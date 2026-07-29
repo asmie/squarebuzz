@@ -54,6 +54,11 @@ public static class MauiProgram
         // never disagree about the current language.
         services.AddSingleton<ILocalizationService, LocalizationServiceAdapter>();
 
+        // Behind interfaces so ViewModels never touch Shell.Current or DeviceInfo directly -
+        // both are statics that a test cannot substitute.
+        services.AddSingleton<INavigationService, ShellNavigationService>();
+        services.AddSingleton<IDeviceScreen, DeviceScreen>();
+
         RegisterDomain(services);
     }
 
@@ -96,13 +101,21 @@ public static class MauiProgram
     private static void RegisterViewModels(IServiceCollection services)
     {
         // Transient: a fresh ViewModel per navigation, so screens never inherit stale state.
-        services.AddTransient<StartupViewModel>();
+        services.AddTransient<SplashViewModel>();
+        services.AddTransient<OnboardingViewModel>();
+        services.AddTransient<MenuViewModel>();
+        services.AddTransient<NewGameViewModel>();
         services.AddTransient<GameViewModel>();
+        services.AddTransient<ComingSoonViewModel>();
     }
 
     private static void RegisterPages(IServiceCollection services)
     {
-        services.AddTransient<StartupPage>();
+        services.AddTransient<SplashPage>();
+        services.AddTransient<OnboardingPage>();
+        services.AddTransient<MenuPage>();
+        services.AddTransient<NewGamePage>();
         services.AddTransient<GamePage>();
+        services.AddTransient<ComingSoonPage>();
     }
 }

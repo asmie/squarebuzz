@@ -18,6 +18,7 @@ public partial class GamePage : ContentPage
         _viewModel.BoardChanged += OnBoardChanged;
         _viewModel.MistakeMade += OnMistakeMade;
         _viewModel.HintGranted += OnHintGranted;
+        _viewModel.PuzzleSolved += OnPuzzleSolved;
 
         Board.CellPainted += OnCellPainted;
         Board.CrossGestureRecognised += OnCrossGestureRecognised;
@@ -57,6 +58,20 @@ public partial class GamePage : ContentPage
     }
 
     private void OnHintGranted(object? sender, int index) => Board.ShowHint(index);
+
+    private async void OnPuzzleSolved(object? sender, EventArgs e)
+    {
+        if (_viewModel.Session is not { } session)
+        {
+            return;
+        }
+
+        // The reveal is the reward, so it is animated rather than snapped in.
+        Reveal.Puzzle = session.Puzzle;
+
+        await HapticFeedbackSafely(HapticFeedbackType.Click);
+        await Reveal.RevealAsync(TimeSpan.FromMilliseconds(700));
+    }
 
     private async void OnCrossGestureRecognised(object? sender, EventArgs e) =>
         await HapticFeedbackSafely(HapticFeedbackType.Click);

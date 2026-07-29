@@ -102,6 +102,12 @@ public sealed record GameSettings
     /// <summary>Screen-time reminder in minutes, set in the parent zone. Null when off.</summary>
     public int? ScreenTimeLimitMinutes { get; init; }
 
+    /// <summary>
+    /// False until the player has been through (or skipped) the three onboarding cards, which
+    /// is how the app knows to show them only on a genuine first run.
+    /// </summary>
+    public bool HasSeenOnboarding { get; init; }
+
     public static GameSettings Default { get; } = new();
 
     /// <summary>

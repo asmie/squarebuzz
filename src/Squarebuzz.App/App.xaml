@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
              x:Class="Squarebuzz.App.App">
     <Application.Resources>
         <ResourceDictionary>
+
+            <!--
+              Colour-free converters only. Anything that needs a palette colour has to be
+              declared in page resources instead: the theme dictionaries are merged at runtime
+              by ThemeService, so a StaticResource colour lookup here would run before they
+              exist and fail to resolve.
+            -->
+            <conv:InvertBoolConverter x:Key="InvertBool" />
+
+            <!--
+              Values are declared as explicit x:Double rather than attribute strings, so the
+              converter hands the binding a double instead of relying on string coercion into
+              Opacity and StrokeThickness.
+            -->
+            <conv:BoolSelectConverter x:Key="ChipStrokeThickness">
+                <conv:BoolSelectConverter.TrueValue>
+                    <x:Double>0</x:Double>
+                </conv:BoolSelectConverter.TrueValue>
+                <conv:BoolSelectConverter.FalseValue>
+                    <x:Double>2</x:Double>
+                </conv:BoolSelectConverter.FalseValue>
+            </conv:BoolSelectConverter>
+
+            <!-- Locked options stay visible but clearly out of reach. -->
+            <conv:BoolSelectConverter x:Key="LockedOpacity">
+                <conv:BoolSelectConverter.TrueValue>
+                    <x:Double>0.45</x:Double>
+                </conv:BoolSelectConverter.TrueValue>
+                <conv:BoolSelectConverter.FalseValue>
+                    <x:Double>1</x:Double>
+                </conv:BoolSelectConverter.FalseValue>
+            </conv:BoolSelectConverter>
+
             <ResourceDictionary.MergedDictionaries>
                 <!--
                   Only the colour-agnostic styles are merged declaratively. ThemeService appends

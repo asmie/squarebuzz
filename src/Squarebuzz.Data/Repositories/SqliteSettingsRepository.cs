@@ -66,6 +66,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             LastChallenge = ReadEnum(values, Keys.LastChallenge, defaults.LastChallenge),
 
             ScreenTimeLimitMinutes = ReadNullableInt(values, Keys.ScreenTimeLimitMinutes),
+            HasSeenOnboarding = ReadBool(values, Keys.HasSeenOnboarding, defaults.HasSeenOnboarding),
         }.Sanitised();
     }
 
@@ -109,6 +110,8 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
                 Key = Keys.ScreenTimeLimitMinutes,
                 Value = settings.ScreenTimeLimitMinutes?.ToString(CultureInfo.InvariantCulture),
             },
+
+            Row(Keys.HasSeenOnboarding, settings.HasSeenOnboarding),
         };
 
         // One transaction: a half-written settings table would leave the UI in a state the
@@ -189,5 +192,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
         public const string LastChallenge = "lastGame.challenge";
 
         public const string ScreenTimeLimitMinutes = "parent.screenTimeLimitMinutes";
+
+        public const string HasSeenOnboarding = "firstRun.hasSeenOnboarding";
     }
 }

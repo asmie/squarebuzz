@@ -7,11 +7,18 @@
        Shell.NavBarIsVisible="False">
 
     <!--
-      The game drives its own full-screen navigation, so the Shell chrome stays hidden.
-      Routes for the individual screens are registered in AppShell.xaml.cs as each screen
-      is built; this ShellContent is the entry point.
+      The game drives its own full-screen navigation, so Shell chrome stays hidden by default
+      and individual pages opt back in. Splash and Menu are declared as ShellContent so
+      ResetToAsync("//route") can replace the stack; everything else is a pushed route
+      registered in AppShell.xaml.cs.
     -->
-    <ShellContent Route="startup"
-                  ContentTemplate="{DataTemplate views:StartupPage}" />
+    <ShellContent Route="splash"
+                  ContentTemplate="{DataTemplate views:SplashPage}" />
+
+    <ShellContent Route="onboarding"
+                  ContentTemplate="{DataTemplate views:OnboardingPage}" />
+
+    <ShellContent Route="menu"
+                  ContentTemplate="{DataTemplate views:MenuPage}" />
 
 </Shell>

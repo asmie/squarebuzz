@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
+             x:Class="Squarebuzz.App.Views.NewGamePage"
+             x:DataType="vm:NewGameViewModel"
+             Title="{Binding StartLabel}"
+             Shell.NavBarIsVisible="True"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <ContentPage.Resources>
+        <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
+        <conv:BoolSelectConverter x:Key="ChipBackground"
+                                  TrueValue="{StaticResource Primary}"
+                                  FalseValue="{StaticResource Surface2}" />
+        <conv:BoolSelectConverter x:Key="ChipTextColor"
+                                  TrueValue="{StaticResource OnPrimary}"
+                                  FalseValue="{StaticResource Ink}" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="{StaticResource PagePadding}"
+                                 Spacing="24"
+                                 MaximumWidthRequest="{StaticResource FrameMaxWidth}"
+                                 HorizontalOptions="Center">
+
+                <!-- Size -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding GridSizeTitle}" Style="{StaticResource H2}" />
+                    <Label Text="{Binding GridSizeHelp}" Style="{StaticResource Subtle}" FontSize="13" />
+
+                    <FlexLayout BindableLayout.ItemsSource="{Binding Sizes}"
+                                Wrap="Wrap"
+                                JustifyContent="Start"
+                                Margin="0,4,0,0">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:SizeOption">
+                                <Border Margin="0,0,8,8"
+                                        Padding="14,10"
+                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
+                                        Stroke="{DynamicResource Line}"
+                                        StrokeThickness="{Binding IsSelected, Converter={StaticResource ChipStrokeThickness}}"
+                                        Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, Path=SelectSizeCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="2" MinimumWidthRequest="72">
+                                        <Label Text="{Binding Label}"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
+                                        <Label Text="{Binding Caption}"
+                                               FontSize="12"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
+                                        <Label Text="{Binding LockedNote}"
+                                               IsVisible="{Binding IsLocked}"
+                                               FontSize="10"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="{DynamicResource Ink2}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Difficulty -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding DifficultyTitle}" Style="{StaticResource H2}" />
+
+                    <FlexLayout BindableLayout.ItemsSource="{Binding Difficulties}" Wrap="Wrap" JustifyContent="Start">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DifficultyOption">
+                                <Border Margin="0,0,8,8"
+                                        Padding="12,10"
+                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
+                                        Stroke="{DynamicResource Line}"
+                                        StrokeThickness="{Binding IsSelected, Converter={StaticResource ChipStrokeThickness}}">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, Path=SelectDifficultyCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="{Binding Stars}"
+                                               FontSize="13"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
+                                        <Label Text="{Binding Label}"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Challenge -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding ChallengeTitle}" Style="{StaticResource H2}" />
+                    <Label Text="{Binding ChallengeHelp}" Style="{StaticResource Subtle}" FontSize="13" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,4,0,0">
+                        <Button Grid.Column="0"
+                                Text="{Binding RelaxedLabel}"
+                                Command="{Binding SelectChallengeCommand}"
+                                CommandParameter="relaxed"
+                                BackgroundColor="{Binding IsRelaxed, Converter={StaticResource ChipBackground}}"
+                                TextColor="{Binding IsRelaxed, Converter={StaticResource ChipTextColor}}"
+                                CornerRadius="16"
+                                HeightRequest="52"
+                                FontAttributes="Bold" />
+                        <Button Grid.Column="1"
+                                Text="{Binding SharpLabel}"
+                                Command="{Binding SelectChallengeCommand}"
+                                CommandParameter="sharp"
+                                BackgroundColor="{Binding IsSharp, Converter={StaticResource ChipBackground}}"
+                                TextColor="{Binding IsSharp, Converter={StaticResource ChipTextColor}}"
+                                CornerRadius="16"
+                                HeightRequest="52"
+                                FontAttributes="Bold" />
+                    </Grid>
+
+                    <Label Text="{Binding ChallengeNote}" Style="{StaticResource Subtle}" FontSize="13" />
+                </VerticalStackLayout>
+
+                <!-- Pack -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding PackTitle}" Style="{StaticResource H2}" />
+
+                    <FlexLayout BindableLayout.ItemsSource="{Binding Packs}" Wrap="Wrap" JustifyContent="Start">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:PackOption">
+                                <Border Margin="0,0,8,8"
+                                        Padding="12,10"
+                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
+                                        Stroke="{DynamicResource Line}"
+                                        StrokeThickness="{Binding IsSelected, Converter={StaticResource ChipStrokeThickness}}"
+                                        Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, Path=SelectPackCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="2" MinimumWidthRequest="64">
+                                        <Label Text="{Binding Icon}" FontSize="22" HorizontalTextAlignment="Center" />
+                                        <Label Text="{Binding Label}"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Pinned so Start is always reachable without scrolling back down. -->
+        <Button Grid.Row="1"
+                Text="{Binding StartLabel}"
+                Command="{Binding StartCommand}"
+                Style="{StaticResource PrimaryButton}"
+                HeightRequest="60"
+                FontSize="19"
+                Margin="{StaticResource PagePadding}" />
+    </Grid>
+
+</ContentPage>

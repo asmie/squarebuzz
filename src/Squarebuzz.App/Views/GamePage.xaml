@@ -7,18 +7,31 @@
              x:DataType="vm:GameViewModel"
              BackgroundColor="{DynamicResource Bg}">
 
+    <!-- Outer grid layers the pause and win overlays over the board. -->
+    <Grid>
     <Grid RowDefinitions="Auto,*,Auto"
           Padding="{StaticResource PagePadding}"
           RowSpacing="12">
 
-        <!-- Status bar: picture name, counters, timer -->
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+        <!-- Status bar: picture name, counters, timer, pause -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
             <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
                 <Label Text="{Binding PuzzleName}" Style="{StaticResource H2}" />
                 <Label Text="{Binding StatusText}" Style="{StaticResource Subtle}" FontSize="14" />
             </VerticalStackLayout>
 
-            <Border Grid.Column="1"
+            <Button Grid.Column="1"
+                    Text="⏸"
+                    Command="{Binding PauseCommand}"
+                    BackgroundColor="{DynamicResource Surface2}"
+                    TextColor="{DynamicResource Ink}"
+                    CornerRadius="999"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    Padding="0"
+                    VerticalOptions="Center" />
+
+            <Border Grid.Column="2"
                     IsVisible="{Binding ShowTimer}"
                     BackgroundColor="{DynamicResource Surface2}"
                     Stroke="{DynamicResource Line}"
@@ -100,6 +113,88 @@
                     HeightRequest="56"
                     Text="{Binding ModeButtonText}" />
         </VerticalStackLayout>
+    </Grid>
+
+        <!--
+          Pause overlay. An overlay rather than a route so the session stays in memory - pausing
+          must never risk the board, and there is nothing to serialise.
+        -->
+        <Grid IsVisible="{Binding IsPaused}" BackgroundColor="#CC000000">
+            <Border Style="{StaticResource Card}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    Padding="24">
+                <VerticalStackLayout Spacing="12">
+                    <controls:MascotView Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center" />
+                    <Label Text="{Binding PausedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+
+                    <Button Text="{Binding ResumeText}"
+                            Command="{Binding ResumeCommand}"
+                            Style="{StaticResource PrimaryButton}"
+                            HeightRequest="54" />
+                    <Button Text="{Binding RestartText}"
+                            Command="{Binding RestartCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            HeightRequest="50" />
+                    <Button Text="{Binding HowToText}"
+                            Command="{Binding HowToCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            HeightRequest="50" />
+                    <Button Text="{Binding QuitText}"
+                            Command="{Binding QuitCommand}"
+                            BackgroundColor="{DynamicResource WarnSoft}"
+                            TextColor="{DynamicResource OnWarnSoft}"
+                            CornerRadius="16"
+                            FontAttributes="Bold"
+                            HeightRequest="50" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Win overlay: the picture revealed in its own colour, plus the result. -->
+        <Grid IsVisible="{Binding IsSolved}" BackgroundColor="#E6000000">
+            <Border Style="{StaticResource Card}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="320"
+                    Padding="24">
+                <VerticalStackLayout Spacing="14">
+                    <controls:MascotView Pose="Cheer" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center" />
+
+                    <Label Text="{Binding SolvedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+
+                    <controls:PuzzleArtView x:Name="Reveal"
+                                            HeightRequest="200"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="200" />
+
+                    <Label Text="{Binding StarsText}"
+                           FontSize="30"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{DynamicResource Gold}" />
+
+                    <Label Style="{StaticResource Subtle}" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding TimeLabel}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding ElapsedText}" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Button Text="{Binding NextPuzzleText}"
+                            Command="{Binding NextPuzzleCommand}"
+                            Style="{StaticResource PrimaryButton}"
+                            HeightRequest="54" />
+                    <Button Text="{Binding MenuText}"
+                            Command="{Binding QuitCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            HeightRequest="50" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </Grid>
 
 </ContentPage>

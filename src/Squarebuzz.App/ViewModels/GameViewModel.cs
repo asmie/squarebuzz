@@ -3,55 +3,43 @@ using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
-using Squarebuzz.Core.Solving;
 
 namespace Squarebuzz.App.ViewModels;
 
 /// <summary>
-/// Drives the board screen: mode toggle, undo/redo, hints, the timer, and completion.
+/// Drives the board screen: mode toggle, undo/redo, hints, the timer, pausing and completion.
 /// </summary>
 /// <remarks>
 /// Holds the <see cref="GameSession"/> but never reimplements its rules - every move goes
 /// through the session so the domain stays the single source of truth for what is legal.
+/// Pause and completion are overlays on this screen rather than separate routes, so the session
+/// never has to be serialised across a navigation just to show a summary over the board.
 /// </remarks>
-public partial class GameViewModel : ViewModelBase, IDisposable
+public partial class GameViewModel : LocalizedViewModel
 {
     private readonly GameSessionFactory _sessions;
     private readonly ISettingsRepository _settingsRepository;
     private readonly IProgressRepository _progress;
-    private readonly ILocalizationService _strings;
+    private readonly INavigationService _navigation;
     private readonly IClock _clock;
 
     private IDispatcherTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
-    private bool _disposed;
 
     public GameViewModel(
         GameSessionFactory sessions,
         ISettingsRepository settingsRepository,
         IProgressRepository progress,
         ILocalizationService strings,
+        INavigationService navigation,
         IClock clock)
+        : base(strings)
     {
         _sessions = sessions;
         _settingsRepository = settingsRepository;
         _progress = progress;
-        _strings = strings;
+        _navigation = navigation;
         _clock = clock;
-
-        // Every localised label on this screen is a computed property, so a language change is
-        // one broadcast rather than a subscription per label.
-        _strings.LanguageChanged += OnLanguageChanged;
-    }
-
-    private void OnLanguageChanged(object? sender, EventArgs e)
-    {
-        OnPropertyChanged(nameof(StatusText));
-        OnPropertyChanged(nameof(ModeButtonText));
-        OnPropertyChanged(nameof(UndoText));
-        OnPropertyChanged(nameof(RedoText));
-        OnPropertyChanged(nameof(HintText));
-        OnPropertyChanged(nameof(RestartText));
     }
 
     /// <summary>Raised when the board data changed and the canvas needs redrawing.</summary>
@@ -62,6 +50,9 @@ public partial class GameViewModel : ViewModelBase, IDisposable
 
     /// <summary>Raised with a cell index when a hint was granted.</summary>
     public event EventHandler<int>? HintGranted;
+
+    /// <summary>Raised when the picture is finished, so the view can play the reveal.</summary>
+    public event EventHandler? PuzzleSolved;
 
     [ObservableProperty]
     public partial GameSession? Session { get; private set; }
@@ -77,37 +68,11 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     [NotifyPropertyChangedFor(nameof(ModeButtonText))]
     public partial bool IsCrossMode { get; private set; }
 
-    public bool HasToast => !string.IsNullOrEmpty(Toast);
-
-    /// <summary>
-    /// Label for the mode toggle. It names the mode the button switches <em>to</em>, which is
-    /// the convention children read correctly - "Mark X" means "tapping will now mark X".
-    /// </summary>
-    public string ModeButtonText => IsCrossMode
-        ? _strings.GetString("fill")
-        : _strings.GetString("cross");
-
-    /// <summary>
-    /// Hints and mistakes as one line.
-    /// </summary>
-    /// <remarks>
-    /// Composed here rather than assembled in XAML from several localised spans. Building it
-    /// in the ViewModel keeps the markup trivial, avoids indexer bindings against a source
-    /// other than the binding context, and makes the wording testable.
-    /// </remarks>
-    public string StatusText =>
-        $"{_strings.GetString("hints")} {HintsRemaining}    {_strings.GetString("mistakes")} {Mistakes}";
-
-    public string UndoText => _strings.GetString("undo");
-
-    public string RedoText => _strings.GetString("redo");
-
-    public string HintText => _strings.GetString("hint");
-
-    public string RestartText => _strings.GetString("restart");
-
     [ObservableProperty]
     public partial bool IsSolved { get; private set; }
+
+    [ObservableProperty]
+    public partial bool IsPaused { get; private set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StatusText))]
@@ -118,6 +83,7 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     public partial int Mistakes { get; private set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(StarsText))]
     public partial int StarRating { get; private set; }
 
     [ObservableProperty]
@@ -129,6 +95,8 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     [ObservableProperty]
     public partial string PuzzleName { get; private set; } = string.Empty;
 
+    public bool HasToast => !string.IsNullOrEmpty(Toast);
+
     public bool ShowTimer => _settings.Helpers.ShowTimer;
 
     public int ZoomPercent => _settings.CellZoomPercent;
@@ -137,25 +105,81 @@ public partial class GameViewModel : ViewModelBase, IDisposable
 
     public TapBehaviour TapBehaviour => _settings.TapBehaviour;
 
+    /// <summary>
+    /// Label for the mode toggle. It names the mode the button switches <em>to</em>, which is
+    /// the convention children read correctly - "Mark X" means "tapping will now mark X".
+    /// </summary>
+    public string ModeButtonText => IsCrossMode ? T("fill") : T("cross");
+
+    /// <summary>
+    /// Hints and mistakes as one line, composed here rather than assembled in XAML from several
+    /// localised spans - simpler markup, and the wording becomes testable.
+    /// </summary>
+    public string StatusText => $"{T("hints")} {HintsRemaining}    {T("mistakes")} {Mistakes}";
+
+    public string UndoText => T("undo");
+
+    public string RedoText => T("redo");
+
+    public string HintText => T("hint");
+
+    public string RestartText => T("restart");
+
+    public string PauseText => T("pause");
+
+    public string PausedTitle => T("paused");
+
+    public string ResumeText => T("resume");
+
+    public string HowToText => T("howTo");
+
+    public string QuitText => T("quit");
+
+    public string SolvedTitle => T("solved");
+
+    public string TimeLabel => T("time");
+
+    public string NextPuzzleText => T("nextPuzzle");
+
+    public string MenuText => T("menu");
+
+    /// <summary>Filled stars up to the rating, hollow for the rest.</summary>
+    public string StarsText => new string('★', StarRating) + new string('☆', Math.Max(0, 3 - StarRating));
+
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
     {
-        _settings = await _settingsRepository.LoadAsync();
+        try
+        {
+            _settings = await _settingsRepository.LoadAsync();
+        }
+        catch (Exception)
+        {
+            _settings = GameSettings.Default;
+        }
 
-        var effective = options ?? _settings.ToNewGameOptions();
-        Session = _sessions.Create(effective with { Helpers = _settings.Helpers });
+        // A null seed means "surprise me", so replaying gives a different picture rather than
+        // the same one over and over.
+        var effective = (options ?? _settings.ToNewGameOptions()) with { Helpers = _settings.Helpers };
+        Session = _sessions.Create(effective);
 
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
         IsSolved = false;
+        IsPaused = false;
         Toast = string.Empty;
 
         PuzzleName = Session.Puzzle.IsGenerated
-            ? _strings.GetString("Puzzle_gen")
-            : _strings.GetString($"Puzzle_{Session.Puzzle.Id}");
+            ? T("Puzzle_gen")
+            : T($"Puzzle_{Session.Puzzle.Id}");
 
         SyncFromSession();
         StartTimer();
+
+        OnPropertyChanged(nameof(ShowTimer));
+        OnPropertyChanged(nameof(ZoomPercent));
+        OnPropertyChanged(nameof(BigNumbers));
+        OnPropertyChanged(nameof(TapBehaviour));
 
         BoardChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -163,7 +187,7 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     /// <summary>Applies a paint request from the board view.</summary>
     public void Paint(int index, CellState target)
     {
-        if (Session is not { } session || IsSolved)
+        if (Session is not { } session || IsSolved || IsPaused)
         {
             return;
         }
@@ -173,12 +197,12 @@ public partial class GameViewModel : ViewModelBase, IDisposable
         switch (outcome.Result)
         {
             case MoveResult.Mistake:
-                ShowToast(_strings.GetString("mistakeMsg"));
+                ShowToast(T("mistakeMsg"));
                 MistakeMade?.Invoke(this, index);
                 break;
 
             case MoveResult.Applied when outcome.CompletedALine:
-                ShowToast(_strings.GetString("lineDone"));
+                ShowToast(T("lineDone"));
                 break;
 
             default:
@@ -233,14 +257,14 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     [RelayCommand]
     private void UseHint()
     {
-        if (Session is not { } session)
+        if (Session is not { } session || IsPaused)
         {
             return;
         }
 
         if (session.HintsRemaining <= 0)
         {
-            ShowToast(_strings.GetString("noHints"));
+            ShowToast(T("noHints"));
             return;
         }
 
@@ -251,7 +275,7 @@ public partial class GameViewModel : ViewModelBase, IDisposable
             return;
         }
 
-        ShowToast(_strings.GetString("hintUsed"));
+        ShowToast(T("hintUsed"));
         HintGranted?.Invoke(this, hint.Index);
 
         SyncFromSession();
@@ -264,9 +288,60 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     }
 
     [RelayCommand]
+    private void Pause()
+    {
+        if (IsSolved)
+        {
+            return;
+        }
+
+        IsPaused = true;
+        StopTimer();
+    }
+
+    [RelayCommand]
+    private void Resume()
+    {
+        IsPaused = false;
+        StartTimer();
+    }
+
+    [RelayCommand]
     private async Task RestartAsync()
     {
-        await StartAsync(Session?.Origin);
+        IsPaused = false;
+        await StartAsync(SameSettingsFreshPuzzle());
+    }
+
+    /// <summary>A fresh puzzle with the same settings - the "Next" button on the win screen.</summary>
+    [RelayCommand]
+    private async Task NextPuzzleAsync() => await StartAsync(SameSettingsFreshPuzzle());
+
+    /// <summary>
+    /// The current options with the seed cleared, so a replay keeps the player's size, pack and
+    /// challenge but draws a different picture. Null when there is no session yet, in which case
+    /// <see cref="StartAsync"/> falls back to saved settings.
+    /// </summary>
+    private NewGameOptions? SameSettingsFreshPuzzle()
+    {
+        // Written out rather than as `Session?.Origin with { ... }`, which compiles but
+        // dereferences a possibly-null value and would throw once Origin was ever null.
+        var origin = Session?.Origin;
+
+        return origin is null ? null : origin with { Seed = null };
+    }
+
+    [RelayCommand]
+    private async Task QuitAsync()
+    {
+        StopTimer();
+        await _navigation.ResetToAsync(Routes.Menu);
+    }
+
+    [RelayCommand]
+    private async Task HowToAsync()
+    {
+        await _navigation.GoToAsync(Routes.HowTo, new Dictionary<string, object> { ["titleKey"] = "howToTitle" });
     }
 
     private async Task HandleCompletionAsync()
@@ -278,7 +353,8 @@ public partial class GameViewModel : ViewModelBase, IDisposable
 
         StopTimer();
         IsSolved = true;
-        ShowToast(_strings.GetString("solved"));
+        IsPaused = false;
+        PuzzleSolved?.Invoke(this, EventArgs.Empty);
 
         try
         {
@@ -286,7 +362,7 @@ public partial class GameViewModel : ViewModelBase, IDisposable
                 session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
                 session.StarRating,
                 session.Elapsed,
-                session.Puzzle.Solution.ToArray().Count(filled => filled),
+                CountFilledCells(session.Puzzle),
                 session.HintsUsed,
                 _clock.Now));
         }
@@ -295,6 +371,22 @@ public partial class GameViewModel : ViewModelBase, IDisposable
             // Losing a progress write must not spoil the win. The star total will simply be
             // short next launch, which is far better than an error dialog after a child wins.
         }
+    }
+
+    private static int CountFilledCells(Puzzle puzzle)
+    {
+        var count = 0;
+        var solution = puzzle.Solution;
+
+        for (var i = 0; i < solution.Length; i++)
+        {
+            if (solution[i])
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     private void SyncFromSession()
@@ -333,7 +425,7 @@ public partial class GameViewModel : ViewModelBase, IDisposable
 
     private void OnTimerTick(object? sender, EventArgs e)
     {
-        if (Session is not { } session || session.IsSolved)
+        if (Session is not { } session || session.IsSolved || IsPaused)
         {
             return;
         }
@@ -382,17 +474,13 @@ public partial class GameViewModel : ViewModelBase, IDisposable
     /// Stops the timer. Without this a ViewModel left behind by navigation keeps ticking and
     /// keeps itself alive through the dispatcher's handler list.
     /// </summary>
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
-        if (_disposed)
+        if (disposing)
         {
-            return;
+            StopTimer();
         }
 
-        StopTimer();
-        _strings.LanguageChanged -= OnLanguageChanged;
-        _disposed = true;
-
-        GC.SuppressFinalize(this);
+        base.Dispose(disposing);
     }
 }

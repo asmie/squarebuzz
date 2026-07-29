@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Views.OnboardingPage"
+             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
+             x:DataType="vm:OnboardingViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <ContentPage.Resources>
+        <!-- Declared per page so the theme dictionaries are already merged when it resolves. -->
+        <conv:BoolSelectConverter x:Key="DotFill"
+                                  TrueValue="{StaticResource Primary}"
+                                  FalseValue="{StaticResource Line}" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource PagePadding}" RowSpacing="18">
+
+        <Button Grid.Row="0"
+                Text="{Binding SkipLabel}"
+                Command="{Binding SkipCommand}"
+                HorizontalOptions="End"
+                BackgroundColor="Transparent"
+                TextColor="{DynamicResource Ink2}"
+                FontAttributes="Bold"
+                MinimumHeightRequest="48" />
+
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
+                             Spacing="24"
+                             MaximumWidthRequest="{StaticResource FrameMaxWidth}">
+
+            <Border Style="{StaticResource Card}"
+                    HeightRequest="300"
+                    WidthRequest="300"
+                    HorizontalOptions="Center">
+                <Grid RowDefinitions="*,Auto" RowSpacing="10">
+                    <controls:PuzzleArtView Grid.Row="0" Puzzle="{Binding DemoPuzzle}" />
+                    <controls:MascotView Grid.Row="1"
+                                         Pose="{Binding MascotPose}"
+                                         HeightRequest="56"
+                                         WidthRequest="52"
+                                         HorizontalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="{Binding StepTitle}"
+                       Style="{StaticResource H1}"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="{Binding StepBody}"
+                       Style="{StaticResource Subtle}"
+                       HorizontalTextAlignment="Center"
+                       LineHeight="1.4" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="16">
+            <!-- Step dots. Three fixed pips rather than a bound list: the count never changes,
+                 and hard-coding them keeps the markup readable. -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Ellipse WidthRequest="10" HeightRequest="10"
+                         Fill="{Binding IsOnStepOne, Converter={StaticResource DotFill}}" />
+                <Ellipse WidthRequest="10" HeightRequest="10"
+                         Fill="{Binding IsOnStepTwo, Converter={StaticResource DotFill}}" />
+                <Ellipse WidthRequest="10" HeightRequest="10"
+                         Fill="{Binding IsOnStepThree, Converter={StaticResource DotFill}}" />
+            </HorizontalStackLayout>
+
+            <Button Text="{Binding NextLabel}"
+                    Command="{Binding NextCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    HeightRequest="56" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

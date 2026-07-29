@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Views.SplashPage"
+             x:DataType="vm:SplashViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Spacing="26"
+                         Padding="{StaticResource PagePadding}">
+
+        <controls:MascotView Pose="Idle" HeightRequest="140" WidthRequest="130" HorizontalOptions="Center" />
+
+        <VerticalStackLayout Spacing="6">
+            <Label HorizontalOptions="Center" FontSize="46" FontAttributes="Bold">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="square" TextColor="{DynamicResource Ink}" />
+                        <Span Text="buzz" TextColor="{DynamicResource PrimaryDeep}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Text="{Binding Tagline}"
+                   Style="{StaticResource Subtle}"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <!-- A plain ProgressBar would be a hairline; this reads as a chunky toy loading bar. -->
+        <Border WidthRequest="190"
+                HeightRequest="12"
+                BackgroundColor="{DynamicResource Sunk}"
+                StrokeThickness="0"
+                HorizontalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="999" />
+            </Border.StrokeShape>
+            <ProgressBar Progress="{Binding Progress}"
+                         ProgressColor="{DynamicResource Primary}"
+                         HeightRequest="12" />
+        </Border>
+
+        <Label Text="{Binding LoadingLabel}"
+               Style="{StaticResource Subtle}"
+               FontSize="14"
+               HorizontalOptions="Center" />
+    </VerticalStackLayout>
+
+</ContentPage>

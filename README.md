@@ -23,6 +23,18 @@ design/                 The original Claude Design prototype, kept as the visual
 
 Dependencies flow strictly `App → Data → Core`. Core depends on nothing.
 
+## Screen status
+
+| Built | Scaffolded (shared `ComingSoonPage`) |
+|---|---|
+| Splash, Onboarding, Menu, New Game, Board, Pause, Complete | Continue, Trials, Options, About, Gallery, How to Play |
+
+Pause and Complete are overlays on the board rather than separate routes, so the in-progress
+session never has to be serialised across a navigation just to show a summary over it.
+
+Every scaffolded route is registered and navigable today — they share one page and differ only
+by a `titleKey` route parameter, so the menu is fully explorable with no dead ends.
+
 ## Requirements
 
 - .NET SDK 10.0 with the `maui-windows`, `android`, `ios` and `maccatalyst` workloads

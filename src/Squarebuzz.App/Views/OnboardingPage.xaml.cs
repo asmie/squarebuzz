@@ -2,11 +2,11 @@ using Squarebuzz.App.ViewModels;
 
 namespace Squarebuzz.App.Views;
 
-public partial class StartupPage : ContentPage
+public partial class OnboardingPage : ContentPage
 {
-    private readonly StartupViewModel _viewModel;
+    private readonly OnboardingViewModel _viewModel;
 
-    public StartupPage(StartupViewModel viewModel)
+    public OnboardingPage(OnboardingViewModel viewModel)
     {
         InitializeComponent();
 
