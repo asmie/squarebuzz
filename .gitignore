@@ -14,11 +14,12 @@ artifacts/
 *.sln.docstates
 
 # MAUI / mobile build artefacts
+# NOTE: do not add a bare "*.app/" here - it matches the Squarebuzz.App project directory
+# and silently excludes the entire MAUI head from the repository. macOS .app bundles and
+# .dSYM folders only ever appear under bin/obj, which are already ignored above.
 *.apk
 *.aab
 *.ipa
-*.app/
-*.dSYM/
 *.binlog
 Platforms/Android/**/keystore.properties
 *.keystore

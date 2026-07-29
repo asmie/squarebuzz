@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!--
+    No INTERNET permission on purpose. squarebuzz is a fully offline game for 6-12 year
+    olds with no ads, analytics or purchases, and the absence of the permission is the
+    strongest guarantee of that. Add it only if a real online feature ever ships.
+  -->
+  <uses-permission android:name="android.permission.VIBRATE" />
+
+  <!-- Phones and tablets, both orientations. -->
+  <supports-screens
+      android:smallScreens="true"
+      android:normalScreens="true"
+      android:largeScreens="true"
+      android:xlargeScreens="true"
+      android:anyDensity="true" />
+
+  <application
+      android:allowBackup="true"
+      android:icon="@mipmap/appicon"
+      android:roundIcon="@mipmap/appicon_round"
+      android:supportsRtl="true" />
+
+</manifest>

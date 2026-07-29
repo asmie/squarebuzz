@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Grape accent over the dark theme - lighter violets so they stay legible on #191527.
+  From [data-theme="dark"][data-accent="grape"].
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Squarebuzz.App.Resources.Themes.Accents.GrapeDark">
+
+    <Color x:Key="Primary">#A585FF</Color>
+    <Color x:Key="PrimaryDeep">#7A52DE</Color>
+    <Color x:Key="PrimarySoft">#2C2049</Color>
+    <Color x:Key="OnPrimary">#1A1030</Color>
+
+    <Color x:Key="Accent">#6FB9FF</Color>
+    <Color x:Key="AccentDeep">#3D86CC</Color>
+    <Color x:Key="AccentSoft">#16283D</Color>
+
+</ResourceDictionary>

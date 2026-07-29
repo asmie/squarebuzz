@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Colour-blind friendly theme (blue / orange, Okabe-Ito derived).
+  Ported from the `[data-theme="cb"]` block of design/Squarebuzz.dc.html.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Squarebuzz.App.Resources.Themes.ColorBlind">
+
+    <Color x:Key="Bg">#FBF7F0</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="Surface2">#F1EDE4</Color>
+    <Color x:Key="Sunk">#E6E0D4</Color>
+
+    <Color x:Key="Ink">#1F2430</Color>
+    <Color x:Key="Ink2">#4C5462</Color>
+    <Color x:Key="Line">#D8D2C6</Color>
+
+    <Color x:Key="CellEmpty">#FFFFFF</Color>
+    <Color x:Key="CellLine">#CFC8BA</Color>
+    <Color x:Key="CellFill">#2B3A55</Color>
+    <Color x:Key="CellFill2">#3E5175</Color>
+
+    <Color x:Key="Gutter">#EDE8DE</Color>
+    <Color x:Key="GutterInk">#333A48</Color>
+
+    <Color x:Key="Primary">#E69F00</Color>
+    <Color x:Key="PrimaryDeep">#A87400</Color>
+    <Color x:Key="PrimarySoft">#FBECCB</Color>
+    <Color x:Key="OnPrimary">#1F2430</Color>
+
+    <Color x:Key="Accent">#00795A</Color>
+    <Color x:Key="AccentDeep">#005940</Color>
+    <Color x:Key="AccentSoft">#CDEDE3</Color>
+    <Color x:Key="OnAccent">#FFFFFF</Color>
+    <Color x:Key="OnAccentSoft">#005940</Color>
+
+    <Color x:Key="Sky">#0072B2</Color>
+    <Color x:Key="SkyDeep">#00558A</Color>
+    <Color x:Key="OnSky">#FFFFFF</Color>
+
+    <Color x:Key="Gold">#F0E442</Color>
+    <Color x:Key="GoldDeep">#6E6500</Color>
+
+    <Color x:Key="Warn">#A2437D</Color>
+    <Color x:Key="WarnDeep">#7A2E5D</Color>
+    <Color x:Key="WarnSoft">#F6E1EC</Color>
+    <Color x:Key="OnWarn">#FFFFFF</Color>
+    <Color x:Key="OnWarnSoft">#7A2E5D</Color>
+
+    <Color x:Key="Good">#009E73</Color>
+
+</ResourceDictionary>

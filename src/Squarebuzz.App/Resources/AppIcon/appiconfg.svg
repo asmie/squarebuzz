@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Icon foreground: a partly-solved 3x3 nonogram. Filled cells use the ink colour, the
+  in-progress cell uses the tangerine primary, and one cell carries an X mark - the three
+  states a player actually sees on the board.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <g>
+    <!-- row 1 -->
+    <rect x="34"  y="34"  width="56" height="56" rx="12" fill="#3B3550"/>
+    <rect x="100" y="34"  width="56" height="56" rx="12" fill="#FFFDF7" stroke="#E4D8C4" stroke-width="4"/>
+    <rect x="166" y="34"  width="56" height="56" rx="12" fill="#3B3550"/>
+
+    <!-- row 2 -->
+    <rect x="34"  y="100" width="56" height="56" rx="12" fill="#FF8A3D"/>
+    <rect x="100" y="100" width="56" height="56" rx="12" fill="#3B3550"/>
+    <rect x="166" y="100" width="56" height="56" rx="12" fill="#FF8A3D"/>
+
+    <!-- row 3: centre cell is crossed out -->
+    <rect x="34"  y="166" width="56" height="56" rx="12" fill="#3B3550"/>
+    <rect x="100" y="166" width="56" height="56" rx="12" fill="#FFFDF7" stroke="#E4D8C4" stroke-width="4"/>
+    <path d="M114 180 L142 208 M142 180 L114 208" stroke="#5F5770" stroke-width="9" stroke-linecap="round"/>
+    <rect x="166" y="166" width="56" height="56" rx="12" fill="#3B3550"/>
+  </g>
+</svg>

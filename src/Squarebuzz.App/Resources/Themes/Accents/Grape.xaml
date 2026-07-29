@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Grape accent over a light or colour-blind theme. From [data-accent="grape"]. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Squarebuzz.App.Resources.Themes.Accents.Grape">
+
+    <Color x:Key="Primary">#6F3DE0</Color>
+    <Color x:Key="PrimaryDeep">#5326B4</Color>
+    <Color x:Key="PrimarySoft">#EBE2FF</Color>
+    <Color x:Key="OnPrimary">#FFFFFF</Color>
+
+    <Color x:Key="Accent">#4FA8F5</Color>
+    <Color x:Key="AccentDeep">#2F7ECB</Color>
+    <Color x:Key="AccentSoft">#DCEDFF</Color>
+
+</ResourceDictionary>

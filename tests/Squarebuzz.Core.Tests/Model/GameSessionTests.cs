@@ -1,0 +1,335 @@
+using Squarebuzz.Core.Model;
+using Squarebuzz.Core.Solving;
+using Xunit;
+
+namespace Squarebuzz.Core.Tests.Model;
+
+public class GameSessionTests
+{
+    /// <summary>
+    /// A plus sign. Small enough to reason about by hand, and its middle row and column are
+    /// full, which makes auto-crossing easy to trigger deliberately.
+    /// </summary>
+    private static Puzzle Plus() =>
+        Puzzle.FromRows("plus", "test", "#FF8A3D",
+        [
+            "..#..",
+            "..#..",
+            "#####",
+            "..#..",
+            "..#..",
+        ]);
+
+    private static GameSession NewSession(GameRules? rules = null) =>
+        new(Plus(), rules ?? GameRules.Relaxed);
+
+    private static void FillEntireSolution(GameSession session)
+    {
+        for (var i = 0; i < session.Puzzle.CellCount; i++)
+        {
+            if (session.Puzzle.Solution[i])
+            {
+                session.Paint(i, CellState.Filled);
+            }
+        }
+    }
+
+    [Fact]
+    public void NewSession_StartsEmptyWithFullHintAllowance()
+    {
+        var session = NewSession();
+
+        Assert.All(session.Cells.ToArray(), c => Assert.Equal(CellState.Empty, c));
+        Assert.Equal(3, session.HintsRemaining);
+        Assert.Equal(0, session.HintsUsed);
+        Assert.Equal(0, session.Mistakes);
+        Assert.False(session.IsSolved);
+        Assert.False(session.CanUndo);
+    }
+
+    [Fact]
+    public void Tap_InFillMode_TogglesFilled()
+    {
+        var session = NewSession();
+        var index = session.Puzzle.IndexOf(2, 0); // Part of the picture.
+
+        Assert.Equal(MoveResult.Applied, session.Tap(index).Result);
+        Assert.Equal(CellState.Filled, session[index]);
+
+        Assert.Equal(MoveResult.Applied, session.Tap(index).Result);
+        Assert.Equal(CellState.Empty, session[index]);
+    }
+
+    [Fact]
+    public void Tap_InCrossMode_TogglesCrossed()
+    {
+        var session = NewSession();
+        session.Mode = PaintMode.Cross;
+        var index = session.Puzzle.IndexOf(0, 0); // Not part of the picture.
+
+        session.Tap(index);
+        Assert.Equal(CellState.Crossed, session[index]);
+
+        session.Tap(index);
+        Assert.Equal(CellState.Empty, session[index]);
+    }
+
+    [Fact]
+    public void FillingAWrongCell_IsRefusedAndCounted()
+    {
+        var session = NewSession();
+        var wrong = session.Puzzle.IndexOf(0, 0); // Blank in the picture.
+
+        var outcome = session.Paint(wrong, CellState.Filled);
+
+        Assert.Equal(MoveResult.Mistake, outcome.Result);
+        Assert.Equal(1, session.Mistakes);
+
+        // The board must not be left holding something the clues contradict.
+        Assert.Equal(CellState.Empty, session[wrong]);
+        Assert.False(session.CanUndo);
+    }
+
+    [Fact]
+    public void WithWarningsOff_AWrongFillIsAllowedToStand()
+    {
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { WarnOnMistakes = false, AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
+        var wrong = session.Puzzle.IndexOf(0, 0);
+
+        var outcome = session.Paint(wrong, CellState.Filled);
+
+        Assert.Equal(MoveResult.Applied, outcome.Result);
+        Assert.Equal(CellState.Filled, session[wrong]);
+        Assert.Equal(0, session.Mistakes);
+    }
+
+    [Fact]
+    public void CompletingARow_AutoCrossesTheRest()
+    {
+        var session = NewSession();
+
+        // Row 0 is "..#..", clue 1. Filling the single cell completes it.
+        var outcome = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        Assert.True(outcome.CompletedALine);
+
+        // The four blanks in row 0 must now be crossed.
+        Assert.Equal(CellState.Crossed, session.At(0, 0));
+        Assert.Equal(CellState.Crossed, session.At(1, 0));
+        Assert.Equal(CellState.Crossed, session.At(3, 0));
+        Assert.Equal(CellState.Crossed, session.At(4, 0));
+    }
+
+    [Fact]
+    public void UndoingAnAutoCrossingMove_TakesBackEveryAutomaticCross()
+    {
+        var session = NewSession();
+        var index = session.Puzzle.IndexOf(2, 0);
+
+        var outcome = session.Paint(index, CellState.Filled);
+        Assert.True(outcome.AutoCrossedCells > 0);
+
+        Assert.True(session.Undo());
+
+        // This is the prototype's bug: it applied auto-crosses outside its history, so undo
+        // left them stranded. Every cell of row 0 must be back to empty.
+        for (var x = 0; x < session.Puzzle.Width; x++)
+        {
+            Assert.Equal(CellState.Empty, session.At(x, 0));
+        }
+
+        Assert.False(session.CanUndo);
+        Assert.True(session.CanRedo);
+    }
+
+    [Fact]
+    public void RedoingAnAutoCrossingMove_RestoresIt()
+    {
+        var session = NewSession();
+        var index = session.Puzzle.IndexOf(2, 0);
+
+        session.Paint(index, CellState.Filled);
+        session.Undo();
+        Assert.True(session.Redo());
+
+        Assert.Equal(CellState.Filled, session[index]);
+        Assert.Equal(CellState.Crossed, session.At(0, 0));
+    }
+
+    [Fact]
+    public void WithAutoCrossOff_CompletingARowChangesNothingElse()
+    {
+        var session = new GameSession(Plus(), GameRules.Sharp);
+
+        var outcome = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        Assert.Equal(0, outcome.AutoCrossedCells);
+        Assert.Equal(CellState.Empty, session.At(0, 0));
+    }
+
+    [Fact]
+    public void SharpChallenge_AllowsOnlyOneHintAndNoAutoCross()
+    {
+        var rules = GameRules.Sharp;
+
+        Assert.Equal(1, rules.HintAllowance);
+        Assert.False(rules.AutoCrossCompletedLines);
+    }
+
+    [Fact]
+    public void DisablingHints_LeavesNoneAvailable()
+    {
+        var rules = GameRules.Create(ChallengeLevel.Relaxed, HelperSettings.Default with { AllowHints = false });
+        var session = new GameSession(Plus(), rules);
+
+        Assert.Equal(0, session.HintsRemaining);
+        Assert.Null(session.UseHint());
+    }
+
+    [Fact]
+    public void FillingEveryPictureCell_WinsWithoutNeedingCrosses()
+    {
+        var session = NewSession();
+
+        FillEntireSolution(session);
+
+        Assert.True(session.IsSolved);
+    }
+
+    [Fact]
+    public void AfterSolving_TheBoardIsFrozen()
+    {
+        var session = NewSession();
+        FillEntireSolution(session);
+
+        Assert.Equal(MoveResult.NoChange, session.Tap(0).Result);
+        Assert.False(session.Undo());
+        Assert.False(session.CanUndo);
+    }
+
+    [Fact]
+    public void PaintingTheValueACellAlreadyHolds_IsANoOp()
+    {
+        var session = NewSession();
+        var index = session.Puzzle.IndexOf(2, 0);
+        session.Paint(index, CellState.Filled);
+
+        var outcome = session.Paint(index, CellState.Filled);
+
+        Assert.Equal(MoveResult.NoChange, outcome.Result);
+    }
+
+    [Theory]
+    [InlineData(0, 0, 3)] // Clean run.
+    [InlineData(2, 0, 3)] // Two mistakes is still forgiven.
+    [InlineData(3, 0, 2)] // More than two costs a star.
+    [InlineData(0, 2, 2)] // More than one hint costs a star.
+    [InlineData(5, 3, 1)] // Both penalties, floored at one.
+    public void StarRating_FollowsTheMistakeAndHintPenalties(int mistakes, int hintsUsed, int expectedStars)
+    {
+        var session = NewSession();
+
+        // Drive the counters through the public surface rather than reaching into state.
+        var wrong = session.Puzzle.IndexOf(0, 0);
+        for (var i = 0; i < mistakes; i++)
+        {
+            session.Paint(wrong, CellState.Filled);
+        }
+
+        for (var i = 0; i < hintsUsed; i++)
+        {
+            session.UseHint();
+        }
+
+        Assert.Equal(mistakes, session.Mistakes);
+        Assert.Equal(hintsUsed, session.HintsUsed);
+        Assert.Equal(expectedStars, session.StarRating);
+    }
+
+    [Fact]
+    public void UsingAHint_SpendsItAndMarksTheCell()
+    {
+        var session = NewSession();
+
+        var hint = session.UseHint();
+
+        Assert.NotNull(hint);
+        Assert.Equal(2, session.HintsRemaining);
+        Assert.Equal(1, session.HintsUsed);
+        Assert.Equal(hint.Value, session[hint.Index]);
+    }
+
+    [Fact]
+    public void HintsRunOut()
+    {
+        var session = NewSession();
+
+        Assert.NotNull(session.UseHint());
+        Assert.NotNull(session.UseHint());
+        Assert.NotNull(session.UseHint());
+
+        Assert.Equal(0, session.HintsRemaining);
+        Assert.Null(session.UseHint());
+    }
+
+    [Fact]
+    public void AHintIsUndoable_LikeAnyOtherMove()
+    {
+        var session = NewSession();
+        var hint = session.UseHint();
+        Assert.NotNull(hint);
+
+        Assert.True(session.Undo());
+        Assert.Equal(CellState.Empty, session[hint.Index]);
+
+        // The hint itself stays spent: undo rewinds the board, not the cost of asking.
+        Assert.Equal(2, session.HintsRemaining);
+    }
+
+    [Fact]
+    public void Timer_OnlyRunsUntilThePuzzleIsSolved()
+    {
+        var session = NewSession();
+
+        session.Advance(TimeSpan.FromSeconds(5));
+        Assert.Equal(TimeSpan.FromSeconds(5), session.Elapsed);
+
+        FillEntireSolution(session);
+        session.Advance(TimeSpan.FromSeconds(30));
+
+        Assert.Equal(TimeSpan.FromSeconds(5), session.Elapsed);
+    }
+
+    [Fact]
+    public void ClueStrikes_MarkARowOnceItsRunIsPinnedDown()
+    {
+        var session = NewSession();
+
+        Assert.All(session.RowClueStrikes(0), struck => Assert.False(struck));
+
+        // Filling row 0's single cell completes the row and auto-crosses the rest.
+        session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        Assert.All(session.RowClueStrikes(0), Assert.True);
+    }
+
+    [Fact]
+    public void EveryHintOnASolvablePuzzle_IsLogicallyDeducible()
+    {
+        // Never a bare SolutionReveal on content that solves by logic - that would mean the
+        // game was teaching nothing at the moment the child asked for help.
+        var session = NewSession();
+
+        while (session.HintsRemaining > 0)
+        {
+            var hint = session.UseHint();
+            Assert.NotNull(hint);
+            Assert.NotEqual(HintSource.SolutionReveal, hint.Source);
+            Assert.Equal(session.Puzzle.ExpectedState(hint.Index), hint.Value);
+        }
+    }
+}

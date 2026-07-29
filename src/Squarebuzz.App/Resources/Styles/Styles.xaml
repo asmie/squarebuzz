@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Non-colour design tokens and base control styles.
+  Colours live in Resources/Themes/*.xaml and are swapped at runtime by ThemeService,
+  so everything here refers to them only through DynamicResource.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Corner radii, from the prototype's r-sm .. r-pill custom properties. -->
+    <x:Double x:Key="RadiusSm">10</x:Double>
+    <x:Double x:Key="RadiusMd">16</x:Double>
+    <x:Double x:Key="RadiusLg">22</x:Double>
+    <x:Double x:Key="RadiusXl">28</x:Double>
+    <x:Double x:Key="RadiusPill">999</x:Double>
+
+    <!-- Type scale. The prototype grows these at 760px / 1100px via media queries;
+         MAUI has no media queries, so tablets get the larger step via OnIdiom. -->
+    <OnIdiom x:Key="FontSizeBody" x:TypeArguments="x:Double" Phone="18" Tablet="19" Desktop="19" Default="18" />
+    <OnIdiom x:Key="FontSizeH1" x:TypeArguments="x:Double" Phone="28" Tablet="34" Desktop="40" Default="28" />
+    <OnIdiom x:Key="FontSizeH2" x:TypeArguments="x:Double" Phone="21" Tablet="24" Desktop="24" Default="21" />
+    <OnIdiom x:Key="FontSizeLabel" x:TypeArguments="x:Double" Phone="16" Tablet="17" Desktop="17" Default="16" />
+
+    <!-- Layout padding (the prototype's "pad") and its 430/720/980 frame cap. -->
+    <OnIdiom x:Key="PagePadding" x:TypeArguments="Thickness" Phone="18" Tablet="26" Desktop="34" Default="18" />
+    <OnIdiom x:Key="FrameMaxWidth" x:TypeArguments="x:Double" Phone="430" Tablet="720" Desktop="980" Default="430" />
+
+    <!-- Minimum 48px touch targets throughout: this is a game for 6-12 year olds. -->
+    <x:Double x:Key="TouchTargetMin">48</x:Double>
+
+    <Style TargetType="Page" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Bg}" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
+    </Style>
+
+    <Style x:Key="H1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeH1}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="H2" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeH2}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="Subtle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink2}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
+    </Style>
+
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+        <Setter Property="TextColor" Value="{DynamicResource OnPrimary}" />
+        <Setter Property="MinimumHeightRequest" Value="{StaticResource TouchTargetMin}" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Padding" Value="18,0" />
+    </Style>
+
+    <Style x:Key="SecondaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Surface2}" />
+        <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="MinimumHeightRequest" Value="{StaticResource TouchTargetMin}" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Padding" Value="18,0" />
+    </Style>
+
+    <!-- Card surface: the prototype's surface colour with a 2px line-coloured border. -->
+    <Style x:Key="Card" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Stroke" Value="{DynamicResource Line}" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="22" />
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

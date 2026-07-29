@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Tangerine is the default accent: it overrides nothing and lets each theme's own
+  Primary / Accent / Sky values stand. The prototype has no [data-accent="tangerine"]
+  rule for the same reason. This file exists so ThemeService can merge an accent
+  dictionary unconditionally instead of special-casing the default.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Squarebuzz.App.Resources.Themes.Accents.Tangerine" />
