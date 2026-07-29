@@ -5,7 +5,13 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <!--
+      Must stay false. squarebuzz ships in English, Polish and Spanish, and invariant
+      globalization makes CultureInfo.GetCultureInfo("pl") throw CultureNotFoundException -
+      which surfaces as a TypeInitializationException the first time anything touches
+      LocalizationService. The ICU data it pulls in is the price of being localised.
+    -->
+    <InvariantGlobalization>false</InvariantGlobalization>
 
     <!-- Warnings are defects. Kept on for Core/Data; the MAUI head relaxes this below. -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

@@ -151,6 +151,9 @@ public partial class StartupViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private static async Task PlayAsync() => await Shell.Current.GoToAsync(Routes.Game);
+
+    [RelayCommand]
     private async Task CycleThemeAsync()
     {
         var next = _themeService.Theme switch

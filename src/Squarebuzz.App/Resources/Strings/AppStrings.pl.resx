@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Generated from the STR / PACK_NAME / PUZZLE_NAME tables in design/Squarebuzz.dc.html.
+  English is the neutral culture and therefore complete. The pl and es satellites are
+  partial, exactly as the prototype was; .NET resource fallback fills the gaps from here,
+  which is the same behaviour the prototype got from its own T() helper.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Logiczne łamigłówki, które zamieniają się w obrazki</value></data>
+  <data name="loading" xml:space="preserve"><value>Rozgrzewam klocki…</value></data>
+  <data name="skip" xml:space="preserve"><value>Pomiń</value></data>
+  <data name="next" xml:space="preserve"><value>Dalej</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Zagrajmy!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Nowa gra</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Kontynuuj</value></data>
+  <data name="trials" xml:space="preserve"><value>Wyzwania</value></data>
+  <data name="options" xml:space="preserve"><value>Ustawienia</value></data>
+  <data name="about" xml:space="preserve"><value>O grze</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} w toku</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Nic nie zapisano</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Dzisiejsza zagadka czeka</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Dźwięk, motyw, sterowanie</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Czym jest nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Jak duża?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Większe siatki zajmują więcej czasu, ale mają więcej szczegółów.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Mała</value></data>
+  <data name="normal" xml:space="preserve"><value>Zwykła</value></data>
+  <data name="big" xml:space="preserve"><value>Duża</value></data>
+  <data name="huge" xml:space="preserve"><value>Ogromna</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigant</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tablet</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Jak trudno?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Bardzo łatwo</value></data>
+  <data name="easy" xml:space="preserve"><value>Łatwo</value></data>
+  <data name="medium" xml:space="preserve"><value>Średnio</value></data>
+  <data name="hard" xml:space="preserve"><value>Trudno</value></data>
+  <data name="expert" xml:space="preserve"><value>Ekspert</value></data>
+  <data name="challenge" xml:space="preserve"><value>Poziom wyzwania</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Druga skala, niezależna od rozmiaru i trudności.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Spokojnie</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Pomoce włączone</value></data>
+  <data name="sharp" xml:space="preserve"><value>Ostro</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Błędy liczone</value></data>
+  <data name="pack" xml:space="preserve"><value>Zestaw obrazków</value></data>
+  <data name="helpers" xml:space="preserve"><value>Pomoce</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Auto-X po skończonej linii</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Ostrzegaj o błędach</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Pokaż czas</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Pozwól na podpowiedzi</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Wybór zagadki</value></data>
+  <data name="random" xml:space="preserve"><value>Losowa</value></data>
+  <data name="gallery" xml:space="preserve"><value>Z galerii</value></data>
+  <data name="locked" xml:space="preserve"><value>Zablokowane</value></data>
+  <data name="preview" xml:space="preserve"><value>Podgląd</value></data>
+  <data name="start" xml:space="preserve"><value>Zacznij</value></data>
+  <data name="fill" xml:space="preserve"><value>Wypełnij</value></data>
+  <data name="cross" xml:space="preserve"><value>Znak X</value></data>
+  <data name="undo" xml:space="preserve"><value>Cofnij</value></data>
+  <data name="redo" xml:space="preserve"><value>Ponów</value></data>
+  <data name="hint" xml:space="preserve"><value>Podpowiedź</value></data>
+  <data name="pause" xml:space="preserve"><value>Pauza</value></data>
+  <data name="minimap" xml:space="preserve"><value>Mapa</value></data>
+  <data name="paused" xml:space="preserve"><value>Pauza</value></data>
+  <data name="resume" xml:space="preserve"><value>Wróć</value></data>
+  <data name="restart" xml:space="preserve"><value>Od nowa</value></data>
+  <data name="howTo" xml:space="preserve"><value>Jak grać</value></data>
+  <data name="quit" xml:space="preserve"><value>Do menu</value></data>
+  <data name="solved" xml:space="preserve"><value>Udało się!</value></data>
+  <data name="time" xml:space="preserve"><value>Czas</value></data>
+  <data name="hints" xml:space="preserve"><value>Podp.</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Błędy</value></data>
+  <data name="save" xml:space="preserve"><value>Zapisz</value></data>
+  <data name="share" xml:space="preserve"><value>Udostępnij</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Dalej</value></data>
+  <data name="menu" xml:space="preserve"><value>Menu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Liczby to ciągi klocków</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Wskazówka 3 1 znaczy: trzy klocki, przerwa, potem jeden. W tej kolejności.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Zaznacz puste pola</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Stuknij, by wypełnić. Przełącz na X, by oznaczyć pola, które na pewno zostaną puste.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Pojawia się obrazek</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Skończ każdy wiersz i kolumnę, a klocki zamienią się w obrazek. Każda zagadka ma jedno rozwiązanie.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Masz jedną za darmo!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Nie to pole — spróbuj jeszcze raz</value></data>
+  <data name="noHints" xml:space="preserve"><value>Brak podpowiedzi</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Linia gotowa!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Czekam na ciebie. Wybierz zagadkę!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Nieźle ci idzie. Jeszcze jedna?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Znalazłem dziś nowe obrazki.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Dobra robota. Jeszcze jedna?</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Zwierzęta</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinozaury</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Kosmos</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Jedzenie</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Pojazdy</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Baśnie</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Niespodzianka</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Serce</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Rybka</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Gwiazda</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Duszek</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Jabłko</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Żaglówka</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinozaur</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kotek</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Babeczka</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Wyścigówka</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Rakieta</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Korona</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Tajemniczy obrazek</value></data>
+</root>

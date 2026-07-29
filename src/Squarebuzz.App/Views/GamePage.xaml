@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Views.GamePage"
+             x:DataType="vm:GameViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="{StaticResource PagePadding}"
+          RowSpacing="12">
+
+        <!-- Status bar: picture name, counters, timer -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                <Label Text="{Binding PuzzleName}" Style="{StaticResource H2}" />
+                <Label Text="{Binding StatusText}" Style="{StaticResource Subtle}" FontSize="14" />
+            </VerticalStackLayout>
+
+            <Border Grid.Column="1"
+                    IsVisible="{Binding ShowTimer}"
+                    BackgroundColor="{DynamicResource Surface2}"
+                    Stroke="{DynamicResource Line}"
+                    StrokeThickness="2"
+                    Padding="14,8"
+                    VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="999" />
+                </Border.StrokeShape>
+                <Label Text="{Binding ElapsedText}" FontAttributes="Bold" FontSize="18" />
+            </Border>
+        </Grid>
+
+        <!-- The board. Scrollable on both axes so a 25x25 grid stays reachable on a phone. -->
+        <!--
+          The host fills the row, so its measured size IS the space available to the board.
+          The board then centres itself inside it, and the host scrolls only when the board
+          is genuinely larger.
+        -->
+        <ScrollView Grid.Row="1"
+                    x:Name="BoardHost"
+                    Orientation="Both"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+            <controls:BoardView x:Name="Board"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Session="{Binding Session}"
+                                ZoomPercent="{Binding ZoomPercent}"
+                                BigNumbers="{Binding BigNumbers}"
+                                TapBehaviour="{Binding TapBehaviour}" />
+        </ScrollView>
+
+        <!-- Controls -->
+        <VerticalStackLayout Grid.Row="2" Spacing="10">
+
+            <Label Text="{Binding Toast}"
+                   IsVisible="{Binding HasToast}"
+                   Style="{StaticResource Subtle}"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   TextColor="{DynamicResource PrimaryDeep}" />
+
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+                <Button Grid.Column="0"
+                        Style="{StaticResource SecondaryButton}"
+                        FontSize="13"
+                        Padding="4,0"
+                        Command="{Binding UndoCommand}"
+                        IsEnabled="{Binding CanUndo}"
+                        Text="{Binding UndoText}" />
+
+                <Button Grid.Column="1"
+                        Style="{StaticResource SecondaryButton}"
+                        FontSize="13"
+                        Padding="4,0"
+                        Command="{Binding RedoCommand}"
+                        IsEnabled="{Binding CanRedo}"
+                        Text="{Binding RedoText}" />
+
+                <Button Grid.Column="2"
+                        Style="{StaticResource SecondaryButton}"
+                        FontSize="13"
+                        Padding="4,0"
+                        Command="{Binding UseHintCommand}"
+                        Text="{Binding HintText}" />
+
+                <Button Grid.Column="3"
+                        Style="{StaticResource SecondaryButton}"
+                        FontSize="13"
+                        Padding="4,0"
+                        Command="{Binding RestartCommand}"
+                        Text="{Binding RestartText}" />
+            </Grid>
+
+            <!-- Mode toggle is the widest, lowest button: it is the control used most often. -->
+            <Button Style="{StaticResource PrimaryButton}"
+                    Command="{Binding ToggleModeCommand}"
+                    HeightRequest="56"
+                    Text="{Binding ModeButtonText}" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

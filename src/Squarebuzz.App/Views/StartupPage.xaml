@@ -64,7 +64,8 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="Cycle theme" Style="{StaticResource PrimaryButton}" Command="{Binding CycleThemeCommand}" />
+            <Button Text="Play a puzzle" Style="{StaticResource PrimaryButton}" HeightRequest="56" Command="{Binding PlayCommand}" />
+            <Button Text="Cycle theme" Style="{StaticResource SecondaryButton}" Command="{Binding CycleThemeCommand}" />
             <Button Text="Cycle accent" Style="{StaticResource SecondaryButton}" Command="{Binding CycleAccentCommand}" />
 
         </VerticalStackLayout>

@@ -14,10 +14,11 @@ public partial class AppShell : Shell
     /// </summary>
     private static void RegisterRoutes()
     {
-        // Registered as screens land:
+        Routing.RegisterRoute(Routes.Game, typeof(Views.GamePage));
+
+        // Registered as the remaining screens land:
         //   Routing.RegisterRoute(Routes.Menu, typeof(MenuPage));
         //   Routing.RegisterRoute(Routes.NewGame, typeof(NewGamePage));
-        //   Routing.RegisterRoute(Routes.Game, typeof(GamePage));
         //   ...
     }
 }

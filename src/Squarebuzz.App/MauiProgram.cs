@@ -50,6 +50,10 @@ public static class MauiProgram
         services.AddSingleton<IThemeService, ThemeService>();
         services.AddSingleton<AppShell>();
 
+        // Resolves to the same object XAML reaches through x:Static, so markup and code can
+        // never disagree about the current language.
+        services.AddSingleton<ILocalizationService, LocalizationServiceAdapter>();
+
         RegisterDomain(services);
     }
 
@@ -93,10 +97,12 @@ public static class MauiProgram
     {
         // Transient: a fresh ViewModel per navigation, so screens never inherit stale state.
         services.AddTransient<StartupViewModel>();
+        services.AddTransient<GameViewModel>();
     }
 
     private static void RegisterPages(IServiceCollection services)
     {
         services.AddTransient<StartupPage>();
+        services.AddTransient<GamePage>();
     }
 }
