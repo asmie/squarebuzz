@@ -1,0 +1,45 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+
+# MAUI / mobile build artefacts
+*.apk
+*.aab
+*.ipa
+*.app/
+*.dSYM/
+*.binlog
+Platforms/Android/**/keystore.properties
+*.keystore
+*.jks
+*.mobileprovision
+*.p12
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Node (design/ prototype tooling)
+node_modules/
+
+# Test / coverage output
+[Tt]est[Rr]esult*/
+coverage*/
+*.trx
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,21 @@
+<Project>
+
+  <!-- Settings shared by every project in the solution. -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- Warnings are defects. Kept on for Core/Data; the MAUI head relaxes this below. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+
+    <Product>squarebuzz</Product>
+    <Company>squarebuzz</Company>
+    <Copyright>Copyright © squarebuzz</Copyright>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+</Project>

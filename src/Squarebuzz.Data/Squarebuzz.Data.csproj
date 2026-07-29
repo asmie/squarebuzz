@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Persistence adapters. Implements the repository interfaces declared in
+    Squarebuzz.Core.Abstractions on top of SQLite, so the domain never sees a database.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Brings SQLitePCLRaw core/provider 3.0.x and the SourceGear.sqlite3 native library.
+         See Directory.Packages.props for why no SQLitePCLRaw bundle is referenced. -->
+    <PackageReference Include="sqlite-net-pcl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Squarebuzz.Core\Squarebuzz.Core.csproj" />
+  </ItemGroup>
+
+</Project>

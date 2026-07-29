@@ -1,0 +1,34 @@
+<Project>
+
+  <!-- Central Package Management: versions live here only, never in the .csproj files. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <ItemGroup Label="App">
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageVersion Include="CommunityToolkit.Maui" Version="15.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+  </ItemGroup>
+
+  <!--
+    sqlite-net-pcl 1.11.285 already depends on SQLitePCLRaw.core/provider 3.0.3 plus the
+    SourceGear.sqlite3 3.53.3 native package, so it needs no companion bundle.
+
+    Do NOT add SQLitePCLRaw.bundle_green here. Its newest release (2.1.11) pins the old
+    native packages at 2.1.11, and everything <= 2.1.11 is affected by CVE-2025-6965
+    (GHSA-2m69-gcr7-jv3q, high). It also ships a second copy of libe_sqlite3.so, which
+    made the Android build emit XA4301 and silently discard one of the two.
+  -->
+  <ItemGroup Label="Data">
+    <PackageVersion Include="sqlite-net-pcl" Version="1.11.285" />
+  </ItemGroup>
+
+  <ItemGroup Label="Tests">
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+  </ItemGroup>
+
+</Project>

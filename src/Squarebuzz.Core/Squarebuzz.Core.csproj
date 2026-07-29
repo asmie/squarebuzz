@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Pure domain layer: game rules, clue maths, the constraint solver and puzzle generation.
+    Deliberately references NOTHING - no MAUI, no SQLite, no platform APIs - so the whole
+    game can be unit-tested on any OS without an emulator.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Content\puzzles.json" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "_comment": [
+    "Authored puzzle content, ported from the RAW table in design/Squarebuzz.dc.html.",
+    "Grids use '#' for a filled cell and '.' for an empty one, one string per row, so a",
+    "puzzle can be read and edited by eye in a diff. Row/column clues are never stored -",
+    "they are derived by ClueCalculator, which keeps them impossible to desynchronise",
+    "from the solution.",
+    "Sizes 15/20/25 have no authored content and are produced by the generator instead."
+  ],
+
+  "packs": [
+    { "id": "animals",  "icon": "🐱", "locked": false, "isWildcard": false },
+    { "id": "dinos",    "icon": "🦕", "locked": false, "isWildcard": false },
+    { "id": "space",    "icon": "🚀", "locked": false, "isWildcard": false },
+    { "id": "food",     "icon": "🧁", "locked": false, "isWildcard": false },
+    { "id": "vehicles", "icon": "🚗", "locked": false, "isWildcard": false },
+    { "id": "fairy",    "icon": "👑", "locked": true,  "isWildcard": false },
+    { "id": "surprise", "icon": "🎁", "locked": false, "isWildcard": true }
+  ],
+
+  "puzzles": [
+    {
+      "id": "heart", "pack": "animals", "width": 5, "height": 5, "color": "#FF6B8A",
+      "rows": [".#.#.", "#####", "#####", ".###.", "..#.."]
+    },
+    {
+      "id": "fish", "pack": "animals", "width": 5, "height": 5, "color": "#4FA8F5",
+      "rows": ["..#.#", ".####", "#####", ".####", "..#.#"]
+    },
+    {
+      "id": "star", "pack": "space", "width": 5, "height": 5, "color": "#FFC244",
+      "rows": ["..#..", ".###.", "#####", ".###.", ".#.#."]
+    },
+    {
+      "id": "ghost", "pack": "fairy", "width": 5, "height": 5, "color": "#B8A9E8",
+      "rows": [".###.", "#####", "#.#.#", "#####", "#.#.#"]
+    },
+    {
+      "id": "apple", "pack": "food", "width": 5, "height": 5, "color": "#F2564F",
+      "rows": ["..#..", ".###.", "#####", "#####", ".###."]
+    },
+    {
+      "id": "boat", "pack": "vehicles", "width": 5, "height": 5, "color": "#2FC0A4",
+      "rows": ["..#..", "..##.", "..#..", "#####", ".###."]
+    },
+    {
+      "id": "dino", "pack": "dinos", "width": 10, "height": 10, "color": "#59C36A",
+      "rows": [
+        "......###.",
+        ".....#####",
+        ".....##.##",
+        ".....#####",
+        ".....####.",
+        "..#######.",
+        ".#########",
+        ".########.",
+        "..##..##..",
+        "..##..##.."
+      ]
+    },
+    {
+      "id": "cat", "pack": "animals", "width": 10, "height": 10, "color": "#FF9F45",
+      "rows": [
+        "##......##",
+        "###....###",
+        "##########",
+        "##########",
+        "#.##..##.#",
+        "##########",
+        "####..####",
+        "##.####.##",
+        ".########.",
+        "..######.."
+      ]
+    },
+    {
+      "id": "cupcake", "pack": "food", "width": 10, "height": 10, "color": "#FF8FB1",
+      "rows": [
+        "....#.....",
+        "...###....",
+        "..#####...",
+        ".#######..",
+        ".########.",
+        "..######..",
+        ".########.",
+        ".#.####.#.",
+        "..######..",
+        "...####..."
+      ]
+    },
+    {
+      "id": "car", "pack": "vehicles", "width": 10, "height": 10, "color": "#F2564F",
+      "rows": [
+        "..........",
+        "...#####..",
+        "..#######.",
+        "..#.#.#.#.",
+        "##########",
+        "##########",
+        "##########",
+        ".##....##.",
+        "..#....#..",
+        ".........."
+      ]
+    },
+    {
+      "id": "rocket", "pack": "space", "width": 10, "height": 10, "color": "#7FB2FF",
+      "rows": [
+        "....##....",
+        "...####...",
+        "...#..#...",
+        "...####...",
+        "...####...",
+        "..######..",
+        ".###..###.",
+        "...####...",
+        "....##....",
+        "....##...."
+      ]
+    },
+    {
+      "id": "crown", "pack": "fairy", "width": 10, "height": 10, "color": "#FFC244",
+      "rows": [
+        "#...#....#",
+        "##..#...##",
+        "##.###..##",
+        "##.###.###",
+        "##########",
+        "##########",
+        "#.##.##.##",
+        "##########",
+        "##########",
+        ".........."
+      ]
+    }
+  ]
+}
