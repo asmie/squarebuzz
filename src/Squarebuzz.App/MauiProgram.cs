@@ -7,6 +7,8 @@ using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Content;
 using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Data;
+using Squarebuzz.Data.Repositories;
 
 namespace Squarebuzz.App;
 
@@ -68,6 +70,23 @@ public static class MauiProgram
         services.AddSingleton<IPuzzleGenerator>(_ => new UniqueSolutionGenerator(new BlobPuzzleGenerator()));
 
         services.AddSingleton<GameSessionFactory>();
+
+        RegisterPersistence(services);
+    }
+
+    /// <summary>
+    /// SQLite persistence. The database lives in <see cref="FileSystem.AppDataDirectory"/>,
+    /// which is per-app private storage on every platform and is included in device backups.
+    /// </summary>
+    private static void RegisterPersistence(IServiceCollection services)
+    {
+        // One connection for the whole app - see SquarebuzzDatabase for why sharing matters.
+        services.AddSingleton(_ => new SquarebuzzDatabase(
+            Path.Combine(FileSystem.AppDataDirectory, "squarebuzz.db3")));
+
+        services.AddSingleton<ISettingsRepository, SqliteSettingsRepository>();
+        services.AddSingleton<ISaveGameRepository, SqliteSaveGameRepository>();
+        services.AddSingleton<IProgressRepository, SqliteProgressRepository>();
     }
 
     private static void RegisterViewModels(IServiceCollection services)

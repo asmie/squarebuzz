@@ -5,28 +5,43 @@ using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Solving;
+using Squarebuzz.Data;
 
 namespace Squarebuzz.App.ViewModels;
 
 /// <summary>
-/// Scaffolding screen for the structural milestone. It proves the composition root works end
-/// to end - DI, Shell hosting, runtime theme swapping, and that the domain runs correctly on
-/// the real device - and is replaced by the splash screen when the screens land.
+/// Scaffolding screen for the structural milestones. It proves the composition root works end
+/// to end - DI, Shell hosting, runtime theming, the domain, and SQLite - on the real device,
+/// and is replaced by the splash screen when the screens land.
 /// </summary>
 public partial class StartupViewModel : ViewModelBase
 {
     private readonly IThemeService _themeService;
     private readonly IPuzzleRepository _puzzles;
     private readonly GameSessionFactory _sessions;
+    private readonly ISettingsRepository _settingsRepository;
+    private readonly ISaveGameRepository _saveGames;
+    private readonly IProgressRepository _progress;
+    private readonly SquarebuzzDatabase _database;
+
+    private GameSettings _settings = GameSettings.Default;
 
     public StartupViewModel(
         IThemeService themeService,
         IPuzzleRepository puzzles,
-        GameSessionFactory sessions)
+        GameSessionFactory sessions,
+        ISettingsRepository settingsRepository,
+        ISaveGameRepository saveGames,
+        IProgressRepository progress,
+        SquarebuzzDatabase database)
     {
         _themeService = themeService;
         _puzzles = puzzles;
         _sessions = sessions;
+        _settingsRepository = settingsRepository;
+        _saveGames = saveGames;
+        _progress = progress;
+        _database = database;
 
         Title = "squarebuzz";
         RefreshTheme();
@@ -47,10 +62,32 @@ public partial class StartupViewModel : ViewModelBase
     [ObservableProperty]
     public partial string GeneratorSummary { get; private set; } = "…";
 
-    public override Task OnAppearingAsync()
+    [ObservableProperty]
+    public partial string StorageSummary { get; private set; } = "…";
+
+    public override async Task OnAppearingAsync()
     {
+        // The persisted theme is applied here rather than in the App constructor because
+        // loading it is asynchronous. Once the real splash screen exists it covers this
+        // moment; on this scaffolding page a brief default-themed frame is acceptable.
+        await LoadAndApplySettingsAsync();
+
         RunDomainSelfCheck();
-        return Task.CompletedTask;
+        await RunStorageSelfCheckAsync();
+    }
+
+    private async Task LoadAndApplySettingsAsync()
+    {
+        try
+        {
+            _settings = await _settingsRepository.LoadAsync();
+            _themeService.Apply(_settings.Theme, _settings.Accent);
+            RefreshTheme();
+        }
+        catch (Exception ex)
+        {
+            StorageSummary = $"settings load FAILED: {ex.GetType().Name}: {ex.Message}";
+        }
     }
 
     /// <summary>
@@ -91,8 +128,30 @@ public partial class StartupViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Proves SQLite works on this platform: the native library loaded, the file opened in the
+    /// app's private storage, migrations ran, and a save round-trips.
+    /// </summary>
+    private async Task RunStorageSelfCheckAsync()
+    {
+        try
+        {
+            var schemaVersion = await _database.GetSchemaVersionAsync();
+            var saveCount = await _saveGames.CountAsync();
+            var progress = await _progress.GetProgressAsync();
+
+            StorageSummary =
+                $"SQLite schema v{schemaVersion}, journal={_database.JournalMode}, " +
+                $"{saveCount} saves, {progress.Stars} stars";
+        }
+        catch (Exception ex)
+        {
+            StorageSummary = $"SQLite FAILED: {ex.GetType().Name}: {ex.Message}";
+        }
+    }
+
     [RelayCommand]
-    private void CycleTheme()
+    private async Task CycleThemeAsync()
     {
         var next = _themeService.Theme switch
         {
@@ -103,10 +162,12 @@ public partial class StartupViewModel : ViewModelBase
 
         _themeService.Apply(next, _themeService.Accent);
         RefreshTheme();
+
+        await PersistThemeAsync();
     }
 
     [RelayCommand]
-    private void CycleAccent()
+    private async Task CycleAccentAsync()
     {
         var next = _themeService.Accent switch
         {
@@ -117,6 +178,23 @@ public partial class StartupViewModel : ViewModelBase
 
         _themeService.Apply(_themeService.Theme, next);
         RefreshTheme();
+
+        await PersistThemeAsync();
+    }
+
+    private async Task PersistThemeAsync()
+    {
+        try
+        {
+            _settings = _settings with { Theme = _themeService.Theme, Accent = _themeService.Accent };
+            await _settingsRepository.SaveAsync(_settings);
+
+            await RunStorageSelfCheckAsync();
+        }
+        catch (Exception ex)
+        {
+            StorageSummary = $"settings save FAILED: {ex.GetType().Name}: {ex.Message}";
+        }
     }
 
     private void RefreshTheme()

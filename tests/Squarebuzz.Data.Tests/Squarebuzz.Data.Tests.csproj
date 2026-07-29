@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Runs against a real SQLite file in a temp directory rather than a mock. The point of these
+    tests is the SQL, the mapping and the migration runner, none of which a fake would exercise.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Squarebuzz.Core\Squarebuzz.Core.csproj" />
+    <ProjectReference Include="..\..\src\Squarebuzz.Data\Squarebuzz.Data.csproj" />
+  </ItemGroup>
+
+</Project>

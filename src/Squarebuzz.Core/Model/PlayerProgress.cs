@@ -1,0 +1,69 @@
+namespace Squarebuzz.Core.Model;
+
+/// <summary>A picture the player has finished, as the Gallery and trophies need it.</summary>
+/// <param name="PuzzleId">Authored puzzle identifier.</param>
+/// <param name="FirstSolvedOn">When it was first completed - shown on the gallery card.</param>
+/// <param name="BestStars">Best star rating achieved.</param>
+/// <param name="BestTime">Fastest completion.</param>
+/// <param name="TimesSolved">How often it has been completed.</param>
+public sealed record SolvedPuzzle(
+    string PuzzleId,
+    DateOnly FirstSolvedOn,
+    int BestStars,
+    TimeSpan BestTime,
+    int TimesSolved);
+
+/// <summary>The trophies the game can award. Ids are persisted, so do not renumber them.</summary>
+public enum TrophyId
+{
+    FirstPicture = 1,
+    WeekStreak = 2,
+    NoHints = 3,
+    Speedy = 4,
+    HundredBlocks = 5,
+    DinoFan = 6,
+    NightOwl = 7,
+    PerfectTen = 8,
+    Collector = 9,
+}
+
+/// <summary>A trophy the player has earned.</summary>
+public sealed record EarnedTrophy(TrophyId Trophy, DateOnly EarnedOn);
+
+/// <summary>
+/// The player's standing: their name, stars, streak, and what they have finished.
+/// </summary>
+public sealed record PlayerProgress
+{
+    public string PlayerName { get; init; } = string.Empty;
+
+    /// <summary>Total stars collected across all completions.</summary>
+    public int Stars { get; init; }
+
+    /// <summary>Consecutive days played, as of <see cref="LastPlayedOn"/>.</summary>
+    public int Streak { get; init; }
+
+    public DateOnly? LastPlayedOn { get; init; }
+
+    /// <summary>Total filled cells ever, which the "100 blocks" trophy counts.</summary>
+    public int TotalBlocksFilled { get; init; }
+
+    public static PlayerProgress Empty { get; } = new();
+}
+
+/// <summary>
+/// The result of finishing a puzzle, handed to the progress repository to record.
+/// </summary>
+/// <param name="PuzzleId">Authored puzzle id, or null for a generated one (not gallery-tracked).</param>
+/// <param name="Stars">Stars awarded, 1-3.</param>
+/// <param name="Elapsed">How long it took.</param>
+/// <param name="BlocksFilled">Cells filled in the finished picture.</param>
+/// <param name="HintsUsed">Hints spent.</param>
+/// <param name="CompletedAt">When it was finished, for streaks and the night-owl trophy.</param>
+public sealed record PuzzleCompletion(
+    string? PuzzleId,
+    int Stars,
+    TimeSpan Elapsed,
+    int BlocksFilled,
+    int HintsUsed,
+    DateTimeOffset CompletedAt);

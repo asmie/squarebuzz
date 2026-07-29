@@ -60,6 +60,7 @@
                     <Label Text="{Binding ContentSummary}" Style="{StaticResource Subtle}" />
                     <Label Text="{Binding SolverSummary}" Style="{StaticResource Subtle}" />
                     <Label Text="{Binding GeneratorSummary}" Style="{StaticResource Subtle}" />
+                    <Label Text="{Binding StorageSummary}" Style="{StaticResource Subtle}" />
                 </VerticalStackLayout>
             </Border>
 

@@ -17,13 +17,15 @@ public sealed class GameSession
     private readonly CellState[] _cells;
     private readonly MoveHistory _history = new();
 
-    public GameSession(Puzzle puzzle, GameRules rules)
+    public GameSession(Puzzle puzzle, GameRules rules, NewGameOptions? origin = null, int seed = 0)
     {
         ArgumentNullException.ThrowIfNull(puzzle);
         ArgumentNullException.ThrowIfNull(rules);
 
         Puzzle = puzzle;
         Rules = rules;
+        Origin = origin;
+        Seed = seed;
         _cells = new CellState[puzzle.CellCount];
         HintsRemaining = rules.HintAllowance;
     }
@@ -31,6 +33,15 @@ public sealed class GameSession
     public Puzzle Puzzle { get; }
 
     public GameRules Rules { get; }
+
+    /// <summary>
+    /// The choices this session was created from. Carried so a save can record the player's
+    /// actual difficulty and challenge rather than guessing them back out of the rules.
+    /// </summary>
+    public NewGameOptions? Origin { get; }
+
+    /// <summary>Seed that reproduces this puzzle, so a save need not store the picture.</summary>
+    public int Seed { get; }
 
     /// <summary>Which mark a plain tap produces. The UI's fill/cross toggle sets this.</summary>
     public PaintMode Mode { get; set; } = PaintMode.Fill;
@@ -87,6 +98,41 @@ public sealed class GameSession
         {
             Elapsed += delta;
         }
+    }
+
+    /// <summary>
+    /// Rehydrates a session from a save.
+    /// </summary>
+    /// <remarks>
+    /// Deliberately bypasses the move rules: these marks were already validated when the
+    /// player made them, and re-checking would count old mistakes twice. Undo history starts
+    /// empty, so a resumed game cannot be unwound past the point it was saved.
+    /// </remarks>
+    public void Restore(IReadOnlyList<CellState> cells, TimeSpan elapsed, int hintsRemaining, int mistakes)
+    {
+        ArgumentNullException.ThrowIfNull(cells);
+
+        if (cells.Count != _cells.Length)
+        {
+            throw new ArgumentException(
+                $"Saved board has {cells.Count} cells but the puzzle needs {_cells.Length}.",
+                nameof(cells));
+        }
+
+        ArgumentOutOfRangeException.ThrowIfNegative(mistakes);
+        ArgumentOutOfRangeException.ThrowIfNegative(hintsRemaining);
+
+        for (var i = 0; i < cells.Count; i++)
+        {
+            _cells[i] = cells[i];
+        }
+
+        Elapsed = elapsed;
+        HintsRemaining = Math.Min(hintsRemaining, Rules.HintAllowance);
+        Mistakes = mistakes;
+        _history.Clear();
+
+        EvaluateSolved();
     }
 
     /// <summary>

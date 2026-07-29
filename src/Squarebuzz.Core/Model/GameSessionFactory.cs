@@ -34,7 +34,9 @@ public sealed class GameSessionFactory
         var puzzle = SelectPuzzle(options, seed);
         var rules = GameRules.Create(options.Challenge, options.Helpers);
 
-        return new GameSession(puzzle, rules);
+        // The resolved seed is recorded even when the caller left it null, so this exact
+        // game can be saved and resumed.
+        return new GameSession(puzzle, rules, options with { Seed = seed }, seed);
     }
 
     /// <summary>Resumes a specific picture, for continuing a saved game.</summary>
@@ -52,6 +54,34 @@ public sealed class GameSessionFactory
         ArgumentNullException.ThrowIfNull(puzzle);
 
         return new GameSession(puzzle, GameRules.Create(challenge, helpers));
+    }
+
+    /// <summary>
+    /// Rebuilds a session from a save. The picture is looked up by id when it was authored, or
+    /// regenerated from the stored seed when it was not - which is why generation has to be
+    /// deterministic.
+    /// </summary>
+    public GameSession Restore(SavedGame save, HelperSettings helpers)
+    {
+        ArgumentNullException.ThrowIfNull(save);
+        ArgumentNullException.ThrowIfNull(helpers);
+
+        var options = new NewGameOptions(save.Size, save.Difficulty, save.PackId, save.Challenge)
+        {
+            Helpers = helpers,
+            Seed = save.Seed,
+        };
+
+        var puzzle = save.PuzzleId is { } id
+            ? _repository.FindById(id)
+              ?? throw new InvalidOperationException(
+                  $"Saved game references puzzle '{id}', which is no longer in the shipped content.")
+            : _generator.Generate(new PuzzleRequest(save.Size, save.Size, save.Difficulty, save.PackId, save.Seed));
+
+        var session = new GameSession(puzzle, GameRules.Create(save.Challenge, helpers), options, save.Seed);
+        session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.Mistakes);
+
+        return session;
     }
 
     private Puzzle SelectPuzzle(NewGameOptions options, int seed)
