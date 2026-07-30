@@ -12,6 +12,7 @@
         <Label Grid.Row="0"
                Text="{Binding Heading}"
                Style="{StaticResource H1}"
+               SemanticProperties.HeadingLevel="Level1"
                Margin="0,0,0,12" />
 
         <!-- Empty state: a mascot and a way out, rather than a blank screen. -->
@@ -19,7 +20,8 @@
                              IsVisible="{Binding IsEmpty}"
                              VerticalOptions="Center"
                              Spacing="18">
-            <controls:MascotView Pose="Think" HeightRequest="110" WidthRequest="102" HorizontalOptions="Center" />
+            <controls:MascotView Pose="Think" HeightRequest="110" WidthRequest="102" HorizontalOptions="Center"
+                                 AutomationProperties.ExcludedWithChildren="True" />
             <Label Text="{Binding EmptyMessage}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
             <Button Text="{Binding StartFirstLabel}"
                     Command="{Binding NewGameCommand}"
@@ -49,7 +51,8 @@
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="12" />
                                 </Border.StrokeShape>
-                                <controls:PuzzleArtView Puzzle="{Binding Puzzle}" Marks="{Binding Marks}" InputTransparent="True" Margin="6" />
+                                <controls:PuzzleArtView Puzzle="{Binding Puzzle}" Marks="{Binding Marks}" InputTransparent="True" Margin="6"
+                                                                        AutomationProperties.ExcludedWithChildren="True" />
                             </Border>
 
                             <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
@@ -75,6 +78,7 @@
                                        HorizontalTextAlignment="End" />
 
                                 <Button Text="▶"
+                                        SemanticProperties.Description="{Binding ResumeDescription}"
                                         Command="{Binding Path=ResumeCommand, Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, x:DataType=vm:ContinueViewModel}"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="{DynamicResource Primary}"
@@ -85,6 +89,7 @@
                                         Padding="0" />
 
                                 <Button Text="✕"
+                                        SemanticProperties.Description="{Binding DeleteDescription}"
                                         Command="{Binding Path=DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, x:DataType=vm:ContinueViewModel}"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="{DynamicResource WarnSoft}"

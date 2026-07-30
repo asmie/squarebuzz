@@ -18,7 +18,7 @@
     <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,*" RowSpacing="10">
 
         <VerticalStackLayout Grid.Row="0" Spacing="2">
-            <Label Text="{Binding Heading}" Style="{StaticResource H1}" />
+            <Label Text="{Binding Heading}" Style="{StaticResource H1}" SemanticProperties.HeadingLevel="Level1" />
             <Label Text="{Binding FoundSummary}" Style="{StaticResource Subtle}" />
         </VerticalStackLayout>
 
@@ -33,7 +33,12 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:GalleryCard">
-                    <Border BackgroundColor="{DynamicResource Surface}"
+                    <!--
+                      One description for the whole card, so a screen reader reads it as a single
+                      item rather than announcing three unlabelled fragments.
+                    -->
+                    <Border SemanticProperties.Description="{Binding Description}"
+                            BackgroundColor="{DynamicResource Surface}"
                             Stroke="{Binding IsFound, Converter={StaticResource CardStroke}}"
                             StrokeThickness="3"
                             Padding="10"
@@ -54,6 +59,7 @@
                             <controls:PuzzleArtView Puzzle="{Binding Puzzle}"
                                                     IsMasked="{Binding IsMasked}"
                                                     InputTransparent="True"
+                                                    AutomationProperties.ExcludedWithChildren="True"
                                                     HeightRequest="110" />
 
                             <Label Text="{Binding Name}"

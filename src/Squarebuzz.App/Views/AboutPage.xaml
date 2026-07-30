@@ -14,9 +14,9 @@
                                  MaximumWidthRequest="{StaticResource FrameMaxWidth}"
                                  HorizontalOptions="Center">
 
-                <Label Text="{Binding Heading}" Style="{StaticResource H1}" />
+                <Label Text="{Binding Heading}" Style="{StaticResource H1}" SemanticProperties.HeadingLevel="Level1" />
 
-                <controls:MascotView Pose="Idle" HeightRequest="90" WidthRequest="84" HorizontalOptions="Center" />
+                <controls:MascotView Pose="Idle" HeightRequest="90" WidthRequest="84" HorizontalOptions="Center" AutomationProperties.ExcludedWithChildren="True" />
 
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="10">

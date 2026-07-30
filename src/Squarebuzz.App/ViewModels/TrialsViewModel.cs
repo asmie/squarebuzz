@@ -27,6 +27,12 @@ public sealed class TrophyCard
     public required string EarnedOn { get; init; }
 
     public double Opacity => IsEarned ? 1 : 0.5;
+
+    /// <summary>
+    /// Name, whether it is earned, and how it is won, as one sentence. The emoji icon and the
+    /// gold border carry all of that visually and none of it otherwise.
+    /// </summary>
+    public required string Description { get; init; }
 }
 
 /// <summary>
@@ -160,6 +166,10 @@ public partial class TrialsViewModel : LocalizedViewModel
                 EarnedOn = record is null
                     ? "—"
                     : record.EarnedOn.ToString("d MMM yyyy", CultureInfo.CurrentCulture),
+                Description = Strings.Format(
+                    record is null ? "a11yTrophyLocked" : "a11yTrophyEarned",
+                    T($"tr{ordinal}"),
+                    T($"trophyHint{ordinal}")),
             });
 
             ordinal++;

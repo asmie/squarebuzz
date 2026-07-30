@@ -16,12 +16,15 @@
         <!-- Status bar: picture name, counters, timer, pause -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
             <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
-                <Label Text="{Binding PuzzleName}" Style="{StaticResource H2}" />
+                <Label Text="{Binding PuzzleName}" Style="{StaticResource H2}"
+                       SemanticProperties.HeadingLevel="Level1" />
                 <Label Text="{Binding StatusText}" Style="{StaticResource Subtle}" FontSize="14" />
             </VerticalStackLayout>
 
+            <!-- Glyph-only, so the only thing a screen reader has to go on is this. -->
             <Button Grid.Column="1"
                     Text="⏸"
+                    SemanticProperties.Description="{Binding PauseText}"
                     Command="{Binding PauseCommand}"
                     BackgroundColor="{DynamicResource Surface2}"
                     TextColor="{DynamicResource Ink}"
@@ -33,6 +36,7 @@
 
             <Border Grid.Column="2"
                     IsVisible="{Binding ShowTimer}"
+                    SemanticProperties.Description="{Binding ElapsedDescription}"
                     BackgroundColor="{DynamicResource Surface2}"
                     Stroke="{DynamicResource Line}"
                     StrokeThickness="2"
@@ -56,7 +60,12 @@
                     Orientation="Both"
                     HorizontalOptions="Fill"
                     VerticalOptions="Fill">
+            <!--
+              A GraphicsView adds nothing to the accessibility tree, so without this the board is
+              simply not there for a screen reader. See GameViewModel.BoardDescription.
+            -->
             <controls:BoardView x:Name="Board"
+                                SemanticProperties.Description="{Binding BoardDescription}"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
                                 Session="{Binding Session}"
@@ -86,7 +95,8 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="16" />
             </Border.StrokeShape>
-            <controls:MagnifierView x:Name="Magnifier" Session="{Binding Session}" />
+            <controls:MagnifierView x:Name="Magnifier" Session="{Binding Session}"
+                                    AutomationProperties.ExcludedWithChildren="True" />
         </Border>
 
         <!-- Controls -->
@@ -154,8 +164,10 @@
                     WidthRequest="300"
                     Padding="24">
                 <VerticalStackLayout Spacing="12">
-                    <controls:MascotView Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center" />
-                    <Label Text="{Binding PausedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+                    <controls:MascotView Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                         AutomationProperties.ExcludedWithChildren="True" />
+                    <Label Text="{Binding PausedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
+                           SemanticProperties.HeadingLevel="Level1" />
 
                     <Button Text="{Binding ResumeText}"
                             Command="{Binding ResumeCommand}"
@@ -191,9 +203,11 @@
                     WidthRequest="310"
                     Padding="24">
                 <VerticalStackLayout Spacing="14">
-                    <controls:MascotView Pose="Idle" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center" />
+                    <controls:MascotView Pose="Idle" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                         AutomationProperties.ExcludedWithChildren="True" />
 
-                    <Label Text="{Binding BreakTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding BreakTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center"
+                           SemanticProperties.HeadingLevel="Level1" />
 
                     <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
                     <Label Text="{Binding BreakBody}"
@@ -221,16 +235,21 @@
                     WidthRequest="320"
                     Padding="24">
                 <VerticalStackLayout Spacing="14">
-                    <controls:MascotView Pose="Cheer" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center" />
+                    <controls:MascotView Pose="Cheer" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                         AutomationProperties.ExcludedWithChildren="True" />
 
-                    <Label Text="{Binding SolvedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding SolvedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
+                           SemanticProperties.HeadingLevel="Level1" />
 
+                    <!-- The picture is announced by name in the win message instead. -->
                     <controls:PuzzleArtView x:Name="Reveal"
+                                            AutomationProperties.ExcludedWithChildren="True"
                                             HeightRequest="200"
                                             HorizontalOptions="Center"
                                             WidthRequest="200" />
 
                     <Label Text="{Binding StarsText}"
+                           SemanticProperties.Description="{Binding StarsDescription}"
                            FontSize="30"
                            HorizontalTextAlignment="Center"
                            TextColor="{DynamicResource Gold}" />

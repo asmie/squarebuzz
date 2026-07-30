@@ -182,11 +182,13 @@
                         <Grid ColumnDefinitions="*,Auto,Auto,Auto" MinimumHeightRequest="56" ColumnSpacing="8">
                             <Label Text="{Binding CellSizeLabel}" Style="{StaticResource RowLabel}" />
                             <Button Grid.Column="1" Text="−" Command="{Binding ZoomOutCommand}"
+                                    SemanticProperties.Description="{Binding SmallerLabel}"
                                     Style="{StaticResource SegButton}" WidthRequest="52"
                                     BackgroundColor="{DynamicResource Surface2}" TextColor="{DynamicResource Ink}" />
                             <Label Grid.Column="2" Text="{Binding CellZoomText}" Style="{StaticResource RowLabel}"
                                    WidthRequest="56" HorizontalTextAlignment="Center" />
                             <Button Grid.Column="3" Text="+" Command="{Binding ZoomInCommand}"
+                                    SemanticProperties.Description="{Binding BiggerLabel}"
                                     Style="{StaticResource SegButton}" WidthRequest="52"
                                     BackgroundColor="{DynamicResource Surface2}" TextColor="{DynamicResource Ink}" />
                         </Grid>

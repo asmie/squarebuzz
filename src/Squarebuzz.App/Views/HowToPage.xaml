@@ -26,6 +26,7 @@
                  localised heading rather than hardcoding it. -->
             <Label Text="{Binding Heading}"
                    Style="{StaticResource H1}"
+                   SemanticProperties.HeadingLevel="Level1"
                    Margin="0,0,0,14" />
         </CollectionView.Header>
 
@@ -72,6 +73,7 @@
                           pinning the width takes them out of the negotiation entirely.
                         -->
                         <controls:MiniGridView Grid.Row="1"
+                                               AutomationProperties.ExcludedWithChildren="True"
                                                Rows="{Binding Rows}"
                                                RowClues="{Binding RowClues}"
                                                WidthRequest="280"

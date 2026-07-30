@@ -48,6 +48,47 @@ public class GameSessionTests
     }
 
     [Fact]
+    public void FilledCount_CountsOnlyFilledSquares()
+    {
+        // This is what a screen reader is told about the board, so it has to mean "progress
+        // towards the picture" - crossing squares out is not progress, and counting them would
+        // report a board as nearly done when nothing had been filled in at all.
+        var session = NewSession();
+
+        Assert.Equal(0, session.FilledCount);
+
+        session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+        session.Paint(session.Puzzle.IndexOf(2, 1), CellState.Filled);
+        Assert.Equal(2, session.FilledCount);
+
+        session.Paint(session.Puzzle.IndexOf(0, 0), CellState.Crossed);
+        Assert.Equal(2, session.FilledCount);
+
+        session.Paint(session.Puzzle.IndexOf(2, 1), CellState.Empty);
+        Assert.Equal(1, session.FilledCount);
+    }
+
+    [Fact]
+    public void FilledCount_OnASolvedBoard_EqualsThePictureSize()
+    {
+        var session = NewSession();
+        FillEntireSolution(session);
+
+        var pictureSize = 0;
+
+        for (var i = 0; i < session.Puzzle.CellCount; i++)
+        {
+            if (session.Puzzle.Solution[i])
+            {
+                pictureSize++;
+            }
+        }
+
+        Assert.True(session.IsSolved);
+        Assert.Equal(pictureSize, session.FilledCount);
+    }
+
+    [Fact]
     public void Tap_InFillMode_TogglesFilled()
     {
         var session = NewSession();

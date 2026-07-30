@@ -97,6 +97,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     public partial GameSession? Session { get; private set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ElapsedDescription))]
     public partial string ElapsedText { get; private set; } = "0:00";
 
     [ObservableProperty]
@@ -243,6 +244,42 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     /// <summary>Filled stars up to the rating, hollow for the rest.</summary>
     public string StarsText => new string('★', StarRating) + new string('☆', Math.Max(0, 3 - StarRating));
+
+    /// <summary>Star row read as words, since "★★☆" is not something a screen reader can say.</summary>
+    public string StarsDescription => Strings.Format("a11yStarRating", StarRating);
+
+    /// <summary>
+    /// What a screen reader is told about the board.
+    /// </summary>
+    /// <remarks>
+    /// A <c>GraphicsView</c> contributes nothing to the accessibility tree - the board is simply
+    /// absent from it - so this is the whole of what a screen reader can convey about the puzzle.
+    /// It says so, too: promising a playable board and then providing no way to reach a square
+    /// would be worse than admitting the limit. See the README on what is still missing.
+    /// </remarks>
+    public string BoardDescription
+    {
+        get
+        {
+            if (Session is not { } session)
+            {
+                return string.Empty;
+            }
+
+            var total = CountFilledCells(session.Puzzle);
+
+            return Strings.Format(
+                       "a11yBoard",
+                       session.Puzzle.Width,
+                       session.Puzzle.Height,
+                       session.FilledCount,
+                       total)
+                   + " " + T("a11yBoardNote");
+        }
+    }
+
+    /// <summary>The timer as a sentence; "5:26" alone is read as a pair of numbers.</summary>
+    public string ElapsedDescription => Strings.Format("a11yTime", ElapsedText);
 
     /// <summary>
     /// Picks up a <c>saveId</c> from the route, if the player arrived from Continue.
@@ -640,7 +677,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         // The picture's name is the reward, so it is said as well as the congratulation - the
         // whole point of the puzzle was finding out what it was.
-        _narration.Speak($"{SolvedTitle} {PuzzleName}");
+        var solved = $"{SolvedTitle} {PuzzleName}. {StarsDescription}";
+
+        _narration.Speak(solved);
+        Announce(solved);
 
         PuzzleSolved?.Invoke(this, EventArgs.Empty);
 
@@ -729,6 +769,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         OnPropertyChanged(nameof(BigNumbers));
         OnPropertyChanged(nameof(TapBehaviour));
         OnPropertyChanged(nameof(ShowMagnifier));
+        OnPropertyChanged(nameof(BoardDescription));
         OnPropertyChanged(nameof(HapticsEnabled));
         OnPropertyChanged(nameof(UndoColumn));
         OnPropertyChanged(nameof(RedoColumn));
@@ -750,6 +791,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         CanRedo = session.CanRedo;
         IsSolved = session.IsSolved;
         UpdateElapsedText();
+
+        // The board's accessible description carries the filled count, so it goes stale on every
+        // move unless it is raised here - and "2 of 17" while the board is nearly finished is
+        // worse than no description at all. Nothing on screen shows this, so only a dump of the
+        // accessibility tree catches it.
+        OnPropertyChanged(nameof(BoardDescription));
     }
 
     private void StartTimer()
@@ -787,7 +834,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         if (_screenTime.Add(second))
         {
             IsBreakReminderOpen = true;
-            _narration.Speak($"{BreakTitle} {BreakBody}");
+
+            var reminder = $"{BreakTitle} {BreakBody}";
+
+            _narration.Speak(reminder);
+            Announce(reminder);
 
             // Nothing about a break should risk the board, so this is a save point too.
             _ = AutosaveAsync();
@@ -819,6 +870,31 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         ElapsedText = $"{(int)elapsed.TotalMinutes}:{elapsed.Seconds:00}";
     }
 
+    /// <summary>
+    /// Sends <paramref name="text"/> to the platform screen reader.
+    /// </summary>
+    /// <remarks>
+    /// A no-op when no screen reader is running, so this is safe to call unconditionally - and
+    /// unlike narration it is deliberately not tied to the Voice narration setting, because the
+    /// player's screen reader is their choice rather than ours to switch off.
+    /// </remarks>
+    private static void Announce(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+
+        try
+        {
+            SemanticScreenReader.Default.Announce(text);
+        }
+        catch (Exception)
+        {
+            // Not every platform implements it, and an announcement is never worth a crash.
+        }
+    }
+
     private void ShowToast(string message)
     {
         Toast = message;
@@ -827,6 +903,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         // funnel covers "line done", "oops" and "hint used" without three separate calls that
         // a fourth message could later be added alongside and forget.
         _narration.Speak(message);
+
+        // And the same message to whatever screen reader the player is using. A toast that
+        // appears and fades is invisible to one otherwise: nothing takes focus, so nothing is
+        // read. Announce is a no-op when no screen reader is running.
+        Announce(message);
 
         // Clears itself, so no screen has to remember to tidy up after a transient message.
         _ = Task.Delay(1500).ContinueWith(

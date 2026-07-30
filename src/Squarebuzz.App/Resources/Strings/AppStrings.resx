@@ -120,6 +120,26 @@
   <!-- Spoken, not shown, so it is phrased as speech rather than as a label. -->
   <data name="voiceReady" xml:space="preserve"><value>I can read to you now.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>No voice for this language on this device</value></data>
+  <!--
+    Screen-reader text. Never displayed, so it is written as something to be heard: a name that
+    stands on its own out of context, because a screen reader reads one element at a time with no
+    surrounding layout to explain it.
+  -->
+  <data name="a11yBoard" xml:space="preserve"><value>Puzzle board, {0} by {1}. {2} of {3} squares filled.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>The squares cannot be reached by touch exploration yet.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Time so far: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} stars in total</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} days in a row</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Carry on with {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Delete {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Smaller squares</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Bigger squares</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, found, {1} stars</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Picture not found yet. Play to reveal it.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Locked picture</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, earned. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, not earned yet. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} out of 3 stars</value></data>
   <data name="haptics" xml:space="preserve"><value>Buzz on tap</value></data>
   <data name="audio" xml:space="preserve"><value>Sound</value></data>
   <data name="look" xml:space="preserve"><value>Look &amp; feel</value></data>

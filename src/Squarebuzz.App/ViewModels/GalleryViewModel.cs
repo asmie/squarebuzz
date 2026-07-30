@@ -33,6 +33,12 @@ public sealed class GalleryCard
     /// <summary>Localised "Locked" caption, carried on the card so the template stays simple.</summary>
     public required string LockedLabel { get; init; }
 
+    /// <summary>
+    /// The whole card as one sentence. A grid of identical unlabelled tiles is what a screen
+    /// reader sees otherwise, and an unfound card must not give its picture away here either.
+    /// </summary>
+    public required string Description { get; init; }
+
     public string Size => $"{Puzzle.Width}×{Puzzle.Height}";
 
     /// <summary>Found pictures show their colour; the rest stay hidden behind blocks.</summary>
@@ -134,10 +140,31 @@ public partial class GalleryViewModel : LocalizedViewModel
                     ? string.Empty
                     : $"{(int)record.BestTime.TotalMinutes}:{record.BestTime.Seconds:00}",
                 LockedLabel = T("locked"),
+                Description = DescribeCard(
+                    isFound, lockedPacks.Contains(puzzle.Pack), puzzle, record?.BestStars ?? 0),
             });
         }
 
         FoundSummary = Strings.Format("galleryFound", byId.Count, Cards.Count);
+    }
+
+    /// <summary>
+    /// One sentence per card. Deliberately says nothing about an unfound picture beyond its size -
+    /// naming it, or even hinting at its shape, would spoil the discovery for the one player who
+    /// depends on this text instead of the artwork.
+    /// </summary>
+    private string DescribeCard(bool isFound, bool isLocked, Puzzle puzzle, int stars)
+    {
+        var size = $"{puzzle.Width}×{puzzle.Height}";
+
+        if (isLocked)
+        {
+            return $"{T("a11yLockedCard")}, {size}";
+        }
+
+        return isFound
+            ? Strings.Format("a11yFound", T($"Puzzle_{puzzle.Id}"), stars) + $", {size}"
+            : $"{T("a11yNotFound")} {size}";
     }
 
     [RelayCommand]

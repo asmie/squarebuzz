@@ -88,6 +88,31 @@ public sealed class GameSession
         }
     }
 
+    /// <summary>
+    /// Squares the player has filled in.
+    /// </summary>
+    /// <remarks>
+    /// Crossed squares do not count. This is progress towards the picture, and the count is what a
+    /// screen reader is told about the board - a canvas has nothing for it to read otherwise.
+    /// </remarks>
+    public int FilledCount
+    {
+        get
+        {
+            var count = 0;
+
+            for (var i = 0; i < _cells.Length; i++)
+            {
+                if (_cells[i] == CellState.Filled)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+    }
+
     public CellState this[int index] => _cells[index];
 
     public CellState At(int x, int y) => _cells[Puzzle.IndexOf(x, y)];

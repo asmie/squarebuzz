@@ -150,8 +150,7 @@ would be worse than silence.
 
 It is **not a screen reader.** It speaks what the game chooses to speak, because the youngest
 players in the target range can read the clue *numbers* long before they can read "Auto-cross
-finished lines". Proper accessibility is a separate job — `SemanticProperties` on the pages so
-TalkBack and VoiceOver work — and has not been done.
+finished lines". Screen-reader support is separate, and is covered below.
 
 **A voice is per-language and per-device.** Nothing is spoken in a language the device has no
 voice for, and the service deliberately does **not** fall back to another language's voice: an
@@ -170,6 +169,45 @@ Verifying speech without hearing it: the TTS engine registers its own audio play
 uid, so `dumpsys audio` shows a player appear from `com.google.android.tts` for the duration of
 each utterance — enough to prove a given action speaks, that the switch gates it, and that
 switching language still produces speech.
+
+## Screen readers
+
+Every control that a screen reader could not otherwise name now carries
+`SemanticProperties.Description`: the ⏸ button, the timer, the ▶ and ✕ on each saved game (two
+rows of unlabelled buttons where one is destructive), the −/+ cell-size steppers, each gallery
+card, each trophy, and the star row (`★★☆` is not something that can be spoken). Page titles
+carry `HeadingLevel`, and the decorative drawables are marked
+`AutomationProperties.ExcludedWithChildren`.
+
+Descriptions are composed in the ViewModels so they are localised and stay in step with state.
+Gallery cards deliberately say **nothing** about an unfound picture beyond its size: naming it, or
+even hinting at its shape, would spoil the discovery for exactly the player who has to rely on
+this text instead of the artwork.
+
+**The board is the honest gap.** A `GraphicsView` contributes nothing to the accessibility tree,
+so before this the puzzle was simply *absent* — a screen-reader user could not perceive it at all.
+It now carries a description ("Puzzle board, 10 by 10. 24 of 34 squares filled.") that updates on
+every move, and that description says outright that the squares cannot be reached by touch
+exploration yet. **The game is therefore still not playable with a screen reader.** Making it so
+means an accessible overlay — one focusable element per cell, each naming its row and column, its
+state, and its two clues — which is a real feature and not a label pass. It is also the reason
+the board description tells the truth rather than implying more than it delivers.
+
+Announcements go through `SemanticScreenReader.Announce` at the same funnel narration uses, so
+toasts, the win and the break reminder are spoken even though nothing takes focus when they
+appear. That is deliberately **not** tied to the Voice narration switch: the player's screen
+reader is their choice, not ours to switch off. If both are on, both speak.
+
+Verifying it: `adb shell uiautomator dump` writes the whole accessibility tree, so
+`content-desc` can be inspected per node without TalkBack running at all.
+
+```bash
+adb shell uiautomator dump /sdcard/t.xml && adb exec-out cat /sdcard/t.xml
+```
+
+That is how two silent bugs turned up — a timer description frozen at `0:00` while the visible
+clock ran, and a board description that never refreshed after a move. Neither is visible on
+screen, and neither would fail a test that did not know to look.
 
 ## Continuous integration
 

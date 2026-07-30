@@ -36,8 +36,9 @@
                     WidthRequest="300"
                     HorizontalOptions="Center">
                 <Grid RowDefinitions="*,Auto" RowSpacing="10">
-                    <controls:PuzzleArtView Grid.Row="0" Puzzle="{Binding DemoPuzzle}" />
+                    <controls:PuzzleArtView Grid.Row="0" Puzzle="{Binding DemoPuzzle}" AutomationProperties.ExcludedWithChildren="True" />
                     <controls:MascotView Grid.Row="1"
+                                         AutomationProperties.ExcludedWithChildren="True"
                                          Pose="{Binding MascotPose}"
                                          HeightRequest="56"
                                          WidthRequest="52"
@@ -48,6 +49,7 @@
             <VerticalStackLayout Spacing="10">
                 <Label Text="{Binding StepTitle}"
                        Style="{StaticResource H1}"
+                       SemanticProperties.HeadingLevel="Level1"
                        HorizontalTextAlignment="Center" />
                 <Label Text="{Binding StepBody}"
                        Style="{StaticResource Subtle}"

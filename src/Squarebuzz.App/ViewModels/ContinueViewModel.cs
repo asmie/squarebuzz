@@ -34,6 +34,14 @@ public sealed class SavedGameCard
     public required double Progress { get; init; }
 
     public required string SavedWhen { get; init; }
+
+    /// <summary>
+    /// Names the picture in each button's description. Two rows of unlabelled play and delete
+    /// buttons are indistinguishable to a screen reader, and one of them is destructive.
+    /// </summary>
+    public required string ResumeDescription { get; init; }
+
+    public required string DeleteDescription { get; init; }
 }
 
 /// <summary>
@@ -143,6 +151,8 @@ public partial class ContinueViewModel : LocalizedViewModel
             ProgressText = $"{done} / {total}",
             Progress = total == 0 ? 0 : done / (double)total,
             SavedWhen = DescribeWhen(save.SavedAt),
+            ResumeDescription = Strings.Format("a11yResumeGame", name),
+            DeleteDescription = Strings.Format("a11yDeleteGame", name),
         };
     }
 

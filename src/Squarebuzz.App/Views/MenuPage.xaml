@@ -16,6 +16,7 @@
             <!-- Header: wordmark, stars and streak -->
             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                 <controls:MascotView Grid.Column="0"
+                                     AutomationProperties.ExcludedWithChildren="True"
                                      Pose="{Binding MascotPose}"
                                      HeightRequest="72"
                                      WidthRequest="66" />

@@ -268,6 +268,11 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string CellSizeLabel => T("cellSize");
 
+    // "−" and "+" alone are read as "minus" and "plus", which says nothing about what they change.
+    public string SmallerLabel => T("a11ySmaller");
+
+    public string BiggerLabel => T("a11yBigger");
+
     // The magnifier is new, so these keys were added to AppStrings.resx rather than ported.
     // English only for now, which is exactly how the partial pl/es satellites already behave.
     public string MagnifierLabel => T("magnifier");
