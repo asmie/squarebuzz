@@ -17,15 +17,18 @@ public partial class OnboardingViewModel : LocalizedViewModel
 
     private readonly ISettingsRepository _settingsRepository;
     private readonly INavigationService _navigation;
+    private readonly INarrationService _narration;
 
     public OnboardingViewModel(
         ILocalizationService strings,
         ISettingsRepository settingsRepository,
-        INavigationService navigation)
+        INavigationService navigation,
+        INarrationService narration)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
         _navigation = navigation;
+        _narration = narration;
     }
 
     [ObservableProperty]
@@ -72,6 +75,21 @@ public partial class OnboardingViewModel : LocalizedViewModel
         _ => Puzzle.FromRows("demo3", "demo", "#FF6B8A", [".#.#.", "#####", "#####", ".###.", "..#.."]),
     };
 
+    /// <summary>
+    /// Reads the card aloud. These three cards explain the entire game in prose, to a player who
+    /// by definition has never seen it - so if narration is ever going to matter, it is here.
+    /// </summary>
+    public override Task OnAppearingAsync()
+    {
+        NarrateStep();
+
+        return Task.CompletedTask;
+    }
+
+    partial void OnStepChanged(int value) => NarrateStep();
+
+    private void NarrateStep() => _narration.Speak($"{StepTitle}. {StepBody}");
+
     [RelayCommand]
     private async Task NextAsync()
     {
@@ -89,6 +107,9 @@ public partial class OnboardingViewModel : LocalizedViewModel
 
     private async Task FinishAsync()
     {
+        // Nobody wants card three read out over the menu they have just arrived at.
+        _narration.StopSpeaking();
+
         try
         {
             var settings = await _settingsRepository.LoadAsync();

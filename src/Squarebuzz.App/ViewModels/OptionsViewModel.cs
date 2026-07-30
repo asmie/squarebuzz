@@ -23,6 +23,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     private readonly INavigationService _navigation;
     private readonly IScreenTimeMonitor _screenTime;
     private readonly IAudioService _audio;
+    private readonly INarrationService _narration;
 
     private GameSettings _settings = GameSettings.Default;
 
@@ -36,7 +37,8 @@ public partial class OptionsViewModel : LocalizedViewModel
         IThemeService theme,
         INavigationService navigation,
         IScreenTimeMonitor screenTime,
-        IAudioService audio)
+        IAudioService audio,
+        INarrationService narration)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
@@ -45,6 +47,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         _navigation = navigation;
         _screenTime = screenTime;
         _audio = audio;
+        _narration = narration;
 
         Gate = new ParentGate(strings);
     }
@@ -59,6 +62,12 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     [ObservableProperty]
     public partial bool VoiceNarration { get; set; }
+
+    /// <summary>
+    /// True when the device has no voice installed for the chosen language, in which case the
+    /// switch is shown with a note saying so rather than left to fail silently.
+    /// </summary>
+    public bool HasNoVoice => !_narration.IsAvailable;
 
     [ObservableProperty]
     public partial bool Haptics { get; set; }
@@ -219,6 +228,8 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string VoiceLabel => T("voice");
 
+    public string NoVoiceNote => T("voiceMissing");
+
     public string HapticsLabel => T("haptics");
 
     public string ThemeLabel => T("theme");
@@ -338,6 +349,10 @@ public partial class OptionsViewModel : LocalizedViewModel
         ScreenTimeLimitMinutes = _settings.ScreenTimeLimitMinutes;
 
         _isLoading = false;
+
+        // The splash already probed for a voice; this just re-reads the answer, since the note
+        // under the switch is bound to it and this screen may be built long afterwards.
+        OnPropertyChanged(nameof(HasNoVoice));
     }
 
     // Every control funnels into the same persist step. The generator only calls these hooks for
@@ -368,7 +383,19 @@ public partial class OptionsViewModel : LocalizedViewModel
         Persist();
     }
 
-    partial void OnVoiceNarrationChanged(bool value) => Persist();
+    partial void OnVoiceNarrationChanged(bool value)
+    {
+        _narration.Configure(value);
+
+        // Same reasoning as the effects switch: the confirmation is the feature demonstrating
+        // itself, and it is the only way a player finds out their device has no voice installed.
+        if (value && !_isLoading)
+        {
+            _narration.Speak(T("voiceReady"));
+        }
+
+        Persist();
+    }
 
     partial void OnHapticsChanged(bool value) => Persist();
 
@@ -439,7 +466,20 @@ public partial class OptionsViewModel : LocalizedViewModel
     {
         // Applied before persisting so the screen relabels itself the moment it is tapped.
         Strings.SetLanguage(value);
+
+        // A voice is per-language, so switching to Polish on a device with only an English one
+        // has to turn the note on and narration off. Fire-and-forget: enumerating voices is slow
+        // enough to stall the button, and nothing else waits on the answer.
+        _ = RefreshNarrationVoiceAsync(value);
+
         Persist();
+    }
+
+    private async Task RefreshNarrationVoiceAsync(AppLanguage language)
+    {
+        await _narration.PrepareAsync(language);
+
+        OnPropertyChanged(nameof(HasNoVoice));
     }
 
     [RelayCommand]

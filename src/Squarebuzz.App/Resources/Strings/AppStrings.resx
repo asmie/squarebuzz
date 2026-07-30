@@ -117,6 +117,9 @@
   <data name="sound" xml:space="preserve"><value>Sound effects</value></data>
   <data name="music" xml:space="preserve"><value>Music</value></data>
   <data name="voice" xml:space="preserve"><value>Voice narration</value></data>
+  <!-- Spoken, not shown, so it is phrased as speech rather than as a label. -->
+  <data name="voiceReady" xml:space="preserve"><value>I can read to you now.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>No voice for this language on this device</value></data>
   <data name="haptics" xml:space="preserve"><value>Buzz on tap</value></data>
   <data name="audio" xml:space="preserve"><value>Sound</value></data>
   <data name="look" xml:space="preserve"><value>Look &amp; feel</value></data>

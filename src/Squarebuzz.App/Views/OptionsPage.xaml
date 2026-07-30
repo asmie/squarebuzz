@@ -60,7 +60,14 @@
                                     OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
-                            <Label Text="{Binding VoiceLabel}" Style="{StaticResource RowLabel}" />
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding VoiceLabel}" Style="{StaticResource RowLabel}" />
+                                <!-- Only appears when the device has no voice for this language. -->
+                                <Label Text="{Binding NoVoiceNote}"
+                                       IsVisible="{Binding HasNoVoice}"
+                                       Style="{StaticResource Subtle}"
+                                       FontSize="12" />
+                            </VerticalStackLayout>
                             <Switch Grid.Column="1" IsToggled="{Binding VoiceNarration}" VerticalOptions="Center"
                                     OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
                         </Grid>

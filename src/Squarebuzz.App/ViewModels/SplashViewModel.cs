@@ -22,6 +22,7 @@ public partial class SplashViewModel : LocalizedViewModel
     private readonly INavigationService _navigation;
     private readonly IScreenTimeMonitor _screenTime;
     private readonly IAudioService _audio;
+    private readonly INarrationService _narration;
 
     public SplashViewModel(
         ILocalizationService strings,
@@ -29,7 +30,8 @@ public partial class SplashViewModel : LocalizedViewModel
         IThemeService theme,
         INavigationService navigation,
         IScreenTimeMonitor screenTime,
-        IAudioService audio)
+        IAudioService audio,
+        INarrationService narration)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
@@ -37,6 +39,7 @@ public partial class SplashViewModel : LocalizedViewModel
         _navigation = navigation;
         _screenTime = screenTime;
         _audio = audio;
+        _narration = narration;
     }
 
     /// <summary>0 to 1, so it binds straight to <c>ProgressBar.Progress</c> with no converter.</summary>
@@ -86,6 +89,12 @@ public partial class SplashViewModel : LocalizedViewModel
             // awaited: it is the difference between the first tap on a cell being silent and
             // being audible.
             await _audio.PrimeAsync();
+
+            // Enumerating the device's voices is the slowest of these, and it has to finish
+            // before the first onboarding card appears - that card is the one screen where a
+            // brand-new player most needs the words read out.
+            await _narration.PrepareAsync(settings.Language);
+            _narration.Configure(settings.VoiceNarration);
 
             return settings;
         }

@@ -75,7 +75,7 @@ in `TrophyEvaluator` as named constants, and worth a look before release:
 ## Settings
 
 Every switch in Options changes something. That is worth stating because it was not true for
-a while: four settings were persisted and read back faithfully but never consulted by anything,
+a while: seven settings were persisted and read back faithfully but never consulted by anything,
 which is a failure a passing build and a green test suite both report as success.
 
 | Setting | What it actually does |
@@ -87,7 +87,7 @@ which is a failure a passing build and a green test suite both report as success
 | Haptics | Gated in one place (`GamePage.Buzz`), so a new buzz cannot skip the switch |
 | Sound effects | Six effects, gated in one place (`AudioService.Play`) — see below |
 | Music | An eight-second loop, stopped when the app leaves the foreground |
-| Voice narration | **Still inert.** Needs platform text-to-speech rather than assets; its own chunk |
+| Voice narration | Reads the onboarding cards and the game's messages aloud — see below |
 
 **Auto and `UserAppTheme`.** Following the OS is not simply "read `RequestedTheme`". Setting
 `Application.UserAppTheme` overrides `RequestedTheme`, so a service that writes it and then
@@ -139,6 +139,37 @@ Two things worth knowing about the plugin (`Plugin.Maui.Audio` 4.0.0):
 Verifying audio without being able to hear it: `adb shell dumpsys audio` lists every registered
 player for a pid with its state, which is enough to prove that the assets loaded, that a given
 action starts a given player, that the switches gate them, and that a mistake starts nothing.
+
+## Voice narration
+
+`NarrationService` speaks through the platform's text-to-speech engine — no assets, no package.
+It reads the three onboarding cards, the transient game messages ("line done", "oops", "hint
+used"), the win, and the break reminder. Narration **interrupts** rather than queues: these are
+captions for what is on screen now, and a backlog describing screens the player has already left
+would be worse than silence.
+
+It is **not a screen reader.** It speaks what the game chooses to speak, because the youngest
+players in the target range can read the clue *numbers* long before they can read "Auto-cross
+finished lines". Proper accessibility is a separate job — `SemanticProperties` on the pages so
+TalkBack and VoiceOver work — and has not been done.
+
+**A voice is per-language and per-device.** Nothing is spoken in a language the device has no
+voice for, and the service deliberately does **not** fall back to another language's voice: an
+English engine reading Polish is noise, not degraded narration, and a child who cannot read the
+words cannot tell that the voice is wrong either. When no voice is found, the switch carries the
+note "No voice for this language on this device" rather than failing silently.
+
+To exercise that path on an emulator:
+
+```bash
+adb shell pm disable-user --user 0 com.google.android.tts   # then relaunch the app
+adb shell pm enable --user 0 com.google.android.tts
+```
+
+Verifying speech without hearing it: the TTS engine registers its own audio player under *its*
+uid, so `dumpsys audio` shows a player appear from `com.google.android.tts` for the duration of
+each utterance — enough to prove a given action speaks, that the switch gates it, and that
+switching language still produces speech.
 
 ## Continuous integration
 

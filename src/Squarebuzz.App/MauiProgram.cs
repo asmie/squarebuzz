@@ -60,6 +60,9 @@ public static class MauiProgram
         // Holds the loaded players for the life of the app, so a tap never waits on file I/O.
         services.AddSingleton<IAudioService, AudioService>();
 
+        // Singleton so one utterance can cut off the previous one across screens.
+        services.AddSingleton<INarrationService, NarrationService>();
+
         // Resolves to the same object XAML reaches through x:Static, so markup and code can
         // never disagree about the current language.
         services.AddSingleton<ILocalizationService, LocalizationServiceAdapter>();
