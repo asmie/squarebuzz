@@ -143,6 +143,16 @@
   <data name="bigNumbers" xml:space="preserve"><value>Big numbers</value></data>
   <data name="language" xml:space="preserve"><value>Language</value></data>
   <data name="screenTime" xml:space="preserve"><value>Screen-time reminder</value></data>
+  <!-- Screen-time choices and the reminder itself. Added here rather than ported: the
+       prototype had the row but never a working reminder behind it. -->
+  <data name="stOff" xml:space="preserve"><value>Off</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 hour</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Time for a break?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>You have been playing for {0} minutes. Your puzzle will wait for you.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>A little longer</value></data>
+  <data name="breakStop" xml:space="preserve"><value>I'll stop here</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Reset progress</value></data>
   <data name="privacy" xml:space="preserve"><value>Data &amp; privacy</value></data>
   <data name="open" xml:space="preserve"><value>Open</value></data>

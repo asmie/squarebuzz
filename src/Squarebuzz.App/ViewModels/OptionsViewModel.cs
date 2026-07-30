@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Services;
@@ -20,6 +21,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     private readonly IProgressRepository _progress;
     private readonly IThemeService _theme;
     private readonly INavigationService _navigation;
+    private readonly IScreenTimeMonitor _screenTime;
 
     private GameSettings _settings = GameSettings.Default;
 
@@ -31,13 +33,15 @@ public partial class OptionsViewModel : LocalizedViewModel
         ISettingsRepository settingsRepository,
         IProgressRepository progress,
         IThemeService theme,
-        INavigationService navigation)
+        INavigationService navigation,
+        IScreenTimeMonitor screenTime)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
         _progress = progress;
         _theme = theme;
         _navigation = navigation;
+        _screenTime = screenTime;
 
         Gate = new ParentGate(strings);
     }
@@ -63,6 +67,18 @@ public partial class OptionsViewModel : LocalizedViewModel
     public partial GameTheme Theme { get; set; }
 
     /// <summary>
+    /// The "Auto" third option next to Light and Dark: light/dark comes from the phone.
+    /// </summary>
+    /// <remarks>
+    /// Stored alongside <see cref="Theme"/> rather than as a fourth <see cref="GameTheme"/>,
+    /// because the player's explicit choice still has to be remembered - turning Auto off has
+    /// to go back to the theme they picked, not to an arbitrary default.
+    /// </remarks>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLightTheme), nameof(IsDarkTheme), nameof(IsAutoTheme))]
+    public partial bool FollowSystemTheme { get; set; }
+
+    /// <summary>
     /// Two-way companion for the colour-blind switch.
     /// </summary>
     /// <remarks>
@@ -81,9 +97,13 @@ public partial class OptionsViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial bool BigNumbers { get; set; }
 
-    public bool IsLightTheme => Theme == GameTheme.Light;
+    // Auto is a third state of the same control, so Light and Dark have to read as unselected
+    // while it is on - otherwise two segments look active at once.
+    public bool IsLightTheme => !FollowSystemTheme && Theme == GameTheme.Light;
 
-    public bool IsDarkTheme => Theme == GameTheme.Dark;
+    public bool IsDarkTheme => !FollowSystemTheme && Theme == GameTheme.Dark;
+
+    public bool IsAutoTheme => FollowSystemTheme;
 
     public bool IsColorBlind => Theme == GameTheme.ColorBlind;
 
@@ -154,6 +174,28 @@ public partial class OptionsViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial bool IsResetConfirmOpen { get; private set; }
 
+    /// <summary>Minutes of play before the break reminder, or null for off.</summary>
+    /// <remarks>
+    /// Not behind the parent gate. The gate exists to stop a child wiping their own progress;
+    /// choosing when to be reminded of a break is not destructive, and putting a sum in front
+    /// of it would only stop parents using it.
+    /// </remarks>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(
+        nameof(IsScreenTimeOff),
+        nameof(IsScreenTime15),
+        nameof(IsScreenTime30),
+        nameof(IsScreenTime60))]
+    public partial int? ScreenTimeLimitMinutes { get; set; }
+
+    public bool IsScreenTimeOff => ScreenTimeLimitMinutes is null;
+
+    public bool IsScreenTime15 => ScreenTimeLimitMinutes == 15;
+
+    public bool IsScreenTime30 => ScreenTimeLimitMinutes == 30;
+
+    public bool IsScreenTime60 => ScreenTimeLimitMinutes == 60;
+
     // ---- Section and row labels ----
 
     public string AudioSection => T("audio");
@@ -181,6 +223,8 @@ public partial class OptionsViewModel : LocalizedViewModel
     public string LightLabel => T("light");
 
     public string DarkLabel => T("dark");
+
+    public string AutoLabel => T("auto");
 
     public string ColorBlindLabel => T("cbPalette");
 
@@ -224,6 +268,16 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string HintsLabel => T("allowHints");
 
+    public string ScreenTimeLabel => T("screenTime");
+
+    public string ScreenTimeOffLabel => T("stOff");
+
+    public string ScreenTime15Label => T("st15");
+
+    public string ScreenTime30Label => T("st30");
+
+    public string ScreenTime60Label => T("st60");
+
     public string ResetLabel => T("resetProgress");
 
     public string ResetAction => T("reset");
@@ -262,6 +316,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         Haptics = _settings.Haptics;
 
         Theme = _settings.Theme;
+        FollowSystemTheme = _settings.FollowSystemTheme;
         ColorBlindEnabled = _settings.Theme == GameTheme.ColorBlind;
         Accent = _settings.Accent;
         BigNumbers = _settings.BigNumbers;
@@ -277,11 +332,15 @@ public partial class OptionsViewModel : LocalizedViewModel
         AllowHints = _settings.Helpers.AllowHints;
 
         Language = _settings.Language;
+        ScreenTimeLimitMinutes = _settings.ScreenTimeLimitMinutes;
 
         _isLoading = false;
     }
 
-    // Every toggle funnels into the same persist step, so no setting can be forgotten.
+    // Every control funnels into the same persist step. The generator only calls these hooks for
+    // properties that declare one, though, so a missing hook is a silently unsaved setting -
+    // Handedness and TapBehaviour were both listed in Persist() but had no hook, so they only
+    // ever reached the database if the player happened to change something else afterwards.
     partial void OnSoundEffectsChanged(bool value) => Persist();
 
     partial void OnMusicChanged(bool value) => Persist();
@@ -304,9 +363,13 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     partial void OnCellZoomPercentChanged(int value) => Persist();
 
+    partial void OnHandednessChanged(Handedness value) => Persist();
+
+    partial void OnTapBehaviourChanged(TapBehaviour value) => Persist();
+
     partial void OnThemeChanged(GameTheme value)
     {
-        _theme.Apply(value, Accent);
+        _theme.Apply(value, Accent, FollowSystemTheme);
 
         // Keep the switch in step when the theme changed from the Light/Dark buttons instead.
         if (!_isLoading)
@@ -316,6 +379,20 @@ public partial class OptionsViewModel : LocalizedViewModel
             _isLoading = false;
         }
 
+        Persist();
+    }
+
+    partial void OnFollowSystemThemeChanged(bool value)
+    {
+        _theme.Apply(Theme, Accent, value);
+        Persist();
+    }
+
+    partial void OnScreenTimeLimitMinutesChanged(int? value)
+    {
+        // Applied to the live monitor as well as persisted, so a parent who sets a limit
+        // mid-afternoon does not have to restart the game for it to count.
+        _screenTime.Configure(value);
         Persist();
     }
 
@@ -331,7 +408,7 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     partial void OnAccentChanged(GameAccent value)
     {
-        _theme.Apply(Theme, value);
+        _theme.Apply(Theme, value, FollowSystemTheme);
         Persist();
     }
 
@@ -343,12 +420,25 @@ public partial class OptionsViewModel : LocalizedViewModel
     }
 
     [RelayCommand]
-    private void SelectTheme(string theme) => Theme = theme switch
+    private void SelectTheme(string theme)
     {
-        "dark" => GameTheme.Dark,
-        "cb" => GameTheme.ColorBlind,
-        _ => GameTheme.Light,
-    };
+        if (theme == "auto")
+        {
+            FollowSystemTheme = true;
+            return;
+        }
+
+        // Picking a brightness explicitly is also how Auto is turned off. Order matters: clear
+        // the flag first so the Apply that OnThemeChanged fires is not still following the OS.
+        FollowSystemTheme = false;
+
+        Theme = theme switch
+        {
+            "dark" => GameTheme.Dark,
+            "cb" => GameTheme.ColorBlind,
+            _ => GameTheme.Light,
+        };
+    }
 
     [RelayCommand]
     private void SelectAccent(string accent) => Accent = accent switch
@@ -368,6 +458,12 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     [RelayCommand]
     private void SelectLanguage(string language) => Language = AppLanguages.FromCultureCode(language);
+
+    [RelayCommand]
+    private void SelectScreenTime(string minutes) =>
+        ScreenTimeLimitMinutes = int.TryParse(minutes, CultureInfo.InvariantCulture, out var parsed)
+            ? parsed
+            : null;
 
     [RelayCommand]
     private void ZoomIn() =>
@@ -420,8 +516,10 @@ public partial class OptionsViewModel : LocalizedViewModel
             VoiceNarration = VoiceNarration,
             Haptics = Haptics,
             Theme = Theme,
+            FollowSystemTheme = FollowSystemTheme,
             Accent = Accent,
             BigNumbers = BigNumbers,
+            ScreenTimeLimitMinutes = ScreenTimeLimitMinutes,
             TapBehaviour = TapBehaviour,
             Handedness = Handedness,
             CellZoomPercent = CellZoomPercent,

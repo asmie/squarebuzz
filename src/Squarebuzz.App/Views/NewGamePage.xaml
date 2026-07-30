@@ -50,7 +50,7 @@
                                     </Border.StrokeShape>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, Path=SelectSizeCommand}"
+                                            Command="{Binding Path=SelectSizeCommand, Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, x:DataType=vm:NewGameViewModel}"
                                             CommandParameter="{Binding .}" />
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout Spacing="2" MinimumWidthRequest="72">
@@ -91,7 +91,7 @@
                                     </Border.StrokeShape>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, Path=SelectDifficultyCommand}"
+                                            Command="{Binding Path=SelectDifficultyCommand, Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, x:DataType=vm:NewGameViewModel}"
                                             CommandParameter="{Binding .}" />
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout Spacing="2">
@@ -157,7 +157,7 @@
                                     </Border.StrokeShape>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, Path=SelectPackCommand}"
+                                            Command="{Binding Path=SelectPackCommand, Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, x:DataType=vm:NewGameViewModel}"
                                             CommandParameter="{Binding .}" />
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout Spacing="2" MinimumWidthRequest="64">

@@ -78,7 +78,7 @@
                     <VerticalStackLayout Spacing="14">
                         <VerticalStackLayout Spacing="6">
                             <Label Text="{Binding ThemeLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
                                 <Button Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding LightLabel}"
                                         Command="{Binding SelectThemeCommand}" CommandParameter="light"
@@ -89,6 +89,12 @@
                                         Command="{Binding SelectThemeCommand}" CommandParameter="dark"
                                         BackgroundColor="{Binding IsDarkTheme, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsDarkTheme, Converter={StaticResource SegTextColor}}" />
+                                <!-- Auto takes light/dark from the phone. See ThemeService.Resolve. -->
+                                <Button Grid.Column="2" Style="{StaticResource SegButton}"
+                                        Text="{Binding AutoLabel}"
+                                        Command="{Binding SelectThemeCommand}" CommandParameter="auto"
+                                        BackgroundColor="{Binding IsAutoTheme, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsAutoTheme, Converter={StaticResource SegTextColor}}" />
                             </Grid>
                         </VerticalStackLayout>
 
@@ -238,7 +244,38 @@
                 <!-- Parent zone -->
                 <Label Text="{Binding ParentSection}" Style="{StaticResource SectionHeading}" />
                 <Border Style="{StaticResource Card}" Padding="16,12">
-                    <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout Spacing="14">
+                        <!--
+                          Screen-time reminder. Ungated: the sum in front of Reset is there to
+                          stop a child wiping their own progress, and a break reminder is not
+                          destructive - gating it would only get in a parent's way.
+                        -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding ScreenTimeLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                                        Text="{Binding ScreenTimeOffLabel}"
+                                        Command="{Binding SelectScreenTimeCommand}" CommandParameter="off"
+                                        BackgroundColor="{Binding IsScreenTimeOff, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsScreenTimeOff, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                        Text="{Binding ScreenTime15Label}"
+                                        Command="{Binding SelectScreenTimeCommand}" CommandParameter="15"
+                                        BackgroundColor="{Binding IsScreenTime15, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsScreenTime15, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="2" Style="{StaticResource SegButton}"
+                                        Text="{Binding ScreenTime30Label}"
+                                        Command="{Binding SelectScreenTimeCommand}" CommandParameter="30"
+                                        BackgroundColor="{Binding IsScreenTime30, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsScreenTime30, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="3" Style="{StaticResource SegButton}"
+                                        Text="{Binding ScreenTime60Label}"
+                                        Command="{Binding SelectScreenTimeCommand}" CommandParameter="60"
+                                        BackgroundColor="{Binding IsScreenTime60, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsScreenTime60, Converter={StaticResource SegTextColor}}" />
+                            </Grid>
+                        </VerticalStackLayout>
+
                         <Label Text="{Binding Gate.Title}" Style="{StaticResource Subtle}" FontSize="12" />
                         <Button Text="{Binding ResetLabel}"
                                 Command="{Binding OpenResetGateCommand}"

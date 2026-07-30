@@ -100,7 +100,7 @@ public partial class GamePage : ContentPage
 
     private async void OnMistakeMade(object? sender, int index)
     {
-        await HapticFeedbackSafely(HapticFeedbackType.LongPress);
+        Buzz(HapticFeedbackType.LongPress);
         await Board.FlashMistakeAsync(index);
     }
 
@@ -116,19 +116,29 @@ public partial class GamePage : ContentPage
         // The reveal is the reward, so it is animated rather than snapped in.
         Reveal.Puzzle = session.Puzzle;
 
-        await HapticFeedbackSafely(HapticFeedbackType.Click);
+        Buzz(HapticFeedbackType.Click);
         await Reveal.RevealAsync(TimeSpan.FromMilliseconds(700));
     }
 
-    private async void OnCrossGestureRecognised(object? sender, EventArgs e) =>
-        await HapticFeedbackSafely(HapticFeedbackType.Click);
+    private void OnCrossGestureRecognised(object? sender, EventArgs e) =>
+        Buzz(HapticFeedbackType.Click);
 
     /// <summary>
-    /// Haptics are unsupported on some platforms and desktop, and the API throws rather than
-    /// no-ops. Feedback is a nicety, so failing to buzz must never interrupt play.
+    /// Buzzes, if the player asked for it.
     /// </summary>
-    private static Task HapticFeedbackSafely(HapticFeedbackType type)
+    /// <remarks>
+    /// The setting check belongs here rather than at each call site: every buzz in the game goes
+    /// through this method, so there is no way to add a new one that quietly ignores the switch.
+    /// Haptics are also unsupported on desktop and some platforms, and the API throws rather than
+    /// no-opping - feedback is a nicety, so failing to buzz must never interrupt play.
+    /// </remarks>
+    private void Buzz(HapticFeedbackType type)
     {
+        if (!_viewModel.HapticsEnabled)
+        {
+            return;
+        }
+
         try
         {
             HapticFeedback.Default.Perform(type);
@@ -139,7 +149,5 @@ public partial class GamePage : ContentPage
         catch (PermissionException)
         {
         }
-
-        return Task.CompletedTask;
     }
 }

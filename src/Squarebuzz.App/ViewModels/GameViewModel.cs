@@ -40,6 +40,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private readonly IPuzzleRepository _puzzles;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
+    private readonly IScreenTimeMonitor _screenTime;
 
     private IDispatcherTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
@@ -60,7 +61,8 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IPuzzleRepository puzzles,
         ILocalizationService strings,
         INavigationService navigation,
-        IClock clock)
+        IClock clock,
+        IScreenTimeMonitor screenTime)
         : base(strings)
     {
         _sessions = sessions;
@@ -70,6 +72,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         _puzzles = puzzles;
         _navigation = navigation;
         _clock = clock;
+        _screenTime = screenTime;
     }
 
     /// <summary>Raised when the board data changed and the canvas needs redrawing.</summary>
@@ -104,6 +107,18 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [ObservableProperty]
     public partial bool IsPaused { get; private set; }
 
+    /// <summary>
+    /// The break reminder, shown once when the parent-set screen-time limit is reached.
+    /// </summary>
+    /// <remarks>
+    /// Deliberately a modal overlay rather than a toast, and it stops the clock while it is up.
+    /// A message a child can play straight through is not a reminder. It is not a lockout
+    /// either - "A little longer" resumes - because the limit is guidance, not a punishment.
+    /// </remarks>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BreakBody))]
+    public partial bool IsBreakReminderOpen { get; private set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StatusText))]
     public partial int HintsRemaining { get; private set; }
@@ -137,6 +152,37 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     public bool ShowMagnifier => _settings.ShowMagnifier;
 
+    /// <summary>Read by the page before every buzz, so the Haptics switch is actually obeyed.</summary>
+    public bool HapticsEnabled => _settings.Haptics;
+
+    /// <summary>
+    /// Column for each action button, so the row can be ordered for the player's hand -
+    /// "Buttons on: Left / Right".
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Undo is the button a child reaches for most, so it belongs under the thumb rather than
+    /// across the screen from it: right-handed puts it at the right-hand end. Reordering the row
+    /// is the whole effect - our layout is full-width, so there is no cluster to move to the
+    /// other side as the prototype's was.
+    /// </para>
+    /// <para>
+    /// Done by binding <c>Grid.Column</c> rather than by setting <c>FlowDirection</c> on the row.
+    /// FlowDirection reads better in markup and does reverse the columns, but only when it is set
+    /// before the grid lays out; changing it afterwards left the buttons where they were, so
+    /// switching hands mid-game did nothing. Only a screenshot showed that.
+    /// </para>
+    /// </remarks>
+    public int UndoColumn => IsRightHanded ? 3 : 0;
+
+    public int RedoColumn => IsRightHanded ? 2 : 1;
+
+    public int HintColumn => IsRightHanded ? 1 : 2;
+
+    public int RestartColumn => IsRightHanded ? 0 : 3;
+
+    private bool IsRightHanded => _settings.Handedness == Handedness.Right;
+
     /// <summary>
     /// Label for the mode toggle. It names the mode the button switches <em>to</em>, which is
     /// the convention children read correctly - "Mark X" means "tapping will now mark X".
@@ -166,6 +212,20 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     public string HowToText => T("howTo");
 
     public string QuitText => T("quit");
+
+    public string BreakTitle => T("breakTitle");
+
+    /// <summary>
+    /// The reminder names the figure the parent set, so the child is told a real number rather
+    /// than "a while". Rounded up, because "0 minutes" would be nonsense at the moment it fires.
+    /// </summary>
+    public string BreakBody => Strings.Format(
+        "breakBody",
+        Math.Max(1, (int)Math.Ceiling(_screenTime.Played.TotalMinutes)));
+
+    public string BreakKeepText => T("breakKeep");
+
+    public string BreakStopText => T("breakStop");
 
     public string SolvedTitle => T("solved");
 
@@ -282,6 +342,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
         IsPaused = false;
+        IsBreakReminderOpen = false;
         Toast = string.Empty;
 
         PuzzleName = Session.Puzzle.IsGenerated
@@ -340,6 +401,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         Session.Mode = PaintMode.Fill;
         IsSolved = false;
         IsPaused = false;
+        IsBreakReminderOpen = false;
         Toast = string.Empty;
 
         PuzzleName = Session.Puzzle.IsGenerated
@@ -357,7 +419,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Applies a paint request from the board view.</summary>
     public void Paint(int index, CellState target)
     {
-        if (Session is not { } session || IsSolved || IsPaused)
+        if (Session is not { } session || IsSolved || IsPaused || IsBreakReminderOpen)
         {
             return;
         }
@@ -479,6 +541,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IsPaused = false;
         StartTimer();
     }
+
+    /// <summary>Dismisses the break reminder and carries on playing.</summary>
+    [RelayCommand]
+    private void DismissBreakReminder() => IsBreakReminderOpen = false;
 
     [RelayCommand]
     private async Task RestartAsync()
@@ -631,6 +697,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         OnPropertyChanged(nameof(BigNumbers));
         OnPropertyChanged(nameof(TapBehaviour));
         OnPropertyChanged(nameof(ShowMagnifier));
+        OnPropertyChanged(nameof(HapticsEnabled));
+        OnPropertyChanged(nameof(UndoColumn));
+        OnPropertyChanged(nameof(RedoColumn));
+        OnPropertyChanged(nameof(HintColumn));
+        OnPropertyChanged(nameof(RestartColumn));
     }
 
     private void SyncFromSession()
@@ -669,13 +740,25 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     private void OnTimerTick(object? sender, EventArgs e)
     {
-        if (Session is not { } session || session.IsSolved || IsPaused)
+        if (Session is not { } session || session.IsSolved || IsPaused || IsBreakReminderOpen)
         {
             return;
         }
 
-        session.Advance(TimeSpan.FromSeconds(1));
+        var second = TimeSpan.FromSeconds(1);
+
+        session.Advance(second);
         UpdateElapsedText();
+
+        // Counted here rather than in the monitor's own timer so that only time actually spent
+        // playing counts - the guards above are exactly the cases that should not.
+        if (_screenTime.Add(second))
+        {
+            IsBreakReminderOpen = true;
+
+            // Nothing about a break should risk the board, so this is a save point too.
+            _ = AutosaveAsync();
+        }
 
         if (++_secondsSinceAutosave >= AutosaveEverySeconds)
         {

@@ -99,8 +99,12 @@
                    FontAttributes="Bold"
                    TextColor="{DynamicResource PrimaryDeep}" />
 
+            <!--
+              Columns come from the ViewModel so the Handedness setting can reorder the row -
+              see GameViewModel.UndoColumn for why this is not FlowDirection.
+            -->
             <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
-                <Button Grid.Column="0"
+                <Button Grid.Column="{Binding UndoColumn}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
@@ -108,7 +112,7 @@
                         IsEnabled="{Binding CanUndo}"
                         Text="{Binding UndoText}" />
 
-                <Button Grid.Column="1"
+                <Button Grid.Column="{Binding RedoColumn}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
@@ -116,14 +120,14 @@
                         IsEnabled="{Binding CanRedo}"
                         Text="{Binding RedoText}" />
 
-                <Button Grid.Column="2"
+                <Button Grid.Column="{Binding HintColumn}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
                         Command="{Binding UseHintCommand}"
                         Text="{Binding HintText}" />
 
-                <Button Grid.Column="3"
+                <Button Grid.Column="{Binding RestartColumn}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
@@ -171,6 +175,39 @@
                             TextColor="{DynamicResource OnWarnSoft}"
                             CornerRadius="16"
                             FontAttributes="Bold"
+                            HeightRequest="50" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!--
+          Break reminder. Sits above the board and below the win overlay, so finishing the
+          picture on the very tick the limit is reached still shows the celebration.
+        -->
+        <Grid IsVisible="{Binding IsBreakReminderOpen}" BackgroundColor="#CC000000">
+            <Border Style="{StaticResource Card}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="310"
+                    Padding="24">
+                <VerticalStackLayout Spacing="14">
+                    <controls:MascotView Pose="Idle" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center" />
+
+                    <Label Text="{Binding BreakTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+
+                    <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
+                    <Label Text="{Binding BreakBody}"
+                           Style="{StaticResource Subtle}"
+                           FontSize="15"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="{Binding BreakKeepText}"
+                            Command="{Binding DismissBreakReminderCommand}"
+                            Style="{StaticResource PrimaryButton}"
+                            HeightRequest="54" />
+                    <Button Text="{Binding BreakStopText}"
+                            Command="{Binding QuitCommand}"
+                            Style="{StaticResource SecondaryButton}"
                             HeightRequest="50" />
                 </VerticalStackLayout>
             </Border>

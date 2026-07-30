@@ -12,6 +12,14 @@
     <EnableDefaultCssItems>false</EnableDefaultCssItems>
     <MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
 
+    <!--
+      Compile bindings that set Source too. Without this, the six RelativeSource bindings that
+      reach a page's ViewModel from inside a DataTemplate stay reflection-based and each raises
+      XC0025 - harmless on its own, but the CI job that builds this project with -warnaserror
+      turns all six into build failures. Every such binding carries an explicit x:DataType.
+    -->
+    <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+
     <ApplicationTitle>squarebuzz</ApplicationTitle>
     <ApplicationId>co.equilibrium.squarebuzz</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

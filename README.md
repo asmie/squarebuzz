@@ -72,6 +72,36 @@ in `TrophyEvaluator` as named constants, and worth a look before release:
 | Perfect Ten | 3 stars *and* zero mistakes on a 10×10 or larger |
 | Collector | Every picture in every pack, locked ones included |
 
+## Settings
+
+Every switch in Options changes something. That is worth stating because it was not true for
+a while: four settings were persisted and read back faithfully but never consulted by anything,
+which is a failure a passing build and a green test suite both report as success.
+
+| Setting | What it actually does |
+|---|---|
+| Theme: Light / Dark / **Auto** | Auto takes light/dark from the OS and keeps following it while the app runs — see below |
+| Colour-blind | A third palette. Deliberately **not** overridden by Auto: it is an accessibility choice, not a brightness |
+| Buttons on: Left / Right | Reorders the action row so Undo — the most-reached button — sits at the chosen end |
+| Screen-time reminder | Off / 15 / 30 / 60 min of **play**, then a break overlay |
+| Haptics | Gated in one place (`GamePage.Buzz`), so a new buzz cannot skip the switch |
+| Sound effects, Music, Voice narration | **Still inert.** No audio pipeline or assets exist yet — see below |
+
+**Auto and `UserAppTheme`.** Following the OS is not simply "read `RequestedTheme`". Setting
+`Application.UserAppTheme` overrides `RequestedTheme`, so a service that writes it and then
+reads it back gets its own answer instead of the system's. Under Auto the app leaves
+`UserAppTheme` at `Unspecified` and reads `PlatformAppTheme`, which always reports the OS.
+
+**Screen time counts play, not uptime.** `IScreenTimeMonitor` is a singleton so the count is the
+sum across every puzzle in an app run — a child who finishes five boards has been on the screen
+for all five. It only counts ticks where the clock is actually running, and it reports the limit
+being crossed exactly once, because a reminder that reopened every second would make the board
+unusable. The break overlay stops the clock but is not a lockout: "A little longer" resumes.
+
+**Audio is the remaining gap.** Three switches still do nothing. The pipeline and the assets are
+both missing, and no sound files ship with the repo — the prototype had the same four switches
+and no audio behind them either. Left for its own chunk rather than faked.
+
 ## Continuous integration
 
 `.github/workflows/ci.yml` runs four jobs:
@@ -112,6 +142,14 @@ The Windows target needs a **2.x Windows App Runtime**. If launching fails with
 `REGDB_E_CLASSNOTREG`, that runtime is missing — Visual Studio installs it as part of
 deployment.
 
+Useful for checking the Auto theme on an emulator, since it needs the OS setting to change
+underneath a running app:
+
+```bash
+adb shell cmd uimode night yes    # OS to dark; the app should follow with no restart
+adb shell cmd uimode night no
+```
+
 ## Viewing the original design
 
 The prototype is a self-contained web app that compiles itself in the browser, so it only
@@ -129,6 +167,15 @@ It has no npm dependencies; `tools/serve.mjs` is a zero-dependency static server
 - **Central Package Management** — package versions live only in `Directory.Packages.props`.
 - Warnings are errors in Core and Data. The MAUI head relaxes this because generated
   partials trip a few analyser rules.
+- **Adding a setting is three steps, and the compiler checks none of them.** Put it in
+  `GameSettings`, read *and* write it in `SqliteSettingsRepository`, and add a
+  `partial void On<Name>Changed` in `OptionsViewModel` so the change persists — the MVVM
+  generator only emits that hook for properties that declare one, so a missing hook is a
+  setting that silently never saves. Then make something actually consume it. Four settings
+  had already gone the whole way to the database and back without step four.
+- **Known MAUI quirk:** `FlowDirection` set on a layout does reverse its columns, but only
+  before that layout has measured. Binding it to a value that changes later leaves the children
+  where they were. Bind `Grid.Column` per child instead when the order has to change at runtime.
 - **Known MAUI quirk:** a `Label` inside a `DataTemplate` can reserve height for one line
   fewer than it needs and silently clip the last line. It cost real text on How to Play. If
   you edit or translate a multi-line string in a templated list, check it still renders in

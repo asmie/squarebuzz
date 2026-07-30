@@ -43,7 +43,7 @@
                         </Border.StrokeShape>
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GalleryViewModel}}, Path=PlayCommand}"
+                                Command="{Binding Path=PlayCommand, Source={RelativeSource AncestorType={x:Type vm:GalleryViewModel}}, x:DataType=vm:GalleryViewModel}"
                                 CommandParameter="{Binding .}" />
                         </Border.GestureRecognizers>
 

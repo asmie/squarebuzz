@@ -7,6 +7,7 @@ using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Content;
 using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Core.Progression;
 using Squarebuzz.Data;
 using Squarebuzz.Data.Repositories;
 
@@ -69,6 +70,10 @@ public static class MauiProgram
     private static void RegisterDomain(IServiceCollection services)
     {
         services.AddSingleton<IClock, SystemClock>();
+
+        // Singleton on purpose: screen time is the sum across every puzzle in this app run, so
+        // a per-game instance would reset the count each time a child started a new picture.
+        services.AddSingleton<IScreenTimeMonitor, ScreenTimeMonitor>();
 
         // Authored content is immutable and parsed once from an embedded resource.
         services.AddSingleton<IPuzzleRepository, EmbeddedPuzzleRepository>();

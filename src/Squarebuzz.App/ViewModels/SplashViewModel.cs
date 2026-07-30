@@ -20,17 +20,20 @@ public partial class SplashViewModel : LocalizedViewModel
     private readonly ISettingsRepository _settingsRepository;
     private readonly IThemeService _theme;
     private readonly INavigationService _navigation;
+    private readonly IScreenTimeMonitor _screenTime;
 
     public SplashViewModel(
         ILocalizationService strings,
         ISettingsRepository settingsRepository,
         IThemeService theme,
-        INavigationService navigation)
+        INavigationService navigation,
+        IScreenTimeMonitor screenTime)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
         _theme = theme;
         _navigation = navigation;
+        _screenTime = screenTime;
     }
 
     /// <summary>0 to 1, so it binds straight to <c>ProgressBar.Progress</c> with no converter.</summary>
@@ -65,8 +68,12 @@ public partial class SplashViewModel : LocalizedViewModel
         {
             var settings = await _settingsRepository.LoadAsync();
 
-            _theme.Apply(settings.Theme, settings.Accent);
+            _theme.Apply(settings.Theme, settings.Accent, settings.FollowSystemTheme);
             Strings.SetLanguage(settings.Language);
+
+            // The reminder has to be armed before the first board opens, not when Options is
+            // first visited - a child who goes straight into a game must still be counted.
+            _screenTime.Configure(settings.ScreenTimeLimitMinutes);
 
             return settings;
         }

@@ -10,13 +10,25 @@ namespace Squarebuzz.App.Services;
 /// </summary>
 public interface IThemeService
 {
+    /// <summary>The theme actually on screen, which under <see cref="FollowsSystem"/> is the one the OS asked for.</summary>
     GameTheme Theme { get; }
 
     GameAccent Accent { get; }
+
+    /// <summary>True when light/dark is being taken from the operating system.</summary>
+    bool FollowsSystem { get; }
 
     /// <summary>
     /// Swaps in the dictionaries for <paramref name="theme"/> and <paramref name="accent"/>.
     /// Safe to call repeatedly; a no-op when nothing changed.
     /// </summary>
-    void Apply(GameTheme theme, GameAccent accent);
+    /// <param name="theme">
+    /// The player's chosen theme. Ignored for light/dark purposes when
+    /// <paramref name="followSystem"/> is set, except for
+    /// <see cref="GameTheme.ColorBlind"/>, which is a palette rather than a brightness.
+    /// </param>
+    /// <param name="followSystem">
+    /// Take light/dark from the OS, and keep following it while the app runs.
+    /// </param>
+    void Apply(GameTheme theme, GameAccent accent, bool followSystem = false);
 }

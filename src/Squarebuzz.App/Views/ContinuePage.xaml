@@ -75,7 +75,7 @@
                                        HorizontalTextAlignment="End" />
 
                                 <Button Text="▶"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, Path=ResumeCommand}"
+                                        Command="{Binding Path=ResumeCommand, Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, x:DataType=vm:ContinueViewModel}"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="{DynamicResource Primary}"
                                         TextColor="{DynamicResource OnPrimary}"
@@ -85,7 +85,7 @@
                                         Padding="0" />
 
                                 <Button Text="✕"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, Path=DeleteCommand}"
+                                        Command="{Binding Path=DeleteCommand, Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, x:DataType=vm:ContinueViewModel}"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="{DynamicResource WarnSoft}"
                                         TextColor="{DynamicResource OnWarnSoft}"
