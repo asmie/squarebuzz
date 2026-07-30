@@ -12,6 +12,16 @@ public sealed class CellPaintedEventArgs(int index, CellState target) : EventArg
     public CellState Target { get; } = target;
 }
 
+/// <summary>Reports which cell the finger is over.</summary>
+/// <param name="index">Row-major cell index, or -1 when the touch has ended.</param>
+/// <param name="isInLeftHalf">True when the cell is in the left half of the grid.</param>
+public sealed class TouchedCellEventArgs(int index, bool isInLeftHalf) : EventArgs
+{
+    public int Index { get; } = index;
+
+    public bool IsInLeftHalf { get; } = isInLeftHalf;
+}
+
 /// <summary>
 /// The interactive board: a single <see cref="GraphicsView"/> that draws every cell and turns
 /// touches into paint requests.
@@ -46,6 +56,13 @@ public sealed class BoardView : GraphicsView
     }
 
     public event EventHandler<CellPaintedEventArgs>? CellPainted;
+
+    /// <summary>
+    /// Raised as the finger moves between cells, and once with -1 on release. Drives the
+    /// magnifier; <see cref="TouchedCellEventArgs.IsInLeftHalf"/> lets the host park the panel
+    /// on the opposite side of the board from the hand.
+    /// </summary>
+    public event EventHandler<TouchedCellEventArgs>? TouchedCellChanged;
 
     /// <summary>Fired when a long press asks for a cross, so the host can give haptic feedback.</summary>
     public event EventHandler? CrossGestureRecognised;
@@ -272,6 +289,8 @@ public sealed class BoardView : GraphicsView
         _drawable.HighlightRow = -1;
         _drawable.HighlightColumn = -1;
         Invalidate();
+
+        TouchedCellChanged?.Invoke(this, new TouchedCellEventArgs(-1, isInLeftHalf: false));
     }
 
     private void Paint(int index)
@@ -294,9 +313,13 @@ public sealed class BoardView : GraphicsView
             return;
         }
 
+        var column = index % layout.Columns;
+
         _drawable.HighlightRow = index / layout.Columns;
-        _drawable.HighlightColumn = index % layout.Columns;
+        _drawable.HighlightColumn = column;
         _drawable.HintIndex = -1;
+
+        TouchedCellChanged?.Invoke(this, new TouchedCellEventArgs(index, column < layout.Columns / 2));
     }
 
     private void StartLongPressTimer(int index)

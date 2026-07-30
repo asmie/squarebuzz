@@ -15,21 +15,38 @@ namespace Squarebuzz.App.ViewModels;
 /// Pause and completion are overlays on this screen rather than separate routes, so the session
 /// never has to be serialised across a navigation just to show a summary over the board.
 /// </remarks>
-public partial class GameViewModel : LocalizedViewModel
+public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 {
+    /// <summary>Route parameter naming the save to resume.</summary>
+    public const string SaveIdParameter = "saveId";
+
+    /// <summary>
+    /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
+    /// only a few moves, rare enough that it never competes with drawing.
+    /// </summary>
+    private const int AutosaveEverySeconds = 15;
+
     private readonly GameSessionFactory _sessions;
     private readonly ISettingsRepository _settingsRepository;
     private readonly IProgressRepository _progress;
+    private readonly ISaveGameRepository _saveGames;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
 
     private IDispatcherTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
 
+    /// <summary>Identity of this game's row in the save table, so autosaves replace rather than pile up.</summary>
+    private Guid _saveId = Guid.NewGuid();
+
+    private Guid? _pendingResumeId;
+    private int _secondsSinceAutosave;
+
     public GameViewModel(
         GameSessionFactory sessions,
         ISettingsRepository settingsRepository,
         IProgressRepository progress,
+        ISaveGameRepository saveGames,
         ILocalizationService strings,
         INavigationService navigation,
         IClock clock)
@@ -38,6 +55,7 @@ public partial class GameViewModel : LocalizedViewModel
         _sessions = sessions;
         _settingsRepository = settingsRepository;
         _progress = progress;
+        _saveGames = saveGames;
         _navigation = navigation;
         _clock = clock;
     }
@@ -105,6 +123,8 @@ public partial class GameViewModel : LocalizedViewModel
 
     public TapBehaviour TapBehaviour => _settings.TapBehaviour;
 
+    public bool ShowMagnifier => _settings.ShowMagnifier;
+
     /// <summary>
     /// Label for the mode toggle. It names the mode the button switches <em>to</em>, which is
     /// the convention children read correctly - "Mark X" means "tapping will now mark X".
@@ -146,6 +166,105 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>Filled stars up to the rating, hollow for the rest.</summary>
     public string StarsText => new string('★', StarRating) + new string('☆', Math.Max(0, 3 - StarRating));
 
+    /// <summary>
+    /// Picks up a <c>saveId</c> from the route, if the player arrived from Continue.
+    /// </summary>
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        ArgumentNullException.ThrowIfNull(query);
+
+        if (query.TryGetValue(SaveIdParameter, out var raw)
+            && Guid.TryParse(raw?.ToString(), out var id))
+        {
+            _pendingResumeId = id;
+        }
+    }
+
+    /// <summary>
+    /// Entry point for the page: resumes the save the route named, or starts a fresh puzzle.
+    /// </summary>
+    public async Task InitialiseAsync()
+    {
+        if (_pendingResumeId is { } id)
+        {
+            _pendingResumeId = null;
+
+            if (await TryResumeAsync(id))
+            {
+                return;
+            }
+
+            // The save vanished or its picture no longer ships - fall through to a new game
+            // rather than leaving the player on an empty board.
+        }
+
+        await StartAsync();
+    }
+
+    private async Task<bool> TryResumeAsync(Guid id)
+    {
+        try
+        {
+            _settings = await _settingsRepository.LoadAsync();
+
+            var save = await _saveGames.GetAsync(id);
+
+            if (save is null)
+            {
+                return false;
+            }
+
+            Session = _sessions.Restore(save, _settings.Helpers);
+            _saveId = save.Id;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+
+        IsCrossMode = false;
+        Session.Mode = PaintMode.Fill;
+        IsPaused = false;
+        Toast = string.Empty;
+
+        PuzzleName = Session.Puzzle.IsGenerated
+            ? T("Puzzle_gen")
+            : T($"Puzzle_{Session.Puzzle.Id}");
+
+        SyncFromSession();
+        StartTimer();
+        NotifySettingsDependentProperties();
+
+        BoardChanged?.Invoke(this, EventArgs.Empty);
+        return true;
+    }
+
+    /// <summary>
+    /// Writes the game in progress to the save table. Called on pause, on quit and on leaving the
+    /// screen, plus periodically while playing.
+    /// </summary>
+    public async Task AutosaveAsync()
+    {
+        if (Session is not { } session || session.IsSolved || session.MoveCount == 0)
+        {
+            // Nothing worth keeping: an untouched board would clutter Continue with a game the
+            // player never actually started.
+            return;
+        }
+
+        try
+        {
+            await _saveGames.SaveAsync(SavedGame.FromSession(session, _saveId, _clock.Now));
+        }
+        catch (Exception)
+        {
+            // A failed autosave costs the player their place, but surfacing it mid-play would
+            // be worse. The next autosave will most likely succeed.
+        }
+
+        _secondsSinceAutosave = 0;
+    }
+
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
     {
@@ -163,6 +282,10 @@ public partial class GameViewModel : LocalizedViewModel
         var effective = (options ?? _settings.ToNewGameOptions()) with { Helpers = _settings.Helpers };
         Session = _sessions.Create(effective);
 
+        // A new game is a new row: restarting must not overwrite the save it came from.
+        _saveId = Guid.NewGuid();
+        _secondsSinceAutosave = 0;
+
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
         IsSolved = false;
@@ -176,10 +299,7 @@ public partial class GameViewModel : LocalizedViewModel
         SyncFromSession();
         StartTimer();
 
-        OnPropertyChanged(nameof(ShowTimer));
-        OnPropertyChanged(nameof(ZoomPercent));
-        OnPropertyChanged(nameof(BigNumbers));
-        OnPropertyChanged(nameof(TapBehaviour));
+        NotifySettingsDependentProperties();
 
         BoardChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -288,7 +408,7 @@ public partial class GameViewModel : LocalizedViewModel
     }
 
     [RelayCommand]
-    private void Pause()
+    private async Task PauseAsync()
     {
         if (IsSolved)
         {
@@ -297,6 +417,10 @@ public partial class GameViewModel : LocalizedViewModel
 
         IsPaused = true;
         StopTimer();
+
+        // Pausing is the most likely moment for the player to walk away, so write now rather
+        // than waiting for the next tick.
+        await AutosaveAsync();
     }
 
     [RelayCommand]
@@ -335,6 +459,7 @@ public partial class GameViewModel : LocalizedViewModel
     private async Task QuitAsync()
     {
         StopTimer();
+        await AutosaveAsync();
         await _navigation.ResetToAsync(Routes.Menu);
     }
 
@@ -355,6 +480,17 @@ public partial class GameViewModel : LocalizedViewModel
         IsSolved = true;
         IsPaused = false;
         PuzzleSolved?.Invoke(this, EventArgs.Empty);
+
+        try
+        {
+            // Drop the save first: a completed puzzle in Continue would be a dead end, and it
+            // must go even if recording progress then fails.
+            await _saveGames.DeleteAsync(_saveId);
+        }
+        catch (Exception)
+        {
+            // Leaves a stale save behind; the player can delete it from Continue.
+        }
 
         try
         {
@@ -387,6 +523,15 @@ public partial class GameViewModel : LocalizedViewModel
         }
 
         return count;
+    }
+
+    private void NotifySettingsDependentProperties()
+    {
+        OnPropertyChanged(nameof(ShowTimer));
+        OnPropertyChanged(nameof(ZoomPercent));
+        OnPropertyChanged(nameof(BigNumbers));
+        OnPropertyChanged(nameof(TapBehaviour));
+        OnPropertyChanged(nameof(ShowMagnifier));
     }
 
     private void SyncFromSession()
@@ -432,6 +577,11 @@ public partial class GameViewModel : LocalizedViewModel
 
         session.Advance(TimeSpan.FromSeconds(1));
         UpdateElapsedText();
+
+        if (++_secondsSinceAutosave >= AutosaveEverySeconds)
+        {
+            _ = AutosaveAsync();
+        }
     }
 
     private void StopTimer()

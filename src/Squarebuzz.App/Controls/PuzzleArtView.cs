@@ -30,6 +30,24 @@ public sealed class PuzzleArtView : GraphicsView
         set => SetValue(PuzzleProperty, value);
     }
 
+    public static readonly BindableProperty MarksProperty = BindableProperty.Create(
+        nameof(Marks),
+        typeof(IReadOnlyList<CellState>),
+        typeof(PuzzleArtView),
+        propertyChanged: (bindable, _, value) =>
+        {
+            var view = (PuzzleArtView)bindable;
+            view._drawable.Marks = (IReadOnlyList<CellState>?)value;
+            view.Invalidate();
+        });
+
+    /// <summary>Draw the player's marks rather than the finished picture. See PuzzleArtDrawable.</summary>
+    public IReadOnlyList<CellState>? Marks
+    {
+        get => (IReadOnlyList<CellState>?)GetValue(MarksProperty);
+        set => SetValue(MarksProperty, value);
+    }
+
     public static readonly BindableProperty IsMaskedProperty = BindableProperty.Create(
         nameof(IsMasked),
         typeof(bool),

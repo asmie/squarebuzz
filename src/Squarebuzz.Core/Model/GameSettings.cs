@@ -87,6 +87,16 @@ public sealed record GameSettings
     /// <summary>Board zoom as a percentage, clamped to 70-160.</summary>
     public int CellZoomPercent { get; init; } = DefaultCellZoomPercent;
 
+    /// <summary>
+    /// Shows a magnified 3x3 view of the cells around the finger while painting.
+    /// </summary>
+    /// <remarks>
+    /// Off by default. It genuinely helps on a crowded 25x25 board, but it also puts a panel on
+    /// screen during every touch, which is a distraction most players do not want - so it is
+    /// something you turn on when you need it rather than something imposed.
+    /// </remarks>
+    public bool ShowMagnifier { get; init; }
+
     public AppLanguage Language { get; init; } = AppLanguage.English;
 
     public HelperSettings Helpers { get; init; } = HelperSettings.Default;

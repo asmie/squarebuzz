@@ -57,10 +57,29 @@ public sealed class GameSessionFactory
     }
 
     /// <summary>
-    /// Rebuilds a session from a save. The picture is looked up by id when it was authored, or
-    /// regenerated from the stored seed when it was not - which is why generation has to be
-    /// deterministic.
+    /// Recovers the picture a save was playing, without building a session around it.
     /// </summary>
+    /// <remarks>
+    /// Needed on its own by the Continue screen, which draws a thumbnail of every save but has
+    /// no reason to construct playable sessions for a list. Authored pictures are looked up by
+    /// id; generated ones are rebuilt from the stored seed, which is the whole reason generation
+    /// has to be deterministic.
+    /// </remarks>
+    public Puzzle ResolvePuzzle(SavedGame save)
+    {
+        ArgumentNullException.ThrowIfNull(save);
+
+        if (save.PuzzleId is { } id)
+        {
+            return _repository.FindById(id)
+                   ?? throw new InvalidOperationException(
+                       $"Saved game references puzzle '{id}', which is no longer in the shipped content.");
+        }
+
+        return _generator.Generate(new PuzzleRequest(save.Size, save.Size, save.Difficulty, save.PackId, save.Seed));
+    }
+
+    /// <summary>Rebuilds a playable session from a save, marks and all.</summary>
     public GameSession Restore(SavedGame save, HelperSettings helpers)
     {
         ArgumentNullException.ThrowIfNull(save);
@@ -72,11 +91,7 @@ public sealed class GameSessionFactory
             Seed = save.Seed,
         };
 
-        var puzzle = save.PuzzleId is { } id
-            ? _repository.FindById(id)
-              ?? throw new InvalidOperationException(
-                  $"Saved game references puzzle '{id}', which is no longer in the shipped content.")
-            : _generator.Generate(new PuzzleRequest(save.Size, save.Size, save.Difficulty, save.PackId, save.Seed));
+        var puzzle = ResolvePuzzle(save);
 
         var session = new GameSession(puzzle, GameRules.Create(save.Challenge, helpers), options, save.Seed);
         session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.Mistakes);

@@ -17,6 +17,16 @@ public sealed class PuzzleArtDrawable : IDrawable
 
     public Puzzle? Puzzle { get; set; }
 
+    /// <summary>
+    /// When set, the player's own marks are drawn instead of the finished picture.
+    /// </summary>
+    /// <remarks>
+    /// Used by the Continue list. Drawing the solution there would hand the child the answer -
+    /// far more of a giveaway than the picture's name - whereas their own progress both
+    /// identifies the game and gives away nothing.
+    /// </remarks>
+    public IReadOnlyList<CellState>? Marks { get; set; }
+
     /// <summary>Hides the picture behind placeholder blocks, for unsolved gallery entries.</summary>
     public bool IsMasked { get; set; }
 
@@ -60,12 +70,18 @@ public sealed class PuzzleArtDrawable : IDrawable
             {
                 var index = puzzle.IndexOf(x, y);
 
-                if (!puzzle.IsFilled(x, y) || index > revealCutoff)
+                var isDrawn = Marks is { } marks
+                    ? index < marks.Count && marks[index] == CellState.Filled
+                    : puzzle.IsFilled(x, y);
+
+                if (!isDrawn || index > revealCutoff)
                 {
                     continue;
                 }
 
-                canvas.FillColor = IsInterior(puzzle, x, y) ? interiorColour : artColour;
+                // Interior shading needs the true shape, so it only applies when drawing the
+                // finished picture. Partial progress has no meaningful interior yet.
+                canvas.FillColor = Marks is null && IsInterior(puzzle, x, y) ? interiorColour : artColour;
                 canvas.FillRoundedRectangle(offsetX + (x * step), offsetY + (y * step), cell, cell, radius);
             }
         }

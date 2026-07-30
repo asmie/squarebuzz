@@ -193,4 +193,7 @@
   <data name="Puzzle_rocket" xml:space="preserve"><value>Rocket</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Crown</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Mystery Picture</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Magnifier</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Shows a zoomed 3×3 view while you paint. Off by default.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Ask a grown-up</value></data>
 </root>

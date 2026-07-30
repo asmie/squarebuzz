@@ -49,6 +49,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             TapBehaviour = ReadEnum(values, Keys.TapBehaviour, defaults.TapBehaviour),
             Handedness = ReadEnum(values, Keys.Handedness, defaults.Handedness),
             CellZoomPercent = ReadInt(values, Keys.CellZoomPercent, defaults.CellZoomPercent),
+            ShowMagnifier = ReadBool(values, Keys.ShowMagnifier, defaults.ShowMagnifier),
 
             Language = ReadEnum(values, Keys.Language, defaults.Language),
 
@@ -92,6 +93,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             Row(Keys.TapBehaviour, settings.TapBehaviour),
             Row(Keys.Handedness, settings.Handedness),
             Row(Keys.CellZoomPercent, settings.CellZoomPercent),
+            Row(Keys.ShowMagnifier, settings.ShowMagnifier),
 
             Row(Keys.Language, settings.Language),
 
@@ -178,6 +180,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
         public const string TapBehaviour = "controls.tapBehaviour";
         public const string Handedness = "controls.handedness";
         public const string CellZoomPercent = "controls.cellZoomPercent";
+        public const string ShowMagnifier = "controls.showMagnifier";
 
         public const string Language = "language";
 

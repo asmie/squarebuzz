@@ -37,6 +37,7 @@ public class SettingsRepositoryTests
             TapBehaviour = TapBehaviour.HoldToCross,
             Handedness = Handedness.Left,
             CellZoomPercent = 140,
+            ShowMagnifier = true,
             Language = AppLanguage.Polish,
             Helpers = new HelperSettings
             {
@@ -50,6 +51,7 @@ public class SettingsRepositoryTests
             LastPackId = "dinos",
             LastChallenge = ChallengeLevel.Sharp,
             ScreenTimeLimitMinutes = 30,
+            HasSeenOnboarding = true,
         };
 
         await repository.SaveAsync(saved);

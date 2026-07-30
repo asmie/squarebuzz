@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Views.ContinuePage"
+             x:DataType="vm:ContinueViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,*">
+
+        <Label Grid.Row="0"
+               Text="{Binding Heading}"
+               Style="{StaticResource H1}"
+               Margin="0,0,0,12" />
+
+        <!-- Empty state: a mascot and a way out, rather than a blank screen. -->
+        <VerticalStackLayout Grid.Row="1"
+                             IsVisible="{Binding IsEmpty}"
+                             VerticalOptions="Center"
+                             Spacing="18">
+            <controls:MascotView Pose="Think" HeightRequest="110" WidthRequest="102" HorizontalOptions="Center" />
+            <Label Text="{Binding EmptyMessage}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+            <Button Text="{Binding StartFirstLabel}"
+                    Command="{Binding NewGameCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    HeightRequest="56" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                        IsVisible="{Binding HasSaves}"
+                        ItemsSource="{Binding Saves}"
+                        SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:SavedGameCard">
+                    <Border Style="{StaticResource Card}" Padding="12">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                            <!-- Thumbnail of the player's own progress - never the solution. -->
+                            <Border Grid.Column="0"
+                                    WidthRequest="72"
+                                    HeightRequest="72"
+                                    BackgroundColor="{DynamicResource Surface2}"
+                                    StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
+                                <controls:PuzzleArtView Puzzle="{Binding Puzzle}" Marks="{Binding Marks}" Margin="6" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Details}" Style="{StaticResource Subtle}" FontSize="12" />
+
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <ProgressBar Grid.Column="0"
+                                                 Progress="{Binding Progress}"
+                                                 ProgressColor="{DynamicResource Primary}"
+                                                 VerticalOptions="Center" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding ProgressText}"
+                                           Style="{StaticResource Subtle}"
+                                           FontSize="11" />
+                                </Grid>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Text="{Binding SavedWhen}"
+                                       Style="{StaticResource Subtle}"
+                                       FontSize="11"
+                                       HorizontalTextAlignment="End" />
+
+                                <Button Text="▶"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, Path=ResumeCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{DynamicResource Primary}"
+                                        TextColor="{DynamicResource OnPrimary}"
+                                        CornerRadius="999"
+                                        WidthRequest="48"
+                                        HeightRequest="48"
+                                        Padding="0" />
+
+                                <Button Text="✕"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, Path=DeleteCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{DynamicResource WarnSoft}"
+                                        TextColor="{DynamicResource OnWarnSoft}"
+                                        CornerRadius="999"
+                                        WidthRequest="48"
+                                        HeightRequest="36"
+                                        FontSize="12"
+                                        Padding="0" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

@@ -18,12 +18,12 @@ public partial class AppShell : Shell
     {
         Routing.RegisterRoute(Routes.NewGame, typeof(NewGamePage));
         Routing.RegisterRoute(Routes.Game, typeof(GamePage));
+        Routing.RegisterRoute(Routes.Options, typeof(OptionsPage));
+        Routing.RegisterRoute(Routes.Continue, typeof(ContinuePage));
 
-        // Scaffolded screens. All six share ComingSoonPage and differ only by the heading key
-        // passed at navigation time, so every route works end to end today.
-        Routing.RegisterRoute(Routes.Continue, typeof(ComingSoonPage));
+        // Scaffolded screens. They share ComingSoonPage and differ only by the heading
+        // key passed at navigation time, so every route works end to end today.
         Routing.RegisterRoute(Routes.Trials, typeof(ComingSoonPage));
-        Routing.RegisterRoute(Routes.Options, typeof(ComingSoonPage));
         Routing.RegisterRoute(Routes.About, typeof(ComingSoonPage));
         Routing.RegisterRoute(Routes.Gallery, typeof(ComingSoonPage));
         Routing.RegisterRoute(Routes.HowTo, typeof(ComingSoonPage));

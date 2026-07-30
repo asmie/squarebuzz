@@ -6,6 +6,9 @@ public partial class GamePage : ContentPage
 {
     private readonly GameViewModel _viewModel;
 
+    /// <summary>Cell the magnifier is centred on, or -1 when it is hidden.</summary>
+    private int _magnifiedIndex = -1;
+
     public GamePage(GameViewModel viewModel)
     {
         InitializeComponent();
@@ -22,6 +25,7 @@ public partial class GamePage : ContentPage
 
         Board.CellPainted += OnCellPainted;
         Board.CrossGestureRecognised += OnCrossGestureRecognised;
+        Board.TouchedCellChanged += OnTouchedCellChanged;
 
         // The board is sized from the space its host offers, not from its own width - see
         // BoardView.AvailableSize for why that distinction matters.
@@ -42,14 +46,57 @@ public partial class GamePage : ContentPage
 
         if (_viewModel.Session is null)
         {
-            await _viewModel.StartAsync();
+            // Resumes the save named by the route, or starts a fresh puzzle.
+            await _viewModel.InitialiseAsync();
         }
+    }
+
+    protected override async void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        // Covers backgrounding and back-navigation, which are the routes out of the game that
+        // no button handles.
+        await _viewModel.AutosaveAsync();
     }
 
     private void OnCellPainted(object? sender, Controls.CellPaintedEventArgs e) =>
         _viewModel.Paint(e.Index, e.Target);
 
-    private void OnBoardChanged(object? sender, EventArgs e) => Board.RefreshCells();
+    private void OnTouchedCellChanged(object? sender, Controls.TouchedCellEventArgs e)
+    {
+        if (!_viewModel.ShowMagnifier)
+        {
+            return;
+        }
+
+        if (e.Index < 0)
+        {
+            _magnifiedIndex = -1;
+            MagnifierPanel.IsVisible = false;
+            return;
+        }
+
+        // Sit opposite the hand, so the panel is never the thing the palm is covering.
+        MagnifierPanel.HorizontalOptions = e.IsInLeftHalf ? LayoutOptions.End : LayoutOptions.Start;
+        MagnifierPanel.IsVisible = true;
+
+        _magnifiedIndex = e.Index;
+        Magnifier.ShowCell(e.Index);
+    }
+
+    private void OnBoardChanged(object? sender, EventArgs e)
+    {
+        Board.RefreshCells();
+
+        // TouchedCellChanged fires before the move is applied, so the magnifier's first snapshot
+        // is pre-paint. Re-reading it here is what makes it show the cell as it now is rather
+        // than as it was a moment ago.
+        if (_magnifiedIndex >= 0 && MagnifierPanel.IsVisible)
+        {
+            Magnifier.ShowCell(_magnifiedIndex);
+        }
+    }
 
     private async void OnMistakeMade(object? sender, int index)
     {

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
+             x:Class="Squarebuzz.App.Views.OptionsPage"
+             x:DataType="vm:OptionsViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <ContentPage.Resources>
+        <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
+        <conv:BoolSelectConverter x:Key="SegBackground"
+                                  TrueValue="{StaticResource Primary}"
+                                  FalseValue="{StaticResource Surface2}" />
+        <conv:BoolSelectConverter x:Key="SegTextColor"
+                                  TrueValue="{StaticResource OnPrimary}"
+                                  FalseValue="{StaticResource Ink}" />
+
+        <Style x:Key="SectionHeading" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource Ink2}" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="4,10,0,0" />
+        </Style>
+
+        <Style x:Key="RowLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="SegButton" TargetType="Button">
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Padding" Value="4,0" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="{StaticResource PagePadding}"
+                                 Spacing="6"
+                                 MaximumWidthRequest="{StaticResource FrameMaxWidth}"
+                                 HorizontalOptions="Center">
+
+                <!-- Audio -->
+                <Label Text="{Binding AudioSection}" Style="{StaticResource SectionHeading}" />
+                <Border Style="{StaticResource Card}" Padding="16,6">
+                    <VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding SoundLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding SoundEffects}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding MusicLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding Music}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding VoiceLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding VoiceNarration}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding HapticsLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding Haptics}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Look and feel -->
+                <Label Text="{Binding LookSection}" Style="{StaticResource SectionHeading}" />
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding ThemeLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                                        Text="{Binding LightLabel}"
+                                        Command="{Binding SelectThemeCommand}" CommandParameter="light"
+                                        BackgroundColor="{Binding IsLightTheme, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsLightTheme, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                        Text="{Binding DarkLabel}"
+                                        Command="{Binding SelectThemeCommand}" CommandParameter="dark"
+                                        BackgroundColor="{Binding IsDarkTheme, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsDarkTheme, Converter={StaticResource SegTextColor}}" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding ColorBlindLabel}" Style="{StaticResource RowLabel}" />
+                                <Label Text="{Binding ColorBlindNote}" Style="{StaticResource Subtle}" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding ColorBlindEnabled}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding AccentLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                                        Text="{Binding TangerineLabel}"
+                                        Command="{Binding SelectAccentCommand}" CommandParameter="tangerine"
+                                        BackgroundColor="{Binding IsTangerine, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsTangerine, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                        Text="{Binding GrapeLabel}"
+                                        Command="{Binding SelectAccentCommand}" CommandParameter="grape"
+                                        BackgroundColor="{Binding IsGrape, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsGrape, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="2" Style="{StaticResource SegButton}"
+                                        Text="{Binding TrioLabel}"
+                                        Command="{Binding SelectAccentCommand}" CommandParameter="trio"
+                                        BackgroundColor="{Binding IsTrio, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsTrio, Converter={StaticResource SegTextColor}}" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding BigNumbersLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding BigNumbers}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Controls -->
+                <Label Text="{Binding ControlsSection}" Style="{StaticResource SectionHeading}" />
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding TapBehaviourLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                                        Text="{Binding ModeLabel}"
+                                        Command="{Binding SelectTapBehaviourCommand}" CommandParameter="mode"
+                                        BackgroundColor="{Binding IsModeButton, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsModeButton, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                        Text="{Binding HoldLabel}"
+                                        Command="{Binding SelectTapBehaviourCommand}" CommandParameter="hold"
+                                        BackgroundColor="{Binding IsHoldToCross, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsHoldToCross, Converter={StaticResource SegTextColor}}" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding HandedLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                                        Text="{Binding LeftLabel}"
+                                        Command="{Binding SelectHandednessCommand}" CommandParameter="left"
+                                        BackgroundColor="{Binding IsLeftHanded, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsLeftHanded, Converter={StaticResource SegTextColor}}" />
+                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                        Text="{Binding RightLabel}"
+                                        Command="{Binding SelectHandednessCommand}" CommandParameter="right"
+                                        BackgroundColor="{Binding IsRightHanded, Converter={StaticResource SegBackground}}"
+                                        TextColor="{Binding IsRightHanded, Converter={StaticResource SegTextColor}}" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" MinimumHeightRequest="56" ColumnSpacing="8">
+                            <Label Text="{Binding CellSizeLabel}" Style="{StaticResource RowLabel}" />
+                            <Button Grid.Column="1" Text="−" Command="{Binding ZoomOutCommand}"
+                                    Style="{StaticResource SegButton}" WidthRequest="52"
+                                    BackgroundColor="{DynamicResource Surface2}" TextColor="{DynamicResource Ink}" />
+                            <Label Grid.Column="2" Text="{Binding CellZoomText}" Style="{StaticResource RowLabel}"
+                                   WidthRequest="56" HorizontalTextAlignment="Center" />
+                            <Button Grid.Column="3" Text="+" Command="{Binding ZoomInCommand}"
+                                    Style="{StaticResource SegButton}" WidthRequest="52"
+                                    BackgroundColor="{DynamicResource Surface2}" TextColor="{DynamicResource Ink}" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding MagnifierLabel}" Style="{StaticResource RowLabel}" />
+                                <Label Text="{Binding MagnifierNote}" Style="{StaticResource Subtle}" FontSize="12" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding ShowMagnifier}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Helpers -->
+                <Label Text="{Binding HelpersSection}" Style="{StaticResource SectionHeading}" />
+                <Border Style="{StaticResource Card}" Padding="16,6">
+                    <VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding AutoCrossLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding AutoCross}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding WarnLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding WarnOnMistakes}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding TimerLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding ShowTimer}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
+                            <Label Text="{Binding HintsLabel}" Style="{StaticResource RowLabel}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding AllowHints}" VerticalOptions="Center"
+                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Language -->
+                <Label Text="{Binding LanguageSection}" Style="{StaticResource SectionHeading}" />
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Button Grid.Column="0" Style="{StaticResource SegButton}" Text="English"
+                                Command="{Binding SelectLanguageCommand}" CommandParameter="en"
+                                BackgroundColor="{Binding IsEnglish, Converter={StaticResource SegBackground}}"
+                                TextColor="{Binding IsEnglish, Converter={StaticResource SegTextColor}}" />
+                        <Button Grid.Column="1" Style="{StaticResource SegButton}" Text="Polski"
+                                Command="{Binding SelectLanguageCommand}" CommandParameter="pl"
+                                BackgroundColor="{Binding IsPolish, Converter={StaticResource SegBackground}}"
+                                TextColor="{Binding IsPolish, Converter={StaticResource SegTextColor}}" />
+                        <Button Grid.Column="2" Style="{StaticResource SegButton}" Text="Español"
+                                Command="{Binding SelectLanguageCommand}" CommandParameter="es"
+                                BackgroundColor="{Binding IsSpanish, Converter={StaticResource SegBackground}}"
+                                TextColor="{Binding IsSpanish, Converter={StaticResource SegTextColor}}" />
+                    </Grid>
+                </Border>
+
+                <!-- Parent zone -->
+                <Label Text="{Binding ParentSection}" Style="{StaticResource SectionHeading}" />
+                <Border Style="{StaticResource Card}" Padding="16,12">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding GrownUpsLabel}" Style="{StaticResource Subtle}" FontSize="12" />
+                        <Button Text="{Binding ResetLabel}"
+                                Command="{Binding OpenResetGateCommand}"
+                                BackgroundColor="{DynamicResource WarnSoft}"
+                                TextColor="{DynamicResource OnWarnSoft}"
+                                CornerRadius="16"
+                                FontAttributes="Bold"
+                                HeightRequest="52" />
+                        <Label Text="{Binding VersionLabel}" Style="{StaticResource Subtle}" FontSize="12" />
+                        <Label Text="{Binding NoAdsLabel}" Style="{StaticResource Subtle}" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Parent gate: a small sum before anything destructive. -->
+        <Grid IsVisible="{Binding IsGateOpen}" BackgroundColor="#CC000000">
+            <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="300" Padding="24">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="{Binding GrownUpsLabel}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding GateQuestion}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+
+                    <Entry Text="{Binding GateAnswer}"
+                           Keyboard="Numeric"
+                           HorizontalTextAlignment="Center"
+                           FontSize="22"
+                           BackgroundColor="{DynamicResource Surface2}"
+                           TextColor="{DynamicResource Ink}" />
+
+                    <Label Text="{Binding GateRetryMessage}"
+                           IsVisible="{Binding GateFailed}"
+                           TextColor="{DynamicResource WarnDeep}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="OK" Command="{Binding SubmitGateCommand}"
+                            Style="{StaticResource PrimaryButton}" HeightRequest="52" />
+                    <Button Text="{Binding CancelLabel}" Command="{Binding CancelGateCommand}"
+                            Style="{StaticResource SecondaryButton}" HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Reset confirmation, once past the gate. -->
+        <Grid IsVisible="{Binding IsResetConfirmOpen}" BackgroundColor="#E6000000">
+            <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="310" Padding="24">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="{Binding ResetTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding ResetBody}" Style="{StaticResource Subtle}" HorizontalTextAlignment="Center" />
+
+                    <Button Text="{Binding ResetConfirm}"
+                            Command="{Binding ConfirmResetCommand}"
+                            BackgroundColor="{DynamicResource Warn}"
+                            TextColor="{DynamicResource OnWarn}"
+                            CornerRadius="16"
+                            FontAttributes="Bold"
+                            HeightRequest="52" />
+                    <Button Text="{Binding CancelLabel}" Command="{Binding CancelGateCommand}"
+                            Style="{StaticResource SecondaryButton}" HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>

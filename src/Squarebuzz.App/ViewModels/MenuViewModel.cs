@@ -123,7 +123,7 @@ public partial class MenuViewModel : LocalizedViewModel
     private async Task TrialsAsync() => await OpenScaffoldedAsync(Routes.Trials, "trials");
 
     [RelayCommand]
-    private async Task OptionsAsync() => await OpenScaffoldedAsync(Routes.Options, "options");
+    private async Task OptionsAsync() => await _navigation.GoToAsync(Routes.Options);
 
     [RelayCommand]
     private async Task AboutAsync() => await OpenScaffoldedAsync(Routes.About, "about");

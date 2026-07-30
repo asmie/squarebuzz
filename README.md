@@ -27,13 +27,29 @@ Dependencies flow strictly `App → Data → Core`. Core depends on nothing.
 
 | Built | Scaffolded (shared `ComingSoonPage`) |
 |---|---|
-| Splash, Onboarding, Menu, New Game, Board, Pause, Complete | Continue, Trials, Options, About, Gallery, How to Play |
+| Splash, Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue | Trials, About, Gallery, How to Play |
+
+Games autosave every 15 seconds while playing, plus on pause, on quit and on leaving the
+screen. A finished puzzle deletes its own save, so Continue never offers a solved board.
+Saves store the player's marks and a seed — never the picture — so a generated puzzle is
+rebuilt rather than stored.
 
 Pause and Complete are overlays on the board rather than separate routes, so the in-progress
 session never has to be serialised across a navigation just to show a summary over it.
 
 Every scaffolded route is registered and navigable today — they share one page and differ only
 by a `titleKey` route parameter, so the menu is fully explorable with no dead ends.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs four jobs:
+
+| Job | Runner | Why |
+|---|---|---|
+| `domain` | ubuntu + windows | Builds and tests Core and Data. No MAUI workload, so it is fast — and running on both OSes proves the "Core runs anywhere" goal and exercises the platform-specific SQLite native. |
+| `android` | windows | Builds the APK and uploads it as an artifact. |
+| `ios` | **macos** | iOS cannot be built on a Windows dev machine, so without this an iOS-only break would go unnoticed until release. Builds the simulator target, which links the real thing without needing a signing identity. |
+| `app-warnings` | windows | The MAUI head relaxes warnings-as-errors for generated code; this re-builds it with `-warnaserror` so app-layer warnings still fail the build. |
 
 ## Requirements
 

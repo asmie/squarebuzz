@@ -65,6 +65,30 @@
                                 TapBehaviour="{Binding TapBehaviour}" />
         </ScrollView>
 
+        <!--
+          Magnifier, opt-in via Options. Parked in a corner of the board area rather than
+          following the finger: a panel under the palm would defeat the point, and pinning it
+          avoids translating touch coordinates up through the ScrollView. The corner flips to
+          whichever side the hand is not on.
+        -->
+        <Border Grid.Row="1"
+                x:Name="MagnifierPanel"
+                IsVisible="False"
+                WidthRequest="116"
+                HeightRequest="116"
+                Padding="6"
+                Margin="4"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                BackgroundColor="{DynamicResource Surface}"
+                Stroke="{DynamicResource Line}"
+                StrokeThickness="2">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="16" />
+            </Border.StrokeShape>
+            <controls:MagnifierView x:Name="Magnifier" Session="{Binding Session}" />
+        </Border>
+
         <!-- Controls -->
         <VerticalStackLayout Grid.Row="2" Spacing="10">
 
