@@ -16,6 +16,17 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 {
     private const string GeneratedColorHex = "#8B5CF6";
 
+    /// <summary>
+    /// Chance that a cell inside a blob is actually filled, which keeps blob edges organic
+    /// rather than perfectly circular.
+    /// </summary>
+    /// <remarks>
+    /// High on purpose. The prototype thinned blobs by roughly a third, which speckles the
+    /// picture with isolated cells - and an isolated cell is a clue run of 1, so a speckled
+    /// picture is also a noisy, tedious set of clues.
+    /// </remarks>
+    private const double BlobSolidity = 0.85;
+
     public Puzzle Generate(PuzzleRequest request)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -28,30 +39,30 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 
         // Higher difficulty means a sparser picture, which leaves shorter clues and so
         // fewer easy deductions.
-        var density = 0.62 - (request.Difficulty * 0.045);
+        var targetFill = 0.62 - (request.Difficulty * 0.045);
         var cells = new bool[width * height];
-        var blobCount = Math.Max(3, (int)Math.Round(width * height / 26.0));
 
-        for (var blob = 0; blob < blobCount; blob++)
+        // Only the left half is generated; the right is mirrored from it. Measuring the target
+        // against the half rather than the whole grid is what makes the density predictable,
+        // since mirroring copies whatever the half ended up with.
+        var halfWidth = (width + 1) / 2;
+        var wanted = (int)Math.Round(halfWidth * height * targetFill);
+        var maxRadius = Math.Max(2, width / 5);
+
+        // Blob centres come from a shuffled list of every cell in the half, consumed in order.
+        // A permutation cannot leave a band of rows uncovered, which uniformly random centres
+        // regularly did: at 10x10 the old generator placed four small blobs and most rows came
+        // out empty, so FillEmptyLines "repaired" them into a bar down the mirror axis. That bar
+        // was the dominant feature of most generated 10x10 pictures - the daily puzzle's size.
+        var centres = ShuffledHalfCells(halfWidth, height, random);
+
+        // Blobs are added until the half is as full as the difficulty asks, so coverage scales
+        // with the grid instead of being a fixed count that happened to suit 5x5.
+        for (var i = 0; i < centres.Length && CountLeftHalf(cells, width, height, halfWidth) < wanted; i++)
         {
-            var centreX = random.Next(width);
-            var centreY = random.Next(height);
-            var radius = 1 + random.Next(Math.Max(2, width / 5));
-            var radiusSquared = radius * radius;
+            var (centreX, centreY) = centres[i];
 
-            for (var y = 0; y < height; y++)
-            {
-                for (var x = 0; x < width; x++)
-                {
-                    var dx = x - centreX;
-                    var dy = y - centreY;
-
-                    if ((dx * dx) + (dy * dy) <= radiusSquared && random.NextDouble() < density + 0.2)
-                    {
-                        cells[(y * width) + x] = true;
-                    }
-                }
-            }
+            StampBlob(cells, width, height, centreX, centreY, 1 + random.Next(maxRadius), random);
         }
 
         MirrorLeftHalfOntoRight(cells, width, height);
@@ -64,6 +75,79 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
             width,
             height,
             cells);
+    }
+
+    /// <summary>Every cell of the left half, in a seed-determined random order.</summary>
+    private static (int X, int Y)[] ShuffledHalfCells(int halfWidth, int height, DeterministicRandom random)
+    {
+        var cells = new (int X, int Y)[halfWidth * height];
+
+        for (var y = 0; y < height; y++)
+        {
+            for (var x = 0; x < halfWidth; x++)
+            {
+                cells[(y * halfWidth) + x] = (x, y);
+            }
+        }
+
+        // Fisher-Yates, so the order is a genuine permutation rather than a biased shuffle.
+        for (var i = cells.Length - 1; i > 0; i--)
+        {
+            var j = random.Next(i + 1);
+            (cells[i], cells[j]) = (cells[j], cells[i]);
+        }
+
+        return cells;
+    }
+
+    private static void StampBlob(
+        bool[] cells,
+        int width,
+        int height,
+        int centreX,
+        int centreY,
+        int radius,
+        DeterministicRandom random)
+    {
+        var radiusSquared = radius * radius;
+
+        // Only the rows and columns the blob can actually reach, rather than the whole grid.
+        var fromY = Math.Max(0, centreY - radius);
+        var toY = Math.Min(height - 1, centreY + radius);
+        var fromX = Math.Max(0, centreX - radius);
+        var toX = Math.Min(width - 1, centreX + radius);
+
+        for (var y = fromY; y <= toY; y++)
+        {
+            for (var x = fromX; x <= toX; x++)
+            {
+                var dx = x - centreX;
+                var dy = y - centreY;
+
+                if ((dx * dx) + (dy * dy) <= radiusSquared && random.NextDouble() < BlobSolidity)
+                {
+                    cells[(y * width) + x] = true;
+                }
+            }
+        }
+    }
+
+    private static int CountLeftHalf(bool[] cells, int width, int height, int halfWidth)
+    {
+        var count = 0;
+
+        for (var y = 0; y < height; y++)
+        {
+            for (var x = 0; x < halfWidth; x++)
+            {
+                if (cells[(y * width) + x])
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
 
     /// <summary>Vertical symmetry is what makes the blobs read as creatures rather than noise.</summary>
@@ -82,39 +166,124 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 
     /// <summary>
     /// A completely blank row or column is legal nonogram-wise but reads as a mistake in the
-    /// picture, so each one gets a cell in the middle.
+    /// picture, so each one is given a cell that continues the shape beside it.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// Each repair is mirrored, because this runs after
     /// <see cref="MirrorLeftHalfOntoRight"/> and would otherwise undo the symmetry it just
-    /// established. On odd widths the mirror of the centre column is itself, so a single cell
-    /// is added; on even widths the two centre cells are added as a pair. (The prototype
-    /// wrote only one cell and so produced subtly lop-sided pictures at 20x20.)
+    /// established. (The prototype wrote only one cell and so produced subtly lop-sided
+    /// pictures at 20x20.)
+    /// </para>
+    /// <para>
+    /// The cell is placed under a filled cell of the nearest occupied row rather than on the
+    /// mirror axis. Putting every repair on the axis was what made generated pictures look like
+    /// they had a bar down the middle: the repairs all lined up with each other instead of with
+    /// the shape. Attaching them to their neighbour reads as the shape tapering off, which is
+    /// what a row with one or two cells in it should look like.
+    /// </para>
     /// </remarks>
     private static void FillEmptyLines(bool[] cells, int width, int height)
     {
-        var centreX = width / 2;
-        var mirrorX = width - 1 - centreX;
-
         for (var y = 0; y < height; y++)
         {
-            if (!RowHasFilledCell(cells, width, y))
+            if (RowHasFilledCell(cells, width, y))
             {
-                cells[(y * width) + centreX] = true;
-                cells[(y * width) + mirrorX] = true;
+                continue;
             }
-        }
 
-        var centreY = height / 2;
+            var x = ColumnToContinue(cells, width, height, y);
+
+            cells[(y * width) + x] = true;
+            cells[(y * width) + (width - 1 - x)] = true;
+        }
 
         for (var x = 0; x < width; x++)
         {
-            if (!ColumnHasFilledCell(cells, width, height, x))
+            if (ColumnHasFilledCell(cells, width, height, x))
             {
-                cells[(centreY * width) + x] = true;
-                cells[(centreY * width) + (width - 1 - x)] = true;
+                continue;
+            }
+
+            var y = RowToContinue(cells, width, height, x);
+
+            cells[(y * width) + x] = true;
+            cells[(y * width) + (width - 1 - x)] = true;
+        }
+    }
+
+    /// <summary>
+    /// A column that is filled in the row nearest <paramref name="emptyY"/>, preferring one close
+    /// to the middle so the repair attaches to the body rather than to an outlying limb.
+    /// </summary>
+    private static int ColumnToContinue(bool[] cells, int width, int height, int emptyY)
+    {
+        var centreX = width / 2;
+
+        for (var distance = 1; distance < height; distance++)
+        {
+            foreach (var y in new[] { emptyY - distance, emptyY + distance })
+            {
+                if (y < 0 || y >= height || !RowHasFilledCell(cells, width, y))
+                {
+                    continue;
+                }
+
+                var best = -1;
+
+                // Search the left half only: the right is its mirror, so a choice there would be
+                // the same cell reflected and the tie-break would depend on iteration order.
+                for (var x = 0; x <= centreX && x < width; x++)
+                {
+                    if (cells[(y * width) + x] && (best < 0 || Math.Abs(x - centreX) < Math.Abs(best - centreX)))
+                    {
+                        best = x;
+                    }
+                }
+
+                if (best >= 0)
+                {
+                    return best;
+                }
             }
         }
+
+        // Nothing filled anywhere, which the fill loop makes impossible in practice.
+        return centreX;
+    }
+
+    /// <summary>The row equivalent of <see cref="ColumnToContinue"/>, for an empty column.</summary>
+    private static int RowToContinue(bool[] cells, int width, int height, int emptyX)
+    {
+        var centreY = height / 2;
+
+        for (var distance = 1; distance < width; distance++)
+        {
+            foreach (var x in new[] { emptyX - distance, emptyX + distance })
+            {
+                if (x < 0 || x >= width || !ColumnHasFilledCell(cells, width, height, x))
+                {
+                    continue;
+                }
+
+                var best = -1;
+
+                for (var y = 0; y < height; y++)
+                {
+                    if (cells[(y * width) + x] && (best < 0 || Math.Abs(y - centreY) < Math.Abs(best - centreY)))
+                    {
+                        best = y;
+                    }
+                }
+
+                if (best >= 0)
+                {
+                    return best;
+                }
+            }
+        }
+
+        return centreY;
     }
 
     private static bool RowHasFilledCell(bool[] cells, int width, int y)

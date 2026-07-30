@@ -39,6 +39,14 @@ screen. A finished puzzle deletes its own save, so Continue never offers a solve
 Saves store the player's marks and a seed — never the picture — so a generated puzzle is
 rebuilt rather than stored.
 
+**That makes generated saves sensitive to generator changes**, and there is no protection yet: a
+seed reconstructs whatever the current generator produces, so after a change to
+`BlobPuzzleGenerator` an existing generated save restores the player's marks onto a *different*
+picture. Nothing crashes — the marks are simply wrong against the new clues. Authored puzzles are
+unaffected, since they are stored content rather than a seed. The fix is a generator version
+recorded alongside the seed, with mismatched saves treated as unresumable; until that exists,
+tuning the generator means discarding generated saves.
+
 The Gallery doubles as a picture picker (reached from New Game, as in the prototype). Nothing
 in it leaks an unsolved answer: unfound cards draw a uniform grid of blank tiles rather than
 the solution in a muted colour, and Continue thumbnails draw the player's own marks.
@@ -108,6 +116,48 @@ in `TrophyEvaluator` as named constants, and worth a look before release:
 | Night Owl | Finish between 20:00 and 06:00 local |
 | Perfect Ten | 3 stars *and* zero mistakes on a 10×10 or larger |
 | Collector | Every picture in every pack, locked ones included |
+
+## Puzzle generation
+
+`BlobPuzzleGenerator` scatters overlapping circular blobs over the left half of the grid and
+mirrors it, which is what makes generated pictures read as symmetrical creatures.
+`UniqueSolutionGenerator` wraps it and rejects anything that cannot be solved by pure logic, so
+the game's promise holds for generated puzzles as well as authored ones.
+
+**Coverage is driven by a target fill, not by a blob count.** The ported version placed
+`width × height / 26` blobs of radius up to `width / 5`, and neither figure scaled: at 10×10 that
+is four small blobs, so most rows came out *empty* and the empty-line repair filled them with a
+pair of cells on the mirror axis. The result was a bar down the middle of most generated 10×10
+pictures — the daily puzzle's size. Everything passed: the grids were symmetrical, had no empty
+line, and were uniquely solvable. They were just poor pictures.
+
+Three changes, each measured over 200 seeds per size:
+
+| | before | after |
+|---|---|---|
+| Fill at 10×10 | 34.5% | 54.2% |
+| Fill spread across sizes | 34.5%–57.9%, non-monotonic | 53%–62% at every size |
+| Mirror-axis artefact rows, 10×10 | **4.35 of 10** (worst 8) | **0.64** |
+| Mirror-axis artefact rows, 15×15 | 3.53 of 15 (worst 11) | 0.35 |
+| Clue runs per row, 25×25 | 3.58 | 2.97 |
+| Uniquely solvable, 10×10 | 53.3% | **89.5%** |
+| Uniquely solvable, 25×25 | 58.7% | **83.5%** |
+
+- Blob centres come from a **shuffled permutation** of the half-grid's cells rather than being
+  drawn independently, so no band of rows can be left uncovered by chance.
+- Blobs are added **until the half reaches the difficulty's target density**, so coverage scales
+  with the grid instead of being a constant tuned for 5×5.
+- The empty-line repair attaches its cell **under a filled cell of the nearest occupied row**
+  instead of to the mirror axis. Axis repairs all lined up with each other, which is what produced
+  the bar; attaching them to their neighbour reads as the shape tapering off.
+
+Blobs are also nearly solid (85%) rather than thinned by a third: every isolated cell is a clue
+run of 1, so a speckled picture is also a tedious set of clues.
+
+`BlobPuzzleGeneratorTests` asserts these as invariants — density band per size, a ceiling on
+axis-artefact rows and sparse columns, a ceiling on clue runs per line, and that difficulty still
+thins the picture. They are statistical tests over 200 seeds, which is what it takes to catch a
+defect that is about *distribution* rather than about any single puzzle.
 
 ## Settings
 
