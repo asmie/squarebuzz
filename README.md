@@ -220,6 +220,31 @@ screen, and neither would fail a test that did not know to look.
 | `ios` | **macos** | iOS cannot be built on a Windows dev machine, so without this an iOS-only break would go unnoticed until release. Builds the simulator target, which links the real thing without needing a signing identity. |
 | `app-warnings` | windows | The MAUI head relaxes warnings-as-errors for generated code; this re-builds it with `-warnaserror` so app-layer warnings still fail the build. |
 
+**It has never actually run.** Nothing has been pushed, so every statement below comes from
+auditing the workflow against the repository and running each job's commands locally — not from a
+green tick. Three failures were found and fixed that way, all of which would have hit on the
+first push:
+
+- `dotnet restore a.csproj b.csproj` — MSBuild takes **one** project and rejects the second as an
+  unknown switch (MSB1008), so the `domain` job died at its first real step on both runners.
+- **Restore covers every framework a project declares**, not just the one being built. The three
+  platform jobs each install a single workload on purpose, so restore alone would have demanded
+  the other three and failed with NETSDK1147. Fixed with a `SquarebuzzTargetFramework` property
+  that only `Squarebuzz.App` reads — overriding `TargetFrameworks` on the command line does not
+  work, because a command-line property is global and redefines `Squarebuzz.Core` and
+  `Squarebuzz.Data` too, which target plain `net10.0`.
+- `dotnet-quality: preview` pinned the SDK to a pre-release build of a framework that has since
+  shipped. Removed; `10.0.x` resolves to the latest release.
+
+What is verified locally, on Windows: the `domain` job's full sequence including the trx
+artifacts, the `android` job's build and that `*-Signed.apk` matches what it produces, and the
+`app-warnings` build. What is **not** verified: anything ubuntu-specific in `domain`, the whole
+`ios` job, and every `dotnet workload install` step — none of which can run here.
+
+There is no `global.json`, so CI takes the latest 10.0.x while this machine builds on
+`10.0.400-preview`. Pinning would make them agree but constrains the local toolchain, so it is
+left as a decision rather than assumed.
+
 ## Requirements
 
 - .NET SDK 10.0 with the `maui-windows`, `android`, `ios` and `maccatalyst` workloads
@@ -239,6 +264,9 @@ dotnet build src/Squarebuzz.App -f net10.0-android -t:Run
 
 # Windows:
 dotnet build src/Squarebuzz.App -f net10.0-windows10.0.19041.0 -t:Run
+
+# One platform only, without needing the other three workloads installed (what CI does):
+dotnet build src/Squarebuzz.App -c Release -p:SquarebuzzTargetFramework=net10.0-android
 ```
 
 Use `-t:Run` for Android rather than `adb install`. Debug builds use Fast Deployment, which

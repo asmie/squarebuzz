@@ -2,8 +2,23 @@
 
   <PropertyGroup>
     <!-- iOS / Android / Mac Catalyst always; Windows only when building on Windows. -->
-    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(SquarebuzzTargetFramework)' == ''">net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="'$(SquarebuzzTargetFramework)' == '' AND $([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+
+    <!--
+      Escape hatch for a CI job that installs one platform's workload.
+
+      Restore covers every framework a project declares, whichever one is being built, so
+      `-f net10.0-android` alone still demands the iOS, Mac Catalyst and Windows workloads and
+      fails with NETSDK1147 on a runner that has only the Android one.
+
+      It has to be a property of our own rather than overriding TargetFrameworks on the command
+      line. A command-line property is global and propagates into ProjectReferences, so
+      `-p:TargetFrameworks=net10.0-android` also redefines Squarebuzz.Core and Squarebuzz.Data -
+      which target plain net10.0 - and the build fails looking for assets that were never
+      restored. Core and Data do not read this property, so they are unaffected.
+    -->
+    <TargetFrameworks Condition="'$(SquarebuzzTargetFramework)' != ''">$(SquarebuzzTargetFramework)</TargetFrameworks>
 
     <OutputType>Exe</OutputType>
     <RootNamespace>Squarebuzz.App</RootNamespace>

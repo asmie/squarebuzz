@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  # Fast feedback: the domain and persistence layers reference no MAUI workload, so they build
+  # and test in well under a minute. Run on both OSes because "Core runs anywhere" is a design
+  # goal - and because the SQLite tests exercise a native library that differs per platform.
+  domain:
+    name: Domain & data (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # One project per invocation: MSBuild takes a single project or solution argument and
+      # rejects the second as an unknown switch (MSB1008). Restoring the solution instead is not
+      # an option here - that would pull in the MAUI head, whose workloads this job does not
+      # install on purpose.
+      - name: Restore
+        run: |
+          dotnet restore tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj
+          dotnet restore tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj
+
+      - name: Build
+        run: |
+          dotnet build src/Squarebuzz.Core/Squarebuzz.Core.csproj -c Release --no-restore
+          dotnet build src/Squarebuzz.Data/Squarebuzz.Data.csproj -c Release --no-restore
+
+      - name: Test
+        run: |
+          dotnet test tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=core.trx" --results-directory artifacts/test-results
+          dotnet test tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=data.trx" --results-directory artifacts/test-results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: artifacts/test-results
+          if-no-files-found: ignore
+
+  android:
+    name: Android
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # The runner ships MAUI workloads, but not necessarily matching this SDK band, so they are
+      # installed explicitly. Only the Android ones are needed for this job.
+      - name: Install MAUI Android workload
+        run: dotnet workload install maui-android --skip-sign-check
+
+      # TargetFrameworks is overridden rather than passing -f, because restore covers every
+      # framework a project declares regardless of which one is being built. With the four in
+      # Squarebuzz.App.csproj that means restore alone would demand the iOS, Mac Catalyst and
+      # Windows workloads this job deliberately does not install, and fail with NETSDK1147.
+      # A command-line property is global, so the csproj cannot append Windows back onto it.
+      - name: Build APK
+        run: >
+          dotnet build src/Squarebuzz.App/Squarebuzz.App.csproj
+          -c Release
+          -p:SquarebuzzTargetFramework=net10.0-android
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: src/Squarebuzz.App/bin/Release/net10.0-android/*-Signed.apk
+          if-no-files-found: warn
+
+  ios:
+    name: iOS
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install MAUI iOS workload
+        run: dotnet workload install maui-ios --skip-sign-check
+
+      # This job exists because iOS cannot be built on the Windows dev machine - it needs a Mac
+      # with Xcode. Without it, an iOS-only break would go unnoticed until release. No signing
+      # identity is available on a public runner, so the simulator target is built instead: it
+      # compiles and links the real thing without needing a provisioning profile.
+      - name: Build for iOS simulator
+        run: >
+          dotnet build src/Squarebuzz.App/Squarebuzz.App.csproj
+          -c Release
+          -p:SquarebuzzTargetFramework=net10.0-ios
+          -p:RuntimeIdentifier=iossimulator-arm64
+          -p:CodesignRequireProvisioningProfile=false
+
+  # Analysers run as errors in Core and Data, so a warning there already fails those jobs. This
+  # catches anything the MAUI head reports, which is built with warnings-as-errors relaxed.
+  app-warnings:
+    name: App warnings
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install MAUI Windows workload
+        run: dotnet workload install maui-windows --skip-sign-check
+
+      - name: Build with warnings as errors
+        run: >
+          dotnet build src/Squarebuzz.App/Squarebuzz.App.csproj
+          -c Release
+          -p:SquarebuzzTargetFramework=net10.0-windows10.0.19041.0
+          -warnaserror
