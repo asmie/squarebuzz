@@ -376,23 +376,47 @@ Then it ran for real, and failed in two independent ways.
 
 **`domain`, both runners:** `CA1707` — see above. `android` and `app-warnings` were unaffected.
 
-**`ios`:** not a code break at all.
+**`ios`:** not a code break at all, and it took two rounds because there are *two* environment
+constraints that pull in opposite directions.
+
+Round one:
 
 ```
 error : This version of .NET for iOS (26.5.10301) requires Xcode 26.6.
         The current version of Xcode is 26.5.
 ```
 
-A .NET for iOS pack refuses to build against an Xcode older than the one it was built for, and the
-runner image's **default** Xcode lags the pack. Xcode 26.6 *was* installed on the image — just not
-selected. So the job now picks the newest Xcode present rather than pinning a version, which would
-need editing again the next time either side moves, and it logs the list of installed Xcodes so a
-future skew diagnoses itself. Pinning the workload instead would have been the wrong lever: nothing
-was wrong with the workload.
+A .NET for iOS pack refuses an Xcode older than the one it was built for, and 26.5 is the image
+**default** — with 26.6 installed alongside it. So: select the newest Xcode.
 
-Worth knowing for next time: `macos-latest` currently carries Xcode 26.0.1 through 26.6 with **26.5
-as default**, which is checkable without a Mac —
-`actions/runner-images/images/macos/macos-26-arm64-Readme.md` lists what each image has.
+Round two got past that and failed further in:
+
+```
+xcodebuild: error: SDK ".../Xcode_26.6.0.app/.../MacOSX.sdk" cannot be located.
+xcrun: error: unable to find utility "actool"
+```
+
+A non-default Xcode has not had its first-launch component install run, so `xcodebuild` cannot
+resolve its SDKs — the newest Xcode is *selectable* without being *usable*.
+
+So the job no longer encodes a version or an assumption. It tries each Xcode newest-first, runs
+`xcodebuild -runFirstLaunch`, and keeps the first one whose toolchain actually resolves the macOS
+SDK and `actool` — the very thing the build needs later. If none can, it fails with the list it
+tried, so the log answers the question instead of prompting another round.
+
+Two things worth keeping in mind here:
+
+- `sort -t. -k1,1n -k2,2n -k3,3n **-r**` does **not** reverse a keyed sort — a trailing `-r` is
+  silently ignored and you get oldest-first. It has to be per-key: `-k1,1nr -k2,2nr -k3,3nr`. That
+  bug would have made the job pick Xcode 26.0.1.
+- What the image contains is checkable without a Mac:
+  `actions/runner-images/images/macos/macos-26-arm64-Readme.md` lists every Xcode, which SDKs each
+  one carries, and which is default. That is where the "26.6 exists but is not default" fact came
+  from, rather than from guessing.
+
+**If it still fails**, the remaining lever is the other direction: pin `dotnet-version` to an
+earlier feature band (the image ships 10.0.103, 10.0.203 and 10.0.302) so the iOS pack matches the
+image's default Xcode, instead of moving Xcode to match the pack.
 
 What is verified locally, on Windows: the `domain` job's full sequence including the trx
 artifacts, the `android` job's build and that `*-Signed.apk` matches what it produces, and the

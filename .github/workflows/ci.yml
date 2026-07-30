@@ -106,29 +106,54 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # A .NET for iOS pack refuses to build against an Xcode older than the one it was built for,
-      # and the runner image's *default* Xcode lags the pack: the first run failed with "requires
-      # Xcode 26.6, the current version of Xcode is 26.5" even though 26.6 was installed alongside
-      # it. So select the newest Xcode present rather than pinning a version, which would need
-      # editing again the next time either side moves. The listing is deliberately logged: if this
-      # ever fails again, the log says exactly what the image had to offer.
-      - name: Select the newest Xcode on the runner
+      # Choosing an Xcode here needs two things to be true at once, and the runner image does not
+      # make either obvious:
+      #
+      #  * The .NET for iOS pack refuses an Xcode older than the one it was built for. The first
+      #    run failed with "requires Xcode 26.6, the current version of Xcode is 26.5" - and 26.5
+      #    is the image *default*, with 26.6 installed alongside it.
+      #  * Merely selecting the newest one is not enough either. The second run got further and then
+      #    failed in actool: "SDK .../MacOSX.sdk cannot be located". A non-default Xcode has not had
+      #    its first-launch component install run, so xcodebuild cannot resolve its SDKs yet.
+      #
+      # So rather than encode a version or an assumption, try each Xcode newest-first and keep the
+      # first one whose toolchain actually resolves the macOS SDK and actool - which is precisely
+      # what the build later needs. Real bundles only: the image also ships symlinks such as
+      # Xcode_26.6.0.app pointing at Xcode_26.6.app, and selecting through those adds nothing.
+      - name: Select a working Xcode
         run: |
-          echo "Xcode versions on this runner:"
+          echo "Xcode bundles on this runner:"
           ls -d /Applications/Xcode*.app
 
-          newest="$(ls -d /Applications/Xcode_*.app 2>/dev/null \
+          candidates="$(find /Applications -maxdepth 1 -name 'Xcode_*.app' -type d \
             | sed -E 's#.*/Xcode_(.+)\.app#\1#' \
-            | sort -t. -k1,1n -k2,2n -k3,3n | tail -n 1 || true)"
+            | sort -t. -k1,1nr -k2,2nr -k3,3nr)"    # per-key nr: a trailing -r does not reverse a keyed sort
 
-          if [ -n "${newest:-}" ]; then
-            echo "Selecting Xcode ${newest}"
-            sudo xcode-select -s "/Applications/Xcode_${newest}.app"
-          else
-            echo "No versioned Xcode found; leaving the default in place."
+          chosen=""
+          for version in $candidates; do
+            echo "--- trying Xcode $version"
+            sudo xcode-select -s "/Applications/Xcode_${version}.app" || continue
+
+            # Idempotent, and the step a non-default Xcode is missing.
+            sudo xcodebuild -runFirstLaunch || true
+
+            if xcrun --sdk macosx --find actool >/dev/null 2>&1; then
+              echo "--- Xcode $version can resolve the macOS SDK and actool"
+              chosen="$version"
+              break
+            fi
+
+            echo "--- Xcode $version cannot resolve actool; trying the next one"
+          done
+
+          if [ -z "$chosen" ]; then
+            echo "No installed Xcode could resolve actool. Versions tried: $candidates"
+            exit 1
           fi
 
+          echo "Using Xcode $chosen"
           xcodebuild -version
+          xcrun --sdk macosx --find actool
 
       - name: Install MAUI iOS workload
         run: dotnet workload install maui-ios --skip-sign-check
