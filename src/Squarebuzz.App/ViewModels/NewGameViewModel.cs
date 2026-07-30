@@ -137,12 +137,43 @@ public partial class NewGameViewModel : LocalizedViewModel
             _settings = GameSettings.Default;
         }
 
-        SelectedSize = _settings.LastSize;
+        SelectedSize = LargestPlayableSize(_settings.LastSize);
         SelectedDifficulty = _settings.LastDifficulty;
         SelectedPackId = _settings.LastPackId;
         SelectedChallenge = _settings.LastChallenge;
 
         BuildOptions();
+    }
+
+    /// <summary>
+    /// The remembered size, or the biggest this screen can offer if that one is locked here.
+    /// </summary>
+    /// <remarks>
+    /// The saved settings travel with the player, not with the device: pick 25x25 on a tablet and
+    /// the same account's phone remembers 25x25, where the size card is locked. Without this the
+    /// screen showed no size selected at all - every card unhighlighted, because the selected one
+    /// was the locked card - and Start would then begin a grid the phone had just refused to
+    /// offer. <see cref="GameSettings.Sanitised"/> cannot do this: whether a size is playable
+    /// depends on the screen, which the domain has no business knowing about.
+    /// </remarks>
+    private int LargestPlayableSize(int remembered)
+    {
+        if (!GridSize.RequiresLargeScreen(remembered) || _screen.IsLargeScreen)
+        {
+            return remembered;
+        }
+
+        var best = GridSize.Tiny;
+
+        foreach (var size in GridSize.All)
+        {
+            if (!GridSize.RequiresLargeScreen(size) && size > best)
+            {
+                best = size;
+            }
+        }
+
+        return best;
     }
 
     protected override void OnLanguageChangedCore() => BuildOptions();

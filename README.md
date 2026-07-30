@@ -39,13 +39,21 @@ screen. A finished puzzle deletes its own save, so Continue never offers a solve
 Saves store the player's marks and a seed — never the picture — so a generated puzzle is
 rebuilt rather than stored.
 
-**That makes generated saves sensitive to generator changes**, and there is no protection yet: a
-seed reconstructs whatever the current generator produces, so after a change to
-`BlobPuzzleGenerator` an existing generated save restores the player's marks onto a *different*
-picture. Nothing crashes — the marks are simply wrong against the new clues. Authored puzzles are
-unaffected, since they are stored content rather than a seed. The fix is a generator version
-recorded alongside the seed, with mismatched saves treated as unresumable; until that exists,
-tuning the generator means discarding generated saves.
+**That makes generated saves sensitive to generator changes**, so each one records the algorithm
+that produced it. A seed only means a picture while the generator still turns it into that
+picture; change the algorithm and the marks come back attached to a board the player never saw.
+Nothing crashes, which is exactly what makes it worth guarding.
+
+- `GeneratorVersion.Current` identifies the algorithm. **Bump it whenever a change alters what any
+  seed produces** — including changes that look cosmetic, like a different radius or one extra
+  draw from the random source, because the seed's meaning is the whole algorithm.
+- `SavedGame.CanBeRebuilt` is the rule: authored puzzles always can, generated ones only at the
+  current version. Not "older than" — a database written by a newer build is equally unrebuildable
+  by this one.
+- `PurgeUnrebuildableAsync` runs **once at startup**, before the menu can show a count or Continue
+  can list anything, so those two can never disagree about how many games are waiting.
+
+Authored saves are unaffected: they are shipped content looked up by id, and carry version 0.
 
 The Gallery doubles as a picture picker (reached from New Game, as in the prototype). Nothing
 in it leaks an unsolved answer: unfound cards draw a uniform grid of blank tiles rather than

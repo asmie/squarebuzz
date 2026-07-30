@@ -30,6 +30,96 @@ public class SaveGameRepositoryTests
     };
 
     [Fact]
+    public async Task GeneratorVersion_SurvivesTheRoundTrip()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+        var id = Guid.NewGuid();
+
+        await repository.SaveAsync(SampleSave(id, Noon, puzzleId: null) with
+        {
+            GeneratorVersion = GeneratorVersion.Current,
+        });
+
+        var reloaded = await repository.GetAsync(id);
+
+        Assert.NotNull(reloaded);
+        Assert.Equal(GeneratorVersion.Current, reloaded.GeneratorVersion);
+        Assert.True(reloaded.CanBeRebuilt);
+    }
+
+    [Fact]
+    public async Task Purge_RemovesGeneratedSavesFromAnotherGeneratorAndKeepsEverythingElse()
+    {
+        // The reason this exists: a generated save stores a seed, not the picture. Resuming one
+        // written by a different generator puts the player's marks on a board they never played.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+
+        var stale = Guid.NewGuid();
+        var current = Guid.NewGuid();
+        var authored = Guid.NewGuid();
+        var newer = Guid.NewGuid();
+
+        await repository.SaveAsync(SampleSave(stale, Noon, puzzleId: null) with
+        {
+            GeneratorVersion = GeneratorVersion.Unknown,
+        });
+        await repository.SaveAsync(SampleSave(current, Noon, puzzleId: null) with
+        {
+            GeneratorVersion = GeneratorVersion.Current,
+        });
+        await repository.SaveAsync(SampleSave(authored, Noon, puzzleId: "heart"));
+
+        // A database touched by a future build is no more rebuildable than an older one.
+        await repository.SaveAsync(SampleSave(newer, Noon, puzzleId: null) with
+        {
+            GeneratorVersion = GeneratorVersion.Current + 1,
+        });
+
+        var removed = await repository.PurgeUnrebuildableAsync();
+
+        Assert.Equal(2, removed);
+        Assert.Null(await repository.GetAsync(stale));
+        Assert.Null(await repository.GetAsync(newer));
+        Assert.NotNull(await repository.GetAsync(current));
+        Assert.NotNull(await repository.GetAsync(authored));
+    }
+
+    [Fact]
+    public async Task Purge_OnAnEmptyDatabase_RemovesNothing()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+
+        Assert.Equal(0, await repository.PurgeUnrebuildableAsync());
+    }
+
+    [Fact]
+    public async Task ASavedSession_CarriesTheGeneratorThatBuiltIt()
+    {
+        // End to end rather than by hand: the version has to be stamped where sessions become
+        // saves, or every save would report Unknown and be purged on the next launch.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+        var factory = NewFactory();
+
+        var generated = factory.Create(new NewGameOptions(5, 2, "surprise", ChallengeLevel.Relaxed)
+        {
+            Seed = 4242,
+            ForceGenerated = true,
+        });
+
+        await repository.SaveAsync(SavedGame.FromSession(generated, Guid.NewGuid(), Noon));
+
+        var reloaded = Assert.Single(await repository.GetAllAsync());
+
+        Assert.True(reloaded.IsGenerated);
+        Assert.Equal(GeneratorVersion.Current, reloaded.GeneratorVersion);
+        Assert.Equal(0, await repository.PurgeUnrebuildableAsync());
+    }
+
+    [Fact]
     public async Task NoSaves_OnFirstRun()
     {
         await using var temp = new TemporaryDatabase();

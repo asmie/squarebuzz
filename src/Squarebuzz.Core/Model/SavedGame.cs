@@ -39,7 +39,24 @@ public sealed record SavedGame
 
     public required DateTimeOffset SavedAt { get; init; }
 
+    /// <summary>
+    /// Generation algorithm that produced this puzzle, or <see cref="GeneratorVersion.Unknown"/>
+    /// for an authored one and for saves written before versioning existed.
+    /// </summary>
+    public int GeneratorVersion { get; init; } = Generation.GeneratorVersion.Unknown;
+
     public bool IsGenerated => PuzzleId is null;
+
+    /// <summary>
+    /// True when the picture this save refers to can still be reproduced.
+    /// </summary>
+    /// <remarks>
+    /// An authored puzzle is shipped content, so it always can. A generated one only can while the
+    /// generator still turns its seed into the same picture - see
+    /// <see cref="Generation.GeneratorVersion"/>. Resuming a save that fails this test would put
+    /// the player's marks on a board they never played.
+    /// </remarks>
+    public bool CanBeRebuilt => !IsGenerated || GeneratorVersion == Generation.GeneratorVersion.Current;
 
     /// <summary>Filled cells so far, for the "in progress" thumbnail on the Continue screen.</summary>
     public int FilledCount => Cells.Count(c => c == CellState.Filled);
@@ -72,6 +89,11 @@ public sealed record SavedGame
             HintsRemaining = session.HintsRemaining,
             Mistakes = session.Mistakes,
             SavedAt = savedAt,
+
+            // Only a generated picture depends on the algorithm; an authored one is content.
+            GeneratorVersion = session.Puzzle.IsGenerated
+                ? Generation.GeneratorVersion.Current
+                : Generation.GeneratorVersion.Unknown,
         };
     }
 }

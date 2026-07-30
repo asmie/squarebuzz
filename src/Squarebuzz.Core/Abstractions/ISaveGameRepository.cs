@@ -18,4 +18,15 @@ public interface ISaveGameRepository
     Task DeleteAllAsync(CancellationToken cancellationToken = default);
 
     Task<int> CountAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes saves whose picture can no longer be reproduced, returning how many went.
+    /// </summary>
+    /// <remarks>
+    /// A generated save holds a seed, not the picture, so it stops meaning anything once the
+    /// generator changes - see <see cref="Model.SavedGame.CanBeRebuilt"/>. Run once at startup
+    /// rather than filtered at each call site, so that the count on the menu and the list on the
+    /// Continue screen cannot disagree about how many games are waiting.
+    /// </remarks>
+    Task<int> PurgeUnrebuildableAsync(CancellationToken cancellationToken = default);
 }

@@ -86,6 +86,13 @@ internal sealed class SavedGameEntity
 
     [Column("saved_at_offset_ticks")]
     public long SavedAtOffsetTicks { get; set; }
+
+    /// <summary>
+    /// Generation algorithm that produced the picture. Zero means "written before this column
+    /// existed", which is treated as unrebuildable rather than assumed to be version 1.
+    /// </summary>
+    [Column("generator_version")]
+    public int GeneratorVersion { get; set; }
 }
 
 /// <summary>The player's standing. Exactly one row, pinned to <see cref="SingletonId"/>.</summary>

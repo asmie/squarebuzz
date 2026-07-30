@@ -33,6 +33,66 @@ public class SavedGameResolutionTests
     };
 
     [Fact]
+    public void AnAuthoredSave_CanAlwaysBeRebuilt()
+    {
+        // Authored puzzles are shipped content looked up by id, so no change to the generator can
+        // invalidate them - including the default Unknown version that older rows carry.
+        Assert.True(Save("heart", 5, seed: 1).CanBeRebuilt);
+
+        Assert.True((Save("heart", 5, seed: 1) with { GeneratorVersion = GeneratorVersion.Unknown }).CanBeRebuilt);
+        Assert.True((Save("heart", 5, seed: 1) with { GeneratorVersion = 99 }).CanBeRebuilt);
+    }
+
+    [Theory]
+    [InlineData(GeneratorVersion.Unknown, false)]
+    [InlineData(GeneratorVersion.Current, true)]
+    [InlineData(GeneratorVersion.Current + 1, false)]
+    [InlineData(GeneratorVersion.Current - 1, false)]
+    public void AGeneratedSave_CanOnlyBeRebuiltByTheGeneratorThatMadeIt(int version, bool expected)
+    {
+        // Not "older than": a save written by a newer build is equally unrebuildable here, because
+        // this build cannot reproduce a picture from an algorithm it does not have.
+        var save = Save(puzzleId: null, 10, seed: 7) with { GeneratorVersion = version };
+
+        Assert.Equal(expected, save.CanBeRebuilt);
+    }
+
+    [Fact]
+    public void AGeneratedSession_RecordsTheGeneratorVersion()
+    {
+        var factory = NewFactory();
+
+        var session = factory.Create(new NewGameOptions(5, 2, "surprise", ChallengeLevel.Relaxed)
+        {
+            Seed = 99,
+            ForceGenerated = true,
+        });
+
+        var save = SavedGame.FromSession(session, Guid.NewGuid(), SavedAt);
+
+        Assert.True(save.IsGenerated);
+        Assert.Equal(GeneratorVersion.Current, save.GeneratorVersion);
+        Assert.True(save.CanBeRebuilt);
+    }
+
+    [Fact]
+    public void AnAuthoredSession_LeavesTheGeneratorVersionUnset()
+    {
+        var factory = NewFactory();
+
+        var session = factory.Create(new NewGameOptions(5, 2, "animals", ChallengeLevel.Relaxed)
+        {
+            PuzzleId = "heart",
+        });
+
+        var save = SavedGame.FromSession(session, Guid.NewGuid(), SavedAt);
+
+        Assert.False(save.IsGenerated);
+        Assert.Equal(GeneratorVersion.Unknown, save.GeneratorVersion);
+        Assert.True(save.CanBeRebuilt);
+    }
+
+    [Fact]
     public void AnAuthoredSave_ResolvesToTheSameStoredPicture()
     {
         var factory = NewFactory();

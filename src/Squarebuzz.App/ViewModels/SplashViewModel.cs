@@ -23,6 +23,7 @@ public partial class SplashViewModel : LocalizedViewModel
     private readonly IScreenTimeMonitor _screenTime;
     private readonly IAudioService _audio;
     private readonly INarrationService _narration;
+    private readonly ISaveGameRepository _saveGames;
 
     public SplashViewModel(
         ILocalizationService strings,
@@ -31,7 +32,8 @@ public partial class SplashViewModel : LocalizedViewModel
         INavigationService navigation,
         IScreenTimeMonitor screenTime,
         IAudioService audio,
-        INarrationService narration)
+        INarrationService narration,
+        ISaveGameRepository saveGames)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
@@ -40,6 +42,7 @@ public partial class SplashViewModel : LocalizedViewModel
         _screenTime = screenTime;
         _audio = audio;
         _narration = narration;
+        _saveGames = saveGames;
     }
 
     /// <summary>0 to 1, so it binds straight to <c>ProgressBar.Progress</c> with no converter.</summary>
@@ -68,6 +71,18 @@ public partial class SplashViewModel : LocalizedViewModel
         await _navigation.ResetToAsync(settings.HasSeenOnboarding ? Routes.Menu : Routes.Onboarding);
     }
 
+    private async Task PurgeUnrebuildableSavesAsync()
+    {
+        try
+        {
+            await _saveGames.PurgeUnrebuildableAsync();
+        }
+        catch (Exception)
+        {
+            // Worst case a stale save survives to confuse someone. Not worth blocking startup.
+        }
+    }
+
     private async Task<Core.Model.GameSettings> LoadSettingsAsync()
     {
         try
@@ -89,6 +104,11 @@ public partial class SplashViewModel : LocalizedViewModel
             // awaited: it is the difference between the first tap on a cell being silent and
             // being audible.
             await _audio.PrimeAsync();
+
+            // Once per launch, before the menu can show a count or Continue can list anything.
+            // A generated save whose picture the current generator no longer produces would put
+            // the player's marks on a board they never played, so it goes.
+            await PurgeUnrebuildableSavesAsync();
 
             // Enumerating the device's voices is the slowest of these, and it has to finish
             // before the first onboarding card appears - that card is the one screen where a

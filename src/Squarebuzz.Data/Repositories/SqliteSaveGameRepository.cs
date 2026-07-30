@@ -1,4 +1,5 @@
 using Squarebuzz.Core.Abstractions;
+using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Data.Entities;
 
@@ -85,6 +86,21 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         return await connection.Table<SavedGameEntity>().CountAsync().ConfigureAwait(false);
     }
 
+    public async Task<int> PurgeUnrebuildableAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
+
+        // Generated puzzles only: an authored one is looked up by id, so it survives any change to
+        // the generator. The comparison is against equality rather than "older than", because a
+        // database written by a newer build is just as unrebuildable by this one.
+        return await connection.ExecuteAsync(
+                "DELETE FROM saved_game WHERE puzzle_id IS NULL AND generator_version <> ?",
+                GeneratorVersion.Current)
+            .ConfigureAwait(false);
+    }
+
     private static SavedGameEntity ToEntity(SavedGame game)
     {
         var cells = new byte[game.Cells.Count];
@@ -108,6 +124,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             Mistakes = game.Mistakes,
             SavedAtUtcTicks = game.SavedAt.UtcTicks,
             SavedAtOffsetTicks = game.SavedAt.Offset.Ticks,
+            GeneratorVersion = game.GeneratorVersion,
         };
     }
 
@@ -141,6 +158,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             Mistakes = row.Mistakes,
             SavedAt = new DateTimeOffset(row.SavedAtUtcTicks, TimeSpan.Zero)
                 .ToOffset(new TimeSpan(row.SavedAtOffsetTicks)),
+            GeneratorVersion = row.GeneratorVersion,
         };
     }
 }
