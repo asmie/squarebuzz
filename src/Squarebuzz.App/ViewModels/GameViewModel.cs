@@ -20,6 +20,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Route parameter naming the save to resume.</summary>
     public const string SaveIdParameter = "saveId";
 
+    /// <summary>Route parameter naming a specific picture to play, as the Gallery does.</summary>
+    public const string PuzzleIdParameter = "puzzleId";
+
     /// <summary>
     /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
     /// only a few moves, rare enough that it never competes with drawing.
@@ -40,6 +43,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private Guid _saveId = Guid.NewGuid();
 
     private Guid? _pendingResumeId;
+    private string? _pendingPuzzleId;
     private int _secondsSinceAutosave;
 
     public GameViewModel(
@@ -178,6 +182,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         {
             _pendingResumeId = id;
         }
+
+        if (query.TryGetValue(PuzzleIdParameter, out var puzzleId)
+            && puzzleId?.ToString() is { Length: > 0 } picked)
+        {
+            _pendingPuzzleId = picked;
+        }
     }
 
     /// <summary>
@@ -198,7 +208,31 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             // rather than leaving the player on an empty board.
         }
 
+        if (_pendingPuzzleId is { } chosen)
+        {
+            _pendingPuzzleId = null;
+
+            // The chosen picture overrides size and pack; those are still carried so the save
+            // record and a later "Next" keep the player's other preferences.
+            _settings = await LoadSettingsSafelyAsync();
+            await StartAsync(_settings.ToNewGameOptions() with { PuzzleId = chosen, Seed = null });
+            return;
+        }
+
         await StartAsync();
+    }
+
+    private async Task<GameSettings> LoadSettingsSafelyAsync()
+    {
+        try
+        {
+            return await _settingsRepository.LoadAsync();
+        }
+        catch (Exception)
+        {
+            // Defaults get the player into a game; Options can put things right.
+            return GameSettings.Default;
+        }
     }
 
     private async Task<bool> TryResumeAsync(Guid id)
@@ -268,14 +302,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
     {
-        try
-        {
-            _settings = await _settingsRepository.LoadAsync();
-        }
-        catch (Exception)
-        {
-            _settings = GameSettings.Default;
-        }
+        _settings = await LoadSettingsSafelyAsync();
 
         // A null seed means "surprise me", so replaying gives a different picture rather than
         // the same one over and over.

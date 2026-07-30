@@ -49,7 +49,7 @@
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="12" />
                                 </Border.StrokeShape>
-                                <controls:PuzzleArtView Puzzle="{Binding Puzzle}" Marks="{Binding Marks}" Margin="6" />
+                                <controls:PuzzleArtView Puzzle="{Binding Puzzle}" Marks="{Binding Marks}" InputTransparent="True" Margin="6" />
                             </Border>
 
                             <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">

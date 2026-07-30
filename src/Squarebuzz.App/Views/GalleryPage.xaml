@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
+             x:Class="Squarebuzz.App.Views.GalleryPage"
+             x:DataType="vm:GalleryViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <ContentPage.Resources>
+        <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
+        <conv:BoolSelectConverter x:Key="CardStroke"
+                                  TrueValue="{StaticResource Gold}"
+                                  FalseValue="{StaticResource Line}" />
+    </ContentPage.Resources>
+
+    <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,*" RowSpacing="10">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="2">
+            <Label Text="{Binding Heading}" Style="{StaticResource H1}" />
+            <Label Text="{Binding FoundSummary}" Style="{StaticResource Subtle}" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Cards}" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <!-- Two across on a phone: any narrower and the art stops reading as a picture. -->
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="2"
+                                 HorizontalItemSpacing="10"
+                                 VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:GalleryCard">
+                    <Border BackgroundColor="{DynamicResource Surface}"
+                            Stroke="{Binding IsFound, Converter={StaticResource CardStroke}}"
+                            StrokeThickness="3"
+                            Padding="10"
+                            Opacity="{Binding Opacity}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="22" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GalleryViewModel}}, Path=PlayCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="6">
+                            <!-- InputTransparent is essential: a GraphicsView consumes touches,
+                                 so without it tapping the picture - the obvious target - does
+                                 nothing and only the caption area opens the puzzle. -->
+                            <controls:PuzzleArtView Puzzle="{Binding Puzzle}"
+                                                    IsMasked="{Binding IsMasked}"
+                                                    InputTransparent="True"
+                                                    HeightRequest="110" />
+
+                            <Label Text="{Binding Name}"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   LineBreakMode="TailTruncation" />
+
+                            <Label Text="{Binding Stars}"
+                                   TextColor="{DynamicResource Gold}"
+                                   FontSize="14"
+                                   HorizontalTextAlignment="Center"
+                                   IsVisible="{Binding IsFound}" />
+
+                            <Label Style="{StaticResource Subtle}"
+                                   FontSize="11"
+                                   HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Size}" />
+                                        <Span Text=" · " />
+                                        <Span Text="{Binding FoundOn}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Text="{Binding LockedLabel}"
+                                   IsVisible="{Binding IsLocked}"
+                                   Style="{StaticResource Subtle}"
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

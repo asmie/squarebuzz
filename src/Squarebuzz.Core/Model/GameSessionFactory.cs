@@ -101,6 +101,14 @@ public sealed class GameSessionFactory
 
     private Puzzle SelectPuzzle(NewGameOptions options, int seed)
     {
+        // An explicit pick wins over size and pack - that is the whole point of choosing from
+        // the Gallery. A missing id falls through rather than failing, so removing content
+        // cannot strand a player on an error.
+        if (options.PuzzleId is { } requested && _repository.FindById(requested) is { } picked)
+        {
+            return picked;
+        }
+
         if (GridSize.IsAuthored(options.Size))
         {
             var candidates = _repository.Find(options.PackId, options.Size);

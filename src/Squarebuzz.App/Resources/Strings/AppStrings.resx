@@ -196,4 +196,5 @@
   <data name="magnifier" xml:space="preserve"><value>Magnifier</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Shows a zoomed 3×3 view while you paint. Off by default.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Ask a grown-up</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} of {1} found</value></data>
 </root>

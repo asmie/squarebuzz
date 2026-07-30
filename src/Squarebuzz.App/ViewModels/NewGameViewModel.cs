@@ -122,6 +122,8 @@ public partial class NewGameViewModel : LocalizedViewModel
 
     public string StartLabel => T("start");
 
+    public string GalleryLabel => T("gallery");
+
     public string ChallengeNote => IsSharp ? T("sharpSub") : T("relaxedSub");
 
     public override async Task OnAppearingAsync()
@@ -248,6 +250,13 @@ public partial class NewGameViewModel : LocalizedViewModel
         SelectedChallenge = string.Equals(level, "sharp", StringComparison.OrdinalIgnoreCase)
             ? ChallengeLevel.Sharp
             : ChallengeLevel.Relaxed;
+
+    /// <summary>
+    /// Opens the gallery, which doubles as a picture picker - the prototype reached it from this
+    /// screen for the same reason.
+    /// </summary>
+    [RelayCommand]
+    private async Task OpenGalleryAsync() => await _navigation.GoToAsync(Routes.Gallery);
 
     [RelayCommand]
     private async Task StartAsync()

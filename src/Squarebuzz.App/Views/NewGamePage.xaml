@@ -21,7 +21,9 @@
 
     <Grid RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="{StaticResource PagePadding}"
+            <!-- Bottom padding clears the pinned footer, which would otherwise cover the last
+                 row of pack chips once the content is scrolled to the end. -->
+            <VerticalStackLayout Padding="18,18,18,140"
                                  Spacing="24"
                                  MaximumWidthRequest="{StaticResource FrameMaxWidth}"
                                  HorizontalOptions="Center">
@@ -175,13 +177,18 @@
         </ScrollView>
 
         <!-- Pinned so Start is always reachable without scrolling back down. -->
-        <Button Grid.Row="1"
-                Text="{Binding StartLabel}"
+        <VerticalStackLayout Grid.Row="1" Spacing="8" Margin="{StaticResource PagePadding}">
+            <Button Text="{Binding GalleryLabel}"
+                    Command="{Binding OpenGalleryCommand}"
+                    Style="{StaticResource SecondaryButton}"
+                    HeightRequest="50"
+                    FontSize="15" />
+            <Button Text="{Binding StartLabel}"
                 Command="{Binding StartCommand}"
                 Style="{StaticResource PrimaryButton}"
                 HeightRequest="60"
-                FontSize="19"
-                Margin="{StaticResource PagePadding}" />
+                FontSize="19" />
+        </VerticalStackLayout>
     </Grid>
 
 </ContentPage>

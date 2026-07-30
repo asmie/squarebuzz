@@ -27,12 +27,16 @@ Dependencies flow strictly `App → Data → Core`. Core depends on nothing.
 
 | Built | Scaffolded (shared `ComingSoonPage`) |
 |---|---|
-| Splash, Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue | Trials, About, Gallery, How to Play |
+| Splash, Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery | Trials, About, How to Play |
 
 Games autosave every 15 seconds while playing, plus on pause, on quit and on leaving the
 screen. A finished puzzle deletes its own save, so Continue never offers a solved board.
 Saves store the player's marks and a seed — never the picture — so a generated puzzle is
 rebuilt rather than stored.
+
+The Gallery doubles as a picture picker (reached from New Game, as in the prototype). Nothing
+in it leaks an unsolved answer: unfound cards draw a uniform grid of blank tiles rather than
+the solution in a muted colour, and Continue thumbnails draw the player's own marks.
 
 Pause and Complete are overlays on the board rather than separate routes, so the in-progress
 session never has to be serialised across a navigation just to show a summary over it.

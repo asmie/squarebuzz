@@ -22,5 +22,15 @@ public sealed record NewGameOptions(
     /// </summary>
     public int? Seed { get; init; }
 
+    /// <summary>
+    /// Play this exact authored picture rather than letting the size and pack choose one.
+    /// </summary>
+    /// <remarks>
+    /// Set by the Gallery, where the player picks a specific picture. Takes precedence over
+    /// <see cref="PackId"/> and <see cref="Size"/>, which are then only carried through for the
+    /// save record. Ignored if no picture with that id ships.
+    /// </remarks>
+    public string? PuzzleId { get; init; }
+
     public static NewGameOptions Default { get; } = new(GridSize.Tiny, 2, "animals", ChallengeLevel.Relaxed);
 }

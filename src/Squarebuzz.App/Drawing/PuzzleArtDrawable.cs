@@ -27,7 +27,15 @@ public sealed class PuzzleArtDrawable : IDrawable
     /// </remarks>
     public IReadOnlyList<CellState>? Marks { get; set; }
 
-    /// <summary>Hides the picture behind placeholder blocks, for unsolved gallery entries.</summary>
+    /// <summary>
+    /// Hides the picture completely, for gallery entries the player has not found yet.
+    /// </summary>
+    /// <remarks>
+    /// Draws a full grid of blank tiles rather than the solution in a muted colour. Recolouring
+    /// the real shape would leave the silhouette perfectly readable - a "???" caption over a
+    /// recognisable heart tells the child both what the picture is and which cells to fill,
+    /// which is the entire puzzle given away.
+    /// </remarks>
     public bool IsMasked { get; set; }
 
     /// <summary>0 to 1. Cells appear progressively, giving the reveal its sweep.</summary>
@@ -70,9 +78,12 @@ public sealed class PuzzleArtDrawable : IDrawable
             {
                 var index = puzzle.IndexOf(x, y);
 
-                var isDrawn = Marks is { } marks
-                    ? index < marks.Count && marks[index] == CellState.Filled
-                    : puzzle.IsFilled(x, y);
+                // Masked cards fill every cell, so the grid carries no information about the
+                // shape hiding behind it.
+                var isDrawn = IsMasked
+                              || (Marks is { } marks
+                                  ? index < marks.Count && marks[index] == CellState.Filled
+                                  : puzzle.IsFilled(x, y));
 
                 if (!isDrawn || index > revealCutoff)
                 {
@@ -80,8 +91,10 @@ public sealed class PuzzleArtDrawable : IDrawable
                 }
 
                 // Interior shading needs the true shape, so it only applies when drawing the
-                // finished picture. Partial progress has no meaningful interior yet.
-                canvas.FillColor = Marks is null && IsInterior(puzzle, x, y) ? interiorColour : artColour;
+                // finished picture. Partial progress and masked cards have no interior.
+                canvas.FillColor = !IsMasked && Marks is null && IsInterior(puzzle, x, y)
+                    ? interiorColour
+                    : artColour;
                 canvas.FillRoundedRectangle(offsetX + (x * step), offsetY + (y * step), cell, cell, radius);
             }
         }
