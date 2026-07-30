@@ -180,13 +180,56 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// switching hands mid-game did nothing. Only a screenshot showed that.
     /// </para>
     /// </remarks>
-    public int UndoColumn => IsRightHanded ? 3 : 0;
+    public int UndoColumn => ColumnFor(UndoOrder);
 
-    public int RedoColumn => IsRightHanded ? 2 : 1;
+    public int RedoColumn => ColumnFor(RedoOrder);
 
-    public int HintColumn => IsRightHanded ? 1 : 2;
+    public int HintColumn => ColumnFor(HintOrder);
 
-    public int RestartColumn => IsRightHanded ? 0 : 3;
+    public int RestartColumn => ColumnFor(RestartOrder);
+
+    public int UndoRow => RowFor(UndoOrder);
+
+    public int RedoRow => RowFor(RedoOrder);
+
+    public int HintRow => RowFor(HintOrder);
+
+    public int RestartRow => RowFor(RestartOrder);
+
+    /// <summary>
+    /// True on a wide landscape screen, where the play column becomes a row.
+    /// </summary>
+    /// <remarks>
+    /// Set by the page from its own measured size, because MAUI has no media queries. The design
+    /// doc's scaling note is the source of the rule: "Above 900 px in landscape the play column
+    /// becomes a row", with cell size computed from the free rectangle rather than hard-coded.
+    /// </remarks>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(
+        nameof(UndoColumn), nameof(RedoColumn), nameof(HintColumn), nameof(RestartColumn),
+        nameof(UndoRow), nameof(RedoRow), nameof(HintRow), nameof(RestartRow))]
+    public partial bool IsWideLayout { get; set; }
+
+    /// <summary>
+    /// Which side the controls column takes in the wide layout - the hand's side, so the buttons
+    /// are under the thumb that is already holding that edge of the tablet.
+    /// </summary>
+    public bool IsWideControlsOnRight => IsRightHanded;
+
+    // Position of each button in reading order once handedness has been applied.
+    private int UndoOrder => IsRightHanded ? 3 : 0;
+
+    private int RedoOrder => IsRightHanded ? 2 : 1;
+
+    private int HintOrder => IsRightHanded ? 1 : 2;
+
+    private int RestartOrder => IsRightHanded ? 0 : 3;
+
+    // One row of four across the bottom, or a 2x2 block in the side column - where four buttons
+    // in a row would leave each of them too narrow for its label.
+    private int ColumnFor(int order) => IsWideLayout ? order % 2 : order;
+
+    private int RowFor(int order) => IsWideLayout ? order / 2 : 0;
 
     private bool IsRightHanded => _settings.Handedness == Handedness.Right;
 

@@ -46,6 +46,43 @@ the solution in a muted colour, and Continue thumbnails draw the player's own ma
 Pause and Complete are overlays on the board rather than separate routes, so the in-progress
 session never has to be serialised across a navigation just to show a summary over it.
 
+## Large screens
+
+The design doc's scaling note is the rule: *"Above 900 px in landscape the play column becomes a
+row … Cell size is computed from the free rectangle, not hard-coded."* `GamePage.ApplyLayout`
+implements it — on a wide landscape screen the board takes the left column at full height and the
+action buttons move into a 320-unit side column as a 2×2 block, on the side the Handedness setting
+puts them. It is done in code, from the page's own measured size, because MAUI has no media
+queries; and by rearranging **one** visual tree rather than switching between two, since the board
+is a stateful control holding the live session.
+
+That matters more than it sounds: with the controls beneath it, a 25×25 in landscape was squeezed
+to roughly half the cell size it can now use.
+
+**Deviation from the doc:** it puts a mini-map and clue helpers in the right-hand column and keeps
+the toolbar at the bottom edge. Neither of those exists, and on a tablet the whole board is
+visible at once so a mini-map would show nothing new — the controls go there instead.
+
+25×25 "Giant" is unlocked by `IDeviceScreen.IsLargeScreen` (≥760 units, or a tablet/desktop
+idiom), and shown locked with a "Tablet" caption on phones rather than hidden, as the doc asks.
+Android also lets tablets rotate freely while phones stay portrait (`MainActivity`), and the
+activity handles the configuration change itself so rotating never recreates it and loses the
+board.
+
+No tablet AVD is installed here, so this was exercised by reconfiguring the running emulator —
+which is enough, because the app's own tablet test is `SmallestScreenWidthDp >= 600`:
+
+```bash
+adb shell wm size 1600x2560 && adb shell wm density 320   # then relaunch the app
+adb shell settings put system accelerometer_rotation 0
+adb shell settings put system user_rotation 1             # landscape
+adb shell wm size reset && adb shell wm density reset
+```
+
+Verified that way: Giant unlocks, a 25×25 generates in about 4 seconds and renders whole, the
+wide layout appears in landscape and reverts in portrait, the session survives both rotations,
+and the phone layout is unchanged.
+
 ## Daily puzzle and trophies
 
 Trials holds today's puzzle and the trophy cabinet.

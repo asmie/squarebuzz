@@ -9,12 +9,19 @@
 
     <!-- Outer grid layers the pause and win overlays over the board. -->
     <Grid>
-    <Grid RowDefinitions="Auto,*,Auto"
+    <!--
+      Row layout on a phone, and a two-column layout on a wide landscape screen - see
+      GamePage.ApplyLayout. The definitions and the children's positions are set from code
+      because MAUI has no media queries.
+    -->
+    <Grid x:Name="PlayLayout"
+          RowDefinitions="Auto,*,Auto"
           Padding="{StaticResource PagePadding}"
-          RowSpacing="12">
+          RowSpacing="12"
+          ColumnSpacing="16">
 
         <!-- Status bar: picture name, counters, timer, pause -->
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+        <Grid x:Name="StatusBar" Grid.Row="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
             <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
                 <Label Text="{Binding PuzzleName}" Style="{StaticResource H2}"
                        SemanticProperties.HeadingLevel="Level1" />
@@ -100,7 +107,7 @@
         </Border>
 
         <!-- Controls -->
-        <VerticalStackLayout Grid.Row="2" Spacing="10">
+        <VerticalStackLayout x:Name="ControlsPanel" Grid.Row="2" Spacing="10">
 
             <Label Text="{Binding Toast}"
                    IsVisible="{Binding HasToast}"
@@ -113,8 +120,9 @@
               Columns come from the ViewModel so the Handedness setting can reorder the row -
               see GameViewModel.UndoColumn for why this is not FlowDirection.
             -->
-            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+            <Grid x:Name="ActionGrid" ColumnDefinitions="*,*,*,*" ColumnSpacing="8" RowSpacing="8">
                 <Button Grid.Column="{Binding UndoColumn}"
+                        Grid.Row="{Binding UndoRow}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
@@ -123,6 +131,7 @@
                         Text="{Binding UndoText}" />
 
                 <Button Grid.Column="{Binding RedoColumn}"
+                        Grid.Row="{Binding RedoRow}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
@@ -131,6 +140,7 @@
                         Text="{Binding RedoText}" />
 
                 <Button Grid.Column="{Binding HintColumn}"
+                        Grid.Row="{Binding HintRow}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
@@ -138,6 +148,7 @@
                         Text="{Binding HintText}" />
 
                 <Button Grid.Column="{Binding RestartColumn}"
+                        Grid.Row="{Binding RestartRow}"
                         Style="{StaticResource SecondaryButton}"
                         FontSize="13"
                         Padding="4,0"
