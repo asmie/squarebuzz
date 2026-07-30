@@ -335,10 +335,31 @@ screen, and neither would fail a test that did not know to look.
 | `ios` | **macos** | iOS cannot be built on a Windows dev machine, so without this an iOS-only break would go unnoticed until release. Builds the simulator target, which links the real thing without needing a signing identity. |
 | `app-warnings` | windows | The MAUI head relaxes warnings-as-errors for generated code; this re-builds it with `-warnaserror` so app-layer warnings still fail the build. |
 
-**It has never actually run.** Nothing has been pushed, so every statement below comes from
-auditing the workflow against the repository and running each job's commands locally — not from a
-green tick. Three failures were found and fixed that way, all of which would have hit on the
-first push:
+### Reproducing CI locally
+
+**CI builds a clean checkout; a local build is incremental.** That difference hides analyser
+failures completely: analysers only run when a file is actually compiled, so a rule that would fail
+the build stays silent for as long as the outputs are up to date. The first real CI run failed on
+`CA1707` in both `domain` jobs while every local build had been green for weeks.
+
+The faithful reproduction is to build from what git actually has, not from the working directory:
+
+```bash
+git archive HEAD -o /tmp/head.zip && unzip -q /tmp/head.zip -d /tmp/head && cd /tmp/head
+```
+
+That catches both halves of the problem at once — analysers running from scratch, and **files that
+exist on disk but were never committed**. The `CA1707` failure was exactly the latter: the
+suppression lived only in `.editorconfig`, which had never been `git add`ed. Build behaviour must
+come from files the build owns, so it now lives in the test `.csproj` files instead, and
+`.editorconfig` is editor style only.
+
+`-t:Rebuild` forces the analysers to run but will not tell you about an uncommitted file.
+
+### The first run
+
+Three failures were found before it ever ran, by auditing the workflow and running each job's
+commands locally, and all three would have hit on the first push:
 
 - `dotnet restore a.csproj b.csproj` — MSBuild takes **one** project and rejects the second as an
   unknown switch (MSB1008), so the `domain` job died at its first real step on both runners.
@@ -351,10 +372,15 @@ first push:
 - `dotnet-quality: preview` pinned the SDK to a pre-release build of a framework that has since
   shipped. Removed; `10.0.x` resolves to the latest release.
 
+Then it ran for real, and failed — see above. One cause, one job: `CA1707` broke `domain` on both
+runners. `android` and `app-warnings` were unaffected, and both still build from a clean checkout
+with no `.editorconfig`.
+
 What is verified locally, on Windows: the `domain` job's full sequence including the trx
 artifacts, the `android` job's build and that `*-Signed.apk` matches what it produces, and the
-`app-warnings` build. What is **not** verified: anything ubuntu-specific in `domain`, the whole
-`ios` job, and every `dotnet workload install` step — none of which can run here.
+`app-warnings` build — all from a clean export of what git holds. What is **not** verified:
+anything ubuntu-specific in `domain`, the whole `ios` job, and every `dotnet workload install`
+step — none of which can run here.
 
 There is no `global.json`, so CI takes the latest 10.0.x while this machine builds on
 `10.0.400-preview`. Pinning would make them agree but constrains the local toolchain, so it is

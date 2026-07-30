@@ -8,6 +8,15 @@
     <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+
+    <!--
+      Test names read Subject_Scenario_Expectation, which CA1707 objects to because it is a rule
+      about public API surface. The suppression lives here rather than only in .editorconfig
+      because the solution builds with warnings as errors: an .editorconfig is an editor-style
+      file, and CI failed for real when it was absent from the checkout while every local build
+      kept passing. Build behaviour has to come from files the build owns.
+    -->
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
