@@ -372,9 +372,27 @@ commands locally, and all three would have hit on the first push:
 - `dotnet-quality: preview` pinned the SDK to a pre-release build of a framework that has since
   shipped. Removed; `10.0.x` resolves to the latest release.
 
-Then it ran for real, and failed — see above. One cause, one job: `CA1707` broke `domain` on both
-runners. `android` and `app-warnings` were unaffected, and both still build from a clean checkout
-with no `.editorconfig`.
+Then it ran for real, and failed in two independent ways.
+
+**`domain`, both runners:** `CA1707` — see above. `android` and `app-warnings` were unaffected.
+
+**`ios`:** not a code break at all.
+
+```
+error : This version of .NET for iOS (26.5.10301) requires Xcode 26.6.
+        The current version of Xcode is 26.5.
+```
+
+A .NET for iOS pack refuses to build against an Xcode older than the one it was built for, and the
+runner image's **default** Xcode lags the pack. Xcode 26.6 *was* installed on the image — just not
+selected. So the job now picks the newest Xcode present rather than pinning a version, which would
+need editing again the next time either side moves, and it logs the list of installed Xcodes so a
+future skew diagnoses itself. Pinning the workload instead would have been the wrong lever: nothing
+was wrong with the workload.
+
+Worth knowing for next time: `macos-latest` currently carries Xcode 26.0.1 through 26.6 with **26.5
+as default**, which is checkable without a Mac —
+`actions/runner-images/images/macos/macos-26-arm64-Readme.md` lists what each image has.
 
 What is verified locally, on Windows: the `domain` job's full sequence including the trx
 artifacts, the `android` job's build and that `*-Signed.apk` matches what it produces, and the

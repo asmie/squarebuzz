@@ -106,6 +106,30 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      # A .NET for iOS pack refuses to build against an Xcode older than the one it was built for,
+      # and the runner image's *default* Xcode lags the pack: the first run failed with "requires
+      # Xcode 26.6, the current version of Xcode is 26.5" even though 26.6 was installed alongside
+      # it. So select the newest Xcode present rather than pinning a version, which would need
+      # editing again the next time either side moves. The listing is deliberately logged: if this
+      # ever fails again, the log says exactly what the image had to offer.
+      - name: Select the newest Xcode on the runner
+        run: |
+          echo "Xcode versions on this runner:"
+          ls -d /Applications/Xcode*.app
+
+          newest="$(ls -d /Applications/Xcode_*.app 2>/dev/null \
+            | sed -E 's#.*/Xcode_(.+)\.app#\1#' \
+            | sort -t. -k1,1n -k2,2n -k3,3n | tail -n 1 || true)"
+
+          if [ -n "${newest:-}" ]; then
+            echo "Selecting Xcode ${newest}"
+            sudo xcode-select -s "/Applications/Xcode_${newest}.app"
+          else
+            echo "No versioned Xcode found; leaving the default in place."
+          fi
+
+          xcodebuild -version
+
       - name: Install MAUI iOS workload
         run: dotnet workload install maui-ios --skip-sign-check
 
