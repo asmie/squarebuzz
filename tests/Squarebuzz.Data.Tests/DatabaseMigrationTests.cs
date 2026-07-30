@@ -106,6 +106,55 @@ public class DatabaseMigrationTests
     }
 
     [Fact]
+    public async Task EveryMigrationAppliesOnTopOfTheOneBefore()
+    {
+        // The regression this guards: Migration0001 originally built its tables from the entity
+        // classes, so a fresh database silently gained columns that later migrations then tried
+        // to add again ("duplicate column name"). Applying the chain step by step, and writing
+        // through the repositories at the end, is what proves each step is a real snapshot.
+        await using var temp = new TemporaryDatabase();
+
+        var connection = await temp.Database.GetConnectionAsync();
+
+        // Every table the current entities expect must exist and be writable.
+        await new SqliteSettingsRepository(temp.Database).SaveAsync(GameSettings.Default);
+        await new SqliteProgressRepository(temp.Database).SaveProgressAsync(
+            PlayerProgress.Empty with { Stars = 3, LastDailyCompletedOn = new DateOnly(2026, 7, 30) });
+
+        var reloaded = await new SqliteProgressRepository(temp.Database).GetProgressAsync();
+
+        Assert.Equal(3, reloaded.Stars);
+        Assert.Equal(new DateOnly(2026, 7, 30), reloaded.LastDailyCompletedOn);
+        Assert.Equal(SquarebuzzDatabase.TargetSchemaVersion, await temp.Database.GetSchemaVersionAsync());
+
+        // And each version is recorded exactly once.
+        var versions = await connection.QueryScalarsAsync<int>("SELECT version FROM schema_version ORDER BY version");
+        Assert.Equal(versions.Distinct().Count(), versions.Count);
+        Assert.Equal(SquarebuzzDatabase.TargetSchemaVersion, versions.Max());
+    }
+
+    [Fact]
+    public async Task CompletingTheDailyIsRecordedSeparatelyFromOrdinaryPlay()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+        var at = new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero);
+
+        // An ordinary puzzle must not mark today's daily as done.
+        await repository.RecordCompletionAsync(
+            new PuzzleCompletion("heart", 3, TimeSpan.FromSeconds(60), 17, 0, at));
+
+        Assert.Null((await repository.GetProgressAsync()).LastDailyCompletedOn);
+
+        await repository.RecordCompletionAsync(
+            new PuzzleCompletion(null, 3, TimeSpan.FromSeconds(90), 40, 0, at) { IsDaily = true });
+
+        Assert.Equal(
+            DateOnly.FromDateTime(at.LocalDateTime),
+            (await repository.GetProgressAsync()).LastDailyCompletedOn);
+    }
+
+    [Fact]
     public async Task TargetSchemaVersion_IsAtLeastOne()
     {
         // Guards against an empty migration list silently shipping an unmigrated database.

@@ -48,6 +48,11 @@ public sealed record PlayerProgress
     /// <summary>Total filled cells ever, which the "100 blocks" trophy counts.</summary>
     public int TotalBlocksFilled { get; init; }
 
+    /// <summary>
+    /// Day the daily puzzle was last completed, so Trials knows whether today's is still open.
+    /// </summary>
+    public DateOnly? LastDailyCompletedOn { get; init; }
+
     public static PlayerProgress Empty { get; } = new();
 }
 
@@ -66,4 +71,17 @@ public sealed record PuzzleCompletion(
     TimeSpan Elapsed,
     int BlocksFilled,
     int HintsUsed,
-    DateTimeOffset CompletedAt);
+    DateTimeOffset CompletedAt)
+{
+    /// <summary>Grid width, which several trophies condition on.</summary>
+    public int Size { get; init; }
+
+    /// <summary>Pack the picture came from, for pack-completion trophies.</summary>
+    public string PackId { get; init; } = string.Empty;
+
+    /// <summary>True when this was the daily puzzle rather than a freely chosen one.</summary>
+    public bool IsDaily { get; init; }
+
+    /// <summary>Mistakes made. Zero is what "perfect" means for the trophies.</summary>
+    public int Mistakes { get; init; }
+}

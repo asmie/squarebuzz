@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
+             x:Class="Squarebuzz.App.Views.TrialsPage"
+             x:DataType="vm:TrialsViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <ContentPage.Resources>
+        <conv:BoolSelectConverter x:Key="TabBackground"
+                                  TrueValue="{StaticResource Primary}"
+                                  FalseValue="{StaticResource Surface2}" />
+        <conv:BoolSelectConverter x:Key="TabTextColor"
+                                  TrueValue="{StaticResource OnPrimary}"
+                                  FalseValue="{StaticResource Ink}" />
+        <conv:BoolSelectConverter x:Key="TrophyStroke"
+                                  TrueValue="{StaticResource Gold}"
+                                  FalseValue="{StaticResource Line}" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="12">
+
+        <Label Grid.Row="0" Text="{Binding Heading}" Style="{StaticResource H1}" />
+
+        <!-- Two tabs. Timed modes and the puzzle path are absent rather than hollow. -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="8">
+            <Button Grid.Column="0"
+                    Text="{Binding DailyTabLabel}"
+                    Command="{Binding ShowDailyCommand}"
+                    BackgroundColor="{Binding IsDailyTab, Converter={StaticResource TabBackground}}"
+                    TextColor="{Binding IsDailyTab, Converter={StaticResource TabTextColor}}"
+                    CornerRadius="16"
+                    HeightRequest="50"
+                    FontSize="14"
+                    FontAttributes="Bold" />
+            <Button Grid.Column="1"
+                    Text="{Binding TrophiesTabLabel}"
+                    Command="{Binding ShowTrophiesCommand}"
+                    BackgroundColor="{Binding IsTrophiesTab, Converter={StaticResource TabBackground}}"
+                    TextColor="{Binding IsTrophiesTab, Converter={StaticResource TabTextColor}}"
+                    CornerRadius="16"
+                    HeightRequest="50"
+                    FontSize="14"
+                    FontAttributes="Bold" />
+        </Grid>
+
+        <!-- Daily -->
+        <VerticalStackLayout Grid.Row="2" IsVisible="{Binding IsDailyTab}" Spacing="14">
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{Binding TodayLabel}" Style="{StaticResource Subtle}" FontSize="13" />
+                    <Label Text="{Binding DailyTitle}" Style="{StaticResource H2}" />
+                    <Label Text="{Binding DailySubtitle}" Style="{StaticResource Subtle}" />
+
+                    <controls:MascotView Pose="Idle" HeightRequest="90" WidthRequest="84"
+                                         HorizontalOptions="Center" InputTransparent="True" />
+
+                    <Button Text="{Binding PlayLabel}"
+                            Command="{Binding PlayDailyCommand}"
+                            IsVisible="{Binding IsDailyAvailable}"
+                            Style="{StaticResource PrimaryButton}"
+                            HeightRequest="56" />
+
+                    <Label Text="{Binding DailyDoneLabel}"
+                           IsVisible="{Binding IsDailyAvailable, Converter={StaticResource InvertBool}}"
+                           Style="{StaticResource Subtle}"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource AccentDeep}"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Trophies -->
+        <Grid Grid.Row="2" IsVisible="{Binding IsTrophiesTab}" RowDefinitions="Auto,*" RowSpacing="8">
+            <Label Grid.Row="0" Text="{Binding EarnedSummary}" Style="{StaticResource Subtle}" />
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Trophies}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TrophyCard">
+                        <Border BackgroundColor="{DynamicResource Surface}"
+                                Stroke="{Binding IsEarned, Converter={StaticResource TrophyStroke}}"
+                                StrokeThickness="3"
+                                Padding="12"
+                                Opacity="{Binding Opacity}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="18" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                <Label Grid.Column="0"
+                                       Text="{Binding Icon}"
+                                       FontSize="30"
+                                       VerticalOptions="Center" />
+
+                                <Grid Grid.Column="1" RowDefinitions="Auto,Auto" RowSpacing="2" VerticalOptions="Center">
+                                    <Label Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" />
+                                    <!-- Explicit size: see the note on HowToPage about labels in
+                                         templates reserving one line too few. -->
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Hint}"
+                                           FontSize="12"
+                                           TextColor="{DynamicResource Ink2}"
+                                           LineBreakMode="WordWrap" />
+                                </Grid>
+
+                                <Label Grid.Column="2"
+                                       Text="{Binding EarnedOn}"
+                                       FontSize="11"
+                                       TextColor="{DynamicResource Ink2}"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="End" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+
+</ContentPage>

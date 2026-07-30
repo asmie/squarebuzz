@@ -197,4 +197,14 @@
   <data name="magnifierSub" xml:space="preserve"><value>Shows a zoomed 3×3 view while you paint. Off by default.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Ask a grown-up</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} of {1} found</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Finish your first picture.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Play seven days in a row.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Finish a picture without a single hint.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Finish a 5×5 in under a minute.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Fill 100 blocks altogether.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Find every dinosaur.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Finish a picture after 8pm.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Three stars on a 10×10, with no mistakes.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Find every picture in the gallery.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Done today — see you tomorrow!</value></data>
 </root>

@@ -109,7 +109,7 @@ public sealed class GameSessionFactory
             return picked;
         }
 
-        if (GridSize.IsAuthored(options.Size))
+        if (GridSize.IsAuthored(options.Size) && !options.ForceGenerated)
         {
             var candidates = _repository.Find(options.PackId, options.Size);
 

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Core.Progression;
 
 namespace Squarebuzz.App.ViewModels;
 
@@ -23,6 +24,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Route parameter naming a specific picture to play, as the Gallery does.</summary>
     public const string PuzzleIdParameter = "puzzleId";
 
+    /// <summary>Route parameter marking this game as today's daily puzzle.</summary>
+    public const string DailyParameter = "daily";
+
     /// <summary>
     /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
     /// only a few moves, rare enough that it never competes with drawing.
@@ -33,6 +37,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private readonly ISettingsRepository _settingsRepository;
     private readonly IProgressRepository _progress;
     private readonly ISaveGameRepository _saveGames;
+    private readonly IPuzzleRepository _puzzles;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
 
@@ -44,6 +49,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     private Guid? _pendingResumeId;
     private string? _pendingPuzzleId;
+    private bool _isDaily;
     private int _secondsSinceAutosave;
 
     public GameViewModel(
@@ -51,6 +57,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         ISettingsRepository settingsRepository,
         IProgressRepository progress,
         ISaveGameRepository saveGames,
+        IPuzzleRepository puzzles,
         ILocalizationService strings,
         INavigationService navigation,
         IClock clock)
@@ -60,6 +67,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         _settingsRepository = settingsRepository;
         _progress = progress;
         _saveGames = saveGames;
+        _puzzles = puzzles;
         _navigation = navigation;
         _clock = clock;
     }
@@ -188,6 +196,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         {
             _pendingPuzzleId = picked;
         }
+
+        if (query.ContainsKey(DailyParameter))
+        {
+            _isDaily = true;
+        }
     }
 
     /// <summary>
@@ -206,6 +219,16 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
             // The save vanished or its picture no longer ships - fall through to a new game
             // rather than leaving the player on an empty board.
+        }
+
+        if (_isDaily)
+        {
+            _settings = await LoadSettingsSafelyAsync();
+
+            // Seeded from today's date, so it is the same puzzle for everyone and survives a
+            // restart. See DailyPuzzle.
+            await StartAsync(DailyPuzzle.OptionsFor(_clock.Today, _settings.Helpers));
+            return;
         }
 
         if (_pendingPuzzleId is { } chosen)
@@ -466,7 +489,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     /// <summary>A fresh puzzle with the same settings - the "Next" button on the win screen.</summary>
     [RelayCommand]
-    private async Task NextPuzzleAsync() => await StartAsync(SameSettingsFreshPuzzle());
+    private async Task NextPuzzleAsync()
+    {
+        // Moving on from the daily means leaving it behind: the next puzzle is an ordinary one,
+        // and must not be recorded as today's daily.
+        _isDaily = false;
+
+        await StartAsync(SameSettingsFreshPuzzle());
+    }
 
     /// <summary>
     /// The current options with the seed cleared, so a replay keeps the player's size, pack and
@@ -475,6 +505,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// </summary>
     private NewGameOptions? SameSettingsFreshPuzzle()
     {
+        // Restarting the daily has to give back the same puzzle - it is *today's* picture, and
+        // handing out a different one would also let a different picture be recorded as the
+        // daily. Only an ordinary game gets a new seed.
+        if (_isDaily)
+        {
+            return DailyPuzzle.OptionsFor(_clock.Today, _settings.Helpers);
+        }
+
         // Written out rather than as `Session?.Origin with { ... }`, which compiles but
         // dereferences a possibly-null value and would throw once Origin was ever null.
         var origin = Session?.Origin;
@@ -519,20 +557,54 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             // Leaves a stale save behind; the player can delete it from Continue.
         }
 
+        var completion = new PuzzleCompletion(
+            session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
+            session.StarRating,
+            session.Elapsed,
+            CountFilledCells(session.Puzzle),
+            session.HintsUsed,
+            _clock.Now)
+        {
+            Size = session.Puzzle.Width,
+            PackId = session.Puzzle.Pack,
+            Mistakes = session.Mistakes,
+            IsDaily = _isDaily,
+        };
+
         try
         {
-            await _progress.RecordCompletionAsync(new PuzzleCompletion(
-                session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
-                session.StarRating,
-                session.Elapsed,
-                CountFilledCells(session.Puzzle),
-                session.HintsUsed,
-                _clock.Now));
+            var progress = await _progress.RecordCompletionAsync(completion);
+
+            await AwardTrophiesAsync(completion, progress);
         }
         catch (Exception)
         {
             // Losing a progress write must not spoil the win. The star total will simply be
             // short next launch, which is far better than an error dialog after a child wins.
+        }
+    }
+
+    /// <summary>
+    /// Awards whatever the completion just earned. Evaluated from a snapshot taken after the
+    /// completion was recorded, so streak and running totals are already up to date.
+    /// </summary>
+    private async Task AwardTrophiesAsync(PuzzleCompletion completion, PlayerProgress progress)
+    {
+        var solved = await _progress.GetSolvedPuzzlesAsync();
+        var alreadyEarned = (await _progress.GetTrophiesAsync()).Select(t => t.Trophy).ToHashSet();
+
+        var newlyEarned = TrophyEvaluator.Evaluate(new TrophyContext(
+            completion,
+            progress,
+            solved,
+            _puzzles.Puzzles,
+            alreadyEarned));
+
+        var today = _clock.Today;
+
+        foreach (var trophy in newlyEarned)
+        {
+            await _progress.AwardTrophyAsync(trophy, today);
         }
     }
 

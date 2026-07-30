@@ -108,6 +108,10 @@ public sealed class SqliteProgressRepository : IProgressRepository
             Streak = NextStreak(current, completedOn),
             LastPlayedOn = completedOn,
             TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
+
+            // Only a daily completion stamps this, so finishing a normal puzzle never marks
+            // today's daily as done.
+            LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
         };
 
         // Progress and the solved-picture row move together: crediting stars without recording
@@ -193,6 +197,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
         Streak = row.Streak,
         LastPlayedOn = row.LastPlayedDayNumber is { } day ? DateOnly.FromDayNumber(day) : null,
         TotalBlocksFilled = row.TotalBlocksFilled,
+        LastDailyCompletedOn = row.LastDailyDayNumber is { } daily ? DateOnly.FromDayNumber(daily) : null,
     };
 
     private static ProgressEntity ToEntity(PlayerProgress progress) => new()
@@ -203,5 +208,6 @@ public sealed class SqliteProgressRepository : IProgressRepository
         Streak = progress.Streak,
         LastPlayedDayNumber = progress.LastPlayedOn?.DayNumber,
         TotalBlocksFilled = progress.TotalBlocksFilled,
+        LastDailyDayNumber = progress.LastDailyCompletedOn?.DayNumber,
     };
 }

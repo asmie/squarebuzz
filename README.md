@@ -25,9 +25,14 @@ Dependencies flow strictly `App → Data → Core`. Core depends on nothing.
 
 ## Screen status
 
-| Built | Scaffolded (shared `ComingSoonPage`) |
-|---|---|
-| Splash, Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery, About, How to Play | Trials |
+Every screen is real. There is no placeholder page and no dead end in the menu: Splash,
+Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery, About,
+How to Play and Trials are all implemented.
+
+Two things the prototype sketched are **deliberately absent** rather than present and hollow:
+the timed modes and the "puzzle path" progression. Both need domain work that does not exist
+yet — a countdown inside `GameSession`, and a progression model — and a tab that looks
+playable but is not would be worse than one that is not there.
 
 Games autosave every 15 seconds while playing, plus on pause, on quit and on leaving the
 screen. A finished puzzle deletes its own save, so Continue never offers a solved board.
@@ -41,8 +46,31 @@ the solution in a muted colour, and Continue thumbnails draw the player's own ma
 Pause and Complete are overlays on the board rather than separate routes, so the in-progress
 session never has to be serialised across a navigation just to show a summary over it.
 
-Every scaffolded route is registered and navigable today — they share one page and differ only
-by a `titleKey` route parameter, so the menu is fully explorable with no dead ends.
+## Daily puzzle and trophies
+
+Trials holds today's puzzle and the trophy cabinet.
+
+The daily is **generated from the date**, not drawn from the twelve authored pictures — with
+only twelve a rotation would repeat every twelve days. `DailyPuzzle.SeedFor` hashes the day
+number, so every player gets the same picture on the same day and closing the app returns to
+the identical board. It forces generation explicitly (`NewGameOptions.ForceGenerated`) because
+10×10 falls inside the authored range and the factory would otherwise serve a shipped picture.
+"Start over" on the daily re-serves *today's* puzzle rather than a fresh seed.
+
+The nine trophies come from the prototype's artwork; **their thresholds are a proposal**, all
+in `TrophyEvaluator` as named constants, and worth a look before release:
+
+| Trophy | Rule |
+|---|---|
+| First Picture | Any puzzle finished |
+| Week Streak | 7-day streak |
+| No Hints | Finish with all hints unused |
+| Speedy | A 5×5 in under 60 s |
+| 100 Blocks | 100 filled squares in total |
+| Dino Fan | Every puzzle in the `dinos` pack |
+| Night Owl | Finish between 20:00 and 06:00 local |
+| Perfect Ten | 3 stars *and* zero mistakes on a 10×10 or larger |
+| Collector | Every picture in every pack, locked ones included |
 
 ## Continuous integration
 

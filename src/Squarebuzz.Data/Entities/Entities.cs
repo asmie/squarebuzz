@@ -113,6 +113,10 @@ internal sealed class ProgressEntity
 
     [Column("total_blocks_filled")]
     public int TotalBlocksFilled { get; set; }
+
+    /// <summary>Day the daily was last completed, or null. Added by Migration0002.</summary>
+    [Column("last_daily_day")]
+    public int? LastDailyDayNumber { get; set; }
 }
 
 /// <summary>A completed picture, one row per authored puzzle.</summary>

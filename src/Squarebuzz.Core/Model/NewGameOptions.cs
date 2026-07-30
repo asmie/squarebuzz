@@ -32,5 +32,16 @@ public sealed record NewGameOptions(
     /// </remarks>
     public string? PuzzleId { get; init; }
 
+    /// <summary>
+    /// Generate the picture even at a size that has authored artwork.
+    /// </summary>
+    /// <remarks>
+    /// The daily puzzle needs this. It wants a comfortable 10x10, but 10x10 is within the
+    /// authored range, so without it the factory would hand out one of the twelve shipped
+    /// pictures - which would repeat within a week and spoil gallery entries the player had not
+    /// found yet.
+    /// </remarks>
+    public bool ForceGenerated { get; init; }
+
     public static NewGameOptions Default { get; } = new(GridSize.Tiny, 2, "animals", ChallengeLevel.Relaxed);
 }

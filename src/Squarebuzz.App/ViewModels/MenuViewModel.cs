@@ -118,11 +118,8 @@ public partial class MenuViewModel : LocalizedViewModel
     [RelayCommand]
     private async Task ContinueAsync() => await _navigation.GoToAsync(Routes.Continue);
 
-    // Trials is still scaffolded, and ComingSoonPage takes its heading from this parameter.
     [RelayCommand]
-    private async Task TrialsAsync() => await _navigation.GoToAsync(
-        Routes.Trials,
-        new Dictionary<string, object> { ["titleKey"] = "trials" });
+    private async Task TrialsAsync() => await _navigation.GoToAsync(Routes.Trials);
 
     [RelayCommand]
     private async Task OptionsAsync() => await _navigation.GoToAsync(Routes.Options);

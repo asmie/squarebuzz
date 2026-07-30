@@ -111,7 +111,7 @@ public static class MauiProgram
         services.AddTransient<GalleryViewModel>();
         services.AddTransient<AboutViewModel>();
         services.AddTransient<HowToViewModel>();
-        services.AddTransient<ComingSoonViewModel>();
+        services.AddTransient<TrialsViewModel>();
     }
 
     private static void RegisterPages(IServiceCollection services)
@@ -126,6 +126,6 @@ public static class MauiProgram
         services.AddTransient<GalleryPage>();
         services.AddTransient<AboutPage>();
         services.AddTransient<HowToPage>();
-        services.AddTransient<ComingSoonPage>();
+        services.AddTransient<TrialsPage>();
     }
 }

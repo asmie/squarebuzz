@@ -23,10 +23,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(Routes.Gallery, typeof(GalleryPage));
         Routing.RegisterRoute(Routes.About, typeof(AboutPage));
         Routing.RegisterRoute(Routes.HowTo, typeof(HowToPage));
+        Routing.RegisterRoute(Routes.Trials, typeof(TrialsPage));
 
-        // Trials is the one screen still scaffolded. ComingSoonPage takes its heading from a
-        // route parameter, so the route works end to end today.
-        Routing.RegisterRoute(Routes.Trials, typeof(ComingSoonPage));
     }
 }
 
