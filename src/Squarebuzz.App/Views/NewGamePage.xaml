@@ -55,7 +55,7 @@
                                     </Border.GestureRecognizers>
                                     <VerticalStackLayout Spacing="2" MinimumWidthRequest="72">
                                         <Label Text="{Binding Label}"
-                                               FontAttributes="Bold"
+                                               FontFamily="BodyBold"
                                                HorizontalTextAlignment="Center"
                                                TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
                                         <Label Text="{Binding Caption}"
@@ -101,7 +101,7 @@
                                                TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
                                         <Label Text="{Binding Label}"
                                                FontSize="12"
-                                               FontAttributes="Bold"
+                                               FontFamily="BodyBold"
                                                TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
                                     </VerticalStackLayout>
                                 </Border>
@@ -124,7 +124,7 @@
                                 TextColor="{Binding IsRelaxed, Converter={StaticResource ChipTextColor}}"
                                 CornerRadius="16"
                                 HeightRequest="52"
-                                FontAttributes="Bold" />
+                                FontFamily="BodyBold" />
                         <Button Grid.Column="1"
                                 Text="{Binding SharpLabel}"
                                 Command="{Binding SelectChallengeCommand}"
@@ -133,7 +133,7 @@
                                 TextColor="{Binding IsSharp, Converter={StaticResource ChipTextColor}}"
                                 CornerRadius="16"
                                 HeightRequest="52"
-                                FontAttributes="Bold" />
+                                FontFamily="BodyBold" />
                     </Grid>
 
                     <Label Text="{Binding ChallengeNote}" Style="{StaticResource Subtle}" FontSize="13" />
@@ -164,7 +164,7 @@
                                         <Label Text="{Binding Icon}" FontSize="22" HorizontalTextAlignment="Center" />
                                         <Label Text="{Binding Label}"
                                                FontSize="12"
-                                               FontAttributes="Bold"
+                                               FontFamily="BodyBold"
                                                HorizontalTextAlignment="Center"
                                                TextColor="{Binding IsSelected, Converter={StaticResource ChipTextColor}}" />
                                     </VerticalStackLayout>

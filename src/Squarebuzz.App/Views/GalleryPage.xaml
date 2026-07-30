@@ -63,7 +63,7 @@
                                                     HeightRequest="110" />
 
                             <Label Text="{Binding Name}"
-                                   FontAttributes="Bold"
+                                   FontFamily="BodyBold"
                                    HorizontalTextAlignment="Center"
                                    LineBreakMode="TailTruncation" />
 
@@ -89,7 +89,7 @@
                                    IsVisible="{Binding IsLocked}"
                                    Style="{StaticResource Subtle}"
                                    FontSize="11"
-                                   FontAttributes="Bold"
+                                   FontFamily="BodyBold"
                                    HorizontalTextAlignment="Center" />
                         </VerticalStackLayout>
                     </Border>

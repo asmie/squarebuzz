@@ -29,10 +29,10 @@ Every screen is real. There is no placeholder page and no dead end in the menu: 
 Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery, About,
 How to Play and Trials are all implemented.
 
-Two things the prototype sketched are **deliberately absent** rather than present and hollow:
-the timed modes and the "puzzle path" progression. Both need domain work that does not exist
-yet — a countdown inside `GameSession`, and a progression model — and a tab that looks
-playable but is not would be worse than one that is not there.
+One thing the prototype sketched is **deliberately absent** rather than present and hollow: the
+**Timed Trial** tab, with its Warm-up / Steady / Lightning tiers. It needs a countdown inside
+`GameSession` — a time limit, a "time up" outcome, and a clock that runs down rather than up — and
+a tab that looks playable but is not would be worse than one that is not there.
 
 Games autosave every 15 seconds while playing, plus on pause, on quit and on leaving the
 screen. A finished puzzle deletes its own save, so Continue never offers a solved board.
@@ -99,9 +99,29 @@ Verified that way: Giant unlocks, a 25×25 generates in about 4 seconds and rend
 wide layout appears in landscape and reverts in portrait, the session survives both rotations,
 and the phone layout is unchanged.
 
-## Daily puzzle and trophies
+## Daily puzzle, the path, and trophies
 
-Trials holds today's puzzle and the trophy cabinet.
+Trials holds today's puzzle, the Puzzle Path and the trophy cabinet.
+
+### Puzzle Path
+
+The design's winding trail of twelve stops: finished ones show a star in the accent colour, the
+next one is drawn larger in the primary colour, and the rest are numbered and dimmed. Stops lean
+sideways on the prototype's eight-step cycle (0, 26, 46, 26, 0, −26, −46, −26 — a sampled sine), so
+a column of circles reads as a trail.
+
+**It stores nothing.** `PuzzlePath.Build` derives the whole thing from the twelve authored pictures
+and the solved table the game already keeps for the Gallery and the trophies, so the path cannot
+disagree with the rest of the game about what has been finished. The order is the order the content
+ships in, which already ramps — six 5×5 pictures then six 10×10 — and a test asserts a later stop
+is never smaller than an earlier one, because sorting here would silently reshuffle the path
+whenever a puzzle was added.
+
+Finished stops are replayable; locked ones are shown, numbered and inert rather than hidden, which
+is the same call the design makes for the locked 25×25 size card: *visible, explained, not hidden*.
+A picture finished out of order from the Gallery counts as done, and the next stop is always the
+first *unsolved* one — the only reading that cannot leave the player with two current stops or
+none.
 
 The daily is **generated from the date**, not drawn from the twelve authored pictures — with
 only twelve a rotation would repeat every twelve days. `DailyPuzzle.SeedFor` hashes the day
@@ -413,6 +433,12 @@ It has no npm dependencies; `tools/serve.mjs` is a zero-dependency static server
 - Colours are never hard-coded in pages. They come from the swappable theme dictionaries in
   `Resources/Themes` via `DynamicResource`, which is what makes 3 themes × 3 accents work at
   runtime.
+- **Fonts are named by alias, never by file.** `Display`, `Body` and `BodyBold` are registered in
+  `MauiProgram` and referred to from `Styles.xaml` — see `Resources/Fonts/README.md`, which also
+  records where the files came from and how to cut a different weight. Nothing uses
+  `FontAttributes="Bold"`: a rounded face smears when the platform fakes weight, so bold text names
+  the bold cut. The board's clue numbers are the one exception to "styles decide the font", because
+  a canvas does not inherit them.
 
 ## Licence
 

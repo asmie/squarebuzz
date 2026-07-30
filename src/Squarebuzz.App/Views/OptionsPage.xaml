@@ -291,7 +291,7 @@
                                 BackgroundColor="{DynamicResource WarnSoft}"
                                 TextColor="{DynamicResource OnWarnSoft}"
                                 CornerRadius="16"
-                                FontAttributes="Bold"
+                                FontFamily="BodyBold"
                                 HeightRequest="52" />
                         <Label Text="{Binding VersionLabel}" Style="{StaticResource Subtle}" FontSize="12" />
                         <Label Text="{Binding NoAdsLabel}" Style="{StaticResource Subtle}" FontSize="12" />
@@ -318,7 +318,7 @@
                     <Label Text="{Binding Gate.RetryMessage}"
                            IsVisible="{Binding Gate.HasFailed}"
                            TextColor="{DynamicResource WarnDeep}"
-                           FontAttributes="Bold"
+                           FontFamily="BodyBold"
                            HorizontalTextAlignment="Center" />
 
                     <Button Text="OK" Command="{Binding Gate.SubmitCommand}"
@@ -342,7 +342,7 @@
                             BackgroundColor="{DynamicResource Warn}"
                             TextColor="{DynamicResource OnWarn}"
                             CornerRadius="16"
-                            FontAttributes="Bold"
+                            FontFamily="BodyBold"
                             HeightRequest="52" />
                     <Button Text="{Binding CancelLabel}" Command="{Binding CancelResetCommand}"
                             Style="{StaticResource SecondaryButton}" HeightRequest="48" />

@@ -34,10 +34,16 @@ public static class MauiProgram
             .AddAudio()
             .ConfigureFonts(fonts =>
             {
-                // The prototype uses Fredoka (display) and Quicksand (body) from Google Fonts.
-                // Drop the .ttf files into Resources/Fonts and register them here - see the
-                // README in that folder. Until then the platform default is used, which
-                // changes the feel but nothing functional.
+                // The design's two families, bundled rather than fetched: a children's game has
+                // to look like itself offline. Aliases are what XAML refers to, so the styles do
+                // not repeat file names.
+                //
+                // Both families ship upstream only as variable fonts whose default weight is 300,
+                // so shipping those directly would render the whole app in Light. These are static
+                // instances cut at the weights the design uses - see Resources/Fonts/README.md.
+                fonts.AddFont("Fredoka-SemiBold.ttf", "Display");
+                fonts.AddFont("Quicksand-Medium.ttf", "Body");
+                fonts.AddFont("Quicksand-Bold.ttf", "BodyBold");
             });
 
         RegisterServices(builder.Services);

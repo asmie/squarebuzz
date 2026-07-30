@@ -23,7 +23,7 @@
                 HorizontalOptions="End"
                 BackgroundColor="Transparent"
                 TextColor="{DynamicResource Ink2}"
-                FontAttributes="Bold"
+                FontFamily="BodyBold"
                 MinimumHeightRequest="48" />
 
         <VerticalStackLayout Grid.Row="1"

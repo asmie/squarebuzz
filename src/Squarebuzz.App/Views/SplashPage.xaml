@@ -15,7 +15,7 @@
         <controls:MascotView Pose="Idle" HeightRequest="140" WidthRequest="130" HorizontalOptions="Center" AutomationProperties.ExcludedWithChildren="True" />
 
         <VerticalStackLayout Spacing="6">
-            <Label HorizontalOptions="Center" FontSize="46" FontAttributes="Bold">
+            <Label HorizontalOptions="Center" FontSize="46" FontFamily="BodyBold">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="square" TextColor="{DynamicResource Ink}" />

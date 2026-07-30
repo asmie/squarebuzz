@@ -21,7 +21,7 @@
                                      HeightRequest="72"
                                      WidthRequest="66" />
 
-                <Label Grid.Column="1" VerticalOptions="Center" FontSize="34" FontAttributes="Bold">
+                <Label Grid.Column="1" VerticalOptions="Center" FontSize="34" FontFamily="BodyBold">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="square" TextColor="{DynamicResource Ink}" />
@@ -31,7 +31,7 @@
                 </Label>
 
                 <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2">
-                    <Label HorizontalTextAlignment="End" FontAttributes="Bold">
+                    <Label HorizontalTextAlignment="End" FontFamily="BodyBold">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="★ " TextColor="{DynamicResource Gold}" />
@@ -52,7 +52,7 @@
 
             <!-- The mascot's line, so the menu feels answered rather than static -->
             <Border Style="{StaticResource Card}" Padding="14">
-                <Label Text="{Binding Greeting}" Style="{StaticResource Subtle}" FontAttributes="Bold" />
+                <Label Text="{Binding Greeting}" Style="{StaticResource Subtle}" FontFamily="BodyBold" />
             </Border>
 
             <!-- Primary action gets the full-width treatment; the rest are equals below it. -->
@@ -69,7 +69,7 @@
                             BackgroundColor="Transparent"
                             TextColor="{DynamicResource Ink}"
                             HeightRequest="64"
-                            FontAttributes="Bold"
+                            FontFamily="BodyBold"
                             Text="{Binding ContinueLabel}" />
                     <Label Text="{Binding ContinueSubtitle}"
                            Style="{StaticResource Subtle}"

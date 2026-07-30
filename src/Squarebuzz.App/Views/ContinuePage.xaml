@@ -56,7 +56,7 @@
                             </Border>
 
                             <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Name}" FontFamily="BodyBold" />
                                 <Label Text="{Binding Details}" Style="{StaticResource Subtle}" FontSize="12" />
 
                                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">

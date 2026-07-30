@@ -35,31 +35,31 @@
                                 Command="{Binding HowToCommand}"
                                 BackgroundColor="Transparent"
                                 TextColor="{DynamicResource Ink}"
-                                FontAttributes="Bold"
+                                FontFamily="BodyBold"
                                 HeightRequest="56" />
                         <Button Text="{Binding ContactLabel}"
                                 Command="{Binding ContactCommand}"
                                 BackgroundColor="Transparent"
                                 TextColor="{DynamicResource Ink}"
-                                FontAttributes="Bold"
+                                FontFamily="BodyBold"
                                 HeightRequest="56" />
                         <Button Text="{Binding PrivacyLabel}"
                                 Command="{Binding PrivacyCommand}"
                                 BackgroundColor="Transparent"
                                 TextColor="{DynamicResource Ink}"
-                                FontAttributes="Bold"
+                                FontFamily="BodyBold"
                                 HeightRequest="56" />
                         <Button Text="{Binding RateLabel}"
                                 Command="{Binding RateCommand}"
                                 BackgroundColor="Transparent"
                                 TextColor="{DynamicResource Ink}"
-                                FontAttributes="Bold"
+                                FontFamily="BodyBold"
                                 HeightRequest="56" />
                         <Button Text="{Binding CreditsLabel}"
                                 Command="{Binding CreditsCommand}"
                                 BackgroundColor="Transparent"
                                 TextColor="{DynamicResource Ink}"
-                                FontAttributes="Bold"
+                                FontFamily="BodyBold"
                                 HeightRequest="56" />
                     </VerticalStackLayout>
                 </Border>
@@ -67,7 +67,7 @@
                 <Label Text="{Binding Notice}"
                        IsVisible="{Binding HasNotice}"
                        Style="{StaticResource Subtle}"
-                       FontAttributes="Bold"
+                       FontFamily="BodyBold"
                        TextColor="{DynamicResource PrimaryDeep}"
                        HorizontalTextAlignment="Center" />
 
@@ -98,7 +98,7 @@
                     <Label Text="{Binding Gate.RetryMessage}"
                            IsVisible="{Binding Gate.HasFailed}"
                            TextColor="{DynamicResource WarnDeep}"
-                           FontAttributes="Bold"
+                           FontFamily="BodyBold"
                            HorizontalTextAlignment="Center" />
 
                     <Button Text="OK" Command="{Binding Gate.SubmitCommand}"

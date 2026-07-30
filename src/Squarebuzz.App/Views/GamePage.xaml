@@ -52,7 +52,7 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="999" />
                 </Border.StrokeShape>
-                <Label Text="{Binding ElapsedText}" FontAttributes="Bold" FontSize="18" />
+                <Label Text="{Binding ElapsedText}" FontFamily="BodyBold" FontSize="18" />
             </Border>
         </Grid>
 
@@ -113,7 +113,7 @@
                    IsVisible="{Binding HasToast}"
                    Style="{StaticResource Subtle}"
                    HorizontalOptions="Center"
-                   FontAttributes="Bold"
+                   FontFamily="BodyBold"
                    TextColor="{DynamicResource PrimaryDeep}" />
 
             <!--
@@ -197,7 +197,7 @@
                             BackgroundColor="{DynamicResource WarnSoft}"
                             TextColor="{DynamicResource OnWarnSoft}"
                             CornerRadius="16"
-                            FontAttributes="Bold"
+                            FontFamily="BodyBold"
                             HeightRequest="50" />
                 </VerticalStackLayout>
             </Border>
@@ -270,7 +270,7 @@
                             <FormattedString>
                                 <Span Text="{Binding TimeLabel}" />
                                 <Span Text=" " />
-                                <Span Text="{Binding ElapsedText}" FontAttributes="Bold" />
+                                <Span Text="{Binding ElapsedText}" FontFamily="BodyBold" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

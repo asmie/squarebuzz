@@ -54,7 +54,7 @@
                                 </Border.StrokeShape>
                                 <Label Text="{Binding Number}"
                                        TextColor="{DynamicResource OnPrimary}"
-                                       FontAttributes="Bold"
+                                       FontFamily="BodyBold"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center" />
                             </Border>

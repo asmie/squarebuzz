@@ -33,25 +33,32 @@
         <Setter Property="Padding" Value="0" />
     </Style>
 
+    <!--
+      Fredoka for display, Quicksand for everything else, as the design specifies. Where a style
+      already says FontFamily="BodyBold" the family is the bold cut rather than a synthetic
+      thickening of the medium one - a rounded face smears badly when the platform fakes weight.
+    -->
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontFamily" Value="Body" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
     </Style>
 
     <Style x:Key="H1" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontFamily" Value="Display" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeH1}" />
-        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <Style x:Key="H2" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        <Setter Property="FontFamily" Value="Display" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeH2}" />
-        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <Style x:Key="Subtle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink2}" />
+        <Setter Property="FontFamily" Value="Body" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
     </Style>
 
@@ -60,8 +67,8 @@
         <Setter Property="TextColor" Value="{DynamicResource OnPrimary}" />
         <Setter Property="MinimumHeightRequest" Value="{StaticResource TouchTargetMin}" />
         <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="FontFamily" Value="BodyBold" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
-        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="Padding" Value="18,0" />
     </Style>
 
@@ -70,8 +77,8 @@
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
         <Setter Property="MinimumHeightRequest" Value="{StaticResource TouchTargetMin}" />
         <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="FontFamily" Value="BodyBold" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
-        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="Padding" Value="18,0" />
     </Style>
 

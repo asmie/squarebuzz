@@ -23,6 +23,12 @@ public sealed class BoardDrawable : IDrawable
     private const float CellBorderThickness = 1f;
     private const float StruckClueOpacity = 0.42f;
 
+    /// <summary>
+    /// The clue face. "BodyBold" is the alias registered in <c>MauiProgram</c>; a canvas resolves
+    /// it through the same font registry the XAML styles use, so there is one source of truth.
+    /// </summary>
+    private static readonly Microsoft.Maui.Graphics.Font ClueFont = new("BodyBold");
+
     /// <summary>The puzzle being drawn. Null before a game starts.</summary>
     public Puzzle? Puzzle { get; set; }
 
@@ -286,6 +292,10 @@ public sealed class BoardDrawable : IDrawable
             return;
         }
 
+        // Clue numbers are the one place text is drawn rather than laid out, so the family has to
+        // be set here too - a canvas does not inherit the XAML styles. Bold, because these are the
+        // most-read characters in the game and they sit on a tinted gutter.
+        canvas.Font = ClueFont;
         canvas.FontSize = fontSize;
         canvas.FontColor = isStruck ? Palette.Ink2 : Palette.GutterInk;
         canvas.Alpha = isStruck ? StruckClueOpacity : 1f;

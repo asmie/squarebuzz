@@ -59,7 +59,8 @@
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#FFF6EA" BaseSize="128,128" />
 
     <MauiImage Include="Resources\Images\*" />
-    <MauiFont Include="Resources\Fonts\*" />
+    <!-- .ttf only: the folder also holds the OFL licence files and a README. -->
+    <MauiFont Include="Resources\Fonts\*.ttf" />
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
