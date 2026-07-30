@@ -27,7 +27,7 @@ Dependencies flow strictly `App → Data → Core`. Core depends on nothing.
 
 | Built | Scaffolded (shared `ComingSoonPage`) |
 |---|---|
-| Splash, Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery | Trials, About, How to Play |
+| Splash, Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery, About, How to Play | Trials |
 
 Games autosave every 15 seconds while playing, plus on pause, on quit and on leaving the
 screen. A finished puzzle deletes its own save, so Continue never offers a solved board.
@@ -101,6 +101,10 @@ It has no npm dependencies; `tools/serve.mjs` is a zero-dependency static server
 - **Central Package Management** — package versions live only in `Directory.Packages.props`.
 - Warnings are errors in Core and Data. The MAUI head relaxes this because generated
   partials trip a few analyser rules.
+- **Known MAUI quirk:** a `Label` inside a `DataTemplate` can reserve height for one line
+  fewer than it needs and silently clip the last line. It cost real text on How to Play. If
+  you edit or translate a multi-line string in a templated list, check it still renders in
+  full on a device — the build will not tell you.
 - Colours are never hard-coded in pages. They come from the swappable theme dictionaries in
   `Resources/Themes` via `DynamicResource`, which is what makes 3 themes × 3 accents work at
   runtime.

@@ -51,8 +51,7 @@
                        HorizontalTextAlignment="Center" />
                 <Label Text="{Binding StepBody}"
                        Style="{StaticResource Subtle}"
-                       HorizontalTextAlignment="Center"
-                       LineHeight="1.4" />
+                       HorizontalTextAlignment="Center" />
             </VerticalStackLayout>
         </VerticalStackLayout>
 

@@ -115,19 +115,18 @@ public partial class MenuViewModel : LocalizedViewModel
     [RelayCommand]
     private async Task NewGameAsync() => await _navigation.GoToAsync(Routes.NewGame);
 
-    // The scaffolded screens share one page, so each passes the resource key for its heading.
     [RelayCommand]
-    private async Task ContinueAsync() => await OpenScaffoldedAsync(Routes.Continue, "continueGame");
+    private async Task ContinueAsync() => await _navigation.GoToAsync(Routes.Continue);
 
+    // Trials is still scaffolded, and ComingSoonPage takes its heading from this parameter.
     [RelayCommand]
-    private async Task TrialsAsync() => await OpenScaffoldedAsync(Routes.Trials, "trials");
+    private async Task TrialsAsync() => await _navigation.GoToAsync(
+        Routes.Trials,
+        new Dictionary<string, object> { ["titleKey"] = "trials" });
 
     [RelayCommand]
     private async Task OptionsAsync() => await _navigation.GoToAsync(Routes.Options);
 
     [RelayCommand]
-    private async Task AboutAsync() => await OpenScaffoldedAsync(Routes.About, "about");
-
-    private Task OpenScaffoldedAsync(string route, string titleKey) =>
-        _navigation.GoToAsync(route, new Dictionary<string, object> { ["titleKey"] = titleKey });
+    private async Task AboutAsync() => await _navigation.GoToAsync(Routes.About);
 }

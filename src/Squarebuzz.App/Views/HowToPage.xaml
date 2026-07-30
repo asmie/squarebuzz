@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Views.HowToPage"
+             x:DataType="vm:HowToViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <!--
+      A CollectionView rather than a BindableLayout inside a ScrollView. The latter measured the
+      body labels against a stale width and clipped the last line of the longer lessons; a
+      CollectionView measures each item properly, and scrolls itself so there is no nested
+      scrolling either.
+    -->
+    <CollectionView ItemsSource="{Binding Sections}"
+                    SelectionMode="None"
+                    Margin="{StaticResource PagePadding}">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.Header>
+            <!-- The header inherits the CollectionView's binding context, so it can bind the
+                 localised heading rather than hardcoding it. -->
+            <Label Text="{Binding Heading}"
+                   Style="{StaticResource H1}"
+                   Margin="0,0,0,14" />
+        </CollectionView.Header>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="vm:HowToSection">
+                <Border Style="{StaticResource Card}">
+                    <!--
+                      A Grid rather than a VerticalStackLayout. The stack measured the body label
+                      with an indefinite width, so it reserved height for one line fewer than it
+                      later needed and clipped the last line. A Grid row hands its child a
+                      definite width, so the wrap it measures is the wrap it draws.
+                    -->
+                    <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+
+                        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                            <!-- Numbered so the lessons read as a sequence to follow. -->
+                            <Border Grid.Column="0"
+                                    BackgroundColor="{DynamicResource Primary}"
+                                    WidthRequest="34"
+                                    HeightRequest="34"
+                                    StrokeThickness="0"
+                                    VerticalOptions="Start">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="999" />
+                                </Border.StrokeShape>
+                                <Label Text="{Binding Number}"
+                                       TextColor="{DynamicResource OnPrimary}"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   Style="{StaticResource H2}"
+                                   VerticalOptions="Center" />
+                        </Grid>
+
+                        <!--
+                          Explicit width on purpose. A GraphicsView with no width constraint
+                          reports a large desired width, which made the card measure wider than
+                          it was later arranged at - so the body label reserved height for three
+                          lines and clipped its fourth. The diagrams are fixed-size drawings, so
+                          pinning the width takes them out of the negotiation entirely.
+                        -->
+                        <controls:MiniGridView Grid.Row="1"
+                                               Rows="{Binding Rows}"
+                                               RowClues="{Binding RowClues}"
+                                               WidthRequest="280"
+                                               HeightRequest="110"
+                                               HorizontalOptions="Center"
+                                               InputTransparent="True" />
+
+                        <!--
+                          WORKAROUND, not a fix. Inside this DataTemplate the label reserves
+                          height for one line fewer than it needs and silently clips the last
+                          line - it cost the end of lessons 1 and 3 before it was noticed. The
+                          underlying MAUI Android measurement issue is not understood; setting a
+                          slightly smaller explicit size is what makes all five lessons fit the
+                          height that is allocated. Re-check this if the strings are ever edited
+                          or translated, because longer text may clip again.
+                        -->
+                        <Label Grid.Row="2"
+                               Text="{Binding Body}"
+                               FontSize="15"
+                               TextColor="{DynamicResource Ink2}"
+                               LineBreakMode="WordWrap" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</ContentPage>

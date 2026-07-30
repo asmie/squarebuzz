@@ -38,6 +38,8 @@ public partial class OptionsViewModel : LocalizedViewModel
         _progress = progress;
         _theme = theme;
         _navigation = navigation;
+
+        Gate = new ParentGate(strings);
     }
 
     // ---- Audio ----
@@ -146,26 +148,11 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     // ---- Parent gate ----
 
-    /// <summary>
-    /// A small multiplication, so a young child cannot wander into a destructive action alone.
-    /// It is a speed bump, not security - and it is honest about being one.
-    /// </summary>
-    [ObservableProperty]
-    public partial bool IsGateOpen { get; private set; }
-
-    [ObservableProperty]
-    public partial string GateQuestion { get; private set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial string GateAnswer { get; set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial bool GateFailed { get; private set; }
+    /// <summary>The shared grown-ups' check in front of the reset. See <see cref="ParentGate"/>.</summary>
+    public ParentGate Gate { get; }
 
     [ObservableProperty]
     public partial bool IsResetConfirmOpen { get; private set; }
-
-    private int _gateExpectedAnswer;
 
     // ---- Section and row labels ----
 
@@ -249,14 +236,12 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string CancelLabel => T("cancel");
 
-    /// <summary>Shown when the sum is answered wrongly. The prototype's own wording.</summary>
-    public string GateRetryMessage => T("gateRetry");
-
-    public string GrownUpsLabel => T("grownUps");
 
     public string VersionLabel => T("version");
 
     public string NoAdsLabel => T("noAds");
+
+    protected override void OnLanguageChangedCore() => Gate.RefreshLabels();
 
     public override async Task OnAppearingAsync()
     {
@@ -393,39 +378,14 @@ public partial class OptionsViewModel : LocalizedViewModel
         CellZoomPercent = Math.Max(GameSettings.MinCellZoomPercent, CellZoomPercent - 10);
 
     [RelayCommand]
-    private void OpenResetGate()
+    private void OpenResetGate() => Gate.Open(() =>
     {
-        // Deliberately varied each time, so it cannot be learned by rote.
-        var left = 3 + (Environment.TickCount % 6);
-        var right = 3 + ((Environment.TickCount / 7) % 6);
-
-        _gateExpectedAnswer = left * right;
-        GateQuestion = $"{left} × {right} = ?";
-        GateAnswer = string.Empty;
-        GateFailed = false;
-        IsGateOpen = true;
-    }
+        IsResetConfirmOpen = true;
+        return Task.CompletedTask;
+    });
 
     [RelayCommand]
-    private void SubmitGate()
-    {
-        if (int.TryParse(GateAnswer, out var answer) && answer == _gateExpectedAnswer)
-        {
-            IsGateOpen = false;
-            IsResetConfirmOpen = true;
-            return;
-        }
-
-        GateFailed = true;
-        GateAnswer = string.Empty;
-    }
-
-    [RelayCommand]
-    private void CancelGate()
-    {
-        IsGateOpen = false;
-        IsResetConfirmOpen = false;
-    }
+    private void CancelReset() => IsResetConfirmOpen = false;
 
     [RelayCommand]
     private async Task ConfirmResetAsync()

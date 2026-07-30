@@ -109,6 +109,8 @@ public static class MauiProgram
         services.AddTransient<OptionsViewModel>();
         services.AddTransient<ContinueViewModel>();
         services.AddTransient<GalleryViewModel>();
+        services.AddTransient<AboutViewModel>();
+        services.AddTransient<HowToViewModel>();
         services.AddTransient<ComingSoonViewModel>();
     }
 
@@ -122,6 +124,8 @@ public static class MauiProgram
         services.AddTransient<OptionsPage>();
         services.AddTransient<ContinuePage>();
         services.AddTransient<GalleryPage>();
+        services.AddTransient<AboutPage>();
+        services.AddTransient<HowToPage>();
         services.AddTransient<ComingSoonPage>();
     }
 }

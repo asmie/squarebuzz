@@ -21,12 +21,12 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(Routes.Options, typeof(OptionsPage));
         Routing.RegisterRoute(Routes.Continue, typeof(ContinuePage));
         Routing.RegisterRoute(Routes.Gallery, typeof(GalleryPage));
+        Routing.RegisterRoute(Routes.About, typeof(AboutPage));
+        Routing.RegisterRoute(Routes.HowTo, typeof(HowToPage));
 
-        // Scaffolded screens. They share ComingSoonPage and differ only by the heading
-        // key passed at navigation time, so every route works end to end today.
+        // Trials is the one screen still scaffolded. ComingSoonPage takes its heading from a
+        // route parameter, so the route works end to end today.
         Routing.RegisterRoute(Routes.Trials, typeof(ComingSoonPage));
-        Routing.RegisterRoute(Routes.About, typeof(ComingSoonPage));
-        Routing.RegisterRoute(Routes.HowTo, typeof(ComingSoonPage));
     }
 }
 

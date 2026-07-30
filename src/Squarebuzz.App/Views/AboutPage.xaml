@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.App.ViewModels"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Views.AboutPage"
+             x:DataType="vm:AboutViewModel"
+             BackgroundColor="{DynamicResource Bg}">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="{StaticResource PagePadding}"
+                                 Spacing="14"
+                                 MaximumWidthRequest="{StaticResource FrameMaxWidth}"
+                                 HorizontalOptions="Center">
+
+                <Label Text="{Binding Heading}" Style="{StaticResource H1}" />
+
+                <controls:MascotView Pose="Idle" HeightRequest="90" WidthRequest="84" HorizontalOptions="Center" />
+
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding WhatIsTitle}" Style="{StaticResource H2}" />
+                        <Label Text="{Binding WhatIsBody}" Style="{StaticResource Subtle}" />
+                        <Label Text="{Binding AlsoCalled}"
+                               Style="{StaticResource Subtle}"
+                               FontSize="12"
+                               FontAttributes="Italic" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Card}" Padding="0">
+                    <VerticalStackLayout>
+                        <Button Text="{Binding HowToLabel}"
+                                Command="{Binding HowToCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource Ink}"
+                                FontAttributes="Bold"
+                                HeightRequest="56" />
+                        <Button Text="{Binding ContactLabel}"
+                                Command="{Binding ContactCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource Ink}"
+                                FontAttributes="Bold"
+                                HeightRequest="56" />
+                        <Button Text="{Binding PrivacyLabel}"
+                                Command="{Binding PrivacyCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource Ink}"
+                                FontAttributes="Bold"
+                                HeightRequest="56" />
+                        <Button Text="{Binding RateLabel}"
+                                Command="{Binding RateCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource Ink}"
+                                FontAttributes="Bold"
+                                HeightRequest="56" />
+                        <Button Text="{Binding CreditsLabel}"
+                                Command="{Binding CreditsCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{DynamicResource Ink}"
+                                FontAttributes="Bold"
+                                HeightRequest="56" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="{Binding Notice}"
+                       IsVisible="{Binding HasNotice}"
+                       Style="{StaticResource Subtle}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource PrimaryDeep}"
+                       HorizontalTextAlignment="Center" />
+
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="{Binding VersionLabel}" Style="{StaticResource Subtle}" FontSize="12"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding NoAdsLabel}" Style="{StaticResource Subtle}" FontSize="12"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Grown-ups' check, shared with Options. See ParentGate. -->
+        <Grid IsVisible="{Binding Gate.IsOpen}" BackgroundColor="#CC000000">
+            <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="300" Padding="24">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="{Binding Gate.Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding Gate.Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+
+                    <Entry Text="{Binding Gate.Answer}"
+                           Keyboard="Numeric"
+                           HorizontalTextAlignment="Center"
+                           FontSize="22"
+                           BackgroundColor="{DynamicResource Surface2}"
+                           TextColor="{DynamicResource Ink}" />
+
+                    <Label Text="{Binding Gate.RetryMessage}"
+                           IsVisible="{Binding Gate.HasFailed}"
+                           TextColor="{DynamicResource WarnDeep}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="OK" Command="{Binding Gate.SubmitCommand}"
+                            Style="{StaticResource PrimaryButton}" HeightRequest="52" />
+                    <Button Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
+                            Style="{StaticResource SecondaryButton}" HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>

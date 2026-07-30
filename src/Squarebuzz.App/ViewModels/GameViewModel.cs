@@ -493,7 +493,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [RelayCommand]
     private async Task HowToAsync()
     {
-        await _navigation.GoToAsync(Routes.HowTo, new Dictionary<string, object> { ["titleKey"] = "howToTitle" });
+        await _navigation.GoToAsync(Routes.HowTo);
     }
 
     private async Task HandleCompletionAsync()

@@ -239,7 +239,7 @@
                 <Label Text="{Binding ParentSection}" Style="{StaticResource SectionHeading}" />
                 <Border Style="{StaticResource Card}" Padding="16,12">
                     <VerticalStackLayout Spacing="10">
-                        <Label Text="{Binding GrownUpsLabel}" Style="{StaticResource Subtle}" FontSize="12" />
+                        <Label Text="{Binding Gate.Title}" Style="{StaticResource Subtle}" FontSize="12" />
                         <Button Text="{Binding ResetLabel}"
                                 Command="{Binding OpenResetGateCommand}"
                                 BackgroundColor="{DynamicResource WarnSoft}"
@@ -255,29 +255,29 @@
         </ScrollView>
 
         <!-- Parent gate: a small sum before anything destructive. -->
-        <Grid IsVisible="{Binding IsGateOpen}" BackgroundColor="#CC000000">
+        <Grid IsVisible="{Binding Gate.IsOpen}" BackgroundColor="#CC000000">
             <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Center"
                     WidthRequest="300" Padding="24">
                 <VerticalStackLayout Spacing="14">
-                    <Label Text="{Binding GrownUpsLabel}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
-                    <Label Text="{Binding GateQuestion}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding Gate.Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding Gate.Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
 
-                    <Entry Text="{Binding GateAnswer}"
+                    <Entry Text="{Binding Gate.Answer}"
                            Keyboard="Numeric"
                            HorizontalTextAlignment="Center"
                            FontSize="22"
                            BackgroundColor="{DynamicResource Surface2}"
                            TextColor="{DynamicResource Ink}" />
 
-                    <Label Text="{Binding GateRetryMessage}"
-                           IsVisible="{Binding GateFailed}"
+                    <Label Text="{Binding Gate.RetryMessage}"
+                           IsVisible="{Binding Gate.HasFailed}"
                            TextColor="{DynamicResource WarnDeep}"
                            FontAttributes="Bold"
                            HorizontalTextAlignment="Center" />
 
-                    <Button Text="OK" Command="{Binding SubmitGateCommand}"
+                    <Button Text="OK" Command="{Binding Gate.SubmitCommand}"
                             Style="{StaticResource PrimaryButton}" HeightRequest="52" />
-                    <Button Text="{Binding CancelLabel}" Command="{Binding CancelGateCommand}"
+                    <Button Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
                             Style="{StaticResource SecondaryButton}" HeightRequest="48" />
                 </VerticalStackLayout>
             </Border>
@@ -298,7 +298,7 @@
                             CornerRadius="16"
                             FontAttributes="Bold"
                             HeightRequest="52" />
-                    <Button Text="{Binding CancelLabel}" Command="{Binding CancelGateCommand}"
+                    <Button Text="{Binding CancelLabel}" Command="{Binding CancelResetCommand}"
                             Style="{StaticResource SecondaryButton}" HeightRequest="48" />
                 </VerticalStackLayout>
             </Border>
