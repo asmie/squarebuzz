@@ -22,6 +22,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     private readonly IThemeService _theme;
     private readonly INavigationService _navigation;
     private readonly IScreenTimeMonitor _screenTime;
+    private readonly IAudioService _audio;
 
     private GameSettings _settings = GameSettings.Default;
 
@@ -34,7 +35,8 @@ public partial class OptionsViewModel : LocalizedViewModel
         IProgressRepository progress,
         IThemeService theme,
         INavigationService navigation,
-        IScreenTimeMonitor screenTime)
+        IScreenTimeMonitor screenTime,
+        IAudioService audio)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
@@ -42,6 +44,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         _theme = theme;
         _navigation = navigation;
         _screenTime = screenTime;
+        _audio = audio;
 
         Gate = new ParentGate(strings);
     }
@@ -341,9 +344,29 @@ public partial class OptionsViewModel : LocalizedViewModel
     // properties that declare one, though, so a missing hook is a silently unsaved setting -
     // Handedness and TapBehaviour were both listed in Persist() but had no hook, so they only
     // ever reached the database if the player happened to change something else afterwards.
-    partial void OnSoundEffectsChanged(bool value) => Persist();
+    partial void OnSoundEffectsChanged(bool value)
+    {
+        _audio.Configure(value, Music);
 
-    partial void OnMusicChanged(bool value) => Persist();
+        // Play the sound the switch just turned on. Silence would be an ambiguous answer to
+        // "did that work?", and a child needs to hear what they have chosen.
+        //
+        // Only when the player did it. This hook also runs while the screen is copying saved
+        // settings into its own controls, and opening Options should not make a noise - which is
+        // exactly what it did until dumpsys showed the effect player had been started on arrival.
+        if (value && !_isLoading)
+        {
+            _audio.Play(GameSound.Fill);
+        }
+
+        Persist();
+    }
+
+    partial void OnMusicChanged(bool value)
+    {
+        _audio.Configure(SoundEffects, value);
+        Persist();
+    }
 
     partial void OnVoiceNarrationChanged(bool value) => Persist();
 

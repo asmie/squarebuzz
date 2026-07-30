@@ -21,19 +21,22 @@ public partial class SplashViewModel : LocalizedViewModel
     private readonly IThemeService _theme;
     private readonly INavigationService _navigation;
     private readonly IScreenTimeMonitor _screenTime;
+    private readonly IAudioService _audio;
 
     public SplashViewModel(
         ILocalizationService strings,
         ISettingsRepository settingsRepository,
         IThemeService theme,
         INavigationService navigation,
-        IScreenTimeMonitor screenTime)
+        IScreenTimeMonitor screenTime,
+        IAudioService audio)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
         _theme = theme;
         _navigation = navigation;
         _screenTime = screenTime;
+        _audio = audio;
     }
 
     /// <summary>0 to 1, so it binds straight to <c>ProgressBar.Progress</c> with no converter.</summary>
@@ -74,6 +77,15 @@ public partial class SplashViewModel : LocalizedViewModel
             // The reminder has to be armed before the first board opens, not when Options is
             // first visited - a child who goes straight into a game must still be counted.
             _screenTime.Configure(settings.ScreenTimeLimitMinutes);
+
+            // Applied before priming so the loop does not briefly start for a player who has
+            // music switched off; PrimeAsync re-applies once the assets are actually loaded.
+            _audio.Configure(settings.SoundEffects, settings.Music);
+
+            // The splash exists to cover startup work, and this is startup work. Deliberately
+            // awaited: it is the difference between the first tap on a cell being silent and
+            // being audible.
+            await _audio.PrimeAsync();
 
             return settings;
         }

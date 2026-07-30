@@ -51,6 +51,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="CommunityToolkit.Maui" />
+    <PackageReference Include="Plugin.Maui.Audio" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Condition="'$(Configuration)' == 'Debug'" />
   </ItemGroup>
 

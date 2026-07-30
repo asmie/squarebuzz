@@ -10,6 +10,13 @@
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageVersion Include="CommunityToolkit.Maui" Version="15.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+
+    <!--
+      Sound effects. MAUI has no audio playback of its own - CommunityToolkit.Maui.MediaElement
+      is a view for media with transport controls, which is the wrong shape for a 90 ms blip.
+      This wraps each platform's low-latency player (SoundPool, AVAudioPlayer, MediaPlayer).
+    -->
+    <PackageVersion Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
 
   <!--

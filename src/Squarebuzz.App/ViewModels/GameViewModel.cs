@@ -41,6 +41,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
     private readonly IScreenTimeMonitor _screenTime;
+    private readonly IAudioService _audio;
 
     private IDispatcherTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
@@ -62,7 +63,8 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         ILocalizationService strings,
         INavigationService navigation,
         IClock clock,
-        IScreenTimeMonitor screenTime)
+        IScreenTimeMonitor screenTime,
+        IAudioService audio)
         : base(strings)
     {
         _sessions = sessions;
@@ -73,6 +75,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         _navigation = navigation;
         _clock = clock;
         _screenTime = screenTime;
+        _audio = audio;
     }
 
     /// <summary>Raised when the board data changed and the canvas needs redrawing.</summary>
@@ -431,10 +434,20 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             case MoveResult.Mistake:
                 ShowToast(T("mistakeMsg"));
                 MistakeMade?.Invoke(this, index);
+
+                // No sound here on purpose - see GameSound.
                 break;
 
             case MoveResult.Applied when outcome.CompletedALine:
                 ShowToast(T("lineDone"));
+
+                // The line sound instead of the cell sound, not as well as: the completion is
+                // the more informative of the two, and both at once is just noise.
+                _audio.Play(GameSound.LineComplete);
+                break;
+
+            case MoveResult.Applied:
+                _audio.Play(SoundFor(target));
                 break;
 
             default:
@@ -449,6 +462,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             _ = HandleCompletionAsync();
         }
     }
+
+    /// <summary>The sound for a mark that was just applied. Clearing a cell gets its own.</summary>
+    private static GameSound SoundFor(CellState target) => target switch
+    {
+        CellState.Filled => GameSound.Fill,
+        CellState.Crossed => GameSound.Cross,
+        _ => GameSound.Erase,
+    };
 
     [RelayCommand]
     private void ToggleMode()
@@ -508,6 +529,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         }
 
         ShowToast(T("hintUsed"));
+        _audio.Play(GameSound.Hint);
         HintGranted?.Invoke(this, hint.Index);
 
         SyncFromSession();
@@ -610,6 +632,8 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         StopTimer();
         IsSolved = true;
         IsPaused = false;
+
+        _audio.Play(GameSound.Win);
         PuzzleSolved?.Invoke(this, EventArgs.Empty);
 
         try

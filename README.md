@@ -85,7 +85,9 @@ which is a failure a passing build and a green test suite both report as success
 | Buttons on: Left / Right | Reorders the action row so Undo — the most-reached button — sits at the chosen end |
 | Screen-time reminder | Off / 15 / 30 / 60 min of **play**, then a break overlay |
 | Haptics | Gated in one place (`GamePage.Buzz`), so a new buzz cannot skip the switch |
-| Sound effects, Music, Voice narration | **Still inert.** No audio pipeline or assets exist yet — see below |
+| Sound effects | Six effects, gated in one place (`AudioService.Play`) — see below |
+| Music | An eight-second loop, stopped when the app leaves the foreground |
+| Voice narration | **Still inert.** Needs platform text-to-speech rather than assets; its own chunk |
 
 **Auto and `UserAppTheme`.** Following the OS is not simply "read `RequestedTheme`". Setting
 `Application.UserAppTheme` overrides `RequestedTheme`, so a service that writes it and then
@@ -98,9 +100,45 @@ for all five. It only counts ticks where the clock is actually running, and it r
 being crossed exactly once, because a reminder that reopened every second would make the board
 unusable. The break overlay stops the clock but is not a lockout: "A little longer" resumes.
 
-**Audio is the remaining gap.** Three switches still do nothing. The pipeline and the assets are
-both missing, and no sound files ship with the repo — the prototype had the same four switches
-and no audio behind them either. Left for its own chunk rather than faked.
+## Sound
+
+`Resources/Raw/*.wav` are **generated, not recorded**, by `tools/generate-sounds.cs`:
+
+```bash
+dotnet run tools/generate-sounds.cs
+```
+
+Each sound is a few numbers — pitch, length, envelope, peak level — so what it will sound like is
+a property of that file, and changing one is reviewable in a diff rather than requiring an audio
+editor. They are sine fundamentals with one quiet harmonic, raised-cosine envelopes so nothing
+starts or ends on a discontinuity, all pitched from one C major scale so no two can clash, and
+peaking at −14 dBFS. That makes them plain and safe; it does not make them good. **Treat them as
+placeholders for a sound designer**, and note that nobody has yet listened to them on a real
+device — their measured properties were verified, their musicality was not.
+
+`music.wav` is a chord pad rather than a tune, on purpose: a melody heard for an hour is what
+makes a child turn the sound off, and unlike a 70 ms blip a tune is a composition rather than
+arithmetic. It loops seamlessly by construction — every frequency, including the slow swells, is
+rounded to a whole number of cycles across the eight seconds, so the step at the wrap point is
+smaller than an ordinary sample-to-sample step within the file. It is written at 11 kHz because
+its highest partial is 392 Hz; at 44.1 kHz this one file would outweigh everything else in the
+app four times over.
+
+**There is deliberately no mistake sound.** The design doc's motion spec says of the mistake
+shake: "No sound sting by default." The shake and the warn tint already say it.
+
+Two things worth knowing about the plugin (`Plugin.Maui.Audio` 4.0.0):
+
+- Audio attributes must be passed to **each** `CreatePlayer` call. Configuring them once on the
+  app builder is not enough — `adb shell dumpsys audio` showed every player registered as
+  `USAGE_UNKNOWN` until `AudioService.OptionsFor` set them per player.
+- The audio-focus and iOS session-category options in its documentation are **not in the released
+  package**. So focus is unmanaged: the loop is stopped by hand on backgrounding
+  (`App.CreateWindow`), but an incoming call will talk over it rather than pause it.
+
+Verifying audio without being able to hear it: `adb shell dumpsys audio` lists every registered
+player for a pid with its state, which is enough to prove that the assets loaded, that a given
+action starts a given player, that the switches gate them, and that a mistake starts nothing.
 
 ## Continuous integration
 

@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 using Squarebuzz.App.Services;
 using Squarebuzz.App.ViewModels;
 using Squarebuzz.App.Views;
@@ -26,6 +27,11 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+
+            // Registers IAudioManager. The per-player audio attributes are set in
+            // AudioService.OptionsFor rather than here: configuring them on the builder alone
+            // left every player registered with USAGE_UNKNOWN.
+            .AddAudio()
             .ConfigureFonts(fonts =>
             {
                 // The prototype uses Fredoka (display) and Quicksand (body) from Google Fonts.
@@ -50,6 +56,9 @@ public static class MauiProgram
         // Singletons: one instance for the app's lifetime.
         services.AddSingleton<IThemeService, ThemeService>();
         services.AddSingleton<AppShell>();
+
+        // Holds the loaded players for the life of the app, so a tap never waits on file I/O.
+        services.AddSingleton<IAudioService, AudioService>();
 
         // Resolves to the same object XAML reaches through x:Static, so markup and code can
         // never disagree about the current language.
