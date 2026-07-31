@@ -26,36 +26,48 @@
                 FontFamily="BodyBold"
                 MinimumHeightRequest="48" />
 
-        <VerticalStackLayout Grid.Row="1"
-                             VerticalOptions="Center"
-                             Spacing="24"
-                             MaximumWidthRequest="{StaticResource FrameMaxWidth}">
+        <!-- This wrapper exists to be measured: it fills the middle row, so its height is the row's
+             height, which is what decides how big the card may be. Reading it beats adding up the
+             padding, the two pinned rows and the row gaps, where any term left out silently becomes
+             an overlap. -->
+        <Grid x:Name="MiddleRow" Grid.Row="1">
 
-            <Border Style="{StaticResource Card}"
-                    HeightRequest="300"
-                    WidthRequest="300"
-                    HorizontalOptions="Center">
-                <Grid RowDefinitions="*,Auto" RowSpacing="10">
-                    <controls:PuzzleArtView Grid.Row="0" Puzzle="{Binding DemoPuzzle}" AutomationProperties.ExcludedWithChildren="True" />
-                    <controls:MascotView Grid.Row="1"
-                                         AutomationProperties.ExcludedWithChildren="True"
-                                         Pose="{Binding MascotPose}"
-                                         HeightRequest="56"
-                                         WidthRequest="52"
-                                         HorizontalOptions="Center" />
-                </Grid>
-            </Border>
+            <!-- Centred like every other capped page: with the default Fill the stack spans the
+                 whole viewport, so the caption keeps wrapping past the frame cap on a wide window
+                 even though the card itself centres. -->
+            <VerticalStackLayout x:Name="CardAndCaption"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="24"
+                                 MaximumWidthRequest="{StaticResource FrameMaxWidth}">
 
-            <VerticalStackLayout Spacing="10">
-                <Label Text="{Binding StepTitle}"
-                       Style="{StaticResource H1}"
-                       SemanticProperties.HeadingLevel="Level1"
-                       HorizontalTextAlignment="Center" />
-                <Label Text="{Binding StepBody}"
-                       Style="{StaticResource Subtle}"
-                       HorizontalTextAlignment="Center" />
+                <Border x:Name="DemoCard"
+                        Style="{StaticResource Card}"
+                        HeightRequest="300"
+                        WidthRequest="300"
+                        HorizontalOptions="Center">
+                    <Grid RowDefinitions="*,Auto" RowSpacing="10">
+                        <controls:PuzzleArtView Grid.Row="0" Puzzle="{Binding DemoPuzzle}" AutomationProperties.ExcludedWithChildren="True" />
+                        <controls:MascotView Grid.Row="1"
+                                             AutomationProperties.ExcludedWithChildren="True"
+                                             Pose="{Binding MascotPose}"
+                                             HeightRequest="56"
+                                             WidthRequest="52"
+                                             HorizontalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <VerticalStackLayout x:Name="Caption" Spacing="10">
+                    <Label Text="{Binding StepTitle}"
+                           Style="{StaticResource H1}"
+                           SemanticProperties.HeadingLevel="Level1"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding StepBody}"
+                           Style="{StaticResource Subtle}"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
             </VerticalStackLayout>
-        </VerticalStackLayout>
+        </Grid>
 
         <VerticalStackLayout Grid.Row="2" Spacing="16">
             <!-- Step dots. Three fixed pips rather than a bound list: the count never changes,
