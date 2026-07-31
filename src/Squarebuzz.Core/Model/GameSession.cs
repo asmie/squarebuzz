@@ -422,16 +422,25 @@ public sealed class GameSession
     }
 
     /// <summary>
-    /// The puzzle is won when every cell of the picture is filled. Crossing off the blanks is
-    /// a bookkeeping aid for the player, not a requirement.
+    /// The puzzle is won when the filled cells are exactly the picture. Crossing off the blanks
+    /// is a bookkeeping aid for the player, not a requirement - but *filling* a blank blocks the
+    /// win until it is cleared.
     /// </summary>
+    /// <remarks>
+    /// The second half of the check only matters when <see cref="GameRules.WarnOnMistakes"/> is
+    /// off: with it on, a wrong fill is refused at <see cref="Paint"/> and can never be on the
+    /// board. Without this clause, warn-off would accept painting the whole grid as a win -
+    /// three stars for defeating the point of the game.
+    /// </remarks>
     private bool EvaluateSolved()
     {
         var solution = Puzzle.Solution;
 
         for (var i = 0; i < solution.Length; i++)
         {
-            if (solution[i] && _cells[i] != CellState.Filled)
+            var filled = _cells[i] == CellState.Filled;
+
+            if (solution[i] != filled)
             {
                 return false;
             }

@@ -19,6 +19,10 @@ public partial class GamePage : ContentPage
         _viewModel = viewModel;
         BindingContext = viewModel;
 
+        // Beyond the usual leak (see PageLifecycle), disposing this ViewModel is what stops the
+        // one-second clock when the player leaves with the back gesture instead of Quit.
+        this.DisposeViewModelWhenPopped();
+
         // Board rendering is imperative by nature - a canvas redraw is not a binding - so the
         // ViewModel signals through events and the page translates them into draw calls.
         _viewModel.BoardChanged += OnBoardChanged;
@@ -159,6 +163,11 @@ public partial class GamePage : ContentPage
             // Resumes the save named by the route, or starts a fresh puzzle.
             await _viewModel.InitialiseAsync();
         }
+        else
+        {
+            // Coming back from backgrounding or from a page pushed over the game (How to play).
+            _viewModel.ResumeClock();
+        }
     }
 
     protected override async void OnDisappearing()
@@ -166,7 +175,10 @@ public partial class GamePage : ContentPage
         base.OnDisappearing();
 
         // Covers backgrounding and back-navigation, which are the routes out of the game that
-        // no button handles.
+        // no button handles. The clock stops first: time on the home screen or on a page pushed
+        // over the game is not time spent playing, and it must not count against a timed trial
+        // or the parental screen-time limit.
+        _viewModel.SuspendClock();
         await _viewModel.AutosaveAsync();
     }
 

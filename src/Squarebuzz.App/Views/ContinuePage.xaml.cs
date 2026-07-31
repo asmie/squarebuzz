@@ -12,6 +12,9 @@ public partial class ContinuePage : ContentPage
 
         _viewModel = viewModel;
         BindingContext = viewModel;
+
+        // Popped pages own their ViewModel - see PageLifecycle.
+        this.DisposeViewModelWhenPopped();
     }
 
     protected override async void OnAppearing()

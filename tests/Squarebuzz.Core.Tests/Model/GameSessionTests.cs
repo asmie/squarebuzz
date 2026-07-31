@@ -149,6 +149,48 @@ public class GameSessionTests
     }
 
     [Fact]
+    public void WithWarningsOff_AWrongFillBlocksTheWin_UntilItIsCleared()
+    {
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { WarnOnMistakes = false, AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
+        var wrong = session.Puzzle.IndexOf(0, 0);
+
+        session.Paint(wrong, CellState.Filled);
+        FillEntireSolution(session);
+
+        // The picture is all there, but so is a square that is not part of it.
+        Assert.False(session.IsSolved);
+
+        var outcome = session.Paint(wrong, CellState.Empty);
+
+        Assert.True(outcome.SolvedPuzzle);
+        Assert.True(session.IsSolved);
+    }
+
+    [Fact]
+    public void WithWarningsOff_PaintingTheWholeGrid_IsNotAWin()
+    {
+        // Without this, turning off "Warn on mistakes" and dragging over everything would earn
+        // three stars - the win has to mean the picture, not a full board.
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { WarnOnMistakes = false, AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
+
+        for (var i = 0; i < session.Puzzle.CellCount; i++)
+        {
+            session.Paint(i, CellState.Filled);
+        }
+
+        Assert.False(session.IsSolved);
+        Assert.Equal(session.Puzzle.CellCount, session.FilledCount);
+    }
+
+    [Fact]
     public void CompletingARow_AutoCrossesTheRest()
     {
         var session = NewSession();

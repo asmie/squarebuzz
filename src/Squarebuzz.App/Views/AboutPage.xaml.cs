@@ -8,5 +8,8 @@ public partial class AboutPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+
+        // Popped pages own their ViewModel - see PageLifecycle.
+        this.DisposeViewModelWhenPopped();
     }
 }

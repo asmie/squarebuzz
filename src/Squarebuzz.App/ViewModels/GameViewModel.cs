@@ -969,6 +969,24 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         OnPropertyChanged(nameof(BoardDescription));
     }
 
+    /// <summary>
+    /// Stops the clock while the game is not in front. Called from the page's OnDisappearing,
+    /// which covers backgrounding as well as a page pushed over the game.
+    /// </summary>
+    public void SuspendClock() => StopTimer();
+
+    /// <summary>
+    /// Restarts the clock suspended by <see cref="SuspendClock"/>, unless the game has ended in
+    /// the meantime. Safe to call when the clock is already running.
+    /// </summary>
+    public void ResumeClock()
+    {
+        if (Session is { IsOver: false })
+        {
+            StartTimer();
+        }
+    }
+
     private void StartTimer()
     {
         StopTimer();
