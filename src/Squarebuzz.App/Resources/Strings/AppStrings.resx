@@ -44,7 +44,7 @@
   <data name="relaxed" xml:space="preserve"><value>Relaxed</value></data>
   <data name="relaxedSub" xml:space="preserve"><value>Helpers on, no limits</value></data>
   <data name="sharp" xml:space="preserve"><value>Sharp</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Mistakes counted, no auto-cross</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Mistakes counted, one hint</value></data>
   <data name="pack" xml:space="preserve"><value>Picture pack</value></data>
   <data name="helpers" xml:space="preserve"><value>Helpers</value></data>
   <data name="autoCross" xml:space="preserve"><value>Auto-cross finished lines</value></data>

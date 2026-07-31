@@ -64,10 +64,12 @@ public class GameSessionFactoryTests
         var sharp = factory.Create(NewGameOptions.Default with { Challenge = ChallengeLevel.Sharp, Seed = 1 });
 
         Assert.Equal(3, relaxed.HintsRemaining);
-        Assert.True(relaxed.Rules.AutoCrossCompletedLines);
-
         Assert.Equal(1, sharp.HintsRemaining);
-        Assert.False(sharp.Rules.AutoCrossCompletedLines);
+
+        // The hint budget is what the challenge decides; auto-crossing is the player's switch,
+        // which is on by default at either level.
+        Assert.True(relaxed.Rules.AutoCrossCompletedLines);
+        Assert.True(sharp.Rules.AutoCrossCompletedLines);
     }
 
     [Fact]

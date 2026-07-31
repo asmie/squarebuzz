@@ -540,13 +540,20 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// </summary>
     public async Task RefreshSettingsAsync()
     {
-        if (Session is null)
+        if (Session is not { } session)
         {
             // InitialiseAsync loads settings itself; refreshing before it runs is wasted I/O.
             return;
         }
 
         _settings = await LoadSettingsSafelyAsync();
+
+        // The rules too, not just the view-level preferences: a session resolves its rules at
+        // creation, so without this a helper flipped from the pause overlay's Options - the
+        // auto-cross switch, say - would quietly do nothing until the next puzzle.
+        session.ApplyHelpers(_settings.Helpers);
+
+        SyncFromSession();
         NotifySettingsDependentProperties();
     }
 

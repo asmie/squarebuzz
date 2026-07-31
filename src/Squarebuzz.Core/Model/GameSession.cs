@@ -32,7 +32,7 @@ public sealed class GameSession
 
     public Puzzle Puzzle { get; }
 
-    public GameRules Rules { get; }
+    public GameRules Rules { get; private set; }
 
     /// <summary>
     /// The choices this session was created from. Carried so a save can record the player's
@@ -50,7 +50,12 @@ public sealed class GameSession
 
     public int HintsRemaining { get; private set; }
 
-    public int HintsUsed => Rules.HintAllowance - HintsRemaining;
+    /// <summary>
+    /// Hints actually spent. A counter of its own rather than allowance-minus-remaining,
+    /// because <see cref="ApplyHelpers"/> can change the allowance mid-game and the stars
+    /// must keep charging for the help that was really taken.
+    /// </summary>
+    public int HintsUsed { get; private set; }
 
     public int Mistakes { get; private set; }
 
@@ -189,10 +194,37 @@ public sealed class GameSession
 
         Elapsed = elapsed;
         HintsRemaining = Math.Min(hintsRemaining, Rules.HintAllowance);
+        HintsUsed = Math.Max(0, Rules.HintAllowance - HintsRemaining);
         Mistakes = mistakes;
         _history.Clear();
 
         EvaluateSolved();
+    }
+
+    /// <summary>
+    /// Re-resolves the rules after the player changed a helper in Options mid-game.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Without this, the pause overlay's Options entry would be a lie: rules are resolved when
+    /// a session is created, so a helper flipped mid-game would change nothing until the next
+    /// puzzle. The challenge the game was started with is kept, so Sharp keeps counting
+    /// mistakes and keeps its single hint, and the hint budget is recomputed against hints
+    /// already spent - toggling hints off and back on cannot mint fresh ones.
+    /// </para>
+    /// <para>
+    /// Only future moves are affected. A line that was already complete when auto-crossing was
+    /// switched on keeps its blanks; the next completed line behaves as configured.
+    /// </para>
+    /// </remarks>
+    public void ApplyHelpers(HelperSettings helpers)
+    {
+        ArgumentNullException.ThrowIfNull(helpers);
+
+        // Origin is present on every session the app creates; the Relaxed fallback only
+        // matters for bare test constructions.
+        Rules = GameRules.Create(Origin?.Challenge ?? ChallengeLevel.Relaxed, helpers);
+        HintsRemaining = Math.Max(0, Rules.HintAllowance - HintsUsed);
     }
 
     /// <summary>
@@ -345,6 +377,7 @@ public sealed class GameSession
         }
 
         HintsRemaining--;
+        HintsUsed++;
 
         var changes = new List<CellChange> { new(hint.Index, _cells[hint.Index], hint.Value) };
         _cells[hint.Index] = hint.Value;

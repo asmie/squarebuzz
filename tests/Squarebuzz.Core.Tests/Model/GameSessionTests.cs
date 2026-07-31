@@ -193,8 +193,8 @@ public class GameSessionTests
     [Fact]
     public void CompletingALine_WithAutoCrossOff_StillReportsTheCompletion()
     {
-        // Sharp play switches the auto-cross helper off. The "line done" chime must not go with
-        // it - the line is no less done.
+        // A player can switch auto-crossing off. The "line done" chime must not go with it -
+        // the line is no less done.
         var rules = GameRules.Create(
             ChallengeLevel.Relaxed,
             HelperSettings.Default with { AutoCross = false });
@@ -258,6 +258,72 @@ public class GameSessionTests
     }
 
     [Fact]
+    public void ApplyHelpers_TurnsAutoCrossingOnForSubsequentMoves()
+    {
+        // The pause overlay links to Options, so a helper can change mid-game. The session's
+        // rules have to follow, or the switch silently does nothing until the next puzzle.
+        var off = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { AutoCross = false });
+
+        var session = new GameSession(
+            Plus(),
+            off,
+            new NewGameOptions(GridSize.Tiny, 2, "test", ChallengeLevel.Relaxed));
+
+        var before = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+        Assert.Equal(0, before.AutoCrossedCells);
+
+        session.ApplyHelpers(HelperSettings.Default);
+
+        // Row 4 is "..#..": filling its single cell completes it and must now auto-cross.
+        var after = session.Paint(session.Puzzle.IndexOf(2, 4), CellState.Filled);
+
+        Assert.True(after.AutoCrossedCells > 0);
+        Assert.Equal(CellState.Crossed, session.At(0, 4));
+    }
+
+    [Fact]
+    public void ApplyHelpers_KeepsTheChallengeButFollowsTheHelper()
+    {
+        var rules = GameRules.Create(
+            ChallengeLevel.Sharp,
+            HelperSettings.Default with { AutoCross = false });
+
+        var session = new GameSession(
+            Plus(),
+            rules,
+            new NewGameOptions(GridSize.Tiny, 2, "test", ChallengeLevel.Sharp));
+
+        session.ApplyHelpers(HelperSettings.Default with { AutoCross = true });
+
+        // The switch is obeyed even here; the challenge keeps its single hint.
+        Assert.True(session.Rules.AutoCrossCompletedLines);
+        Assert.Equal(1, session.Rules.HintAllowance);
+    }
+
+    [Fact]
+    public void ApplyHelpers_CannotMintFreshHints()
+    {
+        var session = new GameSession(
+            Plus(),
+            GameRules.Relaxed,
+            new NewGameOptions(GridSize.Tiny, 2, "test", ChallengeLevel.Relaxed));
+
+        Assert.NotNull(session.UseHint());
+        Assert.Equal(1, session.HintsUsed);
+
+        session.ApplyHelpers(HelperSettings.Default with { AllowHints = false });
+        Assert.Equal(0, session.HintsRemaining);
+
+        // Back on: the spent hint stays spent.
+        session.ApplyHelpers(HelperSettings.Default);
+
+        Assert.Equal(2, session.HintsRemaining);
+        Assert.Equal(1, session.HintsUsed);
+    }
+
+    [Fact]
     public void CompletingARow_AutoCrossesTheRest()
     {
         var session = NewSession();
@@ -313,7 +379,11 @@ public class GameSessionTests
     [Fact]
     public void WithAutoCrossOff_CompletingARowChangesNothingElse()
     {
-        var session = new GameSession(Plus(), GameRules.Sharp);
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
 
         var outcome = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
 
@@ -322,12 +392,38 @@ public class GameSessionTests
     }
 
     [Fact]
-    public void SharpChallenge_AllowsOnlyOneHintAndNoAutoCross()
+    public void SharpChallenge_AllowsOnlyOneHint()
     {
         var rules = GameRules.Sharp;
 
         Assert.Equal(1, rules.HintAllowance);
-        Assert.False(rules.AutoCrossCompletedLines);
+    }
+
+    [Fact]
+    public void SharpChallenge_StillObeysTheAutoCrossSwitch()
+    {
+        // Auto-crossing is bookkeeping, not help: it only marks blanks a finished clue has
+        // already proved empty. Sharp is about counted mistakes and a single hint, so it has
+        // no business overriding the player's switch in either direction.
+        Assert.True(GameRules.Sharp.AutoCrossCompletedLines);
+
+        var off = GameRules.Create(
+            ChallengeLevel.Sharp,
+            HelperSettings.Default with { AutoCross = false });
+
+        Assert.False(off.AutoCrossCompletedLines);
+    }
+
+    [Fact]
+    public void SharpChallenge_AutoCrossesACompletedLine()
+    {
+        var session = new GameSession(Plus(), GameRules.Sharp);
+
+        // Row 0 is "..#..", clue 1: filling its single cell completes it.
+        var outcome = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        Assert.True(outcome.AutoCrossedCells > 0);
+        Assert.Equal(CellState.Crossed, session.At(0, 0));
     }
 
     [Fact]

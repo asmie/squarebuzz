@@ -46,9 +46,10 @@ public sealed record TimedTier(int Tier, int Size, TimeSpan Limit)
 /// time, which is what makes it read as a dare rather than as more of the same.
 /// </para>
 /// <para>
-/// A trial is played under <see cref="ChallengeLevel.Sharp"/>, so mistakes are counted and lines
-/// are not auto-crossed. Racing a clock with the helpers on would measure tapping speed rather
-/// than reading the clues.
+/// A trial is played under <see cref="ChallengeLevel.Sharp"/>, so mistakes are counted and there
+/// is a single hint - a race decided by three free reveals would not be much of a race. The
+/// player's own helper switches still apply, auto-crossing included: see
+/// <see cref="Model.GameRules.Create"/> for why that is not the same as handing out help.
 /// </para>
 /// </remarks>
 public static class TimedTrial

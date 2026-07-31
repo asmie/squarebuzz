@@ -9,7 +9,7 @@ public enum ChallengeLevel
     /// <summary>Helpers on, no limits.</summary>
     Relaxed,
 
-    /// <summary>Mistakes counted, no auto-crossing, one hint.</summary>
+    /// <summary>Mistakes counted, one hint.</summary>
     Sharp,
 }
 
@@ -49,16 +49,24 @@ public sealed record GameRules
     public bool ShowTimer { get; init; }
 
     /// <summary>
-    /// Resolves the rules. Auto-crossing needs both the helper enabled and a relaxed
-    /// challenge - Sharp explicitly withholds it.
+    /// Resolves the rules.
     /// </summary>
+    /// <remarks>
+    /// Auto-crossing follows the helper alone, on every challenge level. It used to need a
+    /// relaxed challenge as well, which made the Options switch look broken to anyone playing
+    /// Sharp: the toggle said one thing and the board did another. Crossing off blanks a
+    /// completed clue has already proved is bookkeeping, not a hint - it reveals nothing the
+    /// player has not deduced - so withholding it made Sharp tedious rather than harder. What
+    /// still separates Sharp is what it is actually about: mistakes are counted and there is
+    /// one hint instead of three.
+    /// </remarks>
     public static GameRules Create(ChallengeLevel level, HelperSettings helpers)
     {
         ArgumentNullException.ThrowIfNull(helpers);
 
         return new GameRules
         {
-            AutoCrossCompletedLines = helpers.AutoCross && level == ChallengeLevel.Relaxed,
+            AutoCrossCompletedLines = helpers.AutoCross,
             WarnOnMistakes = helpers.WarnOnMistakes,
             ShowTimer = helpers.ShowTimer,
             HintAllowance = helpers.AllowHints

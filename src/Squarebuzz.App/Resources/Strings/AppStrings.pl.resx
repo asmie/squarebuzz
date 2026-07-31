@@ -44,7 +44,7 @@
   <data name="relaxed" xml:space="preserve"><value>Spokojnie</value></data>
   <data name="relaxedSub" xml:space="preserve"><value>Pomoce włączone</value></data>
   <data name="sharp" xml:space="preserve"><value>Ostro</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Błędy liczone</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Błędy liczone, jedna podpowiedź</value></data>
   <data name="pack" xml:space="preserve"><value>Zestaw obrazków</value></data>
   <data name="helpers" xml:space="preserve"><value>Pomoce</value></data>
   <data name="autoCross" xml:space="preserve"><value>Auto-X po skończonej linii</value></data>
