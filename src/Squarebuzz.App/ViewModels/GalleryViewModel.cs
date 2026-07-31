@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Core.Progression;
 
 namespace Squarebuzz.App.ViewModels;
 
@@ -110,10 +111,12 @@ public partial class GalleryViewModel : LocalizedViewModel
         }
 
         var byId = solved.ToDictionary(s => s.PuzzleId, StringComparer.Ordinal);
-        var lockedPacks = _puzzles.Packs
-            .Where(p => p.Locked)
-            .Select(p => p.Id)
-            .ToHashSet(StringComparer.Ordinal);
+
+        // Which packs are open is derived from the same solved table - see PackUnlocks.
+        var unlockedPacks = PackUnlocks.UnlockedPackIds(
+            _puzzles.Packs,
+            _puzzles.Puzzles,
+            [.. byId.Keys]);
 
         Cards.Clear();
 
@@ -122,11 +125,16 @@ public partial class GalleryViewModel : LocalizedViewModel
             var record = byId.GetValueOrDefault(puzzle.Id);
             var isFound = record is not null;
 
+            // A found picture is never locked, whatever its pack says: the Puzzle Path plays
+            // locked-pack pictures at their stops, and something the player has legitimately
+            // finished must stay theirs to admire and replay.
+            var isLocked = !unlockedPacks.Contains(puzzle.Pack) && !isFound;
+
             Cards.Add(new GalleryCard
             {
                 Puzzle = puzzle,
                 IsFound = isFound,
-                IsLocked = lockedPacks.Contains(puzzle.Pack),
+                IsLocked = isLocked,
 
                 // Withholding the name is what makes finding one feel like a discovery.
                 Name = isFound ? T($"Puzzle_{puzzle.Id}") : "???",
@@ -140,8 +148,7 @@ public partial class GalleryViewModel : LocalizedViewModel
                     ? string.Empty
                     : $"{(int)record.BestTime.TotalMinutes}:{record.BestTime.Seconds:00}",
                 LockedLabel = T("locked"),
-                Description = DescribeCard(
-                    isFound, lockedPacks.Contains(puzzle.Pack), puzzle, record?.BestStars ?? 0),
+                Description = DescribeCard(isFound, isLocked, puzzle, record?.BestStars ?? 0),
             });
         }
 

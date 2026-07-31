@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Core.Progression;
 
 namespace Squarebuzz.App.ViewModels;
 
@@ -60,21 +61,27 @@ public partial class NewGameViewModel : LocalizedViewModel
 {
     private readonly IPuzzleRepository _puzzles;
     private readonly ISettingsRepository _settingsRepository;
+    private readonly IProgressRepository _progress;
     private readonly INavigationService _navigation;
     private readonly IDeviceScreen _screen;
 
     private GameSettings _settings = GameSettings.Default;
 
+    /// <summary>Ids of packs open to choose from - see <see cref="PackUnlocks"/>.</summary>
+    private IReadOnlySet<string> _unlockedPacks = new HashSet<string>(StringComparer.Ordinal);
+
     public NewGameViewModel(
         ILocalizationService strings,
         IPuzzleRepository puzzles,
         ISettingsRepository settingsRepository,
+        IProgressRepository progress,
         INavigationService navigation,
         IDeviceScreen screen)
         : base(strings)
     {
         _puzzles = puzzles;
         _settingsRepository = settingsRepository;
+        _progress = progress;
         _navigation = navigation;
         _screen = screen;
     }
@@ -135,6 +142,21 @@ public partial class NewGameViewModel : LocalizedViewModel
         catch (Exception)
         {
             _settings = GameSettings.Default;
+        }
+
+        try
+        {
+            var solved = await _progress.GetSolvedPuzzlesAsync();
+            _unlockedPacks = PackUnlocks.UnlockedPackIds(
+                _puzzles.Packs,
+                _puzzles.Puzzles,
+                [.. solved.Select(s => s.PuzzleId)]);
+        }
+        catch (Exception)
+        {
+            // Unreadable progress must not block starting a game; the statically open packs
+            // are still there.
+            _unlockedPacks = PackUnlocks.UnlockedPackIds(_puzzles.Packs, _puzzles.Puzzles, []);
         }
 
         SelectedSize = LargestPlayableSize(_settings.LastSize);
@@ -227,7 +249,10 @@ public partial class NewGameViewModel : LocalizedViewModel
                 Id = pack.Id,
                 Icon = pack.Icon,
                 Label = T($"Pack_{pack.Id}"),
-                IsLocked = pack.Locked,
+
+                // Not the content flag alone: a shipped-locked pack opens once its pictures
+                // have all been found on the Puzzle Path. See PackUnlocks.
+                IsLocked = !_unlockedPacks.Contains(pack.Id),
                 IsSelected = pack.Id == SelectedPackId,
             });
         }
