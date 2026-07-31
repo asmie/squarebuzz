@@ -47,10 +47,64 @@ public sealed class BoardDrawable : IDrawable
     /// <summary>Cell being pulsed as a hint. -1 for none.</summary>
     public int HintIndex { get; set; } = -1;
 
+    /// <summary>Ring width around the hinted cell. Animated by the view; 3 when at rest.</summary>
+    public float HintRingWidth { get; set; } = 3f;
+
     /// <summary>Cell flashed red after a wrong fill. -1 for none.</summary>
     public int MistakeIndex { get; set; } = -1;
 
+    /// <summary>Cell mid-pop after being filled. -1 for none.</summary>
+    public int PopIndex { get; set; } = -1;
+
+    /// <summary>Scale of the popping cell, driven by the view's animation.</summary>
+    public float PopScale { get; set; } = 1f;
+
     public bool BigNumbers { get; set; }
+
+    /// <summary>How long a clue strike takes to wipe across the number.</summary>
+    private const double StrikeWipeMilliseconds = 180;
+
+    /// <summary>
+    /// When each clue strike first appeared, keyed by line and run, so a newly satisfied clue
+    /// wipes its line in over <see cref="StrikeWipeMilliseconds"/> instead of snapping. Strikes
+    /// present when a board is first drawn - a resumed save - are seeded as ancient, because a
+    /// restore is not news.
+    /// </summary>
+    private readonly Dictionary<long, long> _strikeBirths = [];
+
+    private bool _seedStrikesSilently = true;
+
+    /// <summary>Forget every strike and treat the next draw as a fresh board.</summary>
+    public void ResetStrikeAnimations()
+    {
+        _strikeBirths.Clear();
+        _seedStrikesSilently = true;
+    }
+
+    private float StrikeProgress(bool isRow, int line, int run, bool isStruck)
+    {
+        var key = ((isRow ? 1L : 0L) << 40) | ((long)line << 20) | (uint)run;
+
+        if (!isStruck)
+        {
+            _strikeBirths.Remove(key);
+            return 0f;
+        }
+
+        if (!_strikeBirths.TryGetValue(key, out var birth))
+        {
+            // Ancient (0) when seeding a freshly shown board, newborn otherwise.
+            birth = _seedStrikesSilently ? 0 : Environment.TickCount64;
+            _strikeBirths[key] = birth;
+        }
+
+        if (birth == 0 || Services.MotionPreferences.ReduceMotion)
+        {
+            return 1f;
+        }
+
+        return (float)Math.Min(1.0, (Environment.TickCount64 - birth) / StrikeWipeMilliseconds);
+    }
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
@@ -68,6 +122,10 @@ public sealed class BoardDrawable : IDrawable
         DrawGroupSeparators(canvas, layout);
         DrawColumnClues(canvas, puzzle, layout);
         DrawRowClues(canvas, puzzle, layout);
+
+        // Everything struck during the first draw of a board has now been seeded as ancient;
+        // from here on a new strike is genuinely new and earns its wipe.
+        _seedStrikesSilently = false;
     }
 
     private void DrawGutterBackgrounds(ICanvas canvas, BoardLayout layout)
@@ -121,14 +179,20 @@ public sealed class BoardDrawable : IDrawable
 
                 if (state == CellState.Filled || index == MistakeIndex)
                 {
+                    // A cell mid-pop is drawn scaled around its own centre - small, overshoot,
+                    // settle - which is what makes a mark feel placed rather than switched on.
+                    var scale = index == PopIndex ? PopScale : 1f;
+                    var size = (cellSize - (CellInset * 2)) * scale;
+                    var offset = (cellSize - size) / 2f;
+
                     // Filled cells get rounded corners, which is what gives the finished
                     // picture its soft, blocky character.
                     canvas.FillRoundedRectangle(
-                        left + CellInset,
-                        top + CellInset,
-                        cellSize - (CellInset * 2),
-                        cellSize - (CellInset * 2),
-                        cornerRadius);
+                        left + offset,
+                        top + offset,
+                        size,
+                        size,
+                        cornerRadius * scale);
                 }
                 else
                 {
@@ -144,11 +208,18 @@ public sealed class BoardDrawable : IDrawable
                     DrawCross(canvas, left, top, cellSize);
                 }
 
-                if (index == HintIndex)
+                if (index == HintIndex && HintRingWidth > 0.1f)
                 {
+                    // Width animated by the view: two quick pulses when granted, 3 at rest.
+                    var ring = HintRingWidth;
                     canvas.StrokeColor = Palette.Gold;
-                    canvas.StrokeSize = 3f;
-                    canvas.DrawRoundedRectangle(left + 1.5f, top + 1.5f, cellSize - 3f, cellSize - 3f, cornerRadius);
+                    canvas.StrokeSize = ring;
+                    canvas.DrawRoundedRectangle(
+                        left + (ring / 2f),
+                        top + (ring / 2f),
+                        cellSize - ring,
+                        cellSize - ring,
+                        cornerRadius);
                 }
             }
         }
@@ -234,6 +305,7 @@ public sealed class BoardDrawable : IDrawable
                     canvas,
                     runs[k],
                     struck[k],
+                    StrikeProgress(isRow: false, x, k, struck[k]),
                     (float)cellX,
                     (float)(firstSlotTop + (k * slot)),
                     (float)layout.CellSize,
@@ -266,6 +338,7 @@ public sealed class BoardDrawable : IDrawable
                     canvas,
                     runs[k],
                     struck[k],
+                    StrikeProgress(isRow: true, y, k, struck[k]),
                     (float)(firstSlotLeft + (k * slot)),
                     (float)cellY,
                     slot,
@@ -279,6 +352,7 @@ public sealed class BoardDrawable : IDrawable
         ICanvas canvas,
         int value,
         bool isStruck,
+        float strikeProgress,
         float left,
         float top,
         float width,
@@ -309,17 +383,19 @@ public sealed class BoardDrawable : IDrawable
             HorizontalAlignment.Center,
             VerticalAlignment.Center);
 
-        if (isStruck)
+        if (isStruck && strikeProgress > 0f)
         {
             // A line through the number, so "done" is not conveyed by opacity alone - it has
-            // to survive the colour-blind palette and a washed-out screen in sunlight.
+            // to survive the colour-blind palette and a washed-out screen in sunlight. A new
+            // strike wipes in from the left; progress is 1 for anything already settled.
             canvas.Alpha = 1f;
             canvas.StrokeColor = Palette.Warn;
             canvas.StrokeSize = Math.Max(1.5f, fontSize * (float)StrikeThicknessRatio);
 
             var inset = width * 0.14f;
+            var fullLength = width - (inset * 2);
             var centreY = top + (height / 2f);
-            canvas.DrawLine(left + inset, centreY, left + width - inset, centreY);
+            canvas.DrawLine(left + inset, centreY, left + inset + (fullLength * strikeProgress), centreY);
         }
 
         canvas.Alpha = 1f;

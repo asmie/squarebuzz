@@ -4,14 +4,17 @@ namespace Squarebuzz.App.Services;
 /// <remarks>
 /// The default: no platform answer, so no overlay. See the Android partial for the real one.
 /// </remarks>
-public sealed partial class AccessibilityState : IAccessibilityState
+public sealed partial class AccessibilityState : IAccessibilityState, IDisposable
 {
     public AccessibilityState()
     {
         // Lets a platform hook the system's change notifications. Registered once for the
-        // app's lifetime - this service is a singleton, so nothing ever needs to unhook.
+        // app's lifetime - this service is a singleton, so the container disposes it only at
+        // process exit.
         PlatformInitialize();
     }
+
+    public void Dispose() => DisposePlatform();
 
     public event EventHandler? ScreenReaderStateChanged;
 
@@ -21,6 +24,8 @@ public sealed partial class AccessibilityState : IAccessibilityState
     private void RaiseChanged() => ScreenReaderStateChanged?.Invoke(this, EventArgs.Empty);
 
     partial void PlatformInitialize();
+
+    partial void DisposePlatform();
 
 #if !ANDROID
     private static bool GetIsScreenReaderActive() => false;

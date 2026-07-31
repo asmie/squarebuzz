@@ -57,6 +57,12 @@ public sealed partial class AccessibilityState
         }
     }
 
+    partial void DisposePlatform()
+    {
+        _listener?.Dispose();
+        _listener = null;
+    }
+
     private static AccessibilityManager? Manager() =>
         Application.Context.GetSystemService(Android.Content.Context.AccessibilityService)
             as AccessibilityManager;

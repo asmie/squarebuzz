@@ -113,6 +113,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Raised with a cell index when a fill was wrong, so the view can flash it.</summary>
     public event EventHandler<int>? MistakeMade;
 
+    /// <summary>Raised with a cell index when a fill landed, so the view can pop it.</summary>
+    public event EventHandler<int>? CellFilled;
+
     /// <summary>Raised with a cell index when a hint was granted.</summary>
     public event EventHandler<int>? HintGranted;
 
@@ -740,6 +743,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
             default:
                 break;
+        }
+
+        if (outcome.Result == MoveResult.Applied && target == CellState.Filled)
+        {
+            CellFilled?.Invoke(this, index);
         }
 
         SyncFromSession();

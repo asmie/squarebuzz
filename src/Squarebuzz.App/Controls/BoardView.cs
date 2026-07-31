@@ -71,7 +71,14 @@ public sealed class BoardView : GraphicsView
         nameof(Session),
         typeof(GameSession),
         typeof(BoardView),
-        propertyChanged: (bindable, _, _) => ((BoardView)bindable).Refresh());
+        propertyChanged: (bindable, _, _) =>
+        {
+            var view = (BoardView)bindable;
+
+            // A different game's strikes are not news - they seed silently on first draw.
+            view._drawable.ResetStrikeAnimations();
+            view.Refresh();
+        });
 
     public GameSession? Session
     {
@@ -117,11 +124,79 @@ public sealed class BoardView : GraphicsView
         set => SetValue(TapBehaviourProperty, value);
     }
 
-    /// <summary>Highlights a hinted cell until the next refresh clears it.</summary>
+    /// <summary>
+    /// Highlights a hinted cell until the next refresh clears it, announcing itself with two
+    /// quick pulses of the gold ring - a static ring is easy to miss on a busy board.
+    /// </summary>
     public void ShowHint(int index)
     {
         _drawable.HintIndex = index;
+        _drawable.HintRingWidth = 3f;
         Invalidate();
+
+        if (Services.MotionPreferences.ReduceMotion)
+        {
+            return;
+        }
+
+        this.AbortAnimation("hintPulse");
+
+        // Two pulses of 0 -> 6 -> 0, then the resting 3, per the design's motion spec.
+        new Animation(
+            v =>
+            {
+                _drawable.HintRingWidth = (float)(6 * Math.Abs(Math.Sin(v * Math.PI * 2)));
+                Invalidate();
+            },
+            0,
+            1)
+            .Commit(
+                this,
+                "hintPulse",
+                length: 900,
+                finished: (_, _) =>
+                {
+                    _drawable.HintRingWidth = 3f;
+                    Invalidate();
+                });
+    }
+
+    /// <summary>
+    /// Pops the cell that was just marked: small, overshoot, settle. What makes a fill feel
+    /// placed rather than switched on.
+    /// </summary>
+    public void PopCell(int index)
+    {
+        if (Services.MotionPreferences.ReduceMotion)
+        {
+            return;
+        }
+
+        this.AbortAnimation("cellPop");
+
+        _drawable.PopIndex = index;
+
+        // SpringOut overshoots past 1 before settling, which is the 40% -> 114% -> 100% curve
+        // the design asks for without hand-writing the keyframes.
+        new Animation(
+            v =>
+            {
+                _drawable.PopScale = (float)v;
+                Invalidate();
+            },
+            0.4,
+            1.0,
+            Easing.SpringOut)
+            .Commit(
+                this,
+                "cellPop",
+                length: 160,
+                finished: (_, _) =>
+                {
+                    _drawable.PopIndex = -1;
+                    _drawable.PopScale = 1f;
+                    Invalidate();
+                });
     }
 
     /// <summary>Flashes a cell to show the fill was wrong.</summary>
@@ -206,6 +281,17 @@ public sealed class BoardView : GraphicsView
 
         _drawable.Cells = session.Cells.ToArray();
         Invalidate();
+
+        // A move can newly satisfy a clue, whose strike wipes in over a few frames. The drawable
+        // computes the wipe from wall time and only learns of a new strike *during* the next
+        // draw - too late for this method to ask whether one appeared - so every move simply
+        // buys a wipe's worth of redraws. A dozen frames of a cheap draw is nothing next to
+        // drag-painting, which already redraws per entered cell.
+        if (!Services.MotionPreferences.ReduceMotion && !this.AnimationIsRunning("strikeWipe"))
+        {
+            new Animation(_ => Invalidate(), 0, 1)
+                .Commit(this, "strikeWipe", length: 240, finished: (_, _) => Invalidate());
+        }
     }
 
     protected override void OnSizeAllocated(double width, double height)

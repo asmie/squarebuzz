@@ -287,6 +287,9 @@
 
         <!-- Win overlay: the picture revealed in its own colour, plus the result. -->
         <Grid IsVisible="{Binding IsSolved}" BackgroundColor="#E6000000">
+            <!-- Falls behind the card, over the dimmed board. Purely decorative. -->
+            <controls:ConfettiView IsRunning="{Binding IsSolved}"
+                                   AutomationProperties.ExcludedWithChildren="True" />
             <Border Style="{StaticResource Card}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"

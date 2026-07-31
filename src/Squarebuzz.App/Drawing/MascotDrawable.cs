@@ -57,6 +57,9 @@ public sealed class MascotDrawable : IDrawable
 
     public MascotPose Pose { get; set; } = MascotPose.Idle;
 
+    /// <summary>Mid-blink: open eyes are drawn as thin bars for a beat. Driven by the view.</summary>
+    public bool EyesClosed { get; set; }
+
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         ArgumentNullException.ThrowIfNull(canvas);
@@ -111,6 +114,21 @@ public sealed class MascotDrawable : IDrawable
                 }
 
                 canvas.FillColor = colour;
+
+                // A blink squashes open eyes into thin bars; the deliberately closed '-' eyes
+                // of the Think pose already are one.
+                if (pattern[y][x] == 'E' && EyesClosed)
+                {
+                    var barHeight = pixel * 0.3f;
+                    canvas.FillRoundedRectangle(
+                        offsetX + (x * step),
+                        offsetY + (y * step) + ((pixel - barHeight) / 2f),
+                        pixel,
+                        barHeight,
+                        radius * 0.5f);
+                    continue;
+                }
+
                 canvas.FillRoundedRectangle(offsetX + (x * step), offsetY + (y * step), pixel, pixel, radius);
             }
         }

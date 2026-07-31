@@ -29,6 +29,7 @@ public partial class GamePage : ContentPage
         _viewModel.MistakeMade += OnMistakeMade;
         _viewModel.HintGranted += OnHintGranted;
         _viewModel.PuzzleSolved += OnPuzzleSolved;
+        _viewModel.CellFilled += (_, index) => Board.PopCell(index);
 
         // Full Refresh, not RefreshCells: only the former re-reads the palette, which is the
         // point - the canvas snapshots its colours and a theme swap otherwise leaves the board
@@ -337,7 +338,24 @@ public partial class GamePage : ContentPage
     private async void OnMistakeMade(object? sender, int index)
     {
         Buzz(HapticFeedbackType.LongPress);
+
+        // The design's "no" gesture: four quick beats of ±7, alongside the warn tint. Never a
+        // modal, never a sound - a slip should cost a beat, not a telling-off.
+        if (!Services.MotionPreferences.ReduceMotion)
+        {
+            _ = ShakeBoardAsync();
+        }
+
         await Board.FlashMistakeAsync(index);
+    }
+
+    private async Task ShakeBoardAsync()
+    {
+        await Board.TranslateToAsync(-7, 0, 50, Easing.Linear);
+        await Board.TranslateToAsync(7, 0, 100, Easing.Linear);
+        await Board.TranslateToAsync(-7, 0, 100, Easing.Linear);
+        await Board.TranslateToAsync(7, 0, 100, Easing.Linear);
+        await Board.TranslateToAsync(0, 0, 50, Easing.Linear);
     }
 
     private void OnHintGranted(object? sender, int index) => Board.ShowHint(index);
