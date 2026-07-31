@@ -85,6 +85,7 @@
   <data name="onb3b" xml:space="preserve"><value>Finish every row and column and the blocks turn into a picture. Every puzzle has exactly one answer — never guess.</value></data>
   <data name="hintUsed" xml:space="preserve"><value>Here’s one for free!</value></data>
   <data name="mistakeMsg" xml:space="preserve"><value>Not that one — try again</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Couldn't build a puzzle this time. Please try again!</value></data>
   <data name="noHints" xml:space="preserve"><value>No hints left</value></data>
   <data name="lineDone" xml:space="preserve"><value>Line finished!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Ready when you are. Pick a puzzle!</value></data>

@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
+using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Progression;
 
@@ -47,6 +48,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private readonly IAudioService _audio;
     private readonly INarrationService _narration;
     private readonly IAccessibilityState _accessibility;
+    private readonly IThemeService _theme;
 
     private IDispatcherTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
@@ -72,7 +74,8 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IScreenTimeMonitor screenTime,
         IAudioService audio,
         INarrationService narration,
-        IAccessibilityState accessibility)
+        IAccessibilityState accessibility,
+        IThemeService theme)
         : base(strings)
     {
         _sessions = sessions;
@@ -86,10 +89,19 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         _audio = audio;
         _narration = narration;
         _accessibility = accessibility;
+        _theme = theme;
+
+        // The board canvas snapshots its palette when it draws, so a theme change mid-game -
+        // OS dusk flip under Auto, or Options changed from the pause overlay one day - must
+        // push a redraw. Unhooked in Dispose, which PageLifecycle guarantees is called.
+        _theme.Changed += OnThemeChanged;
     }
 
     /// <summary>Raised when the board data changed and the canvas needs redrawing.</summary>
     public event EventHandler? BoardChanged;
+
+    /// <summary>Raised when the palette changed, so the canvas re-reads its colours.</summary>
+    public event EventHandler? PaletteChanged;
 
     /// <summary>Raised with a cell index when a fill was wrong, so the view can flash it.</summary>
     public event EventHandler<int>? MistakeMade;
@@ -576,7 +588,26 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         // A null seed means "surprise me", so replaying gives a different picture rather than
         // the same one over and over.
         var effective = (options ?? _settings.ToNewGameOptions()) with { Helpers = _settings.Helpers };
-        Session = _sessions.Create(effective);
+
+        try
+        {
+            Session = _sessions.Create(effective);
+        }
+        catch (PuzzleGenerationException)
+        {
+            // The generator has already retried internally and given up, so trying again here
+            // would not help. This path should be unreachable in practice, but reaching it must
+            // not take the app down: StartAsync is called from async void page lifecycle, where
+            // an escaped exception has no handler at all. Home with an apology beats a crash.
+            var sorry = T("genFailed");
+
+            ShowToast(sorry);
+            _narration.Speak(sorry);
+            Announce(sorry);
+
+            await _navigation.ResetToAsync(Routes.Menu);
+            return;
+        }
 
         // A new game is a new row: restarting must not overwrite the save it came from.
         _saveId = Guid.NewGuid();
@@ -1145,11 +1176,15 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// Stops the timer. Without this a ViewModel left behind by navigation keeps ticking and
     /// keeps itself alive through the dispatcher's handler list.
     /// </summary>
+    private void OnThemeChanged(object? sender, EventArgs e) =>
+        PaletteChanged?.Invoke(this, EventArgs.Empty);
+
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
             StopTimer();
+            _theme.Changed -= OnThemeChanged;
         }
 
         base.Dispose(disposing);

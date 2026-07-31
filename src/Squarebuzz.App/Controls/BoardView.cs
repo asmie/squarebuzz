@@ -339,11 +339,17 @@ public sealed class BoardView : GraphicsView
         var cancellation = new CancellationTokenSource();
         _longPressCancellation = cancellation;
 
+        // Taken here, on the UI thread, while the source is certainly alive. The task below must
+        // only ever touch this token, never the source: a quick tap cancels *and disposes* the
+        // source from OnEndInteraction, possibly before the pool has even started the task, and
+        // a disposed source throws from its Token property. The token itself stays valid.
+        var token = cancellation.Token;
+
         _ = Task.Run(async () =>
         {
             try
             {
-                await Task.Delay(LongPressDelay, cancellation.Token);
+                await Task.Delay(LongPressDelay, token);
             }
             catch (OperationCanceledException)
             {
@@ -354,7 +360,7 @@ public sealed class BoardView : GraphicsView
             // the release does not also paint.
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
-                if (cancellation.IsCancellationRequested || Session is not { } session)
+                if (token.IsCancellationRequested || Session is not { } session)
                 {
                     return;
                 }

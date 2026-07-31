@@ -30,6 +30,11 @@ public partial class GamePage : ContentPage
         _viewModel.HintGranted += OnHintGranted;
         _viewModel.PuzzleSolved += OnPuzzleSolved;
 
+        // Full Refresh, not RefreshCells: only the former re-reads the palette, which is the
+        // point - the canvas snapshots its colours and a theme swap otherwise leaves the board
+        // in the old ones.
+        _viewModel.PaletteChanged += (_, _) => Board.Refresh();
+
         Board.CellPainted += OnCellPainted;
         Board.CrossGestureRecognised += OnCrossGestureRecognised;
         Board.TouchedCellChanged += OnTouchedCellChanged;

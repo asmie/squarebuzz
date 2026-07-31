@@ -85,6 +85,7 @@
   <data name="onb3b" xml:space="preserve"><value>Skończ każdy wiersz i kolumnę, a klocki zamienią się w obrazek. Każda zagadka ma jedno rozwiązanie.</value></data>
   <data name="hintUsed" xml:space="preserve"><value>Masz jedną za darmo!</value></data>
   <data name="mistakeMsg" xml:space="preserve"><value>Nie to pole — spróbuj jeszcze raz</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Tym razem nie udało się ułożyć planszy. Spróbuj jeszcze raz!</value></data>
   <data name="noHints" xml:space="preserve"><value>Brak podpowiedzi</value></data>
   <data name="lineDone" xml:space="preserve"><value>Linia gotowa!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Czekam na ciebie. Wybierz zagadkę!</value></data>

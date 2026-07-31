@@ -16,6 +16,8 @@ public sealed class ThemeService : IThemeService
 
     private bool _isSubscribed;
 
+    public event EventHandler? Changed;
+
     public GameTheme Theme { get; private set; } = GameTheme.Light;
 
     public GameAccent Accent { get; private set; } = GameAccent.Tangerine;
@@ -139,6 +141,11 @@ public sealed class ThemeService : IThemeService
         {
             app.UserAppTheme = theme == GameTheme.Dark ? AppTheme.Dark : AppTheme.Light;
         }
+
+        // After the dictionaries are in place, so a listener that re-reads colours sees the new
+        // ones. Main thread by construction: Options calls Apply from the UI, and the system
+        // flip dispatches through BeginInvokeOnMainThread above.
+        Changed?.Invoke(this, EventArgs.Empty);
     }
 
     private static ResourceDictionary CreateTheme(GameTheme theme) => theme switch

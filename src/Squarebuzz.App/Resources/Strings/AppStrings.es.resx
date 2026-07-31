@@ -85,6 +85,7 @@
   <data name="onb3b" xml:space="preserve"><value>Termina cada fila y columna y los bloques se vuelven un dibujo. Cada puzle tiene una sola solución.</value></data>
   <data name="hintUsed" xml:space="preserve"><value>¡Una gratis!</value></data>
   <data name="mistakeMsg" xml:space="preserve"><value>Esa no — inténtalo otra vez</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Esta vez no se pudo crear el puzle. ¡Inténtalo de nuevo!</value></data>
   <data name="noHints" xml:space="preserve"><value>Sin pistas</value></data>
   <data name="lineDone" xml:space="preserve"><value>¡Línea lista!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Cuando quieras. ¡Elige un puzle!</value></data>

@@ -10,6 +10,15 @@ namespace Squarebuzz.App.Services;
 /// </summary>
 public interface IThemeService
 {
+    /// <summary>
+    /// Raised after the on-screen palette actually changed. DynamicResource bindings follow the
+    /// dictionary swap by themselves; this exists for the things that cannot - a canvas that
+    /// snapshotted its colours has to be told to snapshot again, or an OS dusk-time flip under
+    /// Auto leaves the board drawn in the old palette while the chrome around it changes.
+    /// Always raised on the main thread.
+    /// </summary>
+    event EventHandler? Changed;
+
     /// <summary>The theme actually on screen, which under <see cref="FollowsSystem"/> is the one the OS asked for.</summary>
     GameTheme Theme { get; }
 
