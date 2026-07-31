@@ -126,6 +126,14 @@
                            Margin="16,0,16,10" />
                 </VerticalStackLayout>
             </Border>
+
+            <!-- The lessons, without needing a game first. Quieter than the cards above. -->
+            <Button Text="{Binding HowToLabel}"
+                    Command="{Binding HowToCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{DynamicResource Ink2}"
+                    FontFamily="BodyBold"
+                    MinimumHeightRequest="48" />
         </VerticalStackLayout>
     </ScrollView>
 

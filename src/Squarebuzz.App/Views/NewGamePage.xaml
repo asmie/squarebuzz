@@ -108,6 +108,13 @@
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </FlexLayout>
+
+                    <!-- Honesty note: the dial steers the generator, and small sizes serve
+                         authored pictures. Silence here would be a dial that does nothing. -->
+                    <Label Text="{Binding DifficultyNote}"
+                           IsVisible="{Binding ShowDifficultyNote}"
+                           Style="{StaticResource Subtle}"
+                           FontSize="13" />
                 </VerticalStackLayout>
 
                 <!-- Challenge -->

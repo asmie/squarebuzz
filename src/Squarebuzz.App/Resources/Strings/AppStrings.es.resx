@@ -117,6 +117,8 @@
   <data name="firstPuzzle" xml:space="preserve"><value>Empieza tu primer puzle</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Cómo jugar</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Cuenta para los tableros grandes que inventa el juego: de 15×15 en adelante. Los dibujos pequeños están hechos a mano.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Puzles diarios completados este mes: {0}</value></data>
 
   <!-- Desafíos -->
   <data name="dailyTitle" xml:space="preserve"><value>Puzle del día</value></data>

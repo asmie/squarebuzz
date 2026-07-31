@@ -55,6 +55,7 @@ public sealed class ConfettiView : GraphicsView
         }
 
         _drawable.Restart();
+        _drawable.IsActive = true;
 
         _timer = Dispatcher.CreateTimer();
         _timer.Interval = TimeSpan.FromMilliseconds(33);
@@ -67,6 +68,10 @@ public sealed class ConfettiView : GraphicsView
     {
         _timer?.Stop();
         _timer = null;
+
+        // Without this, a run that never starts - reduced motion - still drew one motionless
+        // frame of mid-air confetti, which is worse than none.
+        _drawable.IsActive = false;
         Invalidate();
     }
 
@@ -87,13 +92,16 @@ public sealed class ConfettiView : GraphicsView
 
         private long _startedAt = Environment.TickCount64;
 
+        /// <summary>Drawn only while the loop runs; a still frame of confetti is not a celebration.</summary>
+        public bool IsActive { get; set; }
+
         public void Restart() => _startedAt = Environment.TickCount64;
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
             ArgumentNullException.ThrowIfNull(canvas);
 
-            if (dirtyRect.Width <= 0 || dirtyRect.Height <= 0)
+            if (!IsActive || dirtyRect.Width <= 0 || dirtyRect.Height <= 0)
             {
                 return;
             }

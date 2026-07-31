@@ -87,6 +87,8 @@
   <data name="mistakeMsg" xml:space="preserve"><value>Not that one — try again</value></data>
   <data name="genFailed" xml:space="preserve"><value>Couldn't build a puzzle this time. Please try again!</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Counts for the bigger boards the game invents — 15×15 and up. The small pictures are hand-drawn.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Daily puzzles finished this month: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>No hints left</value></data>
   <data name="lineDone" xml:space="preserve"><value>Line finished!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Ready when you are. Pick a puzzle!</value></data>

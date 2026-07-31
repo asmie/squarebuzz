@@ -120,6 +120,12 @@ public sealed class SqliteProgressRepository : IProgressRepository
         {
             transaction.InsertOrReplace(ToEntity(updated));
 
+            if (completion.IsDaily)
+            {
+                // The calendar's memory. Keyed on the day, so finishing is naturally once-per-day.
+                transaction.InsertOrReplace(new DailyCompletionEntity { DayNumber = completedOn.DayNumber });
+            }
+
             if (completion.PuzzleId is not { } puzzleId)
             {
                 // Generated puzzles earn stars but are not gallery pictures, so there is
@@ -152,6 +158,16 @@ public sealed class SqliteProgressRepository : IProgressRepository
         return updated;
     }
 
+    public async Task<IReadOnlyList<DateOnly>> GetDailyCompletionsAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
+        var rows = await connection.Table<DailyCompletionEntity>().ToListAsync().ConfigureAwait(false);
+
+        return [.. rows.Select(r => DateOnly.FromDayNumber(r.DayNumber))];
+    }
+
     public async Task ResetAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -166,6 +182,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
             transaction.DeleteAll<SolvedPuzzleEntity>();
             transaction.DeleteAll<TrophyEntity>();
             transaction.DeleteAll<SavedGameEntity>();
+            transaction.DeleteAll<DailyCompletionEntity>();
         }).ConfigureAwait(false);
     }
 

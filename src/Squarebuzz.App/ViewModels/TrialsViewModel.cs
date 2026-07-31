@@ -35,6 +35,17 @@ public sealed class TrophyCard
     public required string Description { get; init; }
 }
 
+/// <summary>One cell of the Daily tab's month calendar, ready for the item template.</summary>
+public sealed class CalendarDayCell
+{
+    /// <summary>Day of the month, or empty for the blanks padding the first week.</summary>
+    public required string Label { get; init; }
+
+    public required bool IsDone { get; init; }
+
+    public required bool IsToday { get; init; }
+}
+
 /// <summary>One rung of the Timed Trial ladder, ready for the item template.</summary>
 public sealed class TimedCard
 {
@@ -159,6 +170,15 @@ public partial class TrialsViewModel : LocalizedViewModel
 
     public string StreakDescription => Strings.Format("a11yStreak", Streak);
 
+    /// <summary>This month's calendar cells - blanks pad the first week.</summary>
+    public ObservableCollection<CalendarDayCell> CalendarDays { get; } = [];
+
+    [ObservableProperty]
+    public partial string MonthLabel { get; private set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string CalendarDescription { get; private set; } = string.Empty;
+
     [ObservableProperty]
     public partial string EarnedSummary { get; private set; } = string.Empty;
 
@@ -224,6 +244,8 @@ public partial class TrialsViewModel : LocalizedViewModel
         IsDailyAvailable = DailyPuzzle.IsAvailable(progress, today);
         Streak = progress.Streak;
 
+        await BuildCalendarAsync(today);
+
         var earnedById = earned.ToDictionary(e => e.Trophy);
 
         Trophies.Clear();
@@ -278,6 +300,47 @@ public partial class TrialsViewModel : LocalizedViewModel
                 Description = Strings.Format("a11yTimedTier", name, subtitle, tier.ClockText),
             });
         }
+    }
+
+    /// <summary>
+    /// The design's month calendar: which days this month the daily was finished. Real history
+    /// from the daily-completion table, not a guess derived from the streak.
+    /// </summary>
+    private async Task BuildCalendarAsync(DateOnly today)
+    {
+        IReadOnlyList<DateOnly> completions;
+
+        try
+        {
+            completions = await _progress.GetDailyCompletionsAsync();
+        }
+        catch (Exception)
+        {
+            completions = [];
+        }
+
+        MonthLabel = today.ToString("MMMM yyyy", CultureInfo.CurrentCulture);
+
+        var cells = DailyCalendar.Build(
+            today,
+            completions,
+            CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek);
+
+        CalendarDays.Clear();
+
+        foreach (var cell in cells)
+        {
+            CalendarDays.Add(new CalendarDayCell
+            {
+                Label = cell.IsBlank ? string.Empty : cell.Day.ToString(CultureInfo.CurrentCulture),
+                IsDone = cell.IsDone,
+                IsToday = cell.IsToday,
+            });
+        }
+
+        CalendarDescription = Strings.Format(
+            "a11yDailyCalendar",
+            cells.Count(c => c.IsDone));
     }
 
     /// <summary>

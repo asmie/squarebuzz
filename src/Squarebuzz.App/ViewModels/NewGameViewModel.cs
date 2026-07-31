@@ -93,7 +93,17 @@ public partial class NewGameViewModel : LocalizedViewModel
     public ObservableCollection<PackOption> Packs { get; } = [];
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowDifficultyNote))]
     public partial int SelectedSize { get; private set; } = GridSize.Tiny;
+
+    /// <summary>
+    /// The difficulty dial only steers the generator, and the small sizes serve authored
+    /// pictures whose difficulty is whatever the artist drew. Saying so beats a dial that
+    /// silently does nothing.
+    /// </summary>
+    public bool ShowDifficultyNote => GridSize.IsAuthored(SelectedSize);
+
+    public string DifficultyNote => T("difficultyNote");
 
     [ObservableProperty]
     public partial int SelectedDifficulty { get; private set; } = 2;

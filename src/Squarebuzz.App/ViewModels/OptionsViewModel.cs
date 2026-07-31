@@ -300,6 +300,10 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string ScreenTime60Label => T("st60");
 
+    public string PrivacyLabel => T("privacy");
+
+    public string PrivacyOpenLabel => T("open");
+
     public string ResetLabel => T("resetProgress");
 
     public string ResetAction => T("reset");
@@ -316,6 +320,39 @@ public partial class OptionsViewModel : LocalizedViewModel
     public string VersionLabel => T("version");
 
     public string NoAdsLabel => T("noAds");
+
+    /// <summary>
+    /// Shown after the gated privacy row is unlocked. Like About's links, the destination does
+    /// not exist yet, so this says so rather than pretending.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasNotice))]
+    public partial string Notice { get; private set; } = string.Empty;
+
+    public bool HasNotice => !string.IsNullOrEmpty(Notice);
+
+    /// <summary>Behind the gate: privacy is grown-up reading, and would lead outside the app.</summary>
+    [RelayCommand]
+    private void Privacy() => Gate.Open(() =>
+    {
+        ShowNotice($"🔓 {T("privacy")}");
+        return Task.CompletedTask;
+    });
+
+    private void ShowNotice(string message)
+    {
+        Notice = message;
+
+        _ = Task.Delay(2500).ContinueWith(
+            _ => MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (Notice == message)
+                {
+                    Notice = string.Empty;
+                }
+            }),
+            TaskScheduler.Default);
+    }
 
     protected override void OnLanguageChangedCore() => Gate.RefreshLabels();
 

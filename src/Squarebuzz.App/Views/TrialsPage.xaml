@@ -35,6 +35,17 @@
         <conv:BoolSelectConverter x:Key="TrophyStroke"
                                   TrueValue="{StaticResource Gold}"
                                   FalseValue="{StaticResource Line}" />
+
+        <!-- Calendar day cells: done days filled, today outlined, the rest quiet. -->
+        <conv:BoolSelectConverter x:Key="DayFill"
+                                  TrueValue="{StaticResource Primary}"
+                                  FalseValue="{x:Static Colors.Transparent}" />
+        <conv:BoolSelectConverter x:Key="DayStroke"
+                                  TrueValue="{StaticResource PrimaryDeep}"
+                                  FalseValue="{x:Static Colors.Transparent}" />
+        <conv:BoolSelectConverter x:Key="DayText"
+                                  TrueValue="{StaticResource OnPrimary}"
+                                  FalseValue="{StaticResource Ink2}" />
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="12">
@@ -115,6 +126,49 @@
                     <controls:MascotView Pose="Idle" HeightRequest="90" WidthRequest="84"
                                          HorizontalOptions="Center" InputTransparent="True"
                                          AutomationProperties.ExcludedWithChildren="True" />
+
+                    <!--
+                      The month at a glance: every day the daily was finished gets its dot. The
+                      cells are decorative for a screen reader - the summary sentence on the
+                      container carries the same fact in words.
+                    -->
+                    <Label Text="{Binding MonthLabel}"
+                           Style="{StaticResource Subtle}"
+                           FontFamily="BodyBold"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center" />
+
+                    <ContentView SemanticProperties.Description="{Binding CalendarDescription}">
+                        <FlexLayout BindableLayout.ItemsSource="{Binding CalendarDays}"
+                                    AutomationProperties.ExcludedWithChildren="True"
+                                    Wrap="Wrap"
+                                    JustifyContent="Start">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:CalendarDayCell">
+                                    <!-- Exactly seven per row: each cell is one seventh wide. -->
+                                    <ContentView FlexLayout.Basis="14.28%" HeightRequest="38">
+                                        <Border BackgroundColor="{Binding IsDone, Converter={StaticResource DayFill}}"
+                                                Stroke="{Binding IsToday, Converter={StaticResource DayStroke}}"
+                                                StrokeThickness="2"
+                                                WidthRequest="32"
+                                                HeightRequest="32"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="999" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Label}"
+                                                   FontSize="12"
+                                                   FontFamily="BodyBold"
+                                                   TextColor="{Binding IsDone, Converter={StaticResource DayText}}"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center" />
+                                        </Border>
+                                    </ContentView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </ContentView>
 
                     <Button Text="{Binding PlayLabel}"
                             Command="{Binding PlayDailyCommand}"

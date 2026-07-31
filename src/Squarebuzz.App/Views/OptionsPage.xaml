@@ -286,6 +286,25 @@
                         </VerticalStackLayout>
 
                         <Label Text="{Binding Gate.Title}" Style="{StaticResource Subtle}" FontSize="12" />
+
+                        <!-- Data & privacy, behind the same gate as everything grown-up. -->
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <Label Grid.Column="0" Style="{StaticResource RowLabel}"
+                                   Text="{Binding PrivacyLabel}" />
+                            <Button Grid.Column="1"
+                                    Text="{Binding PrivacyOpenLabel}"
+                                    Command="{Binding PrivacyCommand}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    HeightRequest="48"
+                                    MinimumWidthRequest="96" />
+                        </Grid>
+
+                        <Label Text="{Binding Notice}"
+                               IsVisible="{Binding HasNotice}"
+                               Style="{StaticResource Subtle}"
+                               FontFamily="BodyBold"
+                               HorizontalTextAlignment="Center" />
+
                         <Button Text="{Binding ResetLabel}"
                                 Command="{Binding OpenResetGateCommand}"
                                 BackgroundColor="{DynamicResource WarnSoft}"

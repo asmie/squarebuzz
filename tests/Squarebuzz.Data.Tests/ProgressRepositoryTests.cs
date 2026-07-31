@@ -26,6 +26,42 @@ public class ProgressRepositoryTests
         Assert.Equal(PlayerProgress.Empty, await repository.GetProgressAsync());
         Assert.Empty(await repository.GetSolvedPuzzlesAsync());
         Assert.Empty(await repository.GetTrophiesAsync());
+        Assert.Empty(await repository.GetDailyCompletionsAsync());
+    }
+
+    [Fact]
+    public async Task ADailyCompletion_JoinsTheCalendarHistory()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+
+        await repository.RecordCompletionAsync(
+            Completion(puzzleId: null, 3, Day1) with { IsDaily = true });
+        await repository.RecordCompletionAsync(
+            Completion(puzzleId: null, 3, Day1.AddDays(2)) with { IsDaily = true });
+
+        // An ordinary puzzle the same week must not appear as a daily.
+        await repository.RecordCompletionAsync(Completion("heart", 3, Day1.AddDays(1)));
+
+        var days = await repository.GetDailyCompletionsAsync();
+
+        Assert.Equal(
+            [new DateOnly(2026, 7, 27), new DateOnly(2026, 7, 29)],
+            days.OrderBy(d => d).ToList());
+    }
+
+    [Fact]
+    public async Task Reset_ForgetsTheCalendarHistoryToo()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+
+        await repository.RecordCompletionAsync(
+            Completion(puzzleId: null, 3, Day1) with { IsDaily = true });
+
+        await repository.ResetAsync();
+
+        Assert.Empty(await repository.GetDailyCompletionsAsync());
     }
 
     [Fact]

@@ -66,6 +66,8 @@ public partial class MenuViewModel : LocalizedViewModel
 
     public string AboutSubtitle => T("aboutSub");
 
+    public string HowToLabel => T("howToTitle");
+
     /// <summary>Either a count of unfinished puzzles or an invitation to start one.</summary>
     public string ContinueSubtitle => SaveCount > 0
         ? Strings.Format("inProgress", SaveCount)
@@ -126,4 +128,11 @@ public partial class MenuViewModel : LocalizedViewModel
 
     [RelayCommand]
     private async Task AboutAsync() => await _navigation.GoToAsync(Routes.About);
+
+    /// <summary>
+    /// The lessons, one tap from the front door. The design wants them reachable without a game
+    /// in progress - a child should not have to start a puzzle to re-read how puzzles work.
+    /// </summary>
+    [RelayCommand]
+    private async Task HowToAsync() => await _navigation.GoToAsync(Routes.HowTo);
 }

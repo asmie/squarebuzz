@@ -158,3 +158,12 @@ internal sealed class TrophyEntity
     [Column("earned_day")]
     public int EarnedDayNumber { get; set; }
 }
+
+/// <summary>A day whose daily puzzle was finished, for the Trials calendar. Added by Migration0004.</summary>
+[Table("daily_completion")]
+internal sealed class DailyCompletionEntity
+{
+    [PrimaryKey]
+    [Column("day")]
+    public int DayNumber { get; set; }
+}

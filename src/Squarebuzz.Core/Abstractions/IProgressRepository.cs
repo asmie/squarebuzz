@@ -21,6 +21,9 @@ public interface IProgressRepository
     /// </summary>
     Task<PlayerProgress> RecordCompletionAsync(PuzzleCompletion completion, CancellationToken cancellationToken = default);
 
+    /// <summary>Every day whose daily puzzle was finished, for the Trials calendar.</summary>
+    Task<IReadOnlyList<DateOnly>> GetDailyCompletionsAsync(CancellationToken cancellationToken = default);
+
     /// <summary>
     /// Erases everything - the parent zone's "reset progress". Settings are left alone, so a
     /// wipe does not also undo accessibility choices.
