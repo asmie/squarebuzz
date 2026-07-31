@@ -191,6 +191,73 @@ public class GameSessionTests
     }
 
     [Fact]
+    public void CompletingALine_WithAutoCrossOff_StillReportsTheCompletion()
+    {
+        // Sharp play switches the auto-cross helper off. The "line done" chime must not go with
+        // it - the line is no less done.
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
+
+        var outcome = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        Assert.True(outcome.CompletedALine);
+        Assert.Equal(0, outcome.AutoCrossedCells);
+    }
+
+    [Fact]
+    public void CompletingALine_WhoseBlanksWereCrossedByHand_StillReportsTheCompletion()
+    {
+        // A tidy player who crosses the blanks as they go leaves auto-cross nothing to do.
+        // That must not silence the completion.
+        var session = NewSession();
+
+        session.Paint(session.Puzzle.IndexOf(0, 0), CellState.Crossed);
+        session.Paint(session.Puzzle.IndexOf(1, 0), CellState.Crossed);
+        session.Paint(session.Puzzle.IndexOf(3, 0), CellState.Crossed);
+        session.Paint(session.Puzzle.IndexOf(4, 0), CellState.Crossed);
+
+        var outcome = session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        Assert.True(outcome.CompletedALine);
+        Assert.Equal(0, outcome.AutoCrossedCells);
+    }
+
+    [Fact]
+    public void MarkingInsideAnAlreadyCompleteLine_IsNotReportedAsACompletion()
+    {
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
+        session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
+
+        // Row 0 is already accounted for; bookkeeping in it is not news.
+        var outcome = session.Paint(session.Puzzle.IndexOf(0, 0), CellState.Crossed);
+
+        Assert.False(outcome.CompletedALine);
+    }
+
+    [Fact]
+    public void ErasingTheFillThatCompletedALine_IsNotReportedAsACompletion()
+    {
+        var rules = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { AutoCross = false });
+
+        var session = new GameSession(Plus(), rules);
+        var index = session.Puzzle.IndexOf(2, 0);
+        session.Paint(index, CellState.Filled);
+
+        var outcome = session.Paint(index, CellState.Empty);
+
+        Assert.False(outcome.CompletedALine);
+    }
+
+    [Fact]
     public void CompletingARow_AutoCrossesTheRest()
     {
         var session = NewSession();

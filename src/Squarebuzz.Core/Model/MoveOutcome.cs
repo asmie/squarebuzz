@@ -23,13 +23,21 @@ public enum MoveResult
 /// <param name="Result">Whether the mark landed.</param>
 /// <param name="AutoCrossedCells">Cells crossed off automatically because a line completed.</param>
 /// <param name="SolvedPuzzle">True when this move finished the picture.</param>
-public readonly record struct MoveOutcome(MoveResult Result, int AutoCrossedCells, bool SolvedPuzzle)
+/// <param name="CompletedALine">
+/// True when this move made the cell's row or column newly match its clue. Carried as a fact of
+/// its own rather than inferred from <paramref name="AutoCrossedCells"/>: auto-crossing is an
+/// optional helper that Sharp play switches off, and a player who crosses the blanks by hand
+/// leaves it nothing to do - neither should cost them the "line done" chime.
+/// </param>
+public readonly record struct MoveOutcome(
+    MoveResult Result,
+    int AutoCrossedCells,
+    bool SolvedPuzzle,
+    bool CompletedALine)
 {
-    public static MoveOutcome NoChange { get; } = new(MoveResult.NoChange, 0, false);
+    public static MoveOutcome NoChange { get; } = new(MoveResult.NoChange, 0, false, false);
 
-    public static MoveOutcome Mistake { get; } = new(MoveResult.Mistake, 0, false);
-
-    public bool CompletedALine => AutoCrossedCells > 0;
+    public static MoveOutcome Mistake { get; } = new(MoveResult.Mistake, 0, false, false);
 }
 
 /// <summary>Which mark a plain tap produces.</summary>

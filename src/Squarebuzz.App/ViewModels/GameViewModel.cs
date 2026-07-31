@@ -163,7 +163,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     public bool HasToast => !string.IsNullOrEmpty(Toast);
 
-    public bool ShowTimer => _settings.Helpers.ShowTimer;
+    /// <summary>
+    /// The clock is a preference in an ordinary game but the whole point of a timed trial, so a
+    /// trial overrides the switch: a player who hid the timer in Options must still see the
+    /// countdown they are racing, or the first they learn of it is the "out of time" screen.
+    /// </summary>
+    public bool ShowTimer => Session is { IsTimed: true } || _settings.Helpers.ShowTimer;
 
     public int ZoomPercent => _settings.CellZoomPercent;
 

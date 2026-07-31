@@ -237,8 +237,19 @@ public sealed class GameSession
             return MoveOutcome.Mistake;
         }
 
+        // Sampled before and after the change so the outcome reports a *transition*: only the
+        // move that makes a line newly match its clue is a completion, not every later mark in
+        // an already-finished line.
+        var x = index % Puzzle.Width;
+        var y = index / Puzzle.Width;
+        var rowWasSatisfied = IsRowSatisfied(y);
+        var columnWasSatisfied = IsColumnSatisfied(x);
+
         var changes = new List<CellChange> { new(index, current, target) };
         _cells[index] = target;
+
+        var completedALine = (!rowWasSatisfied && IsRowSatisfied(y))
+                             || (!columnWasSatisfied && IsColumnSatisfied(x));
 
         var autoCrossed = Rules.AutoCrossCompletedLines ? AutoCrossCompletedLines(changes) : 0;
 
@@ -246,7 +257,25 @@ public sealed class GameSession
 
         var solved = EvaluateSolved();
 
-        return new MoveOutcome(MoveResult.Applied, autoCrossed, solved);
+        return new MoveOutcome(MoveResult.Applied, autoCrossed, solved, completedALine);
+    }
+
+    /// <summary>Whether a row's filled runs already match its clue, crossed or not.</summary>
+    private bool IsRowSatisfied(int y) =>
+        ClueCalculator.FromMarks(_cells.AsSpan(y * Puzzle.Width, Puzzle.Width))
+            .Equals(Puzzle.RowClues[y]);
+
+    /// <summary>Whether a column's filled runs already match its clue, crossed or not.</summary>
+    private bool IsColumnSatisfied(int x)
+    {
+        Span<CellState> column = new CellState[Puzzle.Height];
+
+        for (var y = 0; y < Puzzle.Height; y++)
+        {
+            column[y] = _cells[(y * Puzzle.Width) + x];
+        }
+
+        return ClueCalculator.FromMarks(column).Equals(Puzzle.ColumnClues[x]);
     }
 
     /// <summary>
