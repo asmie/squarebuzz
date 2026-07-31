@@ -108,6 +108,16 @@
   <data name="a11yPathCurrent" xml:space="preserve"><value>Stop {0}, {1} by {1}, next to play.</value></data>
   <data name="a11yPathLocked" xml:space="preserve"><value>Stop {0}, locked. Finish the stop before it.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trophies</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Out of time!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>The clock beat you this time. Have another go?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Try again</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} on the clock.</value></data>
+  <!-- Short forms for the four-up tab row. The full names stay on the panels themselves;
+       "Daily Puzzle" and "Puzzle Path" simply do not fit a quarter of a phone's width, and
+       truncating them leaves the useless pair "Daily" / "Puzzle". -->
+  <data name="tabDaily" xml:space="preserve"><value>Daily</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Timed</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Path</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Timed Trial</value></data>
   <data name="tr1" xml:space="preserve"><value>First Picture</value></data>
   <data name="tr2" xml:space="preserve"><value>Week Streak</value></data>
@@ -129,6 +139,11 @@
     stands on its own out of context, because a screen reader reads one element at a time with no
     surrounding layout to explain it.
   -->
+  <data name="a11yCell" xml:space="preserve"><value>Row {0}, column {1}, {2}. Row clue {3}. Column clue {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>empty</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>filled</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>crossed out</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>none</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Puzzle board, {0} by {1}. {2} of {3} squares filled.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>The squares cannot be reached by touch exploration yet.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Time so far: {0}</value></data>

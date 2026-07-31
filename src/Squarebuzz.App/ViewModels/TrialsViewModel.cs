@@ -35,6 +35,20 @@ public sealed class TrophyCard
     public required string Description { get; init; }
 }
 
+/// <summary>One rung of the Timed Trial ladder, ready for the item template.</summary>
+public sealed class TimedCard
+{
+    public required TimedTier Tier { get; init; }
+
+    public required string Name { get; init; }
+
+    public required string Subtitle { get; init; }
+
+    public required string Description { get; init; }
+
+    public string Clock => Tier.ClockText;
+}
+
 /// <summary>One stop on the Puzzle Path, ready for the item template.</summary>
 public sealed class PathCard
 {
@@ -112,6 +126,11 @@ public partial class TrialsViewModel : LocalizedViewModel
 
     public ObservableCollection<PathCard> Path { get; } = [];
 
+    /// <summary>
+    /// The three rungs, built once: they are fixed content, not player state.
+    /// </summary>
+    public ObservableCollection<TimedCard> Timed { get; } = [];
+
     [ObservableProperty]
     public partial string PathSummary { get; private set; } = string.Empty;
 
@@ -120,10 +139,13 @@ public partial class TrialsViewModel : LocalizedViewModel
     /// two booleans cannot express "exactly one of three" without letting both be false.
     /// </summary>
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsDailyTab), nameof(IsPathTab), nameof(IsTrophiesTab))]
+    [NotifyPropertyChangedFor(
+        nameof(IsDailyTab), nameof(IsTimedTab), nameof(IsPathTab), nameof(IsTrophiesTab))]
     public partial TrialsTab Tab { get; private set; } = TrialsTab.Daily;
 
     public bool IsDailyTab => Tab == TrialsTab.Daily;
+
+    public bool IsTimedTab => Tab == TrialsTab.Timed;
 
     public bool IsPathTab => Tab == TrialsTab.Path;
 
@@ -140,9 +162,11 @@ public partial class TrialsViewModel : LocalizedViewModel
 
     public string Heading => T("trials");
 
-    public string DailyTabLabel => T("dailyTitle");
+    public string DailyTabLabel => T("tabDaily");
 
-    public string PathTabLabel => T("pathTitle");
+    public string TimedTabLabel => T("tabTimed");
+
+    public string PathTabLabel => T("tabPath");
 
     public string TrophiesTabLabel => T("trophies");
 
@@ -193,6 +217,7 @@ public partial class TrialsViewModel : LocalizedViewModel
         }
 
         BuildPath(solved);
+        BuildTimedLadder();
 
         IsDailyAvailable = DailyPuzzle.IsAvailable(progress, today);
 
@@ -227,6 +252,29 @@ public partial class TrialsViewModel : LocalizedViewModel
         }
 
         EarnedSummary = Strings.Format("galleryFound", earnedById.Count, Trophies.Count);
+    }
+
+    /// <summary>
+    /// The ladder is fixed content, so it is built once and then left alone. Rebuilt on a language
+    /// change, though, which is why it lives here rather than in the constructor.
+    /// </summary>
+    private void BuildTimedLadder()
+    {
+        Timed.Clear();
+
+        foreach (var tier in TimedTrial.Tiers)
+        {
+            var name = T($"timedName{tier.Tier}");
+            var subtitle = T($"timedSub{tier.Tier}");
+
+            Timed.Add(new TimedCard
+            {
+                Tier = tier,
+                Name = name,
+                Subtitle = subtitle,
+                Description = Strings.Format("a11yTimedTier", name, subtitle, tier.ClockText),
+            });
+        }
     }
 
     /// <summary>
@@ -273,7 +321,27 @@ public partial class TrialsViewModel : LocalizedViewModel
     private void ShowDaily() => Tab = TrialsTab.Daily;
 
     [RelayCommand]
+    private void ShowTimed() => Tab = TrialsTab.Timed;
+
+    [RelayCommand]
     private void ShowPath() => Tab = TrialsTab.Path;
+
+    /// <summary>Starts a timed trial.</summary>
+    [RelayCommand]
+    private async Task PlayTimedAsync(TimedCard? card)
+    {
+        if (card is null)
+        {
+            return;
+        }
+
+        await _navigation.GoToAsync(
+            Routes.Game,
+            new Dictionary<string, object>
+            {
+                [GameViewModel.TimedTierParameter] = card.Tier.Tier.ToString(CultureInfo.InvariantCulture),
+            });
+    }
 
     [RelayCommand]
     private void ShowTrophies() => Tab = TrialsTab.Trophies;
@@ -314,6 +382,7 @@ public partial class TrialsViewModel : LocalizedViewModel
 public enum TrialsTab
 {
     Daily,
+    Timed,
     Path,
     Trophies,
 }

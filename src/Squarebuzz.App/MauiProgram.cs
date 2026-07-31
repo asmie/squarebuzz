@@ -69,6 +69,9 @@ public static class MauiProgram
         // Singleton so one utterance can cut off the previous one across screens.
         services.AddSingleton<INarrationService, NarrationService>();
 
+        // Read on every board open, so it must be cheap and must not cache a stale answer.
+        services.AddSingleton<IAccessibilityState, AccessibilityState>();
+
         // Resolves to the same object XAML reaches through x:Static, so markup and code can
         // never disagree about the current language.
         services.AddSingleton<ILocalizationService, LocalizationServiceAdapter>();

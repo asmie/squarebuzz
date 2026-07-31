@@ -37,6 +37,9 @@ public partial class GamePage : ContentPage
         // The page's own size decides the arrangement, and it changes on rotation as well as at
         // first layout.
         SizeChanged += (_, _) => ApplyLayout();
+
+        // The overlay has to follow the board's geometry, which changes with zoom and rotation.
+        Board.LayoutChanged += (_, _) => BuildCellOverlay();
     }
 
     private void OnBoardHostSizeChanged(object? sender, EventArgs e)
@@ -192,9 +195,114 @@ public partial class GamePage : ContentPage
         Magnifier.ShowCell(e.Index);
     }
 
+    /// <summary>
+    /// Builds one focusable button per square, over the board, so a screen-reader user can reach
+    /// the puzzle at all - a canvas offers nothing to focus.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Only when a screen reader is actually running. A 20x20 grid is four hundred buttons, which
+    /// is worth building for the player who cannot otherwise play and pure waste for everyone else;
+    /// see <see cref="Services.IAccessibilityState"/>.
+    /// </para>
+    /// <para>
+    /// Alignment comes from the board's own <c>BoardLayout</c> rather than from a second
+    /// calculation: the overlay is inset by the clue gutters and then given one row and column per
+    /// cell at exactly the drawn cell size. Two independent computations of the same geometry would
+    /// drift the first time either changed.
+    /// </para>
+    /// </remarks>
+    private void BuildCellOverlay()
+    {
+        if (!_viewModel.NeedsCellOverlay || _viewModel.Session is not { } session)
+        {
+            CellOverlay.IsVisible = false;
+            CellOverlay.Clear();
+            return;
+        }
+
+        var layout = Board.CurrentLayout;
+        var puzzle = session.Puzzle;
+
+        if (layout.CellSize <= 0)
+        {
+            return;
+        }
+
+        CellOverlay.Clear();
+        CellOverlay.RowDefinitions.Clear();
+        CellOverlay.ColumnDefinitions.Clear();
+
+        // Sit exactly over the grid, leaving the clue gutters to the canvas.
+        CellOverlay.Margin = new Thickness(layout.RowGutterWidth, layout.ColumnGutterHeight, 0, 0);
+        CellOverlay.HorizontalOptions = LayoutOptions.Start;
+        CellOverlay.VerticalOptions = LayoutOptions.Start;
+
+        for (var row = 0; row < puzzle.Height; row++)
+        {
+            CellOverlay.RowDefinitions.Add(new RowDefinition(layout.CellSize));
+        }
+
+        for (var column = 0; column < puzzle.Width; column++)
+        {
+            CellOverlay.ColumnDefinitions.Add(new ColumnDefinition(layout.CellSize));
+        }
+
+        for (var row = 0; row < puzzle.Height; row++)
+        {
+            for (var column = 0; column < puzzle.Width; column++)
+            {
+                var index = (row * puzzle.Width) + column;
+
+                var cell = new Button
+                {
+                    BackgroundColor = Colors.Transparent,
+                    BorderWidth = 0,
+                    CornerRadius = 0,
+                    Padding = 0,
+                    Text = string.Empty,
+                };
+
+                SemanticProperties.SetDescription(cell, _viewModel.DescribeCell(index));
+
+                cell.Clicked += (_, _) =>
+                {
+                    _viewModel.TapCell(index);
+
+                    // The square's description is now stale, and a screen reader reads whatever the
+                    // element says at the moment it is focused - so it is refreshed immediately
+                    // rather than waiting for the next rebuild.
+                    RefreshCellDescriptions();
+                };
+
+                CellOverlay.Add(cell, column, row);
+            }
+        }
+
+        CellOverlay.IsVisible = true;
+    }
+
+    /// <summary>Re-reads every square's description after a move, without rebuilding the overlay.</summary>
+    private void RefreshCellDescriptions()
+    {
+        if (!CellOverlay.IsVisible)
+        {
+            return;
+        }
+
+        for (var i = 0; i < CellOverlay.Children.Count; i++)
+        {
+            if (CellOverlay.Children[i] is View view)
+            {
+                SemanticProperties.SetDescription(view, _viewModel.DescribeCell(i));
+            }
+        }
+    }
+
     private void OnBoardChanged(object? sender, EventArgs e)
     {
         Board.RefreshCells();
+        RefreshCellDescriptions();
 
         // TouchedCellChanged fires before the move is applied, so the magnifier's first snapshot
         // is pre-paint. Re-reading it here is what makes it show the cell as it now is rather

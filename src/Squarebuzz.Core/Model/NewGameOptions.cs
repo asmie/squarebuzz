@@ -43,5 +43,14 @@ public sealed record NewGameOptions(
     /// </remarks>
     public bool ForceGenerated { get; init; }
 
+    /// <summary>
+    /// Countdown for a timed trial, or null for an ordinary game with no limit.
+    /// </summary>
+    /// <remarks>
+    /// Null rather than <see cref="TimeSpan.Zero"/> for "no limit": zero is a perfectly meaningful
+    /// limit that would end the game instantly, so the two must not share a representation.
+    /// </remarks>
+    public TimeSpan? TimeLimit { get; init; }
+
     public static NewGameOptions Default { get; } = new(GridSize.Tiny, 2, "animals", ChallengeLevel.Relaxed);
 }

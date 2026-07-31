@@ -158,6 +158,14 @@ public sealed class BoardView : GraphicsView
         set => SetValue(AvailableSizeProperty, value);
     }
 
+    /// <summary>
+    /// The geometry the board was last drawn with, so an overlay can line up with the cells.
+    /// </summary>
+    public BoardLayout CurrentLayout => _drawable.Layout;
+
+    /// <summary>Raised after <see cref="Refresh"/> recomputes the geometry.</summary>
+    public event EventHandler? LayoutChanged;
+
     /// <summary>Recomputes layout for the available space and redraws.</summary>
     public void Refresh()
     {
@@ -184,6 +192,8 @@ public sealed class BoardView : GraphicsView
         WidthRequest = layout.TotalWidth;
 
         Invalidate();
+
+        LayoutChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>Redraws from the session without recomputing layout - the common case after a move.</summary>

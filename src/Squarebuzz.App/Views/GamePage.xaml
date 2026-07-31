@@ -71,14 +71,22 @@
               A GraphicsView adds nothing to the accessibility tree, so without this the board is
               simply not there for a screen reader. See GameViewModel.BoardDescription.
             -->
-            <controls:BoardView x:Name="Board"
-                                SemanticProperties.Description="{Binding BoardDescription}"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                Session="{Binding Session}"
-                                ZoomPercent="{Binding ZoomPercent}"
-                                BigNumbers="{Binding BigNumbers}"
-                                TapBehaviour="{Binding TapBehaviour}" />
+            <!--
+              The board and, over it, the per-cell accessibility overlay. One container so the two
+              share an origin: the overlay is inset by the clue gutters and then lays out a cell-sized
+              grid, which is the only way it can line up with squares drawn on a canvas.
+            -->
+            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                <controls:BoardView x:Name="Board"
+                                    SemanticProperties.Description="{Binding BoardDescription}"
+                                    Session="{Binding Session}"
+                                    ZoomPercent="{Binding ZoomPercent}"
+                                    BigNumbers="{Binding BigNumbers}"
+                                    TapBehaviour="{Binding TapBehaviour}" />
+
+                <!-- Built in code, and only when a screen reader is running. See GamePage.BuildCellOverlay. -->
+                <Grid x:Name="CellOverlay" IsVisible="False" />
+            </Grid>
         </ScrollView>
 
         <!--
@@ -231,6 +239,41 @@
                             Style="{StaticResource PrimaryButton}"
                             HeightRequest="54" />
                     <Button Text="{Binding BreakStopText}"
+                            Command="{Binding QuitCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            HeightRequest="50" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!--
+          Out of time. The game's only loss, so it is worded as a setback rather than a failure and
+          leads with another go - the same shape as the win overlay, deliberately.
+        -->
+        <Grid IsVisible="{Binding IsTimeUp}" BackgroundColor="#E6000000">
+            <Border Style="{StaticResource Card}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="310"
+                    Padding="24">
+                <VerticalStackLayout Spacing="14">
+                    <controls:MascotView Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                         AutomationProperties.ExcludedWithChildren="True" />
+
+                    <Label Text="{Binding TimeUpTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
+                           SemanticProperties.HeadingLevel="Level1" />
+
+                    <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
+                    <Label Text="{Binding TimeUpBody}"
+                           Style="{StaticResource Subtle}"
+                           FontSize="15"
+                           HorizontalTextAlignment="Center" />
+
+                    <Button Text="{Binding TryAgainText}"
+                            Command="{Binding RestartCommand}"
+                            Style="{StaticResource PrimaryButton}"
+                            HeightRequest="54" />
+                    <Button Text="{Binding MenuText}"
                             Command="{Binding QuitCommand}"
                             Style="{StaticResource SecondaryButton}"
                             HeightRequest="50" />

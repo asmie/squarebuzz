@@ -29,10 +29,8 @@ Every screen is real. There is no placeholder page and no dead end in the menu: 
 Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery, About,
 How to Play and Trials are all implemented.
 
-One thing the prototype sketched is **deliberately absent** rather than present and hollow: the
-**Timed Trial** tab, with its Warm-up / Steady / Lightning tiers. It needs a countdown inside
-`GameSession` — a time limit, a "time up" outcome, and a clock that runs down rather than up — and
-a tab that looks playable but is not would be worse than one that is not there.
+Every screen the prototype sketched now exists, including both Trials features that were
+deliberately held back until the domain could support them.
 
 Games autosave every 15 seconds while playing, plus on pause, on quit and on leaving the
 screen. A finished puzzle deletes its own save, so Continue never offers a solved board.
@@ -99,9 +97,39 @@ Verified that way: Giant unlocks, a 25×25 generates in about 4 seconds and rend
 wide layout appears in landscape and reverts in portrait, the session survives both rotations,
 and the phone layout is unchanged.
 
-## Daily puzzle, the path, and trophies
+## Daily puzzle, timed trials, the path, and trophies
 
-Trials holds today's puzzle, the Puzzle Path and the trophy cabinet.
+Trials holds today's puzzle, the Timed Trial ladder, the Puzzle Path and the trophy cabinet — the
+four tabs the design sketched.
+
+### Timed Trial
+
+Three rungs, from the design: **Warm-up** (5×5 in 3:00), **Steady** (10×10 in 5:00) and
+**Lightning** (the same 10×10 in 2:00). The jump that matters is the third — the same grid as the
+second with well under half the time, which is what makes it read as a dare rather than as more of
+the same.
+
+This is **the only way to lose the game**, and that is most of the work. `GameSession` gained a
+`TimeLimit`, a `Remaining` that never goes negative, an `IsTimeUp`, and an `IsOver` that means
+"won or lost". Every play guard moved from `IsSolved` to `IsOver`, so a board whose clock has
+stopped refuses marks, hints and undo while the view catches up on the next tick. Solving on the
+final tick counts as a **win**: `IsSolved` is checked first, and there is a test for exactly that
+ordering.
+
+Some deliberate choices:
+
+- A trial is **generated and Sharp**. Racing a clock with the helpers on measures tapping speed
+  rather than reading clues, and both trial sizes fall inside the authored range — so without
+  `ForceGenerated` a trial would hand out one of the twelve shipped pictures, which a player may
+  already know by heart.
+- **Trials are never saved.** A race you can put down and pick up tomorrow is not a race, and a
+  countdown frozen in the Continue list would mean nothing. `AutosaveAsync` skips timed sessions,
+  which also means the feature needed no schema change at all.
+- Losing costs the attempt, not the afternoon: nothing is recorded, and the overlay leads with
+  another go. **Try again** draws a fresh picture and a full clock rather than handing back the
+  same grid, which would let a player beat the trial from memory.
+- Elapsed time is clamped to the limit, so a loss does not get recorded as taking longer the
+  coarser the caller's tick happens to be.
 
 ### Puzzle Path
 
@@ -299,14 +327,44 @@ Gallery cards deliberately say **nothing** about an unfound picture beyond its s
 even hinting at its shape, would spoil the discovery for exactly the player who has to rely on
 this text instead of the artwork.
 
-**The board is the honest gap.** A `GraphicsView` contributes nothing to the accessibility tree,
-so before this the puzzle was simply *absent* — a screen-reader user could not perceive it at all.
-It now carries a description ("Puzzle board, 10 by 10. 24 of 34 squares filled.") that updates on
-every move, and that description says outright that the squares cannot be reached by touch
-exploration yet. **The game is therefore still not playable with a screen reader.** Making it so
-means an accessible overlay — one focusable element per cell, each naming its row and column, its
-state, and its two clues — which is a real feature and not a label pass. It is also the reason
-the board description tells the truth rather than implying more than it delivers.
+### The board
+
+A `GraphicsView` contributes nothing to the accessibility tree, so the puzzle used to be *absent* —
+a screen-reader user could not perceive it, let alone play it. Two things now cover it.
+
+The board carries a summary that updates on every move: "Puzzle board, 10 by 10. 24 of 34 squares
+filled."
+
+And when a screen reader is running, `GamePage.BuildCellOverlay` puts **one focusable button per
+square** over the grid, each announcing where it is, what is in it, and the two clues that govern
+it — "Row 3, column 3, empty. Row clue 6 6. Column clue 2 2 2 4 4." Activating one plays the move,
+and every square's description is refreshed immediately afterwards, because a screen reader reads
+whatever an element says at the moment it takes focus.
+
+Three decisions worth knowing:
+
+- **Only when something is listening.** A 20×20 grid is four hundred buttons: worth it for a player
+  who cannot otherwise play, pure waste for everyone else. `IAccessibilityState` asks Android
+  whether *touch exploration* is on — not merely whether some accessibility service is enabled,
+  since switch access and screen dimmers do not navigate square by square. Platforms without an
+  implementation report false, erring towards the cheap path. Verified both ways: 100 cell nodes for
+  a 10×10 with a reader on, **zero** with it off.
+- **Alignment comes from the board's own `BoardLayout`**, not a second calculation — the overlay is
+  inset by the clue gutters and given one row and column per cell at exactly the drawn cell size.
+  Two independent computations of the same geometry would drift the first time either changed.
+- **The clues are repeated on every square.** Verbose, and deliberate: a player who cannot see the
+  gutters has no other way to know them, and asking a child to hold twenty numbers in their head is
+  not an alternative. The tidier design — focusable row and column headers that announce clues only
+  when focus crosses into a new line — needs control over focus order, which MAUI does not offer.
+
+The board summary drops its "cannot be reached" caveat when the overlay exists, so the description
+never contradicts the screen it describes.
+
+**Not verified:** TalkBack's own double-tap gesture. It activates the accessibility-focused node,
+which for an `android.widget.Button` is the same click the overlay handles — and the nodes report
+`clickable=true focusable=true class=android.widget.Button` — but injected `adb` taps cannot drive
+TalkBack's focus, so the click path was exercised directly instead. Nor has the 400-button case been
+timed on real hardware.
 
 Announcements go through `SemanticScreenReader.Announce` at the same funnel narration uses, so
 toasts, the win and the break reminder are spoken even though nothing takes focus when they

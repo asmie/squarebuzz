@@ -43,7 +43,7 @@
                SemanticProperties.HeadingLevel="Level1" />
 
         <!-- Two tabs. Timed modes and the puzzle path are absent rather than hollow. -->
-        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="8">
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" ColumnSpacing="6">
             <Button Grid.Column="0"
                     Text="{Binding DailyTabLabel}"
                     Command="{Binding ShowDailyCommand}"
@@ -51,25 +51,34 @@
                     TextColor="{Binding IsDailyTab, Converter={StaticResource TabTextColor}}"
                     CornerRadius="16"
                     HeightRequest="50"
-                    FontSize="14"
+                    FontSize="12"
                     FontFamily="BodyBold" />
             <Button Grid.Column="1"
+                    Text="{Binding TimedTabLabel}"
+                    Command="{Binding ShowTimedCommand}"
+                    BackgroundColor="{Binding IsTimedTab, Converter={StaticResource TabBackground}}"
+                    TextColor="{Binding IsTimedTab, Converter={StaticResource TabTextColor}}"
+                    CornerRadius="16"
+                    HeightRequest="50"
+                    FontSize="12"
+                    FontFamily="BodyBold" />
+            <Button Grid.Column="2"
                     Text="{Binding PathTabLabel}"
                     Command="{Binding ShowPathCommand}"
                     BackgroundColor="{Binding IsPathTab, Converter={StaticResource TabBackground}}"
                     TextColor="{Binding IsPathTab, Converter={StaticResource TabTextColor}}"
                     CornerRadius="16"
                     HeightRequest="50"
-                    FontSize="14"
+                    FontSize="12"
                     FontFamily="BodyBold" />
-            <Button Grid.Column="2"
+            <Button Grid.Column="3"
                     Text="{Binding TrophiesTabLabel}"
                     Command="{Binding ShowTrophiesCommand}"
                     BackgroundColor="{Binding IsTrophiesTab, Converter={StaticResource TabBackground}}"
                     TextColor="{Binding IsTrophiesTab, Converter={StaticResource TabTextColor}}"
                     CornerRadius="16"
                     HeightRequest="50"
-                    FontSize="14"
+                    FontSize="12"
                     FontFamily="BodyBold" />
         </Grid>
 
@@ -100,6 +109,53 @@
                 </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
+
+        <!-- Timed Trial: three rungs, hardest last. -->
+        <ScrollView Grid.Row="2" IsVisible="{Binding IsTimedTab}">
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Timed}" Spacing="14">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:TimedCard">
+                        <Border Style="{StaticResource Card}"
+                                SemanticProperties.Description="{Binding Description}">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                                <Border Grid.Column="0"
+                                        BackgroundColor="{DynamicResource Surface2}"
+                                        Stroke="{DynamicResource Line}"
+                                        StrokeThickness="2"
+                                        Padding="12,8"
+                                        VerticalOptions="Center">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="14" />
+                                    </Border.StrokeShape>
+                                    <Label Text="{Binding Clock}"
+                                           FontFamily="Display"
+                                           FontSize="22"
+                                           TextColor="{DynamicResource Ink}" />
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" Style="{StaticResource H2}" />
+                                    <Label Text="{Binding Subtitle}" Style="{StaticResource Subtle}" FontSize="13" />
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="2"
+                                        Text="▶"
+                                        SemanticProperties.Description="{Binding Description}"
+                                        Command="{Binding Path=PlayTimedCommand, Source={RelativeSource AncestorType={x:Type vm:TrialsViewModel}}, x:DataType=vm:TrialsViewModel}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{DynamicResource Primary}"
+                                        TextColor="{DynamicResource OnPrimary}"
+                                        CornerRadius="999"
+                                        WidthRequest="52"
+                                        HeightRequest="52"
+                                        Padding="0"
+                                        VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
 
         <!--
           Puzzle Path. A plain vertical list whose items lean sideways on an eight-step cycle,

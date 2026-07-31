@@ -27,6 +27,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Route parameter marking this game as today's daily puzzle.</summary>
     public const string DailyParameter = "daily";
 
+    /// <summary>Route parameter naming the Timed Trial tier to run.</summary>
+    public const string TimedTierParameter = "tier";
+
     /// <summary>
     /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
     /// only a few moves, rare enough that it never competes with drawing.
@@ -43,6 +46,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private readonly IScreenTimeMonitor _screenTime;
     private readonly IAudioService _audio;
     private readonly INarrationService _narration;
+    private readonly IAccessibilityState _accessibility;
 
     private IDispatcherTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
@@ -53,6 +57,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private Guid? _pendingResumeId;
     private string? _pendingPuzzleId;
     private bool _isDaily;
+    private TimedTier? _pendingTier;
     private int _secondsSinceAutosave;
 
     public GameViewModel(
@@ -66,7 +71,8 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IClock clock,
         IScreenTimeMonitor screenTime,
         IAudioService audio,
-        INarrationService narration)
+        INarrationService narration,
+        IAccessibilityState accessibility)
         : base(strings)
     {
         _sessions = sessions;
@@ -79,6 +85,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         _screenTime = screenTime;
         _audio = audio;
         _narration = narration;
+        _accessibility = accessibility;
     }
 
     /// <summary>Raised when the board data changed and the canvas needs redrawing.</summary>
@@ -110,6 +117,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     [ObservableProperty]
     public partial bool IsSolved { get; private set; }
+
+    /// <summary>
+    /// The clock beat the player. A separate flag from <see cref="IsSolved"/> because it is the
+    /// game's only loss, and the two overlays say opposite things.
+    /// </summary>
+    [ObservableProperty]
+    public partial bool IsTimeUp { get; private set; }
 
     [ObservableProperty]
     public partial bool IsPaused { get; private set; }
@@ -158,6 +172,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     public TapBehaviour TapBehaviour => _settings.TapBehaviour;
 
     public bool ShowMagnifier => _settings.ShowMagnifier;
+
+    /// <summary>
+    /// True when the page should build its per-cell accessibility overlay over the board.
+    /// </summary>
+    public bool NeedsCellOverlay => _accessibility.IsScreenReaderActive;
 
     /// <summary>Read by the page before every buzz, so the Haptics switch is actually obeyed.</summary>
     public bool HapticsEnabled => _settings.Haptics;
@@ -277,6 +296,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     public string BreakStopText => T("breakStop");
 
+    public string TimeUpTitle => T("timeUp");
+
+    public string TimeUpBody => T("timeUpBody");
+
+    public string TryAgainText => T("tryAgain");
+
     public string SolvedTitle => T("solved");
 
     public string TimeLabel => T("time");
@@ -296,9 +321,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// </summary>
     /// <remarks>
     /// A <c>GraphicsView</c> contributes nothing to the accessibility tree - the board is simply
-    /// absent from it - so this is the whole of what a screen reader can convey about the puzzle.
-    /// It says so, too: promising a playable board and then providing no way to reach a square
-    /// would be worse than admitting the limit. See the README on what is still missing.
+    /// absent from it - so this summary is what a screen reader has to go on for the board as a
+    /// whole. When a screen reader is running, the individual squares are reachable through the
+    /// overlay built by <c>GamePage.BuildCellOverlay</c>; when it is not, the summary says outright
+    /// that they are not, because promising a playable board and providing no way to reach a square
+    /// would be worse than admitting the limit.
     /// </remarks>
     public string BoardDescription
     {
@@ -311,15 +338,60 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
             var total = CountFilledCells(session.Puzzle);
 
-            return Strings.Format(
-                       "a11yBoard",
-                       session.Puzzle.Width,
-                       session.Puzzle.Height,
-                       session.FilledCount,
-                       total)
-                   + " " + T("a11yBoardNote");
+            var summary = Strings.Format(
+                "a11yBoard",
+                session.Puzzle.Width,
+                session.Puzzle.Height,
+                session.FilledCount,
+                total);
+
+            // The caveat is only true when there is no cell overlay. Leaving it in once the squares
+            // became reachable would be a description that contradicts the screen it describes.
+            return NeedsCellOverlay ? summary : $"{summary} {T("a11yBoardNote")}";
         }
     }
+
+    /// <summary>
+    /// What a screen reader says about one square: where it is, what is in it, and the two clues
+    /// that govern it.
+    /// </summary>
+    /// <remarks>
+    /// The clues are repeated on every square, which is verbose - but a player who cannot see the
+    /// gutters has no other way to know them, and asking a child to hold twenty numbers in their
+    /// head is not an alternative. The tidier design would be separate focusable headers per row
+    /// and column, announcing clues only when the focus crosses into a new line; that needs
+    /// control over focus order, which MAUI does not offer.
+    /// </remarks>
+    public string DescribeCell(int index)
+    {
+        if (Session is not { } session || index < 0 || index >= session.Puzzle.CellCount)
+        {
+            return string.Empty;
+        }
+
+        var puzzle = session.Puzzle;
+        var column = index % puzzle.Width;
+        var row = index / puzzle.Width;
+
+        var state = session[index] switch
+        {
+            CellState.Filled => T("a11yCellFilled"),
+            CellState.Crossed => T("a11yCellCrossed"),
+            _ => T("a11yCellEmpty"),
+        };
+
+        return Strings.Format(
+            "a11yCell",
+            row + 1,
+            column + 1,
+            state,
+            Describe(puzzle.RowClues[row]),
+            Describe(puzzle.ColumnClues[column]));
+    }
+
+    /// <summary>Clue runs as spoken numbers; a blank line reads as "none" rather than "zero".</summary>
+    private string Describe(LineClues clues) =>
+        clues.IsBlank ? T("a11yClueNone") : string.Join(" ", clues);
 
     /// <summary>The timer as a sentence; "5:26" alone is read as a pair of numbers.</summary>
     public string ElapsedDescription => Strings.Format("a11yTime", ElapsedText);
@@ -341,6 +413,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             && puzzleId?.ToString() is { Length: > 0 } picked)
         {
             _pendingPuzzleId = picked;
+        }
+
+        if (query.TryGetValue(TimedTierParameter, out var tier)
+            && int.TryParse(tier?.ToString(), out var tierNumber))
+        {
+            _pendingTier = TimedTrial.Find(tierNumber);
         }
 
         if (query.ContainsKey(DailyParameter))
@@ -365,6 +443,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
             // The save vanished or its picture no longer ships - fall through to a new game
             // rather than leaving the player on an empty board.
+        }
+
+        if (_pendingTier is { } tier)
+        {
+            _settings = await LoadSettingsSafelyAsync();
+
+            await StartAsync(tier.ToOptions(_settings.Helpers));
+            return;
         }
 
         if (_isDaily)
@@ -449,10 +535,18 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// </summary>
     public async Task AutosaveAsync()
     {
-        if (Session is not { } session || session.IsSolved || session.MoveCount == 0)
+        if (Session is not { } session || session.IsOver || session.MoveCount == 0)
         {
             // Nothing worth keeping: an untouched board would clutter Continue with a game the
             // player never actually started.
+            return;
+        }
+
+        if (session.IsTimed)
+        {
+            // A trial is a race, and a race you can put down and pick up tomorrow is not one.
+            // Skipping the save also keeps trials out of Continue, where a countdown frozen at
+            // whatever it read when the player left would be meaningless.
             return;
         }
 
@@ -486,6 +580,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
         IsSolved = false;
+        IsTimeUp = false;
         IsPaused = false;
         IsBreakReminderOpen = false;
         Toast = string.Empty;
@@ -510,8 +605,33 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             return;
         }
 
-        var outcome = session.Paint(index, target);
+        Apply(index, session.Paint(index, target), target);
+    }
 
+    /// <summary>
+    /// Applies a plain tap, letting the session decide what the mark becomes from the current mode.
+    /// </summary>
+    /// <remarks>
+    /// The accessibility overlay's route in. It cannot compute a target the way the board view does,
+    /// because that is worked out from where a finger went down and which way it dragged - a
+    /// gesture a screen-reader user is not making.
+    /// </remarks>
+    public void TapCell(int index)
+    {
+        if (Session is not { } session || IsSolved || IsPaused || IsBreakReminderOpen)
+        {
+            return;
+        }
+
+        var before = session[index];
+        var outcome = session.Tap(index);
+
+        // The sound follows what the square became, which a tap decides for itself.
+        Apply(index, outcome, session[index] == before ? CellState.Empty : session[index]);
+    }
+
+    private void Apply(int index, MoveOutcome outcome, CellState target)
+    {
         switch (outcome.Result)
         {
             case MoveResult.Mistake:
@@ -679,6 +799,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         // Restarting the daily has to give back the same puzzle - it is *today's* picture, and
         // handing out a different one would also let a different picture be recorded as the
         // daily. Only an ordinary game gets a new seed.
+        if (_pendingTier is { } tier)
+        {
+            // A new picture and a full clock. Handing back the same grid would let a player learn
+            // it and "beat" the trial by memory rather than by reading the clues.
+            return tier.ToOptions(_settings.Helpers);
+        }
+
         if (_isDaily)
         {
             return DailyPuzzle.OptionsFor(_clock.Today, _settings.Helpers);
@@ -862,7 +989,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     private void OnTimerTick(object? sender, EventArgs e)
     {
-        if (Session is not { } session || session.IsSolved || IsPaused || IsBreakReminderOpen)
+        if (Session is not { } session || session.IsOver || IsPaused || IsBreakReminderOpen)
         {
             return;
         }
@@ -871,6 +998,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         session.Advance(second);
         UpdateElapsedText();
+
+        if (session.IsTimeUp)
+        {
+            HandleTimeUp();
+            return;
+        }
 
         // Counted here rather than in the monitor's own timer so that only time actually spent
         // playing counts - the guards above are exactly the cases that should not.
@@ -907,10 +1040,31 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     private void UpdateElapsedText()
     {
-        var elapsed = Session?.Elapsed ?? TimeSpan.Zero;
+        // A trial shows what is left rather than what has passed: the number that matters is the
+        // one running out. Same m:ss format either way, matching the prototype's fmtTime.
+        var shown = Session is { IsTimed: true } timed ? timed.Remaining : Session?.Elapsed ?? TimeSpan.Zero;
 
-        // m:ss, matching the prototype's fmtTime - hours are unrealistic for one puzzle.
-        ElapsedText = $"{(int)elapsed.TotalMinutes}:{elapsed.Seconds:00}";
+        ElapsedText = $"{(int)shown.TotalMinutes}:{shown.Seconds:00}";
+    }
+
+    /// <summary>
+    /// Ends a trial the player did not finish in time.
+    /// </summary>
+    /// <remarks>
+    /// No progress is recorded and no save is written: a trial that ran out produced no picture, so
+    /// there is nothing to put in the Gallery and nothing to come back to. Losing is meant to cost
+    /// the attempt, not the afternoon - the overlay offers another go straight away.
+    /// </remarks>
+    private void HandleTimeUp()
+    {
+        StopTimer();
+
+        IsTimeUp = true;
+
+        var message = $"{TimeUpTitle} {TimeUpBody}";
+
+        _narration.Speak(message);
+        Announce(message);
     }
 
     /// <summary>

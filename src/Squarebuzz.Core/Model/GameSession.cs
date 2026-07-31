@@ -58,9 +58,35 @@ public sealed class GameSession
 
     public bool IsSolved { get; private set; }
 
-    public bool CanUndo => !IsSolved && _history.CanUndo;
+    /// <summary>The countdown for a timed trial, or null when the game is untimed.</summary>
+    public TimeSpan? TimeLimit => Origin?.TimeLimit;
 
-    public bool CanRedo => !IsSolved && _history.CanRedo;
+    /// <summary>Whether this session is racing a clock at all.</summary>
+    public bool IsTimed => TimeLimit is not null;
+
+    /// <summary>
+    /// Time left on the clock, never negative. <see cref="TimeSpan.Zero"/> for an untimed game,
+    /// which callers should not be showing in the first place - check <see cref="IsTimed"/>.
+    /// </summary>
+    public TimeSpan Remaining => TimeLimit is { } limit
+        ? (limit > Elapsed ? limit - Elapsed : TimeSpan.Zero)
+        : TimeSpan.Zero;
+
+    /// <summary>
+    /// The clock ran out before the picture was finished - the game's only way to lose.
+    /// </summary>
+    /// <remarks>
+    /// Solving on the very last tick counts as a win: <see cref="IsSolved"/> is checked first, and
+    /// <see cref="Advance"/> stops the clock the moment the puzzle is done.
+    /// </remarks>
+    public bool IsTimeUp => IsTimed && !IsSolved && Remaining == TimeSpan.Zero;
+
+    /// <summary>True once the session can no longer be played, whether won or lost.</summary>
+    public bool IsOver => IsSolved || IsTimeUp;
+
+    public bool CanUndo => !IsOver && _history.CanUndo;
+
+    public bool CanRedo => !IsOver && _history.CanRedo;
 
     public int MoveCount => _history.AppliedCount;
 
@@ -119,9 +145,18 @@ public sealed class GameSession
 
     public void Advance(TimeSpan delta)
     {
-        if (!IsSolved)
+        if (IsOver)
         {
-            Elapsed += delta;
+            return;
+        }
+
+        Elapsed += delta;
+
+        // Clamped so a timed game never reports having run longer than its own limit, which would
+        // make the recorded time of a loss depend on how coarsely the caller happened to tick.
+        if (TimeLimit is { } limit && Elapsed > limit)
+        {
+            Elapsed = limit;
         }
     }
 
@@ -180,7 +215,9 @@ public sealed class GameSession
     /// </summary>
     public MoveOutcome Paint(int index, CellState target)
     {
-        if (IsSolved)
+        // IsOver, not IsSolved: a timed trial whose clock has run out is finished too, and must
+        // not keep accepting marks while the view catches up with the fact.
+        if (IsOver)
         {
             return MoveOutcome.NoChange;
         }
@@ -217,7 +254,7 @@ public sealed class GameSession
     /// </summary>
     public bool Undo()
     {
-        if (IsSolved)
+        if (IsOver)
         {
             return false;
         }
@@ -239,7 +276,7 @@ public sealed class GameSession
 
     public bool Redo()
     {
-        if (IsSolved)
+        if (IsOver)
         {
             return false;
         }
@@ -266,7 +303,7 @@ public sealed class GameSession
     /// </summary>
     public Hint? UseHint()
     {
-        if (IsSolved || HintsRemaining <= 0)
+        if (IsOver || HintsRemaining <= 0)
         {
             return null;
         }
