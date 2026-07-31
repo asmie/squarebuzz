@@ -47,6 +47,8 @@ public sealed partial class ParentGate : ObservableObject
 
     public string RetryMessage => _strings.GetString("gateRetry");
 
+    public string SubmitLabel => _strings.GetString("ok");
+
     public string CancelLabel => _strings.GetString("cancel");
 
     /// <summary>
@@ -106,6 +108,7 @@ public sealed partial class ParentGate : ObservableObject
     {
         OnPropertyChanged(nameof(Title));
         OnPropertyChanged(nameof(RetryMessage));
+        OnPropertyChanged(nameof(SubmitLabel));
         OnPropertyChanged(nameof(CancelLabel));
     }
 }

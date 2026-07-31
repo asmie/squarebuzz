@@ -112,4 +112,154 @@
   <data name="Puzzle_rocket" xml:space="preserve"><value>Rakieta</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Korona</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Tajemniczy obrazek</value></data>
+
+  <!-- Menu / ogólne -->
+  <data name="firstPuzzle" xml:space="preserve"><value>Zacznij swoją pierwszą układankę</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Jak grać</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+
+  <!-- Wyzwania -->
+  <data name="dailyTitle" xml:space="preserve"><value>Codzienna układanka</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Nowy obrazek każdego ranka</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Zrobione na dziś — do jutra!</value></data>
+  <data name="play" xml:space="preserve"><value>Graj</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Dziś</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Na czas</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Szlak</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Próba na czas</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Rozgrzewka</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Spokojnie</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Błyskawica</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · mnóstwo czasu</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · nie zwalniaj</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · ani mrugnij</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Szlak układanek</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Ukończ poprzedni przystanek, aby otworzyć następny</value></data>
+  <data name="trophies" xml:space="preserve"><value>Trofea</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Koniec czasu!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Tym razem zegar był szybszy. Spróbujesz jeszcze raz?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Spróbuj znowu</value></data>
+  <data name="tr1" xml:space="preserve"><value>Pierwszy obrazek</value></data>
+  <data name="tr2" xml:space="preserve"><value>Tydzień z rzędu</value></data>
+  <data name="tr3" xml:space="preserve"><value>Bez podpowiedzi</value></data>
+  <data name="tr4" xml:space="preserve"><value>Ekspres</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 klocków</value></data>
+  <data name="tr6" xml:space="preserve"><value>Fan dinozaurów</value></data>
+  <data name="tr7" xml:space="preserve"><value>Nocny marek</value></data>
+  <data name="tr8" xml:space="preserve"><value>Perfekcyjna dziesiątka</value></data>
+  <data name="tr9" xml:space="preserve"><value>Kolekcjoner</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Ukończ swój pierwszy obrazek.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Graj przez siedem dni z rzędu.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Ukończ obrazek bez ani jednej podpowiedzi.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Ukończ planszę 5×5 w mniej niż minutę.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Zamaluj łącznie 100 klocków.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Znajdź wszystkie dinozaury.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Ukończ obrazek po 20:00.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Trzy gwiazdki na 10×10, bez żadnej pomyłki.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Znajdź każdy obrazek w galerii.</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>Znaleziono {0} z {1}</value></data>
+
+  <!-- Opcje -->
+  <data name="audio" xml:space="preserve"><value>Dźwięk</value></data>
+  <data name="sound" xml:space="preserve"><value>Dźwięki</value></data>
+  <data name="music" xml:space="preserve"><value>Muzyka</value></data>
+  <data name="voice" xml:space="preserve"><value>Czytanie na głos</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Teraz mogę ci czytać.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Brak głosu dla tego języka na tym urządzeniu</value></data>
+  <data name="haptics" xml:space="preserve"><value>Wibracje przy dotknięciu</value></data>
+  <data name="look" xml:space="preserve"><value>Wygląd</value></data>
+  <data name="controls" xml:space="preserve"><value>Sterowanie</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Język</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Strefa rodzica</value></data>
+  <data name="theme" xml:space="preserve"><value>Motyw</value></data>
+  <data name="light" xml:space="preserve"><value>Jasny</value></data>
+  <data name="dark" xml:space="preserve"><value>Ciemny</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Przyjazny dla daltonistów</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Paleta niebiesko-pomarańczowa, wzory zostają</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Główny kolor</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarynka</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Winogrono</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Dotknięcie</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Dotknięcie maluje, przytrzymanie = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Przycisk trybu</value></data>
+  <data name="handed" xml:space="preserve"><value>Przyciski po</value></data>
+  <data name="leftH" xml:space="preserve"><value>Lewej</value></data>
+  <data name="rightH" xml:space="preserve"><value>Prawej</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Rozmiar pól</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Duże cyfry</value></data>
+  <data name="language" xml:space="preserve"><value>Język</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Pokazuje powiększony widok 3×3 podczas malowania. Domyślnie wyłączona.</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Przypomnienie o przerwie</value></data>
+  <data name="stOff" xml:space="preserve"><value>Wył.</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 godz.</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Czas na przerwę?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Grasz już {0} minut. Twoja układanka poczeka.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Jeszcze chwilkę</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Kończę na dziś</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Wyzeruj postępy</value></data>
+  <data name="privacy" xml:space="preserve"><value>Dane i prywatność</value></data>
+  <data name="open" xml:space="preserve"><value>Otwórz</value></data>
+  <data name="reset" xml:space="preserve"><value>Wyzeruj</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Tylko dla dorosłych</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Ile to 7 × 4?</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Poproś dorosłego</value></data>
+  <data name="cancel" xml:space="preserve"><value>Anuluj</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Wymazać wszystko?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Wszystkie układanki, gwiazdki i naklejki znikną. Nie da się tego cofnąć.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Tak, wymaż wszystko</value></data>
+
+  <!-- O grze -->
+  <data name="version" xml:space="preserve"><value>Wersja 1.0 · kompilacja 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Bez reklam · bez zakupów w aplikacji</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Czym jest nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram to obrazek ukryty w liczbach. Wskazówki przy każdym wierszu i kolumnie mówią, ile klocków zamalować i w jakiej kolejności. Rozwiąż każdą linię czystą logiką, a obrazek się pojawi — nigdy nie musisz zgadywać.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Znany też jako: Picross · Griddler · Hanjie · Pic-a-Pix · Malowanie liczbami · Krzyżówka japońska</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Jak grać</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Autorzy</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Polityka prywatności</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Napisz do nas</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Oceń squarebuzz</value></data>
+
+  <!-- Jak grać -->
+  <data name="ht1" xml:space="preserve"><value>Czytaj wskazówki</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Każda liczba to jeden nieprzerwany ciąg zamalowanych klocków, w podanej kolejności. Wskazówka 3 1 znaczy: trzy razem, co najmniej jedna przerwa, potem jeden osobno.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Maluj i przekreślaj</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Dotknij pola, aby je zamalować. Przełącz na tryb X dla pól, o których wiesz, że zostają puste. Znaki X to nie ozdoba — dzięki nim się nie pogubisz.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Nakładanie przy długich wskazówkach</value></data>
+  <data name="ht3b" xml:space="preserve"><value>W wierszu o szerokości 10 wskazówka 8 zawsze przykrywa środkowe 6 pól, gdziekolwiek by zaczynała. Przesuń ciąg w lewo, przesuń w prawo i zamaluj część wspólną.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Łącz wiersze z kolumnami</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Gdy wiersz da ci jedno pewne pole, spójrz wzdłuż jego kolumny. Nowy klocek często domyka wskazówkę kolumny, a to daje kolejne X, a te — kolejne klocki.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Przekreślaj skończone linie</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Gdy linia w pełni zgadza się ze wskazówkami, przekreśl w niej wszystkie pozostałe pola. Liczby przygasną — wiadomo, że ta linia jest gotowa.</value></data>
+
+  <!-- Czytnik ekranu -->
+  <data name="a11yCell" xml:space="preserve"><value>Wiersz {0}, kolumna {1}, {2}. Wskazówka wiersza: {3}. Wskazówka kolumny: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>puste</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>zamalowane</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>przekreślone</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>brak</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Plansza, {0} na {1}. Zamalowano {2} z {3} pól.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Pól nie można jeszcze używać przez eksplorację dotykiem.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Dotychczasowy czas: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Łącznie gwiazdek: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} dni z rzędu</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Graj dalej: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Usuń: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Mniejsze pola</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Większe pola</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, odkryty, gwiazdki: {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Obrazek jeszcze nieodkryty. Zagraj, aby go zobaczyć.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Zablokowany obrazek</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, zdobyte. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, jeszcze niezdobyte. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} z 3 gwiazdek</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Przystanek {0}, {1}, ukończony. Zagraj jeszcze raz.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Przystanek {0}, {1} na {1}, następny w kolejce.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Przystanek {0}, zablokowany. Najpierw ukończ poprzedni.</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na zegarze.</value></data>
 </root>

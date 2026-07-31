@@ -47,8 +47,10 @@ public partial class GamePage : ContentPage
         // first layout.
         SizeChanged += (_, _) => ApplyLayout();
 
-        // The overlay has to follow the board's geometry, which changes with zoom and rotation.
+        // The overlay has to follow the board's geometry, which changes with zoom and rotation -
+        // and the screen-reader state, which can flip mid-game.
         Board.LayoutChanged += (_, _) => BuildCellOverlay();
+        _viewModel.OverlayNeedChanged += (_, _) => BuildCellOverlay();
     }
 
     private void OnBoardHostSizeChanged(object? sender, EventArgs e)

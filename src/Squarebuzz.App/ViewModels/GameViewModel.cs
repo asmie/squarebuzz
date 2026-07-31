@@ -95,6 +95,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         // OS dusk flip under Auto, or Options changed from the pause overlay one day - must
         // push a redraw. Unhooked in Dispose, which PageLifecycle guarantees is called.
         _theme.Changed += OnThemeChanged;
+
+        // TalkBack switched on mid-game must grow the cell overlay right away - the player who
+        // just turned it on is exactly the one who cannot see that the board ignored them.
+        _accessibility.ScreenReaderStateChanged += OnScreenReaderStateChanged;
     }
 
     /// <summary>Raised when the board data changed and the canvas needs redrawing.</summary>
@@ -102,6 +106,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     /// <summary>Raised when the palette changed, so the canvas re-reads its colours.</summary>
     public event EventHandler? PaletteChanged;
+
+    /// <summary>Raised when <see cref="NeedsCellOverlay"/> changed, so the page rebuilds it.</summary>
+    public event EventHandler? OverlayNeedChanged;
 
     /// <summary>Raised with a cell index when a fill was wrong, so the view can flash it.</summary>
     public event EventHandler<int>? MistakeMade;
@@ -1179,12 +1186,23 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private void OnThemeChanged(object? sender, EventArgs e) =>
         PaletteChanged?.Invoke(this, EventArgs.Empty);
 
+    private void OnScreenReaderStateChanged(object? sender, EventArgs e)
+    {
+        OnPropertyChanged(nameof(NeedsCellOverlay));
+
+        // The summary's "cannot be reached" caveat depends on whether the overlay exists.
+        OnPropertyChanged(nameof(BoardDescription));
+
+        OverlayNeedChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
             StopTimer();
             _theme.Changed -= OnThemeChanged;
+            _accessibility.ScreenReaderStateChanged -= OnScreenReaderStateChanged;
         }
 
         base.Dispose(disposing);

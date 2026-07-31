@@ -14,12 +14,15 @@ namespace Squarebuzz.App.Services;
 /// </remarks>
 public sealed partial class AccessibilityState
 {
+    // Rooted in a field: the manager holds listeners weakly on some API levels, and a collected
+    // listener is a change notification that silently never comes.
+    private TouchExplorationListener? _listener;
+
     private static bool GetIsScreenReaderActive()
     {
         try
         {
-            var manager = Application.Context.GetSystemService(
-                Android.Content.Context.AccessibilityService) as AccessibilityManager;
+            var manager = Manager();
 
             return manager is { IsEnabled: true, IsTouchExplorationEnabled: true };
         }
@@ -27,6 +30,46 @@ public sealed partial class AccessibilityState
         {
             // A missing or refused system service must not stop the game starting.
             return false;
+        }
+    }
+
+    /// <summary>
+    /// Watches for TalkBack being switched on or off while the app runs, so a board that is
+    /// already open can grow or shed its cell overlay instead of waiting for the next visit.
+    /// </summary>
+    partial void PlatformInitialize()
+    {
+        try
+        {
+            if (Manager() is not { } manager)
+            {
+                return;
+            }
+
+            // Touch exploration, matching GetIsScreenReaderActive: it flips exactly when the
+            // answer to "is a screen reader driving?" flips.
+            _listener = new TouchExplorationListener(this);
+            manager.AddTouchExplorationStateChangeListener(_listener);
+        }
+        catch (Exception)
+        {
+            // No notifications then - the state is still read fresh on every board open.
+        }
+    }
+
+    private static AccessibilityManager? Manager() =>
+        Application.Context.GetSystemService(Android.Content.Context.AccessibilityService)
+            as AccessibilityManager;
+
+    private sealed class TouchExplorationListener(AccessibilityState owner)
+        : Java.Lang.Object, AccessibilityManager.ITouchExplorationStateChangeListener
+    {
+        public void OnTouchExplorationStateChanged(bool enabled)
+        {
+            // Listeners can fire on a system thread; everything downstream touches UI. TalkBack
+            // also restarts itself while initialising, so this fires more than once per toggle -
+            // harmless, since every consumer re-reads the live state rather than the argument.
+            MainThread.BeginInvokeOnMainThread(owner.RaiseChanged);
         }
     }
 }

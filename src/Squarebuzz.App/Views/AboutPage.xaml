@@ -101,7 +101,7 @@
                            FontFamily="BodyBold"
                            HorizontalTextAlignment="Center" />
 
-                    <Button Text="OK" Command="{Binding Gate.SubmitCommand}"
+                    <Button Text="{Binding Gate.SubmitLabel}" Command="{Binding Gate.SubmitCommand}"
                             Style="{StaticResource PrimaryButton}" HeightRequest="52" />
                     <Button Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
                             Style="{StaticResource SecondaryButton}" HeightRequest="48" />
