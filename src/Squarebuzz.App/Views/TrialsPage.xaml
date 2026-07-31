@@ -85,7 +85,30 @@
         <VerticalStackLayout Grid.Row="2" IsVisible="{Binding IsDailyTab}" Spacing="14">
             <Border Style="{StaticResource Card}">
                 <VerticalStackLayout Spacing="12">
-                    <Label Text="{Binding TodayLabel}" Style="{StaticResource Subtle}" FontSize="13" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="{Binding TodayLabel}" Style="{StaticResource Subtle}"
+                               FontSize="13" VerticalOptions="Center" />
+
+                        <!-- The streak flame the design puts on this tab: celebrated, never punished. -->
+                        <Border Grid.Column="1"
+                                SemanticProperties.Description="{Binding StreakDescription}"
+                                BackgroundColor="{DynamicResource Surface2}"
+                                Stroke="{DynamicResource Line}"
+                                StrokeThickness="2"
+                                Padding="12,4">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="999" />
+                            </Border.StrokeShape>
+                            <Label FontFamily="BodyBold" FontSize="14" VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="🔥 " />
+                                        <Span Text="{Binding Streak}" TextColor="{DynamicResource Ink}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Border>
+                    </Grid>
                     <Label Text="{Binding DailyTitle}" Style="{StaticResource H2}" />
                     <Label Text="{Binding DailySubtitle}" Style="{StaticResource Subtle}" />
 

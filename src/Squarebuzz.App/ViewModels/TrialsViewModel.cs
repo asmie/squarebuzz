@@ -152,6 +152,13 @@ public partial class TrialsViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial string TodayLabel { get; private set; } = string.Empty;
 
+    /// <summary>The streak flame on the Daily card, e.g. "🔥 3".</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(StreakDescription))]
+    public partial int Streak { get; private set; }
+
+    public string StreakDescription => Strings.Format("a11yStreak", Streak);
+
     [ObservableProperty]
     public partial string EarnedSummary { get; private set; } = string.Empty;
 
@@ -215,6 +222,7 @@ public partial class TrialsViewModel : LocalizedViewModel
         BuildTimedLadder();
 
         IsDailyAvailable = DailyPuzzle.IsAvailable(progress, today);
+        Streak = progress.Streak;
 
         var earnedById = earned.ToDictionary(e => e.Trophy);
 

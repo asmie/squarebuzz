@@ -93,7 +93,13 @@ public sealed class LocalizationService : INotifyPropertyChanged
         Language = language;
         _culture = CultureInfo.GetCultureInfo(language.ToCultureCode());
 
-        // Affects date and number formatting too, not just our own strings.
+        // Affects date and number formatting too, not just our own strings. The Default* pair
+        // matters as much as the Current* pair: Current only changes *this* thread, and the
+        // saved language is applied during startup on whichever thread the settings load
+        // happened to finish on - without the defaults, every other thread keeps formatting
+        // dates in the device language while the labels around them speak the chosen one.
+        CultureInfo.DefaultThreadCurrentCulture = _culture;
+        CultureInfo.DefaultThreadCurrentUICulture = _culture;
         CultureInfo.CurrentUICulture = _culture;
         CultureInfo.CurrentCulture = _culture;
 

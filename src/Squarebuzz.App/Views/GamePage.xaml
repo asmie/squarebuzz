@@ -20,16 +20,24 @@
           RowSpacing="12"
           ColumnSpacing="16">
 
-        <!-- Status bar: picture name, counters, timer, pause -->
-        <Grid x:Name="StatusBar" Grid.Row="0" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+        <!-- Status bar: picture name, counters, progress ring, timer, pause -->
+        <Grid x:Name="StatusBar" Grid.Row="0" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="10">
             <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
                 <Label Text="{Binding PuzzleName}" Style="{StaticResource H2}"
                        SemanticProperties.HeadingLevel="Level1" />
                 <Label Text="{Binding StatusText}" Style="{StaticResource Subtle}" FontSize="14" />
             </VerticalStackLayout>
 
+            <!-- Glanceable progress; screen readers get the same fact via the board summary. -->
+            <controls:ProgressRingView Grid.Column="1"
+                                       Progress="{Binding Progress}"
+                                       AutomationProperties.ExcludedWithChildren="True"
+                                       WidthRequest="40"
+                                       HeightRequest="40"
+                                       VerticalOptions="Center" />
+
             <!-- Glyph-only, so the only thing a screen reader has to go on is this. -->
-            <Button Grid.Column="1"
+            <Button Grid.Column="2"
                     Text="⏸"
                     SemanticProperties.Description="{Binding PauseText}"
                     Command="{Binding PauseCommand}"
@@ -41,7 +49,7 @@
                     Padding="0"
                     VerticalOptions="Center" />
 
-            <Border Grid.Column="2"
+            <Border Grid.Column="3"
                     IsVisible="{Binding ShowTimer}"
                     SemanticProperties.Description="{Binding ElapsedDescription}"
                     BackgroundColor="{DynamicResource Surface2}"
@@ -95,6 +103,21 @@
           avoids translating touch coordinates up through the ScrollView. The corner flips to
           whichever side the hand is not on.
         -->
+        <!--
+          Overview map for boards bigger than their viewport - 15x15 and up on a phone. Bottom
+          corner, opposite nothing in particular: the magnifier owns the top and the two must
+          not fight over it. Shown from code when the board actually scrolls.
+        -->
+        <controls:BoardMiniMapView Grid.Row="1"
+                                   x:Name="MiniMap"
+                                   IsVisible="False"
+                                   AutomationProperties.ExcludedWithChildren="True"
+                                   WidthRequest="104"
+                                   HeightRequest="104"
+                                   Margin="4"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="End" />
+
         <Border Grid.Row="1"
                 x:Name="MagnifierPanel"
                 IsVisible="False"

@@ -28,6 +28,12 @@
     <!-- Minimum 48px touch targets throughout: this is a game for 6-12 year olds. -->
     <x:Double x:Key="TouchTargetMin">48</x:Double>
 
+    <!--
+      The focus glow's colour. A static resource on purpose: a Shadow brush inside a visual
+      state cannot re-resolve DynamicResource, and the sky blue reads on every theme.
+    -->
+    <SolidColorBrush x:Key="FocusRing" Color="#4FA8F5" />
+
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="{DynamicResource Bg}" />
         <Setter Property="Padding" Value="0" />
@@ -62,6 +68,12 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
     </Style>
 
+    <!--
+      The pressable face from the design system: a solid shadow along the bottom edge that the
+      button sinks into when pressed, so it reads as a physical key rather than a flat rectangle.
+      Focus swaps the shadow for a sky glow - the design's focus ring - which matters for
+      keyboard players on desktop and never replaces the border, because there is none.
+    -->
     <Style x:Key="PrimaryButton" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
         <Setter Property="TextColor" Value="{DynamicResource OnPrimary}" />
@@ -70,6 +82,38 @@
         <Setter Property="FontFamily" Value="BodyBold" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
         <Setter Property="Padding" Value="18,0" />
+        <Setter Property="Shadow">
+            <Shadow Brush="#40000000" Radius="0" Offset="0,3" />
+        </Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="TranslationY" Value="0" />
+                            <Setter Property="Shadow">
+                                <Shadow Brush="#40000000" Radius="0" Offset="0,3" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="TranslationY" Value="2" />
+                            <Setter Property="Shadow">
+                                <Shadow Brush="#40000000" Radius="0" Offset="0,1" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+                            <Setter Property="Shadow">
+                                <Shadow Brush="{StaticResource FocusRing}" Radius="8" Offset="0,0" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
     <Style x:Key="SecondaryButton" TargetType="Button">
@@ -80,6 +124,38 @@
         <Setter Property="FontFamily" Value="BodyBold" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeLabel}" />
         <Setter Property="Padding" Value="18,0" />
+        <Setter Property="Shadow">
+            <Shadow Brush="#26000000" Radius="0" Offset="0,3" />
+        </Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="TranslationY" Value="0" />
+                            <Setter Property="Shadow">
+                                <Shadow Brush="#26000000" Radius="0" Offset="0,3" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="TranslationY" Value="2" />
+                            <Setter Property="Shadow">
+                                <Shadow Brush="#26000000" Radius="0" Offset="0,1" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+                            <Setter Property="Shadow">
+                                <Shadow Brush="{StaticResource FocusRing}" Radius="8" Offset="0,0" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
     <!-- Card surface: the prototype's surface colour with a 2px line-coloured border. -->

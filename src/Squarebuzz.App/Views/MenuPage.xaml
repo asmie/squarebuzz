@@ -78,20 +78,54 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="{Binding TrialsLabel}"
-                    Command="{Binding TrialsCommand}"
-                    Style="{StaticResource SecondaryButton}"
-                    HeightRequest="56" />
+            <!--
+              Poster buttons, as the design draws them: the destination plus one line of why
+              you would go there. Same shape as the Continue card above.
+            -->
+            <Border Style="{StaticResource Card}" Padding="0">
+                <VerticalStackLayout>
+                    <Button Text="{Binding TrialsLabel}"
+                            Command="{Binding TrialsCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{DynamicResource Ink}"
+                            HeightRequest="60"
+                            FontFamily="BodyBold" />
+                    <Label Text="{Binding TrialsSubtitle}"
+                           Style="{StaticResource Subtle}"
+                           FontSize="13"
+                           Margin="16,0,16,10" />
+                </VerticalStackLayout>
+            </Border>
 
-            <Button Text="{Binding OptionsLabel}"
-                    Command="{Binding OptionsCommand}"
-                    Style="{StaticResource SecondaryButton}"
-                    HeightRequest="56" />
+            <Border Style="{StaticResource Card}" Padding="0">
+                <VerticalStackLayout>
+                    <Button Text="{Binding OptionsLabel}"
+                            Command="{Binding OptionsCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{DynamicResource Ink}"
+                            HeightRequest="60"
+                            FontFamily="BodyBold" />
+                    <Label Text="{Binding OptionsSubtitle}"
+                           Style="{StaticResource Subtle}"
+                           FontSize="13"
+                           Margin="16,0,16,10" />
+                </VerticalStackLayout>
+            </Border>
 
-            <Button Text="{Binding AboutLabel}"
-                    Command="{Binding AboutCommand}"
-                    Style="{StaticResource SecondaryButton}"
-                    HeightRequest="56" />
+            <Border Style="{StaticResource Card}" Padding="0">
+                <VerticalStackLayout>
+                    <Button Text="{Binding AboutLabel}"
+                            Command="{Binding AboutCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{DynamicResource Ink}"
+                            HeightRequest="60"
+                            FontFamily="BodyBold" />
+                    <Label Text="{Binding AboutSubtitle}"
+                           Style="{StaticResource Subtle}"
+                           FontSize="13"
+                           Margin="16,0,16,10" />
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 

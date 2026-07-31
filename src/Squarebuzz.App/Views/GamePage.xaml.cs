@@ -52,6 +52,10 @@ public partial class GamePage : ContentPage
         // and the screen-reader state, which can flip mid-game.
         Board.LayoutChanged += (_, _) => BuildCellOverlay();
         _viewModel.OverlayNeedChanged += (_, _) => BuildCellOverlay();
+
+        // The mini-map tracks the board's geometry and the scroll window over it.
+        Board.LayoutChanged += (_, _) => UpdateMiniMap();
+        BoardHost.Scrolled += (_, _) => UpdateMiniMapViewport();
     }
 
     private void OnBoardHostSizeChanged(object? sender, EventArgs e)
@@ -115,6 +119,7 @@ public partial class GamePage : ContentPage
             Place(StatusBar, row: 0, column: 0, columnSpan: 1);
             Place(BoardHost, row: 1, column: 0, columnSpan: 1);
             Place(MagnifierPanel, row: 1, column: 0, columnSpan: 1);
+            Place(MiniMap, row: 1, column: 0, columnSpan: 1);
             Place(ControlsPanel, row: 2, column: 0, columnSpan: 1);
 
             ControlsPanel.WidthRequest = -1;
@@ -144,6 +149,7 @@ public partial class GamePage : ContentPage
         Place(StatusBar, row: 0, column: 0, columnSpan: 2);
         Place(BoardHost, row: 1, column: boardColumn, columnSpan: 1);
         Place(MagnifierPanel, row: 1, column: boardColumn, columnSpan: 1);
+        Place(MiniMap, row: 1, column: boardColumn, columnSpan: 1);
         Place(ControlsPanel, row: 1, column: controlsColumn, columnSpan: 1);
 
         ControlsPanel.WidthRequest = ControlsWidth;
@@ -326,6 +332,11 @@ public partial class GamePage : ContentPage
         Board.RefreshCells();
         RefreshCellDescriptions();
 
+        if (MiniMap.IsVisible)
+        {
+            MiniMap.UpdateCells(_viewModel.Session);
+        }
+
         // TouchedCellChanged fires before the move is applied, so the magnifier's first snapshot
         // is pre-paint. Re-reading it here is what makes it show the cell as it now is rather
         // than as it was a moment ago.
@@ -333,6 +344,44 @@ public partial class GamePage : ContentPage
         {
             Magnifier.ShowCell(_magnifiedIndex);
         }
+    }
+
+    /// <summary>
+    /// Shows the overview map only when it earns its corner: a 15-and-up grid whose drawn size
+    /// exceeds the scroll window, which is exactly when the player loses sight of parts of it.
+    /// </summary>
+    private void UpdateMiniMap()
+    {
+        var puzzle = _viewModel.Session?.Puzzle;
+        var scrollable = Board.Width > BoardHost.Width + 1 || Board.Height > BoardHost.Height + 1;
+        var wanted = puzzle is { Width: >= 15 } && scrollable;
+
+        if (MiniMap.IsVisible != wanted)
+        {
+            MiniMap.IsVisible = wanted;
+        }
+
+        if (!wanted)
+        {
+            return;
+        }
+
+        MiniMap.UpdateCells(_viewModel.Session);
+        UpdateMiniMapViewport();
+    }
+
+    private void UpdateMiniMapViewport()
+    {
+        if (!MiniMap.IsVisible || Board.Width <= 0 || Board.Height <= 0)
+        {
+            return;
+        }
+
+        MiniMap.UpdateViewport(
+            BoardHost.ScrollX / Board.Width,
+            BoardHost.ScrollY / Board.Height,
+            Math.Min(1, BoardHost.Width / Board.Width),
+            Math.Min(1, BoardHost.Height / Board.Height));
     }
 
     private async void OnMistakeMade(object? sender, int index)

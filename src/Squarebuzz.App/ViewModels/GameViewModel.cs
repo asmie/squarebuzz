@@ -174,6 +174,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [ObservableProperty]
     public partial int HintsUsed { get; private set; }
 
+    /// <summary>Fraction of the picture filled in, 0..1, for the status bar's ring.</summary>
+    [ObservableProperty]
+    public partial double Progress { get; private set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StarsText))]
     public partial int StarRating { get; private set; }
@@ -1059,6 +1063,20 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         HintsRemaining = session.HintsRemaining;
         HintsUsed = session.HintsUsed;
+
+        var solution = session.Puzzle.Solution;
+        var pictureSize = 0;
+
+        for (var i = 0; i < solution.Length; i++)
+        {
+            if (solution[i])
+            {
+                pictureSize++;
+            }
+        }
+
+        Progress = pictureSize == 0 ? 0 : (double)session.FilledCount / pictureSize;
+
         Mistakes = session.Mistakes;
         StarRating = session.StarRating;
         CanUndo = session.CanUndo;
