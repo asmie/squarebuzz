@@ -80,13 +80,8 @@ public sealed class PathCard
 }
 
 /// <summary>
-/// Trials: today's puzzle, the Puzzle Path and the trophy cabinet.
+/// Trials: today's puzzle, the timed tiers, the Puzzle Path and the trophy cabinet.
 /// </summary>
-/// <remarks>
-/// The prototype also sketched timed modes and a "puzzle path". Both need work the domain does
-/// not have yet - a countdown, and a progression model - so they are deliberately absent rather
-/// than present and hollow.
-/// </remarks>
 public partial class TrialsViewModel : LocalizedViewModel
 {
     /// <summary>Icons per trophy. The prototype had a matching row of emoji.</summary>
@@ -375,10 +370,6 @@ public partial class TrialsViewModel : LocalizedViewModel
 }
 
 /// <summary>The tabs on the Trials screen.</summary>
-/// <remarks>
-/// The prototype had a fourth, Timed Trial, which needs a countdown inside <c>GameSession</c> that
-/// does not exist yet. Absent rather than present and hollow.
-/// </remarks>
 public enum TrialsTab
 {
     Daily,

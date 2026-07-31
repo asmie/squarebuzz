@@ -42,7 +42,6 @@
         <Label Grid.Row="0" Text="{Binding Heading}" Style="{StaticResource H1}"
                SemanticProperties.HeadingLevel="Level1" />
 
-        <!-- Two tabs. Timed modes and the puzzle path are absent rather than hollow. -->
         <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" ColumnSpacing="6">
             <Button Grid.Column="0"
                     Text="{Binding DailyTabLabel}"

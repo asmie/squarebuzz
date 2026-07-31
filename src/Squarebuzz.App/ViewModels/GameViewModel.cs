@@ -167,6 +167,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [NotifyPropertyChangedFor(nameof(StatusText))]
     public partial int Mistakes { get; private set; }
 
+    /// <summary>Hints spent this game, for the win overlay's tiles.</summary>
+    [ObservableProperty]
+    public partial int HintsUsed { get; private set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StarsText))]
     public partial int StarRating { get; private set; }
@@ -304,6 +308,8 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     public string HowToText => T("howTo");
 
+    public string OptionsText => T("options");
+
     public string QuitText => T("quit");
 
     public string BreakTitle => T("breakTitle");
@@ -329,6 +335,25 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     public string SolvedTitle => T("solved");
 
     public string TimeLabel => T("time");
+
+    public string HintsLabel => T("hints");
+
+    public string MistakesLabel => T("mistakes");
+
+    /// <summary>
+    /// The solve time for the win overlay. Not <see cref="ElapsedText"/>: that shows what is
+    /// *left* during a timed trial, and a trial's win screen should still report how long the
+    /// solve took, not how much clock remained.
+    /// </summary>
+    public string SolvedTimeText
+    {
+        get
+        {
+            var elapsed = Session?.Elapsed ?? TimeSpan.Zero;
+
+            return $"{(int)elapsed.TotalMinutes}:{elapsed.Seconds:00}";
+        }
+    }
 
     public string NextPuzzleText => T("nextPuzzle");
 
@@ -499,6 +524,23 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         }
 
         await StartAsync();
+    }
+
+    /// <summary>
+    /// Re-reads the settings after another screen may have changed them - the pause overlay
+    /// links to Options, and the player expects a new cell size or handedness to apply the
+    /// moment they come back to the board.
+    /// </summary>
+    public async Task RefreshSettingsAsync()
+    {
+        if (Session is null)
+        {
+            // InitialiseAsync loads settings itself; refreshing before it runs is wasted I/O.
+            return;
+        }
+
+        _settings = await LoadSettingsSafelyAsync();
+        NotifySettingsDependentProperties();
     }
 
     private async Task<GameSettings> LoadSettingsSafelyAsync()
@@ -875,6 +917,16 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         await _navigation.GoToAsync(Routes.HowTo);
     }
 
+    /// <summary>
+    /// Options from the pause overlay. The game stays paused underneath and picks the changes
+    /// up on return - settings are re-read by NotifySettingsDependentProperties on appearing.
+    /// </summary>
+    [RelayCommand]
+    private async Task OptionsAsync()
+    {
+        await _navigation.GoToAsync(Routes.Options);
+    }
+
     private async Task HandleCompletionAsync()
     {
         if (Session is not { } session)
@@ -998,12 +1050,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         }
 
         HintsRemaining = session.HintsRemaining;
+        HintsUsed = session.HintsUsed;
         Mistakes = session.Mistakes;
         StarRating = session.StarRating;
         CanUndo = session.CanUndo;
         CanRedo = session.CanRedo;
         IsSolved = session.IsSolved;
         UpdateElapsedText();
+        OnPropertyChanged(nameof(SolvedTimeText));
 
         // The board's accessible description carries the filled count, so it goes stale on every
         // move unless it is raised here - and "2 of 17" while the board is nearly finished is

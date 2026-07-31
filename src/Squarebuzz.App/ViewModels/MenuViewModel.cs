@@ -60,12 +60,6 @@ public partial class MenuViewModel : LocalizedViewModel
 
     public string AboutLabel => T("about");
 
-    public string TrialsSubtitle => T("dailyReady");
-
-    public string OptionsSubtitle => T("settingsSub");
-
-    public string AboutSubtitle => T("aboutSub");
-
     /// <summary>Either a count of unfinished puzzles or an invitation to start one.</summary>
     public string ContinueSubtitle => SaveCount > 0
         ? Strings.Format("inProgress", SaveCount)

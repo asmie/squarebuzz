@@ -172,7 +172,9 @@ public partial class GamePage : ContentPage
         }
         else
         {
-            // Coming back from backgrounding or from a page pushed over the game (How to play).
+            // Coming back from backgrounding or from a page pushed over the game - How to play,
+            // or Options, whose changes must show on the board right away.
+            await _viewModel.RefreshSettingsAsync();
             _viewModel.ResumeClock();
         }
     }
