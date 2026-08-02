@@ -32,7 +32,7 @@ public sealed class TouchedCellEventArgs(int index, bool isInLeftHalf) : EventAr
 /// drag then paints that same value into each newly entered cell. A <c>seen</c> set stops a
 /// wobbling finger from flipping a cell back and forth as it re-enters it.
 /// </remarks>
-public sealed class BoardView : GraphicsView
+public sealed partial class BoardView : GraphicsView
 {
     /// <summary>Long-press duration that turns a tap into a cross, in hold-to-cross mode.</summary>
     private static readonly TimeSpan LongPressDelay = TimeSpan.FromMilliseconds(480);
@@ -338,8 +338,15 @@ public sealed class BoardView : GraphicsView
 
         if (index is not { } cell)
         {
+            // A gutter touch is not a paint gesture, so it is left to the scrolling host - that
+            // is how a board bigger than the screen gets panned.
             return;
         }
+
+        // From here the gesture is the board's. Without this the scrolling host takes it back
+        // the moment the finger travels past the system touch slop, which is a fraction of one
+        // square: a drag across ten cells used to paint two and then be cancelled.
+        ClaimGestureFromScrollers(true);
 
         _pressedIndex = cell;
         _paintedThisDrag.Clear();
@@ -404,8 +411,18 @@ public sealed class BoardView : GraphicsView
         EndDrag();
     }
 
+    /// <summary>
+    /// Platform hook: takes the gesture away from any scrolling ancestor, or gives it back.
+    /// Does nothing where the platform has no such notion.
+    /// </summary>
+    partial void ClaimGestureFromScrollers(bool claim);
+
     private void EndDrag()
     {
+        // Released on every route out of a gesture, including cancellation - a host left
+        // permanently unable to intercept would stop scrolling altogether.
+        ClaimGestureFromScrollers(false);
+
         _isDragging = false;
         _paintedThisDrag.Clear();
 
@@ -418,6 +435,7 @@ public sealed class BoardView : GraphicsView
 
     private void Paint(int index)
     {
+
         // Each cell is painted at most once per drag, so re-entering it does not toggle it back.
         if (!_paintedThisDrag.Add(index))
         {

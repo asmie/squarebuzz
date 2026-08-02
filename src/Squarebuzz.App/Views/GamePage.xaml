@@ -137,15 +137,37 @@
                                     AutomationProperties.ExcludedWithChildren="True" />
         </Border>
 
-        <!-- Controls -->
-        <VerticalStackLayout x:Name="ControlsPanel" Grid.Row="2" Spacing="10">
-
+        <!--
+          "Line done!" / "Oops". An overlay pinned to the bottom of the board area, not a row in
+          the controls panel, because it comes and goes *while the player is dragging*. As a
+          laid-out child it took its height out of the star-sized board row, and the board -
+          centred in what was left - jumped up by half of that. Mid-drag, that moved the grid out
+          from under the finger and the rest of the stroke painted a row off. Being an overlay it
+          costs the board no space at all, which also means it no longer has to be paid for on
+          every board that never sees a toast.
+        -->
+        <Border Grid.Row="1"
+                IsVisible="{Binding HasToast}"
+                InputTransparent="True"
+                Padding="16,7"
+                Margin="8"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                BackgroundColor="{DynamicResource Surface}"
+                Stroke="{DynamicResource Line}"
+                StrokeThickness="2">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="999" />
+            </Border.StrokeShape>
             <Label Text="{Binding Toast}"
-                   IsVisible="{Binding HasToast}"
                    Style="{StaticResource Subtle}"
                    HorizontalOptions="Center"
                    FontFamily="BodyBold"
                    TextColor="{DynamicResource PrimaryDeep}" />
+        </Border>
+
+        <!-- Controls -->
+        <VerticalStackLayout x:Name="ControlsPanel" Grid.Row="2" Spacing="10">
 
             <!--
               Columns come from the ViewModel so the Handedness setting can reorder the row -
