@@ -6,6 +6,32 @@ namespace Squarebuzz.Core.Tests.Clues;
 
 public class ClueStrikeCalculatorTests
 {
+    [Theory]
+    // One run cannot satisfy two clue numbers. Striking both told a child the line was
+    // finished at the exact moment they had over-crossed and broken it.
+    [InlineData("x#x", new[] { 1, 1 })]
+    [InlineData("xx#xx", new[] { 1, 1 })]
+    [InlineData("xx#x#xx", new[] { 1, 1, 1 })]
+    public void AnOverCrossedLine_DoesNotStrikeEveryClue(string line, int[] runs)
+    {
+        var clues = new LineClues(runs);
+
+        var struck = ClueStrikeCalculator.Compute(clues, Marks(line));
+
+        Assert.Contains(false, struck);
+    }
+
+    [Theory]
+    // The forward and backward passes must still each claim their own anchored run.
+    [InlineData("x##xx", new[] { 2, 1 }, new[] { true, false })]
+    [InlineData("x#xx##xx", new[] { 1, 2, 1 }, new[] { true, true, false })]
+    public void ConsistentLines_AreUnaffected(string line, int[] runs, bool[] expected)
+    {
+        var struck = ClueStrikeCalculator.Compute(new LineClues(runs), Marks(line));
+
+        Assert.Equal(expected, struck);
+    }
+
     private static CellState[] Marks(string pattern) =>
         [.. pattern.Select(c => c switch
         {

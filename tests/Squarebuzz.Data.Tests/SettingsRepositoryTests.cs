@@ -149,8 +149,39 @@ public class SettingsRepositoryTests
         // Regional variants must still resolve to the shipped language.
         Assert.Equal(AppLanguage.Polish, AppLanguages.FromCultureCode("pl-PL"));
         Assert.Equal(AppLanguage.Spanish, AppLanguages.FromCultureCode("es-MX"));
-        Assert.Equal(AppLanguage.English, AppLanguages.FromCultureCode("de-DE"));
+        Assert.Equal(AppLanguage.German, AppLanguages.FromCultureCode("de-DE"));
+        Assert.Equal(AppLanguage.Portuguese, AppLanguages.FromCultureCode("pt-BR"));
+
+        // Anything the game does not ship in, and a missing code, fall back to English.
+        Assert.Equal(AppLanguage.English, AppLanguages.FromCultureCode("hu-HU"));
         Assert.Equal(AppLanguage.English, AppLanguages.FromCultureCode(null));
+        Assert.Equal(AppLanguage.English, AppLanguages.FromCultureCode(string.Empty));
+    }
+
+    [Fact]
+    public void EveryShippedLanguage_HasAUniqueCodeAndRoundTrips()
+    {
+        // The picker, the resx satellite names and the persisted value all key off these, so a
+        // duplicate or a code that does not round-trip would silently strand a language.
+        var codes = AppLanguages.All.Select(l => l.CultureCode).ToList();
+        var languages = AppLanguages.All.Select(l => l.Language).ToList();
+
+        Assert.Equal(codes.Count, codes.Distinct(StringComparer.OrdinalIgnoreCase).Count());
+        Assert.Equal(languages.Count, languages.Distinct().Count());
+
+        // Every enum member is listed exactly once.
+        Assert.Equal(Enum.GetValues<AppLanguage>().Length, languages.Count);
+
+        foreach (var info in AppLanguages.All)
+        {
+            Assert.Equal(info.CultureCode, info.Language.ToCultureCode());
+            Assert.Equal(info.Language, AppLanguages.FromCultureCode(info.CultureCode));
+            Assert.False(string.IsNullOrWhiteSpace(info.Endonym));
+        }
+
+        // Arabic is the one right-to-left language, and the only one.
+        Assert.True(AppLanguage.Arabic.IsRightToLeft());
+        Assert.Single(AppLanguages.All, l => l.IsRightToLeft);
     }
 
     [Fact]

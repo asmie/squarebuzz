@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Finnish (fi) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key of the neutral culture is present here.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Logiikkapulmia, joista syntyy kuvia</value></data>
+  <data name="loading" xml:space="preserve"><value>Lämmitellään palikoita…</value></data>
+  <data name="skip" xml:space="preserve"><value>Ohita</value></data>
+  <data name="next" xml:space="preserve"><value>Seuraava</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Pelataan!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Uusi peli</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Jatka</value></data>
+  <data name="trials" xml:space="preserve"><value>Haasteet</value></data>
+  <data name="options" xml:space="preserve"><value>Asetukset</value></data>
+  <data name="about" xml:space="preserve"><value>Tietoa</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} kesken</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Ei tallennuksia</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Päivän pulma on valmis</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Äänet, teema, ohjaus</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Mikä on nonogrammi?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Kuinka iso?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Isommat ruudukot kestävät kauemmin, mutta niissä on enemmän yksityiskohtia.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Pieni</value></data>
+  <data name="normal" xml:space="preserve"><value>Normaali</value></data>
+  <data name="big" xml:space="preserve"><value>Iso</value></data>
+  <data name="huge" xml:space="preserve"><value>Valtava</value></data>
+  <data name="giant" xml:space="preserve"><value>Jätti</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tabletti</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Kuinka vaikea?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Tosi helppo</value></data>
+  <data name="easy" xml:space="preserve"><value>Helppo</value></data>
+  <data name="medium" xml:space="preserve"><value>Keskitaso</value></data>
+  <data name="hard" xml:space="preserve"><value>Vaikea</value></data>
+  <data name="expert" xml:space="preserve"><value>Mestari</value></data>
+  <data name="challenge" xml:space="preserve"><value>Haastetaso</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Toinen säädin, erillinen koosta ja vihjeiden vaikeudesta.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Rauhassa</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Apurit päällä, ei rajoja</value></data>
+  <data name="sharp" xml:space="preserve"><value>Tarkka</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Virheet lasketaan, yksi vihje</value></data>
+  <data name="pack" xml:space="preserve"><value>Kuvapaketti</value></data>
+  <data name="helpers" xml:space="preserve"><value>Apurit</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Rastita valmiit linjat</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Varoita virheistä</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Näytä kello</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Salli vihjeet</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Valitse pulma</value></data>
+  <data name="random" xml:space="preserve"><value>Satunnainen</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galleria</value></data>
+  <data name="locked" xml:space="preserve"><value>Lukossa</value></data>
+  <data name="preview" xml:space="preserve"><value>Esikatselu</value></data>
+  <data name="start" xml:space="preserve"><value>Aloita pulma</value></data>
+  <data name="fill" xml:space="preserve"><value>Täytä</value></data>
+  <data name="cross" xml:space="preserve"><value>Rasti X</value></data>
+  <data name="undo" xml:space="preserve"><value>Kumoa</value></data>
+  <data name="redo" xml:space="preserve"><value>Uudelleen</value></data>
+  <data name="hint" xml:space="preserve"><value>Vihje</value></data>
+  <data name="pause" xml:space="preserve"><value>Tauko</value></data>
+  <data name="minimap" xml:space="preserve"><value>Kartta</value></data>
+  <data name="paused" xml:space="preserve"><value>Tauolla</value></data>
+  <data name="resume" xml:space="preserve"><value>Jatka</value></data>
+  <data name="restart" xml:space="preserve"><value>Aloita alusta</value></data>
+  <data name="howTo" xml:space="preserve"><value>Miten pelataan</value></data>
+  <data name="quit" xml:space="preserve"><value>Valikkoon</value></data>
+  <data name="solved" xml:space="preserve"><value>Teit sen!</value></data>
+  <data name="time" xml:space="preserve"><value>Aika</value></data>
+  <data name="hints" xml:space="preserve"><value>Vihjeet</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Hupsis</value></data>
+  <data name="save" xml:space="preserve"><value>Tallenna</value></data>
+  <data name="share" xml:space="preserve"><value>Jaa</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Seuraava</value></data>
+  <data name="menu" xml:space="preserve"><value>Valikko</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Numerot ovat palikkajonoja</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Vihje 3 1 tarkoittaa kolmea palikkaa peräkkäin, väliä, sitten yhtä palikkaa. Samassa järjestyksessä vasemmalta oikealle.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Merkitse tyhjät ruudut</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Napauta kerran, niin ruutu täyttyy. Vaihda X-tilaan ja merkitse ruudut, jotka varmasti jäävät tyhjiksi — se pitää ajatukset selvinä.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Kuva ilmestyy</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Täytä jokainen rivi ja sarake, niin palikoista syntyy kuva. Jokaisella pulmalla on vain yksi ratkaisu — arvata ei tarvitse koskaan.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Tässä yksi ilmaiseksi!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Ei tuo ruutu — yritä uudelleen</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Pulman rakentaminen ei onnistunut tällä kertaa. Yritä uudelleen!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Vaikuttaa isompiin ruudukoihin, jotka peli keksii itse — 15×15 ja isommat. Pienet kuvat on piirretty käsin.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Tässä kuussa valmiit päivän pulmat: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Vihjeet loppuivat</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Linja valmis!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Olen valmiina. Valitse pulma!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Sinulla menee lujaa. Vielä yksi?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Löysin tänään uusia kuvia.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Tuo oli hyvä. Otetaanko toinen?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Aloita ensimmäinen pulma</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Miten pelataan</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Päivän pulma</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Uusi kuva joka aamu</value></data>
+  <data name="play" xml:space="preserve"><value>Pelaa</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Lämmittely</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Tasainen</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Salama</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · runsaasti aikaa</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · pidä vauhtia</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · ei aikaa räpäyttää</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Pulmapolku</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Tee edellinen pysäkki, niin seuraava avautuu</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Pysäkki {0}, {1}, valmis. Pelaa se uudelleen.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Pysäkki {0}, {1} kertaa {1}, seuraava vuorossa.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Pysäkki {0}, lukossa. Tee ensin edellinen pysäkki.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Palkinnot</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Aika loppui!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Kello voitti tällä kertaa. Yritetäänkö uudelleen?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Yritä uudelleen</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Aikaa {2}.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Päivä</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Aika</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Polku</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Aikahaaste</value></data>
+  <data name="tr1" xml:space="preserve"><value>Ensimmäinen kuva</value></data>
+  <data name="tr2" xml:space="preserve"><value>Viikko putkeen</value></data>
+  <data name="tr3" xml:space="preserve"><value>Ei vihjeitä</value></data>
+  <data name="tr4" xml:space="preserve"><value>Vikkelä</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 palikkaa</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dinofani</value></data>
+  <data name="tr7" xml:space="preserve"><value>Yökyöpeli</value></data>
+  <data name="tr8" xml:space="preserve"><value>Täysi kymppi</value></data>
+  <data name="tr9" xml:space="preserve"><value>Keräilijä</value></data>
+  <data name="sound" xml:space="preserve"><value>Äänitehosteet</value></data>
+  <data name="music" xml:space="preserve"><value>Musiikki</value></data>
+  <data name="voice" xml:space="preserve"><value>Lukee ääneen</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Voin nyt lukea sinulle.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Tälle kielelle ei ole ääntä tässä laitteessa</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Rivi {0}, sarake {1}, {2}. Rivin vihje: {3}. Sarakkeen vihje: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>tyhjä</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>täytetty</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>rastitettu</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>ei mitään</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Pulmataulu, {0} kertaa {1}. Ruutuja täytetty {2}, yhteensä {3}.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Ruutuihin ei pääse vielä kosketusselauksella.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Aikaa kulunut: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Tähtiä yhteensä: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Päiviä putkeen: {0}</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Jatka: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Poista: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Pienemmät ruudut</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Isommat ruudut</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, löytyi, tähtiä {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Kuvaa ei ole vielä löytynyt. Pelaa, niin se paljastuu.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Lukittu kuva</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, saatu. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, ei vielä saatu. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} tähteä kolmesta</value></data>
+  <data name="haptics" xml:space="preserve"><value>Värinä napautuksella</value></data>
+  <data name="audio" xml:space="preserve"><value>Ääni</value></data>
+  <data name="look" xml:space="preserve"><value>Ulkoasu</value></data>
+  <data name="controls" xml:space="preserve"><value>Ohjaus</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Kieli</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Vanhemmille</value></data>
+  <data name="theme" xml:space="preserve"><value>Teema</value></data>
+  <data name="light" xml:space="preserve"><value>Vaalea</value></data>
+  <data name="dark" xml:space="preserve"><value>Tumma</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Värisokeille sopiva</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Sini-oranssi paletti, kuviot säilyvät</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Pääväri</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandariini</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Rypäle</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Napautus</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Napautus täyttää, pito = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Tilanappi</value></data>
+  <data name="handed" xml:space="preserve"><value>Nappien puoli</value></data>
+  <data name="leftH" xml:space="preserve"><value>Vasen</value></data>
+  <data name="rightH" xml:space="preserve"><value>Oikea</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Ruudun koko</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Isot numerot</value></data>
+  <data name="language" xml:space="preserve"><value>Kieli</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Taukomuistutus</value></data>
+  <data name="stOff" xml:space="preserve"><value>Pois</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 tunti</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Onko tauon aika?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Olet pelannut {0} minuuttia. Pulma odottaa sinua.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Vielä hetki</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Lopetan tähän</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Nollaa edistyminen</value></data>
+  <data name="privacy" xml:space="preserve"><value>Tiedot ja yksityisyys</value></data>
+  <data name="open" xml:space="preserve"><value>Avaa</value></data>
+  <data name="reset" xml:space="preserve"><value>Nollaa</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Vain aikuisille</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Paljonko on 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Peruuta</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Pyyhitäänkö kaikki?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Kaikki pulmat, tähdet ja tarrat katoavat. Tätä ei voi peruuttaa.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Kyllä, pyyhi kaikki</value></data>
+  <data name="version" xml:space="preserve"><value>Versio 1.0 · koonti 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Ei mainoksia · ei sovellusostoksia</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Mikä on nonogrammi?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogrammi on numeroiden sisään kätketty kuva. Jokaisen rivin ja sarakkeen vihjeet kertovat, montako palikkaa täytetään ja missä järjestyksessä. Ratkaise joka linja pelkällä logiikalla, niin kuva ilmestyy — arvata ei tarvitse koskaan.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Tunnetaan myös nimillä: Picross · Griddler · Hanjie · Pic-a-Pix · Maalaa numeroilla · japanilainen ristikko</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Miten pelataan</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Tekijät</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Tietosuojakäytäntö</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Lähetä palautetta</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Arvioi squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lue vihjeet</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Jokainen numero on yksi katkeamaton jono täytettyjä palikoita, luettelossa järjestyksessä. Rivin vihje 3 1 tarkoittaa kolmea peräkkäin, vähintään yhtä tyhjää väliä ja sitten yhtä yksinään.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Täytä ja rastita</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Napauta ruutua, niin se täyttyy. Vaihda X-tilaan niissä ruuduissa, jotka olet päätellyt tyhjiksi. Rastit eivät ole koristeita — niiden avulla pidät langat käsissäsi.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Päällekkäinen osa</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Kymmenen ruudun leveällä rivillä vihje 8 peittää aina keskimmäiset 6 ruutua, mistä tahansa se alkaisi. Työnnä jono vasemmalle, työnnä oikealle ja täytä se osa, joka menee päällekkäin.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Vertaa ristiin</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Kun rivistä varmistuu yksi palikka, katso sen saraketta. Uusi palikka täydentää usein sarakkeen vihjeen, mikä antaa lisää rasteja, ja rastit antavat lisää palikoita.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Rastita valmiit linjat</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Kun linja täsmää täysin vihjeisiinsä, rastita siitä kaikki loput ruudut. Vihjenumerot vaalenevat, joten tiedät linjan olevan valmis.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Eläimet</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurukset</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Avaruus</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Ruoka</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Kulkuneuvot</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Sadut</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Yllätä minut</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Sydän</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Pikku kala</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Tähti</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Haamu</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Omena</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Purjevene</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurus</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kissan naama</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Kuppikakku</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Kilpa-auto</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Raketti</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Kruunu</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Salainen kuva</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Suurennuslasi</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Näyttää 3×3-lähikuvan, kun maalaat. Oletuksena pois.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Kysy aikuiselta</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>Löydetty {0}/{1}</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Tee ensimmäinen kuva valmiiksi.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Pelaa seitsemän päivää putkeen.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Tee kuva valmiiksi ilman yhtäkään vihjettä.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Tee 5×5 valmiiksi alle minuutissa.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Täytä yhteensä 100 palikkaa.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Löydä kaikki dinosaurukset.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Tee kuva valmiiksi kello 20 jälkeen.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Kolme tähteä 10×10-pulmasta ilman virheitä.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Löydä galleriasta kaikki kuvat.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Tämä päivä tehty — huomiseen!</value></data>
+</root>

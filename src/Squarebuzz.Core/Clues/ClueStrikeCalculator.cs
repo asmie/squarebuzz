@@ -56,8 +56,10 @@ public static class ClueStrikeCalculator
             return;
         }
 
-        StrikeFromStart(clues, line, struck);
-        StrikeFromEnd(clues, line, struck);
+        // The backward pass must not walk back over cells the forward pass already accounted
+        // for, or a single run can be claimed twice - see StrikeFromEnd.
+        var claimedUpTo = StrikeFromStart(clues, line, struck);
+        StrikeFromEnd(clues, line, struck, claimedUpTo);
     }
 
     /// <summary>Convenience overload for tests and non-hot paths.</summary>
@@ -70,7 +72,11 @@ public static class ClueStrikeCalculator
         return struck;
     }
 
-    private static void StrikeFromStart(LineClues clues, ReadOnlySpan<CellState> line, Span<bool> struck)
+    /// <summary>
+    /// Strikes clues anchored to the start of the line, and reports the first cell it did not
+    /// account for, so the backward pass knows where to stop.
+    /// </summary>
+    private static int StrikeFromStart(LineClues clues, ReadOnlySpan<CellState> line, Span<bool> struck)
     {
         var cell = 0;
         var clue = 0;
@@ -85,7 +91,7 @@ public static class ClueStrikeCalculator
 
             if (line[cell] != CellState.Filled)
             {
-                return; // Hit an unmarked cell: nothing beyond here is pinned down.
+                return cell; // Hit an unmarked cell: nothing beyond here is pinned down.
             }
 
             var runEnd = cell;
@@ -99,21 +105,39 @@ public static class ClueStrikeCalculator
 
             if (runLength != clues[clue] || !terminated)
             {
-                return;
+                return cell;
             }
 
             struck[clue] = true;
             clue++;
             cell = runEnd;
         }
+
+        return cell;
     }
 
-    private static void StrikeFromEnd(LineClues clues, ReadOnlySpan<CellState> line, Span<bool> struck)
+    /// <summary>
+    /// Strikes clues anchored to the end of the line, stopping at <paramref name="claimedUpTo"/> -
+    /// the first cell the forward pass left unaccounted for.
+    /// </summary>
+    /// <remarks>
+    /// The stop condition has to be a cell index, not <c>struck[clue]</c>. On a line the player
+    /// has over-crossed there are fewer runs left than clue numbers, so the forward pass can
+    /// consume the whole line while leaving later numbers unstruck - and the backward pass would
+    /// then walk back over the very same run and claim it for a second number. A line reading
+    /// <c>x#x</c> against the clue <c>1 1</c> struck both numbers, telling a child the line was
+    /// finished at the exact moment they had broken it.
+    /// </remarks>
+    private static void StrikeFromEnd(
+        LineClues clues,
+        ReadOnlySpan<CellState> line,
+        Span<bool> struck,
+        int claimedUpTo)
     {
         var cell = line.Length - 1;
         var clue = clues.Count - 1;
 
-        while (cell >= 0 && clue >= 0)
+        while (cell >= claimedUpTo && clue >= 0)
         {
             // Stop once we meet the region the forward pass already claimed.
             if (struck[clue])

@@ -17,35 +17,172 @@ public enum Handedness
     Right,
 }
 
-/// <summary>Languages the game ships in.</summary>
+/// <summary>
+/// Languages the game ships in.
+/// </summary>
+/// <remarks>
+/// Persisted by name rather than ordinal (see the settings repository), so members can be added
+/// in any position without resetting anyone's choice. Each one needs a matching
+/// <c>AppStrings.&lt;code&gt;.resx</c> satellite, or it silently falls back to English.
+/// </remarks>
 public enum AppLanguage
 {
     English,
     Polish,
     Spanish,
+    German,
+    French,
+    Italian,
+    Portuguese,
+    Dutch,
+    Czech,
+    Slovak,
+    Slovenian,
+    Romanian,
+    Bulgarian,
+    Russian,
+    Ukrainian,
+    Lithuanian,
+    Latvian,
+    Estonian,
+    Finnish,
+    Turkish,
+    Japanese,
+    Arabic,
 }
+
+/// <summary>
+/// One shippable language: the enum member, its culture code, and the name it calls itself.
+/// </summary>
+/// <param name="Language">The enum member.</param>
+/// <param name="CultureCode">Two-letter code, matching the resx satellite's suffix.</param>
+/// <param name="Endonym">
+/// What the language calls itself - "Deutsch", not "German". Deliberately not translated: a
+/// player hunting for their own language recognises it written its own way, whatever the app is
+/// currently showing.
+/// </param>
+/// <param name="IsRightToLeft">True for scripts that read right to left.</param>
+/// <param name="DisplayFontCovers">
+/// False when the bundled display face has no glyphs for this language, so headings must use the
+/// body face instead. See <see cref="AppLanguages.All"/> for why this is data rather than a guess.
+/// </param>
+public sealed record LanguageInfo(
+    AppLanguage Language,
+    string CultureCode,
+    string Endonym,
+    bool IsRightToLeft = false,
+    bool DisplayFontCovers = true);
 
 /// <summary>Maps <see cref="AppLanguage"/> to and from the culture codes .NET resources use.</summary>
 public static class AppLanguages
 {
-    public static string ToCultureCode(this AppLanguage language) => language switch
+    /// <summary>
+    /// Every shipped language, in the order the picker lists them: English first as the source
+    /// culture, then the rest alphabetically by their own name, which is the order a player
+    /// scanning for their language expects.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// <c>DisplayFontCovers: false</c> records a measured fact about the bundled Fredoka display
+    /// face, not a preference: its 320 mapped codepoints stop short of several Latin Extended
+    /// letters and every non-Latin script here. Without the flag, a heading renders most of its
+    /// word in Fredoka and the one uncovered letter in whatever the platform substitutes - so
+    /// Czech "Jak těžké?" came out with a thin system-font "ě" wedged mid-word. Headings in these
+    /// languages use the body face instead, which is uniform even where it is also substituted.
+    /// </para>
+    /// <para>
+    /// Re-measure this list whenever a font is re-cut; see Resources/Fonts/README.md.
+    /// </para>
+    /// </remarks>
+    public static IReadOnlyList<LanguageInfo> All { get; } =
+    [
+        new(AppLanguage.English, "en", "English"),
+        new(AppLanguage.Arabic, "ar", "العربية", IsRightToLeft: true, DisplayFontCovers: false),
+        new(AppLanguage.Bulgarian, "bg", "Български", DisplayFontCovers: false),
+        new(AppLanguage.Czech, "cs", "Čeština", DisplayFontCovers: false),
+        new(AppLanguage.German, "de", "Deutsch"),
+        new(AppLanguage.Estonian, "et", "Eesti"),
+        new(AppLanguage.Spanish, "es", "Español"),
+        new(AppLanguage.French, "fr", "Français"),
+        new(AppLanguage.Italian, "it", "Italiano"),
+        new(AppLanguage.Latvian, "lv", "Latviešu", DisplayFontCovers: false),
+        new(AppLanguage.Lithuanian, "lt", "Lietuvių", DisplayFontCovers: false),
+        new(AppLanguage.Dutch, "nl", "Nederlands"),
+        new(AppLanguage.Polish, "pl", "Polski"),
+        new(AppLanguage.Portuguese, "pt", "Português"),
+        new(AppLanguage.Romanian, "ro", "Română", DisplayFontCovers: false),
+        new(AppLanguage.Slovak, "sk", "Slovenčina", DisplayFontCovers: false),
+        new(AppLanguage.Slovenian, "sl", "Slovenščina", DisplayFontCovers: false),
+        new(AppLanguage.Finnish, "fi", "Suomi"),
+        new(AppLanguage.Turkish, "tr", "Türkçe"),
+        new(AppLanguage.Ukrainian, "uk", "Українська", DisplayFontCovers: false),
+        new(AppLanguage.Russian, "ru", "Русский", DisplayFontCovers: false),
+        new(AppLanguage.Japanese, "ja", "日本語", DisplayFontCovers: false),
+    ];
+
+    public static string ToCultureCode(this AppLanguage language)
     {
-        AppLanguage.Polish => "pl",
-        AppLanguage.Spanish => "es",
-        _ => "en",
-    };
+        foreach (var info in All)
+        {
+            if (info.Language == language)
+            {
+                return info.CultureCode;
+            }
+        }
+
+        return "en";
+    }
+
+    /// <summary>True when the language's script reads right to left, so the UI must mirror.</summary>
+    public static bool IsRightToLeft(this AppLanguage language)
+    {
+        foreach (var info in All)
+        {
+            if (info.Language == language)
+            {
+                return info.IsRightToLeft;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// True when headings can use the display face. False means the body face has to stand in -
+    /// see the remarks on <see cref="All"/>.
+    /// </summary>
+    public static bool DisplayFontCovers(this AppLanguage language)
+    {
+        foreach (var info in All)
+        {
+            if (info.Language == language)
+            {
+                return info.DisplayFontCovers;
+            }
+        }
+
+        return true;
+    }
 
     public static AppLanguage FromCultureCode(string? cultureCode)
     {
-        // Match on the language part only, so "pl-PL" and "es-MX" still resolve.
+        // Match on the language part only, so "pl-PL" and "pt-BR" still resolve.
         var prefix = cultureCode?.Split('-')[0];
 
-        return prefix?.ToLowerInvariant() switch
+        if (string.IsNullOrEmpty(prefix))
         {
-            "pl" => AppLanguage.Polish,
-            "es" => AppLanguage.Spanish,
-            _ => AppLanguage.English,
-        };
+            return AppLanguage.English;
+        }
+
+        foreach (var info in All)
+        {
+            if (string.Equals(info.CultureCode, prefix, StringComparison.OrdinalIgnoreCase))
+            {
+                return info.Language;
+            }
+        }
+
+        return AppLanguage.English;
     }
 }
 

@@ -76,6 +76,10 @@ internal sealed class SavedGameEntity
     [Column("hints_remaining")]
     public int HintsRemaining { get; set; }
 
+    /// <summary>Hints actually spent. Added by Migration0005; see <c>SavedGame.HintsUsed</c>.</summary>
+    [Column("hints_used")]
+    public int HintsUsed { get; set; }
+
     [Column("mistakes")]
     public int Mistakes { get; set; }
 

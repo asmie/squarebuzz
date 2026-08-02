@@ -80,9 +80,29 @@ public class AuthoredPuzzleSolvabilityTests
 
         Assert.NotEmpty(surprise);
 
-        // 'fairy' is locked, so the ghost (a 5x5 fairy picture) must not be offered.
+        // 'fairy' ships locked, so the ghost (a 5x5 fairy picture) must not be offered yet.
         Assert.DoesNotContain(surprise, p => p.Pack == "fairy");
         Assert.DoesNotContain(surprise, p => p.Id == "ghost");
+    }
+
+    [Fact]
+    public void WildcardPack_IncludesAPackTheePlayerHasEarned()
+    {
+        // A locked pack is earned by finding its pictures on the Puzzle Path, after which New
+        // Game and the Gallery both offer it. Surprise used to be the one place that never
+        // caught up, because it judged by the shipped flag alone.
+        var repository = new EmbeddedPuzzleRepository();
+
+        var earned = new HashSet<string>(StringComparer.Ordinal) { "fairy" };
+
+        var surprise = repository.Find("surprise", 5, earned);
+
+        Assert.Contains(surprise, p => p.Id == "ghost");
+
+        // Everything it offered before is still there.
+        Assert.ProperSuperset(
+            repository.Find("surprise", 5).Select(p => p.Id).ToHashSet(StringComparer.Ordinal),
+            surprise.Select(p => p.Id).ToHashSet(StringComparer.Ordinal));
     }
 
     [Fact]

@@ -21,6 +21,7 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable
         new Migration0002DailyCompletion(),
         new Migration0003GeneratorVersion(),
         new Migration0004DailyHistory(),
+        new Migration0005SavedHintsUsed(),
     ];
 
     private readonly SemaphoreSlim _initialisationGate = new(1, 1);

@@ -21,7 +21,12 @@ public sealed class GameSessionFactory
         _generator = generator;
     }
 
-    public GameSession Create(NewGameOptions options)
+    /// <param name="unlockedPackIds">
+    /// Packs the player has earned, so the wildcard "surprise" pack can draw from them too.
+    /// Passed in rather than looked up because this factory sits in the domain and has no route
+    /// to saved progress. Null keeps to the shipped locks.
+    /// </param>
+    public GameSession Create(NewGameOptions options, IReadOnlySet<string>? unlockedPackIds = null)
     {
         ArgumentNullException.ThrowIfNull(options);
 
@@ -31,7 +36,7 @@ public sealed class GameSessionFactory
         }
 
         var seed = options.Seed ?? Random.Shared.Next();
-        var puzzle = SelectPuzzle(options, seed);
+        var puzzle = SelectPuzzle(options, seed, unlockedPackIds);
         var rules = GameRules.Create(options.Challenge, options.Helpers);
 
         // The resolved seed is recorded even when the caller left it null, so this exact
@@ -94,12 +99,12 @@ public sealed class GameSessionFactory
         var puzzle = ResolvePuzzle(save);
 
         var session = new GameSession(puzzle, GameRules.Create(save.Challenge, helpers), options, save.Seed);
-        session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.Mistakes);
+        session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.HintsUsed, save.Mistakes);
 
         return session;
     }
 
-    private Puzzle SelectPuzzle(NewGameOptions options, int seed)
+    private Puzzle SelectPuzzle(NewGameOptions options, int seed, IReadOnlySet<string>? unlockedPackIds)
     {
         // An explicit pick wins over size and pack - that is the whole point of choosing from
         // the Gallery. A missing id falls through rather than failing, so removing content
@@ -111,7 +116,7 @@ public sealed class GameSessionFactory
 
         if (GridSize.IsAuthored(options.Size) && !options.ForceGenerated)
         {
-            var candidates = _repository.Find(options.PackId, options.Size);
+            var candidates = _repository.Find(options.PackId, options.Size, unlockedPackIds);
 
             // Fall back to any picture of the right size rather than failing: a pack with no
             // art at this size should still give the player a game, as the prototype did.

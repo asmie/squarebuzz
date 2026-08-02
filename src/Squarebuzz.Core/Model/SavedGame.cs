@@ -35,6 +35,14 @@ public sealed record SavedGame
 
     public required int HintsRemaining { get; init; }
 
+    /// <summary>
+    /// Hints actually spent. Stored rather than derived from the allowance: the allowance can
+    /// change between saving and resuming - the player only has to switch hints off in Options -
+    /// and the stars must keep charging for help that was really taken. See
+    /// <see cref="GameSession.HintsUsed"/>.
+    /// </summary>
+    public int HintsUsed { get; init; }
+
     public required int Mistakes { get; init; }
 
     public required DateTimeOffset SavedAt { get; init; }
@@ -87,6 +95,7 @@ public sealed record SavedGame
             Cells = [.. session.Cells],
             Elapsed = session.Elapsed,
             HintsRemaining = session.HintsRemaining,
+            HintsUsed = session.HintsUsed,
             Mistakes = session.Mistakes,
             SavedAt = savedAt,
 

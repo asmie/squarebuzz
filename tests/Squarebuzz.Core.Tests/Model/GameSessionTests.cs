@@ -324,6 +324,31 @@ public class GameSessionTests
     }
 
     [Fact]
+    public void Restore_KeepsHintsSpent_EvenWhenTheAllowanceHasChanged()
+    {
+        // A save records hints spent, not just hints left. Re-deriving them from the current
+        // allowance hands spent hints back the moment the allowance differs from the one the
+        // game was saved under - which turning hints off in Options is enough to do - restoring
+        // a star and the "no hints" trophy with them.
+        var origin = new NewGameOptions(GridSize.Tiny, 2, "test", ChallengeLevel.Relaxed);
+
+        var noHints = GameRules.Create(
+            ChallengeLevel.Relaxed,
+            HelperSettings.Default with { AllowHints = false });
+
+        var session = new GameSession(Plus(), noHints, origin);
+
+        // Saved under the 3-hint allowance with 2 spent; resumed with hints switched off.
+        session.Restore([.. new CellState[25]], TimeSpan.FromMinutes(1), hintsRemaining: 1, hintsUsed: 2, mistakes: 0);
+
+        Assert.Equal(2, session.HintsUsed);
+        Assert.Equal(0, session.HintsRemaining);
+
+        // Two hints cost a star; the old derivation reported none used and returned all three.
+        Assert.Equal(2, session.StarRating);
+    }
+
+    [Fact]
     public void CompletingARow_AutoCrossesTheRest()
     {
         var session = NewSession();

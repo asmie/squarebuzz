@@ -121,6 +121,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             Cells = cells,
             ElapsedSeconds = game.Elapsed.TotalSeconds,
             HintsRemaining = game.HintsRemaining,
+            HintsUsed = game.HintsUsed,
             Mistakes = game.Mistakes,
             SavedAtUtcTicks = game.SavedAt.UtcTicks,
             SavedAtOffsetTicks = game.SavedAt.Offset.Ticks,
@@ -155,6 +156,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             Cells = cells,
             Elapsed = TimeSpan.FromSeconds(row.ElapsedSeconds),
             HintsRemaining = row.HintsRemaining,
+            HintsUsed = row.HintsUsed,
             Mistakes = row.Mistakes,
             SavedAt = new DateTimeOffset(row.SavedAtUtcTicks, TimeSpan.Zero)
                 .ToOffset(new TimeSpan(row.SavedAtOffsetTicks)),

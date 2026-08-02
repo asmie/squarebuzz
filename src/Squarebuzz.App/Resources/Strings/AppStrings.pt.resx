@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Portuguese (European, pt-PT conventions) satellite for AppStrings, translated from the
+  English neutral culture. Complete: every key of the neutral culture is present here.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Puzzles de lógica que se transformam em imagens</value></data>
+  <data name="loading" xml:space="preserve"><value>A aquecer os blocos…</value></data>
+  <data name="skip" xml:space="preserve"><value>Saltar</value></data>
+  <data name="next" xml:space="preserve"><value>Seguinte</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Vamos jogar!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Novo jogo</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Continuar</value></data>
+  <data name="trials" xml:space="preserve"><value>Desafios</value></data>
+  <data name="options" xml:space="preserve"><value>Opções</value></data>
+  <data name="about" xml:space="preserve"><value>Sobre</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} em curso</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Ainda não guardaste nada</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>O puzzle de hoje está pronto</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Som, tema, controlos</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>O que é um nonograma?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Que tamanho?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>As grelhas maiores levam mais tempo, mas mostram mais detalhe.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Mini</value></data>
+  <data name="normal" xml:space="preserve"><value>Normal</value></data>
+  <data name="big" xml:space="preserve"><value>Grande</value></data>
+  <data name="huge" xml:space="preserve"><value>Enorme</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigante</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tablet</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Que dificuldade?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Muito fácil</value></data>
+  <data name="easy" xml:space="preserve"><value>Fácil</value></data>
+  <data name="medium" xml:space="preserve"><value>Médio</value></data>
+  <data name="hard" xml:space="preserve"><value>Difícil</value></data>
+  <data name="expert" xml:space="preserve"><value>Mestre</value></data>
+  <data name="challenge" xml:space="preserve"><value>Nível de desafio</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Outro botão, separado do tamanho e da dificuldade das pistas.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Calmo</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Ajudas ligadas, sem limites</value></data>
+  <data name="sharp" xml:space="preserve"><value>A sério</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Erros contados, uma ajuda</value></data>
+  <data name="pack" xml:space="preserve"><value>Pacote de imagens</value></data>
+  <data name="helpers" xml:space="preserve"><value>Ajudas</value></data>
+  <data name="autoCross" xml:space="preserve"><value>X automático em linhas prontas</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Avisar-me dos erros</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Mostrar o tempo</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Permitir ajudas</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Escolher puzzle</value></data>
+  <data name="random" xml:space="preserve"><value>Puzzle ao acaso</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galeria</value></data>
+  <data name="locked" xml:space="preserve"><value>Bloqueado</value></data>
+  <data name="preview" xml:space="preserve"><value>Espreitar</value></data>
+  <data name="start" xml:space="preserve"><value>Começar</value></data>
+  <data name="fill" xml:space="preserve"><value>Pintar</value></data>
+  <data name="cross" xml:space="preserve"><value>Marcar X</value></data>
+  <data name="undo" xml:space="preserve"><value>Desfazer</value></data>
+  <data name="redo" xml:space="preserve"><value>Refazer</value></data>
+  <data name="hint" xml:space="preserve"><value>Ajuda</value></data>
+  <data name="pause" xml:space="preserve"><value>Pausa</value></data>
+  <data name="minimap" xml:space="preserve"><value>Mapa</value></data>
+  <data name="paused" xml:space="preserve"><value>Em pausa</value></data>
+  <data name="resume" xml:space="preserve"><value>Continuar</value></data>
+  <data name="restart" xml:space="preserve"><value>Recomeçar</value></data>
+  <data name="howTo" xml:space="preserve"><value>Como jogar</value></data>
+  <data name="quit" xml:space="preserve"><value>Voltar ao menu</value></data>
+  <data name="solved" xml:space="preserve"><value>Conseguiste!</value></data>
+  <data name="time" xml:space="preserve"><value>Tempo</value></data>
+  <data name="hints" xml:space="preserve"><value>Ajudas</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
+  <data name="save" xml:space="preserve"><value>Guardar</value></data>
+  <data name="share" xml:space="preserve"><value>Partilhar</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Seguinte</value></data>
+  <data name="menu" xml:space="preserve"><value>Menu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Os números são grupos de blocos</value></data>
+  <data name="onb1b" xml:space="preserve"><value>A pista 3 1 quer dizer três blocos seguidos, um espaço e depois um bloco. Sempre nesta ordem, da esquerda para a direita.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Marca os quadrados vazios</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Toca uma vez para pintar. Muda para o modo X e marca os quadrados que sabes que ficam vazios — assim não te perdes.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Aparece uma imagem</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Acaba todas as linhas e colunas e os blocos transformam-se numa imagem. Cada puzzle tem só uma solução — nunca precisas de adivinhar.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Esta é de graça!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Não é esse — tenta outra vez</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Não consegui criar um puzzle desta vez. Tenta outra vez!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Conta para os tabuleiros maiores que o jogo inventa — de 15×15 para cima. As imagens pequenas são desenhadas à mão.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Puzzles diários terminados este mês: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Já não há ajudas</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Linha completa!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Estou pronto quando tu estiveres. Escolhe um puzzle!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Estás com jeito. Mais um?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Hoje encontrei imagens novas.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Essa foi boa. Queres outra?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Começa o teu primeiro puzzle</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Como jogar</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Puzzle do dia</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Uma imagem nova todas as manhãs</value></data>
+  <data name="play" xml:space="preserve"><value>Jogar</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Aquecimento</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Ritmo certo</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Relâmpago</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · tempo à vontade</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · não pares</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · nem pestanejes</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Caminho dos puzzles</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Acaba a paragem anterior para abrir a próxima</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Paragem {0}, {1}, terminada. Joga outra vez.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Paragem {0}, {1} por {1}, a próxima a jogar.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Paragem {0}, bloqueada. Acaba primeiro a paragem anterior.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Troféus</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Acabou o tempo!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Desta vez o relógio foi mais rápido. Queres tentar outra vez?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Tentar outra vez</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} no relógio.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Hoje</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Tempo</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Caminho</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Contra o tempo</value></data>
+  <data name="tr1" xml:space="preserve"><value>Primeira imagem</value></data>
+  <data name="tr2" xml:space="preserve"><value>Semana cheia</value></data>
+  <data name="tr3" xml:space="preserve"><value>Sem ajudas</value></data>
+  <data name="tr4" xml:space="preserve"><value>Veloz</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 blocos</value></data>
+  <data name="tr6" xml:space="preserve"><value>Fã de dinos</value></data>
+  <data name="tr7" xml:space="preserve"><value>Coruja da noite</value></data>
+  <data name="tr8" xml:space="preserve"><value>Dez perfeito</value></data>
+  <data name="tr9" xml:space="preserve"><value>Colecionador</value></data>
+  <data name="sound" xml:space="preserve"><value>Efeitos sonoros</value></data>
+  <data name="music" xml:space="preserve"><value>Música</value></data>
+  <data name="voice" xml:space="preserve"><value>Narração</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Já posso ler para ti.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Não há voz para esta língua neste aparelho</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Linha {0}, coluna {1}, {2}. Pista da linha {3}. Pista da coluna {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>vazio</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>pintado</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>riscado</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>nenhuma</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Tabuleiro do puzzle, {0} por {1}. {2} de {3} quadrados pintados.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Ainda não se chega aos quadrados pela exploração ao toque.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Tempo até agora: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} estrelas no total</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} dias seguidos</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Continuar {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Apagar {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Quadrados mais pequenos</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Quadrados maiores</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, encontrada, {1} estrelas</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Imagem ainda não encontrada. Joga para a descobrir.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Imagem bloqueada</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, conquistado. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, ainda não conquistado. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} de 3 estrelas</value></data>
+  <data name="haptics" xml:space="preserve"><value>Vibrar ao toque</value></data>
+  <data name="audio" xml:space="preserve"><value>Som</value></data>
+  <data name="look" xml:space="preserve"><value>Aspeto</value></data>
+  <data name="controls" xml:space="preserve"><value>Controlos</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Idioma</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Zona dos pais</value></data>
+  <data name="theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="light" xml:space="preserve"><value>Claro</value></data>
+  <data name="dark" xml:space="preserve"><value>Escuro</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Para daltónicos</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Paleta azul / laranja, com padrões</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Cor principal</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Tangerina</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Uva</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>O toque</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Toque pinta, manter = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Botão modo</value></data>
+  <data name="handed" xml:space="preserve"><value>Botões à</value></data>
+  <data name="leftH" xml:space="preserve"><value>Esquerda</value></data>
+  <data name="rightH" xml:space="preserve"><value>Direita</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Tamanho dos quadrados</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Números grandes</value></data>
+  <data name="language" xml:space="preserve"><value>Idioma</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Aviso de pausa</value></data>
+  <data name="stOff" xml:space="preserve"><value>Desl.</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 hora</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Vamos fazer uma pausa?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Já estás a jogar há {0} minutos. O teu puzzle fica à tua espera.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Um pouco mais</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Fico por aqui</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Apagar o progresso</value></data>
+  <data name="privacy" xml:space="preserve"><value>Dados e privacidade</value></data>
+  <data name="open" xml:space="preserve"><value>Abrir</value></data>
+  <data name="reset" xml:space="preserve"><value>Apagar</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Só para adultos</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Quanto é 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Apagar tudo?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Todos os puzzles, estrelas e autocolantes vão desaparecer. Isto não se pode desfazer.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Sim, apagar tudo</value></data>
+  <data name="version" xml:space="preserve"><value>Versão 1.0 · compilação 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Sem anúncios · sem compras na aplicação</value></data>
+  <data name="whatIs" xml:space="preserve"><value>O que é um nonograma?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Um nonograma é uma imagem escondida dentro de números. As pistas de cada linha e de cada coluna dizem-te quantos blocos pintar e em que ordem. Resolve cada linha só com lógica e a imagem aparece — nunca tens de adivinhar.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Também conhecido por: Picross · Griddler · Hanjie · Pic-a-Pix · Pintar por Números · Palavras cruzadas japonesas</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Como jogar</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Créditos</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Política de privacidade</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Enviar comentários</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Avaliar o squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lê as pistas</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Cada número é um grupo seguido de blocos pintados, na ordem indicada. A pista 3 1 numa linha quer dizer três juntos, pelo menos um espaço vazio, e depois um sozinho.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Pinta e risca</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Toca num quadrado para o pintar. Muda para o modo X nos quadrados em que já provaste que ficam vazios. Os X não são enfeite — é assim que não te perdes.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Sobreposição em pistas longas</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Numa linha de 10 quadrados, uma pista de 8 tem de cobrir os 6 quadrados do meio, não importa onde comece. Empurra o grupo para a esquerda, empurra-o para a direita e pinta a parte que se sobrepõe.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Cruza linhas e colunas</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Quando uma linha te dá um bloco certo, olha ao longo dessa coluna. O bloco novo muitas vezes acaba a pista da coluna, o que te dá mais X, e isso dá-te mais blocos.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Risca as linhas prontas</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Quando uma linha combina por completo com as suas pistas, põe um X em todos os quadrados que sobram. Os números da pista ficam apagados, para saberes que aquela linha está feita.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Animais</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinossauros</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Espaço</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Comida</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Veículos</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Contos de fadas</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Surpreende-me</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Coração</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Peixinho</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Estrela</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Fantasma</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Maçã</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Barco à vela</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinossauro</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Cara de gato</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Queque</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Carro de corrida</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Foguetão</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Coroa</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Imagem misteriosa</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Mostra uma vista ampliada 3×3 enquanto pintas. Desligada por predefinição.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Pede a um adulto</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} de {1} encontradas</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Acaba a tua primeira imagem.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Joga sete dias seguidos.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Acaba uma imagem sem nenhuma ajuda.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Acaba um 5×5 em menos de um minuto.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Pinta 100 blocos ao todo.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Encontra todos os dinossauros.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Acaba uma imagem depois das 20h.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Três estrelas num 10×10, sem erros.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Encontra todas as imagens da galeria.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Feito por hoje — até amanhã!</value></data>
+</root>

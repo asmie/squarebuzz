@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -6,6 +7,19 @@ using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 
 namespace Squarebuzz.App.ViewModels;
+
+/// <summary>One language chip in Options.</summary>
+public sealed partial class LanguageOption : ObservableObject
+{
+    /// <summary>Culture code, which is also the command parameter.</summary>
+    public required string Code { get; init; }
+
+    /// <summary>The language's own name for itself - never translated.</summary>
+    public required string Endonym { get; init; }
+
+    [ObservableProperty]
+    public partial bool IsSelected { get; set; }
+}
 
 /// <summary>
 /// Options: sound, appearance, controls, language, and the grown-ups' section.
@@ -172,14 +186,21 @@ public partial class OptionsViewModel : LocalizedViewModel
     // ---- Language ----
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsEnglish), nameof(IsPolish), nameof(IsSpanish))]
     public partial AppLanguage Language { get; set; }
 
-    public bool IsEnglish => Language == AppLanguage.English;
-
-    public bool IsPolish => Language == AppLanguage.Polish;
-
-    public bool IsSpanish => Language == AppLanguage.Spanish;
+    /// <summary>
+    /// Every shipped language as a chip. A list rather than one flag per language: at twenty-two
+    /// of them, a property and a converter each would be unreadable, and the set is content -
+    /// see <see cref="AppLanguages.All"/>.
+    /// </summary>
+    public ObservableCollection<LanguageOption> Languages { get; } =
+    [
+        .. AppLanguages.All.Select(info => new LanguageOption
+        {
+            Code = info.CultureCode,
+            Endonym = info.Endonym,
+        })
+    ];
 
     // ---- Parent gate ----
 
@@ -393,6 +414,10 @@ public partial class OptionsViewModel : LocalizedViewModel
         Language = _settings.Language;
         ScreenTimeLimitMinutes = _settings.ScreenTimeLimitMinutes;
 
+        // Explicitly, not only through the change hook: assigning the language it already holds
+        // raises nothing, so a screen reopened on a non-default language would show no chip lit.
+        SyncLanguageSelection(Language);
+
         _isLoading = false;
 
         // The splash already probed for a voice; this just re-reads the answer, since the note
@@ -509,6 +534,8 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     partial void OnLanguageChanged(AppLanguage value)
     {
+        SyncLanguageSelection(value);
+
         // Applied before persisting so the screen relabels itself the moment it is tapped.
         Strings.SetLanguage(value);
 
@@ -566,6 +593,17 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     [RelayCommand]
     private void SelectLanguage(string language) => Language = AppLanguages.FromCultureCode(language);
+
+    /// <summary>Marks the chosen chip, so the highlight follows the setting however it changed.</summary>
+    private void SyncLanguageSelection(AppLanguage language)
+    {
+        var code = language.ToCultureCode();
+
+        foreach (var option in Languages)
+        {
+            option.IsSelected = string.Equals(option.Code, code, StringComparison.Ordinal);
+        }
+    }
 
     [RelayCommand]
     private void SelectScreenTime(string minutes) =>

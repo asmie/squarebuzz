@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Arabic (ar) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key of the neutral culture is present, so nothing falls back to English.
+  The app switches to right-to-left FlowDirection for this language; the strings themselves
+  contain no direction-control characters and no pre-mirrored wording.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>ألغاز منطقيّة تتحوّل إلى صور</value></data>
+  <data name="loading" xml:space="preserve"><value>نُجهّز المربّعات…</value></data>
+  <data name="skip" xml:space="preserve"><value>تخطّي</value></data>
+  <data name="next" xml:space="preserve"><value>التالي</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>هيّا نلعب!</value></data>
+  <data name="newGame" xml:space="preserve"><value>لعبة جديدة</value></data>
+  <data name="continueGame" xml:space="preserve"><value>متابعة</value></data>
+  <data name="trials" xml:space="preserve"><value>تحدّيات</value></data>
+  <data name="options" xml:space="preserve"><value>الإعدادات</value></data>
+  <data name="about" xml:space="preserve"><value>عن اللعبة</value></data>
+  <data name="inProgress" xml:space="preserve"><value>قيد اللعب: {n}</value></data>
+  <data name="noSaves" xml:space="preserve"><value>لا شيء محفوظ بعد</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>لغز اليوم جاهز</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>الصوت والمظهر والتحكّم</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>ما هو النونوغرام؟</value></data>
+  <data name="gridSize" xml:space="preserve"><value>ما الحجم؟</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>الشبكات الأكبر تحتاج وقتًا أطول، لكنها تُظهر تفاصيل أكثر.</value></data>
+  <data name="tiny" xml:space="preserve"><value>صغيرة</value></data>
+  <data name="normal" xml:space="preserve"><value>عاديّة</value></data>
+  <data name="big" xml:space="preserve"><value>كبيرة</value></data>
+  <data name="huge" xml:space="preserve"><value>ضخمة</value></data>
+  <data name="giant" xml:space="preserve"><value>عملاقة</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>جهاز لوحي</value></data>
+  <data name="difficulty" xml:space="preserve"><value>كم هي صعبة؟</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>سهل جدًا</value></data>
+  <data name="easy" xml:space="preserve"><value>سهل</value></data>
+  <data name="medium" xml:space="preserve"><value>متوسّط</value></data>
+  <data name="hard" xml:space="preserve"><value>صعب</value></data>
+  <data name="expert" xml:space="preserve"><value>خبير</value></data>
+  <data name="challenge" xml:space="preserve"><value>مستوى التحدّي</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>مقياس ثانٍ، مستقلّ عن الحجم وعن صعوبة الأرقام.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>هادئ</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>المساعدات مفتوحة، بلا حدود</value></data>
+  <data name="sharp" xml:space="preserve"><value>جدّي</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>تُحسب الأخطاء، وتلميح واحد</value></data>
+  <data name="pack" xml:space="preserve"><value>مجموعة الصور</value></data>
+  <data name="helpers" xml:space="preserve"><value>المساعدات</value></data>
+  <data name="autoCross" xml:space="preserve"><value>شطب الخطوط المكتملة تلقائيًا</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>نبّهني عند الخطأ</value></data>
+  <data name="showTimer" xml:space="preserve"><value>إظهار الوقت</value></data>
+  <data name="allowHints" xml:space="preserve"><value>السماح بالتلميحات</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>اختيار اللغز</value></data>
+  <data name="random" xml:space="preserve"><value>لغز عشوائي</value></data>
+  <data name="gallery" xml:space="preserve"><value>المعرض</value></data>
+  <data name="locked" xml:space="preserve"><value>مُقفل</value></data>
+  <data name="preview" xml:space="preserve"><value>معاينة</value></data>
+  <data name="start" xml:space="preserve"><value>ابدأ اللغز</value></data>
+  <data name="fill" xml:space="preserve"><value>تلوين</value></data>
+  <data name="cross" xml:space="preserve"><value>علامة X</value></data>
+  <data name="undo" xml:space="preserve"><value>تراجع</value></data>
+  <data name="redo" xml:space="preserve"><value>إعادة</value></data>
+  <data name="hint" xml:space="preserve"><value>تلميح</value></data>
+  <data name="pause" xml:space="preserve"><value>إيقاف</value></data>
+  <data name="minimap" xml:space="preserve"><value>خريطة</value></data>
+  <data name="paused" xml:space="preserve"><value>متوقّف</value></data>
+  <data name="resume" xml:space="preserve"><value>متابعة</value></data>
+  <data name="restart" xml:space="preserve"><value>من البداية</value></data>
+  <data name="howTo" xml:space="preserve"><value>كيف تلعب</value></data>
+  <data name="quit" xml:space="preserve"><value>إلى القائمة</value></data>
+  <data name="solved" xml:space="preserve"><value>نجحت!</value></data>
+  <data name="time" xml:space="preserve"><value>الوقت</value></data>
+  <data name="hints" xml:space="preserve"><value>تلميحات</value></data>
+  <data name="mistakes" xml:space="preserve"><value>زلّات</value></data>
+  <data name="save" xml:space="preserve"><value>حفظ</value></data>
+  <data name="share" xml:space="preserve"><value>مشاركة</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>التالي</value></data>
+  <data name="menu" xml:space="preserve"><value>القائمة</value></data>
+  <data name="onb1t" xml:space="preserve"><value>الأرقام تعني مربّعات متجاورة</value></data>
+  <data name="onb1b" xml:space="preserve"><value>الأرقام 3 1 تعني ثلاثة مربّعات متجاورة، ثم فراغ، ثم مربّع واحد. بالترتيب نفسه من البداية إلى النهاية.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>علّم المربّعات الفارغة</value></data>
+  <data name="onb2b" xml:space="preserve"><value>انقر مرّة واحدة لتلوين المربّع. وانتقل إلى وضع X لتعليم المربّعات التي تعرف أنها تبقى فارغة — هذا يساعدك على التركيز.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>تظهر الصورة</value></data>
+  <data name="onb3b" xml:space="preserve"><value>أكمل كل صفّ وكل عمود، فتتحوّل المربّعات إلى صورة. لكل لغز حلّ واحد فقط — لا حاجة للتخمين أبدًا.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>هذه هديّة منّي!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>ليس هذا المربّع — حاول مرّة أخرى</value></data>
+  <data name="genFailed" xml:space="preserve"><value>لم نتمكّن من تكوين لغز هذه المرّة. حاول مرّة أخرى!</value></data>
+  <data name="ok" xml:space="preserve"><value>حسنًا</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>ينطبق على الشبكات الكبيرة التي تصنعها اللعبة — 15×15 وما فوق. الصور الصغيرة مرسومة باليد.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>ألغاز يوميّة أكملتها هذا الشهر: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>لا مزيد من التلميحات</value></data>
+  <data name="lineDone" xml:space="preserve"><value>اكتمل الخطّ!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>أنا جاهز وقتما تشاء. اختر لغزًا!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>أنت في أفضل حالاتك. لغز آخر؟</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>وجدتُ اليوم صورًا جديدة.</value></data>
+  <data name="winLine" xml:space="preserve"><value>كان لغزًا جميلًا. هل نلعب آخر؟</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>ابدأ لغزك الأوّل</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>كيف تلعب</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>لغز اليوم</value></data>
+  <data name="dailySub" xml:space="preserve"><value>صورة جديدة كل صباح</value></data>
+  <data name="play" xml:space="preserve"><value>العب</value></data>
+  <data name="timedName1" xml:space="preserve"><value>تسخين</value></data>
+  <data name="timedName2" xml:space="preserve"><value>ثابت</value></data>
+  <data name="timedName3" xml:space="preserve"><value>برق</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · وقت وفير</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · لا تتوقّف</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · لا وقت للرمش</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>مسار الألغاز</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>أكمل المحطّة السابقة لتفتح التالية</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>المحطّة {0}، {1}، مكتملة. العب مرّة أخرى.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>المحطّة {0}، {1} في {1}، التالية للعب.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>المحطّة {0}، مُقفلة. أكمل المحطّة التي قبلها.</value></data>
+  <data name="trophies" xml:space="preserve"><value>الجوائز</value></data>
+  <data name="timeUp" xml:space="preserve"><value>انتهى الوقت!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>سبقتك الساعة هذه المرّة. هل تجرّب مرّة أخرى؟</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>حاول مرّة أخرى</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} على الساعة.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>اليوم</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>توقيت</value></data>
+  <data name="tabPath" xml:space="preserve"><value>المسار</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>تحدّي الوقت</value></data>
+  <data name="tr1" xml:space="preserve"><value>أوّل صورة</value></data>
+  <data name="tr2" xml:space="preserve"><value>أسبوع كامل</value></data>
+  <data name="tr3" xml:space="preserve"><value>بلا تلميحات</value></data>
+  <data name="tr4" xml:space="preserve"><value>سريع</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 مربّع</value></data>
+  <data name="tr6" xml:space="preserve"><value>عاشق الديناصورات</value></data>
+  <data name="tr7" xml:space="preserve"><value>ساهر الليل</value></data>
+  <data name="tr8" xml:space="preserve"><value>عشرة كاملة</value></data>
+  <data name="tr9" xml:space="preserve"><value>جامع الصور</value></data>
+  <data name="sound" xml:space="preserve"><value>المؤثّرات الصوتيّة</value></data>
+  <data name="music" xml:space="preserve"><value>الموسيقى</value></data>
+  <data name="voice" xml:space="preserve"><value>القراءة الصوتيّة</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>يمكنني أن أقرأ لك الآن.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>لا يوجد صوت لهذه اللغة على هذا الجهاز</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>الصفّ {0}، العمود {1}، {2}. أرقام الصفّ {3}. أرقام العمود {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>فارغ</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>ملوّن</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>مشطوب</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>لا شيء</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>لوحة اللغز، {0} في {1}. المربّعات الملوّنة: {2} من {3}.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>لا يمكن الوصول إلى المربّعات باستكشاف اللمس بعد.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>الوقت حتى الآن: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>مجموع النجوم: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>أيّام متتالية: {0}</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>أكمل: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>حذف: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>مربّعات أصغر</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>مربّعات أكبر</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}، مكتشفة، النجوم: {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>الصورة لم تُكتشف بعد. العب لتظهر.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>صورة مُقفلة</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}، حصلت عليها. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}، لم تحصل عليها بعد. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} من 3 نجوم</value></data>
+  <data name="haptics" xml:space="preserve"><value>اهتزاز عند اللمس</value></data>
+  <data name="audio" xml:space="preserve"><value>الصوت</value></data>
+  <data name="look" xml:space="preserve"><value>الشكل</value></data>
+  <data name="controls" xml:space="preserve"><value>التحكّم</value></data>
+  <data name="langGroup" xml:space="preserve"><value>اللغة</value></data>
+  <data name="parentZone" xml:space="preserve"><value>منطقة الوالدين</value></data>
+  <data name="theme" xml:space="preserve"><value>المظهر</value></data>
+  <data name="light" xml:space="preserve"><value>فاتح</value></data>
+  <data name="dark" xml:space="preserve"><value>غامق</value></data>
+  <data name="auto" xml:space="preserve"><value>تلقائي</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>مناسب لعمى الألوان</value></data>
+  <data name="cbSub" xml:space="preserve"><value>ألوان أزرق / برتقالي، مع بقاء الأنماط</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>اللون الأساسي</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>يوسفي</value></data>
+  <data name="accGrape" xml:space="preserve"><value>عنبي</value></data>
+  <data name="accTrio" xml:space="preserve"><value>ثلاثي</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>وظيفة النقر</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>النقر يلوّن، والضغط الطويل = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>زرّ الوضع</value></data>
+  <data name="handed" xml:space="preserve"><value>مكان الأزرار</value></data>
+  <data name="leftH" xml:space="preserve"><value>يسار</value></data>
+  <data name="rightH" xml:space="preserve"><value>يمين</value></data>
+  <data name="cellSize" xml:space="preserve"><value>حجم المربّع</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>أرقام كبيرة</value></data>
+  <data name="language" xml:space="preserve"><value>اللغة</value></data>
+  <data name="screenTime" xml:space="preserve"><value>تذكير بوقت الشاشة</value></data>
+  <data name="stOff" xml:space="preserve"><value>مغلق</value></data>
+  <data name="st15" xml:space="preserve"><value>15 دقيقة</value></data>
+  <data name="st30" xml:space="preserve"><value>30 دقيقة</value></data>
+  <data name="st60" xml:space="preserve"><value>ساعة</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>هل نأخذ راحة؟</value></data>
+  <data name="breakBody" xml:space="preserve"><value>وقت لعبك حتى الآن: {0} دقيقة. لغزك سينتظرك.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>أكمل قليلًا</value></data>
+  <data name="breakStop" xml:space="preserve"><value>سأتوقّف هنا</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>محو التقدّم</value></data>
+  <data name="privacy" xml:space="preserve"><value>البيانات والخصوصيّة</value></data>
+  <data name="open" xml:space="preserve"><value>فتح</value></data>
+  <data name="reset" xml:space="preserve"><value>تصفير</value></data>
+  <data name="grownUps" xml:space="preserve"><value>للكبار فقط</value></data>
+  <data name="gateQ" xml:space="preserve"><value>كم يساوي 7 × 4؟</value></data>
+  <data name="cancel" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>محو كل شيء؟</value></data>
+  <data name="resetBody" xml:space="preserve"><value>ستختفي كل الألغاز والنجوم والملصقات، ولا يمكن التراجع عن ذلك.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>نعم، امحُ الكل</value></data>
+  <data name="version" xml:space="preserve"><value>الإصدار 1.0 · بناء 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>بلا إعلانات · بلا مشتريات داخل التطبيق</value></data>
+  <data name="whatIs" xml:space="preserve"><value>ما هو النونوغرام؟</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>النونوغرام صورة مخبّأة داخل أرقام. الأرقام عند كل صفّ وكل عمود تخبرك بعدد المربّعات التي تلوّنها وبترتيبها. حلّ كل خطّ بالمنطق وحده فتظهر الصورة — ولن تحتاج إلى التخمين أبدًا.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>يُعرف أيضًا باسم: Picross · Griddler · Hanjie · Pic-a-Pix · الرسم بالأرقام · الكلمات المتقاطعة اليابانيّة</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>كيف تلعب</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>فريق العمل</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>سياسة الخصوصيّة</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>أرسل ملاحظاتك</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>قيّم squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>اقرأ الأرقام</value></data>
+  <data name="ht1b" xml:space="preserve"><value>كل رقم يعني مجموعة مربّعات ملوّنة متجاورة بلا انقطاع، والأرقام مكتوبة بالترتيب. الأرقام 3 1 في صفّ تعني: ثلاثة معًا، ثم فراغ واحد على الأقل، ثم مربّع واحد وحده.</value></data>
+  <data name="ht2" xml:space="preserve"><value>لوّن واشطب</value></data>
+  <data name="ht2b" xml:space="preserve"><value>انقر المربّع لتلوينه. وانتقل إلى وضع X للمربّعات التي تأكّدت أنها تبقى فارغة. علامات X ليست زينة — بها تتابع كل ما عرفته.</value></data>
+  <data name="ht3" xml:space="preserve"><value>التداخل في الأرقام الكبيرة</value></data>
+  <data name="ht3b" xml:space="preserve"><value>في صفّ عرضه 10 مربّعات، الرقم 8 يغطّي المربّعات الستّة الوسطى أينما بدأ. ادفع المجموعة إلى أحد الطرفين، ثم ادفعها إلى الطرف الآخر، ولوّن المربّعات المشتركة.</value></data>
+  <data name="ht4" xml:space="preserve"><value>قارن الصفوف بالأعمدة</value></data>
+  <data name="ht4b" xml:space="preserve"><value>إذا منحك صفّ مربّعًا مؤكّدًا، فانظر إلى عموده. غالبًا يُكمل هذا المربّع أرقام العمود، فتحصل على علامات X جديدة، وهذه تمنحك مربّعات جديدة.</value></data>
+  <data name="ht5" xml:space="preserve"><value>اشطب الخطوط المكتملة</value></data>
+  <data name="ht5b" xml:space="preserve"><value>إذا طابق الخطّ أرقامه تمامًا، فضع علامة X على كل مربّع باقٍ فيه. تبهت الأرقام لتعرف أن هذا الخطّ اكتمل.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>الحيوانات</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>الديناصورات</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>الفضاء</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>الطعام</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>المركبات</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>حكايات خياليّة</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>فاجئني</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>قلب</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>سمكة صغيرة</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>نجمة</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>شبح</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>تفّاحة</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>قارب شراعي</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>ديناصور</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>وجه قطّة</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>كعكة صغيرة</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>سيّارة سباق</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>صاروخ</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>تاج</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>صورة غامضة</value></data>
+  <data name="magnifier" xml:space="preserve"><value>المكبّرة</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>تُظهر منظرًا مكبّرًا 3×3 أثناء التلوين. مغلقة في الأصل.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>اسأل أحد الكبار</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>وجدت {0} من {1}</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>أكمل صورتك الأولى.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>العب سبعة أيّام متتالية.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>أكمل صورة دون أي تلميح.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>أكمل لوحة 5×5 في أقل من دقيقة.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>لوّن 100 مربّع في المجموع.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>اعثر على كل الديناصورات.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>أكمل صورة بعد الساعة 8 مساءً.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>ثلاث نجوم في لوحة 10×10 بلا أي خطأ.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>اعثر على كل الصور في المعرض.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>انتهى لغز اليوم — إلى الغد!</value></data>
+</root>

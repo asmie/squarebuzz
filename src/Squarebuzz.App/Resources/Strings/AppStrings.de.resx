@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  German (de) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key of the neutral culture is present here.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Logikrätsel, die zu Bildern werden</value></data>
+  <data name="loading" xml:space="preserve"><value>Die Klötzchen wärmen sich auf…</value></data>
+  <data name="skip" xml:space="preserve"><value>Überspringen</value></data>
+  <data name="next" xml:space="preserve"><value>Weiter</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Los geht’s!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Neues Spiel</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Fortsetzen</value></data>
+  <data name="trials" xml:space="preserve"><value>Challenges</value></data>
+  <data name="options" xml:space="preserve"><value>Optionen</value></data>
+  <data name="about" xml:space="preserve"><value>Info</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} angefangen</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Noch nichts gespeichert</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Das Rätsel von heute ist da</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Ton, Design, Steuerung</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Was ist ein Nonogramm?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Wie groß?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Größere Gitter dauern länger, zeigen aber mehr Details.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Winzig</value></data>
+  <data name="normal" xml:space="preserve"><value>Normal</value></data>
+  <data name="big" xml:space="preserve"><value>Groß</value></data>
+  <data name="huge" xml:space="preserve"><value>Riesig</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigantisch</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tablet</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Wie schwer?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Sehr leicht</value></data>
+  <data name="easy" xml:space="preserve"><value>Leicht</value></data>
+  <data name="medium" xml:space="preserve"><value>Mittel</value></data>
+  <data name="hard" xml:space="preserve"><value>Schwer</value></data>
+  <data name="expert" xml:space="preserve"><value>Experte</value></data>
+  <data name="challenge" xml:space="preserve"><value>Spielstil</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Ein zweiter Regler, unabhängig von Größe und Schwierigkeit.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Entspannt</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Hilfen an, keine Grenzen</value></data>
+  <data name="sharp" xml:space="preserve"><value>Sportlich</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Fehler zählen, ein Tipp</value></data>
+  <data name="pack" xml:space="preserve"><value>Bilderpaket</value></data>
+  <data name="helpers" xml:space="preserve"><value>Hilfen</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Auto-X bei fertigen Linien</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Bei Fehlern warnen</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Zeit anzeigen</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Tipps erlauben</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Rätsel wählen</value></data>
+  <data name="random" xml:space="preserve"><value>Zufällig</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galerie</value></data>
+  <data name="locked" xml:space="preserve"><value>Gesperrt</value></data>
+  <data name="preview" xml:space="preserve"><value>Vorschau</value></data>
+  <data name="start" xml:space="preserve"><value>Rätsel starten</value></data>
+  <data name="fill" xml:space="preserve"><value>Malen</value></data>
+  <data name="cross" xml:space="preserve"><value>X setzen</value></data>
+  <data name="undo" xml:space="preserve"><value>Rückgängig</value></data>
+  <data name="redo" xml:space="preserve"><value>Wiederholen</value></data>
+  <data name="hint" xml:space="preserve"><value>Tipp</value></data>
+  <data name="pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="minimap" xml:space="preserve"><value>Karte</value></data>
+  <data name="paused" xml:space="preserve"><value>Pause</value></data>
+  <data name="resume" xml:space="preserve"><value>Weiterspielen</value></data>
+  <data name="restart" xml:space="preserve"><value>Von vorn</value></data>
+  <data name="howTo" xml:space="preserve"><value>So geht’s</value></data>
+  <data name="quit" xml:space="preserve"><value>Zum Menü</value></data>
+  <data name="solved" xml:space="preserve"><value>Geschafft!</value></data>
+  <data name="time" xml:space="preserve"><value>Zeit</value></data>
+  <data name="hints" xml:space="preserve"><value>Tipps</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
+  <data name="save" xml:space="preserve"><value>Speichern</value></data>
+  <data name="share" xml:space="preserve"><value>Teilen</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Weiter</value></data>
+  <data name="menu" xml:space="preserve"><value>Menü</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Zahlen sind Reihen von Klötzchen</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Der Hinweis 3 1 heißt: drei Klötzchen nebeneinander, eine Lücke, dann eins. In dieser Reihenfolge, von links nach rechts.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Markiere die leeren Felder</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Einmal tippen zum Malen. Wechsle in den X-Modus, um Felder zu markieren, die sicher leer bleiben — so behältst du den Überblick.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Ein Bild erscheint</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Löse jede Zeile und jede Spalte, dann werden die Klötzchen zu einem Bild. Jedes Rätsel hat genau eine Lösung — du musst nie raten.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Den bekommst du geschenkt!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Dieses nicht — probier weiter</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Diesmal hat kein Rätsel geklappt. Versuch es noch einmal!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Gilt für die größeren Felder, die das Spiel selbst erfindet — ab 15×15. Die kleinen Bilder sind von Hand gezeichnet.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Tagesrätsel in diesem Monat gelöst: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Keine Tipps mehr</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Linie fertig!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Ich bin bereit. Wähl ein Rätsel aus!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Du bist in Fahrt. Noch eins?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Ich habe heute neue Bilder gefunden.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Das war ein schönes. Noch eins?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Starte dein erstes Rätsel</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>So wird gespielt</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Tagesrätsel</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Jeden Morgen ein neues Bild</value></data>
+  <data name="play" xml:space="preserve"><value>Spielen</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Aufwärmen</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Stetig</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Blitz</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · viel Zeit</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · bleib dran</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · keine Zeit zum Blinzeln</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Rätselweg</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Schaffe die Station davor, um die nächste zu öffnen</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Station {0}, {1}, geschafft. Spiel sie noch einmal.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Station {0}, {1} mal {1}, als Nächstes dran.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Station {0}, gesperrt. Schaffe zuerst die Station davor.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Pokale</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Zeit ist um!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Diesmal war die Uhr schneller. Noch ein Versuch?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Nochmal</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} auf der Uhr.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Heute</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Zeit</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Weg</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Zeitrennen</value></data>
+  <data name="tr1" xml:space="preserve"><value>Erstes Bild</value></data>
+  <data name="tr2" xml:space="preserve"><value>Ganze Woche</value></data>
+  <data name="tr3" xml:space="preserve"><value>Ohne Tipps</value></data>
+  <data name="tr4" xml:space="preserve"><value>Blitzschnell</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 Klötzchen</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dino-Fan</value></data>
+  <data name="tr7" xml:space="preserve"><value>Nachteule</value></data>
+  <data name="tr8" xml:space="preserve"><value>Perfekte Zehn</value></data>
+  <data name="tr9" xml:space="preserve"><value>Sammler</value></data>
+  <data name="sound" xml:space="preserve"><value>Geräusche</value></data>
+  <data name="music" xml:space="preserve"><value>Musik</value></data>
+  <data name="voice" xml:space="preserve"><value>Vorlesen</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Ich kann dir jetzt vorlesen.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Für diese Sprache gibt es auf diesem Gerät keine Stimme</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Zeile {0}, Spalte {1}, {2}. Hinweis der Zeile: {3}. Hinweis der Spalte: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>leer</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>gefüllt</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>angekreuzt</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>keiner</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Rätselfeld, {0} mal {1}. {2} von {3} Feldern gefüllt.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Die Felder lassen sich noch nicht durch Erkundung mit dem Finger erreichen.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Bisherige Zeit: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} Sterne insgesamt</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} Tage in Folge</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Weiterspielen: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>{0} löschen</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Kleinere Felder</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Größere Felder</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, gefunden, {1} Sterne</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Bild noch nicht gefunden. Spiele, um es aufzudecken.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Gesperrtes Bild</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, erhalten. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, noch nicht erhalten. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} von 3 Sternen</value></data>
+  <data name="haptics" xml:space="preserve"><value>Summen beim Tippen</value></data>
+  <data name="audio" xml:space="preserve"><value>Ton</value></data>
+  <data name="look" xml:space="preserve"><value>Aussehen</value></data>
+  <data name="controls" xml:space="preserve"><value>Steuerung</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Sprache</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Eltern-Bereich</value></data>
+  <data name="theme" xml:space="preserve"><value>Design</value></data>
+  <data name="light" xml:space="preserve"><value>Hell</value></data>
+  <data name="dark" xml:space="preserve"><value>Dunkel</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Für Farbenblinde</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Blau/Orange, Muster bleiben</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Hauptfarbe</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarine</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Traube</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Tippen macht</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Tippen malt, halten = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Modustaste</value></data>
+  <data name="handed" xml:space="preserve"><value>Tasten</value></data>
+  <data name="leftH" xml:space="preserve"><value>Links</value></data>
+  <data name="rightH" xml:space="preserve"><value>Rechts</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Feldgröße</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Große Zahlen</value></data>
+  <data name="language" xml:space="preserve"><value>Sprache</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Pausen-Erinnerung</value></data>
+  <data name="stOff" xml:space="preserve"><value>Aus</value></data>
+  <data name="st15" xml:space="preserve"><value>15 Min.</value></data>
+  <data name="st30" xml:space="preserve"><value>30 Min.</value></data>
+  <data name="st60" xml:space="preserve"><value>1 Std.</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Zeit für eine Pause?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Du spielst schon {0} Minuten. Dein Rätsel wartet auf dich.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Noch ein bisschen</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Ich höre auf</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Fortschritt löschen</value></data>
+  <data name="privacy" xml:space="preserve"><value>Daten &amp; Datenschutz</value></data>
+  <data name="open" xml:space="preserve"><value>Öffnen</value></data>
+  <data name="reset" xml:space="preserve"><value>Löschen</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Nur für Erwachsene</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Was ist 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Alles löschen?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Alle Rätsel, Sterne und Sticker sind dann weg. Das kann man nicht zurückholen.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Ja, alles löschen</value></data>
+  <data name="version" xml:space="preserve"><value>Version 1.0 · Build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Keine Werbung · keine In-App-Käufe</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Was ist ein Nonogramm?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Ein Nonogramm ist ein Bild, das in Zahlen versteckt ist. Die Hinweise an jeder Zeile und Spalte sagen dir, wie viele Klötzchen du malen musst und in welcher Reihenfolge. Löse jede Linie mit reiner Logik, und ein Bild erscheint — raten musst du nie.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Auch bekannt als: Picross · Griddler · Hanjie · Pic-a-Pix · Malen nach Zahlen · Japanisches Kreuzworträtsel</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>So wird gespielt</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Mitwirkende</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Datenschutz</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Feedback senden</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>squarebuzz bewerten</value></data>
+  <data name="ht1" xml:space="preserve"><value>Hinweise lesen</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Jede Zahl ist eine zusammenhängende Reihe gefüllter Klötzchen, in der genannten Reihenfolge. Der Zeilenhinweis 3 1 heißt: drei zusammen, mindestens eine Lücke, dann eines allein.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Malen und kreuzen</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Tippe ein Feld an, um es zu füllen. Wechsle in den X-Modus für Felder, bei denen du sicher weißt, dass sie leer bleiben. Die X sind keine Deko — mit ihnen behältst du den Überblick.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Überlappung bei langen Hinweisen</value></data>
+  <data name="ht3b" xml:space="preserve"><value>In einer 10 Felder breiten Zeile deckt der Hinweis 8 immer die mittleren 6 Felder ab, ganz egal, wo er beginnt. Schiebe die Reihe nach links, schiebe sie nach rechts und fülle alles, was sich überlappt.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Zeilen und Spalten verbinden</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Wenn eine Zeile dir ein sicheres Klötzchen verrät, schau in dieser Spalte nach unten. Das neue Klötzchen macht oft einen Spaltenhinweis fertig, das gibt dir neue X, und die geben dir neue Klötzchen.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Fertige Linien ankreuzen</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Wenn eine Linie ihren Hinweisen ganz entspricht, kreuze alle übrigen Felder darin an. Die Hinweiszahlen werden blasser — so siehst du, dass die Linie fertig ist.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Tiere</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurier</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Weltraum</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Essen</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Fahrzeuge</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Märchen</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Überrasch mich</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Herz</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Kleiner Fisch</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Stern</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Gespenst</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Apfel</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Segelboot</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurier</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Katze</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Muffin</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Rennauto</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Rakete</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Krone</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Geheimes Bild</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupe</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Zeigt beim Malen einen 3×3-Ausschnitt vergrößert. Standardmäßig aus.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Frag einen Erwachsenen</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} von {1} gefunden</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Löse dein erstes Bild.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Spiele sieben Tage in Folge.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Löse ein Bild ohne einen einzigen Tipp.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Löse ein 5×5 in weniger als einer Minute.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Fülle insgesamt 100 Klötzchen.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Finde jeden Dinosaurier.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Löse ein Bild nach 20 Uhr.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Drei Sterne auf einem 10×10, ohne Fehler.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Finde jedes Bild in der Galerie.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Für heute geschafft — bis morgen!</value></data>
+</root>

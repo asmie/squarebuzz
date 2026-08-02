@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Slovak (sk) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key from AppStrings.resx is present here.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Logické hádanky, z ktorých vzniknú obrázky</value></data>
+  <data name="loading" xml:space="preserve"><value>Zahrievam kocôčky…</value></data>
+  <data name="skip" xml:space="preserve"><value>Preskočiť</value></data>
+  <data name="next" xml:space="preserve"><value>Ďalej</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Ideme hrať!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Nová hra</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Pokračovať</value></data>
+  <data name="trials" xml:space="preserve"><value>Výzvy</value></data>
+  <data name="options" xml:space="preserve"><value>Nastavenia</value></data>
+  <data name="about" xml:space="preserve"><value>O hre</value></data>
+  <data name="inProgress" xml:space="preserve"><value>Rozohraté: {n}</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Nič uložené</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Dnešná hádanka je pripravená</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Zvuk, vzhľad, ovládanie</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Čo je nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Aká veľká?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Väčšie mriežky trvajú dlhšie, ale je na nich viac detailov.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Malá</value></data>
+  <data name="normal" xml:space="preserve"><value>Normálna</value></data>
+  <data name="big" xml:space="preserve"><value>Veľká</value></data>
+  <data name="huge" xml:space="preserve"><value>Obrovská</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigant</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tablet</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Aké ťažké?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Najľahšie</value></data>
+  <data name="easy" xml:space="preserve"><value>Ľahké</value></data>
+  <data name="medium" xml:space="preserve"><value>Stredné</value></data>
+  <data name="hard" xml:space="preserve"><value>Ťažké</value></data>
+  <data name="expert" xml:space="preserve"><value>Expert</value></data>
+  <data name="challenge" xml:space="preserve"><value>Úroveň výzvy</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Druhá stupnica, nezávislá od veľkosti a náročnosti nápovied.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>V pohode</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Pomôcky zapnuté, bez limitu</value></data>
+  <data name="sharp" xml:space="preserve"><value>Naostro</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Chyby sa počítajú, jedna nápoveda</value></data>
+  <data name="pack" xml:space="preserve"><value>Sada obrázkov</value></data>
+  <data name="helpers" xml:space="preserve"><value>Pomôcky</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Auto-X pri hotových radoch</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Upozorňovať na chyby</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Zobraziť čas</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Povoliť nápovedy</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Výber hádanky</value></data>
+  <data name="random" xml:space="preserve"><value>Náhodná</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galéria</value></data>
+  <data name="locked" xml:space="preserve"><value>Zamknuté</value></data>
+  <data name="preview" xml:space="preserve"><value>Náhľad</value></data>
+  <data name="start" xml:space="preserve"><value>Začať hádanku</value></data>
+  <data name="fill" xml:space="preserve"><value>Vyplniť</value></data>
+  <data name="cross" xml:space="preserve"><value>Krížik</value></data>
+  <data name="undo" xml:space="preserve"><value>Späť</value></data>
+  <data name="redo" xml:space="preserve"><value>Znova</value></data>
+  <data name="hint" xml:space="preserve"><value>Nápoveda</value></data>
+  <data name="pause" xml:space="preserve"><value>Pauza</value></data>
+  <data name="minimap" xml:space="preserve"><value>Mapa</value></data>
+  <data name="paused" xml:space="preserve"><value>Pauza</value></data>
+  <data name="resume" xml:space="preserve"><value>Hrať ďalej</value></data>
+  <data name="restart" xml:space="preserve"><value>Od začiatku</value></data>
+  <data name="howTo" xml:space="preserve"><value>Ako hrať</value></data>
+  <data name="quit" xml:space="preserve"><value>Do menu</value></data>
+  <data name="solved" xml:space="preserve"><value>Máš to!</value></data>
+  <data name="time" xml:space="preserve"><value>Čas</value></data>
+  <data name="hints" xml:space="preserve"><value>Nápovedy</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Chybičky</value></data>
+  <data name="save" xml:space="preserve"><value>Uložiť</value></data>
+  <data name="share" xml:space="preserve"><value>Zdieľať</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Ďalšia</value></data>
+  <data name="menu" xml:space="preserve"><value>Menu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Čísla sú rady kociek</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Nápoveda 3 1 znamená tri kocky za sebou, medzeru a potom jednu. V tom istom poradí, zľava doprava.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Označ prázdne políčka</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Ťuknutím políčko vyplníš. Prepni na režim X a označ tie, o ktorých vieš, že zostanú prázdne — budeš mať v hlave jasno.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Objaví sa obrázok</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Dokonči každý riadok a každý stĺpec a z kociek sa stane obrázok. Každá hádanka má jediné riešenie — hádať nemusíš nikdy.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Túto máš zadarmo!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Toto nie — skús to inak</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Tentoraz sa hádanku nepodarilo vytvoriť. Skús to, prosím, znova!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Platí pre väčšie plochy, ktoré si hra vymyslí — od 15×15 vyššie. Malé obrázky sú kreslené ručne.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Denné hádanky dokončené tento mesiac: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Už nemáš nápovedy</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Rad je hotový!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Som pripravený. Vyber si hádanku!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Ide ti to. Ešte jednu?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Dnes som našiel nové obrázky.</value></data>
+  <data name="winLine" xml:space="preserve"><value>To bola dobrá. Chceš ďalšiu?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Začni svoju prvú hádanku</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Ako hrať</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Denná hádanka</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Každé ráno nový obrázok</value></data>
+  <data name="play" xml:space="preserve"><value>Hrať</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Rozcvička</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Tempo</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Blesk</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · času dosť</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · nezastavuj</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · ani nemrkni</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Cesta hádaniek</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Dokonči predchádzajúcu zastávku a otvorí sa ďalšia</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Zastávka {0}, {1}, dokončená. Zahraj si ju znova.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Zastávka {0}, {1} na {1}, hrá sa ako ďalšia.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Zastávka {0}, zamknutá. Dokonči tú predchádzajúcu.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Trofeje</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Čas vypršal!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Tentoraz boli hodiny rýchlejšie. Skúsiš to znova?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Skúsiť znova</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na hodinách.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Dnes</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Na čas</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Cesta</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Hra na čas</value></data>
+  <data name="tr1" xml:space="preserve"><value>Prvý obrázok</value></data>
+  <data name="tr2" xml:space="preserve"><value>Týždeň v kuse</value></data>
+  <data name="tr3" xml:space="preserve"><value>Bez nápovedy</value></data>
+  <data name="tr4" xml:space="preserve"><value>Rýchlik</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 kociek</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dino fanúšik</value></data>
+  <data name="tr7" xml:space="preserve"><value>Nočná sova</value></data>
+  <data name="tr8" xml:space="preserve"><value>Perfektná desiatka</value></data>
+  <data name="tr9" xml:space="preserve"><value>Zberateľ</value></data>
+  <data name="sound" xml:space="preserve"><value>Zvuky</value></data>
+  <data name="music" xml:space="preserve"><value>Hudba</value></data>
+  <data name="voice" xml:space="preserve"><value>Čítanie nahlas</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Teraz ti môžem čítať.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Pre tento jazyk tu nie je hlas</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Riadok {0}, stĺpec {1}, {2}. Nápoveda riadka: {3}. Nápoveda stĺpca: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>prázdne</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>vyplnené</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>prečiarknuté</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>žiadna</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Hracia plocha, {0} na {1}. Vyplnených {2} z {3} políčok.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Políčka sa zatiaľ nedajú preskúmavať dotykom.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Doterajší čas: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Hviezdičiek celkovo: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Dní v rade: {0}</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Pokračovať: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Vymazať: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Menšie políčka</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Väčšie políčka</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, nájdené, hviezdičiek: {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Tento obrázok ešte nie je nájdený. Zahraj si a odkryješ ho.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Zamknutý obrázok</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, získané. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, ešte nezískané. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} z 3 hviezdičiek</value></data>
+  <data name="haptics" xml:space="preserve"><value>Bzučanie pri ťuknutí</value></data>
+  <data name="audio" xml:space="preserve"><value>Zvuk</value></data>
+  <data name="look" xml:space="preserve"><value>Vzhľad</value></data>
+  <data name="controls" xml:space="preserve"><value>Ovládanie</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Jazyk</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Zóna pre rodičov</value></data>
+  <data name="theme" xml:space="preserve"><value>Motív</value></data>
+  <data name="light" xml:space="preserve"><value>Svetlý</value></data>
+  <data name="dark" xml:space="preserve"><value>Tmavý</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Pre farboslepých</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Modrá a oranžová, vzory zostávajú</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Hlavná farba</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarínka</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Hrozno</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Ťuknutie</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Ťuknutie vyplní, pridržanie = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Prepínač</value></data>
+  <data name="handed" xml:space="preserve"><value>Tlačidlá</value></data>
+  <data name="leftH" xml:space="preserve"><value>Vľavo</value></data>
+  <data name="rightH" xml:space="preserve"><value>Vpravo</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Veľkosť políčok</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Veľké čísla</value></data>
+  <data name="language" xml:space="preserve"><value>Jazyk</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Pripomienka pauzy</value></data>
+  <data name="stOff" xml:space="preserve"><value>Vyp.</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 hod.</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Čas na pauzu?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Hráš už {0} min. Tvoja hádanka na teba počká.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Ešte chvíľku</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Už končím</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Vynulovať postup</value></data>
+  <data name="privacy" xml:space="preserve"><value>Údaje a súkromie</value></data>
+  <data name="open" xml:space="preserve"><value>Otvoriť</value></data>
+  <data name="reset" xml:space="preserve"><value>Vynulovať</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Len pre dospelých</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Koľko je 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Zrušiť</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Vymazať všetko?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Všetky hádanky, hviezdičky aj nálepky zmiznú. Toto sa nedá vrátiť.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Áno, vymazať všetko</value></data>
+  <data name="version" xml:space="preserve"><value>Verzia 1.0 · zostava 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Bez reklám · bez nákupov v aplikácii</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Čo je nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je obrázok skrytý v číslach. Nápovedy pri každom riadku a stĺpci hovoria, koľko kociek vyfarbiť a v akom poradí. Vyrieš každú líniu čistou logikou a objaví sa obrázok — hádať nemusíš nikdy.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Známy aj ako: Picross · Griddler · Hanjie · Pic-a-Pix · Maľovanie podľa čísel · japonská krížovka</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Ako hrať</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Autori</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Ochrana súkromia</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Napíš nám</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Ohodnoť squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Čítaj nápovedy</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Každé číslo je jeden neprerušený úsek vyfarbených kociek a čísla sú v poradí. Nápoveda 3 1 znamená tri vedľa seba, aspoň jednu medzeru a potom jednu samotnú.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Vyfarbuj a škrtaj</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Ťuknutím políčko vyfarbíš. Pri políčkach, o ktorých už vieš, že zostanú prázdne, prepni na režim X. Krížiky nie sú ozdoba — vďaka nim sa nestratíš.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Prekryv pri dlhých nápovedách</value></data>
+  <data name="ht3b" xml:space="preserve"><value>V rade širokom 10 políčok musí nápoveda 8 vždy zakryť prostredných 6 políčok, nech začína kdekoľvek. Posuň úsek úplne vľavo, potom úplne vpravo a vyfarbi to, čo sa prekrýva.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Porovnávaj rady a stĺpce</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Keď ti rad odhalí jedno isté políčko, pozri sa po jeho stĺpci. Nová kocka často dokončí nápovedu stĺpca, z toho vzniknú ďalšie krížiky a z nich ďalšie kocky.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Škrtaj hotové línie</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Keď línia presne zodpovedá svojim nápovedám, daj krížik do všetkých zvyšných políčok. Čísla nápovedy zosvetlejú, takže poznáš, že línia je hotová.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Zvieratá</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaury</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Kozmos</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Jedlo</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Vozidlá</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Rozprávky</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Prekvapenie</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Srdce</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Rybka</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Hviezda</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Duch</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Jablko</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Plachetnica</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurus</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Mačička</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Muffin</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Pretekárske auto</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Raketa</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Korunka</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Tajomný obrázok</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Pri maľovaní ukazuje zväčšený výrez 3×3. Predvolene vypnutá.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Spýtaj sa dospelého</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>Nájdené {0} z {1}</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Dokonči svoj prvý obrázok.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Hraj sedem dní v rade.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Dokonči obrázok bez jedinej nápovedy.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Dokonči 5×5 pod jednu minútu.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Vyfarbi spolu 100 kociek.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Nájdi všetky dinosaury.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Dokonči obrázok po ôsmej večer.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Tri hviezdičky na 10×10 bez jedinej chyby.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Nájdi všetky obrázky v galérii.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Dnes hotovo — zajtra zas!</value></data>
+</root>

@@ -557,6 +557,40 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         NotifySettingsDependentProperties();
     }
 
+    /// <summary>
+    /// The packs the player has earned, for the wildcard "surprise" pack to draw from.
+    /// </summary>
+    /// <remarks>
+    /// Only fetched when a wildcard is actually in play - every other pack names itself, and the
+    /// solved table is of no use in choosing from it. That keeps the extra read off the ordinary
+    /// start path rather than paying for it on every new game.
+    /// </remarks>
+    private async Task<IReadOnlySet<string>?> LoadUnlockedPacksAsync(NewGameOptions options)
+    {
+        var isWildcard = _puzzles.Packs.Any(p =>
+            p.IsWildcard && string.Equals(p.Id, options.PackId, StringComparison.Ordinal));
+
+        if (!isWildcard)
+        {
+            return null;
+        }
+
+        try
+        {
+            var solved = await _progress.GetSolvedPuzzlesAsync();
+
+            return PackUnlocks.UnlockedPackIds(
+                _puzzles.Packs,
+                _puzzles.Puzzles,
+                [.. solved.Select(s => s.PuzzleId)]);
+        }
+        catch (Exception)
+        {
+            // Unreadable progress must not stop a game starting; the shipped locks still apply.
+            return null;
+        }
+    }
+
     private async Task<GameSettings> LoadSettingsSafelyAsync()
     {
         try
@@ -654,7 +688,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         try
         {
-            Session = _sessions.Create(effective);
+            Session = _sessions.Create(effective, await LoadUnlockedPacksAsync(effective));
         }
         catch (PuzzleGenerationException)
         {
@@ -1055,10 +1089,19 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         OnPropertyChanged(nameof(ShowMagnifier));
         OnPropertyChanged(nameof(BoardDescription));
         OnPropertyChanged(nameof(HapticsEnabled));
+
+        // Both axes, and the side the controls sit on. Handedness moves a button's row as well
+        // as its column in the wide tablet layout, so raising only the columns left the buttons
+        // half-rearranged after a change made from the pause overlay's Options.
         OnPropertyChanged(nameof(UndoColumn));
         OnPropertyChanged(nameof(RedoColumn));
         OnPropertyChanged(nameof(HintColumn));
         OnPropertyChanged(nameof(RestartColumn));
+        OnPropertyChanged(nameof(UndoRow));
+        OnPropertyChanged(nameof(RedoRow));
+        OnPropertyChanged(nameof(HintRow));
+        OnPropertyChanged(nameof(RestartRow));
+        OnPropertyChanged(nameof(IsWideControlsOnRight));
     }
 
     private void SyncFromSession()

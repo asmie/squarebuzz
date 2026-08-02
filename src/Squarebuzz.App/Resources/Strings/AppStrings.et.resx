@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Estonian (et) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key of the neutral culture is present here.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Loogikamõistatused, millest saavad pildid</value></data>
+  <data name="loading" xml:space="preserve"><value>Soojendan klotse…</value></data>
+  <data name="skip" xml:space="preserve"><value>Jäta vahele</value></data>
+  <data name="next" xml:space="preserve"><value>Edasi</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Mängime!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Uus mäng</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Jätka</value></data>
+  <data name="trials" xml:space="preserve"><value>Väljakutsed</value></data>
+  <data name="options" xml:space="preserve"><value>Seaded</value></data>
+  <data name="about" xml:space="preserve"><value>Teave</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} pooleli</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Midagi pole salvestatud</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Tänane mõistatus on valmis</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Heli, teema, juhtimine</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Mis on nonogramm?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Kui suur?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Suuremad ruudustikud võtavad kauem aega, aga näitavad rohkem detaile.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Tilluke</value></data>
+  <data name="normal" xml:space="preserve"><value>Tavaline</value></data>
+  <data name="big" xml:space="preserve"><value>Suur</value></data>
+  <data name="huge" xml:space="preserve"><value>Väga suur</value></data>
+  <data name="giant" xml:space="preserve"><value>Hiiglane</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tahvel</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Kui keeruline?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Väga lihtne</value></data>
+  <data name="easy" xml:space="preserve"><value>Lihtne</value></data>
+  <data name="medium" xml:space="preserve"><value>Keskmine</value></data>
+  <data name="hard" xml:space="preserve"><value>Raske</value></data>
+  <data name="expert" xml:space="preserve"><value>Meister</value></data>
+  <data name="challenge" xml:space="preserve"><value>Väljakutse tase</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Teine seadistus, eraldi suurusest ja vihjete raskusest.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Rahulik</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Abid sees, piire pole</value></data>
+  <data name="sharp" xml:space="preserve"><value>Terav</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Vead loetakse, üks vihje</value></data>
+  <data name="pack" xml:space="preserve"><value>Pildipakk</value></data>
+  <data name="helpers" xml:space="preserve"><value>Abid</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Märgi valmis read ristiga</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Hoiata vigadest</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Näita kella</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Luba vihjed</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Vali mõistatus</value></data>
+  <data name="random" xml:space="preserve"><value>Juhuslik</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galerii</value></data>
+  <data name="locked" xml:space="preserve"><value>Lukus</value></data>
+  <data name="preview" xml:space="preserve"><value>Eelvaade</value></data>
+  <data name="start" xml:space="preserve"><value>Alusta mõistatust</value></data>
+  <data name="fill" xml:space="preserve"><value>Täida</value></data>
+  <data name="cross" xml:space="preserve"><value>Märgi X</value></data>
+  <data name="undo" xml:space="preserve"><value>Võta tagasi</value></data>
+  <data name="redo" xml:space="preserve"><value>Tee uuesti</value></data>
+  <data name="hint" xml:space="preserve"><value>Vihje</value></data>
+  <data name="pause" xml:space="preserve"><value>Paus</value></data>
+  <data name="minimap" xml:space="preserve"><value>Kaart</value></data>
+  <data name="paused" xml:space="preserve"><value>Pausil</value></data>
+  <data name="resume" xml:space="preserve"><value>Jätka</value></data>
+  <data name="restart" xml:space="preserve"><value>Alusta uuesti</value></data>
+  <data name="howTo" xml:space="preserve"><value>Kuidas mängida</value></data>
+  <data name="quit" xml:space="preserve"><value>Menüüsse</value></data>
+  <data name="solved" xml:space="preserve"><value>Said hakkama!</value></data>
+  <data name="time" xml:space="preserve"><value>Aeg</value></data>
+  <data name="hints" xml:space="preserve"><value>Vihjed</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Uups</value></data>
+  <data name="save" xml:space="preserve"><value>Salvesta</value></data>
+  <data name="share" xml:space="preserve"><value>Jaga</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Edasi</value></data>
+  <data name="menu" xml:space="preserve"><value>Menüü</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Numbrid on klotsijadad</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Vihje 3 1 tähendab kolme klotsi järjest, siis vahet ja siis üht klotsi. Samas järjekorras, vasakult paremale.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Märgi tühjad ruudud</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Puuduta korra, et ruut täita. Lülitu X-režiimile ja märgi ruudud, mis kindlasti jäävad tühjaks — nii püsib pea selge.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Pilt tuleb nähtavale</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Täida iga rida ja veerg ning klotsidest saab pilt. Igal mõistatusel on ainult üks lahendus — arvata pole vaja.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Siin on üks tasuta!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Mitte see ruut — proovi veel</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Seekord ei õnnestunud mõistatust koostada. Proovi palun uuesti!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Kehtib suuremate ruudustike kohta, mille mäng ise välja mõtleb — 15×15 ja suuremad. Väikesed pildid on käsitsi joonistatud.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Sel kuul lõpetatud päevamõistatusi: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Vihjeid pole enam</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Rida valmis!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Olen valmis. Vali mõistatus!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Sul läheb hästi. Veel üks?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Leidsin täna uusi pilte.</value></data>
+  <data name="winLine" xml:space="preserve"><value>See oli tore. Võtame veel ühe?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Alusta oma esimest mõistatust</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Kuidas mängida</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Päeva mõistatus</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Iga hommik uus pilt</value></data>
+  <data name="play" xml:space="preserve"><value>Mängi</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Soojendus</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Ühtlane</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Välk</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · aega on küllaga</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · hoia tempot</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · pilgutamiseks pole aega</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Mõistatuste rada</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Lõpeta eelmine peatus, et järgmine avaneks</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Peatus {0}, {1}, lõpetatud. Mängi veel kord.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Peatus {0}, {1} korda {1}, järgmine mängida.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Peatus {0}, lukus. Lõpeta enne eelmine peatus.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Karikad</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Aeg sai läbi!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Seekord oli kell kiirem. Proovid veel?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Proovi uuesti</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Aega {2}.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Päev</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Aeg</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Rada</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Ajakatse</value></data>
+  <data name="tr1" xml:space="preserve"><value>Esimene pilt</value></data>
+  <data name="tr2" xml:space="preserve"><value>Nädal järjest</value></data>
+  <data name="tr3" xml:space="preserve"><value>Ilma vihjeta</value></data>
+  <data name="tr4" xml:space="preserve"><value>Kiire</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 klotsi</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dinofänn</value></data>
+  <data name="tr7" xml:space="preserve"><value>Öökull</value></data>
+  <data name="tr8" xml:space="preserve"><value>Täiuslik kümme</value></data>
+  <data name="tr9" xml:space="preserve"><value>Koguja</value></data>
+  <data name="sound" xml:space="preserve"><value>Heliefektid</value></data>
+  <data name="music" xml:space="preserve"><value>Muusika</value></data>
+  <data name="voice" xml:space="preserve"><value>Loeb ette</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Nüüd saan sulle ette lugeda.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Selles seadmes pole selle keele häält</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Rida {0}, veerg {1}, {2}. Rea vihje: {3}. Veeru vihje: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>tühi</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>täidetud</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>ristiga märgitud</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>puudub</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Mängulaud, {0} korda {1}. Täidetud ruute {2}, kokku {3}.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Ruute ei saa veel puutega uurida.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Kulunud aeg: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Tähti kokku: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Päevi järjest: {0}</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Jätka: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Kustuta: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Väiksemad ruudud</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Suuremad ruudud</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, leitud, tähti {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Pilti pole veel leitud. Mängi, et see nähtavale tuleks.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Lukus pilt</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, teenitud. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, veel teenimata. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} tähte kolmest</value></data>
+  <data name="haptics" xml:space="preserve"><value>Värin puudutusel</value></data>
+  <data name="audio" xml:space="preserve"><value>Heli</value></data>
+  <data name="look" xml:space="preserve"><value>Välimus</value></data>
+  <data name="controls" xml:space="preserve"><value>Juhtimine</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Keel</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Vanemale</value></data>
+  <data name="theme" xml:space="preserve"><value>Teema</value></data>
+  <data name="light" xml:space="preserve"><value>Hele</value></data>
+  <data name="dark" xml:space="preserve"><value>Tume</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Sobib värvipimedale</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Sinine-oranž palett, mustrid jäävad</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Põhivärv</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandariin</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Viinamari</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Puudutus</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Puudutus täidab, hoidmine = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Režiiminupp</value></data>
+  <data name="handed" xml:space="preserve"><value>Nuppude pool</value></data>
+  <data name="leftH" xml:space="preserve"><value>Vasak</value></data>
+  <data name="rightH" xml:space="preserve"><value>Parem</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Ruudu suurus</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Suured numbrid</value></data>
+  <data name="language" xml:space="preserve"><value>Keel</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Pausi meeldetuletus</value></data>
+  <data name="stOff" xml:space="preserve"><value>Väljas</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 tund</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Kas teeme pausi?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Oled mänginud {0} minutit. Sinu mõistatus ootab sind.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Veel natuke</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Lõpetan siin</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Lähtesta edenemine</value></data>
+  <data name="privacy" xml:space="preserve"><value>Andmed ja privaatsus</value></data>
+  <data name="open" xml:space="preserve"><value>Ava</value></data>
+  <data name="reset" xml:space="preserve"><value>Lähtesta</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Ainult täiskasvanutele</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Palju on 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Tühista</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Kas kustutame kõik?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Kõik mõistatused, tähed ja kleepsud kaovad. Seda ei saa tagasi võtta.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Jah, kustuta kõik</value></data>
+  <data name="version" xml:space="preserve"><value>Versioon 1.0 · järk 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Reklaamivaba · ilma ostudeta</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Mis on nonogramm?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogramm on numbrite sisse peidetud pilt. Iga rea ja veeru vihjed ütlevad, mitu klotsi täita ja millises järjekorras. Lahenda iga rida puhta loogikaga ja pilt tuleb välja — arvata ei pea kunagi.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Tuntud ka kui: Picross · Griddler · Hanjie · Pic-a-Pix · Värvi numbrite järgi · Jaapani ristsõna</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Kuidas mängida</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Tegijad</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Privaatsuspoliitika</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Saada tagasisidet</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Hinda squarebuzz'i</value></data>
+  <data name="ht1" xml:space="preserve"><value>Loe vihjeid</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Iga number on üks katkematu jada täidetud klotse, loetletud järjekorras. Rea vihje 3 1 tähendab kolme koos, siis vähemalt üht tühja ruutu ja siis üht üksinda.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Täida ja märgi ristiga</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Puuduta ruutu, et see täita. Lülitu X-režiimile nende ruutude jaoks, mille kohta oled kindlaks teinud, et need jäävad tühjaks. Ristid ei ole kaunistus — nende abil hoiad asjad meeles.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Kattuv osa</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Kümne ruudu laiuses reas katab vihje 8 alati keskmised 6 ruutu, ükskõik kust see algab. Lükka jada vasakule, lükka paremale ja täida see osa, mis kattub.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Võrdle risti</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Kui rida annab sulle ühe kindla klotsi, vaata selle veergu. Uus klots lõpetab tihti mõne veeru vihje, mis annab uusi riste, ja need annavad uusi klotse.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Märgi valmis read ristiga</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Kui rida vastab täpselt oma vihjetele, märgi kõik ülejäänud ruudud ristiga. Vihjenumbrid tuhmuvad, nii tead, et see rida on valmis.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Loomad</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurused</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Kosmos</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Toit</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Sõidukid</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Muinasjutud</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Üllata mind</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Süda</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Väike kala</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Täht</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Kummitus</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Õun</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Purjekas</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurus</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kassi nägu</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Koogike</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Võiduauto</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Rakett</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Kroon</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Salapärane pilt</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Luup</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Näitab maalimise ajal suurendatud 3×3 vaadet. Vaikimisi väljas.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Küsi täiskasvanult</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>Leitud {0}/{1}</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Lõpeta oma esimene pilt.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Mängi seitse päeva järjest.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Lõpeta pilt ilma ühtegi vihjet kasutamata.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Lõpeta 5×5 vähem kui minutiga.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Täida kokku 100 klotsi.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Leia kõik dinosaurused.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Lõpeta pilt pärast kella 20.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Kolm tähte 10×10 mõistatuses, ilma ühegi veata.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Leia galeriist kõik pildid.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Tänaseks tehtud — homme näeme!</value></data>
+</root>

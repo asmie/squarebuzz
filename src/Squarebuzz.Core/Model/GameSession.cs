@@ -173,7 +173,12 @@ public sealed class GameSession
     /// player made them, and re-checking would count old mistakes twice. Undo history starts
     /// empty, so a resumed game cannot be unwound past the point it was saved.
     /// </remarks>
-    public void Restore(IReadOnlyList<CellState> cells, TimeSpan elapsed, int hintsRemaining, int mistakes)
+    public void Restore(
+        IReadOnlyList<CellState> cells,
+        TimeSpan elapsed,
+        int hintsRemaining,
+        int hintsUsed,
+        int mistakes)
     {
         ArgumentNullException.ThrowIfNull(cells);
 
@@ -194,7 +199,13 @@ public sealed class GameSession
 
         Elapsed = elapsed;
         HintsRemaining = Math.Min(hintsRemaining, Rules.HintAllowance);
-        HintsUsed = Math.Max(0, Rules.HintAllowance - HintsRemaining);
+
+        // Taken from the save, never re-derived from the allowance. The allowance can differ
+        // from the one the game was saved under - switching hints off in Options is enough -
+        // and deriving it would hand back hints the player had already spent, restoring a star
+        // and the "no hints" trophy along with them.
+        HintsUsed = Math.Max(0, hintsUsed);
+
         Mistakes = mistakes;
         _history.Clear();
 

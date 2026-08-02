@@ -44,6 +44,13 @@
       already says FontFamily="BodyBold" the family is the bold cut rather than a synthetic
       thickening of the medium one - a rounded face smears badly when the platform fakes weight.
     -->
+
+    <!--
+      Which family headings use. A resource rather than a literal because Fredoka cannot render
+      every language the game ships in, and a heading with one substituted letter in it looks
+      broken - AppShell swaps this to the body face for those languages. See AppLanguages.All.
+    -->
+    <x:String x:Key="DisplayFontFamily">Display</x:String>
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
         <Setter Property="FontFamily" Value="Body" />
@@ -52,13 +59,13 @@
 
     <Style x:Key="H1" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-        <Setter Property="FontFamily" Value="Display" />
+        <Setter Property="FontFamily" Value="{DynamicResource DisplayFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeH1}" />
     </Style>
 
     <Style x:Key="H2" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-        <Setter Property="FontFamily" Value="Display" />
+        <Setter Property="FontFamily" Value="{DynamicResource DisplayFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeH2}" />
     </Style>
 

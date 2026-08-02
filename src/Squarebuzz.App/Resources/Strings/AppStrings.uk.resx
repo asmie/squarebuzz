@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Ukrainian (uk) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key of the neutral culture is present here.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Логічні головоломки, що перетворюються на малюнки</value></data>
+  <data name="loading" xml:space="preserve"><value>Розігріваю блоки…</value></data>
+  <data name="skip" xml:space="preserve"><value>Пропустити</value></data>
+  <data name="next" xml:space="preserve"><value>Далі</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Граємо!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Нова гра</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Продовжити</value></data>
+  <data name="trials" xml:space="preserve"><value>Випробування</value></data>
+  <data name="options" xml:space="preserve"><value>Налаштування</value></data>
+  <data name="about" xml:space="preserve"><value>Про гру</value></data>
+  <data name="inProgress" xml:space="preserve"><value>Розпочато: {n}</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Поки нічого немає</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Загадка дня готова</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Звук, тема, керування</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Що таке нонограма?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Який розмір?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Більші поля розв’язувати довше, зате малюнок докладніший.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Міні</value></data>
+  <data name="normal" xml:space="preserve"><value>Звичайний</value></data>
+  <data name="big" xml:space="preserve"><value>Великий</value></data>
+  <data name="huge" xml:space="preserve"><value>Величезний</value></data>
+  <data name="giant" xml:space="preserve"><value>Гігант</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Планшет</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Наскільки складно?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Дуже легко</value></data>
+  <data name="easy" xml:space="preserve"><value>Легко</value></data>
+  <data name="medium" xml:space="preserve"><value>Середньо</value></data>
+  <data name="hard" xml:space="preserve"><value>Складно</value></data>
+  <data name="expert" xml:space="preserve"><value>Експерт</value></data>
+  <data name="challenge" xml:space="preserve"><value>Суворість гри</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Друге налаштування — воно не залежить від розміру й складності підказок.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Спокійно</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Помічники є, обмежень немає</value></data>
+  <data name="sharp" xml:space="preserve"><value>Суворо</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Помилки рахуються, одна підказка</value></data>
+  <data name="pack" xml:space="preserve"><value>Набір малюнків</value></data>
+  <data name="helpers" xml:space="preserve"><value>Помічники</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Авто-X у готових лініях</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Попереджати про помилки</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Показувати час</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Дозволити підказки</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Вибір загадки</value></data>
+  <data name="random" xml:space="preserve"><value>Випадкова</value></data>
+  <data name="gallery" xml:space="preserve"><value>Галерея</value></data>
+  <data name="locked" xml:space="preserve"><value>Закрито</value></data>
+  <data name="preview" xml:space="preserve"><value>Перегляд</value></data>
+  <data name="start" xml:space="preserve"><value>Почати</value></data>
+  <data name="fill" xml:space="preserve"><value>Малювати</value></data>
+  <data name="cross" xml:space="preserve"><value>Хрестик</value></data>
+  <data name="undo" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="redo" xml:space="preserve"><value>Повернути</value></data>
+  <data name="hint" xml:space="preserve"><value>Підказка</value></data>
+  <data name="pause" xml:space="preserve"><value>Пауза</value></data>
+  <data name="minimap" xml:space="preserve"><value>Карта</value></data>
+  <data name="paused" xml:space="preserve"><value>Пауза</value></data>
+  <data name="resume" xml:space="preserve"><value>Продовжити</value></data>
+  <data name="restart" xml:space="preserve"><value>Заново</value></data>
+  <data name="howTo" xml:space="preserve"><value>Як грати</value></data>
+  <data name="quit" xml:space="preserve"><value>У меню</value></data>
+  <data name="solved" xml:space="preserve"><value>Вийшло!</value></data>
+  <data name="time" xml:space="preserve"><value>Час</value></data>
+  <data name="hints" xml:space="preserve"><value>Підк.</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Ой</value></data>
+  <data name="save" xml:space="preserve"><value>Зберегти</value></data>
+  <data name="share" xml:space="preserve"><value>Поділитися</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Далі</value></data>
+  <data name="menu" xml:space="preserve"><value>Меню</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Числа — це ланцюжки блоків</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Підказка 3 1 означає: три блоки поруч, проміжок, потім один. У тому ж порядку, зліва направо.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Позначай порожні клітинки</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Натисни, щоб замалювати. Перейди в режим X, щоб позначати клітинки, які точно залишаться порожніми — так легше тримати все в голові.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>З’являється малюнок</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Заповни кожен рядок і стовпчик — і блоки стануть малюнком. У кожної загадки лише одна відповідь, вгадувати не треба.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Одна підказка — безкоштовно!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Не ця клітинка — спробуй ще</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Цього разу не вдалося скласти загадку. Спробуй ще раз!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Стосується великих полів, які гра придумує сама — від 15×15. Маленькі малюнки намальовані вручну.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Загадок дня розв’язано цього місяця: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Підказок більше немає</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Лінія готова!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Усе готово. Вибирай загадку!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>У тебе гарно виходить. Ще одну?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Я знайшов сьогодні нові малюнки.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Гарна була загадка. Хочеш ще?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Почни свою першу загадку</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Як грати</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Загадка дня</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Новий малюнок щоранку</value></data>
+  <data name="play" xml:space="preserve"><value>Грати</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Розминка</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Впевнено</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Блискавка</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · часу вдосталь</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · не гальмуй</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · оком не змигнути</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Шлях загадок</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Пройди попередню зупинку, щоб відкрити цю</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Зупинка {0}, {1}, пройдена. Можеш зіграти знову.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Зупинка {0}, {1} на {1}, наступна для гри.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Зупинка {0}, закрита. Спершу пройди попередню.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Нагороди</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Час вийшов!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Цього разу годинник виявився швидшим. Спробуєш знову?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Ще раз</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. На годиннику {2}.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Сьогодні</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>На час</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Шлях</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Випробування на час</value></data>
+  <data name="tr1" xml:space="preserve"><value>Перший малюнок</value></data>
+  <data name="tr2" xml:space="preserve"><value>Тиждень підряд</value></data>
+  <data name="tr3" xml:space="preserve"><value>Без підказок</value></data>
+  <data name="tr4" xml:space="preserve"><value>Швидкий</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 блоків</value></data>
+  <data name="tr6" xml:space="preserve"><value>Фанат динозаврів</value></data>
+  <data name="tr7" xml:space="preserve"><value>Нічна сова</value></data>
+  <data name="tr8" xml:space="preserve"><value>Ідеальна десятка</value></data>
+  <data name="tr9" xml:space="preserve"><value>Колекціонер</value></data>
+  <data name="sound" xml:space="preserve"><value>Звуки</value></data>
+  <data name="music" xml:space="preserve"><value>Музика</value></data>
+  <data name="voice" xml:space="preserve"><value>Читання вголос</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Тепер я можу читати тобі вголос.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>На цьому пристрої немає голосу для цієї мови</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Рядок {0}, стовпчик {1}, {2}. Підказка рядка: {3}. Підказка стовпчика: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>порожньо</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>замальовано</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>перекреслено</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>немає</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Поле загадки, {0} на {1}. Замальовано {2} клітинок із {3}.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Клітинки поки не можна обстежити дотиком.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Минуло часу: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Усього зірок: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Днів підряд: {0}</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Продовжити: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Видалити: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Менші клітинки</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Більші клітинки</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, знайдено, зірок: {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Малюнок поки не знайдено. Зіграй, щоб його відкрити.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Закритий малюнок</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, отримано. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, поки не отримано. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>Зірок: {0} із 3</value></data>
+  <data name="haptics" xml:space="preserve"><value>Вібрація при дотику</value></data>
+  <data name="audio" xml:space="preserve"><value>Звук</value></data>
+  <data name="look" xml:space="preserve"><value>Вигляд</value></data>
+  <data name="controls" xml:space="preserve"><value>Керування</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Мова</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Для батьків</value></data>
+  <data name="theme" xml:space="preserve"><value>Тема</value></data>
+  <data name="light" xml:space="preserve"><value>Світла</value></data>
+  <data name="dark" xml:space="preserve"><value>Темна</value></data>
+  <data name="auto" xml:space="preserve"><value>Авто</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Для дальтоніків</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Синій та оранжевий, візерунки лишаються</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Головний колір</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Мандарин</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Виноград</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Тріо</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Дотик</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Дотик малює, довгий = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Кнопка</value></data>
+  <data name="handed" xml:space="preserve"><value>Кнопки</value></data>
+  <data name="leftH" xml:space="preserve"><value>Ліворуч</value></data>
+  <data name="rightH" xml:space="preserve"><value>Праворуч</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Розмір клітинок</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Великі цифри</value></data>
+  <data name="language" xml:space="preserve"><value>Мова</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Нагадування про перерву</value></data>
+  <data name="stOff" xml:space="preserve"><value>Вимк.</value></data>
+  <data name="st15" xml:space="preserve"><value>15 хв</value></data>
+  <data name="st30" xml:space="preserve"><value>30 хв</value></data>
+  <data name="st60" xml:space="preserve"><value>1 год</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Час відпочити?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Ти граєш уже {0} хв. Загадка тебе дочекається.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Ще трошки</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Закінчу на цьому</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Скинути прогрес</value></data>
+  <data name="privacy" xml:space="preserve"><value>Дані та приватність</value></data>
+  <data name="open" xml:space="preserve"><value>Відкрити</value></data>
+  <data name="reset" xml:space="preserve"><value>Скинути</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Лише для дорослих</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Скільки буде 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Стерти все?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Усі загадки, зірки й наліпки зникнуть. Скасувати це буде неможливо.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Так, стерти все</value></data>
+  <data name="version" xml:space="preserve"><value>Версія 1.0 · збірка 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Без реклами · без покупок у застосунку</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Що таке нонограма?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Нонограма — це малюнок, схований у числах. Підказки біля кожного рядка й кожного стовпчика кажуть, скільки блоків замалювати і в якому порядку. Розберися з кожною лінією чистою логікою — і малюнок з’явиться сам. Вгадувати не потрібно ніколи.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Інші назви: Picross · Griddler · Hanjie · Pic-a-Pix · Малювання за числами · Японський кросворд</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Як грати</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Автори</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Політика приватності</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Напиши нам</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Оцінити squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Читай підказки</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Кожне число — це один неперервний ланцюжок замальованих блоків, і ланцюжки йдуть у тому ж порядку. Підказка 3 1 означає: три разом, потім хоча б одна порожня клітинка, потім один блок окремо.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Замальовуй і перекреслюй</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Натисни на клітинку, щоб замалювати її. Перейди в режим X для клітинок, про які ти вже точно знаєш, що вони порожні. Хрестики — не окраса, вони допомагають не заплутатися.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Перекриття довгих ланцюжків</value></data>
+  <data name="ht3b" xml:space="preserve"><value>У рядку з 10 клітинок підказка 8 обов’язково накриє 6 клітинок посередині, де б ланцюжок не починався. Притисни його вліво, притисни вправо — і замалюй те, що збіглося.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Звіряй рядки зі стовпчиками</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Якщо рядок дав тобі точний блок, подивись уздовж його стовпчика. Новий блок часто завершує підказку стовпчика, а це дає нові хрестики, а хрестики — нові блоки.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Перекреслюй готові лінії</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Коли лінія повністю збігається зі своїми підказками, постав X у всіх клітинках, що лишилися. Числа підказки пригаснуть — отже, ця лінія готова.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Тварини</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Динозаври</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Космос</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Їжа</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Транспорт</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Казки</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Здивуй мене</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Серденько</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Рибка</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Зірочка</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Привид</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Яблуко</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Вітрильник</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Динозавр</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Котик</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Тістечко</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Гоночне авто</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Ракета</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Корона</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Таємний малюнок</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Лупа</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Показує збільшений вид 3×3, поки ти малюєш. Типово вимкнена.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Поклич дорослого</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>Знайдено {0} з {1}</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Заверши свій перший малюнок.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Грай сім днів підряд.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Заверши малюнок без жодної підказки.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Заверши поле 5×5 менш ніж за хвилину.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Замалюй разом 100 блоків.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Знайди всіх динозаврів.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Заверши малюнок після 20:00.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Три зірки на полі 10×10 і жодної помилки.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Знайди всі малюнки в галереї.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>На сьогодні все — до завтра!</value></data>
+</root>

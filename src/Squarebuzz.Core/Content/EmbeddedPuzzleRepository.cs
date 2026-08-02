@@ -47,16 +47,21 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
 
     public IReadOnlyList<Puzzle> Puzzles { get; }
 
-    public IReadOnlyList<Puzzle> Find(string packId, int size)
+    public IReadOnlyList<Puzzle> Find(string packId, int size, IReadOnlySet<string>? unlockedPackIds = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(packId);
 
         var pack = Packs.FirstOrDefault(p => string.Equals(p.Id, packId, StringComparison.Ordinal));
 
-        // A wildcard pack draws from everything that is not locked.
+        // A wildcard pack draws from every pack the player can currently choose. That is not the
+        // same as "not shipped locked": a locked pack is earned by finding its pictures on the
+        // Puzzle Path, after which New Game and the Gallery both offer it. Judging by the shipped
+        // flag alone left Surprise as the one place that never caught up, so a pack the player had
+        // legitimately earned could still never turn up in it.
         if (pack?.IsWildcard == true)
         {
-            var unlocked = Packs.Where(p => !p.Locked && !p.IsWildcard)
+            var unlocked = Packs
+                .Where(p => !p.IsWildcard && (!p.Locked || unlockedPackIds?.Contains(p.Id) == true))
                 .Select(p => p.Id)
                 .ToHashSet(StringComparer.Ordinal);
 

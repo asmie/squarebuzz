@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Lithuanian (lt) satellite for AppStrings, translated from the English neutral culture.
+  Complete: every key from AppStrings.resx is present here, in the same order.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Loginiai galvosūkiai, kurie tampa paveikslėliais</value></data>
+  <data name="loading" xml:space="preserve"><value>Šildau kubelius…</value></data>
+  <data name="skip" xml:space="preserve"><value>Praleisti</value></data>
+  <data name="next" xml:space="preserve"><value>Toliau</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Pažaiskim!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Naujas žaidimas</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Tęsti</value></data>
+  <data name="trials" xml:space="preserve"><value>Išbandymai</value></data>
+  <data name="options" xml:space="preserve"><value>Nustatymai</value></data>
+  <data name="about" xml:space="preserve"><value>Apie</value></data>
+  <data name="inProgress" xml:space="preserve"><value>Pradėta: {n}</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Kol kas nieko nėra</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Šiandienos galvosūkis paruoštas</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Garsas, tema, valdymas</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Kas yra nonograma?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Kokio dydžio?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Didesni tinkleliai užima daugiau laiko, bet atskleidžia daugiau detalių.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Mažas</value></data>
+  <data name="normal" xml:space="preserve"><value>Įprastas</value></data>
+  <data name="big" xml:space="preserve"><value>Didelis</value></data>
+  <data name="huge" xml:space="preserve"><value>Didžiulis</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigantas</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Planšetė</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Kaip sunku?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Labai lengva</value></data>
+  <data name="easy" xml:space="preserve"><value>Lengva</value></data>
+  <data name="medium" xml:space="preserve"><value>Vidutinė</value></data>
+  <data name="hard" xml:space="preserve"><value>Sunki</value></data>
+  <data name="expert" xml:space="preserve"><value>Ekspertas</value></data>
+  <data name="challenge" xml:space="preserve"><value>Iššūkio lygis</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Antra skalė, nepriklausanti nuo dydžio ir užuominų sunkumo.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Ramiai</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Pagalbininkai įjungti, be ribų</value></data>
+  <data name="sharp" xml:space="preserve"><value>Aštriai</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Klaidos skaičiuojamos, viena užuomina</value></data>
+  <data name="pack" xml:space="preserve"><value>Paveikslėlių rinkinys</value></data>
+  <data name="helpers" xml:space="preserve"><value>Pagalbininkai</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Auto-X baigtose linijose</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Įspėti apie klaidas</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Rodyti laiką</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Leisti užuominas</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Pasirink galvosūkį</value></data>
+  <data name="random" xml:space="preserve"><value>Atsitiktinis</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galerija</value></data>
+  <data name="locked" xml:space="preserve"><value>Užrakinta</value></data>
+  <data name="preview" xml:space="preserve"><value>Peržiūra</value></data>
+  <data name="start" xml:space="preserve"><value>Pradėti</value></data>
+  <data name="fill" xml:space="preserve"><value>Užpildyti</value></data>
+  <data name="cross" xml:space="preserve"><value>Žymėti X</value></data>
+  <data name="undo" xml:space="preserve"><value>Atšaukti</value></data>
+  <data name="redo" xml:space="preserve"><value>Grąžinti</value></data>
+  <data name="hint" xml:space="preserve"><value>Užuomina</value></data>
+  <data name="pause" xml:space="preserve"><value>Pauzė</value></data>
+  <data name="minimap" xml:space="preserve"><value>Žemėlapis</value></data>
+  <data name="paused" xml:space="preserve"><value>Pauzė</value></data>
+  <data name="resume" xml:space="preserve"><value>Tęsti</value></data>
+  <data name="restart" xml:space="preserve"><value>Nuo naujo</value></data>
+  <data name="howTo" xml:space="preserve"><value>Kaip žaisti</value></data>
+  <data name="quit" xml:space="preserve"><value>Į meniu</value></data>
+  <data name="solved" xml:space="preserve"><value>Pavyko!</value></data>
+  <data name="time" xml:space="preserve"><value>Laikas</value></data>
+  <data name="hints" xml:space="preserve"><value>Užuominos</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
+  <data name="save" xml:space="preserve"><value>Išsaugoti</value></data>
+  <data name="share" xml:space="preserve"><value>Dalintis</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Toliau</value></data>
+  <data name="menu" xml:space="preserve"><value>Meniu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Skaičiai – kubelių virtinės</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Užuomina 3 1 reiškia: trys kubeliai iš eilės, tarpas, tada dar vienas. Tokia pat tvarka, iš kairės į dešinę.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Pažymėk tuščius</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Bakstelėk, kad užpildytum. Perjunk į X režimą ir pažymėk langelius, kurie tikrai liks tušti — taip lengviau nepasimesti.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Atsiranda paveikslėlis</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Užbaik visas eilutes ir stulpelius, ir kubeliai taps paveikslėliu. Kiekvienas galvosūkis turi tik vieną atsakymą — spėti nereikia.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Štai viena – veltui!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Ne tas langelis — pabandyk dar</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Šįkart nepavyko sudėti galvosūkio. Pabandyk dar kartą!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Taikoma didesnėms lentoms, kurias sukuria pats žaidimas — nuo 15×15. Maži paveikslėliai nupiešti ranka.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Šį mėnesį įveikta dienos galvosūkių: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Užuominų nebėra</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Linija baigta!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Aš jau gatavas. Rinkis galvosūkį!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Tau puikiai sekasi. Dar vieną?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Šiandien radau naujų paveikslėlių.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Šis buvo geras. Dar vieną?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Pradėk pirmąjį galvosūkį</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Kaip žaisti</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Dienos galvosūkis</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Naujas paveikslėlis kas rytą</value></data>
+  <data name="play" xml:space="preserve"><value>Žaisti</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Apšilimas</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Tolygiai</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Žaibas</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · laiko daug</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · nesustok</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · nė sumirksėti</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Galvosūkių kelias</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Užbaik ankstesnę stotelę, kad atvertum kitą</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Stotelė {0}, {1}, įveikta. Gali žaisti dar kartą.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Stotelė {0}, {1} kartus {1}, ši – kita.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Stotelė {0}, užrakinta. Pirmiau užbaik ankstesnę.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Trofėjai</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Laikas baigėsi!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Šįkart laikrodis buvo greitesnis. Pabandysi dar?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Bandyk dar</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Laikrodyje {2}.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Šiandien</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Su laiku</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Kelias</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Laiko išbandymas</value></data>
+  <data name="tr1" xml:space="preserve"><value>Pirmas paveikslėlis</value></data>
+  <data name="tr2" xml:space="preserve"><value>Savaitė iš eilės</value></data>
+  <data name="tr3" xml:space="preserve"><value>Be užuominų</value></data>
+  <data name="tr4" xml:space="preserve"><value>Greituolis</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 kubelių</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dinozaurų fanas</value></data>
+  <data name="tr7" xml:space="preserve"><value>Naktibalda</value></data>
+  <data name="tr8" xml:space="preserve"><value>Tobula dešimtis</value></data>
+  <data name="tr9" xml:space="preserve"><value>Kolekcionierius</value></data>
+  <data name="sound" xml:space="preserve"><value>Garso efektai</value></data>
+  <data name="music" xml:space="preserve"><value>Muzika</value></data>
+  <data name="voice" xml:space="preserve"><value>Skaitymas balsu</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Dabar galiu tau skaityti.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Šiai kalbai šiame įrenginyje balso nėra</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Eilutė {0}, stulpelis {1}, {2}. Eilutės užuomina: {3}. Stulpelio užuomina: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>tuščias</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>užpildytas</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>perbrauktas</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>nėra</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Žaidimo lenta, {0} kartus {1}. Užpildyta langelių: {2} iš {3}.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Langelių dar negalima tyrinėti pirštu.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Laikas iki šiol: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Iš viso žvaigždučių: {0}</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Dienų iš eilės: {0}</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Tęsti: {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Ištrinti: {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Mažesni langeliai</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Didesni langeliai</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, rasta, žvaigždučių: {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Paveikslėlis dar nerastas. Žaisk ir jį atskleisi.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Užrakintas paveikslėlis</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, gautas. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, dar negautas. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} iš 3 žvaigždučių</value></data>
+  <data name="haptics" xml:space="preserve"><value>Vibracija bakstelėjus</value></data>
+  <data name="audio" xml:space="preserve"><value>Garsas</value></data>
+  <data name="look" xml:space="preserve"><value>Išvaizda</value></data>
+  <data name="controls" xml:space="preserve"><value>Valdymas</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Kalba</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Tėvų zona</value></data>
+  <data name="theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="light" xml:space="preserve"><value>Šviesi</value></data>
+  <data name="dark" xml:space="preserve"><value>Tamsi</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Draugiška daltonikams</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Mėlyna ir oranžinė paletė, raštai lieka</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Pagrindinė spalva</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarinas</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Vynuogė</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Bakstelėjimas</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Bakstelėk – pildo, palaikyk – X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Režimas</value></data>
+  <data name="handed" xml:space="preserve"><value>Mygtukai</value></data>
+  <data name="leftH" xml:space="preserve"><value>Kairėje</value></data>
+  <data name="rightH" xml:space="preserve"><value>Dešinėje</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Langelių dydis</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Dideli skaičiai</value></data>
+  <data name="language" xml:space="preserve"><value>Kalba</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Priminimas apie pertrauką</value></data>
+  <data name="stOff" xml:space="preserve"><value>Išjungta</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 val.</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Gal laikas pertraukai?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Žaidi jau {0} min. Tavo galvosūkis palauks.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Dar truputį</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Baigsiu čia</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Atstatyti pažangą</value></data>
+  <data name="privacy" xml:space="preserve"><value>Duomenys ir privatumas</value></data>
+  <data name="open" xml:space="preserve"><value>Atverti</value></data>
+  <data name="reset" xml:space="preserve"><value>Atstatyti</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Tik suaugusiems</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Kiek yra 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Atšaukti</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Ištrinti viską?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Visi galvosūkiai, žvaigždutės ir lipdukai išnyks. To nebus galima atšaukti.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Taip, ištrinti viską</value></data>
+  <data name="version" xml:space="preserve"><value>Versija 1.0 · kompiliacija 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Be reklamų · be pirkimų programėlėje</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Kas yra nonograma?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonograma – paveikslėlis, pasislėpęs skaičiuose. Užuominos prie kiekvienos eilutės ir stulpelio pasako, kiek langelių užpildyti ir kokia tvarka. Išnarpliok kiekvieną liniją vien logika, ir paveikslėlis atsiras — spėti nereikia niekada.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Dar žinoma kaip: Picross · Griddler · Hanjie · Pic-a-Pix · Piešimas pagal skaičius · Japoniškas kryžiažodis</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Kaip žaisti</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Autoriai</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Privatumo politika</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Parašyk mums</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Įvertink squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Skaityk užuominas</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Kiekvienas skaičius – vienas nepertraukiamas užpildytų langelių ruožas; skaičiai surašyti eilės tvarka. Eilutės užuomina 3 1 reiškia: trys greta, bent vienas tuščias langelis, tada vienas atskirai.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Pildyk ir perbrauk</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Bakstelėk langelį, kad jį užpildytum. Perjunk į X režimą tiems langeliams, apie kuriuos jau įsitikinai, kad jie liks tušti. X – ne pagražinimas, o būdas nepasimesti.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Persidengimas ilgose užuominose</value></data>
+  <data name="ht3b" xml:space="preserve"><value>10 langelių pločio eilutėje užuomina 8 visada apima vidurinius 6 langelius, kur tik ji prasidėtų. Pastumk ruožą į kairę, pastumk į dešinę ir užpildyk tai, kas persidengia.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Sugretink eilutes ir stulpelius</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Kai eilutėje randi vieną tikrai užpildytą langelį, pažvelk į jo stulpelį. Naujas langelis dažnai užbaigia stulpelio užuominą, o tai duoda daugiau X, o tie – dar daugiau užpildytų langelių.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Perbrauk baigtas linijas</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Kai linija visiškai atitinka savo užuominas, pažymėk X visus likusius jos langelius. Užuominų skaičiai išblunka – žinosi, kad ta linija baigta.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Gyvūnai</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinozaurai</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Kosmosas</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Maistas</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Transportas</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Pasakos</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Nustebink mane</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Širdelė</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Žuvelė</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Žvaigždė</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Vaiduoklis</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Obuolys</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Burlaivis</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinozauras</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kačiukas</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Keksiukas</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Lenktynių mašina</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Raketa</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Karūna</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Paslaptingas paveikslėlis</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Rodo padidintą 3×3 vaizdą, kai spalvini. Iš pradžių išjungta.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Paprašyk suaugusiojo</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>Rasta {0} iš {1}</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Užbaik savo pirmą paveikslėlį.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Žaisk septynias dienas iš eilės.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Užbaik paveikslėlį be nė vienos užuominos.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Užbaik 5×5 greičiau nei per minutę.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Iš viso užpildyk 100 kubelių.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Surask visus dinozaurus.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Užbaik paveikslėlį po 20 val.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Trys žvaigždutės 10×10 be nė vienos klaidos.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Surask visus galerijos paveikslėlius.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Šiandien atlikta — iki rytojaus!</value></data>
+</root>
