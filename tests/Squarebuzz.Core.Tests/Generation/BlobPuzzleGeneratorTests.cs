@@ -124,6 +124,68 @@ public class BlobPuzzleGeneratorTests
     }
 
     [Fact]
+    public void EveryDifficultyStep_ActuallyChangesThePicture()
+    {
+        // The dial used to be far coarser than it looked: the fill target was only checked
+        // *before* stamping, so a final full-size blob could overshoot by its whole area. Every
+        // difficulty came out several points too full, and neighbouring settings landed on a
+        // byte-identical picture for a third to a half of all seeds - the slider did nothing.
+        const int size = 25;
+        const int seeds = 60;
+
+        for (var difficulty = 1; difficulty < 5; difficulty++)
+        {
+            var identical = 0;
+
+            for (var seed = 1; seed <= seeds; seed++)
+            {
+                var sparser = _generator.Generate(new PuzzleRequest(size, size, difficulty + 1, "surprise", seed));
+                var denser = _generator.Generate(new PuzzleRequest(size, size, difficulty, "surprise", seed));
+
+                if (SamePicture(denser, sparser))
+                {
+                    identical++;
+                }
+            }
+
+            _output.WriteLine($"difficulty {difficulty} vs {difficulty + 1}: {identical}/{seeds} identical");
+
+            Assert.True(
+                identical <= seeds / 10,
+                $"Difficulty {difficulty} and {difficulty + 1} gave the same picture for {identical} of {seeds} seeds.");
+        }
+    }
+
+    [Theory]
+    [InlineData(1, 0.575)]
+    [InlineData(3, 0.485)]
+    [InlineData(5, 0.395)]
+    public void PictureDensity_LandsNearTheDifficultysTarget(int difficulty, double target)
+    {
+        // Within a few points, not exact: the shape is clipped at the edges, the solidity roll is
+        // random, and empty-line repair adds a little afterwards. The old overshoot was 5-6
+        // points and always in the same direction, which is what flattened the dial.
+        var fill = Average(25, puzzle => FilledCount(puzzle) / 625.0, difficulty);
+
+        _output.WriteLine($"difficulty {difficulty}: mean fill {fill:P1}, target {target:P1}");
+
+        Assert.InRange(fill, target - 0.04, target + 0.04);
+    }
+
+    private static bool SamePicture(Puzzle a, Puzzle b)
+    {
+        for (var i = 0; i < a.CellCount; i++)
+        {
+            if (a.Solution[i] != b.Solution[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    [Fact]
     public void SparsestDifficulty_IsSparserThanTheEasiest()
     {
         var easiest = Average(15, puzzle => FilledCount(puzzle) / 225.0, difficulty: 1);

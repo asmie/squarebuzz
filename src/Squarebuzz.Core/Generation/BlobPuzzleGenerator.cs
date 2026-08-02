@@ -58,11 +58,21 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 
         // Blobs are added until the half is as full as the difficulty asks, so coverage scales
         // with the grid instead of being a fixed count that happened to suit 5x5.
-        for (var i = 0; i < centres.Length && CountLeftHalf(cells, width, height, halfWidth) < wanted; i++)
+        //
+        // The last blob is the one that decides how close to the target we land, so its radius
+        // is capped by what is still wanted. Without that cap the loop only checked the total
+        // *before* stamping, and a full-size final blob could overshoot by its whole area -
+        // enough that every difficulty came out 5-6 points too full and the sparse end never
+        // arrived. Adjacent settings then produced the same picture for a third to a half of
+        // all seeds, so the slider did nothing for those players.
+        var filled = 0;
+
+        for (var i = 0; i < centres.Length && filled < wanted; i++)
         {
             var (centreX, centreY) = centres[i];
+            var radius = 1 + random.Next(RadiusCapFor(wanted - filled, maxRadius));
 
-            StampBlob(cells, width, height, centreX, centreY, 1 + random.Next(maxRadius), random);
+            filled += StampBlob(cells, width, height, halfWidth, centreX, centreY, radius, random);
         }
 
         MirrorLeftHalfOntoRight(cells, width, height);
@@ -100,16 +110,42 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         return cells;
     }
 
-    private static void StampBlob(
+    /// <summary>
+    /// The largest radius whose blob should still fit inside <paramref name="remaining"/>.
+    /// </summary>
+    /// <remarks>
+    /// A radius-r blob covers about pi*r^2 cells, of which <see cref="BlobSolidity"/> land. That
+    /// is an estimate, not a promise - the shape is clipped at the edges and the solidity roll is
+    /// random - so a small overshoot is still possible and fine. What it prevents is the large
+    /// overshoot: a radius-4 blob dropped when only two cells were still wanted.
+    /// </remarks>
+    private static int RadiusCapFor(int remaining, int maxRadius)
+    {
+        var affordable = (int)Math.Floor(Math.Sqrt(remaining / (Math.PI * BlobSolidity)));
+
+        return Math.Clamp(affordable, 1, maxRadius);
+    }
+
+    /// <summary>
+    /// Stamps one blob and reports how many <em>new</em> left-half cells it filled.
+    /// </summary>
+    /// <remarks>
+    /// Only the left half counts: the right is mirrored from it afterwards, so anything stamped
+    /// beyond the axis is discarded. Returning the delta also lets the caller keep a running
+    /// total instead of recounting the half after every blob, which was quadratic in the grid.
+    /// </remarks>
+    private static int StampBlob(
         bool[] cells,
         int width,
         int height,
+        int halfWidth,
         int centreX,
         int centreY,
         int radius,
         DeterministicRandom random)
     {
         var radiusSquared = radius * radius;
+        var added = 0;
 
         // Only the rows and columns the blob can actually reach, rather than the whole grid.
         var fromY = Math.Max(0, centreY - radius);
@@ -124,31 +160,30 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
                 var dx = x - centreX;
                 var dy = y - centreY;
 
-                if ((dx * dx) + (dy * dy) <= radiusSquared && random.NextDouble() < BlobSolidity)
+                if ((dx * dx) + (dy * dy) > radiusSquared || random.NextDouble() >= BlobSolidity)
                 {
-                    cells[(y * width) + x] = true;
+                    continue;
+                }
+
+                var index = (y * width) + x;
+
+                if (cells[index])
+                {
+                    continue;
+                }
+
+                cells[index] = true;
+
+                if (x < halfWidth)
+                {
+                    added++;
                 }
             }
         }
+
+        return added;
     }
 
-    private static int CountLeftHalf(bool[] cells, int width, int height, int halfWidth)
-    {
-        var count = 0;
-
-        for (var y = 0; y < height; y++)
-        {
-            for (var x = 0; x < halfWidth; x++)
-            {
-                if (cells[(y * width) + x])
-                {
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
 
     /// <summary>Vertical symmetry is what makes the blobs read as creatures rather than noise.</summary>
     private static void MirrorLeftHalfOntoRight(bool[] cells, int width, int height)

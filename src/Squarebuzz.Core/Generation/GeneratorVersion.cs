@@ -30,9 +30,11 @@ public static class GeneratorVersion
     /// Version 1 was the ported prototype algorithm: a fixed blob count that did not scale with
     /// the grid, uniformly random blob centres, and an empty-line repair that wrote to the mirror
     /// axis. Version 2 drives coverage from a target density, takes centres from a shuffled
-    /// permutation of the half-grid, and attaches repairs to the neighbouring row.
+    /// permutation of the half-grid, and attaches repairs to the neighbouring row. Version 3 caps
+    /// the last blob's radius by what is still wanted, so the density actually lands on the
+    /// difficulty's target instead of overshooting it by the area of one whole blob.
     /// </summary>
-    public const int Current = 2;
+    public const int Current = 3;
 
     /// <summary>
     /// Used for a save written before versioning existed. Such a save was produced by version 1,
