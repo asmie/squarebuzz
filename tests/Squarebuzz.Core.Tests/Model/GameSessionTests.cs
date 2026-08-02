@@ -1,3 +1,4 @@
+using Squarebuzz.Core.Clues;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Solving;
 using Xunit;
@@ -576,16 +577,105 @@ public class GameSessionTests
     }
 
     [Fact]
+    public void FilledCount_StaysExactThroughEveryRouteThatChangesACell()
+    {
+        // FilledCount is maintained incrementally rather than recounted, because the board screen
+        // reads it on every painted cell and a recount is the whole grid. An incremental counter
+        // is only correct if *every* write goes through the one place that adjusts it, and a new
+        // write path that forgets to would not fail loudly - it would quietly misreport progress
+        // and the screen-reader summary. So this drives all of them and recounts at each step.
+        var session = NewSession();
+        Assert.True(session.Rules.AutoCrossCompletedLines, "The relaxed default is meant to auto-cross.");
+
+        void AssertExact(string after)
+        {
+            var expected = 0;
+
+            foreach (var cell in session.Cells)
+            {
+                if (cell == CellState.Filled)
+                {
+                    expected++;
+                }
+            }
+
+            Assert.True(
+                expected == session.FilledCount,
+                $"After {after}: FilledCount is {session.FilledCount} but the board holds {expected}.");
+        }
+
+        // Paint, including the auto-cross it triggers when the middle column completes.
+        for (var y = 0; y < session.Puzzle.Height; y++)
+        {
+            session.Paint(session.Puzzle.IndexOf(2, y), CellState.Filled);
+            AssertExact($"filling (2,{y})");
+        }
+
+        // Crossing and erasing: neither adds to the count, and erasing a filled cell subtracts.
+        session.Paint(session.Puzzle.IndexOf(0, 0), CellState.Crossed);
+        AssertExact("crossing (0,0)");
+
+        session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Empty);
+        AssertExact("erasing (2,0)");
+
+        session.Undo();
+        AssertExact("undo");
+
+        session.Redo();
+        AssertExact("redo");
+
+        session.UseHint();
+        AssertExact("hint");
+
+        // Restore takes the board wholesale rather than a cell at a time, so it recounts.
+        var restored = NewSession();
+        restored.Restore(session.Cells.ToArray(), TimeSpan.FromSeconds(9), 2, 1, 0);
+        Assert.Equal(session.FilledCount, restored.FilledCount);
+
+        // Enabling auto-cross mid-game sweeps the board for lines to cross - another write path.
+        var late = NewSession(GameRules.Create(
+            ChallengeLevel.Relaxed,
+            new HelperSettings { AutoCross = false }));
+
+        FillEntireSolution(late);
+        late.ApplyHelpers(new HelperSettings { AutoCross = true });
+
+        var afterSweep = 0;
+
+        foreach (var cell in late.Cells)
+        {
+            if (cell == CellState.Filled)
+            {
+                afterSweep++;
+            }
+        }
+
+        Assert.Equal(afterSweep, late.FilledCount);
+    }
+
+    [Fact]
     public void ClueStrikes_MarkARowOnceItsRunIsPinnedDown()
     {
+        // Strikes are computed by the board renderer straight from the session's marks rather
+        // than stored on the session, so this reads them the way the renderer does. What it
+        // guards is the join: a move has to leave the row in a state the calculator can strike.
         var session = NewSession();
 
-        Assert.All(session.RowClueStrikes(0), struck => Assert.False(struck));
+        Assert.All(RowStrikes(session, 0), struck => Assert.False(struck));
 
         // Filling row 0's single cell completes the row and auto-crosses the rest.
         session.Paint(session.Puzzle.IndexOf(2, 0), CellState.Filled);
 
-        Assert.All(session.RowClueStrikes(0), Assert.True);
+        Assert.All(RowStrikes(session, 0), Assert.True);
+    }
+
+    private static bool[] RowStrikes(GameSession session, int y)
+    {
+        var width = session.Puzzle.Width;
+
+        return ClueStrikeCalculator.Compute(
+            session.Puzzle.RowClues[y],
+            session.Cells.Slice(y * width, width));
     }
 
     [Fact]

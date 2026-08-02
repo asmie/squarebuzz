@@ -73,8 +73,8 @@ public sealed partial class AccessibilityState
         public void OnTouchExplorationStateChanged(bool enabled)
         {
             // Listeners can fire on a system thread; everything downstream touches UI. TalkBack
-            // also restarts itself while initialising, so this fires more than once per toggle -
-            // harmless, since every consumer re-reads the live state rather than the argument.
+            // also restarts itself while initialising, so this fires more than once per toggle;
+            // RaiseChanged re-reads the live state and drops the repeats.
             MainThread.BeginInvokeOnMainThread(owner.RaiseChanged);
         }
     }

@@ -44,10 +44,13 @@ public sealed class BoardView : GraphicsView
     private bool _isDragging;
     private CancellationTokenSource? _longPressCancellation;
     private int _pressedIndex = -1;
+    private bool _wipeFrameQueued;
 
     public BoardView()
     {
         Drawable = _drawable;
+
+        _drawable.WipeInProgress += OnWipeInProgress;
 
         StartInteraction += OnStartInteraction;
         DragInteraction += OnDragInteraction;
@@ -280,18 +283,36 @@ public sealed class BoardView : GraphicsView
         }
 
         _drawable.Cells = session.Cells.ToArray();
-        Invalidate();
 
-        // A move can newly satisfy a clue, whose strike wipes in over a few frames. The drawable
-        // computes the wipe from wall time and only learns of a new strike *during* the next
-        // draw - too late for this method to ask whether one appeared - so every move simply
-        // buys a wipe's worth of redraws. A dozen frames of a cheap draw is nothing next to
-        // drag-painting, which already redraws per entered cell.
-        if (!Services.MotionPreferences.ReduceMotion && !this.AnimationIsRunning("strikeWipe"))
+        // One frame. If the move newly satisfied a clue, the draw will notice its strike is
+        // mid-wipe and ask for the next frame itself through OnWipeInProgress - so the extra
+        // frames happen when there is genuinely something moving, not after every cell.
+        Invalidate();
+    }
+
+    /// <summary>
+    /// Keeps a clue strike's wipe going, one frame at a time, for exactly as long as the drawable
+    /// reports it unfinished.
+    /// </summary>
+    /// <remarks>
+    /// Dispatched rather than invalidated straight away: this arrives from inside
+    /// <see cref="BoardDrawable.Draw"/>, and asking a view to redraw part-way through its own
+    /// draw is how platforms produce a dropped frame or a re-entrancy assert.
+    /// </remarks>
+    private void OnWipeInProgress(object? sender, EventArgs e)
+    {
+        if (_wipeFrameQueued)
         {
-            new Animation(_ => Invalidate(), 0, 1)
-                .Commit(this, "strikeWipe", length: 240, finished: (_, _) => Invalidate());
+            return;
         }
+
+        _wipeFrameQueued = true;
+
+        Dispatcher.Dispatch(() =>
+        {
+            _wipeFrameQueued = false;
+            Invalidate();
+        });
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -354,12 +375,18 @@ public sealed class BoardView : GraphicsView
             return;
         }
 
-        if (cell != _pressedIndex)
+        // A finger crossing one cell produces a touch sample per frame, and everything below is
+        // per-cell work: the crosshair, the magnifier notification, and the paint request that
+        // ends in a full session update. Samples that did not change cell are dropped here
+        // rather than deduplicated three layers down.
+        if (cell == _pressedIndex)
         {
-            // Moving off the pressed cell means this is a drag, not a hold.
-            CancelLongPress();
-            _pressedIndex = cell;
+            return;
         }
+
+        // Moving off the pressed cell means this is a drag, not a hold.
+        CancelLongPress();
+        _pressedIndex = cell;
 
         Highlight(cell);
         Paint(cell);
@@ -410,10 +437,19 @@ public sealed class BoardView : GraphicsView
         }
 
         var column = index % layout.Columns;
+        var row = index / layout.Columns;
 
-        _drawable.HighlightRow = index / layout.Columns;
-        _drawable.HighlightColumn = column;
-        _drawable.HintIndex = -1;
+        if (_drawable.HighlightRow != row || _drawable.HighlightColumn != column || _drawable.HintIndex >= 0)
+        {
+            _drawable.HighlightRow = row;
+            _drawable.HighlightColumn = column;
+            _drawable.HintIndex = -1;
+
+            // Redrawn here rather than left to the paint that follows: dragging back over a cell
+            // already painted in this drag makes no move at all, and the crosshair still has to
+            // keep up with the finger.
+            Invalidate();
+        }
 
         TouchedCellChanged?.Invoke(this, new TouchedCellEventArgs(index, column < layout.Columns / 2));
     }

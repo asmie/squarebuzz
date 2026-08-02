@@ -211,6 +211,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>
     /// True when the page should build its per-cell accessibility overlay over the board.
     /// </summary>
+    /// <remarks>
+    /// Cheap to read - the state behind it is cached, which matters because the board summary
+    /// consults it on every painted cell.
+    /// </remarks>
     public bool NeedsCellOverlay => _accessibility.IsScreenReaderActive;
 
     /// <summary>Read by the page before every buzz, so the Haptics switch is actually obeyed.</summary>
@@ -392,14 +396,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
                 return string.Empty;
             }
 
-            var total = CountFilledCells(session.Puzzle);
-
             var summary = Strings.Format(
                 "a11yBoard",
                 session.Puzzle.Width,
                 session.Puzzle.Height,
                 session.FilledCount,
-                total);
+                session.Puzzle.PictureCellCount);
 
             // The caveat is only true when there is no cell overlay. Leaving it in once the squares
             // became reachable would be a description that contradicts the screen it describes.
@@ -636,6 +638,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             : T($"Puzzle_{Session.Puzzle.Id}");
 
         SyncFromSession();
+        UpdateElapsedText();
         StartTimer();
         NotifySettingsDependentProperties();
 
@@ -723,6 +726,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             : T($"Puzzle_{Session.Puzzle.Id}");
 
         SyncFromSession();
+        UpdateElapsedText();
         StartTimer();
 
         NotifySettingsDependentProperties();
@@ -1017,7 +1021,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
             session.StarRating,
             session.Elapsed,
-            CountFilledCells(session.Puzzle),
+            session.Puzzle.PictureCellCount,
             session.HintsUsed,
             _clock.Now)
         {
@@ -1064,21 +1068,6 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         }
     }
 
-    private static int CountFilledCells(Puzzle puzzle)
-    {
-        var count = 0;
-        var solution = puzzle.Solution;
-
-        for (var i = 0; i < solution.Length; i++)
-        {
-            if (solution[i])
-            {
-                count++;
-            }
-        }
-
-        return count;
-    }
 
     private void NotifySettingsDependentProperties()
     {
@@ -1104,6 +1093,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         OnPropertyChanged(nameof(IsWideControlsOnRight));
     }
 
+    /// <summary>
+    /// Pushes the session's state onto the bound properties. Runs on every painted cell, so it
+    /// deliberately does no work that a move cannot change: the clock only moves on a tick, and
+    /// the solved time is only read by the win overlay.
+    /// </summary>
     private void SyncFromSession()
     {
         if (Session is not { } session)
@@ -1114,17 +1108,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         HintsRemaining = session.HintsRemaining;
         HintsUsed = session.HintsUsed;
 
-        var solution = session.Puzzle.Solution;
-        var pictureSize = 0;
-
-        for (var i = 0; i < solution.Length; i++)
-        {
-            if (solution[i])
-            {
-                pictureSize++;
-            }
-        }
-
+        var pictureSize = session.Puzzle.PictureCellCount;
         Progress = pictureSize == 0 ? 0 : (double)session.FilledCount / pictureSize;
 
         Mistakes = session.Mistakes;
@@ -1132,8 +1116,6 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         CanUndo = session.CanUndo;
         CanRedo = session.CanRedo;
         IsSolved = session.IsSolved;
-        UpdateElapsedText();
-        OnPropertyChanged(nameof(SolvedTimeText));
 
         // The board's accessible description carries the filled count, so it goes stale on every
         // move unless it is raised here - and "2 of 17" while the board is nearly finished is
@@ -1310,9 +1292,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     }
 
     /// <summary>
-    /// Stops the timer. Without this a ViewModel left behind by navigation keeps ticking and
-    /// keeps itself alive through the dispatcher's handler list.
+    /// Re-reads whether a screen reader is running. Called when the board is shown, because the
+    /// system's change notification cannot reach a backgrounded app.
     /// </summary>
+    public void RefreshAccessibilityState() => _accessibility.Refresh();
+
     private void OnThemeChanged(object? sender, EventArgs e) =>
         PaletteChanged?.Invoke(this, EventArgs.Empty);
 

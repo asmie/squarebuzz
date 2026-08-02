@@ -172,6 +172,11 @@ public partial class GamePage : ContentPage
     {
         base.OnAppearing();
 
+        // TalkBack may have been switched on from the system settings while the app was in the
+        // background, where the change listener cannot reach us. Screen open is the right place
+        // to re-read it; the board itself only ever sees the cached answer.
+        _viewModel.RefreshAccessibilityState();
+
         if (_viewModel.Session is null)
         {
             // Resumes the save named by the route, or starts a fresh puzzle.
@@ -293,15 +298,11 @@ public partial class GamePage : ContentPage
 
                 SemanticProperties.SetDescription(cell, _viewModel.DescribeCell(index));
 
-                cell.Clicked += (_, _) =>
-                {
-                    _viewModel.TapCell(index);
-
-                    // The square's description is now stale, and a screen reader reads whatever the
-                    // element says at the moment it is focused - so it is refreshed immediately
-                    // rather than waiting for the next rebuild.
-                    RefreshCellDescriptions();
-                };
+                // The square's description is now stale, and a screen reader reads whatever the
+                // element says at the moment it is focused. Refreshing it is OnBoardChanged's
+                // job, which TapCell reaches for every move it applies - doing it here as well
+                // just re-described four hundred buttons twice.
+                cell.Clicked += (_, _) => _viewModel.TapCell(index);
 
                 CellOverlay.Add(cell, column, row);
             }

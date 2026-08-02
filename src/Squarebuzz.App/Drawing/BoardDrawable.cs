@@ -74,6 +74,21 @@ public sealed class BoardDrawable : IDrawable
 
     private bool _seedStrikesSilently = true;
 
+    private bool _sawUnfinishedWipe;
+
+    /// <summary>
+    /// Raised at the end of a draw that left a clue strike part-way through its wipe, so the host
+    /// knows to ask for another frame.
+    /// </summary>
+    /// <remarks>
+    /// A strike's progress comes from wall time, so only the draw itself can tell whether one is
+    /// still moving. Reporting it afterwards lets the board animate exactly while something is
+    /// animating. The alternative - and what this replaced - was for every move to commit a
+    /// fixed 240ms ticker on the chance that it completed a line; a ten-cell drag bought a
+    /// hundred and forty full redraws to show a wipe that usually was not there.
+    /// </remarks>
+    public event EventHandler? WipeInProgress;
+
     /// <summary>Forget every strike and treat the next draw as a fresh board.</summary>
     public void ResetStrikeAnimations()
     {
@@ -103,7 +118,14 @@ public sealed class BoardDrawable : IDrawable
             return 1f;
         }
 
-        return (float)Math.Min(1.0, (Environment.TickCount64 - birth) / StrikeWipeMilliseconds);
+        var progress = (float)Math.Min(1.0, (Environment.TickCount64 - birth) / StrikeWipeMilliseconds);
+
+        if (progress < 1f)
+        {
+            _sawUnfinishedWipe = true;
+        }
+
+        return progress;
     }
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
@@ -117,6 +139,8 @@ public sealed class BoardDrawable : IDrawable
 
         var layout = Layout;
 
+        _sawUnfinishedWipe = false;
+
         DrawGutterBackgrounds(canvas, layout);
         DrawCells(canvas, puzzle, layout);
         DrawGroupSeparators(canvas, layout);
@@ -126,6 +150,11 @@ public sealed class BoardDrawable : IDrawable
         // Everything struck during the first draw of a board has now been seeded as ancient;
         // from here on a new strike is genuinely new and earns its wipe.
         _seedStrikesSilently = false;
+
+        if (_sawUnfinishedWipe)
+        {
+            WipeInProgress?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void DrawGutterBackgrounds(ICanvas canvas, BoardLayout layout)

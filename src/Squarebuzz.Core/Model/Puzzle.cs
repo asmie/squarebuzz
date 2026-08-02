@@ -28,13 +28,21 @@ public sealed class Puzzle
         _solution = solution;
 
         var rowClues = new LineClues[height];
+        var pictureCells = 0;
+
         for (var y = 0; y < height; y++)
         {
             rowClues[y] = ClueCalculator.FromSolution(_solution.AsSpan(y * width, width));
+
+            // Free here, and it saves the board screen recounting an immutable value on every
+            // painted cell just to work out how far along the player is.
+            pictureCells += rowClues[y].Sum;
         }
 
+        PictureCellCount = pictureCells;
+
         var columnClues = new LineClues[width];
-        Span<bool> column = new bool[height];
+        Span<bool> column = height <= 64 ? stackalloc bool[height] : new bool[height];
         for (var x = 0; x < width; x++)
         {
             for (var y = 0; y < height; y++)
@@ -65,6 +73,9 @@ public sealed class Puzzle
     public bool IsGenerated { get; }
 
     public int CellCount => Width * Height;
+
+    /// <summary>How many cells the finished picture fills - the denominator of "how far along".</summary>
+    public int PictureCellCount { get; }
 
     /// <summary>Clue for each row, top to bottom.</summary>
     public IReadOnlyList<LineClues> RowClues { get; }

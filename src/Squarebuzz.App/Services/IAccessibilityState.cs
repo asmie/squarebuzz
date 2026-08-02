@@ -19,8 +19,23 @@ namespace Squarebuzz.App.Services;
 public interface IAccessibilityState
 {
     /// <summary>True when a screen reader is driving touch exploration.</summary>
+    /// <remarks>
+    /// A cached answer, not a live system query. Reading it is on the path of every painted cell,
+    /// and on Android the live query is four JNI transitions; the state itself changes at most a
+    /// handful of times in a session. <see cref="Refresh"/> re-reads it.
+    /// </remarks>
     bool IsScreenReaderActive { get; }
 
     /// <summary>Raised when that changes, so a screen already open can adapt.</summary>
     event EventHandler? ScreenReaderStateChanged;
+
+    /// <summary>
+    /// Re-reads the system state and raises <see cref="ScreenReaderStateChanged"/> if it moved.
+    /// </summary>
+    /// <remarks>
+    /// A safety net for the case where the platform's change notification never arrives - the
+    /// listener failed to register, or the platform has none. Call it where a screen opens, not
+    /// on a per-frame or per-move path.
+    /// </remarks>
+    void Refresh();
 }
