@@ -50,7 +50,7 @@ public static class ClueStrikeCalculator
         }
 
         // Whole line already correct: every number is done.
-        if (ClueCalculator.FromMarks(line).Equals(clues))
+        if (ClueCalculator.MatchesMarks(clues, line))
         {
             struck[..displayCount].Fill(true);
             return;

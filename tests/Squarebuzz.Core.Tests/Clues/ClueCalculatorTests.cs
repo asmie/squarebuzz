@@ -16,6 +16,80 @@ public class ClueCalculatorTests
             _ => CellState.Empty,
         })];
 
+    [Fact]
+    public void MatchesMarks_AgreesWithBuildingTheClueAndComparingIt()
+    {
+        // MatchesMarks exists only to avoid the allocation of FromMarks(line).Equals(clues); it
+        // is worth nothing if it is not that exact predicate. So it is checked against the
+        // expression it replaced, over every line of length 0 to 12 in every combination of
+        // empty, crossed and filled - 797,161 lines - against a spread of real clues. An
+        // exhaustive sweep rather than samples, because the interesting cases are the awkward
+        // ones: a trailing run, one run too many, a run that is right until the line ends.
+        var clueSets = new[]
+        {
+            new LineClues(),
+            new LineClues(1),
+            new LineClues(3),
+            new LineClues(1, 1),
+            new LineClues(2, 1),
+            new LineClues(1, 2, 1),
+            new LineClues(5),
+            new LineClues(12),
+        };
+
+        var states = new[] { CellState.Empty, CellState.Crossed, CellState.Filled };
+        var checkedLines = 0;
+
+        for (var length = 0; length <= 12; length++)
+        {
+            var line = new CellState[length];
+            var combinations = (long)Math.Pow(3, length);
+
+            for (long n = 0; n < combinations; n++)
+            {
+                var code = n;
+
+                for (var i = 0; i < length; i++)
+                {
+                    line[i] = states[code % 3];
+                    code /= 3;
+                }
+
+                foreach (var clues in clueSets)
+                {
+                    var expected = ClueCalculator.FromMarks(line).Equals(clues);
+                    var actual = ClueCalculator.MatchesMarks(clues, line);
+
+                    Assert.True(
+                        expected == actual,
+                        $"line '{Render(line)}' against clue [{string.Join(' ', clues)}]: " +
+                        $"FromMarks says {expected}, MatchesMarks says {actual}.");
+                }
+
+                checkedLines++;
+            }
+        }
+
+        Assert.Equal(797161, checkedLines);
+    }
+
+    private static string Render(ReadOnlySpan<CellState> line)
+    {
+        var chars = new char[line.Length];
+
+        for (var i = 0; i < line.Length; i++)
+        {
+            chars[i] = line[i] switch
+            {
+                CellState.Filled => '#',
+                CellState.Crossed => 'x',
+                _ => '.',
+            };
+        }
+
+        return new string(chars);
+    }
+
     [Theory]
     [InlineData("#####", new[] { 5 })]
     [InlineData("##.#.", new[] { 2, 1 })]

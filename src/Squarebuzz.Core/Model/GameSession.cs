@@ -343,8 +343,7 @@ public sealed class GameSession
 
     /// <summary>Whether a row's filled runs already match its clue, crossed or not.</summary>
     private bool IsRowSatisfied(int y) =>
-        ClueCalculator.FromMarks(_cells.AsSpan(y * Puzzle.Width, Puzzle.Width))
-            .Equals(Puzzle.RowClues[y]);
+        ClueCalculator.MatchesMarks(Puzzle.RowClues[y], _cells.AsSpan(y * Puzzle.Width, Puzzle.Width));
 
     /// <summary>Whether a column's filled runs already match its clue, crossed or not.</summary>
     private bool IsColumnSatisfied(int x)
@@ -355,7 +354,7 @@ public sealed class GameSession
 
         CopyColumn(x, column);
 
-        return ClueCalculator.FromMarks(column).Equals(Puzzle.ColumnClues[x]);
+        return ClueCalculator.MatchesMarks(Puzzle.ColumnClues[x], column);
     }
 
     private void RecountFilled()

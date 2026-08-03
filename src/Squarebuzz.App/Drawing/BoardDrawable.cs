@@ -142,8 +142,22 @@ public sealed class BoardDrawable : IDrawable
         _sawUnfinishedWipe = false;
 
         DrawGutterBackgrounds(canvas, layout);
-        DrawCells(canvas, puzzle, layout);
+
+        // Three passes rather than everything cell by cell. The grid is one uniform lattice, so
+        // stroking it once costs 52 lines at 25x25 where a rectangle per cell cost 625 - and
+        // drawing the crosses and hint ring afterwards means a neighbouring cell's border can no
+        // longer clip them, which it could when each cell drew its own.
+        DrawCellFills(canvas, layout);
+        DrawGridLines(canvas, layout);
+        DrawCellMarks(canvas, layout);
         DrawGroupSeparators(canvas, layout);
+
+        // Set once for the whole gutter. A canvas does not inherit the XAML styles, so the clue
+        // numerals have to carry their own font - but it is the same font at the same size for
+        // every one of them, and there are up to a hundred and fifty on a 25x25 board.
+        canvas.Font = ClueFont;
+        canvas.FontSize = (float)layout.ClueFontSize(BigNumbers);
+
         DrawColumnClues(canvas, puzzle, layout);
         DrawRowClues(canvas, puzzle, layout);
 
@@ -183,7 +197,7 @@ public sealed class BoardDrawable : IDrawable
         }
     }
 
-    private void DrawCells(ICanvas canvas, Puzzle puzzle, BoardLayout layout)
+    private void DrawCellFills(ICanvas canvas, BoardLayout layout)
     {
         var cellSize = (float)layout.CellSize;
         var cornerRadius = Math.Max(1f, cellSize * 0.18f);
@@ -227,17 +241,74 @@ public sealed class BoardDrawable : IDrawable
                 {
                     canvas.FillRectangle(left, top, cellSize, cellSize);
                 }
+            }
+        }
+    }
 
-                canvas.StrokeColor = Palette.CellLine;
-                canvas.StrokeSize = CellBorderThickness;
-                canvas.DrawRectangle(left, top, cellSize, cellSize);
+    /// <summary>
+    /// The grid, as one lattice of full-length lines rather than a rectangle around every cell.
+    /// </summary>
+    /// <remarks>
+    /// Identical on screen: adjacent cells shared every interior edge, so a per-cell rectangle
+    /// was drawing each of them twice. One line per boundary is 52 strokes on the largest board
+    /// against 625 rectangles - and a rectangle is four segments, so it is nearer fifty times
+    /// the work on the axis that matters, which is calls into the canvas while a finger drags.
+    /// </remarks>
+    private void DrawGridLines(ICanvas canvas, BoardLayout layout)
+    {
+        canvas.StrokeColor = Palette.CellLine;
+        canvas.StrokeSize = CellBorderThickness;
 
-                if (state == CellState.Crossed)
+        var left = (float)layout.RowGutterWidth;
+        var top = (float)layout.ColumnGutterHeight;
+        var right = (float)layout.TotalWidth;
+        var bottom = (float)layout.TotalHeight;
+
+        for (var column = 0; column <= layout.Columns; column++)
+        {
+            var x = left + (float)(column * layout.CellSize);
+            canvas.DrawLine(x, top, x, bottom);
+        }
+
+        for (var row = 0; row <= layout.Rows; row++)
+        {
+            var y = top + (float)(row * layout.CellSize);
+            canvas.DrawLine(left, y, right, y);
+        }
+    }
+
+    /// <summary>Crosses and the hint ring - the few cells that carry something over the grid.</summary>
+    private void DrawCellMarks(ICanvas canvas, BoardLayout layout)
+    {
+        var cellSize = (float)layout.CellSize;
+        var cornerRadius = Math.Max(1f, cellSize * 0.18f);
+
+        // Rounded ends make a cross look drawn rather than stamped. Set once: a nearly-finished
+        // 25x25 carries several hundred of them, and the hint ring does not care about caps.
+        canvas.StrokeLineCap = LineCap.Round;
+
+        for (var row = 0; row < layout.Rows; row++)
+        {
+            for (var column = 0; column < layout.Columns; column++)
+            {
+                var index = (row * layout.Columns) + column;
+                var isHinted = index == HintIndex && HintRingWidth > 0.1f;
+
+                if (Cells[index] != CellState.Crossed && !isHinted)
+                {
+                    continue;
+                }
+
+                var (x, y) = layout.CellOrigin(column, row);
+                var left = (float)x;
+                var top = (float)y;
+
+                if (Cells[index] == CellState.Crossed)
                 {
                     DrawCross(canvas, left, top, cellSize);
                 }
 
-                if (index == HintIndex && HintRingWidth > 0.1f)
+                if (isHinted)
                 {
                     // Width animated by the view: two quick pulses when granted, 3 at rest.
                     var ring = HintRingWidth;
@@ -252,6 +323,8 @@ public sealed class BoardDrawable : IDrawable
                 }
             }
         }
+
+        canvas.StrokeLineCap = LineCap.Butt;
     }
 
     private void DrawCross(ICanvas canvas, float left, float top, float cellSize)
@@ -260,14 +333,12 @@ public sealed class BoardDrawable : IDrawable
         var centreY = top + (cellSize / 2f);
         var reach = (float)(cellSize * CrossBarLengthRatio / 2);
 
+        // Line cap is set once by DrawCellMarks, around the whole pass.
         canvas.StrokeColor = Palette.Ink2;
         canvas.StrokeSize = Math.Max(2f, (float)(cellSize * CrossBarThicknessRatio));
-        canvas.StrokeLineCap = LineCap.Round;
 
         canvas.DrawLine(centreX - reach, centreY - reach, centreX + reach, centreY + reach);
         canvas.DrawLine(centreX + reach, centreY - reach, centreX - reach, centreY + reach);
-
-        canvas.StrokeLineCap = LineCap.Butt;
     }
 
     /// <summary>
@@ -395,11 +466,8 @@ public sealed class BoardDrawable : IDrawable
             return;
         }
 
-        // Clue numbers are the one place text is drawn rather than laid out, so the family has to
-        // be set here too - a canvas does not inherit the XAML styles. Bold, because these are the
-        // most-read characters in the game and they sit on a tinted gutter.
-        canvas.Font = ClueFont;
-        canvas.FontSize = fontSize;
+        // Font and size come from Draw, which sets them once for the whole gutter. Only the
+        // colour and the fade differ from one numeral to the next.
         canvas.FontColor = isStruck ? Palette.Ink2 : Palette.GutterInk;
         canvas.Alpha = isStruck ? StruckClueOpacity : 1f;
 
