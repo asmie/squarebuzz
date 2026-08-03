@@ -83,6 +83,24 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable
 
             JournalMode = journalMode;
 
+            // NORMAL rather than SQLite's default FULL, which is the right pairing with WAL. FULL
+            // flushes to disk on every single commit; the board autosaves while a child is
+            // playing, so that is a device-level flush every few seconds for the sake of a game
+            // in progress. Under WAL, NORMAL still survives the app being killed - the case that
+            // actually happens, since Android stops backgrounded apps whenever it likes - and
+            // gives up only durability across an OS crash or a flat battery mid-write. The cost
+            // of that, once, is a few seconds of somebody's nonogram.
+            await connection.ExecuteAsync("PRAGMA synchronous=NORMAL").ConfigureAwait(false);
+
+            // The write-ahead log is checkpointed back into the database every 256 pages instead
+            // of the default 1000. Left alone it grew to several megabytes beside a database of
+            // four kilobytes, because nothing here ever writes enough at once to trip the
+            // default. Smaller checkpoints suit a game that writes a little and often.
+            //
+            // Like journal_mode, this one answers with the value it settled on, so it has to be
+            // read as a scalar - ExecuteAsync gives the same "SQLite Error: not an error".
+            await connection.ExecuteScalarAsync<int>("PRAGMA wal_autocheckpoint=256").ConfigureAwait(false);
+
             // Returns no rows, so ExecuteAsync is correct here.
             await connection.ExecuteAsync("PRAGMA foreign_keys=ON").ConfigureAwait(false);
 

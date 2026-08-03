@@ -82,6 +82,32 @@ public class DatabaseMigrationTests
     }
 
     [Fact]
+    public async Task SynchronousMode_IsNormal_NotSqlitesDefaultFull()
+    {
+        // Asserted on the connection rather than trusted, for the reason the test above exists:
+        // a PRAGMA that does not take is silent. FULL flushes on every commit, which the board's
+        // autosave does while a child is playing; NORMAL under WAL still survives the app being
+        // killed, which is the way an Android game actually ends.
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+
+        // 0 = OFF, 1 = NORMAL, 2 = FULL, 3 = EXTRA.
+        Assert.Equal(1, await connection.ExecuteScalarAsync<int>("PRAGMA synchronous"));
+    }
+
+    [Fact]
+    public async Task WalCheckpointThreshold_IsSmallerThanSqlitesDefault()
+    {
+        // The log is what grows; left at the default 1000 pages it reached several megabytes
+        // beside a four-kilobyte database, because this app never writes enough in one go to
+        // trip it.
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+
+        Assert.Equal(256, await connection.ExecuteScalarAsync<int>("PRAGMA wal_autocheckpoint"));
+    }
+
+    [Fact]
     public async Task ConcurrentReadsAndWrites_DoNotBlockEachOther()
     {
         await using var temp = new TemporaryDatabase();

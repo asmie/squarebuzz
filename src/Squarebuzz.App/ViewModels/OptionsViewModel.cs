@@ -487,31 +487,58 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     partial void OnTapBehaviourChanged(TapBehaviour value) => Persist();
 
+    /// <summary>
+    /// True while <see cref="OnAppearingAsync"/> is copying stored settings onto the controls, so
+    /// a hook can tell "the player changed this" from "the screen is being populated".
+    /// </summary>
+    /// <remarks>
+    /// Side effects have to check it, not only <see cref="Persist"/>. Everything on this screen
+    /// is already in force - the splash applied it at launch from the very same row - so
+    /// re-applying it while the controls are filled in is pure repetition. Opening Options rebuilt
+    /// the whole resource dictionary three times over, once each for the theme, the follow-system
+    /// switch and the accent.
+    /// </remarks>
+    private bool IsPopulatingControls => _isLoading;
+
     partial void OnThemeChanged(GameTheme value)
     {
+        if (IsPopulatingControls)
+        {
+            return;
+        }
+
         _theme.Apply(value, Accent, FollowSystemTheme);
 
         // Keep the switch in step when the theme changed from the Light/Dark buttons instead.
-        if (!_isLoading)
-        {
-            _isLoading = true;
-            ColorBlindEnabled = value == GameTheme.ColorBlind;
-            _isLoading = false;
-        }
+        _isLoading = true;
+        ColorBlindEnabled = value == GameTheme.ColorBlind;
+        _isLoading = false;
 
         Persist();
     }
 
     partial void OnFollowSystemThemeChanged(bool value)
     {
+        if (IsPopulatingControls)
+        {
+            return;
+        }
+
         _theme.Apply(Theme, Accent, value);
         Persist();
     }
 
     partial void OnScreenTimeLimitMinutesChanged(int? value)
     {
+        if (IsPopulatingControls)
+        {
+            return;
+        }
+
         // Applied to the live monitor as well as persisted, so a parent who sets a limit
-        // mid-afternoon does not have to restart the game for it to count.
+        // mid-afternoon does not have to restart the game for it to count. Not while populating:
+        // the splash already armed the monitor, and re-configuring it here would restart the
+        // count every time a parent looked at this screen.
         _screenTime.Configure(value);
         Persist();
     }
@@ -528,6 +555,11 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     partial void OnAccentChanged(GameAccent value)
     {
+        if (IsPopulatingControls)
+        {
+            return;
+        }
+
         _theme.Apply(Theme, value, FollowSystemTheme);
         Persist();
     }

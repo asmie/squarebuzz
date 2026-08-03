@@ -55,9 +55,18 @@ public partial class SplashViewModel : LocalizedViewModel
 
     public override async Task OnAppearingAsync()
     {
-        // Settings are read first so the rest of the app - and this very screen - is already
-        // in the player's chosen theme and language before anything else is shown.
+        // Settings are read first, and awaited, so the rest of the app - and this very screen -
+        // is already in the player's chosen theme and language before anything is shown. It is
+        // one row from a local database, so it is not what makes a launch slow.
         var settings = await LoadSettingsAsync();
+
+        // The slow work runs *behind* the progress bar rather than in front of it. Priming the
+        // audio, purging saves and enumerating the device's voices were all awaited before the
+        // bar so much as moved, which meant a launch cost that work plus the bar's own 1.6
+        // seconds, and the bar sat frozen at zero for the part that actually took time - the
+        // one thing it exists to cover. Started here, the bar becomes the floor rather than an
+        // addition, and it is now honestly showing that something is happening.
+        var preparing = PrepareServicesAsync(settings);
 
         while (Progress < 1)
         {
@@ -65,10 +74,43 @@ public partial class SplashViewModel : LocalizedViewModel
             await Task.Delay(StepDelay);
         }
 
+        // Usually finished long ago; awaited so a slow device still gets a full splash rather
+        // than a half-prepared menu.
+        await preparing;
+
         await Task.Delay(380);
 
         // Reset rather than push: the back gesture must never bring a child back to the splash.
         await _navigation.ResetToAsync(settings.HasSeenOnboarding ? Routes.Menu : Routes.Onboarding);
+    }
+
+    /// <summary>
+    /// The startup work the splash screen exists to cover, in the order the first screens need it.
+    /// </summary>
+    private async Task PrepareServicesAsync(Core.Model.GameSettings settings)
+    {
+        try
+        {
+            // Deliberately awaited: it is the difference between the first tap on a cell being
+            // silent and being audible.
+            await _audio.PrimeAsync();
+
+            // Once per launch, before the menu can show a count or Continue can list anything.
+            // A generated save whose picture the current generator no longer produces would put
+            // the player's marks on a board they never played, so it goes.
+            await PurgeUnrebuildableSavesAsync();
+
+            // Enumerating the device's voices is the slowest of these, and it has to finish
+            // before the first onboarding card appears - that card is the one screen where a
+            // brand-new player most needs the words read out.
+            await _narration.PrepareAsync(settings.Language);
+            _narration.Configure(settings.VoiceNarration);
+        }
+        catch (Exception)
+        {
+            // Sound or narration missing is a degraded game, not a broken one, and the player is
+            // better served by the menu than by a splash screen that never ends.
+        }
     }
 
     private async Task PurgeUnrebuildableSavesAsync()
@@ -99,22 +141,6 @@ public partial class SplashViewModel : LocalizedViewModel
             // Applied before priming so the loop does not briefly start for a player who has
             // music switched off; PrimeAsync re-applies once the assets are actually loaded.
             _audio.Configure(settings.SoundEffects, settings.Music);
-
-            // The splash exists to cover startup work, and this is startup work. Deliberately
-            // awaited: it is the difference between the first tap on a cell being silent and
-            // being audible.
-            await _audio.PrimeAsync();
-
-            // Once per launch, before the menu can show a count or Continue can list anything.
-            // A generated save whose picture the current generator no longer produces would put
-            // the player's marks on a board they never played, so it goes.
-            await PurgeUnrebuildableSavesAsync();
-
-            // Enumerating the device's voices is the slowest of these, and it has to finish
-            // before the first onboarding card appears - that card is the one screen where a
-            // brand-new player most needs the words read out.
-            await _narration.PrepareAsync(settings.Language);
-            _narration.Configure(settings.VoiceNarration);
 
             return settings;
         }

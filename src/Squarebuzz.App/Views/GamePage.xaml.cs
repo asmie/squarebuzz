@@ -12,6 +12,9 @@ public partial class GamePage : ContentPage
     /// <summary>Null until the first size is known, so the first layout always applies.</summary>
     private bool? _isWideLayout;
 
+    /// <summary>True while the mistake shake is running, so a second one cannot overlap it.</summary>
+    private bool _isShaking;
+
     public GamePage(GameViewModel viewModel)
     {
         InitializeComponent();
@@ -399,13 +402,40 @@ public partial class GamePage : ContentPage
         await Board.FlashMistakeAsync(index);
     }
 
+    /// <summary>
+    /// The "no" gesture. One at a time, and it always puts the board back where it found it.
+    /// </summary>
+    /// <remarks>
+    /// Started without being awaited, so a second mistake arriving mid-shake used to start a
+    /// second sequence against the same <c>TranslationX</c>. The two then interleaved, and
+    /// whichever finished first left its own final value behind - so a run of mistakes could
+    /// leave the board sitting seven units off-centre for the rest of the game. A drag across a
+    /// row of wrong squares produces exactly that run, several times a minute.
+    /// </remarks>
     private async Task ShakeBoardAsync()
     {
-        await Board.TranslateToAsync(-7, 0, 50, Easing.Linear);
-        await Board.TranslateToAsync(7, 0, 100, Easing.Linear);
-        await Board.TranslateToAsync(-7, 0, 100, Easing.Linear);
-        await Board.TranslateToAsync(7, 0, 100, Easing.Linear);
-        await Board.TranslateToAsync(0, 0, 50, Easing.Linear);
+        if (_isShaking)
+        {
+            return;
+        }
+
+        _isShaking = true;
+
+        try
+        {
+            await Board.TranslateToAsync(-7, 0, 50, Easing.Linear);
+            await Board.TranslateToAsync(7, 0, 100, Easing.Linear);
+            await Board.TranslateToAsync(-7, 0, 100, Easing.Linear);
+            await Board.TranslateToAsync(7, 0, 100, Easing.Linear);
+            await Board.TranslateToAsync(0, 0, 50, Easing.Linear);
+        }
+        finally
+        {
+            // Belt and braces: navigating away mid-shake cancels the animation part-way, and a
+            // board left translated would still be translated when the page is next shown.
+            Board.TranslationX = 0;
+            _isShaking = false;
+        }
     }
 
     private void OnHintGranted(object? sender, int index) => Board.ShowHint(index);

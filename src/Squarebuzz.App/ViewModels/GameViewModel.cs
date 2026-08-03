@@ -62,6 +62,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private TimedTier? _pendingTier;
     private int _secondsSinceAutosave;
 
+    /// <summary>Move count as of the last successful write, so a periodic save can skip a no-op.</summary>
+    private int _savedMoveCount = -1;
+
+    /// <summary>Identifies the most recent toast, so only its own dismissal takes effect.</summary>
+    private int _toastToken;
+
     public GameViewModel(
         GameSessionFactory sessions,
         ISettingsRepository settingsRepository,
@@ -621,6 +627,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
             Session = _sessions.Restore(save, _settings.Helpers);
             _saveId = save.Id;
+
+            // The board matches the row it came from, so the next periodic save has nothing to
+            // do until the player actually marks something.
+            _savedMoveCount = Session.MoveCount;
+            _secondsSinceAutosave = 0;
         }
         catch (Exception)
         {
@@ -670,6 +681,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         try
         {
             await _saveGames.SaveAsync(SavedGame.FromSession(session, _saveId, _clock.Now));
+            _savedMoveCount = session.MoveCount;
         }
         catch (Exception)
         {
@@ -679,6 +691,21 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         _secondsSinceAutosave = 0;
     }
+
+    /// <summary>
+    /// The periodic save: skipped while the board is exactly as it was last written.
+    /// </summary>
+    /// <remarks>
+    /// A child studying a 25x25 grid can sit without moving for minutes, and this was rewriting
+    /// the row - and flushing it - every few seconds throughout, to record nothing but a larger
+    /// elapsed time. The reliable save point is leaving the screen, which always writes; this
+    /// one only exists in case the app is killed, and being killed with no moves since the last
+    /// write costs a few seconds off the clock and nothing else.
+    /// </remarks>
+    private Task AutosaveIfBoardChangedAsync() =>
+        Session is { } session && session.MoveCount == _savedMoveCount
+            ? Task.CompletedTask
+            : AutosaveAsync();
 
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
@@ -712,6 +739,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         // A new game is a new row: restarting must not overwrite the save it came from.
         _saveId = Guid.NewGuid();
         _secondsSinceAutosave = 0;
+        _savedMoveCount = -1;
 
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
@@ -1195,7 +1223,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         if (++_secondsSinceAutosave >= AutosaveEverySeconds)
         {
-            _ = AutosaveAsync();
+            _ = AutosaveIfBoardChangedAsync();
         }
     }
 
@@ -1267,23 +1295,37 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     private void ShowToast(string message)
     {
+        // Already on screen means the player is repeating something - a drag over a row of wrong
+        // squares raises "Oops" once per square. Saying it ten times is not ten times as helpful;
+        // it talks over itself, and for a screen-reader user it buries everything else. The
+        // message still stays up, and its dismissal is pushed back below.
+        var isRepeat = Toast == message;
+
         Toast = message;
 
-        // Every transient message in the game goes through here, so narrating it once at the
-        // funnel covers "line done", "oops" and "hint used" without three separate calls that
-        // a fourth message could later be added alongside and forget.
-        _narration.Speak(message);
+        if (!isRepeat)
+        {
+            // Every transient message in the game goes through here, so narrating it once at the
+            // funnel covers "line done", "oops" and "hint used" without three separate calls that
+            // a fourth message could later be added alongside and forget.
+            _narration.Speak(message);
 
-        // And the same message to whatever screen reader the player is using. A toast that
-        // appears and fades is invisible to one otherwise: nothing takes focus, so nothing is
-        // read. Announce is a no-op when no screen reader is running.
-        Announce(message);
+            // And the same message to whatever screen reader the player is using. A toast that
+            // appears and fades is invisible to one otherwise: nothing takes focus, so nothing is
+            // read. Announce is a no-op when no screen reader is running.
+            Announce(message);
+        }
 
-        // Clears itself, so no screen has to remember to tidy up after a transient message.
+        // Clears itself, so no screen has to remember to tidy up after a transient message. The
+        // token means only the *latest* showing clears it: repeats each scheduled their own
+        // dismissal, and the earliest would fire first and cut a message that had just been
+        // renewed down to a fraction of its time on screen.
+        var token = ++_toastToken;
+
         _ = Task.Delay(1500).ContinueWith(
             _ => MainThread.BeginInvokeOnMainThread(() =>
             {
-                if (Toast == message)
+                if (_toastToken == token && Toast == message)
                 {
                     Toast = string.Empty;
                 }

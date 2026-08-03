@@ -30,6 +30,61 @@ public class SaveGameRepositoryTests
     };
 
     [Fact]
+    public async Task SavingBeyondTheLimit_DropsTheOldestAndKeepsTheRest()
+    {
+        // The cap deletes somebody's unfinished game, so it has to delete the right ones. Saves
+        // go in oldest-first here; what must survive is the newest MaxSavedGames, in order.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+
+        const int total = SqliteSaveGameRepository.MaxSavedGames + 5;
+        var ids = new Guid[total];
+
+        for (var i = 0; i < total; i++)
+        {
+            ids[i] = Guid.NewGuid();
+            await repository.SaveAsync(SampleSave(ids[i], Noon.AddMinutes(i)));
+        }
+
+        Assert.Equal(SqliteSaveGameRepository.MaxSavedGames, await repository.CountAsync());
+
+        // The five oldest are gone...
+        for (var i = 0; i < 5; i++)
+        {
+            Assert.Null(await repository.GetAsync(ids[i]));
+        }
+
+        // ...and every newer one is still there, untouched.
+        for (var i = 5; i < total; i++)
+        {
+            Assert.NotNull(await repository.GetAsync(ids[i]));
+        }
+    }
+
+    [Fact]
+    public async Task ResavingAnExistingGame_DoesNotCountAgainstTheLimit()
+    {
+        // Autosave rewrites the same row over and over. If the cap counted writes rather than
+        // rows, a single long game would evict every other save the player had.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+
+        var keep = Guid.NewGuid();
+        await repository.SaveAsync(SampleSave(keep, Noon));
+
+        var playing = Guid.NewGuid();
+
+        for (var i = 1; i <= SqliteSaveGameRepository.MaxSavedGames * 3; i++)
+        {
+            await repository.SaveAsync(SampleSave(playing, Noon.AddMinutes(i)));
+        }
+
+        Assert.Equal(2, await repository.CountAsync());
+        Assert.NotNull(await repository.GetAsync(keep));
+        Assert.NotNull(await repository.GetAsync(playing));
+    }
+
+    [Fact]
     public async Task GeneratorVersion_SurvivesTheRoundTrip()
     {
         await using var temp = new TemporaryDatabase();

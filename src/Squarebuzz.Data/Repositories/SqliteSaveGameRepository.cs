@@ -1,3 +1,4 @@
+using SQLite;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
@@ -11,6 +12,17 @@ namespace Squarebuzz.Data.Repositories;
 /// </summary>
 public sealed class SqliteSaveGameRepository : ISaveGameRepository
 {
+    /// <summary>
+    /// How many unfinished games are kept. Older ones are dropped, oldest first.
+    /// </summary>
+    /// <remarks>
+    /// Every new puzzle takes a new row, so abandoning games accumulated them without limit -
+    /// testing reached twenty-two, and Continue became a wall of five near-identical 5x5
+    /// Sailboats. This is a screen a six-year-old is meant to be able to use, and the games
+    /// worth resuming are the recent ones; a dozen is already more than anyone will scroll.
+    /// </remarks>
+    public const int MaxSavedGames = 12;
+
     private readonly SquarebuzzDatabase _database;
 
     public SqliteSaveGameRepository(SquarebuzzDatabase database)
@@ -57,7 +69,27 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
 
         await connection.InsertOrReplaceAsync(ToEntity(game)).ConfigureAwait(false);
+        await TrimToMostRecentAsync(connection).ConfigureAwait(false);
     }
+
+    /// <summary>
+    /// Drops everything past the <see cref="MaxSavedGames"/> most recently saved games.
+    /// </summary>
+    /// <remarks>
+    /// Done here rather than by a caller, so no future save path can forget it. A single
+    /// statement, and it does nothing at all until the limit is passed, which for most players
+    /// is never.
+    /// </remarks>
+    /// <returns>How many games were dropped, which is almost always none.</returns>
+    private static Task<int> TrimToMostRecentAsync(SQLiteAsyncConnection connection) =>
+        connection.ExecuteAsync(
+            """
+            DELETE FROM saved_game
+            WHERE id NOT IN (
+                SELECT id FROM saved_game ORDER BY saved_at_ticks DESC LIMIT ?
+            )
+            """,
+            MaxSavedGames);
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
