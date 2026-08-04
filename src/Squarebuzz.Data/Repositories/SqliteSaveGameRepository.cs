@@ -158,6 +158,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             SavedAtUtcTicks = game.SavedAt.UtcTicks,
             SavedAtOffsetTicks = game.SavedAt.Offset.Ticks,
             GeneratorVersion = game.GeneratorVersion,
+            Level = game.Level,
         };
     }
 
@@ -193,6 +194,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             SavedAt = new DateTimeOffset(row.SavedAtUtcTicks, TimeSpan.Zero)
                 .ToOffset(new TimeSpan(row.SavedAtOffsetTicks)),
             GeneratorVersion = row.GeneratorVersion,
+            Level = row.Level,
         };
     }
 }

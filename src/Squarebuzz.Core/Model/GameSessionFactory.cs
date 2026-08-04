@@ -94,6 +94,7 @@ public sealed class GameSessionFactory
         {
             Helpers = helpers,
             Seed = save.Seed,
+            Level = save.Level,
         };
 
         var puzzle = ResolvePuzzle(save);
@@ -123,6 +124,18 @@ public sealed class GameSessionFactory
             if (candidates.Count == 0)
             {
                 candidates = [.. _repository.Puzzles.Where(p => p.Width == options.Size && p.Height == options.Size)];
+            }
+
+            // "Next" must not repeat the picture just solved - unless it is the only one there
+            // is, in which case a repeat beats no game at all.
+            if (options.ExcludePuzzleId is { } excluded && candidates.Count > 1)
+            {
+                var filtered = candidates.Where(p => !string.Equals(p.Id, excluded, StringComparison.Ordinal)).ToList();
+
+                if (filtered.Count > 0)
+                {
+                    candidates = filtered;
+                }
             }
 
             if (candidates.Count > 0)

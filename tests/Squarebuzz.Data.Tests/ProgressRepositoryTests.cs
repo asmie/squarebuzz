@@ -51,6 +51,41 @@ public class ProgressRepositoryTests
     }
 
     [Fact]
+    public async Task FinishingALevel_AdvancesTheCampaign_ButNeverBackwards()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+
+        var after7 = await repository.RecordCompletionAsync(
+            Completion(puzzleId: null, 3, Day1) with { Level = 7 });
+        Assert.Equal(7, after7.HighestLevelCompleted);
+
+        // Replaying an earlier level must not wind the campaign back.
+        var after3 = await repository.RecordCompletionAsync(
+            Completion(puzzleId: null, 3, Day1) with { Level = 3 });
+        Assert.Equal(7, after3.HighestLevelCompleted);
+
+        // A quick game carries no level and leaves the campaign alone.
+        var afterQuick = await repository.RecordCompletionAsync(Completion("heart", 3, Day1));
+        Assert.Equal(7, afterQuick.HighestLevelCompleted);
+
+        // And the value survives a reload, not just the returned snapshot.
+        Assert.Equal(7, (await repository.GetProgressAsync()).HighestLevelCompleted);
+    }
+
+    [Fact]
+    public async Task Reset_WipesTheCampaignProgress()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+
+        await repository.RecordCompletionAsync(Completion(puzzleId: null, 3, Day1) with { Level = 12 });
+        await repository.ResetAsync();
+
+        Assert.Equal(0, (await repository.GetProgressAsync()).HighestLevelCompleted);
+    }
+
+    [Fact]
     public async Task Reset_ForgetsTheCalendarHistoryToo()
     {
         await using var temp = new TemporaryDatabase();

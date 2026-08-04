@@ -97,6 +97,10 @@ internal sealed class SavedGameEntity
     /// </summary>
     [Column("generator_version")]
     public int GeneratorVersion { get; set; }
+
+    /// <summary>Campaign level this game plays, or null outside the Levels mode. Added by Migration0006.</summary>
+    [Column("level")]
+    public int? Level { get; set; }
 }
 
 /// <summary>The player's standing. Exactly one row, pinned to <see cref="SingletonId"/>.</summary>
@@ -128,6 +132,10 @@ internal sealed class ProgressEntity
     /// <summary>Day the daily was last completed, or null. Added by Migration0002.</summary>
     [Column("last_daily_day")]
     public int? LastDailyDayNumber { get; set; }
+
+    /// <summary>Highest campaign level ever completed, 0 before the first. Added by Migration0006.</summary>
+    [Column("highest_level")]
+    public int HighestLevel { get; set; }
 }
 
 /// <summary>A completed picture, one row per authored puzzle.</summary>

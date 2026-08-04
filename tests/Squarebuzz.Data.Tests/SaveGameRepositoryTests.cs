@@ -104,6 +104,25 @@ public class SaveGameRepositoryTests
     }
 
     [Fact]
+    public async Task TheLevelNumber_SurvivesTheRoundTrip_AndNullMeansNotACampaignGame()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+        var levelSave = Guid.NewGuid();
+        var quickSave = Guid.NewGuid();
+
+        await repository.SaveAsync(SampleSave(levelSave, Noon) with { Level = 385 });
+        await repository.SaveAsync(SampleSave(quickSave, Noon.AddMinutes(1)));
+
+        var reloadedLevel = await repository.GetAsync(levelSave);
+        var reloadedQuick = await repository.GetAsync(quickSave);
+
+        Assert.Equal(385, reloadedLevel?.Level);
+        Assert.NotNull(reloadedQuick);
+        Assert.Null(reloadedQuick.Level);
+    }
+
+    [Fact]
     public async Task Purge_RemovesGeneratedSavesFromAnotherGeneratorAndKeepsEverythingElse()
     {
         // The reason this exists: a generated save stores a seed, not the picture. Resuming one

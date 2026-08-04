@@ -52,5 +52,23 @@ public sealed record NewGameOptions(
     /// </remarks>
     public TimeSpan? TimeLimit { get; init; }
 
+    /// <summary>
+    /// The campaign level this game plays, or null for anything outside the Levels mode.
+    /// </summary>
+    /// <remarks>
+    /// Carried in the options so it flows into the session's origin and from there into a save
+    /// without any extra plumbing - a resumed level game still knows which level it is.
+    /// </remarks>
+    public int? Level { get; init; }
+
+    /// <summary>
+    /// A picture the factory should avoid handing out, or null to allow any.
+    /// </summary>
+    /// <remarks>
+    /// Set by the win screen's "Next": serving the picture the player just solved again feels
+    /// broken. Best effort - when it is the only candidate, a repeat beats a failure.
+    /// </remarks>
+    public string? ExcludePuzzleId { get; init; }
+
     public static NewGameOptions Default { get; } = new(GridSize.Tiny, 2, "animals", ChallengeLevel.Relaxed);
 }

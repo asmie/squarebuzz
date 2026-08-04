@@ -112,6 +112,12 @@ public sealed class SqliteProgressRepository : IProgressRepository
             // Only a daily completion stamps this, so finishing a normal puzzle never marks
             // today's daily as done.
             LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
+
+            // Max, not assignment: replaying an already-finished level must never wind the
+            // campaign back.
+            HighestLevelCompleted = completion.Level is { } level
+                ? Math.Max(current.HighestLevelCompleted, level)
+                : current.HighestLevelCompleted,
         };
 
         // Progress and the solved-picture row move together: crediting stars without recording
@@ -215,6 +221,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
         LastPlayedOn = row.LastPlayedDayNumber is { } day ? DateOnly.FromDayNumber(day) : null,
         TotalBlocksFilled = row.TotalBlocksFilled,
         LastDailyCompletedOn = row.LastDailyDayNumber is { } daily ? DateOnly.FromDayNumber(daily) : null,
+        HighestLevelCompleted = row.HighestLevel,
     };
 
     private static ProgressEntity ToEntity(PlayerProgress progress) => new()
@@ -226,5 +233,6 @@ public sealed class SqliteProgressRepository : IProgressRepository
         LastPlayedDayNumber = progress.LastPlayedOn?.DayNumber,
         TotalBlocksFilled = progress.TotalBlocksFilled,
         LastDailyDayNumber = progress.LastDailyCompletedOn?.DayNumber,
+        HighestLevel = progress.HighestLevelCompleted,
     };
 }

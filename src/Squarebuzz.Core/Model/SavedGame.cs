@@ -47,6 +47,9 @@ public sealed record SavedGame
 
     public required DateTimeOffset SavedAt { get; init; }
 
+    /// <summary>Campaign level this game plays, or null for anything outside the Levels mode.</summary>
+    public int? Level { get; init; }
+
     /// <summary>
     /// Generation algorithm that produced this puzzle, or <see cref="GeneratorVersion.Unknown"/>
     /// for an authored one and for saves written before versioning existed.
@@ -98,6 +101,7 @@ public sealed record SavedGame
             HintsUsed = session.HintsUsed,
             Mistakes = session.Mistakes,
             SavedAt = savedAt,
+            Level = origin.Level,
 
             // Only a generated picture depends on the algorithm; an authored one is content.
             GeneratorVersion = session.Puzzle.IsGenerated

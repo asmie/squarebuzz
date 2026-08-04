@@ -90,6 +90,57 @@ public class GameSessionFactoryTests
     }
 
     [Fact]
+    public void ExcludingThePreviousPicture_ServesADifferentOne()
+    {
+        var factory = NewFactory();
+        var options = NewGameOptions.Default with { Size = GridSize.Tiny, PackId = "surprise" };
+
+        var first = factory.Create(options with { Seed = 7 });
+
+        // Whatever seed comes next, the picture just solved must not come straight back.
+        for (var seed = 0; seed < 24; seed++)
+        {
+            var next = factory.Create(options with { Seed = seed, ExcludePuzzleId = first.Puzzle.Id });
+
+            Assert.NotEqual(first.Puzzle.Id, next.Puzzle.Id);
+        }
+    }
+
+    [Fact]
+    public void ASoleCandidate_IsServedDespiteTheExclusion()
+    {
+        // 'dinos' ships exactly one 10x10 picture; excluding it must repeat it rather than fail.
+        var factory = NewFactory();
+        var options = NewGameOptions.Default with { Size = GridSize.Normal, PackId = "dinos", Seed = 3 };
+
+        var first = factory.Create(options);
+        var next = factory.Create(options with { ExcludePuzzleId = first.Puzzle.Id });
+
+        Assert.Equal(first.Puzzle.Id, next.Puzzle.Id);
+    }
+
+    [Fact]
+    public void ExclusionIsIrrelevantToGeneratedBoards()
+    {
+        var session = NewFactory().Create(NewGameOptions.Default with
+        {
+            Size = GridSize.Big,
+            Seed = 11,
+            ExcludePuzzleId = "heart",
+        });
+
+        Assert.True(session.Puzzle.IsGenerated);
+    }
+
+    [Fact]
+    public void TheLevelNumber_SurvivesIntoTheSessionOrigin()
+    {
+        var session = NewFactory().Create(NewGameOptions.Default with { Seed = 1, Level = 42 });
+
+        Assert.Equal(42, session.Origin?.Level);
+    }
+
+    [Fact]
     public void ResumingASpecificPicture_KeepsIt()
     {
         var repository = new EmbeddedPuzzleRepository();

@@ -131,6 +131,34 @@ public class SavedGameResolutionTests
     }
 
     [Fact]
+    public void TheLevelNumber_RoundTripsThroughASaveAndBack()
+    {
+        var factory = NewFactory();
+
+        var session = factory.Create(new NewGameOptions(15, 2, "surprise", ChallengeLevel.Relaxed)
+        {
+            Seed = 12,
+            Level = 217,
+        });
+
+        var save = SavedGame.FromSession(session, Guid.NewGuid(), SavedAt);
+        Assert.Equal(217, save.Level);
+
+        var restored = factory.Restore(save, HelperSettings.Default);
+        Assert.Equal(217, restored.Origin?.Level);
+    }
+
+    [Fact]
+    public void AGameOutsideTheCampaign_SavesNoLevel()
+    {
+        var session = NewFactory().Create(new NewGameOptions(5, 2, "animals", ChallengeLevel.Relaxed) { Seed = 3 });
+
+        var save = SavedGame.FromSession(session, Guid.NewGuid(), SavedAt);
+
+        Assert.Null(save.Level);
+    }
+
+    [Fact]
     public void ASaveNamingAMissingPicture_FailsWithTheIdInTheMessage()
     {
         var exception = Assert.Throws<InvalidOperationException>(

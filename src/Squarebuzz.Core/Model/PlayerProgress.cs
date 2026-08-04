@@ -53,6 +53,12 @@ public sealed record PlayerProgress
     /// </summary>
     public DateOnly? LastDailyCompletedOn { get; init; }
 
+    /// <summary>
+    /// Highest campaign level ever completed, or 0 before the first. Unlocking is strictly
+    /// linear, so this single number is the whole of the Levels progress.
+    /// </summary>
+    public int HighestLevelCompleted { get; init; }
+
     public static PlayerProgress Empty { get; } = new();
 }
 
@@ -84,4 +90,7 @@ public sealed record PuzzleCompletion(
 
     /// <summary>Mistakes made. Zero is what "perfect" means for the trophies.</summary>
     public int Mistakes { get; init; }
+
+    /// <summary>Campaign level this completion finished, or null outside the Levels mode.</summary>
+    public int? Level { get; init; }
 }
