@@ -15,6 +15,13 @@ public readonly record struct BoardLayout
     /// <summary>A clue slot is this fraction of a cell. From the prototype's <c>cw</c>.</summary>
     public const double ClueSlotRatio = 0.66;
 
+    /// <summary>
+    /// The slot fraction when big numbers are on. The bigger font needs a bigger box: 0.52 x 1.3
+    /// is 0.676 of a cell, which overflows the normal 0.66 slot, so the gutter grows instead of
+    /// the accessibility feature silently clipping.
+    /// </summary>
+    public const double BigClueSlotRatio = 0.82;
+
     /// <summary>Below this a cell is too small to hit reliably with a child's finger.</summary>
     public const double MinCellSize = 17;
 
@@ -29,6 +36,12 @@ public readonly record struct BoardLayout
     private const double ClueFontRatio = 0.52;
     private const double BigNumbersMultiplier = 1.3;
 
+    /// <summary>
+    /// A digit in the UI fonts advances roughly 0.6 em, so a two-digit clue is about 1.2 x the
+    /// font size. Capping the font at this fraction of the slot keeps "10" inside its box.
+    /// </summary>
+    private const double MaxFontPerSlotRatio = 0.83;
+
     public required int Columns { get; init; }
 
     public required int Rows { get; init; }
@@ -37,6 +50,12 @@ public readonly record struct BoardLayout
 
     /// <summary>Width and height of one clue numeral's box.</summary>
     public required double ClueSlot { get; init; }
+
+    /// <summary>
+    /// Whether this layout was sized for the big-numbers accessibility setting. Lives on the
+    /// layout so the slot and the font can never be computed from different answers.
+    /// </summary>
+    public required bool BigNumbers { get; init; }
 
     /// <summary>Most clue numbers any single row carries - the row gutter is sized for this.</summary>
     public required int MaxRowClues { get; init; }
@@ -68,7 +87,8 @@ public readonly record struct BoardLayout
     /// <param name="availableWidth">Usable width in device-independent units.</param>
     /// <param name="availableHeight">Usable height.</param>
     /// <param name="zoomPercent">The player's cell-size preference, 70-160.</param>
-    public static BoardLayout Calculate(Puzzle puzzle, double availableWidth, double availableHeight, int zoomPercent = 100)
+    /// <param name="bigNumbers">Whether clue numerals use the larger accessibility font.</param>
+    public static BoardLayout Calculate(Puzzle puzzle, double availableWidth, double availableHeight, int zoomPercent = 100, bool bigNumbers = false)
     {
         ArgumentNullException.ThrowIfNull(puzzle);
 
@@ -91,14 +111,15 @@ public readonly record struct BoardLayout
 
         // Solve for the cell size that makes cells plus gutter exactly fill each axis, then
         // take whichever axis is tighter.
-        var cellFromWidth = usableWidth / (puzzle.Width + (maxRowClues * ClueSlotRatio));
-        var cellFromHeight = usableHeight / (puzzle.Height + (maxColumnClues * ClueSlotRatio));
+        var slotRatio = bigNumbers ? BigClueSlotRatio : ClueSlotRatio;
+        var cellFromWidth = usableWidth / (puzzle.Width + (maxRowClues * slotRatio));
+        var cellFromHeight = usableHeight / (puzzle.Height + (maxColumnClues * slotRatio));
 
         var zoom = Math.Clamp(zoomPercent, GameSettings.MinCellZoomPercent, GameSettings.MaxCellZoomPercent) / 100.0;
         var fitted = Math.Floor(Math.Min(cellFromWidth, cellFromHeight) * zoom);
         var cellSize = Math.Clamp(fitted, MinCellSize, MaxCellSize);
 
-        var clueSlot = Math.Round(cellSize * ClueSlotRatio);
+        var clueSlot = Math.Round(cellSize * slotRatio);
 
         var layout = new BoardLayout
         {
@@ -106,6 +127,7 @@ public readonly record struct BoardLayout
             Rows = puzzle.Height,
             CellSize = cellSize,
             ClueSlot = clueSlot,
+            BigNumbers = bigNumbers,
             MaxRowClues = maxRowClues,
             MaxColumnClues = maxColumnClues,
             RequiresScrolling = false,
@@ -117,12 +139,16 @@ public readonly record struct BoardLayout
         };
     }
 
-    /// <summary>Font size for clue numerals at this cell size.</summary>
-    public double ClueFontSize(bool bigNumbers)
+    /// <summary>
+    /// Font size for clue numerals at this cell size, capped so a two-digit clue always fits
+    /// inside its slot.
+    /// </summary>
+    public double ClueFontSize()
     {
-        var scaled = Math.Round(CellSize * ClueFontRatio * (bigNumbers ? BigNumbersMultiplier : 1));
+        var scaled = CellSize * ClueFontRatio * (BigNumbers ? BigNumbersMultiplier : 1);
+        var fitted = Math.Round(Math.Min(scaled, ClueSlot * MaxFontPerSlotRatio));
 
-        return Math.Clamp(scaled, MinClueFontSize, MaxClueFontSize);
+        return Math.Clamp(fitted, MinClueFontSize, MaxClueFontSize);
     }
 
     /// <summary>

@@ -37,10 +37,17 @@ public sealed partial class BoardView : GraphicsView
     /// <summary>Long-press duration that turns a tap into a cross, in hold-to-cross mode.</summary>
     private static readonly TimeSpan LongPressDelay = TimeSpan.FromMilliseconds(480);
 
+    /// <summary>
+    /// How long the hint ring stays on the board. Public so the page can keep its own hint
+    /// affordances (dimmed overlays) in step with the ring.
+    /// </summary>
+    public static readonly TimeSpan HintDisplayDuration = TimeSpan.FromSeconds(4);
+
     private readonly BoardDrawable _drawable = new();
     private readonly HashSet<int> _paintedThisDrag = [];
 
     private CellState _dragTarget = CellState.Empty;
+    private int _hintGeneration;
     private bool _isDragging;
     private CancellationTokenSource? _longPressCancellation;
     private int _pressedIndex = -1;
@@ -80,6 +87,12 @@ public sealed partial class BoardView : GraphicsView
 
             // A different game's strikes are not news - they seed silently on first draw.
             view._drawable.ResetStrikeAnimations();
+
+            // A new game must not inherit the previous one's hint ring; bumping the
+            // generation also defuses any pending clear timer.
+            view._hintGeneration++;
+            view._drawable.HintIndex = -1;
+
             view.Refresh();
         });
 
@@ -128,14 +141,33 @@ public sealed partial class BoardView : GraphicsView
     }
 
     /// <summary>
-    /// Highlights a hinted cell until the next refresh clears it, announcing itself with two
-    /// quick pulses of the gold ring - a static ring is easy to miss on a busy board.
+    /// Highlights a hinted cell for <see cref="HintDisplayDuration"/>, announcing itself with
+    /// two quick pulses of the gold ring - a static ring is easy to miss on a busy board.
     /// </summary>
+    /// <remarks>
+    /// The hinted mark is already applied to the board by the session, so the ring is pure
+    /// attention direction. It clears itself on a timer rather than on the next touch: a player
+    /// reaching for the board must not wipe the very thing they paid a hint to see.
+    /// </remarks>
     public void ShowHint(int index)
     {
         _drawable.HintIndex = index;
         _drawable.HintRingWidth = 3f;
         Invalidate();
+
+        // The generation guard keeps a stale timer from wiping a newer hint's ring.
+        var generation = ++_hintGeneration;
+        Dispatcher.DispatchDelayed(HintDisplayDuration, () =>
+        {
+            if (generation != _hintGeneration)
+            {
+                return;
+            }
+
+            _drawable.HintIndex = -1;
+            _drawable.HintRingWidth = 3f;
+            Invalidate();
+        });
 
         if (Services.MotionPreferences.ReduceMotion)
         {
@@ -144,11 +176,13 @@ public sealed partial class BoardView : GraphicsView
 
         this.AbortAnimation("hintPulse");
 
-        // Two pulses of 0 -> 6 -> 0, then the resting 3, per the design's motion spec.
+        // Two pulses of 2 -> 6 -> 2, then the resting 3, per the design's motion spec. The
+        // floor of 2 keeps the ring visible for the whole pulse - a |sin| that dips to zero
+        // makes the ring blink out entirely, including on the very first frame.
         new Animation(
             v =>
             {
-                _drawable.HintRingWidth = (float)(6 * Math.Abs(Math.Sin(v * Math.PI * 2)));
+                _drawable.HintRingWidth = 2f + (float)(4 * Math.Abs(Math.Sin(v * Math.PI * 2)));
                 Invalidate();
             },
             0,
@@ -256,12 +290,11 @@ public sealed partial class BoardView : GraphicsView
         var width = AvailableSize.Width > 0 ? AvailableSize.Width : Width;
         var height = AvailableSize.Height > 0 ? AvailableSize.Height : Height;
 
-        var layout = BoardLayout.Calculate(session.Puzzle, width, height, ZoomPercent);
+        var layout = BoardLayout.Calculate(session.Puzzle, width, height, ZoomPercent, BigNumbers);
 
         _drawable.Puzzle = session.Puzzle;
         _drawable.Cells = session.Cells.ToArray();
         _drawable.Layout = layout;
-        _drawable.BigNumbers = BigNumbers;
         _drawable.Palette = BoardPalette.FromResources();
 
         // The board is centred when it fits and pinned top-left when it does not, so a
@@ -457,11 +490,10 @@ public sealed partial class BoardView : GraphicsView
         var column = index % layout.Columns;
         var row = index / layout.Columns;
 
-        if (_drawable.HighlightRow != row || _drawable.HighlightColumn != column || _drawable.HintIndex >= 0)
+        if (_drawable.HighlightRow != row || _drawable.HighlightColumn != column)
         {
             _drawable.HighlightRow = row;
             _drawable.HighlightColumn = column;
-            _drawable.HintIndex = -1;
 
             // Redrawn here rather than left to the paint that follows: dragging back over a cell
             // already painted in this drag makes no move at all, and the crosshair still has to

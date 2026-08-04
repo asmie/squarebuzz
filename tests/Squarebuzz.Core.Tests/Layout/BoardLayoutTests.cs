@@ -203,8 +203,8 @@ public class BoardLayoutTests
         {
             foreach (var viewport in new[] { 120d, 390d, 800d, 1600d })
             {
-                var layout = BoardLayout.Calculate(Square(size), viewport, viewport);
-                var fontSize = layout.ClueFontSize(bigNumbers);
+                var layout = BoardLayout.Calculate(Square(size), viewport, viewport, bigNumbers: bigNumbers);
+                var fontSize = layout.ClueFontSize();
 
                 Assert.InRange(fontSize, min, max);
             }
@@ -214,9 +214,40 @@ public class BoardLayoutTests
     [Fact]
     public void BigNumbersAreNeverSmallerThanNormalOnes()
     {
-        var layout = BoardLayout.Calculate(Square(10), 600, 900);
+        var normal = BoardLayout.Calculate(Square(10), 600, 900);
+        var big = BoardLayout.Calculate(Square(10), 600, 900, bigNumbers: true);
 
-        Assert.True(layout.ClueFontSize(bigNumbers: true) >= layout.ClueFontSize(bigNumbers: false));
+        Assert.True(big.ClueFontSize() >= normal.ClueFontSize());
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void TwoDigitCluesFitTheirSlot(bool bigNumbers)
+    {
+        // A digit advances roughly 0.6 em, so "10" needs about 1.2 x the font size. If this
+        // fails, big clue numerals bleed into the neighbouring slot - the bug that prompted
+        // sizing the slot from the same flag as the font.
+        foreach (var size in GridSize.All)
+        {
+            foreach (var viewport in new[] { 120d, 390d, 800d, 1600d })
+            {
+                var layout = BoardLayout.Calculate(Square(size), viewport, viewport, bigNumbers: bigNumbers);
+
+                Assert.True(
+                    layout.ClueFontSize() * 1.2 <= layout.ClueSlot + 0.5,
+                    $"{size}x{size} at {viewport}: font {layout.ClueFontSize()} in slot {layout.ClueSlot}.");
+            }
+        }
+    }
+
+    [Fact]
+    public void BigNumbersWidenTheClueSlot()
+    {
+        var normal = BoardLayout.Calculate(Square(10), 600, 900);
+        var big = BoardLayout.Calculate(Square(10), 600, 900, bigNumbers: true);
+
+        Assert.True(big.ClueSlot / big.CellSize > normal.ClueSlot / normal.CellSize);
     }
 
     [Fact]

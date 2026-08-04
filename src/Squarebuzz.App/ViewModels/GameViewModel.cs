@@ -206,6 +206,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [ObservableProperty]
     public partial bool CanRedo { get; private set; }
 
+    /// <summary>Whether the hint button should look pressable: hints left and the game live.</summary>
+    [ObservableProperty]
+    public partial bool CanUseHint { get; private set; }
+
     [ObservableProperty]
     public partial string PuzzleName { get; private set; } = string.Empty;
 
@@ -922,10 +926,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
         ShowToast(T("hintUsed"));
         _audio.Play(GameSound.Hint);
-        HintGranted?.Invoke(this, hint.Index);
 
+        // Sync before announcing the hint: the page's handler scrolls to the cell and draws the
+        // ring, and it must see the board with the hinted mark already painted - raising the
+        // event first left the handler working against a stale snapshot.
         SyncFromSession();
         BoardChanged?.Invoke(this, EventArgs.Empty);
+        HintGranted?.Invoke(this, hint.Index);
 
         if (session.IsSolved)
         {
@@ -1162,6 +1169,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         StarRating = session.StarRating;
         CanUndo = session.CanUndo;
         CanRedo = session.CanRedo;
+        CanUseHint = session.HintsRemaining > 0 && !session.IsOver;
         IsSolved = session.IsSolved;
 
         // The board's accessible description carries the filled count, so it goes stale on every

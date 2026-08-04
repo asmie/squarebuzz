@@ -59,8 +59,6 @@ public sealed class BoardDrawable : IDrawable
     /// <summary>Scale of the popping cell, driven by the view's animation.</summary>
     public float PopScale { get; set; } = 1f;
 
-    public bool BigNumbers { get; set; }
-
     /// <summary>How long a clue strike takes to wipe across the number.</summary>
     private const double StrikeWipeMilliseconds = 180;
 
@@ -143,20 +141,22 @@ public sealed class BoardDrawable : IDrawable
 
         DrawGutterBackgrounds(canvas, layout);
 
-        // Three passes rather than everything cell by cell. The grid is one uniform lattice, so
-        // stroking it once costs 52 lines at 25x25 where a rectangle per cell cost 625 - and
-        // drawing the crosses and hint ring afterwards means a neighbouring cell's border can no
-        // longer clip them, which it could when each cell drew its own.
+        // Layered passes rather than everything cell by cell. The grid is one uniform lattice,
+        // so stroking it once costs 52 lines at 25x25 where a rectangle per cell cost 625 - and
+        // drawing the crosses afterwards means a neighbouring cell's border can no longer clip
+        // them, which it could when each cell drew its own. The hint ring goes last of all so
+        // the heavier group separators cannot bisect it - the ring sits on the cell boundary.
         DrawCellFills(canvas, layout);
         DrawGridLines(canvas, layout);
         DrawCellMarks(canvas, layout);
         DrawGroupSeparators(canvas, layout);
+        DrawHintRing(canvas, layout);
 
         // Set once for the whole gutter. A canvas does not inherit the XAML styles, so the clue
         // numerals have to carry their own font - but it is the same font at the same size for
         // every one of them, and there are up to a hundred and fifty on a 25x25 board.
         canvas.Font = ClueFont;
-        canvas.FontSize = (float)layout.ClueFontSize(BigNumbers);
+        canvas.FontSize = (float)layout.ClueFontSize();
 
         DrawColumnClues(canvas, puzzle, layout);
         DrawRowClues(canvas, puzzle, layout);
@@ -277,14 +277,13 @@ public sealed class BoardDrawable : IDrawable
         }
     }
 
-    /// <summary>Crosses and the hint ring - the few cells that carry something over the grid.</summary>
+    /// <summary>Crosses - the few cells that carry something over the grid.</summary>
     private void DrawCellMarks(ICanvas canvas, BoardLayout layout)
     {
         var cellSize = (float)layout.CellSize;
-        var cornerRadius = Math.Max(1f, cellSize * 0.18f);
 
         // Rounded ends make a cross look drawn rather than stamped. Set once: a nearly-finished
-        // 25x25 carries several hundred of them, and the hint ring does not care about caps.
+        // 25x25 carries several hundred of them.
         canvas.StrokeLineCap = LineCap.Round;
 
         for (var row = 0; row < layout.Rows; row++)
@@ -292,39 +291,48 @@ public sealed class BoardDrawable : IDrawable
             for (var column = 0; column < layout.Columns; column++)
             {
                 var index = (row * layout.Columns) + column;
-                var isHinted = index == HintIndex && HintRingWidth > 0.1f;
 
-                if (Cells[index] != CellState.Crossed && !isHinted)
+                if (Cells[index] != CellState.Crossed)
                 {
                     continue;
                 }
 
                 var (x, y) = layout.CellOrigin(column, row);
-                var left = (float)x;
-                var top = (float)y;
-
-                if (Cells[index] == CellState.Crossed)
-                {
-                    DrawCross(canvas, left, top, cellSize);
-                }
-
-                if (isHinted)
-                {
-                    // Width animated by the view: two quick pulses when granted, 3 at rest.
-                    var ring = HintRingWidth;
-                    canvas.StrokeColor = Palette.Gold;
-                    canvas.StrokeSize = ring;
-                    canvas.DrawRoundedRectangle(
-                        left + (ring / 2f),
-                        top + (ring / 2f),
-                        cellSize - ring,
-                        cellSize - ring,
-                        cornerRadius);
-                }
+                DrawCross(canvas, (float)x, (float)y, cellSize);
             }
         }
 
         canvas.StrokeLineCap = LineCap.Butt;
+    }
+
+    /// <summary>
+    /// The gold ring around a hinted cell. Drawn after every other board layer: the ring sits
+    /// on the cell boundary, so anything stroked there later - the group separators above all -
+    /// would cut straight through it.
+    /// </summary>
+    private void DrawHintRing(ICanvas canvas, BoardLayout layout)
+    {
+        if (HintIndex < 0 || HintIndex >= Cells.Length || HintRingWidth <= 0.1f)
+        {
+            return;
+        }
+
+        var cellSize = (float)layout.CellSize;
+        var cornerRadius = Math.Max(1f, cellSize * 0.18f);
+        var column = HintIndex % layout.Columns;
+        var row = HintIndex / layout.Columns;
+        var (x, y) = layout.CellOrigin(column, row);
+
+        // Width animated by the view: two quick pulses when granted, 3 at rest.
+        var ring = HintRingWidth;
+        canvas.StrokeColor = Palette.Gold;
+        canvas.StrokeSize = ring;
+        canvas.DrawRoundedRectangle(
+            (float)x + (ring / 2f),
+            (float)y + (ring / 2f),
+            cellSize - ring,
+            cellSize - ring,
+            cornerRadius);
     }
 
     private void DrawCross(ICanvas canvas, float left, float top, float cellSize)
@@ -377,7 +385,7 @@ public sealed class BoardDrawable : IDrawable
 
     private void DrawColumnClues(ICanvas canvas, Puzzle puzzle, BoardLayout layout)
     {
-        var fontSize = (float)layout.ClueFontSize(BigNumbers);
+        var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
         Span<bool> struck = stackalloc bool[Math.Max(4, layout.MaxColumnClues)];
         Span<CellState> column = stackalloc CellState[layout.Rows];
@@ -417,7 +425,7 @@ public sealed class BoardDrawable : IDrawable
 
     private void DrawRowClues(ICanvas canvas, Puzzle puzzle, BoardLayout layout)
     {
-        var fontSize = (float)layout.ClueFontSize(BigNumbers);
+        var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
         Span<bool> struck = stackalloc bool[Math.Max(4, layout.MaxRowClues)];
 

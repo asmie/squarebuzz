@@ -1,3 +1,4 @@
+using Squarebuzz.App.Controls;
 using Squarebuzz.App.ViewModels;
 
 namespace Squarebuzz.App.Views;
@@ -14,6 +15,9 @@ public partial class GamePage : ContentPage
 
     /// <summary>True while the mistake shake is running, so a second one cannot overlap it.</summary>
     private bool _isShaking;
+
+    /// <summary>Guards the minimap's un-dim timer, so a stale timer cannot undo a newer hint's dim.</summary>
+    private int _hintOverlayGeneration;
 
     public GamePage(GameViewModel viewModel)
     {
@@ -438,7 +442,86 @@ public partial class GamePage : ContentPage
         }
     }
 
-    private void OnHintGranted(object? sender, int index) => Board.ShowHint(index);
+    private async void OnHintGranted(object? sender, int index)
+    {
+        // Bring the cell on screen first: on a scrolling board a hint could land entirely out
+        // of view, and the player paid for it. The ring only starts once the camera has arrived.
+        await ScrollHintedCellIntoViewAsync(index);
+        Board.ShowHint(index);
+    }
+
+    /// <summary>
+    /// Centres the hinted cell in the scroll window, and dims the minimap out of the way when
+    /// the cell ends up underneath it.
+    /// </summary>
+    private async Task ScrollHintedCellIntoViewAsync(int index)
+    {
+        var layout = Board.CurrentLayout;
+
+        if (layout.Columns == 0 || layout.CellSize <= 0)
+        {
+            return;
+        }
+
+        // Same test UpdateMiniMap uses: a board that fits its window has nothing to scroll.
+        var scrollable = Board.Width > BoardHost.Width + 1 || Board.Height > BoardHost.Height + 1;
+
+        var column = index % layout.Columns;
+        var row = index / layout.Columns;
+        var (cellX, cellY) = layout.CellOrigin(column, row);
+
+        var targetX = BoardHost.ScrollX;
+        var targetY = BoardHost.ScrollY;
+
+        if (scrollable)
+        {
+            targetX = Math.Clamp(
+                cellX + (layout.CellSize / 2) - (BoardHost.Width / 2),
+                0,
+                Math.Max(0, Board.Width - BoardHost.Width));
+            targetY = Math.Clamp(
+                cellY + (layout.CellSize / 2) - (BoardHost.Height / 2),
+                0,
+                Math.Max(0, Board.Height - BoardHost.Height));
+
+            await BoardHost.ScrollToAsync(targetX, targetY, animated: !Services.MotionPreferences.ReduceMotion);
+        }
+
+        DimMiniMapIfCoveringCell(cellX - targetX, cellY - targetY, layout.CellSize);
+    }
+
+    /// <summary>
+    /// Drops the minimap to near-transparent for the hint's display window when the hinted cell
+    /// sits behind it. Dimmed rather than hidden: visibility belongs to UpdateMiniMap, and the
+    /// two must not fight.
+    /// </summary>
+    private void DimMiniMapIfCoveringCell(double viewportX, double viewportY, double cellSize)
+    {
+        if (!MiniMap.IsVisible)
+        {
+            return;
+        }
+
+        // The minimap's corner, inflated by its margin, in the same viewport coordinates.
+        var mapRegion = new Rect(BoardHost.Width - 112, BoardHost.Height - 112, 112, 112);
+        var cellRect = new Rect(viewportX, viewportY, cellSize, cellSize);
+
+        if (!mapRegion.IntersectsWith(cellRect))
+        {
+            return;
+        }
+
+        MiniMap.Opacity = 0.15;
+
+        var generation = ++_hintOverlayGeneration;
+        Dispatcher.DispatchDelayed(BoardView.HintDisplayDuration, () =>
+        {
+            if (generation == _hintOverlayGeneration)
+            {
+                MiniMap.Opacity = 1;
+            }
+        });
+    }
 
     private async void OnPuzzleSolved(object? sender, EventArgs e)
     {

@@ -198,6 +198,7 @@
                         FontSize="13"
                         Padding="4,0"
                         Command="{Binding UseHintCommand}"
+                        IsEnabled="{Binding CanUseHint}"
                         Text="{Binding HintText}" />
 
                 <Button Grid.Column="{Binding RestartColumn}"
