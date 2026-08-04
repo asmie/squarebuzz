@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Bengali (bn). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>যুক্তির ধাঁধা, যা ছবিতে বদলে যায়</value></data>
+  <data name="loading" xml:space="preserve"><value>ব্লকগুলো গরম করছি…</value></data>
+  <data name="skip" xml:space="preserve"><value>এড়িয়ে যাও</value></data>
+  <data name="next" xml:space="preserve"><value>পরের</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>চলো খেলি!</value></data>
+  <data name="newGame" xml:space="preserve"><value>নতুন খেলা</value></data>
+  <data name="continueGame" xml:space="preserve"><value>চালিয়ে যাও</value></data>
+  <data name="trials" xml:space="preserve"><value>চ্যালেঞ্জ</value></data>
+  <data name="options" xml:space="preserve"><value>সেটিংস</value></data>
+  <data name="about" xml:space="preserve"><value>সম্পর্কে</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n}টি চলছে</value></data>
+  <data name="noSaves" xml:space="preserve"><value>এখনও কিছু জমা হয়নি</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>আজকের ধাঁধা তৈরি</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>শব্দ, সাজ, নিয়ন্ত্রণ</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>নোনোগ্রাম কী?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>কত বড়?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>বড় ছক বেশি সময় নেয়, কিন্তু আরও খুঁটিনাটি দেখায়।</value></data>
+  <data name="tiny" xml:space="preserve"><value>খুদে</value></data>
+  <data name="normal" xml:space="preserve"><value>সাধারণ</value></data>
+  <data name="big" xml:space="preserve"><value>বড়</value></data>
+  <data name="huge" xml:space="preserve"><value>বিশাল</value></data>
+  <data name="giant" xml:space="preserve"><value>প্রকাণ্ড</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>ট্যাবলেট</value></data>
+  <data name="difficulty" xml:space="preserve"><value>কত কঠিন?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>খুব সহজ</value></data>
+  <data name="easy" xml:space="preserve"><value>সহজ</value></data>
+  <data name="medium" xml:space="preserve"><value>মাঝারি</value></data>
+  <data name="hard" xml:space="preserve"><value>কঠিন</value></data>
+  <data name="expert" xml:space="preserve"><value>দক্ষ</value></data>
+  <data name="challenge" xml:space="preserve"><value>চ্যালেঞ্জের মাত্রা</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>দ্বিতীয় মাপ, আকার আর সংকেতের কঠিনতা থেকে আলাদা।</value></data>
+  <data name="relaxed" xml:space="preserve"><value>আরামে</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>সহায়তা চালু, কোনো সীমা নেই</value></data>
+  <data name="sharp" xml:space="preserve"><value>কড়া</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>ভুল গোনা হয়, একটি সংকেত</value></data>
+  <data name="pack" xml:space="preserve"><value>ছবির প্যাক</value></data>
+  <data name="helpers" xml:space="preserve"><value>সহায়তা</value></data>
+  <data name="autoCross" xml:space="preserve"><value>শেষ হওয়া সারিতে নিজে থেকেই X</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>ভুল হলে জানাও</value></data>
+  <data name="showTimer" xml:space="preserve"><value>সময় দেখাও</value></data>
+  <data name="allowHints" xml:space="preserve"><value>সংকেত দিতে দাও</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>একটা ধাঁধা বাছো</value></data>
+  <data name="random" xml:space="preserve"><value>যেকোনো ধাঁধা</value></data>
+  <data name="gallery" xml:space="preserve"><value>গ্যালারি</value></data>
+  <data name="locked" xml:space="preserve"><value>বন্ধ</value></data>
+  <data name="preview" xml:space="preserve"><value>ঝলক</value></data>
+  <data name="start" xml:space="preserve"><value>ধাঁধা শুরু করো</value></data>
+  <data name="fill" xml:space="preserve"><value>ভরাও</value></data>
+  <data name="cross" xml:space="preserve"><value>X দাও</value></data>
+  <data name="undo" xml:space="preserve"><value>আগের মতো</value></data>
+  <data name="redo" xml:space="preserve"><value>আবার</value></data>
+  <data name="hint" xml:space="preserve"><value>সংকেত</value></data>
+  <data name="pause" xml:space="preserve"><value>থামাও</value></data>
+  <data name="minimap" xml:space="preserve"><value>নকশা</value></data>
+  <data name="paused" xml:space="preserve"><value>থামানো</value></data>
+  <data name="resume" xml:space="preserve"><value>চালিয়ে যাও</value></data>
+  <data name="restart" xml:space="preserve"><value>শুরু থেকে</value></data>
+  <data name="howTo" xml:space="preserve"><value>কীভাবে খেলবে</value></data>
+  <data name="quit" xml:space="preserve"><value>মেনুতে</value></data>
+  <data name="solved" xml:space="preserve"><value>তুমি পেরেছ!</value></data>
+  <data name="time" xml:space="preserve"><value>সময়</value></data>
+  <data name="hints" xml:space="preserve"><value>সংকেত</value></data>
+  <data name="mistakes" xml:space="preserve"><value>ইশ</value></data>
+  <data name="save" xml:space="preserve"><value>জমা করো</value></data>
+  <data name="share" xml:space="preserve"><value>ভাগ করো</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>পরের</value></data>
+  <data name="menu" xml:space="preserve"><value>মেনু</value></data>
+  <data name="onb1t" xml:space="preserve"><value>সংখ্যাগুলো ব্লকের সারি</value></data>
+  <data name="onb1b" xml:space="preserve"><value>৩ ১ সংকেতের মানে পাশাপাশি তিনটে ব্লক, একটা ফাঁক, তারপর একটা ব্লক। একই ক্রমে, বাঁ থেকে ডানে।</value></data>
+  <data name="onb2t" xml:space="preserve"><value>ফাঁকা ঘরে চিহ্ন দাও</value></data>
+  <data name="onb2b" xml:space="preserve"><value>ভরাতে একবার ছোঁও। যে ঘরগুলো ফাঁকা থাকবে বলে তুমি জানো, সেগুলোতে চিহ্ন দিতে X মোডে যাও — এতে মাথা পরিষ্কার থাকে।</value></data>
+  <data name="onb3t" xml:space="preserve"><value>একটা ছবি ফুটে ওঠে</value></data>
+  <data name="onb3b" xml:space="preserve"><value>প্রতিটি সারি আর কলাম শেষ করো, ব্লকগুলো ছবি হয়ে যাবে। প্রতিটি ধাঁধার ঠিক একটাই উত্তর — কখনও আন্দাজ করবে না।</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>এটা একেবারে ফ্রি!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>ওটা নয় — আবার চেষ্টা করো</value></data>
+  <data name="genFailed" xml:space="preserve"><value>এবার ধাঁধা বানাতে পারলাম না। আবার চেষ্টা করো!</value></data>
+  <data name="ok" xml:space="preserve"><value>ঠিক আছে</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>খেলা নিজে যে বড় বোর্ড বানায়, তার জন্য — ১৫×১৫ আর তার বেশি। ছোট ছবিগুলো হাতে আঁকা।</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>এই মাসে শেষ করা দৈনিক ধাঁধা: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>আর সংকেত নেই</value></data>
+  <data name="lineDone" xml:space="preserve"><value>সারি শেষ!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>তুমি তৈরি হলেই। একটা ধাঁধা বাছো!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>বেশ চলছে। আরেকটা?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>আজ কিছু নতুন ছবি পেয়েছি।</value></data>
+  <data name="winLine" xml:space="preserve"><value>ওটা ভালো ছিল। আরেকটা চাও?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>তোমার প্রথম ধাঁধা শুরু করো</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>কীভাবে খেলবে</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>আজকের ধাঁধা</value></data>
+  <data name="dailySub" xml:space="preserve"><value>প্রতি সকালে নতুন ছবি</value></data>
+  <data name="play" xml:space="preserve"><value>খেলো</value></data>
+  <data name="timedName1" xml:space="preserve"><value>গা গরম</value></data>
+  <data name="timedName2" xml:space="preserve"><value>সমান তালে</value></data>
+  <data name="timedName3" xml:space="preserve"><value>বিদ্যুৎ</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>৫×৫ · অনেক সময়</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>১০×১০ · তাল রাখো</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>১০×১০ · চোখ পিটপিট করার সময় নেই</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>ধাঁধার পথ</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>পরেরটা খুলতে আগের থামটা শেষ করো</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>থাম {0}, {1}, শেষ। আবার খেলো।</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>থাম {0}, {1} × {1}, এবার এটাই।</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>থাম {0}, বন্ধ। এর আগের থামটা শেষ করো।</value></data>
+  <data name="trophies" xml:space="preserve"><value>পুরস্কার</value></data>
+  <data name="timeUp" xml:space="preserve"><value>সময় শেষ!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>এবার ঘড়ি জিতে গেল। আরেকবার চেষ্টা করবে?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>আবার চেষ্টা করো</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}। {1}। ঘড়িতে {2}।</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>দৈনিক</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>সময় বাঁধা</value></data>
+  <data name="tabPath" xml:space="preserve"><value>পথ</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>সময়ের পরীক্ষা</value></data>
+  <data name="tr1" xml:space="preserve"><value>প্রথম ছবি</value></data>
+  <data name="tr2" xml:space="preserve"><value>টানা এক সপ্তাহ</value></data>
+  <data name="tr3" xml:space="preserve"><value>সংকেত ছাড়া</value></data>
+  <data name="tr4" xml:space="preserve"><value>চটপটে</value></data>
+  <data name="tr5" xml:space="preserve"><value>১০০ ব্লক</value></data>
+  <data name="tr6" xml:space="preserve"><value>ডাইনোসর ভক্ত</value></data>
+  <data name="tr7" xml:space="preserve"><value>রাতজাগা পাখি</value></data>
+  <data name="tr8" xml:space="preserve"><value>নিখুঁত দশ</value></data>
+  <data name="tr9" xml:space="preserve"><value>সংগ্রাহক</value></data>
+  <data name="sound" xml:space="preserve"><value>শব্দের খেলা</value></data>
+  <data name="music" xml:space="preserve"><value>সংগীত</value></data>
+  <data name="voice" xml:space="preserve"><value>পড়ে শোনানো</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>এখন তোমাকে পড়ে শোনাতে পারি।</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>এই যন্ত্রে এই ভাষার কণ্ঠ নেই</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>সারি {0}, কলাম {1}, {2}। সারির সংকেত {3}। কলামের সংকেত {4}।</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>ফাঁকা</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>ভরা</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>X দেওয়া</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>কিছু নেই</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>ধাঁধার বোর্ড, {0} × {1}। {3}টির মধ্যে {2}টি ঘর ভরা।</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>ছুঁয়ে খুঁজে ঘরগুলোতে এখনও পৌঁছানো যায় না।</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>এ পর্যন্ত সময়: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>মোট {0}টি তারা</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>টানা {0} দিন</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>{0} চালিয়ে যাও</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>{0} মুছে ফেলো</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>ছোট ঘর</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>বড় ঘর</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, পাওয়া গেছে, {1}টি তারা</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>ছবিটা এখনও পাওয়া যায়নি। খেলো, তবেই দেখা যাবে।</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>বন্ধ ছবি</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, জেতা হয়েছে। {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, এখনও জেতা হয়নি। {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>৩টির মধ্যে {0}টি তারা</value></data>
+  <data name="haptics" xml:space="preserve"><value>ছোঁয়ায় কম্পন</value></data>
+  <data name="audio" xml:space="preserve"><value>শব্দ</value></data>
+  <data name="look" xml:space="preserve"><value>সাজ &amp; ভাব</value></data>
+  <data name="controls" xml:space="preserve"><value>নিয়ন্ত্রণ</value></data>
+  <data name="langGroup" xml:space="preserve"><value>ভাষা</value></data>
+  <data name="parentZone" xml:space="preserve"><value>বড়দের কোণ</value></data>
+  <data name="theme" xml:space="preserve"><value>সাজ</value></data>
+  <data name="light" xml:space="preserve"><value>আলো</value></data>
+  <data name="dark" xml:space="preserve"><value>অন্ধকার</value></data>
+  <data name="auto" xml:space="preserve"><value>নিজে থেকে</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>বর্ণান্ধতার উপযোগী</value></data>
+  <data name="cbSub" xml:space="preserve"><value>নীল/কমলা রং, নকশা বজায় থাকে</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>মূল রং</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>কমলা</value></data>
+  <data name="accGrape" xml:space="preserve"><value>আঙুর</value></data>
+  <data name="accTrio" xml:space="preserve"><value>তিনে মিলে</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>ছোঁয়ায় হয়</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>ছোঁয়া ভরায়, চেপে ধরা = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>মোড বোতাম</value></data>
+  <data name="handed" xml:space="preserve"><value>বোতাম কোন দিকে</value></data>
+  <data name="leftH" xml:space="preserve"><value>বাঁ</value></data>
+  <data name="rightH" xml:space="preserve"><value>ডান</value></data>
+  <data name="cellSize" xml:space="preserve"><value>ঘরের আকার</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>বড় সংখ্যা</value></data>
+  <data name="language" xml:space="preserve"><value>ভাষা</value></data>
+  <data name="screenTime" xml:space="preserve"><value>পর্দার সময়ের মনে করানো</value></data>
+  <data name="stOff" xml:space="preserve"><value>বন্ধ</value></data>
+  <data name="st15" xml:space="preserve"><value>১৫ মিনিট</value></data>
+  <data name="st30" xml:space="preserve"><value>৩০ মিনিট</value></data>
+  <data name="st60" xml:space="preserve"><value>১ ঘণ্টা</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>একটু বিশ্রাম?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>তুমি {0} মিনিট ধরে খেলছ। তোমার ধাঁধা অপেক্ষা করবে।</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>আরেকটু</value></data>
+  <data name="breakStop" xml:space="preserve"><value>আমি এখানেই থামব</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>অগ্রগতি মুছে দাও</value></data>
+  <data name="privacy" xml:space="preserve"><value>তথ্য &amp; গোপনীয়তা</value></data>
+  <data name="open" xml:space="preserve"><value>খোলো</value></data>
+  <data name="reset" xml:space="preserve"><value>মুছে দাও</value></data>
+  <data name="grownUps" xml:space="preserve"><value>শুধু বড়দের জন্য</value></data>
+  <data name="gateQ" xml:space="preserve"><value>৭ × ৪ কত?</value></data>
+  <data name="cancel" xml:space="preserve"><value>বাতিল</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>সব মুছে দেব?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>সব ধাঁধা, তারা আর স্টিকার চলে যাবে। এটা আর ফেরানো যাবে না।</value></data>
+  <data name="resetYes" xml:space="preserve"><value>হ্যাঁ, সব মুছে দাও</value></data>
+  <data name="version" xml:space="preserve"><value>সংস্করণ ১.০ · build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>কোনো বিজ্ঞাপন নেই · অ্যাপে কোনো কেনাকাটা নেই</value></data>
+  <data name="whatIs" xml:space="preserve"><value>নোনোগ্রাম কী?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>নোনোগ্রাম হলো সংখ্যার ভেতরে লুকিয়ে থাকা একটা ছবি। প্রতিটি সারি আর কলামের সংকেত বলে দেয় কতগুলো ব্লক ভরতে হবে আর কোন ক্রমে। শুধু যুক্তি দিয়ে প্রতিটি লাইন মেলাও, ছবি ফুটে উঠবে — আন্দাজ করার দরকারই পড়ে না।</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>আরও যে নামে পরিচিত: Picross · Griddler · Hanjie · Pic-a-Pix · সংখ্যা দিয়ে আঁকা · জাপানি শব্দছক</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>কীভাবে খেলবে</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>কৃতজ্ঞতা</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>গোপনীয়তার নীতি</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>মত জানাও</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>squarebuzz-কে রেটিং দাও</value></data>
+  <data name="ht1" xml:space="preserve"><value>সংকেত পড়ো</value></data>
+  <data name="ht1b" xml:space="preserve"><value>প্রতিটি সংখ্যা ভরা ব্লকের একটানা এক সারি, ক্রম মেনে লেখা। সারির সংকেত ৩ ১ মানে তিনটে একসঙ্গে, অন্তত একটা ফাঁক, তারপর একটা একা।</value></data>
+  <data name="ht2" xml:space="preserve"><value>ভরাও আর X দাও</value></data>
+  <data name="ht2b" xml:space="preserve"><value>ঘর ভরাতে সেটা ছোঁও। যেসব ঘর ফাঁকা থাকবে বলে তুমি প্রমাণ করেছ, তার জন্য X মোডে যাও। X সাজসজ্জা নয় — ওটাই তোমার হিসাব রাখার উপায়।</value></data>
+  <data name="ht3" xml:space="preserve"><value>লম্বা সংকেতে ওভারল্যাপ</value></data>
+  <data name="ht3b" xml:space="preserve"><value>১০ চওড়া সারিতে ৮-এর সংকেত যেখান থেকেই শুরু হোক, মাঝের ৬টা ঘর ঢাকবেই। সারিটা বাঁয়ে ঠেলো, ডানে ঠেলো, আর যেটা দুবারই পড়ে সেটা ভরাও।</value></data>
+  <data name="ht4" xml:space="preserve"><value>সারি আর কলাম মেলাও</value></data>
+  <data name="ht4b" xml:space="preserve"><value>যখন কোনো সারি একটা নিশ্চিত ব্লক দেয়, সেই কলামের নিচে দেখো। নতুন ব্লক প্রায়ই কলামের সংকেত শেষ করে দেয়, তাতে আরও X মেলে, তাতে আরও ব্লক মেলে।</value></data>
+  <data name="ht5" xml:space="preserve"><value>শেষ হওয়া লাইনে X দাও</value></data>
+  <data name="ht5b" xml:space="preserve"><value>কোনো লাইন যখন তার সংকেতের সঙ্গে পুরোপুরি মিলে যায়, বাকি প্রতিটি ঘরে X দাও। সংকেতের সংখ্যা ফিকে হয়ে যায়, তাতে বোঝো লাইনটা হয়ে গেছে।</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>জন্তু</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>ডাইনোসর</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>মহাকাশ</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>খাবার</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>গাড়ি</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>রূপকথা</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>চমকে দাও</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>হৃদয়</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>ছোট্ট মাছ</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>তারা</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>ভূত</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>আপেল</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>পালতোলা নৌকা</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>ডাইনোসর</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>বিড়ালের মুখ</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>কাপকেক</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>রেসের গাড়ি</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>রকেট</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>মুকুট</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>রহস্যময় ছবি</value></data>
+  <data name="magnifier" xml:space="preserve"><value>আতশ কাচ</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>রং করার সময় ৩×৩-এর বড় করে দেখা যায়। সাধারণত বন্ধ।</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>একজন বড়কে জিজ্ঞেস করো</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{1}টির মধ্যে {0}টি পাওয়া গেছে</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>তোমার প্রথম ছবি শেষ করো।</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>টানা সাত দিন খেলো।</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>একটাও সংকেত ছাড়া একটা ছবি শেষ করো।</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>এক মিনিটের কমে একটা ৫×৫ শেষ করো।</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>মোট ১০০টি ব্লক ভরাও।</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>সব ডাইনোসর খুঁজে বের করো।</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>রাত ৮টার পরে একটা ছবি শেষ করো।</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>১০×১০-এ তিন তারা, একটাও ভুল ছাড়া।</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>গ্যালারির সব ছবি খুঁজে বের করো।</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>আজকের মতো শেষ — কাল দেখা হবে!</value></data>
+</root>

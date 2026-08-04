@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Chinese (Traditional) (zh-Hant). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>會變成圖畫的邏輯謎題</value></data>
+  <data name="loading" xml:space="preserve"><value>正在暖身方塊…</value></data>
+  <data name="skip" xml:space="preserve"><value>略過</value></data>
+  <data name="next" xml:space="preserve"><value>下一個</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>我們開始玩吧！</value></data>
+  <data name="newGame" xml:space="preserve"><value>新遊戲</value></data>
+  <data name="continueGame" xml:space="preserve"><value>繼續</value></data>
+  <data name="trials" xml:space="preserve"><value>挑戰</value></data>
+  <data name="options" xml:space="preserve"><value>設定</value></data>
+  <data name="about" xml:space="preserve"><value>關於</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} 個進行中</value></data>
+  <data name="noSaves" xml:space="preserve"><value>還沒有儲存任何進度</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>今天的謎題準備好了</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>聲音、外觀、操作</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>什麼是數織？</value></data>
+  <data name="gridSize" xml:space="preserve"><value>多大？</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>更大的方格要花更久，但能畫出更多細節。</value></data>
+  <data name="tiny" xml:space="preserve"><value>迷你</value></data>
+  <data name="normal" xml:space="preserve"><value>普通</value></data>
+  <data name="big" xml:space="preserve"><value>大</value></data>
+  <data name="huge" xml:space="preserve"><value>特大</value></data>
+  <data name="giant" xml:space="preserve"><value>巨大</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>平板</value></data>
+  <data name="difficulty" xml:space="preserve"><value>多難？</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>非常簡單</value></data>
+  <data name="easy" xml:space="preserve"><value>簡單</value></data>
+  <data name="medium" xml:space="preserve"><value>中等</value></data>
+  <data name="hard" xml:space="preserve"><value>困難</value></data>
+  <data name="expert" xml:space="preserve"><value>專家</value></data>
+  <data name="challenge" xml:space="preserve"><value>挑戰級別</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>第二個檔位，和尺寸、提示難度無關。</value></data>
+  <data name="relaxed" xml:space="preserve"><value>輕鬆</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>輔助開啟，沒有限制</value></data>
+  <data name="sharp" xml:space="preserve"><value>嚴格</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>統計錯誤，一次提示</value></data>
+  <data name="pack" xml:space="preserve"><value>圖畫包</value></data>
+  <data name="helpers" xml:space="preserve"><value>輔助</value></data>
+  <data name="autoCross" xml:space="preserve"><value>自動為完成的列打叉</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>出錯時提醒我</value></data>
+  <data name="showTimer" xml:space="preserve"><value>顯示時間</value></data>
+  <data name="allowHints" xml:space="preserve"><value>允許提示</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>挑一個謎題</value></data>
+  <data name="random" xml:space="preserve"><value>隨機謎題</value></data>
+  <data name="gallery" xml:space="preserve"><value>圖庫</value></data>
+  <data name="locked" xml:space="preserve"><value>已鎖定</value></data>
+  <data name="preview" xml:space="preserve"><value>預覽</value></data>
+  <data name="start" xml:space="preserve"><value>開始謎題</value></data>
+  <data name="fill" xml:space="preserve"><value>填塗</value></data>
+  <data name="cross" xml:space="preserve"><value>標叉</value></data>
+  <data name="undo" xml:space="preserve"><value>復原</value></data>
+  <data name="redo" xml:space="preserve"><value>重做</value></data>
+  <data name="hint" xml:space="preserve"><value>提示</value></data>
+  <data name="pause" xml:space="preserve"><value>暫停</value></data>
+  <data name="minimap" xml:space="preserve"><value>地圖</value></data>
+  <data name="paused" xml:space="preserve"><value>已暫停</value></data>
+  <data name="resume" xml:space="preserve"><value>繼續</value></data>
+  <data name="restart" xml:space="preserve"><value>重新開始</value></data>
+  <data name="howTo" xml:space="preserve"><value>怎麼玩</value></data>
+  <data name="quit" xml:space="preserve"><value>回到選單</value></data>
+  <data name="solved" xml:space="preserve"><value>你做到了！</value></data>
+  <data name="time" xml:space="preserve"><value>時間</value></data>
+  <data name="hints" xml:space="preserve"><value>提示</value></data>
+  <data name="mistakes" xml:space="preserve"><value>哎呀</value></data>
+  <data name="save" xml:space="preserve"><value>儲存</value></data>
+  <data name="share" xml:space="preserve"><value>分享</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>下一個</value></data>
+  <data name="menu" xml:space="preserve"><value>選單</value></data>
+  <data name="onb1t" xml:space="preserve"><value>數字是一連串方塊</value></data>
+  <data name="onb1b" xml:space="preserve"><value>提示 3 1 表示三個方塊連在一起，空一格，再一個方塊。順序一樣，從左到右。</value></data>
+  <data name="onb2t" xml:space="preserve"><value>把空格標出來</value></data>
+  <data name="onb2b" xml:space="preserve"><value>點一下就填塗。切到叉號模式，把你確定會留空的格子標起來——這樣腦子裡清清楚楚。</value></data>
+  <data name="onb3t" xml:space="preserve"><value>一幅圖畫出現了</value></data>
+  <data name="onb3b" xml:space="preserve"><value>把每一行每一列都做完，方塊就變成圖畫。每道謎題只有一個答案——永遠不用猜。</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>這一個免費送你！</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>不是那個——再試試</value></data>
+  <data name="genFailed" xml:space="preserve"><value>這次沒能生成謎題。請再試一次！</value></data>
+  <data name="ok" xml:space="preserve"><value>好</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>適用於遊戲自己生成的較大盤面——15×15 及以上。小圖是手繪的。</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>本月完成的每日謎題：{0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>沒有提示了</value></data>
+  <data name="lineDone" xml:space="preserve"><value>這一行完成了！</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>你準備好我就好。挑一個謎題吧！</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>你勢頭正好。再來一個？</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>我今天找到了一些新圖畫。</value></data>
+  <data name="winLine" xml:space="preserve"><value>這個不錯。想再來一個嗎？</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>開始你的第一個謎題</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>怎麼玩</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>每日謎題</value></data>
+  <data name="dailySub" xml:space="preserve"><value>每天早上一幅新圖</value></data>
+  <data name="play" xml:space="preserve"><value>玩</value></data>
+  <data name="timedName1" xml:space="preserve"><value>暖身</value></data>
+  <data name="timedName2" xml:space="preserve"><value>穩住</value></data>
+  <data name="timedName3" xml:space="preserve"><value>閃電</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · 時間充裕</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · 別停下來</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · 連眨眼都來不及</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>謎題之路</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>完成前一站才能打開下一站</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>第 {0} 站，{1}，已完成。再玩一次。</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>第 {0} 站，{1} 乘 {1}，接下來玩這個。</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>第 {0} 站，已鎖定。先完成它前面那一站。</value></data>
+  <data name="trophies" xml:space="preserve"><value>獎盃</value></data>
+  <data name="timeUp" xml:space="preserve"><value>時間到！</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>這次時鐘贏了。要再來一次嗎？</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>再試一次</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}。{1}。時鐘上還有 {2}。</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>每日</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>計時</value></data>
+  <data name="tabPath" xml:space="preserve"><value>路徑</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>計時挑戰</value></data>
+  <data name="tr1" xml:space="preserve"><value>第一幅圖</value></data>
+  <data name="tr2" xml:space="preserve"><value>連續一週</value></data>
+  <data name="tr3" xml:space="preserve"><value>不用提示</value></data>
+  <data name="tr4" xml:space="preserve"><value>神速</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 個方塊</value></data>
+  <data name="tr6" xml:space="preserve"><value>恐龍迷</value></data>
+  <data name="tr7" xml:space="preserve"><value>夜貓子</value></data>
+  <data name="tr8" xml:space="preserve"><value>完美十格</value></data>
+  <data name="tr9" xml:space="preserve"><value>收藏家</value></data>
+  <data name="sound" xml:space="preserve"><value>音效</value></data>
+  <data name="music" xml:space="preserve"><value>音樂</value></data>
+  <data name="voice" xml:space="preserve"><value>語音朗讀</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>現在我可以讀給你聽了。</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>這台裝置上沒有這種語言的語音</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>第 {0} 行，第 {1} 列，{2}。行提示 {3}。列提示 {4}。</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>空的</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>填塗了</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>打了叉</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>沒有</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>謎題盤面，{0} 乘 {1}。已填 {3} 格中的 {2} 格。</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>目前還無法用觸控瀏覽摸到這些格子。</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>已用時間：{0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>一共 {0} 顆星</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>連續 {0} 天</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>繼續玩 {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>刪除 {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>更小的格子</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>更大的格子</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}，已找到，{1} 顆星</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>這幅圖還沒找到。玩一玩就能揭開。</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>已鎖定的圖畫</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}，已獲得。{1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}，還沒獲得。{1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>3 顆星裡得了 {0} 顆</value></data>
+  <data name="haptics" xml:space="preserve"><value>點擊時震動</value></data>
+  <data name="audio" xml:space="preserve"><value>聲音</value></data>
+  <data name="look" xml:space="preserve"><value>外觀 &amp; 感覺</value></data>
+  <data name="controls" xml:space="preserve"><value>操作</value></data>
+  <data name="langGroup" xml:space="preserve"><value>語言</value></data>
+  <data name="parentZone" xml:space="preserve"><value>家長專區</value></data>
+  <data name="theme" xml:space="preserve"><value>主題</value></data>
+  <data name="light" xml:space="preserve"><value>淺色</value></data>
+  <data name="dark" xml:space="preserve"><value>深色</value></data>
+  <data name="auto" xml:space="preserve"><value>自動</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>色盲友善</value></data>
+  <data name="cbSub" xml:space="preserve"><value>藍／橙配色，保留圖案</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>主色</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>橘子</value></data>
+  <data name="accGrape" xml:space="preserve"><value>葡萄</value></data>
+  <data name="accTrio" xml:space="preserve"><value>三色</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>點擊時</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>點擊填塗，長按 = 叉</value></data>
+  <data name="tapMode" xml:space="preserve"><value>模式按鈕</value></data>
+  <data name="handed" xml:space="preserve"><value>按鈕放在</value></data>
+  <data name="leftH" xml:space="preserve"><value>左邊</value></data>
+  <data name="rightH" xml:space="preserve"><value>右邊</value></data>
+  <data name="cellSize" xml:space="preserve"><value>格子大小</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>大號數字</value></data>
+  <data name="language" xml:space="preserve"><value>語言</value></data>
+  <data name="screenTime" xml:space="preserve"><value>用眼時間提醒</value></data>
+  <data name="stOff" xml:space="preserve"><value>關閉</value></data>
+  <data name="st15" xml:space="preserve"><value>15 分鐘</value></data>
+  <data name="st30" xml:space="preserve"><value>30 分鐘</value></data>
+  <data name="st60" xml:space="preserve"><value>1 小時</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>該歇一歇了嗎？</value></data>
+  <data name="breakBody" xml:space="preserve"><value>你已經玩了 {0} 分鐘。謎題會等著你的。</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>再玩一會兒</value></data>
+  <data name="breakStop" xml:space="preserve"><value>我就玩到這裡</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>重設進度</value></data>
+  <data name="privacy" xml:space="preserve"><value>資料 &amp; 隱私</value></data>
+  <data name="open" xml:space="preserve"><value>打開</value></data>
+  <data name="reset" xml:space="preserve"><value>重設</value></data>
+  <data name="grownUps" xml:space="preserve"><value>僅限大人</value></data>
+  <data name="gateQ" xml:space="preserve"><value>7 × 4 等於多少？</value></data>
+  <data name="cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>全部清除嗎？</value></data>
+  <data name="resetBody" xml:space="preserve"><value>所有謎題、星星和貼紙都會消失。這無法復原。</value></data>
+  <data name="resetYes" xml:space="preserve"><value>是的，全部清除</value></data>
+  <data name="version" xml:space="preserve"><value>版本 1.0 · 建置 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>沒有廣告 · 沒有內購</value></data>
+  <data name="whatIs" xml:space="preserve"><value>什麼是數織？</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>數織是一幅藏在數字裡的圖畫。每一行和每一列的提示告訴你要填幾個方塊、按什麼順序填。用純粹的邏輯推出每一條線，圖畫就出現了——你永遠不需要猜。</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>也叫：Picross · Griddler · Hanjie · Pic-a-Pix · 數字填色 · 日本謎題</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>怎麼玩</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>致謝</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>隱私政策</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>傳送意見</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>為 squarebuzz 評分</value></data>
+  <data name="ht1" xml:space="preserve"><value>讀懂提示</value></data>
+  <data name="ht1b" xml:space="preserve"><value>每個數字都是一段不間斷的填塗方塊，按順序排列。行提示 3 1 表示三個連在一起，至少空一格，再一個單獨的。</value></data>
+  <data name="ht2" xml:space="preserve"><value>填塗和打叉</value></data>
+  <data name="ht2b" xml:space="preserve"><value>點一個格子就填塗它。對於你已經確定會留空的格子，切到叉號模式。叉號不是裝飾——你就是靠它記住推理的。</value></data>
+  <data name="ht3" xml:space="preserve"><value>長提示的重疊部分</value></data>
+  <data name="ht3b" xml:space="preserve"><value>在寬 10 的一行裡，提示 8 不管從哪裡開始，都一定會覆蓋中間的 6 格。把這段往左推，再往右推，重疊的部分就填上。</value></data>
+  <data name="ht4" xml:space="preserve"><value>行列對照</value></data>
+  <data name="ht4b" xml:space="preserve"><value>當一行給你一個確定的方塊時，順著那一列往下看。新方塊常常正好做完一個列提示，於是又多了叉號，又多了方塊。</value></data>
+  <data name="ht5" xml:space="preserve"><value>給做完的線打叉</value></data>
+  <data name="ht5b" xml:space="preserve"><value>當一條線和它的提示完全對上時，把剩下的每一格都打上叉。提示數字會變淡，你就知道這條線做完了。</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>動物</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>恐龍</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>太空</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>食物</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>車輛</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>童話</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>給我個驚喜</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>心</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>小魚</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>星星</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>小幽靈</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>蘋果</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>帆船</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>恐龍</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>貓臉</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>杯子蛋糕</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>賽車</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>火箭</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>王冠</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>神秘圖畫</value></data>
+  <data name="magnifier" xml:space="preserve"><value>放大鏡</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>填塗時顯示放大的 3×3 檢視。預設關閉。</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>問一個大人</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>已找到 {1} 幅中的 {0} 幅</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>完成你的第一幅圖。</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>連續玩七天。</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>一個提示都不用，完成一幅圖。</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>一分鐘內完成一個 5×5。</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>累計填塗 100 個方塊。</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>找到每一隻恐龍。</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>晚上八點以後完成一幅圖。</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>在 10×10 上拿到三顆星，且沒有錯誤。</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>找到圖庫裡的每一幅圖。</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>今天就到這裡——明天見！</value></data>
+</root>

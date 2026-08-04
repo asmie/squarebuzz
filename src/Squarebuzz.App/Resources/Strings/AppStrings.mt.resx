@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Maltese (mt). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Puzzles tal-loġika li jsiru stampi</value></data>
+  <data name="loading" xml:space="preserve"><value>Insaħħan il-blokki…</value></data>
+  <data name="skip" xml:space="preserve"><value>Aqbeż</value></data>
+  <data name="next" xml:space="preserve"><value>Li jmiss</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Ejja nilagħbu!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Logħba ġdida</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Kompli</value></data>
+  <data name="trials" xml:space="preserve"><value>Sfidi</value></data>
+  <data name="options" xml:space="preserve"><value>Settings</value></data>
+  <data name="about" xml:space="preserve"><value>Dwar</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} għaddejjin</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Xejn maħżun s'issa</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Il-puzzle ta' llum lest</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Ħoss, tema, kontrolli</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>X'inhu nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Kemm kbir?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Gradilji akbar jieħdu iktar ħin imma juru iktar dettall.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Ċkejken</value></data>
+  <data name="normal" xml:space="preserve"><value>Normali</value></data>
+  <data name="big" xml:space="preserve"><value>Kbir</value></data>
+  <data name="huge" xml:space="preserve"><value>Enormi</value></data>
+  <data name="giant" xml:space="preserve"><value>Ġgant</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tablet</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Kemm diffiċli?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Faċli ħafna</value></data>
+  <data name="easy" xml:space="preserve"><value>Faċli</value></data>
+  <data name="medium" xml:space="preserve"><value>Medju</value></data>
+  <data name="hard" xml:space="preserve"><value>Diffiċli</value></data>
+  <data name="expert" xml:space="preserve"><value>Espert</value></data>
+  <data name="challenge" xml:space="preserve"><value>Livell ta' sfida</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Skala oħra, separata mid-daqs u mid-diffikultà tal-ħjiel.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Kalm</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Għajnuniet mixgħula, bla limiti</value></data>
+  <data name="sharp" xml:space="preserve"><value>Iebes</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>L-iżbalji jingħaddu, ħjiel waħda</value></data>
+  <data name="pack" xml:space="preserve"><value>Pakkett ta' stampi</value></data>
+  <data name="helpers" xml:space="preserve"><value>Għajnuniet</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Immarka waħdek il-linji lesti</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Wissini fuq l-iżbalji</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Uri l-ħin</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Ħalli l-ħjiel</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Agħżel puzzle</value></data>
+  <data name="random" xml:space="preserve"><value>Puzzle bl-addoċċ</value></data>
+  <data name="gallery" xml:space="preserve"><value>Gallerija</value></data>
+  <data name="locked" xml:space="preserve"><value>Msakkar</value></data>
+  <data name="preview" xml:space="preserve"><value>Ħarsa</value></data>
+  <data name="start" xml:space="preserve"><value>Ibda l-puzzle</value></data>
+  <data name="fill" xml:space="preserve"><value>Imla</value></data>
+  <data name="cross" xml:space="preserve"><value>Immarka X</value></data>
+  <data name="undo" xml:space="preserve"><value>Ħassar</value></data>
+  <data name="redo" xml:space="preserve"><value>Erġa' agħmel</value></data>
+  <data name="hint" xml:space="preserve"><value>Ħjiel</value></data>
+  <data name="pause" xml:space="preserve"><value>Waqqaf</value></data>
+  <data name="minimap" xml:space="preserve"><value>Mappa</value></data>
+  <data name="paused" xml:space="preserve"><value>Imwaqqaf</value></data>
+  <data name="resume" xml:space="preserve"><value>Kompli</value></data>
+  <data name="restart" xml:space="preserve"><value>Ibda mill-bidu</value></data>
+  <data name="howTo" xml:space="preserve"><value>Kif tilgħab</value></data>
+  <data name="quit" xml:space="preserve"><value>Lura lejn il-menu</value></data>
+  <data name="solved" xml:space="preserve"><value>Irnexxielek!</value></data>
+  <data name="time" xml:space="preserve"><value>Ħin</value></data>
+  <data name="hints" xml:space="preserve"><value>Ħjiel</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Ops</value></data>
+  <data name="save" xml:space="preserve"><value>Issejvja</value></data>
+  <data name="share" xml:space="preserve"><value>Aqsam</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Li jmiss</value></data>
+  <data name="menu" xml:space="preserve"><value>Menu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>In-numri huma serje ta' blokki</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Ħjiel ta' 3 1 tfisser tliet blokki wara xulxin, spazju, imbagħad blokka waħda. L-istess ordni, mix-xellug għal-lemin.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Immarka l-vojta</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Mess darba biex timla. Aqleb għall-mod X biex timmarka kwadri li taf li jibqgħu vojta — iżommok ċar f'moħħok.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Tfeġġ stampa</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Lesti kull ringiela u kolonna u l-blokki jsiru stampa. Kull puzzle għandu tweġiba waħda biss — qatt taqta' fil-lajma.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Hawn waħda b'xejn!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Mhux dik — erġa' pprova</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Ma rnexxilix nibni puzzle din id-darba. Erġa' pprova!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Jgħodd għall-bordijiet akbar li l-logħba tivvinta hi stess — 15×15 'l fuq. L-istampi ż-żgħar huma mpittra bl-idejn.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Puzzles ta' kuljum lesti dan ix-xahar: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Ma fadalx ħjiel</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Il-linja lesta!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Lest meta tkun int. Agħżel puzzle!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Sejjer tajjeb. Waħda oħra?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Sibt xi stampi ġodda llum.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Dik kienet tajba. Trid oħra?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Ibda l-ewwel puzzle tiegħek</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Kif tilgħab</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Puzzle ta' kuljum</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Stampa ġdida kull filgħodu</value></data>
+  <data name="play" xml:space="preserve"><value>Ilgħab</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Tisħin</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Bil-pass</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Beraq</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · ħin biżżejjed</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · żomm il-pass</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · lanqas ħin biex tteptep</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Il-Mixja tal-Puzzles</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Lesti l-waqfa ta' qabel biex tiftaħ li jmiss</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Waqfa {0}, {1}, lesta. Erġa' lgħabha.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Waqfa {0}, {1} bi {1}, li jmiss biex tilgħab.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Waqfa {0}, msakkra. Lesti l-waqfa ta' qabilha.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Trofej</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Spiċċa l-ħin!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>L-arloġġ rebħek din id-darba. Trid terġa' tipprova?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Erġa' pprova</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} fuq l-arloġġ.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Kuljum</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Bil-ħin</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Mixja</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Sfida bil-ħin</value></data>
+  <data name="tr1" xml:space="preserve"><value>L-ewwel stampa</value></data>
+  <data name="tr2" xml:space="preserve"><value>Ġimgħa sħiħa</value></data>
+  <data name="tr3" xml:space="preserve"><value>Bla ħjiel</value></data>
+  <data name="tr4" xml:space="preserve"><value>Ħafif</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 blokka</value></data>
+  <data name="tr6" xml:space="preserve"><value>Ħabib tad-dinosawri</value></data>
+  <data name="tr7" xml:space="preserve"><value>Għasfur tal-lejl</value></data>
+  <data name="tr8" xml:space="preserve"><value>Għaxra perfetta</value></data>
+  <data name="tr9" xml:space="preserve"><value>Kollettur</value></data>
+  <data name="sound" xml:space="preserve"><value>Effetti tal-ħoss</value></data>
+  <data name="music" xml:space="preserve"><value>Mużika</value></data>
+  <data name="voice" xml:space="preserve"><value>Qari bil-leħen</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Nista' naqralek issa.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>L-ebda leħen għal din il-lingwa fuq dan l-apparat</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Ringiela {0}, kolonna {1}, {2}. Ħjiel tar-ringiela {3}. Ħjiel tal-kolonna {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>vojt</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>mimli</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>immarkat b'X</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>xejn</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Bord tal-puzzle, {0} bi {1}. {2} minn {3} kwadri mimlija.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Il-kwadri għadhom ma jintlaħqux bl-esplorazzjoni bil-mess.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Ħin s'issa: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} stilel b'kollox</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} ijiem wara xulxin</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Kompli bi {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Ħassar {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Kwadri iżgħar</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Kwadri akbar</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, misjuba, {1} stilel</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>L-istampa għadha ma nstabitx. Ilgħab biex tikxifha.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Stampa msakkra</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, mirbuħa. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, għadha mhix mirbuħa. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} minn 3 stilel</value></data>
+  <data name="haptics" xml:space="preserve"><value>Tregħid mal-mess</value></data>
+  <data name="audio" xml:space="preserve"><value>Ħoss</value></data>
+  <data name="look" xml:space="preserve"><value>Dehra &amp; sens</value></data>
+  <data name="controls" xml:space="preserve"><value>Kontrolli</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Lingwa</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Żona tal-ġenituri</value></data>
+  <data name="theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="light" xml:space="preserve"><value>Ċara</value></data>
+  <data name="dark" xml:space="preserve"><value>Skura</value></data>
+  <data name="auto" xml:space="preserve"><value>Awto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Tajba għal min ma jagħrafx il-kuluri</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Paletta blu/oranġjo, il-mudelli jibqgħu</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Kulur ewlieni</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandolin</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Għeneb</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Il-mess jagħmel</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Mess jimla, żomm = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Buttuna tal-mod</value></data>
+  <data name="handed" xml:space="preserve"><value>Buttuni fuq</value></data>
+  <data name="leftH" xml:space="preserve"><value>Ix-xellug</value></data>
+  <data name="rightH" xml:space="preserve"><value>Il-lemin</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Daqs tal-kwadru</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Numri kbar</value></data>
+  <data name="language" xml:space="preserve"><value>Lingwa</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Tfakkira dwar il-ħin fuq l-iskrin</value></data>
+  <data name="stOff" xml:space="preserve"><value>Mitfi</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>siegħa</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Ħin għal waqfa?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Ilek tilgħab {0} minuti. Il-puzzle tiegħek jistenniek.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Ftit iktar</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Nieqaf hawn</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Erġa' ibda l-progress</value></data>
+  <data name="privacy" xml:space="preserve"><value>Dejta &amp; privatezza</value></data>
+  <data name="open" xml:space="preserve"><value>Iftaħ</value></data>
+  <data name="reset" xml:space="preserve"><value>Erġa' ibda</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Għall-kbar biss</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Kemm hu 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Ikkanċella</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Tħassar kollox?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Il-puzzles, l-istilel u l-istickers kollha jmorru. Dan ma jistax jitreġġa' lura.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Iva, ħassar kollox</value></data>
+  <data name="version" xml:space="preserve"><value>Verżjoni 1.0 · build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Bla reklami · bla xiri fl-app</value></data>
+  <data name="whatIs" xml:space="preserve"><value>X'inhu nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram hu stampa moħbija fin-numri. Il-ħjiel ħdejn kull ringiela u kolonna jgħidulek kemm blokki timla u f'liema ordni. Solvi kull linja bil-loġika biss u tfeġġ stampa — qatt ma jkollok bżonn taqta' fil-lajma.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Magħruf ukoll bħala: Picross · Griddler · Hanjie · Pic-a-Pix · Pittura bin-numri · tisliba Ġappuniża</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Kif tilgħab</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Ringrazzjamenti</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Politika tal-privatezza</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Ibgħat il-fehma tiegħek</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Agħti rating lil squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Aqra l-ħjiel</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Kull numru hu serje waħda sħiħa ta' blokki mimlija, imniżżla bl-ordni. Ħjiel tar-ringiela 3 1 tfisser tlieta flimkien, spazju wieħed sa mill-inqas, imbagħad waħda waħedha.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Imla u mmarka</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Mess kwadru biex timlieh. Aqleb għall-mod X għall-kwadri li ppruvajt li jibqgħu vojta. L-X mhumiex tiżjin — bihom iżomm il-kont.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Trikkib fuq ħjiel twal</value></data>
+  <data name="ht3b" xml:space="preserve"><value>F'ringiela 10 wiesgħa, ħjiel ta' 8 trid tgħatti s-6 kwadri tan-nofs, ikun fejn ikun tibda. Imbotta s-serje lejn ix-xellug, imbottaha lejn il-lemin, u imla dak li jitrikkeb.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Qabbel ringiela u kolonna</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Meta ringiela tagħtik blokka ċerta, ħares 'l isfel f'dik il-kolonna. Il-blokka ġdida spiss tlesti ħjiel ta' kolonna, li tagħtik iktar X, li jagħtuk iktar blokki.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Immarka l-linji lesti</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Meta linja taqbel għal kollox mal-ħjiel tagħha, poġġi X f'kull kwadru li jifdal. In-numri jitbaxxew biex tkun taf li dik il-linja lesta.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Annimali</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosawri</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>L-Ispazju</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Ikel</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Vetturi</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Ħrafa</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Issorprendini</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Qalb</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Ħuta żgħira</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Stilla</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Fantażma</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Tuffieħa</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Dgħajsa bil-qlugħ</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosawru</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Wiċċ ta' qattus</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Cupcake</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Karozza tat-tellieqa</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Rokit</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Kuruna</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Stampa misterjuża</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lenti</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Turi ħarsa mkabbra 3×3 waqt li tpitter. Mitfija awtomatikament.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Staqsi lil adult</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} minn {1} misjuba</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Lesti l-ewwel stampa tiegħek.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Ilgħab sebat ijiem wara xulxin.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Lesti stampa bla ebda ħjiel.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Lesti 5×5 f'inqas minn minuta.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Imla 100 blokka b'kollox.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Sib kull dinosawru.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Lesti stampa wara t-8 ta' filgħaxija.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Tliet stilel fuq 10×10, bla żbalji.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Sib kull stampa fil-gallerija.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Lest għal llum — narak għada!</value></data>
+</root>

@@ -49,13 +49,33 @@ public enum AppLanguage
     Turkish,
     Japanese,
     Arabic,
+    ChineseSimplified,
+    ChineseTraditional,
+    Norwegian,
+    Icelandic,
+    Swedish,
+    Georgian,
+    Armenian,
+    Swahili,
+    Zulu,
+    Albanian,
+    Greek,
+    Persian,
+    Maltese,
+    Hindi,
+    Bengali,
+    Hebrew,
+    Croatian,
 }
 
 /// <summary>
 /// One shippable language: the enum member, its culture code, and the name it calls itself.
 /// </summary>
 /// <param name="Language">The enum member.</param>
-/// <param name="CultureCode">Two-letter code, matching the resx satellite's suffix.</param>
+/// <param name="CultureCode">
+/// The culture code, matching the resx satellite's suffix. Two letters for all but Chinese, which
+/// needs its script to tell the two written forms apart - see <see cref="AppLanguages.FromCultureCode"/>.
+/// </param>
 /// <param name="Endonym">
 /// What the language calls itself - "Deutsch", not "German". Deliberately not translated: a
 /// player hunting for their own language recognises it written its own way, whatever the app is
@@ -104,19 +124,47 @@ public static class AppLanguages
         new(AppLanguage.Estonian, "et", "Eesti"),
         new(AppLanguage.Spanish, "es", "Español"),
         new(AppLanguage.French, "fr", "Français"),
+        new(AppLanguage.Croatian, "hr", "Hrvatski", DisplayFontCovers: false),
+        new(AppLanguage.Zulu, "zu", "isiZulu"),
+        new(AppLanguage.Icelandic, "is", "Íslenska"),
         new(AppLanguage.Italian, "it", "Italiano"),
+        new(AppLanguage.Swahili, "sw", "Kiswahili"),
         new(AppLanguage.Latvian, "lv", "Latviešu", DisplayFontCovers: false),
         new(AppLanguage.Lithuanian, "lt", "Lietuvių", DisplayFontCovers: false),
+        new(AppLanguage.Maltese, "mt", "Malti", DisplayFontCovers: false),
         new(AppLanguage.Dutch, "nl", "Nederlands"),
+        new(AppLanguage.Norwegian, "no", "Norsk"),
         new(AppLanguage.Polish, "pl", "Polski"),
         new(AppLanguage.Portuguese, "pt", "Português"),
         new(AppLanguage.Romanian, "ro", "Română", DisplayFontCovers: false),
+        new(AppLanguage.Albanian, "sq", "Shqip"),
         new(AppLanguage.Slovak, "sk", "Slovenčina", DisplayFontCovers: false),
         new(AppLanguage.Slovenian, "sl", "Slovenščina", DisplayFontCovers: false),
         new(AppLanguage.Finnish, "fi", "Suomi"),
+        new(AppLanguage.Swedish, "sv", "Svenska"),
         new(AppLanguage.Turkish, "tr", "Türkçe"),
+
+        // Non-Latin scripts, grouped by script at the end. Alphabetising these against the Latin
+        // names is meaningless - no collation orders Greek against Georgian in a way a child
+        // scanning the list would predict - so they are kept together, and a player looking for
+        // their own writing system finds a block of it. Arabic sits further up only because it
+        // was there before these arrived; moving it would reshuffle a list people already know.
         new(AppLanguage.Ukrainian, "uk", "Українська", DisplayFontCovers: false),
         new(AppLanguage.Russian, "ru", "Русский", DisplayFontCovers: false),
+        new(AppLanguage.Greek, "el", "Ελληνικά", DisplayFontCovers: false),
+        new(AppLanguage.Armenian, "hy", "Հայերեն", DisplayFontCovers: false),
+        new(AppLanguage.Georgian, "ka", "ქართული", DisplayFontCovers: false),
+
+        // Hebrew is the exception the measurement turned up: Fredoka ships Hebrew glyphs even
+        // though Quicksand does not, so headings keep the display face here while the body text
+        // is the substituted one - the opposite way round from every other script in this block.
+        new(AppLanguage.Hebrew, "he", "עברית", IsRightToLeft: true),
+
+        new(AppLanguage.Persian, "fa", "فارسی", IsRightToLeft: true, DisplayFontCovers: false),
+        new(AppLanguage.Hindi, "hi", "हिन्दी", DisplayFontCovers: false),
+        new(AppLanguage.Bengali, "bn", "বাংলা", DisplayFontCovers: false),
+        new(AppLanguage.ChineseSimplified, "zh-Hans", "中文（简体）", DisplayFontCovers: false),
+        new(AppLanguage.ChineseTraditional, "zh-Hant", "中文（繁體）", DisplayFontCovers: false),
         new(AppLanguage.Japanese, "ja", "日本語", DisplayFontCovers: false),
     ];
 
@@ -164,14 +212,44 @@ public static class AppLanguages
         return true;
     }
 
+    /// <summary>Regions that write Chinese in traditional characters.</summary>
+    private static readonly string[] TraditionalChineseRegions = ["TW", "HK", "MO"];
+
+    /// <summary>
+    /// The shipped language a platform culture code asks for, or English when the game does not
+    /// have it.
+    /// </summary>
+    /// <remarks>
+    /// Matching is by language subtag, so "pl-PL" and "pt-BR" resolve to Polish and Portuguese.
+    /// Chinese is the one language where that is not enough: Simplified and Traditional share the
+    /// subtag "zh" and differ only by script, so it is resolved from the script when the code
+    /// carries one ("zh-Hant", "zh-Hant-TW") and from the region when it does not ("zh-TW").
+    /// A bare "zh" says nothing either way and takes Simplified, the larger audience.
+    /// </remarks>
     public static AppLanguage FromCultureCode(string? cultureCode)
     {
-        // Match on the language part only, so "pl-PL" and "pt-BR" still resolve.
-        var prefix = cultureCode?.Split('-')[0];
-
-        if (string.IsNullOrEmpty(prefix))
+        if (string.IsNullOrEmpty(cultureCode))
         {
             return AppLanguage.English;
+        }
+
+        // An exact hit first, so a code that already names its script keeps that script.
+        foreach (var info in All)
+        {
+            if (string.Equals(info.CultureCode, cultureCode, StringComparison.OrdinalIgnoreCase))
+            {
+                return info.Language;
+            }
+        }
+
+        var parts = cultureCode.Split('-');
+        var prefix = parts[0];
+
+        if (string.Equals(prefix, "zh", StringComparison.OrdinalIgnoreCase))
+        {
+            return IsTraditionalChinese(parts)
+                ? AppLanguage.ChineseTraditional
+                : AppLanguage.ChineseSimplified;
         }
 
         foreach (var info in All)
@@ -183,6 +261,32 @@ public static class AppLanguages
         }
 
         return AppLanguage.English;
+    }
+
+    private static bool IsTraditionalChinese(string[] parts)
+    {
+        foreach (var part in parts)
+        {
+            if (string.Equals(part, "Hant", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            if (string.Equals(part, "Hans", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            foreach (var region in TraditionalChineseRegions)
+            {
+                if (string.Equals(part, region, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

@@ -16,12 +16,21 @@ namespace Squarebuzz.Data.Repositories;
 public sealed class SqliteSettingsRepository : ISettingsRepository
 {
     private readonly SquarebuzzDatabase _database;
+    private readonly AppLanguage? _deviceLanguage;
 
-    public SqliteSettingsRepository(SquarebuzzDatabase database)
+    /// <param name="database">The shared connection.</param>
+    /// <param name="deviceLanguage">
+    /// The device's own language, for a player who has never chosen one. A value rather than a
+    /// delegate on purpose: it has to be read before the app applies a saved language, so there is
+    /// nothing to defer - see <see cref="SeedLanguageIfUnchosenAsync"/>. Null leaves the built-in
+    /// default in place, which is what tests want.
+    /// </param>
+    public SqliteSettingsRepository(SquarebuzzDatabase database, AppLanguage? deviceLanguage = null)
     {
         ArgumentNullException.ThrowIfNull(database);
 
         _database = database;
+        _deviceLanguage = deviceLanguage;
     }
 
     public async Task<GameSettings> LoadAsync(CancellationToken cancellationToken = default)
@@ -33,6 +42,8 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
 
         var values = rows.ToDictionary(r => r.Key, r => r.Value, StringComparer.Ordinal);
         var defaults = GameSettings.Default;
+
+        var language = await SeedLanguageIfUnchosenAsync(connection, values, defaults.Language).ConfigureAwait(false);
 
         return new GameSettings
         {
@@ -51,7 +62,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             CellZoomPercent = ReadInt(values, Keys.CellZoomPercent, defaults.CellZoomPercent),
             ShowMagnifier = ReadBool(values, Keys.ShowMagnifier, defaults.ShowMagnifier),
 
-            Language = ReadEnum(values, Keys.Language, defaults.Language),
+            Language = language,
 
             Helpers = new HelperSettings
             {
@@ -69,6 +80,37 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             ScreenTimeLimitMinutes = ReadNullableInt(values, Keys.ScreenTimeLimitMinutes),
             HasSeenOnboarding = ReadBool(values, Keys.HasSeenOnboarding, defaults.HasSeenOnboarding),
         }.Sanitised();
+    }
+
+    /// <summary>
+    /// The language for a player who has never chosen one: the device's, when the app supplied a
+    /// way to read it.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The absence of the row is the only reliable "never chosen" signal - a stored
+    /// <see cref="AppLanguage.English"/> is a choice and must not be second-guessed - which is why
+    /// this lives here rather than in startup code that can only see the loaded value.
+    /// </para>
+    /// <para>
+    /// The seed is written, not just returned, so it is a choice from then on: without the write,
+    /// a player who never opens Options would follow their phone's language for ever, which is a
+    /// different feature from the one this is.
+    /// </para>
+    /// </remarks>
+    private async Task<AppLanguage> SeedLanguageIfUnchosenAsync(
+        SQLite.SQLiteAsyncConnection connection,
+        Dictionary<string, string?> values,
+        AppLanguage fallback)
+    {
+        if (values.ContainsKey(Keys.Language) || _deviceLanguage is not { } seeded)
+        {
+            return ReadEnum(values, Keys.Language, fallback);
+        }
+
+        await connection.InsertOrReplaceAsync(Row(Keys.Language, seeded)).ConfigureAwait(false);
+
+        return seeded;
     }
 
     public async Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)

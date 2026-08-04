@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Armenian (hy). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Տրամաբանական հանելուկներ, որոնք դառնում են նկարներ</value></data>
+  <data name="loading" xml:space="preserve"><value>Տաքացնում եմ խորանարդիկները…</value></data>
+  <data name="skip" xml:space="preserve"><value>Բաց թողնել</value></data>
+  <data name="next" xml:space="preserve"><value>Հաջորդը</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Խաղա՛նք</value></data>
+  <data name="newGame" xml:space="preserve"><value>Նոր խաղ</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Շարունակել</value></data>
+  <data name="trials" xml:space="preserve"><value>Մարտահրավերներ</value></data>
+  <data name="options" xml:space="preserve"><value>Կարգավորումներ</value></data>
+  <data name="about" xml:space="preserve"><value>Ծրագրի մասին</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} ընթացքում</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Դեռ ոչինչ պահված չէ</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Այսօրվա հանելուկը պատրաստ է</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Ձայն, տեսք, կառավարում</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Ի՞նչ է նոնոգրամը</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Որքա՞ն մեծ</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Մեծ ցանցերն ավելի շատ ժամանակ են պահանջում, բայց ավելի շատ մանրամասն են ցույց տալիս։</value></data>
+  <data name="tiny" xml:space="preserve"><value>Փոքրիկ</value></data>
+  <data name="normal" xml:space="preserve"><value>Սովորական</value></data>
+  <data name="big" xml:space="preserve"><value>Մեծ</value></data>
+  <data name="huge" xml:space="preserve"><value>Հսկայական</value></data>
+  <data name="giant" xml:space="preserve"><value>Վիթխարի</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Պլանշետ</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Որքա՞ն դժվար</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Շատ հեշտ</value></data>
+  <data name="easy" xml:space="preserve"><value>Հեշտ</value></data>
+  <data name="medium" xml:space="preserve"><value>Միջին</value></data>
+  <data name="hard" xml:space="preserve"><value>Դժվար</value></data>
+  <data name="expert" xml:space="preserve"><value>Փորձագետ</value></data>
+  <data name="challenge" xml:space="preserve"><value>Մարտահրավերի մակարդակ</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Երկրորդ սանդղակ՝ չափից և հուշումների դժվարությունից անկախ։</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Հանգիստ</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Օգնականները միացված են, սահմաններ չկան</value></data>
+  <data name="sharp" xml:space="preserve"><value>Խիստ</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Սխալները հաշվվում են, մեկ հուշում</value></data>
+  <data name="pack" xml:space="preserve"><value>Նկարների փաթեթ</value></data>
+  <data name="helpers" xml:space="preserve"><value>Օգնականներ</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Ինքնաբերաբար խաչել լրացված տողերը</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Զգուշացնել սխալների մասին</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Ցույց տալ ժամանակը</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Թույլ տալ հուշումներ</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Ընտրիր հանելուկ</value></data>
+  <data name="random" xml:space="preserve"><value>Պատահական հանելուկ</value></data>
+  <data name="gallery" xml:space="preserve"><value>Պատկերասրահ</value></data>
+  <data name="locked" xml:space="preserve"><value>Փակված</value></data>
+  <data name="preview" xml:space="preserve"><value>Նախադիտում</value></data>
+  <data name="start" xml:space="preserve"><value>Սկսել հանելուկը</value></data>
+  <data name="fill" xml:space="preserve"><value>Լցնել</value></data>
+  <data name="cross" xml:space="preserve"><value>Դնել X</value></data>
+  <data name="undo" xml:space="preserve"><value>Հետարկել</value></data>
+  <data name="redo" xml:space="preserve"><value>Կրկնել</value></data>
+  <data name="hint" xml:space="preserve"><value>Հուշում</value></data>
+  <data name="pause" xml:space="preserve"><value>Դադար</value></data>
+  <data name="minimap" xml:space="preserve"><value>Քարտեզ</value></data>
+  <data name="paused" xml:space="preserve"><value>Դադարեցված</value></data>
+  <data name="resume" xml:space="preserve"><value>Շարունակել</value></data>
+  <data name="restart" xml:space="preserve"><value>Սկսել նորից</value></data>
+  <data name="howTo" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
+  <data name="quit" xml:space="preserve"><value>Դեպի ընտրացանկ</value></data>
+  <data name="solved" xml:space="preserve"><value>Դու հասցրեցիր</value></data>
+  <data name="time" xml:space="preserve"><value>Ժամանակ</value></data>
+  <data name="hints" xml:space="preserve"><value>Հուշումներ</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Վա՛յ</value></data>
+  <data name="save" xml:space="preserve"><value>Պահել</value></data>
+  <data name="share" xml:space="preserve"><value>Կիսվել</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Հաջորդը</value></data>
+  <data name="menu" xml:space="preserve"><value>Ընտրացանկ</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Թվերը խորանարդիկների շարքեր են</value></data>
+  <data name="onb1b" xml:space="preserve"><value>3 1 հուշումը նշանակում է երեք խորանարդիկ իրար կողքի, բացակ, ապա մեկ խորանարդիկ։ Նույն հերթականությամբ՝ ձախից աջ։</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Նշիր դատարկները</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Սեղմիր մեկ անգամ լցնելու համար։ Անցիր X ռեժիմին՝ նշելու վանդակները, որոնք գիտես, որ դատարկ կմնան — այդպես գլուխդ պարզ է մնում։</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Հայտնվում է նկար</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Ավարտիր բոլոր տողերն ու սյունակները և խորանարդիկները նկար կդառնան։ Ամեն հանելուկ ունի ճիշտ մեկ պատասխան — երբեք չգուշակես։</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Ահա մեկը՝ ձրի</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Ոչ դա — փորձիր նորից</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Այս անգամ չկարողացա հանելուկ կառուցել։ Փորձիր նորից</value></data>
+  <data name="ok" xml:space="preserve"><value>Լավ</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Վերաբերում է մեծ դաշտերին, որ խաղը ինքն է հորինում — 15×15 և ավելի։ Փոքր նկարները ձեռքով են գծված։</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Այս ամիս ավարտված օրվա հանելուկներ՝ {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Հուշումներ չեն մնացել</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Տողն ավարտվեց</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Պատրաստ եմ, երբ դու պատրաստ լինես։ Ընտրիր հանելուկ</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Լավ է գնում։ Էլ մեկը՞</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Այսօր նոր նկարներ գտա։</value></data>
+  <data name="winLine" xml:space="preserve"><value>Լավն էր։ Ուրիշն ուզո՞ւմ ես</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Սկսիր քո առաջին հանելուկը</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Օրվա հանելուկ</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Նոր նկար ամեն առավոտ</value></data>
+  <data name="play" xml:space="preserve"><value>Խաղալ</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Տաքացում</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Հավասար</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Կայծակ</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · ժամանակը շատ է</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · պահիր տեմպը</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · աչք թարթելու ժամանակ չկա</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Հանելուկների ուղին</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Ավարտիր նախորդ կանգառը, որ հաջորդը բացվի</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Կանգառ {0}, {1}, ավարտված։ Խաղա նորից։</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Կանգառ {0}, {1} × {1}, հաջորդը խաղալու։</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Կանգառ {0}, փակված։ Ավարտիր նրանից առաջ եղած կանգառը։</value></data>
+  <data name="trophies" xml:space="preserve"><value>Գավաթներ</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Ժամանակը սպառվեց</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Այս անգամ ժամացույցը հաղթեց։ Էլի փորձե՞ս</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Փորձիր նորից</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}։ {1}։ {2} ժամացույցի վրա։</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Օրվա</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Ժամանակով</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Ուղի</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Ժամանակային փորձ</value></data>
+  <data name="tr1" xml:space="preserve"><value>Առաջին նկարը</value></data>
+  <data name="tr2" xml:space="preserve"><value>Շաբաթ անընդմեջ</value></data>
+  <data name="tr3" xml:space="preserve"><value>Առանց հուշումների</value></data>
+  <data name="tr4" xml:space="preserve"><value>Արագ</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 խորանարդիկ</value></data>
+  <data name="tr6" xml:space="preserve"><value>Դինոզավրերի սիրահար</value></data>
+  <data name="tr7" xml:space="preserve"><value>Գիշերային բու</value></data>
+  <data name="tr8" xml:space="preserve"><value>Կատարյալ տասը</value></data>
+  <data name="tr9" xml:space="preserve"><value>Հավաքորդ</value></data>
+  <data name="sound" xml:space="preserve"><value>Ձայնային էֆեկտներ</value></data>
+  <data name="music" xml:space="preserve"><value>Երաժշտություն</value></data>
+  <data name="voice" xml:space="preserve"><value>Ձայնային ընթերցում</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Հիմա կարող եմ կարդալ քեզ համար։</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Այս սարքում այս լեզվի ձայն չկա</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Տող {0}, սյունակ {1}, {2}։ Տողի հուշում {3}։ Սյունակի հուշում {4}։</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>դատարկ</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>լցված</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>խաչված</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>ոչինչ</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Հանելուկի դաշտ, {0} × {1}։ Լցված է {3}-ից {2} վանդակ։</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Վանդակներին դեռ հնարավոր չէ հասնել հպումով ուսումնասիրելիս։</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Ժամանակը մինչ այժմ՝ {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Ընդհանուր {0} աստղ</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} օր անընդմեջ</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Շարունակիր {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Ջնջել {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Ավելի փոքր վանդակներ</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Ավելի մեծ վանդակներ</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, գտնված, {1} աստղ</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Նկարը դեռ գտնված չէ։ Խաղա՝ բացահայտելու համար։</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Փակված նկար</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, նվաճված։ {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, դեռ նվաճված չէ։ {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>3 աստղից {0}</value></data>
+  <data name="haptics" xml:space="preserve"><value>Թրթռոց հպելիս</value></data>
+  <data name="audio" xml:space="preserve"><value>Ձայն</value></data>
+  <data name="look" xml:space="preserve"><value>Տեսք &amp; զգացողություն</value></data>
+  <data name="controls" xml:space="preserve"><value>Կառավարում</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Լեզու</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Ծնողների անկյուն</value></data>
+  <data name="theme" xml:space="preserve"><value>Տեսք</value></data>
+  <data name="light" xml:space="preserve"><value>Լուսավոր</value></data>
+  <data name="dark" xml:space="preserve"><value>Մուգ</value></data>
+  <data name="auto" xml:space="preserve"><value>Ավտո</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Գունային կուրության համար հարմար</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Կապույտ/նարնջագույն ներկապնակ, նախշերը մնում են</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Հիմնական գույն</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Մանդարին</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Խաղող</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Երրորդություն</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Հպումն անում է</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Հպումը լցնում է, պահելը = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Ռեժիմի կոճակ</value></data>
+  <data name="handed" xml:space="preserve"><value>Կոճակները</value></data>
+  <data name="leftH" xml:space="preserve"><value>Ձախ</value></data>
+  <data name="rightH" xml:space="preserve"><value>Աջ</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Վանդակի չափ</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Մեծ թվեր</value></data>
+  <data name="language" xml:space="preserve"><value>Լեզու</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Էկրանի ժամանակի հիշեցում</value></data>
+  <data name="stOff" xml:space="preserve"><value>Անջատված</value></data>
+  <data name="st15" xml:space="preserve"><value>15 րոպե</value></data>
+  <data name="st30" xml:space="preserve"><value>30 րոպե</value></data>
+  <data name="st60" xml:space="preserve"><value>1 ժամ</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Ընդմիջման ժամանա՞կ է</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Արդեն {0} րոպե խաղում ես։ Հանելուկդ կսպասի քեզ։</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Մի քիչ էլ</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Այստեղ կկանգնեմ</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Զրոյացնել առաջընթացը</value></data>
+  <data name="privacy" xml:space="preserve"><value>Տվյալներ &amp; գաղտնիություն</value></data>
+  <data name="open" xml:space="preserve"><value>Բացել</value></data>
+  <data name="reset" xml:space="preserve"><value>Զրոյացնել</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Միայն մեծերի համար</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Ինչքա՞ն է 7 × 4</value></data>
+  <data name="cancel" xml:space="preserve"><value>Չեղարկել</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Ջնջե՞լ ամեն ինչ</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Բոլոր հանելուկները, աստղերն ու կպչուն պիտակները կվերանան։ Սա հետ չի բերվում։</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Այո, ջնջիր ամեն ինչ</value></data>
+  <data name="version" xml:space="preserve"><value>Տարբերակ 1.0 · build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Առանց գովազդի · առանց ներծրագրային գնումների</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Ի՞նչ է նոնոգրամը</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Նոնոգրամը թվերի մեջ թաքնված նկար է։ Ամեն տողի ու սյունակի հուշումները ասում են, թե քանի խորանարդիկ լցնես և ինչ հերթականությամբ։ Լուծիր ամեն գիծ մաքուր տրամաբանությամբ և նկարը կհայտնվի — երբեք գուշակելու կարիք չկա։</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Հայտնի է նաև որպես՝ Picross · Griddler · Hanjie · Pic-a-Pix · Նկարել թվերով · ճապոնական խաչբառ</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Շնորհակալություններ</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Գաղտնիության քաղաքականություն</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Ուղարկել կարծիք</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Գնահատել squarebuzz-ը</value></data>
+  <data name="ht1" xml:space="preserve"><value>Կարդա հուշումները</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Ամեն թիվ լցված խորանարդիկների մեկ անընդհատ շարք է՝ հերթականությամբ։ Տողի 3 1 հուշումը նշանակում է երեքը միասին, առնվազն մեկ բացակ, ապա մեկը մենակ։</value></data>
+  <data name="ht2" xml:space="preserve"><value>Լցնիր և խաչիր</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Հպիր վանդակին՝ լցնելու համար։ Անցիր X ռեժիմին այն վանդակների համար, որոնց դատարկ մնալը ապացուցել ես։ X-երը զարդ չեն — դրանցով ես հաշիվը պահում։</value></data>
+  <data name="ht3" xml:space="preserve"><value>Համընկնում երկար հուշումների դեպքում</value></data>
+  <data name="ht3b" xml:space="preserve"><value>10 լայնությամբ տողում 8 հուշումը պետք է ծածկի միջին 6 վանդակը, ուր էլ սկսի։ Հրիր շարքը ձախ, հրիր աջ և լցրու այն, ինչ համընկնում է։</value></data>
+  <data name="ht4" xml:space="preserve"><value>Համեմատիր տողն ու սյունակը</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Երբ տողը մեկ հաստատ խորանարդիկ տա, նայիր այդ սյունակի ներքև։ Նոր խորանարդիկը հաճախ ավարտում է սյունակի հուշումը, ինչը տալիս է ավելի շատ X, ինչը տալիս է ավելի շատ խորանարդիկ։</value></data>
+  <data name="ht5" xml:space="preserve"><value>Խաչիր ավարտված գծերը</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Երբ գիծը լիովին համապատասխանում է իր հուշումներին, դիր X մնացած ամեն վանդակում։ Թվերը մարում են, որ իմանաս՝ այդ գիծն ավարտված է։</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Կենդանիներ</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Դինոզավրեր</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Տարածություն</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Ուտելիք</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Փոխադրամիջոցներ</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Հեքիաթ</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Զարմացրու ինձ</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Սիրտ</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Փոքրիկ ձուկ</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Աստղ</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Ուրվական</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Խնձոր</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Առագաստանավ</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Դինոզավր</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Կատվի դեմք</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Բաժակաթխվածք</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Մրցարշավի մեքենա</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Հրթիռ</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Թագ</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Խորհրդավոր նկար</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Խոշորացույց</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Ներկելիս ցույց է տալիս խոշորացված 3×3 տեսք։ Լռելյայն անջատված է։</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Հարցրու մեծին</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{1}-ից {0} գտնված</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Ավարտիր քո առաջին նկարը։</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Խաղա յոթ օր անընդմեջ։</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Ավարտիր նկարը առանց որևէ հուշման։</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Ավարտիր 5×5-ը մեկ րոպեից պակասում։</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Ընդհանուր լցրու 100 խորանարդիկ։</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Գտիր բոլոր դինոզավրերին։</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Ավարտիր նկարը երեկոյան 8-ից հետո։</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Երեք աստղ 10×10-ի վրա՝ առանց սխալի։</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Գտիր պատկերասրահի բոլոր նկարները։</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Այսօրվա համար վերջ — վաղը կտեսնվենք</value></data>
+</root>

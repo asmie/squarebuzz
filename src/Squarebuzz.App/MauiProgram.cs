@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
@@ -119,7 +120,15 @@ public static class MauiProgram
         services.AddSingleton(_ => new SquarebuzzDatabase(
             Path.Combine(FileSystem.AppDataDirectory, "squarebuzz.db3")));
 
-        services.AddSingleton<ISettingsRepository, SqliteSettingsRepository>();
+        // The device's language, for a player who has never chosen one. Read here, during
+        // startup, rather than inside the factory: LocalizationService.SetLanguage assigns
+        // CultureInfo.DefaultThreadCurrent*, so once the saved language has been applied this
+        // would read back our own override instead of the phone's locale. FromCultureCode drops
+        // the region, so pl-PL and pt-BR resolve, and anything unshipped lands on English.
+        var deviceLanguage = AppLanguages.FromCultureCode(CultureInfo.CurrentUICulture.Name);
+
+        services.AddSingleton<ISettingsRepository>(provider =>
+            new SqliteSettingsRepository(provider.GetRequiredService<SquarebuzzDatabase>(), deviceLanguage));
         services.AddSingleton<ISaveGameRepository, SqliteSaveGameRepository>();
         services.AddSingleton<IProgressRepository, SqliteProgressRepository>();
     }

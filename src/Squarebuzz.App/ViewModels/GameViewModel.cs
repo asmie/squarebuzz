@@ -143,7 +143,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [NotifyPropertyChangedFor(nameof(ModeButtonText))]
     public partial bool IsCrossMode { get; private set; }
 
+    /// <remarks>
+    /// Raises <see cref="SolvedTimeText"/> as well, which is what makes the win overlay's time
+    /// tile show the solve rather than the "0:00" the binding read when the page was built - see
+    /// that property.
+    /// </remarks>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SolvedTimeText))]
     public partial bool IsSolved { get; private set; }
 
     /// <summary>
@@ -184,8 +190,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     [ObservableProperty]
     public partial double Progress { get; private set; }
 
+    /// <remarks>
+    /// Both star properties, not just the visible one: the description is bound to the same label
+    /// and goes stale exactly as <see cref="SolvedTimeText"/> did, so a screen reader was told
+    /// "0 of 3 stars" over a row of three filled ones.
+    /// </remarks>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StarsText))]
+    [NotifyPropertyChangedFor(nameof(StarsDescription))]
     public partial int StarRating { get; private set; }
 
     [ObservableProperty]
@@ -362,6 +374,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// *left* during a timed trial, and a trial's win screen should still report how long the
     /// solve took, not how much clock remained.
     /// </summary>
+    /// <remarks>
+    /// Computed, so it only reaches the screen when something raises it - <see cref="IsSolved"/>
+    /// does. The overlay is in the visual tree from the start, merely hidden, so its binding is
+    /// evaluated once when the page is built: before <see cref="Session"/> is loaded, which read
+    /// "0:00" and then never changed, however long the puzzle took. The same staleness would show
+    /// the *previous* puzzle's time on a second win in one sitting.
+    /// </remarks>
     public string SolvedTimeText
     {
         get

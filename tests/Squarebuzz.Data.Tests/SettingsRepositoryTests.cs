@@ -159,6 +159,91 @@ public class SettingsRepositoryTests
     }
 
     [Fact]
+    public void Chinese_ResolvesScriptRatherThanJustTheLanguage()
+    {
+        // The only pair that shares a language subtag, so it is the one case a plain "split on
+        // the dash" cannot answer. Android reports any of these shapes.
+        Assert.Equal(AppLanguage.ChineseSimplified, AppLanguages.FromCultureCode("zh-Hans"));
+        Assert.Equal(AppLanguage.ChineseTraditional, AppLanguages.FromCultureCode("zh-Hant"));
+        Assert.Equal(AppLanguage.ChineseSimplified, AppLanguages.FromCultureCode("zh-Hans-CN"));
+        Assert.Equal(AppLanguage.ChineseTraditional, AppLanguages.FromCultureCode("zh-Hant-TW"));
+
+        // Region alone implies the script for the places that only use one.
+        Assert.Equal(AppLanguage.ChineseSimplified, AppLanguages.FromCultureCode("zh-CN"));
+        Assert.Equal(AppLanguage.ChineseSimplified, AppLanguages.FromCultureCode("zh-SG"));
+        Assert.Equal(AppLanguage.ChineseTraditional, AppLanguages.FromCultureCode("zh-TW"));
+        Assert.Equal(AppLanguage.ChineseTraditional, AppLanguages.FromCultureCode("zh-HK"));
+        Assert.Equal(AppLanguage.ChineseTraditional, AppLanguages.FromCultureCode("zh-MO"));
+
+        // Bare "zh" says nothing about script; Simplified is the larger audience.
+        Assert.Equal(AppLanguage.ChineseSimplified, AppLanguages.FromCultureCode("zh"));
+    }
+
+    [Fact]
+    public void EveryShippedCultureCode_IsOneDotNetCanResolve()
+    {
+        // LocalizationService calls GetCultureInfo on these, and an unresolvable code surfaces as
+        // a TypeInitializationException the first time anything touches it - not as a missing
+        // translation. That is why a language needs a real culture and not just a resx file.
+        foreach (var info in AppLanguages.All)
+        {
+            var culture = System.Globalization.CultureInfo.GetCultureInfo(info.CultureCode);
+
+            Assert.Equal(info.CultureCode, culture.Name, ignoreCase: true);
+        }
+    }
+
+    [Fact]
+    public void EveryRightToLeftLanguage_IsFlagged()
+    {
+        // Three scripts read right to left, and the UI mirrors on all of them.
+        Assert.True(AppLanguage.Arabic.IsRightToLeft());
+        Assert.True(AppLanguage.Persian.IsRightToLeft());
+        Assert.True(AppLanguage.Hebrew.IsRightToLeft());
+
+        Assert.False(AppLanguage.English.IsRightToLeft());
+        Assert.False(AppLanguage.Hindi.IsRightToLeft());
+    }
+
+    [Fact]
+    public async Task FirstRun_TakesTheLanguageFromTheDevice()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSettingsRepository(temp.Database, AppLanguage.Polish);
+
+        var settings = await repository.LoadAsync();
+
+        Assert.Equal(AppLanguage.Polish, settings.Language);
+    }
+
+    [Fact]
+    public async Task TheSeededLanguage_IsRecorded_SoALaterDeviceChangeCannotMoveIt()
+    {
+        await using var temp = new TemporaryDatabase();
+
+        await new SqliteSettingsRepository(temp.Database, AppLanguage.Polish).LoadAsync();
+
+        // Second launch, phone since switched to German. The first run recorded a choice, and
+        // from then on only the player changes it.
+        var loaded = await new SqliteSettingsRepository(temp.Database, AppLanguage.German).LoadAsync();
+
+        Assert.Equal(AppLanguage.Polish, loaded.Language);
+    }
+
+    [Fact]
+    public async Task AChosenLanguage_IsNotOverriddenByTheDevice()
+    {
+        await using var temp = new TemporaryDatabase();
+
+        await new SqliteSettingsRepository(temp.Database)
+            .SaveAsync(GameSettings.Default with { Language = AppLanguage.Spanish });
+
+        var loaded = await new SqliteSettingsRepository(temp.Database, AppLanguage.Polish).LoadAsync();
+
+        Assert.Equal(AppLanguage.Spanish, loaded.Language);
+    }
+
+    [Fact]
     public void EveryShippedLanguage_HasAUniqueCodeAndRoundTrips()
     {
         // The picker, the resx satellite names and the persisted value all key off these, so a
@@ -179,9 +264,9 @@ public class SettingsRepositoryTests
             Assert.False(string.IsNullOrWhiteSpace(info.Endonym));
         }
 
-        // Arabic is the one right-to-left language, and the only one.
-        Assert.True(AppLanguage.Arabic.IsRightToLeft());
-        Assert.Single(AppLanguages.All, l => l.IsRightToLeft);
+        // Exactly the three right-to-left scripts the game ships, no more - a wrongly flagged
+        // language mirrors the whole UI. See EveryRightToLeftLanguage_IsFlagged.
+        Assert.Equal(3, AppLanguages.All.Count(l => l.IsRightToLeft));
     }
 
     [Fact]

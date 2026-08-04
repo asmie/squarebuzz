@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Albanian (sq). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Enigma logjike që shndërrohen në figura</value></data>
+  <data name="loading" xml:space="preserve"><value>Po ngroh kubat…</value></data>
+  <data name="skip" xml:space="preserve"><value>Kapërce</value></data>
+  <data name="next" xml:space="preserve"><value>Tjetra</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Të lozim!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Lojë e re</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Vazhdo</value></data>
+  <data name="trials" xml:space="preserve"><value>Sfida</value></data>
+  <data name="options" xml:space="preserve"><value>Cilësimet</value></data>
+  <data name="about" xml:space="preserve"><value>Rreth</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} në vazhdim</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Asgjë e ruajtur deri tani</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Enigma e ditës është gati</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Zë, temë, kontrolle</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Çfarë është një nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Sa e madhe?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Rrjetat më të mëdha zgjatin më shumë, por zbulojnë më shumë detaje.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Fare e vogël</value></data>
+  <data name="normal" xml:space="preserve"><value>Normale</value></data>
+  <data name="big" xml:space="preserve"><value>E madhe</value></data>
+  <data name="huge" xml:space="preserve"><value>Shumë e madhe</value></data>
+  <data name="giant" xml:space="preserve"><value>Gjigante</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Tablet</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Sa e ndërlikuar?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Shumë e lehtë</value></data>
+  <data name="easy" xml:space="preserve"><value>E lehtë</value></data>
+  <data name="medium" xml:space="preserve"><value>Mesatare</value></data>
+  <data name="hard" xml:space="preserve"><value>E vështirë</value></data>
+  <data name="expert" xml:space="preserve"><value>Ekspert</value></data>
+  <data name="challenge" xml:space="preserve"><value>Niveli i sfidës</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Një shkallë e dytë, e veçuar nga madhësia dhe vështirësia e të dhënave.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>E qetë</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Ndihmesat aktive, pa kufij</value></data>
+  <data name="sharp" xml:space="preserve"><value>E prerë</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Gabimet numërohen, një ndihmesë</value></data>
+  <data name="pack" xml:space="preserve"><value>Paketë figurash</value></data>
+  <data name="helpers" xml:space="preserve"><value>Ndihmesa</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Kryqëzo vetë rreshtat e mbaruar</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Njofto për gabimet</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Shfaq kohën</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Lejo ndihmesat</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Zgjidh një enigmë</value></data>
+  <data name="random" xml:space="preserve"><value>Enigmë e rastit</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galeria</value></data>
+  <data name="locked" xml:space="preserve"><value>E kyçur</value></data>
+  <data name="preview" xml:space="preserve"><value>Parashikim</value></data>
+  <data name="start" xml:space="preserve"><value>Nis enigmën</value></data>
+  <data name="fill" xml:space="preserve"><value>Mbush</value></data>
+  <data name="cross" xml:space="preserve"><value>Shëno X</value></data>
+  <data name="undo" xml:space="preserve"><value>Zhbëj</value></data>
+  <data name="redo" xml:space="preserve"><value>Ribëj</value></data>
+  <data name="hint" xml:space="preserve"><value>Ndihmesë</value></data>
+  <data name="pause" xml:space="preserve"><value>Pauzë</value></data>
+  <data name="minimap" xml:space="preserve"><value>Harta</value></data>
+  <data name="paused" xml:space="preserve"><value>Në pauzë</value></data>
+  <data name="resume" xml:space="preserve"><value>Vazhdo</value></data>
+  <data name="restart" xml:space="preserve"><value>Nis nga fillimi</value></data>
+  <data name="howTo" xml:space="preserve"><value>Si të lozësh</value></data>
+  <data name="quit" xml:space="preserve"><value>Në menu</value></data>
+  <data name="solved" xml:space="preserve"><value>E bëre!</value></data>
+  <data name="time" xml:space="preserve"><value>Koha</value></data>
+  <data name="hints" xml:space="preserve"><value>Ndihmesa</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
+  <data name="save" xml:space="preserve"><value>Ruaj</value></data>
+  <data name="share" xml:space="preserve"><value>Shpërndaj</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Tjetra</value></data>
+  <data name="menu" xml:space="preserve"><value>Menu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Numrat janë vargje kubash</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Të dhëna 3 1 do të thotë tre kuba në rresht, një hapësirë, pastaj një kub. I njëjti rend, nga e majta në të djathtë.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Shëno të boshët</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Trokit një herë për të mbushur. Kalo në mënyrën X për t'i shënuar kutitë që e di se mbeten bosh — kështu e ke kokën të qartë.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Shfaqet një figurë</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Mbaro çdo rresht dhe shtyllë dhe kubat bëhen figurë. Çdo enigmë ka saktësisht një përgjigje — mos hamendëso kurrë.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Ja një falas!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Jo atë — provo përsëri</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Nuk arrita të ndërtoj një enigmë këtë herë. Provo përsëri!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Vlen për fushat më të mëdha që loja i shpik vetë — 15×15 e sipër. Figurat e vogla janë vizatuar me dorë.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Enigma ditore të mbaruara këtë muaj: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Nuk ka më ndihmesa</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Rreshti u mbarua!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Gati kur të jesh ti. Zgjidh një enigmë!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Po të shkon mirë. Edhe një?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Gjeta figura të reja sot.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Kjo qe e mirë. Do edhe një?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Nis enigmën e parë</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Si të lozësh</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Enigma e ditës</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Një figurë e re çdo mëngjes</value></data>
+  <data name="play" xml:space="preserve"><value>Loz</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Ngrohje</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Me hap</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Vetëtimë</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · kohë me bollëk</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · mos ndalo</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · pa kohë për të pulitur</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Shtegu i enigmave</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Mbaro ndalesën para për të hapur tjetrën</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Ndalesa {0}, {1}, e mbaruar. Loze përsëri.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Ndalesa {0}, {1} me {1}, tjetra për t'u lozur.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Ndalesa {0}, e kyçur. Mbaro ndalesën para saj.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Trofe</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Koha mbaroi!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Ora të mundi këtë herë. Do një provë tjetër?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Provo përsëri</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} në orë.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Ditore</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Me kohë</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Shteg</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Sfidë me kohë</value></data>
+  <data name="tr1" xml:space="preserve"><value>Figura e parë</value></data>
+  <data name="tr2" xml:space="preserve"><value>Javë pa shkëputje</value></data>
+  <data name="tr3" xml:space="preserve"><value>Pa ndihmesa</value></data>
+  <data name="tr4" xml:space="preserve"><value>I shpejtë</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 kuba</value></data>
+  <data name="tr6" xml:space="preserve"><value>Mik i dinosaurëve</value></data>
+  <data name="tr7" xml:space="preserve"><value>Zog nate</value></data>
+  <data name="tr8" xml:space="preserve"><value>Dhjeta e përsosur</value></data>
+  <data name="tr9" xml:space="preserve"><value>Koleksionist</value></data>
+  <data name="sound" xml:space="preserve"><value>Efekte zanore</value></data>
+  <data name="music" xml:space="preserve"><value>Muzika</value></data>
+  <data name="voice" xml:space="preserve"><value>Lexim me zë</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Tani mund të lexoj për ty.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Pa zë për këtë gjuhë në këtë pajisje</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Rreshti {0}, shtylla {1}, {2}. Të dhëna rreshti {3}. Të dhëna shtylle {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>bosh</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>e mbushur</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>e kryqëzuar</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>asnjë</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Fusha e enigmës, {0} me {1}. {2} nga {3} kuti të mbushura.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Kutitë nuk mund të kapen ende me shqyrtim me gisht.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Koha deri tani: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} yje gjithsej</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} ditë rresht</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Vazhdo me {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Fshi {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Kuti më të vogla</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Kuti më të mëdha</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, e gjetur, {1} yje</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Figura nuk është gjetur ende. Loz për ta zbuluar.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Figurë e kyçur</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, e fituar. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, jo e fituar ende. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} nga 3 yje</value></data>
+  <data name="haptics" xml:space="preserve"><value>Dridhje në trokitje</value></data>
+  <data name="audio" xml:space="preserve"><value>Zë</value></data>
+  <data name="look" xml:space="preserve"><value>Pamja &amp; ndjesia</value></data>
+  <data name="controls" xml:space="preserve"><value>Kontrolle</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Gjuha</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Zona e prindërve</value></data>
+  <data name="theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="light" xml:space="preserve"><value>E çelur</value></data>
+  <data name="dark" xml:space="preserve"><value>E errët</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>E përshtatur për daltonizmin</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Paletë blu/portokalli, motivet mbeten</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Ngjyra kryesore</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarinë</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Rrush</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Trokitja bën</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Trokitja mbush, shtypja = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Butoni i mënyrës</value></data>
+  <data name="handed" xml:space="preserve"><value>Butonat në</value></data>
+  <data name="leftH" xml:space="preserve"><value>Majtas</value></data>
+  <data name="rightH" xml:space="preserve"><value>Djathtas</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Madhësia e kutisë</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Numra të mëdhenj</value></data>
+  <data name="language" xml:space="preserve"><value>Gjuha</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Kujtues për kohën para ekranit</value></data>
+  <data name="stOff" xml:space="preserve"><value>Çaktivizuar</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 orë</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Kohë për një pushim?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Ke lozur për {0} minuta. Enigma do të presë për ty.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Edhe pak</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Do ndalem këtu</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Rivendos ecurinë</value></data>
+  <data name="privacy" xml:space="preserve"><value>Të dhënat &amp; privatësia</value></data>
+  <data name="open" xml:space="preserve"><value>Hap</value></data>
+  <data name="reset" xml:space="preserve"><value>Rivendos</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Vetëm për të rriturit</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Sa bëjnë 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Anulo</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Të fshihet çdo gjë?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Të gjitha enigmat, yjet dhe ngjitësat do të zhduken. Kjo nuk mund të kthehet.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Po, fshiji të gjitha</value></data>
+  <data name="version" xml:space="preserve"><value>Versioni 1.0 · ndërtimi 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Pa reklama · pa blerje brenda aplikacionit</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Çfarë është një nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogrami është një figurë e fshehur brenda numrave. Të dhënat në çdo rresht dhe shtyllë të tregojnë sa kuba të mbushësh dhe në çfarë rendi. Zgjidh çdo vijë me logjikë të kulluar dhe shfaqet një figurë — nuk të duhet kurrë të hamendësosh.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Njihet edhe si: Picross · Griddler · Hanjie · Pic-a-Pix · Pikturë me numra · fjalëkryq japonez</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Si të lozësh</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Falënderime</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Politika e privatësisë</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Dërgo mendimin tënd</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Vlerëso squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lexo të dhënat</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Çdo numër është një varg i pandërprerë kubash të mbushur, të renditur me rend. Të dhëna rreshti 3 1 do të thotë tre bashkë, të paktën një hapësirë, pastaj një i vetëm.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Mbush dhe kryqëzo</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Trokit një kuti për ta mbushur. Kalo në mënyrën X për kutitë që kemi provuar se mbeten bosh. X-at nuk janë zbukurim — me ato mban shënim.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Mbivendosja në të dhëna të gjata</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Në një rresht 10 të gjerë, të dhëna 8 duhet të mbulojë 6 kutitë e mesit, kudo që niset. Shtyje vargun majtas, shtyje djathtas, dhe mbush atë që mbivendoset.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Lidh rreshtin me shtyllën</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Kur një rresht të jep një kub të sigurt, shih poshtë atë shtyllë. Kubi i ri shpesh mbaron një të dhënë shtylle, që sjell më shumë X, që sjell më shumë kuba.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Kryqëzo vijat e mbaruara</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Kur një vijë përputhet plotësisht me të dhënat e vet, vendos X në çdo kuti që mbetet. Numrat zbehen që të dish se ajo vijë ka mbaruar.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Kafshë</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurë</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Hapësira</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Ushqim</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Automjete</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Përrallë</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Befasomë</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Zemër</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Peshk i vogël</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Yll</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Fantazmë</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Molla</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Barkë me vela</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaur</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Fytyrë maceje</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Tortë e vogël</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Makinë gare</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Raketë</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Kurorë</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Figurë misterioze</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Shfaq një pamje 3×3 të zmadhuar ndërsa ngjyros. E çaktivizuar si parazgjedhje.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Pyet një të rritur</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} nga {1} të gjetura</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Mbaro figurën e parë.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Loz shtatë ditë rresht.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Mbaro një figurë pa asnjë ndihmesë.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Mbaro një 5×5 në më pak se një minutë.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Mbush 100 kuba gjithsej.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Gjej çdo dinosaur.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Mbaro një figurë pas orës 20.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Tre yje në një 10×10, pa gabime.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Gjej çdo figurë në galeri.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Mbaroi për sot — shihemi nesër!</value></data>
+</root>

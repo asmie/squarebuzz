@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Swahili (sw). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Mafumbo ya mantiki yanayogeuka picha</value></data>
+  <data name="loading" xml:space="preserve"><value>Nawasha vitalu…</value></data>
+  <data name="skip" xml:space="preserve"><value>Ruka</value></data>
+  <data name="next" xml:space="preserve"><value>Ifuatayo</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Twende tucheze!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Mchezo mpya</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Endelea</value></data>
+  <data name="trials" xml:space="preserve"><value>Changamoto</value></data>
+  <data name="options" xml:space="preserve"><value>Mipangilio</value></data>
+  <data name="about" xml:space="preserve"><value>Kuhusu</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} zinaendelea</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Hakuna kilichohifadhiwa bado</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Fumbo la leo liko tayari</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Sauti, muonekano, vidhibiti</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Nonogram ni nini?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Kubwa kiasi gani?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Chati kubwa huchukua muda mrefu lakini zinaonyesha undani zaidi.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Ndogo sana</value></data>
+  <data name="normal" xml:space="preserve"><value>Ya kawaida</value></data>
+  <data name="big" xml:space="preserve"><value>Kubwa</value></data>
+  <data name="huge" xml:space="preserve"><value>Kubwa mno</value></data>
+  <data name="giant" xml:space="preserve"><value>Kubwa kupindukia</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Kompyuta kibao</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Ngumu kiasi gani?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Rahisi sana</value></data>
+  <data name="easy" xml:space="preserve"><value>Rahisi</value></data>
+  <data name="medium" xml:space="preserve"><value>Wastani</value></data>
+  <data name="hard" xml:space="preserve"><value>Ngumu</value></data>
+  <data name="expert" xml:space="preserve"><value>Bingwa</value></data>
+  <data name="challenge" xml:space="preserve"><value>Kiwango cha changamoto</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Kipimo cha pili, tofauti na ukubwa na ugumu wa vidokezo.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Tulivu</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Misaada imewashwa, hakuna mipaka</value></data>
+  <data name="sharp" xml:space="preserve"><value>Kali</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Makosa yanahesabiwa, dokezo moja</value></data>
+  <data name="pack" xml:space="preserve"><value>Kifurushi cha picha</value></data>
+  <data name="helpers" xml:space="preserve"><value>Misaada</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Tia X kwenye mistari iliyokamilika</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Nikumbushe nikikosea</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Onyesha muda</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Ruhusu vidokezo</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Chagua fumbo</value></data>
+  <data name="random" xml:space="preserve"><value>Fumbo lolote</value></data>
+  <data name="gallery" xml:space="preserve"><value>Ghala</value></data>
+  <data name="locked" xml:space="preserve"><value>Imefungwa</value></data>
+  <data name="preview" xml:space="preserve"><value>Mwonekano</value></data>
+  <data name="start" xml:space="preserve"><value>Anza fumbo</value></data>
+  <data name="fill" xml:space="preserve"><value>Jaza</value></data>
+  <data name="cross" xml:space="preserve"><value>Tia X</value></data>
+  <data name="undo" xml:space="preserve"><value>Tangua</value></data>
+  <data name="redo" xml:space="preserve"><value>Rudia</value></data>
+  <data name="hint" xml:space="preserve"><value>Dokezo</value></data>
+  <data name="pause" xml:space="preserve"><value>Simamisha</value></data>
+  <data name="minimap" xml:space="preserve"><value>Ramani</value></data>
+  <data name="paused" xml:space="preserve"><value>Imesimama</value></data>
+  <data name="resume" xml:space="preserve"><value>Endelea</value></data>
+  <data name="restart" xml:space="preserve"><value>Anza upya</value></data>
+  <data name="howTo" xml:space="preserve"><value>Jinsi ya kucheza</value></data>
+  <data name="quit" xml:space="preserve"><value>Nenda menyu</value></data>
+  <data name="solved" xml:space="preserve"><value>Umefanikiwa!</value></data>
+  <data name="time" xml:space="preserve"><value>Muda</value></data>
+  <data name="hints" xml:space="preserve"><value>Vidokezo</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Oh</value></data>
+  <data name="save" xml:space="preserve"><value>Hifadhi</value></data>
+  <data name="share" xml:space="preserve"><value>Shiriki</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Ifuatayo</value></data>
+  <data name="menu" xml:space="preserve"><value>Menyu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Namba ni mifuatano ya vitalu</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Dokezo la 3 1 linamaanisha vitalu vitatu mfululizo, nafasi, kisha kitalu kimoja. Mpangilio huo, kutoka kushoto kwenda kulia.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Weka alama kwenye vitupu</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Gusa mara moja kujaza. Badilisha hali ya X kuweka alama kwenye vijamba unavyojua vitasalia vitupu — hivyo kichwa kinakaa wazi.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Picha inajitokeza</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Kamilisha kila mstari na kila safu na vitalu vitakuwa picha. Kila fumbo lina jibu moja tu — usibahatishe kamwe.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Hii ni bure!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Sio hiyo — jaribu tena</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Sikuweza kutengeneza fumbo mara hii. Jaribu tena!</value></data>
+  <data name="ok" xml:space="preserve"><value>Sawa</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Inahusu chati kubwa ambazo mchezo unatunga wenyewe — 15×15 na kuendelea. Picha ndogo zimechorwa kwa mkono.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Mafumbo ya kila siku yaliyokamilika mwezi huu: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Hakuna vidokezo vilivyobaki</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Mstari umekamilika!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Niko tayari wakati wowote. Chagua fumbo!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Unaenda vizuri. Moja zaidi?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Nimepata picha mpya leo.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Hiyo ilikuwa nzuri. Unataka nyingine?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Anza fumbo lako la kwanza</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Jinsi ya kucheza</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Fumbo la siku</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Picha mpya kila asubuhi</value></data>
+  <data name="play" xml:space="preserve"><value>Cheza</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Kujipasha</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Kwa utaratibu</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Umeme</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · muda wa kutosha</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · endelea kusonga</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · hakuna muda wa kupepesa</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Njia ya mafumbo</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Kamilisha kituo cha nyuma ili kufungua kinachofuata</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Kituo {0}, {1}, kimekamilika. Cheza tena.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Kituo {0}, {1} kwa {1}, kinachofuata kuchezwa.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Kituo {0}, kimefungwa. Kamilisha kituo cha kabla yake.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Vikombe</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Muda umeisha!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Saa ilikushinda mara hii. Unataka kujaribu tena?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Jaribu tena</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} kwenye saa.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Kila siku</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Kwa muda</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Njia</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Jaribio la muda</value></data>
+  <data name="tr1" xml:space="preserve"><value>Picha ya kwanza</value></data>
+  <data name="tr2" xml:space="preserve"><value>Wiki mfululizo</value></data>
+  <data name="tr3" xml:space="preserve"><value>Bila vidokezo</value></data>
+  <data name="tr4" xml:space="preserve"><value>Mwepesi</value></data>
+  <data name="tr5" xml:space="preserve"><value>Vitalu 100</value></data>
+  <data name="tr6" xml:space="preserve"><value>Mpenzi wa dinosaria</value></data>
+  <data name="tr7" xml:space="preserve"><value>Bundi wa usiku</value></data>
+  <data name="tr8" xml:space="preserve"><value>Kumi kamili</value></data>
+  <data name="tr9" xml:space="preserve"><value>Mkusanyaji</value></data>
+  <data name="sound" xml:space="preserve"><value>Athari za sauti</value></data>
+  <data name="music" xml:space="preserve"><value>Muziki</value></data>
+  <data name="voice" xml:space="preserve"><value>Kusomewa kwa sauti</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Sasa naweza kukusomea.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Hakuna sauti ya lugha hii kwenye kifaa hiki</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Mstari {0}, safu {1}, {2}. Dokezo la mstari {3}. Dokezo la safu {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>kitupu</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>kimejaa</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>kimetiwa X</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>hakuna</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Ubao wa fumbo, {0} kwa {1}. Vijamba {2} kati ya {3} vimejaa.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Vijamba haviwezi kufikiwa kwa kuchunguza kwa kugusa bado.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Muda hadi sasa: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Nyota {0} kwa jumla</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Siku {0} mfululizo</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Endelea na {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Futa {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Vijamba vidogo</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Vijamba vikubwa</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, imepatikana, nyota {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Picha haijapatikana bado. Cheza ili kuifichua.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Picha iliyofungwa</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, imepatikana. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, haijapatikana bado. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>Nyota {0} kati ya 3</value></data>
+  <data name="haptics" xml:space="preserve"><value>Mtetemo unapogusa</value></data>
+  <data name="audio" xml:space="preserve"><value>Sauti</value></data>
+  <data name="look" xml:space="preserve"><value>Muonekano &amp; hisia</value></data>
+  <data name="controls" xml:space="preserve"><value>Vidhibiti</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Lugha</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Eneo la wazazi</value></data>
+  <data name="theme" xml:space="preserve"><value>Muonekano</value></data>
+  <data name="light" xml:space="preserve"><value>Angavu</value></data>
+  <data name="dark" xml:space="preserve"><value>Nyeusi</value></data>
+  <data name="auto" xml:space="preserve"><value>Kiotomatiki</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Rafiki kwa upofu wa rangi</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Rangi ya bluu/chungwa, mifumo inasalia</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Rangi kuu</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Chungwa</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Zabibu</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Utatu</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Kugusa hufanya</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Kugusa hujaza, kubonyeza = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Kitufe cha hali</value></data>
+  <data name="handed" xml:space="preserve"><value>Vitufe upande</value></data>
+  <data name="leftH" xml:space="preserve"><value>Kushoto</value></data>
+  <data name="rightH" xml:space="preserve"><value>Kulia</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Ukubwa wa kijamba</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Namba kubwa</value></data>
+  <data name="language" xml:space="preserve"><value>Lugha</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Kikumbusho cha muda wa kioo</value></data>
+  <data name="stOff" xml:space="preserve"><value>Imezimwa</value></data>
+  <data name="st15" xml:space="preserve"><value>Dakika 15</value></data>
+  <data name="st30" xml:space="preserve"><value>Dakika 30</value></data>
+  <data name="st60" xml:space="preserve"><value>Saa 1</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Wakati wa kupumzika?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Umecheza kwa dakika {0}. Fumbo lako litakusubiri.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Kidogo zaidi</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Nitasimama hapa</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Anzisha maendeleo upya</value></data>
+  <data name="privacy" xml:space="preserve"><value>Data &amp; faragha</value></data>
+  <data name="open" xml:space="preserve"><value>Fungua</value></data>
+  <data name="reset" xml:space="preserve"><value>Anzisha upya</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Kwa watu wazima tu</value></data>
+  <data name="gateQ" xml:space="preserve"><value>7 × 4 ni ngapi?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Ghairi</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Futa kila kitu?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Mafumbo yote, nyota na vibandiko vitatoweka. Hii haiwezi kurudishwa.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Ndiyo, futa yote</value></data>
+  <data name="version" xml:space="preserve"><value>Toleo 1.0 · build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Hakuna matangazo · hakuna manunuzi ndani ya programu</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Nonogram ni nini?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram ni picha iliyofichwa ndani ya namba. Vidokezo kwenye kila mstari na safu vinakuambia vitalu vingapi kujaza na kwa mpangilio upi. Tatua kila mstari kwa mantiki tu na picha itajitokeza — hutahitaji kubahatisha kamwe.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Hujulikana pia kama: Picross · Griddler · Hanjie · Pic-a-Pix · Kuchora kwa namba · chemsha bongo ya Kijapani</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Jinsi ya kucheza</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Shukrani</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Sera ya faragha</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Tuma maoni</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Kadiria squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Soma vidokezo</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Kila namba ni mfuatano mmoja usiokatika wa vitalu vilivyojaa, kwa mpangilio. Dokezo la mstari 3 1 linamaanisha vitatu pamoja, nafasi moja angalau, kisha kimoja peke yake.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Jaza na tia X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Gusa kijamba kukijaza. Badilisha hali ya X kwa vijamba ulivyothibitisha vitasalia vitupu. X si mapambo — ndio jinsi unavyoweka kumbukumbu.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Kuingiliana kwenye vidokezo virefu</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Katika mstari wa upana wa 10, dokezo la 8 lazima lifunike vijamba 6 vya katikati, lianzie wapi wapi. Sukuma mfuatano kushoto, sukuma kulia, na jaza kinachoingiliana.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Linganisha mstari na safu</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Mstari ukikupa kitalu kimoja cha uhakika, tazama chini kwenye safu hiyo. Kitalu kipya mara nyingi humaliza dokezo la safu, hilo hutoa X zaidi, na hizo hutoa vitalu zaidi.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Tia X kwenye mistari iliyokamilika</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Mstari ukilingana kabisa na vidokezo vyake, tia X kwenye kila kijamba kilichobaki. Namba hufifia ili ujue mstari huo umekwisha.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Wanyama</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaria</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Anga za mbali</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Chakula</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Magari</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Hadithi</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Nishangaze</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Moyo</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Samaki mdogo</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Nyota</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Mzuka</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Tofaa</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Mashua ya tanga</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaria</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Uso wa paka</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Keki ndogo</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Gari la mashindano</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Roketi</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Taji</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Picha ya siri</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Kioo cha kukuza</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Huonyesha mwonekano mkubwa wa 3×3 unapopaka. Imezimwa kwa kawaida.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Muulize mtu mzima</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} kati ya {1} zimepatikana</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Kamilisha picha yako ya kwanza.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Cheza siku saba mfululizo.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Kamilisha picha bila dokezo hata moja.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Kamilisha 5×5 kwa chini ya dakika moja.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Jaza vitalu 100 kwa jumla.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Pata kila dinosaria.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Kamilisha picha baada ya saa mbili usiku.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Nyota tatu kwenye 10×10, bila makosa.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Pata kila picha kwenye ghala.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Tumemaliza kwa leo — tutaonana kesho!</value></data>
+</root>

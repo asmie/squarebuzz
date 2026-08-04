@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Swedish (sv). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Logiska pussel som blir bilder</value></data>
+  <data name="loading" xml:space="preserve"><value>Värmer upp klossarna…</value></data>
+  <data name="skip" xml:space="preserve"><value>Hoppa över</value></data>
+  <data name="next" xml:space="preserve"><value>Nästa</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Nu spelar vi!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Nytt spel</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Fortsätt</value></data>
+  <data name="trials" xml:space="preserve"><value>Utmaningar</value></data>
+  <data name="options" xml:space="preserve"><value>Inställningar</value></data>
+  <data name="about" xml:space="preserve"><value>Om</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} pågår</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Inget sparat än</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Dagens pussel är klart</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Ljud, tema, kontroller</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Vad är ett nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Hur stort?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Större rutnät tar längre tid men visar mer detaljer.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Pytteliten</value></data>
+  <data name="normal" xml:space="preserve"><value>Normal</value></data>
+  <data name="big" xml:space="preserve"><value>Stor</value></data>
+  <data name="huge" xml:space="preserve"><value>Jättestor</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigantisk</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Surfplatta</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Hur svårt?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Mycket lätt</value></data>
+  <data name="easy" xml:space="preserve"><value>Lätt</value></data>
+  <data name="medium" xml:space="preserve"><value>Medel</value></data>
+  <data name="hard" xml:space="preserve"><value>Svårt</value></data>
+  <data name="expert" xml:space="preserve"><value>Expert</value></data>
+  <data name="challenge" xml:space="preserve"><value>Utmaningsnivå</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>En andra ratt, skild från storlek och ledtrådarnas svårighet.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Lugnt</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Hjälpmedel på, inga gränser</value></data>
+  <data name="sharp" xml:space="preserve"><value>Skarpt</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Misstag räknas, en ledtråd</value></data>
+  <data name="pack" xml:space="preserve"><value>Bildpaket</value></data>
+  <data name="helpers" xml:space="preserve"><value>Hjälpmedel</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Kryssa klara rader automatiskt</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Varna vid misstag</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Visa tid</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Tillåt ledtrådar</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Välj ett pussel</value></data>
+  <data name="random" xml:space="preserve"><value>Slumpat pussel</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galleri</value></data>
+  <data name="locked" xml:space="preserve"><value>Låst</value></data>
+  <data name="preview" xml:space="preserve"><value>Förhandsvisning</value></data>
+  <data name="start" xml:space="preserve"><value>Starta pusslet</value></data>
+  <data name="fill" xml:space="preserve"><value>Fyll</value></data>
+  <data name="cross" xml:space="preserve"><value>Markera X</value></data>
+  <data name="undo" xml:space="preserve"><value>Ångra</value></data>
+  <data name="redo" xml:space="preserve"><value>Gör om</value></data>
+  <data name="hint" xml:space="preserve"><value>Ledtråd</value></data>
+  <data name="pause" xml:space="preserve"><value>Pausa</value></data>
+  <data name="minimap" xml:space="preserve"><value>Karta</value></data>
+  <data name="paused" xml:space="preserve"><value>Pausat</value></data>
+  <data name="resume" xml:space="preserve"><value>Fortsätt</value></data>
+  <data name="restart" xml:space="preserve"><value>Börja om</value></data>
+  <data name="howTo" xml:space="preserve"><value>Så spelar du</value></data>
+  <data name="quit" xml:space="preserve"><value>Till menyn</value></data>
+  <data name="solved" xml:space="preserve"><value>Du klarade det!</value></data>
+  <data name="time" xml:space="preserve"><value>Tid</value></data>
+  <data name="hints" xml:space="preserve"><value>Ledtrådar</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Oj</value></data>
+  <data name="save" xml:space="preserve"><value>Spara</value></data>
+  <data name="share" xml:space="preserve"><value>Dela</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Nästa</value></data>
+  <data name="menu" xml:space="preserve"><value>Meny</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Siffrorna är rader av klossar</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Ledtråden 3 1 betyder tre klossar i rad, ett hopp, sedan en kloss. Samma ordning, från vänster till höger.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Markera de tomma</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Tryck en gång för att fylla. Byt till X-läge för att markera rutor du vet är tomma — det håller ordning i huvudet.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>En bild träder fram</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Klara varje rad och kolumn så blir klossarna en bild. Varje pussel har exakt ett svar — gissa aldrig.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Här får du en gratis!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Inte den — försök igen</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Kunde inte bygga ett pussel den här gången. Försök igen!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Gäller de större planerna som spelet hittar på — 15×15 och uppåt. De små bilderna är ritade för hand.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Dagliga pussel klara den här månaden: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Inga ledtrådar kvar</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Raden är klar!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Klart när du vill. Välj ett pussel!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Det går ju bra. En till?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Jag hittade några nya bilder idag.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Den var bra. Vill du ta en till?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Starta ditt första pussel</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Så spelar du</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Dagens pussel</value></data>
+  <data name="dailySub" xml:space="preserve"><value>En ny bild varje morgon</value></data>
+  <data name="play" xml:space="preserve"><value>Spela</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Uppvärmning</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Stadigt</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Blixtsnabbt</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · gott om tid</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · håll tempot</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · hinner inte blinka</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Pusselstigen</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Klara hållplatsen innan för att öppna nästa</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Hållplats {0}, {1}, klar. Spela den igen.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Hållplats {0}, {1} gånger {1}, nästa att spela.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Hållplats {0}, låst. Klara hållplatsen före den.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Troféer</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Tiden är ute!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Klockan vann den här gången. Vill du försöka igen?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Försök igen</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} på klockan.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Dagligt</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>På tid</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Stig</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Tidsutmaning</value></data>
+  <data name="tr1" xml:space="preserve"><value>Första bilden</value></data>
+  <data name="tr2" xml:space="preserve"><value>Veckosvit</value></data>
+  <data name="tr3" xml:space="preserve"><value>Inga ledtrådar</value></data>
+  <data name="tr4" xml:space="preserve"><value>Snabb</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 klossar</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dinofantast</value></data>
+  <data name="tr7" xml:space="preserve"><value>Nattuggla</value></data>
+  <data name="tr8" xml:space="preserve"><value>Perfekt tia</value></data>
+  <data name="tr9" xml:space="preserve"><value>Samlare</value></data>
+  <data name="sound" xml:space="preserve"><value>Ljudeffekter</value></data>
+  <data name="music" xml:space="preserve"><value>Musik</value></data>
+  <data name="voice" xml:space="preserve"><value>Uppläsning</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Nu kan jag läsa för dig.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Ingen röst för det här språket på den här enheten</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Rad {0}, kolumn {1}, {2}. Radledtråd {3}. Kolumnledtråd {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>tom</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>fylld</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>korsad</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>ingen</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Pusselplan, {0} gånger {1}. {2} av {3} rutor fyllda.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Rutorna går ännu inte att nå med utforskning genom touch.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Tid så här långt: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} stjärnor totalt</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} dagar i rad</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Fortsätt med {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Ta bort {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Mindre rutor</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Större rutor</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, hittad, {1} stjärnor</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Bilden är inte hittad än. Spela för att avslöja den.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Låst bild</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, vunnen. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, inte vunnen än. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} av 3 stjärnor</value></data>
+  <data name="haptics" xml:space="preserve"><value>Vibrera vid tryck</value></data>
+  <data name="audio" xml:space="preserve"><value>Ljud</value></data>
+  <data name="look" xml:space="preserve"><value>Utseende &amp; känsla</value></data>
+  <data name="controls" xml:space="preserve"><value>Kontroller</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Språk</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Föräldrazon</value></data>
+  <data name="theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="light" xml:space="preserve"><value>Ljust</value></data>
+  <data name="dark" xml:space="preserve"><value>Mörkt</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Färgblindvänligt</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Blå/orange palett, mönster kvar</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Huvudfärg</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarin</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Vindruva</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Tryck gör</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Tryck fyller, håll = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Lägesknapp</value></data>
+  <data name="handed" xml:space="preserve"><value>Knappar till</value></data>
+  <data name="leftH" xml:space="preserve"><value>Vänster</value></data>
+  <data name="rightH" xml:space="preserve"><value>Höger</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Rutstorlek</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Stora siffror</value></data>
+  <data name="language" xml:space="preserve"><value>Språk</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Påminnelse om skärmtid</value></data>
+  <data name="stOff" xml:space="preserve"><value>Av</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 timme</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Dags för en paus?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Du har spelat i {0} minuter. Ditt pussel väntar på dig.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Lite längre</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Jag slutar här</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Nollställ framsteg</value></data>
+  <data name="privacy" xml:space="preserve"><value>Data &amp; integritet</value></data>
+  <data name="open" xml:space="preserve"><value>Öppna</value></data>
+  <data name="reset" xml:space="preserve"><value>Nollställ</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Bara för vuxna</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Vad är 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Avbryt</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Radera allt?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Alla pussel, stjärnor och klistermärken försvinner. Det går inte att ångra.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Ja, radera allt</value></data>
+  <data name="version" xml:space="preserve"><value>Version 1.0 · bygge 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Inga annonser · inga köp i appen</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Vad är ett nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Ett nonogram är en bild som gömmer sig i siffror. Ledtrådarna vid varje rad och kolumn talar om hur många klossar du ska fylla och i vilken ordning. Lös varje linje med ren logik så träder en bild fram — du behöver aldrig gissa.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Kallas även: Picross · Griddler · Hanjie · Pic-a-Pix · Måla efter siffror · japanskt korsord</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Så spelar du</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Tack till</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Integritetspolicy</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Skicka synpunkter</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Betygsätt squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Läs ledtrådarna</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Varje siffra är en obruten rad av fyllda klossar, i ordning. Radledtråden 3 1 betyder tre tillsammans, minst ett hopp, sedan en ensam.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Fyll och kryssa</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Tryck på en ruta för att fylla den. Byt till X-läge för rutor du har bevisat är tomma. X är ingen dekoration — det är så du håller räkningen.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Överlapp på långa ledtrådar</value></data>
+  <data name="ht3b" xml:space="preserve"><value>I en rad som är 10 bred måste ledtråden 8 täcka de 6 mittersta rutorna, var den än börjar. Skjut raden vänster, skjut den höger, och fyll det som överlappar.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Korsa referenser</value></data>
+  <data name="ht4b" xml:space="preserve"><value>När en rad ger dig en säker kloss, titta nedåt i kolumnen. Den nya klossen avslutar ofta en kolumnledtråd, vilket ger fler X, vilket ger fler klossar.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Kryssa klara linjer</value></data>
+  <data name="ht5b" xml:space="preserve"><value>När en linje stämmer helt med sina ledtrådar sätter du X i alla rutor som är kvar. Siffrorna bleknar så du ser att linjen är klar.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Djur</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurier</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Rymden</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Mat</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Fordon</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Saga</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Överraska mig</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Hjärta</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Liten fisk</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Stjärna</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Spöke</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Äpple</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Segelbåt</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurie</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kattansikte</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Muffins</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Racerbil</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Raket</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Krona</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Hemlig bild</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupp</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Visar en förstorad 3×3-vy medan du målar. Av som standard.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Fråga en vuxen</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} av {1} hittade</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Gör klart din första bild.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Spela sju dagar i rad.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Gör klart en bild utan en enda ledtråd.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Klara en 5×5 på under en minut.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Fyll 100 klossar sammanlagt.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Hitta alla dinosaurier.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Gör klart en bild efter klockan 20.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Tre stjärnor på en 10×10, utan misstag.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Hitta alla bilder i galleriet.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Klart för idag — vi ses imorgon!</value></data>
+</root>

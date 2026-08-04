@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Icelandic (is). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Rökþrautir sem verða myndir</value></data>
+  <data name="loading" xml:space="preserve"><value>Hita upp kubbana…</value></data>
+  <data name="skip" xml:space="preserve"><value>Sleppa</value></data>
+  <data name="next" xml:space="preserve"><value>Næst</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Spilum!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Nýr leikur</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Halda áfram</value></data>
+  <data name="trials" xml:space="preserve"><value>Áskoranir</value></data>
+  <data name="options" xml:space="preserve"><value>Stillingar</value></data>
+  <data name="about" xml:space="preserve"><value>Um</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} í gangi</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Ekkert vistað enn</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Þraut dagsins er tilbúin</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Hljóð, þema, stjórntæki</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Hvað er nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Hversu stórt?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Stærri rúðunet taka lengri tíma en sýna fleiri smáatriði.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Örlítið</value></data>
+  <data name="normal" xml:space="preserve"><value>Venjulegt</value></data>
+  <data name="big" xml:space="preserve"><value>Stórt</value></data>
+  <data name="huge" xml:space="preserve"><value>Risastórt</value></data>
+  <data name="giant" xml:space="preserve"><value>Tröllaukið</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Spjaldtölva</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Hversu erfitt?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Mjög auðvelt</value></data>
+  <data name="easy" xml:space="preserve"><value>Auðvelt</value></data>
+  <data name="medium" xml:space="preserve"><value>Miðlungs</value></data>
+  <data name="hard" xml:space="preserve"><value>Erfitt</value></data>
+  <data name="expert" xml:space="preserve"><value>Sérfræðingur</value></data>
+  <data name="challenge" xml:space="preserve"><value>Áskorunarstig</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Annar skali, óháður stærð og erfiðleika vísbendinga.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Afslappað</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Hjálpartæki á, engin mörk</value></data>
+  <data name="sharp" xml:space="preserve"><value>Snarpt</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Mistök talin, ein vísbending</value></data>
+  <data name="pack" xml:space="preserve"><value>Myndapakki</value></data>
+  <data name="helpers" xml:space="preserve"><value>Hjálpartæki</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Krossa fullgerðar línur sjálfkrafa</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Vara mig við mistökum</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Sýna tíma</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Leyfa vísbendingar</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Veldu þraut</value></data>
+  <data name="random" xml:space="preserve"><value>Tilviljanakennd þraut</value></data>
+  <data name="gallery" xml:space="preserve"><value>Myndasafn</value></data>
+  <data name="locked" xml:space="preserve"><value>Læst</value></data>
+  <data name="preview" xml:space="preserve"><value>Forskoðun</value></data>
+  <data name="start" xml:space="preserve"><value>Byrja þraut</value></data>
+  <data name="fill" xml:space="preserve"><value>Fylla</value></data>
+  <data name="cross" xml:space="preserve"><value>Merkja X</value></data>
+  <data name="undo" xml:space="preserve"><value>Afturkalla</value></data>
+  <data name="redo" xml:space="preserve"><value>Endurgera</value></data>
+  <data name="hint" xml:space="preserve"><value>Vísbending</value></data>
+  <data name="pause" xml:space="preserve"><value>Hlé</value></data>
+  <data name="minimap" xml:space="preserve"><value>Kort</value></data>
+  <data name="paused" xml:space="preserve"><value>Í hléi</value></data>
+  <data name="resume" xml:space="preserve"><value>Halda áfram</value></data>
+  <data name="restart" xml:space="preserve"><value>Byrja upp á nýtt</value></data>
+  <data name="howTo" xml:space="preserve"><value>Hvernig á að spila</value></data>
+  <data name="quit" xml:space="preserve"><value>Í valmynd</value></data>
+  <data name="solved" xml:space="preserve"><value>Þú gerðir það!</value></data>
+  <data name="time" xml:space="preserve"><value>Tími</value></data>
+  <data name="hints" xml:space="preserve"><value>Vísbendingar</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Úbbs</value></data>
+  <data name="save" xml:space="preserve"><value>Vista</value></data>
+  <data name="share" xml:space="preserve"><value>Deila</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Næst</value></data>
+  <data name="menu" xml:space="preserve"><value>Valmynd</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Tölurnar eru raðir af kubbum</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Vísbendingin 3 1 þýðir þrír kubbar í röð, eyða, svo einn kubbur. Sama röð, frá vinstri til hægri.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Merktu þær tómu</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Ýttu einu sinni til að fylla. Skiptu í X-stillingu til að merkja rúður sem þú veist að eru tómar — það heldur höfðinu skýru.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Mynd kemur í ljós</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Fullgerðu hverja röð og súlu og kubbarnir verða mynd. Hver þraut hefur nákvæmlega eitt svar — giskaðu aldrei.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Hér fær þú eina fría!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Ekki þessa — prófaðu aftur</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Gat ekki búið til þraut þessu sinni. Prófaðu aftur!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Gildir um stærri borðin sem leikurinn býr til — 15×15 og upp. Litlu myndirnar eru handteiknaðar.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Daglegar þrautir loknar þennan mánuð: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Engar vísbendingar eftir</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Línan er fullgerð!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Til í þetta hvenær sem er. Veldu þraut!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Þetta gengur vel. Eina í viðbót?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Ég fann nýjar myndir í dag.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Sú var góð. Viltu aðra?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Byrjaðu fyrstu þrautina</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Hvernig á að spila</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Þraut dagsins</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Ný mynd hvern morgun</value></data>
+  <data name="play" xml:space="preserve"><value>Spila</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Upphitun</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Jafnt og þétt</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Eldsnöggt</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · nægur tími</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · haltu ferðinni</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · enginn tími til að blikka</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Þrautaleiðin</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Fullgerðu stoppið á undan til að opna næsta</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Stopp {0}, {1}, lokið. Spilaðu það aftur.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Stopp {0}, {1} sinnum {1}, næst að spila.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Stopp {0}, læst. Fullgerðu stoppið á undan því.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Verðlaun</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Tíminn er búinn!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Klukkan vann þessu sinni. Viltu prófa aftur?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Prófaðu aftur</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} á klukkunni.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Daglegt</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Á tíma</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Leið</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Tímaáskorun</value></data>
+  <data name="tr1" xml:space="preserve"><value>Fyrsta myndin</value></data>
+  <data name="tr2" xml:space="preserve"><value>Vika í röð</value></data>
+  <data name="tr3" xml:space="preserve"><value>Engar vísbendingar</value></data>
+  <data name="tr4" xml:space="preserve"><value>Snöggur</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 kubbar</value></data>
+  <data name="tr6" xml:space="preserve"><value>Risaeðluvinur</value></data>
+  <data name="tr7" xml:space="preserve"><value>Nátthrafn</value></data>
+  <data name="tr8" xml:space="preserve"><value>Fullkomin tía</value></data>
+  <data name="tr9" xml:space="preserve"><value>Safnari</value></data>
+  <data name="sound" xml:space="preserve"><value>Hljóðbrellur</value></data>
+  <data name="music" xml:space="preserve"><value>Tónlist</value></data>
+  <data name="voice" xml:space="preserve"><value>Upplestur</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Nú get ég lesið fyrir þig.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Engin rödd fyrir þetta tungumál á þessu tæki</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Röð {0}, súla {1}, {2}. Raðvísbending {3}. Súluvísbending {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>tóm</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>fyllt</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>krossuð</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>engin</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Þrautaborð, {0} sinnum {1}. {2} af {3} rúðum fylltar.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Rúðurnar eru enn ekki aðgengilegar með könnun með fingri.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Tími hingað til: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} stjörnur í allt</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} dagar í röð</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Haltu áfram með {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Eyða {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Minni rúður</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Stærri rúður</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, fundin, {1} stjörnur</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Myndin er ekki fundin enn. Spilaðu til að afhjúpa hana.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Læst mynd</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, unnin. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, ekki unnin enn. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} af 3 stjörnum</value></data>
+  <data name="haptics" xml:space="preserve"><value>Suð við ýtingu</value></data>
+  <data name="audio" xml:space="preserve"><value>Hljóð</value></data>
+  <data name="look" xml:space="preserve"><value>Útlit &amp; yfirbragð</value></data>
+  <data name="controls" xml:space="preserve"><value>Stjórntæki</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Tungumál</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Foreldrasvæði</value></data>
+  <data name="theme" xml:space="preserve"><value>Þema</value></data>
+  <data name="light" xml:space="preserve"><value>Ljóst</value></data>
+  <data name="dark" xml:space="preserve"><value>Dökkt</value></data>
+  <data name="auto" xml:space="preserve"><value>Sjálfvirkt</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Litblinduvænt</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Blár/appelsínugulur litur, mynstur haldið</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Aðallitur</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarína</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Vínber</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Þrenna</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Ýting gerir</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Ýting fyllir, haltu = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Stillingarhnappur</value></data>
+  <data name="handed" xml:space="preserve"><value>Hnappar á</value></data>
+  <data name="leftH" xml:space="preserve"><value>Vinstri</value></data>
+  <data name="rightH" xml:space="preserve"><value>Hægri</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Rúðustærð</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Stórar tölur</value></data>
+  <data name="language" xml:space="preserve"><value>Tungumál</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Áminning um skjátíma</value></data>
+  <data name="stOff" xml:space="preserve"><value>Af</value></data>
+  <data name="st15" xml:space="preserve"><value>15 mín</value></data>
+  <data name="st30" xml:space="preserve"><value>30 mín</value></data>
+  <data name="st60" xml:space="preserve"><value>1 klst</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Tími fyrir hlé?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Þú hefur spilað í {0} mínútur. Þrautin bíður þín.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Smá lengur</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Ég stoppa hér</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Endurstilla framvindu</value></data>
+  <data name="privacy" xml:space="preserve"><value>Gögn &amp; gagnavernd</value></data>
+  <data name="open" xml:space="preserve"><value>Opna</value></data>
+  <data name="reset" xml:space="preserve"><value>Endurstilla</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Aðeins fyrir fullorðna</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Hvað er 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Hætta</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Eyða öllu?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Allar þrautir, stjörnur og límmerki hverfa. Þetta er ekki afturkræft.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Já, eyða öllu</value></data>
+  <data name="version" xml:space="preserve"><value>Útgáfa 1.0 · smíð 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Engar auglýsingar · engin kaup í appi</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Hvað er nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram er mynd sem felur sig í tölum. Vísbendingarnar við hverja röð og súlu segja hversu marga kubba á að fylla og í hvaða röð. Leystu hverja línu með hreinni rökfræði og mynd kemur í ljós — þú þarft aldrei að giska.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Einnig þekkt sem: Picross · Griddler · Hanjie · Pic-a-Pix · Mála eftir tölum · japönsk krossgáta</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Hvernig á að spila</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Þakkir</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Gagnaverndarstefna</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Senda umsögn</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Gefa squarebuzz stjörnur</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lestu vísbendingarnar</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Hver tala er ein óbrotin röð fylltra kubba, í réttri röð. Raðvísbendingin 3 1 þýðir þrír saman, að minnsta kosti ein eyða, svo einn sér.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Fylltu og krossaðu</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Ýttu á rúðu til að fylla hana. Skiptu í X-stillingu fyrir rúður sem þú hefur sannað að eru tómar. X er ekki skraut — það er þannig sem þú heldur yfirsýn.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Yfirlögn á löngum vísbendingum</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Í röð sem er 10 breið verður vísbendingin 8 að þekja miðjurúðurnar 6, hvar sem hún byrjar. Ýttu röðinni til vinstri, ýttu henni til hægri, og fylltu það sem skarast.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Krosstengdu</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Þegar röð gefur þér einn vissan kubb, skoðaðu þá súluna. Nýi kubburinn fullgerir oft súluvísbendingu, sem gefur fleiri X, sem gefur fleiri kubba.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Krossaðu yfir fullgerðar línur</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Þegar lína passar fullkomlega við vísbendingar sínar, settu X í allar rúður sem eftir eru. Tölurnar dofna svo þú sérð að línan er búin.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Dýr</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Risaeðlur</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Geimurinn</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Matur</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Farartæki</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Ævintýri</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Komdu mér á óvart</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Hjarta</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Lítill fiskur</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Stjarna</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Draugur</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Epli</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Seglbátur</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Risaeðla</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kattarandlit</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Bollakaka</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Kappakstursbíll</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Eldflaug</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Kóróna</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Dularfull mynd</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Stækkunargler</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Sýnir stækkaða 3×3 sýn meðan þú málar. Sjálfgefið af.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Spurðu fullorðinn</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} af {1} fundnar</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Fullgerðu fyrstu myndina þína.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Spilaðu sjö daga í röð.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Fullgerðu mynd án einnar einustu vísbendingar.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Leystu 5×5 á minna en mínútu.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Fylltu 100 kubba í allt.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Finndu allar risaeðlurnar.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Fullgerðu mynd eftir klukkan 20.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Þrjár stjörnur á 10×10, án mistaka.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Finndu allar myndir í safninu.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Búið í dag — sjáumst á morgun!</value></data>
+</root>

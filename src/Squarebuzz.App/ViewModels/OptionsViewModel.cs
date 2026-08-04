@@ -8,17 +8,14 @@ using Squarebuzz.Core.Model;
 
 namespace Squarebuzz.App.ViewModels;
 
-/// <summary>One language chip in Options.</summary>
-public sealed partial class LanguageOption : ObservableObject
+/// <summary>One row of the language picker in Options.</summary>
+public sealed class LanguageOption
 {
-    /// <summary>Culture code, which is also the command parameter.</summary>
+    /// <summary>Culture code, which is how the row maps back onto <see cref="AppLanguage"/>.</summary>
     public required string Code { get; init; }
 
     /// <summary>The language's own name for itself - never translated.</summary>
     public required string Endonym { get; init; }
-
-    [ObservableProperty]
-    public partial bool IsSelected { get; set; }
 }
 
 /// <summary>
@@ -189,9 +186,18 @@ public partial class OptionsViewModel : LocalizedViewModel
     public partial AppLanguage Language { get; set; }
 
     /// <summary>
-    /// Every shipped language as a chip. A list rather than one flag per language: at twenty-two
-    /// of them, a property and a converter each would be unreadable, and the set is content -
-    /// see <see cref="AppLanguages.All"/>.
+    /// The picker's current row. Kept beside <see cref="Language"/> rather than replacing it
+    /// because a <c>Picker</c> binds to an item from its own <see cref="Languages"/> list, while
+    /// everything else in the app - persistence, the localisation service - speaks
+    /// <see cref="AppLanguage"/>.
+    /// </summary>
+    [ObservableProperty]
+    public partial LanguageOption? SelectedLanguage { get; set; }
+
+    /// <summary>
+    /// Every shipped language, in the order the picker lists them. A list rather than one flag per
+    /// language: at twenty-two of them, a property each would be unreadable, and the set is
+    /// content - see <see cref="AppLanguages.All"/>.
     /// </summary>
     public ObservableCollection<LanguageOption> Languages { get; } =
     [
@@ -623,18 +629,29 @@ public partial class OptionsViewModel : LocalizedViewModel
     private void SelectHandedness(string hand) =>
         Handedness = hand == "left" ? Handedness.Left : Handedness.Right;
 
-    [RelayCommand]
-    private void SelectLanguage(string language) => Language = AppLanguages.FromCultureCode(language);
+    /// <summary>
+    /// The player picked a row. Null is ignored rather than treated as a choice: a Picker reports
+    /// it while its items are being rebuilt, and taking that as "no language" would reset them to
+    /// English on every relabel.
+    /// </summary>
+    partial void OnSelectedLanguageChanged(LanguageOption? value)
+    {
+        if (value is not null)
+        {
+            Language = AppLanguages.FromCultureCode(value.Code);
+        }
+    }
 
-    /// <summary>Marks the chosen chip, so the highlight follows the setting however it changed.</summary>
+    /// <summary>
+    /// Points the picker at the current language, so it follows the setting however it changed -
+    /// including the load on appearing, where nothing was tapped at all.
+    /// </summary>
     private void SyncLanguageSelection(AppLanguage language)
     {
         var code = language.ToCultureCode();
 
-        foreach (var option in Languages)
-        {
-            option.IsSelected = string.Equals(option.Code, code, StringComparison.Ordinal);
-        }
+        SelectedLanguage = Languages.FirstOrDefault(
+            option => string.Equals(option.Code, code, StringComparison.Ordinal));
     }
 
     [RelayCommand]

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Zulu (zu). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Amaphazili engqondo aphenduka izithombe</value></data>
+  <data name="loading" xml:space="preserve"><value>Ngifudumeza izigaxa…</value></data>
+  <data name="skip" xml:space="preserve"><value>Yeqa</value></data>
+  <data name="next" xml:space="preserve"><value>Okulandelayo</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Asidlale!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Umdlalo omusha</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Qhubeka</value></data>
+  <data name="trials" xml:space="preserve"><value>Izinselelo</value></data>
+  <data name="options" xml:space="preserve"><value>Izilungiselelo</value></data>
+  <data name="about" xml:space="preserve"><value>Mayelana</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} ziqhubeka</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Akukho okulondoloziwe okwamanje</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Iphazili lanamuhla lilungile</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Umsindo, ukubukeka, izilawuli</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Yini i-nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Kukhulu kangakanani?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Amagridi amakhulu athatha isikhathi eside kodwa aveza imininingwane eminingi.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Kuncane kakhulu</value></data>
+  <data name="normal" xml:space="preserve"><value>Okujwayelekile</value></data>
+  <data name="big" xml:space="preserve"><value>Kukhulu</value></data>
+  <data name="huge" xml:space="preserve"><value>Kukhulu impela</value></data>
+  <data name="giant" xml:space="preserve"><value>Kuyisiqhwaga</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Ithebulethi</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Kunzima kangakanani?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Kulula kakhulu</value></data>
+  <data name="easy" xml:space="preserve"><value>Kulula</value></data>
+  <data name="medium" xml:space="preserve"><value>Okumaphakathi</value></data>
+  <data name="hard" xml:space="preserve"><value>Kunzima</value></data>
+  <data name="expert" xml:space="preserve"><value>Uchwepheshe</value></data>
+  <data name="challenge" xml:space="preserve"><value>Izinga lenselelo</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Isikali sesibili, esihlukile kubukhulu nasebunzimeni bezinkomba.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Kuthule</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Usizo luvulekile, akukho mikhawulo</value></data>
+  <data name="sharp" xml:space="preserve"><value>Kubukhali</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Amaphutha ayabalwa, inkomba eyodwa</value></data>
+  <data name="pack" xml:space="preserve"><value>Iphakethe lezithombe</value></data>
+  <data name="helpers" xml:space="preserve"><value>Usizo</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Faka u-X ngokuzenzakalela emigqeni ephelele</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Ngixwayise ngamaphutha</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Bonisa isikhathi</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Vumela izinkomba</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Khetha iphazili</value></data>
+  <data name="random" xml:space="preserve"><value>Iphazili elingahleliwe</value></data>
+  <data name="gallery" xml:space="preserve"><value>Igalari</value></data>
+  <data name="locked" xml:space="preserve"><value>Kukhiyiwe</value></data>
+  <data name="preview" xml:space="preserve"><value>Ukubuka kuqala</value></data>
+  <data name="start" xml:space="preserve"><value>Qala iphazili</value></data>
+  <data name="fill" xml:space="preserve"><value>Gcwalisa</value></data>
+  <data name="cross" xml:space="preserve"><value>Faka u-X</value></data>
+  <data name="undo" xml:space="preserve"><value>Buyisa</value></data>
+  <data name="redo" xml:space="preserve"><value>Yenza futhi</value></data>
+  <data name="hint" xml:space="preserve"><value>Inkomba</value></data>
+  <data name="pause" xml:space="preserve"><value>Misa</value></data>
+  <data name="minimap" xml:space="preserve"><value>Imephu</value></data>
+  <data name="paused" xml:space="preserve"><value>Kumisiwe</value></data>
+  <data name="resume" xml:space="preserve"><value>Qhubeka</value></data>
+  <data name="restart" xml:space="preserve"><value>Qala phansi</value></data>
+  <data name="howTo" xml:space="preserve"><value>Indlela yokudlala</value></data>
+  <data name="quit" xml:space="preserve"><value>Buyela kumenyu</value></data>
+  <data name="solved" xml:space="preserve"><value>Ukwenzile!</value></data>
+  <data name="time" xml:space="preserve"><value>Isikhathi</value></data>
+  <data name="hints" xml:space="preserve"><value>Izinkomba</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Yeyi</value></data>
+  <data name="save" xml:space="preserve"><value>Londoloza</value></data>
+  <data name="share" xml:space="preserve"><value>Yabelana</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Okulandelayo</value></data>
+  <data name="menu" xml:space="preserve"><value>Imenyu</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Izinombolo ziyimigqa yezigaxa</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Inkomba ethi 3 1 isho izigaxa ezintathu ndawonye, isikhala, bese isigaxa esisodwa. Uhlelo olufanayo, kusuka kwesobunxele kuya kwesokudla.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Maka lawo angenalutho</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Thinta kanye ukugcwalisa. Shintshela kumodi ka-X ukumaka amabhokisi owazi ukuthi azohlala engenalutho — kugcina ikhanda lakho licacile.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Isithombe siyavela</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Qedela wonke umugqa nekholomu bese izigaxa ziba isithombe. Iphazili ngalinye linempendulo eyodwa kuphela — ungaqagi nanini.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Nakhu okunye mahhala!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Akulona lelo — zama futhi</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Angikwazile ukwakha iphazili kulokhu. Ake uzame futhi!</value></data>
+  <data name="ok" xml:space="preserve"><value>Kulungile</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Kusebenza emabhodini amakhulu umdlalo awaqambayo — 15×15 kuya phezulu. Izithombe ezincane zidwetshwe ngesandla.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Amaphazili ansuku zonke aqediwe kule nyanga: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Azikho izinkomba ezisele</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Umugqa uphelele!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Ngilungile noma nini. Khetha iphazili!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Kuhamba kahle. Elinye futhi?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Ngithole izithombe ezintsha namuhla.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Lelo belilihle. Ufuna elinye?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Qala iphazili lakho lokuqala</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Indlela yokudlala</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Iphazili losuku</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Isithombe esisha njalo ekuseni</value></data>
+  <data name="play" xml:space="preserve"><value>Dlala</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Ukufudumeza</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Ngokungaguquki</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Unyazi</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · isikhathi sanele</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · qhubeka nejubane</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · asikho isikhathi sokucwayiza</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Indlela yamaphazili</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Qedela isiteshi esandulele ukuvula esilandelayo</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Isiteshi {0}, {1}, siphelele. Sidlale futhi.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Isiteshi {0}, {1} nge-{1}, esilandelayo ukudlalwa.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Isiteshi {0}, sikhiyiwe. Qedela isiteshi esingaphambi kwaso.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Izindebe</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Isikhathi siphelile!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Iwashi likunqobile kulokhu. Ufuna ukuzama futhi?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Zama futhi</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} ewashini.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Nsuku zonke</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Ngesikhathi</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Indlela</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Umzamo wesikhathi</value></data>
+  <data name="tr1" xml:space="preserve"><value>Isithombe sokuqala</value></data>
+  <data name="tr2" xml:space="preserve"><value>Isonto lilandelana</value></data>
+  <data name="tr3" xml:space="preserve"><value>Ngaphandle kwezinkomba</value></data>
+  <data name="tr4" xml:space="preserve"><value>Osheshayo</value></data>
+  <data name="tr5" xml:space="preserve"><value>Izigaxa eziyi-100</value></data>
+  <data name="tr6" xml:space="preserve"><value>Umlandeli wamadinosor</value></data>
+  <data name="tr7" xml:space="preserve"><value>Isikhova sasebusuku</value></data>
+  <data name="tr8" xml:space="preserve"><value>Ishumi eliphelele</value></data>
+  <data name="tr9" xml:space="preserve"><value>Umqoqi</value></data>
+  <data name="sound" xml:space="preserve"><value>Imisindo</value></data>
+  <data name="music" xml:space="preserve"><value>Umculo</value></data>
+  <data name="voice" xml:space="preserve"><value>Ukufundelwa ngezwi</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Manje ngingakufundela.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Alikho izwi lalolu limi kule divayisi</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Umugqa {0}, ikholomu {1}, {2}. Inkomba yomugqa {3}. Inkomba yekholomu {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>kungenalutho</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>kugcwele</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>kunomaka u-X</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>lutho</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Ibhodi lephazili, {0} nge-{1}. Amabhokisi angu-{2} kwangu-{3} agcwele.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Amabhokisi awakafinyeleleki ngokuhlola ngokuthinta okwamanje.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Isikhathi kuze kube manje: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>Izinkanyezi ezingu-{0} sezizonke</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>Izinsuku ezingu-{0} zilandelana</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Qhubeka no-{0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Susa {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Amabhokisi amancane</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Amabhokisi amakhulu</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, itholakele, izinkanyezi {1}</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Isithombe asikatholakali. Dlala ukusiveza.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Isithombe esikhiyiwe</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, kuzuziwe. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, akukazuzwa. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>Izinkanyezi ezingu-{0} kwezingu-3</value></data>
+  <data name="haptics" xml:space="preserve"><value>Ukudlidliza uma uthinta</value></data>
+  <data name="audio" xml:space="preserve"><value>Umsindo</value></data>
+  <data name="look" xml:space="preserve"><value>Ukubukeka &amp; umuzwa</value></data>
+  <data name="controls" xml:space="preserve"><value>Izilawuli</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Ulimi</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Indawo yabazali</value></data>
+  <data name="theme" xml:space="preserve"><value>Ukubukeka</value></data>
+  <data name="light" xml:space="preserve"><value>Okukhanyayo</value></data>
+  <data name="dark" xml:space="preserve"><value>Okumnyama</value></data>
+  <data name="auto" xml:space="preserve"><value>Okuzenzakalelayo</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Kulungele ubumpumputhe bemibala</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Imibala eluhlaza/wolintshi, amaphethini asalele</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Umbala oyinhloko</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Unamutamu</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Igilebhisi</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Abathathu</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Ukuthinta kwenza</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Ukuthinta kugcwalisa, ukubamba = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Inkinobho yemodi</value></data>
+  <data name="handed" xml:space="preserve"><value>Izinkinobho ngakwesi</value></data>
+  <data name="leftH" xml:space="preserve"><value>Sobunxele</value></data>
+  <data name="rightH" xml:space="preserve"><value>Sokudla</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Ubukhulu bebhokisi</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Izinombolo ezinkulu</value></data>
+  <data name="language" xml:space="preserve"><value>Ulimi</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Isikhumbuzo sesikhathi sesikrini</value></data>
+  <data name="stOff" xml:space="preserve"><value>Kuvalwe</value></data>
+  <data name="st15" xml:space="preserve"><value>Imizuzu engu-15</value></data>
+  <data name="st30" xml:space="preserve"><value>Imizuzu engu-30</value></data>
+  <data name="st60" xml:space="preserve"><value>Ihora elilodwa</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Isikhathi sokuphumula?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Usudlala imizuzu engu-{0}. Iphazili lakho lizokulinda.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Kancane futhi</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Ngizoma lapha</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Setha kabusha inqubekela</value></data>
+  <data name="privacy" xml:space="preserve"><value>Idatha &amp; ubumfihlo</value></data>
+  <data name="open" xml:space="preserve"><value>Vula</value></data>
+  <data name="reset" xml:space="preserve"><value>Setha kabusha</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Abadala kuphela</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Ngukuphi u-7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Khansela</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Susa konke?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Wonke amaphazili, izinkanyezi nezitikha zizonyamalala. Lokhu akubuyiseki.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Yebo, susa konke</value></data>
+  <data name="version" xml:space="preserve"><value>Inguqulo 1.0 · build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Azikho izikhangiso · akukho okuthengwa ngaphakathi</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Yini i-nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>I-nonogram yisithombe esifihlwe phakathi kwezinombolo. Izinkomba emgqeni nasekholomu ngayinye zikutshela ukuthi mangaki izigaxa okumele uzigcwalise nangaluphi uhlelo. Xazulula umugqa ngamunye ngengqondo kuphela bese isithombe siyavela — awudingi ukuqagela nanini.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Kwaziwa nangokuthi: Picross · Griddler · Hanjie · Pic-a-Pix · Ukupenda ngezinombolo · iphazili lamagama lesiJapane</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Indlela yokudlala</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Ukubonga</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Inqubomgomo yobumfihlo</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Thumela umbono</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Nikeza squarebuzz isilinganiso</value></data>
+  <data name="ht1" xml:space="preserve"><value>Funda izinkomba</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Inombolo ngayinye ingumugqa owodwa ongaphukile wezigaxa ezigcwele, zibhalwe ngokulandelana. Inkomba yomugqa ethi 3 1 isho ezintathu ndawonye, okungenani isikhala esisodwa, bese eyodwa iyodwa.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Gcwalisa bese ufaka u-X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Thinta ibhokisi ukuligcwalisa. Shintshela kumodi ka-X emabhokisini owafakazele ukuthi ahlala engenalutho. U-X akuwona umhlobiso — yindlela obamba ngayo umkhondo.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Ukugqagqana ezinkombeni ezinde</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Emgqeni obubanzi obungu-10, inkomba engu-8 kumele imboze amabhokisi ayisi-6 aphakathi, noma iqala kuphi. Cindezela umugqa ngakwesobunxele, ucindezele ngakwesokudla, bese ugcwalisa lokho okugqagqanayo.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Qhathanisa umugqa nekholomu</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Uma umugqa ukunika isigaxa esiqinisekile, bheka phansi kuleyo kholomu. Isigaxa esisha sivame ukuqedela inkomba yekholomu, okunika ama-X amaningi, okunika izigaxa eziningi.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Faka u-X emigqeni ephelele</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Uma umugqa uhambisana ngokuphelele nezinkomba zawo, faka u-X kubo bonke amabhokisi asele. Izinombolo ziyafiphala ukuze wazi ukuthi lowo mugqa uphelile.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Izilwane</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Amadinosor</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Umkhathi</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Ukudla</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Izimoto</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Inganekwane</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Ngimangaze</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Inhliziyo</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Inhlanzi encane</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Inkanyezi</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Isipoki</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>I-apula</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Isikebhe seseyili</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Idinosor</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Ubuso bekati</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Ikhekhe elincane</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Imoto yomjaho</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Irokhethi</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Umqhele</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Isithombe esiyimfihlo</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Isikhulisi</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Sibonisa ukubuka okukhulisiwe okungu-3×3 ngesikhathi upenda. Kuvalwe ngokuzenzakalela.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Buza umuntu omdala</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} kwangu-{1} zitholakele</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Qedela isithombe sakho sokuqala.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Dlala izinsuku eziyisikhombisa zilandelana.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Qedela isithombe ngaphandle kwenkomba nanye.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Qedela i-5×5 ngaphansi komzuzu.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Gcwalisa izigaxa eziyi-100 sezizonke.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Thola wonke amadinosor.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Qedela isithombe ngemuva kwehora lesi-8 ebusuku.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Izinkanyezi ezintathu ku-10×10, ngaphandle kwamaphutha.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Thola sonke isithombe egalari.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Sekwanele namuhla — sizobonana kusasa!</value></data>
+</root>

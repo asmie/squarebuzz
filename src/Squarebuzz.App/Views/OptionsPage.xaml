@@ -235,47 +235,27 @@
                 <Label Text="{Binding LanguageSection}" Style="{StaticResource SectionHeading}" />
                 <Border Style="{StaticResource Card}" Padding="16,12">
                     <!--
-                      Wrapping chips rather than a segmented row: twenty-two languages cannot
-                      share one line, and each chip is as wide as its own name needs. Every
-                      language is written the way it writes itself, so it is recognisable
-                      whatever the app is currently showing.
+                      A picker rather than the wrapping chips this used to be: twenty-two of them
+                      filled a third of the screen, and the list is scanned once and then never
+                      touched again. The open list is the platform's own, so it does not carry the
+                      game's rounded look - worth it to get one row instead of six, and it brings
+                      the platform's keyboard and screen-reader handling with it.
+
+                      Title doubles as the dialog heading and reuses the section's own string, so
+                      no new key has to be added to twenty-two resx files for one line of chrome.
+
+                      Every language is written the way it writes itself, so it is recognisable
+                      whatever the app is currently showing - see AppLanguages.All.
                     -->
-                    <FlexLayout BindableLayout.ItemsSource="{Binding Languages}"
-                                Wrap="Wrap"
-                                JustifyContent="Start">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="vm:LanguageOption">
-                                <!--
-                                  Shrink="0" and NoWrap together: without them Flex squeezes the
-                                  longest name to fit the row and the label wraps inside a
-                                  fixed-height chip, which clipped "Nederlands" to "Nederland".
-                                  A chip is as wide as its language's name and never narrower.
-                                -->
-                                <Border Margin="0,0,8,8"
-                                        Padding="18,10"
-                                        FlexLayout.Shrink="0"
-                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource SegBackground}}"
-                                        Stroke="{DynamicResource Line}"
-                                        StrokeThickness="2"
-                                        MinimumHeightRequest="{StaticResource TouchTargetMin}">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="14" />
-                                    </Border.StrokeShape>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Path=SelectLanguageCommand, Source={RelativeSource AncestorType={x:Type vm:OptionsViewModel}}, x:DataType=vm:OptionsViewModel}"
-                                            CommandParameter="{Binding Code}" />
-                                    </Border.GestureRecognizers>
-                                    <Label Text="{Binding Endonym}"
-                                           FontFamily="BodyBold"
-                                           FontSize="14"
-                                           LineBreakMode="NoWrap"
-                                           VerticalTextAlignment="Center"
-                                           TextColor="{Binding IsSelected, Converter={StaticResource SegTextColor}}" />
-                                </Border>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </FlexLayout>
+                    <Picker ItemsSource="{Binding Languages}"
+                            ItemDisplayBinding="{Binding Endonym, x:DataType=vm:LanguageOption}"
+                            SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                            Title="{Binding LanguageSection}"
+                            FontFamily="BodyBold"
+                            FontSize="16"
+                            TextColor="{DynamicResource Ink}"
+                            TitleColor="{DynamicResource Ink2}"
+                            MinimumHeightRequest="{StaticResource TouchTargetMin}" />
                 </Border>
 
                 <!-- Parent zone -->

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Georgian (ka). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>ლოგიკური თავსატეხები, რომლებიც სურათებად იქცევა</value></data>
+  <data name="loading" xml:space="preserve"><value>კუბიკებს ვათბობ…</value></data>
+  <data name="skip" xml:space="preserve"><value>გამოტოვება</value></data>
+  <data name="next" xml:space="preserve"><value>შემდეგი</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>ვითამაშოთ!</value></data>
+  <data name="newGame" xml:space="preserve"><value>ახალი თამაში</value></data>
+  <data name="continueGame" xml:space="preserve"><value>გაგრძელება</value></data>
+  <data name="trials" xml:space="preserve"><value>გამოწვევები</value></data>
+  <data name="options" xml:space="preserve"><value>პარამეტრები</value></data>
+  <data name="about" xml:space="preserve"><value>შესახებ</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} მიმდინარეობს</value></data>
+  <data name="noSaves" xml:space="preserve"><value>ჯერ არაფერია შენახული</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>დღევანდელი თავსატეხი მზადაა</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>ხმა, თემა, მართვა</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>რა არის ნონოგრამა?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>რამდენად დიდი?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>დიდი ბადეები მეტ დროს ითხოვს, მაგრამ მეტ დეტალს აჩვენებს.</value></data>
+  <data name="tiny" xml:space="preserve"><value>პაწაწინა</value></data>
+  <data name="normal" xml:space="preserve"><value>ჩვეულებრივი</value></data>
+  <data name="big" xml:space="preserve"><value>დიდი</value></data>
+  <data name="huge" xml:space="preserve"><value>უზარმაზარი</value></data>
+  <data name="giant" xml:space="preserve"><value>გიგანტური</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>ტაბლეტი</value></data>
+  <data name="difficulty" xml:space="preserve"><value>რამდენად რთული?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>ძალიან მარტივი</value></data>
+  <data name="easy" xml:space="preserve"><value>მარტივი</value></data>
+  <data name="medium" xml:space="preserve"><value>საშუალო</value></data>
+  <data name="hard" xml:space="preserve"><value>რთული</value></data>
+  <data name="expert" xml:space="preserve"><value>ექსპერტი</value></data>
+  <data name="challenge" xml:space="preserve"><value>გამოწვევის დონე</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>მეორე შკალა, ზომისა და მინიშნებების სირთულისგან დამოუკიდებელი.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>მშვიდი</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>დამხმარეები ჩართული, ლიმიტების გარეშე</value></data>
+  <data name="sharp" xml:space="preserve"><value>მკვეთრი</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>შეცდომები ითვლება, ერთი მინიშნება</value></data>
+  <data name="pack" xml:space="preserve"><value>სურათების პაკეტი</value></data>
+  <data name="helpers" xml:space="preserve"><value>დამხმარეები</value></data>
+  <data name="autoCross" xml:space="preserve"><value>დასრულებული ხაზების ავტომატური გადახაზვა</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>გამაფრთხილე შეცდომებზე</value></data>
+  <data name="showTimer" xml:space="preserve"><value>დროის ჩვენება</value></data>
+  <data name="allowHints" xml:space="preserve"><value>მინიშნებების ნება</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>აირჩიე თავსატეხი</value></data>
+  <data name="random" xml:space="preserve"><value>შემთხვევითი თავსატეხი</value></data>
+  <data name="gallery" xml:space="preserve"><value>გალერეა</value></data>
+  <data name="locked" xml:space="preserve"><value>დაკეტილი</value></data>
+  <data name="preview" xml:space="preserve"><value>წინასწარი ხედი</value></data>
+  <data name="start" xml:space="preserve"><value>თავსატეხის დაწყება</value></data>
+  <data name="fill" xml:space="preserve"><value>შევსება</value></data>
+  <data name="cross" xml:space="preserve"><value>X-ის დასმა</value></data>
+  <data name="undo" xml:space="preserve"><value>დაბრუნება</value></data>
+  <data name="redo" xml:space="preserve"><value>გამეორება</value></data>
+  <data name="hint" xml:space="preserve"><value>მინიშნება</value></data>
+  <data name="pause" xml:space="preserve"><value>პაუზა</value></data>
+  <data name="minimap" xml:space="preserve"><value>რუკა</value></data>
+  <data name="paused" xml:space="preserve"><value>შეჩერებული</value></data>
+  <data name="resume" xml:space="preserve"><value>გაგრძელება</value></data>
+  <data name="restart" xml:space="preserve"><value>თავიდან დაწყება</value></data>
+  <data name="howTo" xml:space="preserve"><value>როგორ ვითამაშოთ</value></data>
+  <data name="quit" xml:space="preserve"><value>მენიუში</value></data>
+  <data name="solved" xml:space="preserve"><value>შენ შეძელი!</value></data>
+  <data name="time" xml:space="preserve"><value>დრო</value></data>
+  <data name="hints" xml:space="preserve"><value>მინიშნებები</value></data>
+  <data name="mistakes" xml:space="preserve"><value>უპს</value></data>
+  <data name="save" xml:space="preserve"><value>შენახვა</value></data>
+  <data name="share" xml:space="preserve"><value>გაზიარება</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>შემდეგი</value></data>
+  <data name="menu" xml:space="preserve"><value>მენიუ</value></data>
+  <data name="onb1t" xml:space="preserve"><value>რიცხვები კუბიკების მწკრივებია</value></data>
+  <data name="onb1b" xml:space="preserve"><value>მინიშნება 3 1 ნიშნავს სამ კუბიკს ზედიზედ, ხარვეზს, შემდეგ ერთ კუბიკს. იმავე რიგით, მარცხნიდან მარჯვნივ.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>მონიშნე ცარიელები</value></data>
+  <data name="onb2b" xml:space="preserve"><value>დააჭირე ერთხელ შესავსებად. გადადი X-რეჟიმზე, რომ მონიშნო კვადრატები, რომლებიც იცი ცარიელი დარჩება — თავი გასუფთავებული გრჩება.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>ჩნდება სურათი</value></data>
+  <data name="onb3b" xml:space="preserve"><value>დაასრულე ყოველი მწკრივი და სვეტი და კუბიკები სურათად იქცევა. ყოველ თავსატეხს ზუსტად ერთი პასუხი აქვს — არასოდეს გამოიცნო.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>აი, ერთი უფასოდ!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>ეს არა — სცადე ხელახლა</value></data>
+  <data name="genFailed" xml:space="preserve"><value>ამჯერად თავსატეხის აგება ვერ მოხერხდა. სცადე ხელახლა!</value></data>
+  <data name="ok" xml:space="preserve"><value>კარგი</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>ეხება დიდ დაფებს, რომლებსაც თამაში თავად აგებს — 15×15 და მეტი. პატარა სურათები ხელით არის დახატული.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>ამ თვეში დასრულებული დღიური თავსატეხები: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>მინიშნებები აღარ დარჩა</value></data>
+  <data name="lineDone" xml:space="preserve"><value>ხაზი დასრულდა!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>მზად ვარ, როცა შენ იქნები. აირჩიე თავსატეხი!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>კარგად მიდის. კიდევ ერთი?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>დღეს ახალი სურათები ვიპოვე.</value></data>
+  <data name="winLine" xml:space="preserve"><value>კარგი იყო. კიდევ ერთი გინდა?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>დაიწყე პირველი თავსატეხი</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>როგორ ვითამაშოთ</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>დღის თავსატეხი</value></data>
+  <data name="dailySub" xml:space="preserve"><value>ახალი სურათი ყოველ დილით</value></data>
+  <data name="play" xml:space="preserve"><value>თამაში</value></data>
+  <data name="timedName1" xml:space="preserve"><value>გახურება</value></data>
+  <data name="timedName2" xml:space="preserve"><value>თანაბრად</value></data>
+  <data name="timedName3" xml:space="preserve"><value>ელვა</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · დრო საკმარისია</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · ტემპი შეინარჩუნე</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · დახამხამების დრო არ არის</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>თავსატეხების ბილიკი</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>დაასრულე წინა გაჩერება, რომ შემდეგი გაიხსნას</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>გაჩერება {0}, {1}, დასრულებული. ითამაშე ხელახლა.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>გაჩერება {0}, {1} × {1}, შემდეგი სათამაშო.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>გაჩერება {0}, დაკეტილი. დაასრულე მის წინა გაჩერება.</value></data>
+  <data name="trophies" xml:space="preserve"><value>თასები</value></data>
+  <data name="timeUp" xml:space="preserve"><value>დრო ამოიწურა!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>ამჯერად საათმა მოგერია. კიდევ სცადებ?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>სცადე ხელახლა</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} საათზე.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>დღიური</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>დროზე</value></data>
+  <data name="tabPath" xml:space="preserve"><value>ბილიკი</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>დროული გამოცდა</value></data>
+  <data name="tr1" xml:space="preserve"><value>პირველი სურათი</value></data>
+  <data name="tr2" xml:space="preserve"><value>კვირა ზედიზედ</value></data>
+  <data name="tr3" xml:space="preserve"><value>მინიშნებების გარეშე</value></data>
+  <data name="tr4" xml:space="preserve"><value>სწრაფი</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 კუბიკი</value></data>
+  <data name="tr6" xml:space="preserve"><value>დინოსავრების მოყვარული</value></data>
+  <data name="tr7" xml:space="preserve"><value>ღამის ფრინველი</value></data>
+  <data name="tr8" xml:space="preserve"><value>სრულყოფილი ათი</value></data>
+  <data name="tr9" xml:space="preserve"><value>კოლექციონერი</value></data>
+  <data name="sound" xml:space="preserve"><value>ხმოვანი ეფექტები</value></data>
+  <data name="music" xml:space="preserve"><value>მუსიკა</value></data>
+  <data name="voice" xml:space="preserve"><value>ხმით კითხვა</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>ახლა შემიძლია წაგიკითხო.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>ამ ენისთვის ამ მოწყობილობაზე ხმა არ არის</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>მწკრივი {0}, სვეტი {1}, {2}. მწკრივის მინიშნება {3}. სვეტის მინიშნება {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>ცარიელი</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>შევსებული</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>გადახაზული</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>არაფერი</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>თავსატეხის დაფა, {0} × {1}. შევსებულია {2} კვადრატი {3}-დან.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>კვადრატებამდე შეხებით ძიებით ჯერ ვერ მიხვდები.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>დრო აქამდე: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>სულ {0} ვარსკვლავი</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} დღე ზედიზედ</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>გააგრძელე {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>წაშალე {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>პატარა კვადრატები</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>დიდი კვადრატები</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, ნაპოვნი, {1} ვარსკვლავი</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>სურათი ჯერ არ არის ნაპოვნი. ითამაშე, რომ გამოაჩინო.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>დაკეტილი სურათი</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, მოგებული. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, ჯერ არ არის მოგებული. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} ვარსკვლავი 3-დან</value></data>
+  <data name="haptics" xml:space="preserve"><value>ვიბრაცია შეხებაზე</value></data>
+  <data name="audio" xml:space="preserve"><value>ხმა</value></data>
+  <data name="look" xml:space="preserve"><value>იერსახე &amp; შეგრძნება</value></data>
+  <data name="controls" xml:space="preserve"><value>მართვა</value></data>
+  <data name="langGroup" xml:space="preserve"><value>ენა</value></data>
+  <data name="parentZone" xml:space="preserve"><value>მშობლების კუთხე</value></data>
+  <data name="theme" xml:space="preserve"><value>თემა</value></data>
+  <data name="light" xml:space="preserve"><value>ნათელი</value></data>
+  <data name="dark" xml:space="preserve"><value>მუქი</value></data>
+  <data name="auto" xml:space="preserve"><value>ავტო</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>ფერთა სიბრმავისთვის მოსახერხებელი</value></data>
+  <data name="cbSub" xml:space="preserve"><value>ლურჯი/ნარინჯისფერი პალიტრა, ნახატები რჩება</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>მთავარი ფერი</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>მანდარინი</value></data>
+  <data name="accGrape" xml:space="preserve"><value>ყურძენი</value></data>
+  <data name="accTrio" xml:space="preserve"><value>ტრიო</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>შეხება აკეთებს</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>შეხება ავსებს, დაჭერა = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>რეჟიმის ღილაკი</value></data>
+  <data name="handed" xml:space="preserve"><value>ღილაკები</value></data>
+  <data name="leftH" xml:space="preserve"><value>მარცხნივ</value></data>
+  <data name="rightH" xml:space="preserve"><value>მარჯვნივ</value></data>
+  <data name="cellSize" xml:space="preserve"><value>კვადრატის ზომა</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>დიდი ციფრები</value></data>
+  <data name="language" xml:space="preserve"><value>ენა</value></data>
+  <data name="screenTime" xml:space="preserve"><value>ეკრანთან დროის შეხსენება</value></data>
+  <data name="stOff" xml:space="preserve"><value>გამორთული</value></data>
+  <data name="st15" xml:space="preserve"><value>15 წთ</value></data>
+  <data name="st30" xml:space="preserve"><value>30 წთ</value></data>
+  <data name="st60" xml:space="preserve"><value>1 საათი</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>შესვენების დროა?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>უკვე {0} წუთი თამაშობ. თავსატეხი დაგელოდება.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>ცოტა კიდევ</value></data>
+  <data name="breakStop" xml:space="preserve"><value>აქ გავჩერდები</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>პროგრესის განულება</value></data>
+  <data name="privacy" xml:space="preserve"><value>მონაცემები &amp; კონფიდენციალურობა</value></data>
+  <data name="open" xml:space="preserve"><value>გახსნა</value></data>
+  <data name="reset" xml:space="preserve"><value>განულება</value></data>
+  <data name="grownUps" xml:space="preserve"><value>მხოლოდ უფროსებისთვის</value></data>
+  <data name="gateQ" xml:space="preserve"><value>რამდენია 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>გაუქმება</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>ყველაფერი წაიშალოს?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>ყველა თავსატეხი, ვარსკვლავი და სტიკერი გაქრება. ამის დაბრუნება შეუძლებელია.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>დიახ, ყველაფერი წაშალე</value></data>
+  <data name="version" xml:space="preserve"><value>ვერსია 1.0 · build 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>რეკლამის გარეშე · აპშიდა შესყიდვების გარეშე</value></data>
+  <data name="whatIs" xml:space="preserve"><value>რა არის ნონოგრამა?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>ნონოგრამა არის რიცხვებში დამალული სურათი. ყოველი მწკრივისა და სვეტის მინიშნებები გეუბნება, რამდენი კუბიკი შეავსო და რა რიგით. ამოხსენი ყოველი ხაზი წმინდა ლოგიკით და სურათი გამოჩნდება — გამოცნობა არასოდეს გჭირდება.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>ასევე ცნობილია როგორც: Picross · Griddler · Hanjie · Pic-a-Pix · ხატვა ციფრებით · იაპონური კროსვორდი</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>როგორ ვითამაშოთ</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>მადლობები</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>კონფიდენციალურობის პოლიტიკა</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>გამოგზავნე შეფასება</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>შეაფასე squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>წაიკითხე მინიშნებები</value></data>
+  <data name="ht1b" xml:space="preserve"><value>ყოველი რიცხვი შევსებული კუბიკების ერთი უწყვეტი მწკრივია, რიგის მიხედვით. მწკრივის მინიშნება 3 1 ნიშნავს სამს ერთად, სულ ცოტა ერთ ხარვეზს, შემდეგ ერთს მარტო.</value></data>
+  <data name="ht2" xml:space="preserve"><value>შეავსე და გადახაზე</value></data>
+  <data name="ht2b" xml:space="preserve"><value>დააჭირე კვადრატს შესავსებად. გადადი X-რეჟიმზე იმ კვადრატებისთვის, რომლებზეც დაამტკიცე, რომ ცარიელი რჩება. X-ები მორთულობა არ არის — ასე ინახავ ანგარიშს.</value></data>
+  <data name="ht3" xml:space="preserve"><value>გადაფარვა გრძელ მინიშნებებზე</value></data>
+  <data name="ht3b" xml:space="preserve"><value>10-ის სიგანის მწკრივში მინიშნება 8 უნდა დაფაროს შუა 6 კვადრატი, სადაც არ დაიწყოს. მიწიე მწკრივი მარცხნივ, მიწიე მარჯვნივ და შეავსე ის, რაც გადაიფარება.</value></data>
+  <data name="ht4" xml:space="preserve"><value>შეადარე მწკრივი და სვეტი</value></data>
+  <data name="ht4b" xml:space="preserve"><value>როცა მწკრივი ერთ დარწმუნებულ კუბიკს მოგცემს, ჩახედე იმ სვეტს. ახალი კუბიკი ხშირად ასრულებს სვეტის მინიშნებას, რაც მეტ X-ს იძლევა, რაც მეტ კუბიკს იძლევა.</value></data>
+  <data name="ht5" xml:space="preserve"><value>გადახაზე დასრულებული ხაზები</value></data>
+  <data name="ht5b" xml:space="preserve"><value>როცა ხაზი სრულად ემთხვევა თავის მინიშნებებს, დასვი X ყოველ დარჩენილ კვადრატში. რიცხვები ფერმკრთალდება, რომ იცოდე, ეს ხაზი დამთავრდა.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>ცხოველები</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>დინოსავრები</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>კოსმოსი</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>საჭმელი</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>მანქანები</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>ზღაპარი</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>გამაკვირვე</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>გული</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>პატარა თევზი</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>ვარსკვლავი</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>მოჩვენება</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>ვაშლი</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>იალქნიანი ნავი</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>დინოსავრი</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>კატის სახე</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>ნამცხვარი</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>სარბოლო მანქანა</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>რაკეტა</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>გვირგვინი</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>იდუმალი სურათი</value></data>
+  <data name="magnifier" xml:space="preserve"><value>ლუპა</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>ხატვის დროს აჩვენებს გადიდებულ 3×3 ხედს. ნაგულისხმევად გამორთული.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>ჰკითხე უფროსს</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} ნაპოვნია {1}-დან</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>დაასრულე პირველი სურათი.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>ითამაშე შვიდი დღე ზედიზედ.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>დაასრულე სურათი ერთი მინიშნების გარეშე.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>დაასრულე 5×5 ერთ წუთზე ნაკლებში.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>შეავსე სულ 100 კუბიკი.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>იპოვე ყველა დინოსავრი.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>დაასრულე სურათი საღამოს 8-ის შემდეგ.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>სამი ვარსკვლავი 10×10-ზე, შეცდომების გარეშე.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>იპოვე გალერეის ყველა სურათი.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>დღეისთვის სულ — ხვალ გნახავ!</value></data>
+</root>

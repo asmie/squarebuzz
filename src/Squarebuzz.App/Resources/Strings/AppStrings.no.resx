@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Norwegian (no). Key order follows the neutral culture; see AppStrings.resx.
+  Placeholders ({0}, {n}) are positional and must survive translation.
+-->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="tagline" xml:space="preserve"><value>Logiske puslespill som blir bilder</value></data>
+  <data name="loading" xml:space="preserve"><value>Varmer opp klossene…</value></data>
+  <data name="skip" xml:space="preserve"><value>Hopp over</value></data>
+  <data name="next" xml:space="preserve"><value>Neste</value></data>
+  <data name="letsPlay" xml:space="preserve"><value>Nå spiller vi!</value></data>
+  <data name="newGame" xml:space="preserve"><value>Nytt spill</value></data>
+  <data name="continueGame" xml:space="preserve"><value>Fortsett</value></data>
+  <data name="trials" xml:space="preserve"><value>Utfordringer</value></data>
+  <data name="options" xml:space="preserve"><value>Innstillinger</value></data>
+  <data name="about" xml:space="preserve"><value>Om</value></data>
+  <data name="inProgress" xml:space="preserve"><value>{n} pågår</value></data>
+  <data name="noSaves" xml:space="preserve"><value>Ingenting lagret ennå</value></data>
+  <data name="dailyReady" xml:space="preserve"><value>Dagens puslespill er klart</value></data>
+  <data name="settingsSub" xml:space="preserve"><value>Lyd, tema, kontroller</value></data>
+  <data name="aboutSub" xml:space="preserve"><value>Hva er et nonogram?</value></data>
+  <data name="gridSize" xml:space="preserve"><value>Hvor stort?</value></data>
+  <data name="gridSizeHelp" xml:space="preserve"><value>Større rutenett tar lengre tid, men viser flere detaljer.</value></data>
+  <data name="tiny" xml:space="preserve"><value>Pyttelite</value></data>
+  <data name="normal" xml:space="preserve"><value>Normalt</value></data>
+  <data name="big" xml:space="preserve"><value>Stort</value></data>
+  <data name="huge" xml:space="preserve"><value>Kjempestort</value></data>
+  <data name="giant" xml:space="preserve"><value>Gigantisk</value></data>
+  <data name="tabletOnly" xml:space="preserve"><value>Nettbrett</value></data>
+  <data name="difficulty" xml:space="preserve"><value>Hvor vanskelig?</value></data>
+  <data name="veryEasy" xml:space="preserve"><value>Veldig lett</value></data>
+  <data name="easy" xml:space="preserve"><value>Lett</value></data>
+  <data name="medium" xml:space="preserve"><value>Middels</value></data>
+  <data name="hard" xml:space="preserve"><value>Vanskelig</value></data>
+  <data name="expert" xml:space="preserve"><value>Ekspert</value></data>
+  <data name="challenge" xml:space="preserve"><value>Utfordringsnivå</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>En ekstra skala, uavhengig av størrelse og hvor vanskelige hintene er.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Rolig</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Hjelpemidler på, ingen grenser</value></data>
+  <data name="sharp" xml:space="preserve"><value>Skarpt</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Feil telles, ett hint</value></data>
+  <data name="pack" xml:space="preserve"><value>Bildepakke</value></data>
+  <data name="helpers" xml:space="preserve"><value>Hjelpemidler</value></data>
+  <data name="autoCross" xml:space="preserve"><value>Kryss av ferdige linjer automatisk</value></data>
+  <data name="warnMistakes" xml:space="preserve"><value>Advar meg om feil</value></data>
+  <data name="showTimer" xml:space="preserve"><value>Vis tid</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Tillat hint</value></data>
+  <data name="pickStyle" xml:space="preserve"><value>Velg et puslespill</value></data>
+  <data name="random" xml:space="preserve"><value>Tilfeldig puslespill</value></data>
+  <data name="gallery" xml:space="preserve"><value>Galleri</value></data>
+  <data name="locked" xml:space="preserve"><value>Låst</value></data>
+  <data name="preview" xml:space="preserve"><value>Forhåndsvisning</value></data>
+  <data name="start" xml:space="preserve"><value>Start puslespillet</value></data>
+  <data name="fill" xml:space="preserve"><value>Fyll</value></data>
+  <data name="cross" xml:space="preserve"><value>Merk X</value></data>
+  <data name="undo" xml:space="preserve"><value>Angre</value></data>
+  <data name="redo" xml:space="preserve"><value>Gjør om</value></data>
+  <data name="hint" xml:space="preserve"><value>Hint</value></data>
+  <data name="pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="minimap" xml:space="preserve"><value>Kart</value></data>
+  <data name="paused" xml:space="preserve"><value>Pauset</value></data>
+  <data name="resume" xml:space="preserve"><value>Fortsett</value></data>
+  <data name="restart" xml:space="preserve"><value>Start på nytt</value></data>
+  <data name="howTo" xml:space="preserve"><value>Slik spiller du</value></data>
+  <data name="quit" xml:space="preserve"><value>Til menyen</value></data>
+  <data name="solved" xml:space="preserve"><value>Du klarte det!</value></data>
+  <data name="time" xml:space="preserve"><value>Tid</value></data>
+  <data name="hints" xml:space="preserve"><value>Hint</value></data>
+  <data name="mistakes" xml:space="preserve"><value>Oi</value></data>
+  <data name="save" xml:space="preserve"><value>Lagre</value></data>
+  <data name="share" xml:space="preserve"><value>Del</value></data>
+  <data name="nextPuzzle" xml:space="preserve"><value>Neste</value></data>
+  <data name="menu" xml:space="preserve"><value>Meny</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Tallene er rekker av klosser</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Hintet 3 1 betyr tre klosser på rad, et hull, så én kloss. Samme rekkefølge, fra venstre mot høyre.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Merk de tomme</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Trykk én gang for å fylle. Bytt til X-modus for å merke ruter du vet er tomme — det holder hodet klart.</value></data>
+  <data name="onb3t" xml:space="preserve"><value>Et bilde dukker opp</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Gjør ferdig hver rad og kolonne, og klossene blir et bilde. Hvert puslespill har nøyaktig ett svar — du skal aldri gjette.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Her får du ett gratis!</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Ikke den — prøv igjen</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Klarte ikke å lage et puslespill denne gangen. Prøv igjen!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Gjelder de større brettene spillet lager selv — 15×15 og oppover. De små bildene er tegnet for hånd.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Daglige puslespill fullført denne måneden: {0}</value></data>
+  <data name="noHints" xml:space="preserve"><value>Ingen hint igjen</value></data>
+  <data name="lineDone" xml:space="preserve"><value>Linjen er ferdig!</value></data>
+  <data name="m_menu1" xml:space="preserve"><value>Klar når du er. Velg et puslespill!</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Dette går bra. Én til?</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Jeg fant noen nye bilder i dag.</value></data>
+  <data name="winLine" xml:space="preserve"><value>Den var god. Vil du ta en til?</value></data>
+  <data name="firstPuzzle" xml:space="preserve"><value>Start ditt første puslespill</value></data>
+  <data name="howToTitle" xml:space="preserve"><value>Slik spiller du</value></data>
+  <data name="dailyTitle" xml:space="preserve"><value>Dagens puslespill</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Et nytt bilde hver morgen</value></data>
+  <data name="play" xml:space="preserve"><value>Spill</value></data>
+  <data name="timedName1" xml:space="preserve"><value>Oppvarming</value></data>
+  <data name="timedName2" xml:space="preserve"><value>Jevnt</value></data>
+  <data name="timedName3" xml:space="preserve"><value>Lynraskt</value></data>
+  <data name="timedSub1" xml:space="preserve"><value>5×5 · god tid</value></data>
+  <data name="timedSub2" xml:space="preserve"><value>10×10 · hold farten</value></data>
+  <data name="timedSub3" xml:space="preserve"><value>10×10 · ikke tid til å blunke</value></data>
+  <data name="pathTitle" xml:space="preserve"><value>Puslestien</value></data>
+  <data name="pathLocked" xml:space="preserve"><value>Fullfør stoppet før for å åpne det neste</value></data>
+  <data name="a11yPathDone" xml:space="preserve"><value>Stopp {0}, {1}, fullført. Spill den igjen.</value></data>
+  <data name="a11yPathCurrent" xml:space="preserve"><value>Stopp {0}, {1} ganger {1}, neste å spille.</value></data>
+  <data name="a11yPathLocked" xml:space="preserve"><value>Stopp {0}, låst. Fullfør stoppet før det.</value></data>
+  <data name="trophies" xml:space="preserve"><value>Troféer</value></data>
+  <data name="timeUp" xml:space="preserve"><value>Tiden er ute!</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Klokka vant denne gangen. Vil du prøve igjen?</value></data>
+  <data name="tryAgain" xml:space="preserve"><value>Prøv igjen</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} på klokka.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Daglig</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>På tid</value></data>
+  <data name="tabPath" xml:space="preserve"><value>Sti</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Tidsutfordring</value></data>
+  <data name="tr1" xml:space="preserve"><value>Første bilde</value></data>
+  <data name="tr2" xml:space="preserve"><value>Uke på rad</value></data>
+  <data name="tr3" xml:space="preserve"><value>Ingen hint</value></data>
+  <data name="tr4" xml:space="preserve"><value>Kjapp</value></data>
+  <data name="tr5" xml:space="preserve"><value>100 klosser</value></data>
+  <data name="tr6" xml:space="preserve"><value>Dinofan</value></data>
+  <data name="tr7" xml:space="preserve"><value>Nattugle</value></data>
+  <data name="tr8" xml:space="preserve"><value>Perfekt tier</value></data>
+  <data name="tr9" xml:space="preserve"><value>Samler</value></data>
+  <data name="sound" xml:space="preserve"><value>Lydeffekter</value></data>
+  <data name="music" xml:space="preserve"><value>Musikk</value></data>
+  <data name="voice" xml:space="preserve"><value>Opplesing</value></data>
+  <data name="voiceReady" xml:space="preserve"><value>Nå kan jeg lese for deg.</value></data>
+  <data name="voiceMissing" xml:space="preserve"><value>Ingen stemme for dette språket på denne enheten</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Rad {0}, kolonne {1}, {2}. Radhint {3}. Kolonnehint {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>tom</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>fylt</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>krysset ut</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>ingen</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Puslebrett, {0} ganger {1}. {2} av {3} ruter fylt.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Rutene kan ennå ikke nås med utforsking ved berøring.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Tid så langt: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} stjerner til sammen</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} dager på rad</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Fortsett med {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Slett {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Mindre ruter</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Større ruter</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, funnet, {1} stjerner</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Bildet er ikke funnet ennå. Spill for å avsløre det.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Låst bilde</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, oppnådd. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, ikke oppnådd ennå. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} av 3 stjerner</value></data>
+  <data name="haptics" xml:space="preserve"><value>Vibrer ved trykk</value></data>
+  <data name="audio" xml:space="preserve"><value>Lyd</value></data>
+  <data name="look" xml:space="preserve"><value>Utseende &amp; følelse</value></data>
+  <data name="controls" xml:space="preserve"><value>Kontroller</value></data>
+  <data name="langGroup" xml:space="preserve"><value>Språk</value></data>
+  <data name="parentZone" xml:space="preserve"><value>Foreldresone</value></data>
+  <data name="theme" xml:space="preserve"><value>Tema</value></data>
+  <data name="light" xml:space="preserve"><value>Lyst</value></data>
+  <data name="dark" xml:space="preserve"><value>Mørkt</value></data>
+  <data name="auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="cbPalette" xml:space="preserve"><value>Fargeblindvennlig</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Blå/oransje palett, mønstre beholdt</value></data>
+  <data name="accentTheme" xml:space="preserve"><value>Hovedfarge</value></data>
+  <data name="accTangerine" xml:space="preserve"><value>Mandarin</value></data>
+  <data name="accGrape" xml:space="preserve"><value>Drue</value></data>
+  <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Trykk gjør</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Trykk fyller, hold = X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Modusknapp</value></data>
+  <data name="handed" xml:space="preserve"><value>Knapper på</value></data>
+  <data name="leftH" xml:space="preserve"><value>Venstre</value></data>
+  <data name="rightH" xml:space="preserve"><value>Høyre</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Rutestørrelse</value></data>
+  <data name="bigNumbers" xml:space="preserve"><value>Store tall</value></data>
+  <data name="language" xml:space="preserve"><value>Språk</value></data>
+  <data name="screenTime" xml:space="preserve"><value>Påminnelse om skjermtid</value></data>
+  <data name="stOff" xml:space="preserve"><value>Av</value></data>
+  <data name="st15" xml:space="preserve"><value>15 min</value></data>
+  <data name="st30" xml:space="preserve"><value>30 min</value></data>
+  <data name="st60" xml:space="preserve"><value>1 time</value></data>
+  <data name="breakTitle" xml:space="preserve"><value>Tid for en pause?</value></data>
+  <data name="breakBody" xml:space="preserve"><value>Du har spilt i {0} minutter. Puslespillet ditt venter på deg.</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Litt lenger</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Jeg stopper her</value></data>
+  <data name="resetProgress" xml:space="preserve"><value>Nullstill framgang</value></data>
+  <data name="privacy" xml:space="preserve"><value>Data &amp; personvern</value></data>
+  <data name="open" xml:space="preserve"><value>Åpne</value></data>
+  <data name="reset" xml:space="preserve"><value>Nullstill</value></data>
+  <data name="grownUps" xml:space="preserve"><value>Bare for voksne</value></data>
+  <data name="gateQ" xml:space="preserve"><value>Hva er 7 × 4?</value></data>
+  <data name="cancel" xml:space="preserve"><value>Avbryt</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Slette alt?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Alle puslespill, stjerner og klistremerker forsvinner. Dette kan ikke angres.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Ja, slett alt</value></data>
+  <data name="version" xml:space="preserve"><value>Versjon 1.0 · bygg 128</value></data>
+  <data name="noAds" xml:space="preserve"><value>Ingen reklame · ingen kjøp i appen</value></data>
+  <data name="whatIs" xml:space="preserve"><value>Hva er et nonogram?</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Et nonogram er et bilde som skjuler seg i tall. Hintene ved hver rad og kolonne forteller hvor mange klosser du skal fylle, og i hvilken rekkefølge. Løs hver linje med ren logikk, og et bilde dukker opp — du trenger aldri å gjette.</value></data>
+  <data name="alsoCalled" xml:space="preserve"><value>Også kjent som: Picross · Griddler · Hanjie · Pic-a-Pix · Mal etter tall · japansk kryssord</value></data>
+  <data name="aboutHowTo" xml:space="preserve"><value>Slik spiller du</value></data>
+  <data name="aboutCredits" xml:space="preserve"><value>Takk til</value></data>
+  <data name="aboutPrivacy" xml:space="preserve"><value>Personvernerklæring</value></data>
+  <data name="aboutContact" xml:space="preserve"><value>Send tilbakemelding</value></data>
+  <data name="aboutRate" xml:space="preserve"><value>Vurder squarebuzz</value></data>
+  <data name="ht1" xml:space="preserve"><value>Les hintene</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Hvert tall er én ubrutt rekke av fylte klosser, listet i rekkefølge. Radhintet 3 1 betyr tre sammen, minst ett hull, så én alene.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Fyll og kryss</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Trykk på en rute for å fylle den. Bytt til X-modus for ruter du har bevist er tomme. X er ikke pynt — det er slik du holder oversikten.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Overlapp på lange hint</value></data>
+  <data name="ht3b" xml:space="preserve"><value>I en rad som er 10 bred må hintet 8 dekke de 6 midterste rutene uansett hvor det starter. Skyv rekken mot venstre, skyv den mot høyre, og fyll det som overlapper.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Se rad og kolonne sammen</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Når en rad gir deg én sikker kloss, se nedover den kolonnen. Den nye klossen fullfører ofte et kolonnehint, som gir flere X-er, som gir flere klosser.</value></data>
+  <data name="ht5" xml:space="preserve"><value>Kryss ut ferdige linjer</value></data>
+  <data name="ht5b" xml:space="preserve"><value>Når en linje stemmer helt med hintene sine, sett X i alle rutene som er igjen. Tallene blekner slik at du ser at linjen er ferdig.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Dyr</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurer</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Verdensrommet</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Mat</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Kjøretøy</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Eventyr</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Overrask meg</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Hjerte</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Liten fisk</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Stjerne</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Spøkelse</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Eple</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Seilbåt</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaur</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Katteansikt</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Muffins</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Racerbil</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Rakett</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Krone</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Hemmelig bilde</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupe</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Viser en forstørret 3×3-visning mens du maler. Av som standard.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Spør en voksen</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} av {1} funnet</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Gjør ferdig ditt første bilde.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Spill sju dager på rad.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Gjør ferdig et bilde uten et enkelt hint.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Klar en 5×5 på under ett minutt.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Fyll 100 klosser til sammen.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Finn alle dinosaurene.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Gjør ferdig et bilde etter klokka 20.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Tre stjerner på en 10×10, uten feil.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Finn alle bildene i galleriet.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Ferdig for i dag — vi ses i morgen!</value></data>
+</root>
