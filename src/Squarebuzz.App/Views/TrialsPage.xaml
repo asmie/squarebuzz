@@ -15,23 +15,6 @@
         <conv:BoolSelectConverter x:Key="TabTextColor"
                                   TrueValue="{StaticResource OnPrimary}"
                                   FalseValue="{StaticResource Ink}" />
-        <conv:PathStateSelectConverter x:Key="NodeFill"
-                                      DoneValue="{StaticResource Accent}"
-                                      CurrentValue="{StaticResource Primary}"
-                                      LockedValue="{StaticResource Surface}" />
-        <conv:PathStateSelectConverter x:Key="NodeStroke"
-                                      DoneValue="{StaticResource AccentDeep}"
-                                      CurrentValue="{StaticResource PrimaryDeep}"
-                                      LockedValue="{StaticResource Line}" />
-        <conv:PathStateSelectConverter x:Key="NodeInk"
-                                      DoneValue="{StaticResource OnAccent}"
-                                      CurrentValue="{StaticResource OnPrimary}"
-                                      LockedValue="{StaticResource Ink2}" />
-        <conv:PathStateSelectConverter x:Key="TrailInk"
-                                      DoneValue="{StaticResource Accent}"
-                                      CurrentValue="{StaticResource Line}"
-                                      LockedValue="{StaticResource Line}" />
-
         <conv:BoolSelectConverter x:Key="TrophyStroke"
                                   TrueValue="{StaticResource Gold}"
                                   FalseValue="{StaticResource Line}" />
@@ -53,7 +36,7 @@
         <Label Grid.Row="0" Text="{Binding Heading}" Style="{StaticResource H1}"
                SemanticProperties.HeadingLevel="Level1" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" ColumnSpacing="6">
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="6">
             <Button Grid.Column="0"
                     Text="{Binding DailyTabLabel}"
                     Command="{Binding ShowDailyCommand}"
@@ -73,15 +56,6 @@
                     FontSize="12"
                     FontFamily="BodyBold" />
             <Button Grid.Column="2"
-                    Text="{Binding PathTabLabel}"
-                    Command="{Binding ShowPathCommand}"
-                    BackgroundColor="{Binding IsPathTab, Converter={StaticResource TabBackground}}"
-                    TextColor="{Binding IsPathTab, Converter={StaticResource TabTextColor}}"
-                    CornerRadius="16"
-                    HeightRequest="50"
-                    FontSize="12"
-                    FontFamily="BodyBold" />
-            <Button Grid.Column="3"
                     Text="{Binding TrophiesTabLabel}"
                     Command="{Binding ShowTrophiesCommand}"
                     BackgroundColor="{Binding IsTrophiesTab, Converter={StaticResource TabBackground}}"
@@ -232,62 +206,6 @@
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
         </ScrollView>
-
-        <!--
-          Puzzle Path. A plain vertical list whose items lean sideways on an eight-step cycle,
-          which is what turns a column of circles into a trail - see PathCard.Offset.
-        -->
-        <Grid Grid.Row="2" IsVisible="{Binding IsPathTab}" RowDefinitions="Auto,*" RowSpacing="8">
-            <Label Grid.Row="0" Text="{Binding PathSummary}" Style="{StaticResource Subtle}" />
-
-            <ScrollView Grid.Row="1">
-                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Path}" Spacing="0">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate x:DataType="vm:PathCard">
-                            <VerticalStackLayout Spacing="0" TranslationX="{Binding Offset}">
-                                <Border SemanticProperties.Description="{Binding Description}"
-                                        BackgroundColor="{Binding State, Converter={StaticResource NodeFill}}"
-                                        Stroke="{Binding State, Converter={StaticResource NodeStroke}}"
-                                        StrokeThickness="3"
-                                        WidthRequest="{Binding Diameter}"
-                                        HeightRequest="{Binding Diameter}"
-                                        HorizontalOptions="Center">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="999" />
-                                    </Border.StrokeShape>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Path=PlayNodeCommand, Source={RelativeSource AncestorType={x:Type vm:TrialsViewModel}}, x:DataType=vm:TrialsViewModel}"
-                                            CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-
-                                    <Label Text="{Binding Caption}"
-                                           FontFamily="Display"
-                                           FontSize="{Binding FontSize}"
-                                           TextColor="{Binding State, Converter={StaticResource NodeInk}}"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           InputTransparent="True" />
-                                </Border>
-
-                                <!-- Three dots joining this stop to the next. Not after the last. -->
-                                <VerticalStackLayout Spacing="4"
-                                                     Margin="0,4"
-                                                     HorizontalOptions="Center"
-                                                     IsVisible="{Binding IsLast, Converter={StaticResource InvertBool}}">
-                                    <BoxView WidthRequest="5" HeightRequest="5" CornerRadius="3"
-                                             Color="{Binding State, Converter={StaticResource TrailInk}}" />
-                                    <BoxView WidthRequest="5" HeightRequest="5" CornerRadius="3"
-                                             Color="{Binding State, Converter={StaticResource TrailInk}}" />
-                                    <BoxView WidthRequest="5" HeightRequest="5" CornerRadius="3"
-                                             Color="{Binding State, Converter={StaticResource TrailInk}}" />
-                                </VerticalStackLayout>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </VerticalStackLayout>
-            </ScrollView>
-        </Grid>
 
         <!-- Trophies -->
         <Grid Grid.Row="2" IsVisible="{Binding IsTrophiesTab}" RowDefinitions="Auto,*" RowSpacing="8">

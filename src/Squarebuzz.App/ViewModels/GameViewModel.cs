@@ -31,6 +31,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// <summary>Route parameter naming the Timed Trial tier to run.</summary>
     public const string TimedTierParameter = "tier";
 
+    /// <summary>Route parameter naming the campaign level to play.</summary>
+    public const string LevelParameter = "level";
+
     /// <summary>
     /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
     /// only a few moves, rare enough that it never competes with drawing.
@@ -60,6 +63,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private string? _pendingPuzzleId;
     private bool _isDaily;
     private TimedTier? _pendingTier;
+    private int? _pendingLevel;
     private int _secondsSinceAutosave;
 
     /// <summary>Move count as of the last successful write, so a periodic save can skip a no-op.</summary>
@@ -365,7 +369,12 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
 
     public string TryAgainText => T("tryAgain");
 
-    public string SolvedTitle => T("solved");
+    /// <summary>The campaign level being played, or null. Lives in the session's origin, so it
+    /// survives a resume from Continue without any state of this ViewModel's own.</summary>
+    private int? CurrentLevel => Session?.Origin?.Level;
+
+    public string SolvedTitle =>
+        CurrentLevel is { } level ? Strings.Format("levelDone", level) : T("solved");
 
     public string TimeLabel => T("time");
 
@@ -395,7 +404,15 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         }
     }
 
-    public string NextPuzzleText => T("nextPuzzle");
+    public string NextPuzzleText => T(CurrentLevel is null ? "nextPuzzle" : "nextLevel");
+
+    /// <summary>Hidden only on the last level's win screen, where there is nothing to go to.</summary>
+    public bool ShowNextButton => !IsCampaignComplete;
+
+    /// <summary>True on the win screen of level 600 - the one game with no "next".</summary>
+    public bool IsCampaignComplete => CurrentLevel is { } level && level >= LevelCatalog.LevelCount;
+
+    public string AllLevelsDoneText => T("allLevelsDone");
 
     public string MenuText => T("menu");
 
@@ -508,6 +525,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             _pendingTier = TimedTrial.Find(tierNumber);
         }
 
+        if (query.TryGetValue(LevelParameter, out var level)
+            && int.TryParse(level?.ToString(), out var levelNumber)
+            && levelNumber >= 1
+            && levelNumber <= LevelCatalog.LevelCount)
+        {
+            _pendingLevel = levelNumber;
+        }
+
         if (query.ContainsKey(DailyParameter))
         {
             _isDaily = true;
@@ -537,6 +562,17 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             _settings = await LoadSettingsSafelyAsync();
 
             await StartAsync(tier.ToOptions(_settings.Helpers));
+            return;
+        }
+
+        if (_pendingLevel is { } level)
+        {
+            _pendingLevel = null;
+
+            // The catalog decides everything about a level; the settings only lend the
+            // player's helper preferences.
+            _settings = await LoadSettingsSafelyAsync();
+            await StartAsync(LevelCatalog.Get(level, _puzzles.Puzzles).ToOptions(_settings.Helpers));
             return;
         }
 
@@ -667,14 +703,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IsBreakReminderOpen = false;
         Toast = string.Empty;
 
-        PuzzleName = Session.Puzzle.IsGenerated
-            ? T("Puzzle_gen")
-            : T($"Puzzle_{Session.Puzzle.Id}");
+        PuzzleName = NameForPuzzle();
 
         SyncFromSession();
         UpdateElapsedText();
         StartTimer();
         NotifySettingsDependentProperties();
+        NotifyLevelDependentProperties();
 
         BoardChanged?.Invoke(this, EventArgs.Empty);
         return true;
@@ -772,17 +807,48 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IsBreakReminderOpen = false;
         Toast = string.Empty;
 
-        PuzzleName = Session.Puzzle.IsGenerated
-            ? T("Puzzle_gen")
-            : T($"Puzzle_{Session.Puzzle.Id}");
+        PuzzleName = NameForPuzzle();
 
         SyncFromSession();
         UpdateElapsedText();
         StartTimer();
 
         NotifySettingsDependentProperties();
+        NotifyLevelDependentProperties();
 
         BoardChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// What the header calls this game. A campaign level is its number; a milestone level keeps
+    /// the picture's name, because the reveal is the reward. Everything else is as before.
+    /// </summary>
+    private string NameForPuzzle()
+    {
+        if (Session is not { } session)
+        {
+            return string.Empty;
+        }
+
+        if (session.Puzzle.IsGenerated)
+        {
+            return CurrentLevel is { } level ? Strings.Format("levelN", level) : T("Puzzle_gen");
+        }
+
+        return T($"Puzzle_{session.Puzzle.Id}");
+    }
+
+    /// <summary>
+    /// The win overlay's texts change shape in level mode, and the overlay is built with the
+    /// page - so every new session must push them, exactly like the settings-dependent set.
+    /// </summary>
+    private void NotifyLevelDependentProperties()
+    {
+        OnPropertyChanged(nameof(SolvedTitle));
+        OnPropertyChanged(nameof(NextPuzzleText));
+        OnPropertyChanged(nameof(ShowNextButton));
+        OnPropertyChanged(nameof(AllLevelsDoneText));
+        OnPropertyChanged(nameof(IsCampaignComplete));
     }
 
     /// <summary>Applies a paint request from the board view.</summary>
@@ -974,10 +1040,25 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         await StartAsync(SameSettingsFreshPuzzle());
     }
 
-    /// <summary>A fresh puzzle with the same settings - the "Next" button on the win screen.</summary>
+    /// <summary>
+    /// The win screen's "Next": the next campaign level when one is being played, otherwise a
+    /// fresh puzzle with the same settings.
+    /// </summary>
     [RelayCommand]
     private async Task NextPuzzleAsync()
     {
+        if (CurrentLevel is { } level)
+        {
+            if (level >= LevelCatalog.LevelCount)
+            {
+                // The button is hidden on the last level's win screen; this is its backstop.
+                return;
+            }
+
+            await StartAsync(LevelCatalog.Get(level + 1, _puzzles.Puzzles).ToOptions(_settings.Helpers));
+            return;
+        }
+
         // Moving on from the daily means leaving it behind: the next puzzle is an ordinary one,
         // and must not be recorded as today's daily.
         _isDaily = false;
@@ -1011,7 +1092,27 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         // dereferences a possibly-null value and would throw once Origin was ever null.
         var origin = Session?.Origin;
 
-        return origin is null ? null : origin with { Seed = null };
+        if (origin is null)
+        {
+            return null;
+        }
+
+        // A restart of a campaign level replays that exact level: its seed and picture are in
+        // the origin already, and deterministic is the whole point of a level.
+        if (origin.Level is not null)
+        {
+            return origin;
+        }
+
+        return origin with
+        {
+            Seed = null,
+
+            // A picture chosen from the Gallery must not stick to every following "Next" - and
+            // the picture just solved must not come straight back either.
+            PuzzleId = null,
+            ExcludePuzzleId = Session is { Puzzle.IsGenerated: false } current ? current.Puzzle.Id : null,
+        };
     }
 
     [RelayCommand]
@@ -1083,6 +1184,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             PackId = session.Puzzle.Pack,
             Mistakes = session.Mistakes,
             IsDaily = _isDaily,
+            Level = CurrentLevel,
         };
 
         try

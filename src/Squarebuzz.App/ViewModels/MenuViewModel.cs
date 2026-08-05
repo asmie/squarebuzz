@@ -3,11 +3,13 @@ using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.App.Drawing;
 using Squarebuzz.App.Services;
 using Squarebuzz.Core.Abstractions;
+using Squarebuzz.Core.Progression;
 
 namespace Squarebuzz.App.ViewModels;
 
 /// <summary>
-/// The home screen: mascot, a greeting, the player's stars and streak, and the five ways in.
+/// The home screen: mascot, a greeting, the player's stars and streak, and the ways in - the
+/// Play campaign first, a quick custom game second, and the rest below.
 /// </summary>
 public partial class MenuViewModel : LocalizedViewModel
 {
@@ -50,7 +52,20 @@ public partial class MenuViewModel : LocalizedViewModel
 
     public bool HasSaves => SaveCount > 0;
 
-    public string NewGameLabel => T("newGame");
+    /// <summary>Highest campaign level completed, for the Play button's "Level N" subtitle.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PlaySubtitle))]
+    public partial int HighestLevel { get; private set; }
+
+    public string PlayLabel => T("play");
+
+    /// <summary>The next level to play - the last one, once everything is finished.</summary>
+    public string PlaySubtitle =>
+        Strings.Format("levelN", Math.Min(HighestLevel + 1, LevelCatalog.LevelCount));
+
+    public string QuickGameLabel => T("quickGame");
+
+    public string QuickGameSubtitle => T("quickGameSub");
 
     public string ContinueLabel => T("continueGame");
 
@@ -83,6 +98,7 @@ public partial class MenuViewModel : LocalizedViewModel
 
             Stars = progress.Stars;
             Streak = progress.Streak;
+            HighestLevel = progress.HighestLevelCompleted;
             SaveCount = await _saveGames.CountAsync();
         }
         catch (Exception)
@@ -114,6 +130,11 @@ public partial class MenuViewModel : LocalizedViewModel
         return T($"m_menu{index}");
     }
 
+    /// <summary>The front door of the game: the 600-level campaign.</summary>
+    [RelayCommand]
+    private async Task PlayAsync() => await _navigation.GoToAsync(Routes.Levels);
+
+    /// <summary>The old New Game flow, now called Quick game: pick a size and pack yourself.</summary>
     [RelayCommand]
     private async Task NewGameAsync() => await _navigation.GoToAsync(Routes.NewGame);
 

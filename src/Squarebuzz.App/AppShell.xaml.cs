@@ -55,7 +55,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(Routes.About, typeof(AboutPage));
         Routing.RegisterRoute(Routes.HowTo, typeof(HowToPage));
         Routing.RegisterRoute(Routes.Trials, typeof(TrialsPage));
-
+        Routing.RegisterRoute(Routes.Levels, typeof(LevelsPage));
     }
 }
 
@@ -73,4 +73,5 @@ public static class Routes
     public const string About = "about";
     public const string Gallery = "gallery";
     public const string HowTo = "howto";
+    public const string Levels = "levels";
 }

@@ -125,9 +125,9 @@ public partial class GalleryViewModel : LocalizedViewModel
             var record = byId.GetValueOrDefault(puzzle.Id);
             var isFound = record is not null;
 
-            // A found picture is never locked, whatever its pack says: the Puzzle Path plays
-            // locked-pack pictures at their stops, and something the player has legitimately
-            // finished must stay theirs to admire and replay.
+            // A found picture is never locked, whatever its pack says: the campaign plays
+            // locked-pack pictures at their milestone levels, and something the player has
+            // legitimately finished must stay theirs to admire and replay.
             var isLocked = !unlockedPacks.Contains(puzzle.Pack) && !isFound;
 
             Cards.Add(new GalleryCard

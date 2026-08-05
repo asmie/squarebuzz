@@ -8,8 +8,8 @@ namespace Squarebuzz.Core.Progression;
 /// <remarks>
 /// <para>
 /// A pack shipped as locked is "meet these on the trail first": its pictures still appear at
-/// their stops on the Puzzle Path, which plays every shipped picture in order regardless of
-/// locks, and once the player has found them all there the pack opens up for New Game and for
+/// their milestone levels in the campaign, which weaves in every shipped picture regardless of
+/// locks, and once the player has found them all there the pack opens up for Quick game and for
 /// Gallery replays.
 /// </para>
 /// <para>

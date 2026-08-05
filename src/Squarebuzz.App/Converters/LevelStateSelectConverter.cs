@@ -4,8 +4,8 @@ using Squarebuzz.Core.Progression;
 namespace Squarebuzz.App.Converters;
 
 /// <summary>
-/// Picks one of three values from a <see cref="PathNodeState"/>, so the trail's colours stay in the
-/// markup rather than being computed in the ViewModel.
+/// Picks one of three values from a <see cref="LevelNodeState"/>, so the trail's colours stay in
+/// the markup rather than being computed in the ViewModel.
 /// </summary>
 /// <remarks>
 /// The same shape as <see cref="BoolSelectConverter"/> and for the same reason: colours belong to
@@ -14,7 +14,7 @@ namespace Squarebuzz.App.Converters;
 /// <c>App.xaml</c> - the theme dictionaries are merged at runtime, so a <c>StaticResource</c>
 /// colour only resolves once a page is being built.
 /// </remarks>
-public sealed class PathStateSelectConverter : IValueConverter
+public sealed class LevelStateSelectConverter : IValueConverter
 {
     public object? DoneValue { get; set; }
 
@@ -23,11 +23,11 @@ public sealed class PathStateSelectConverter : IValueConverter
     public object? LockedValue { get; set; }
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is PathNodeState state
+        value is LevelNodeState state
             ? state switch
             {
-                PathNodeState.Done => DoneValue,
-                PathNodeState.Current => CurrentValue,
+                LevelNodeState.Done => DoneValue,
+                LevelNodeState.Current => CurrentValue,
                 _ => LockedValue,
             }
             : LockedValue;

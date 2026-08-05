@@ -392,8 +392,17 @@
                         </Border>
                     </Grid>
 
+                    <!-- The last level has no "next": the button gives way to a farewell line. -->
+                    <Label Text="{Binding AllLevelsDoneText}"
+                           IsVisible="{Binding IsCampaignComplete}"
+                           Style="{StaticResource Subtle}"
+                           FontFamily="BodyBold"
+                           TextColor="{DynamicResource AccentDeep}"
+                           HorizontalTextAlignment="Center" />
+
                     <Button Text="{Binding NextPuzzleText}"
                             Command="{Binding NextPuzzleCommand}"
+                            IsVisible="{Binding ShowNextButton}"
                             Style="{StaticResource PrimaryButton}"
                             HeightRequest="54" />
                     <Button Text="{Binding MenuText}"

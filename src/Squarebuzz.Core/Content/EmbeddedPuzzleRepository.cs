@@ -54,8 +54,8 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
         var pack = Packs.FirstOrDefault(p => string.Equals(p.Id, packId, StringComparison.Ordinal));
 
         // A wildcard pack draws from every pack the player can currently choose. That is not the
-        // same as "not shipped locked": a locked pack is earned by finding its pictures on the
-        // Puzzle Path, after which New Game and the Gallery both offer it. Judging by the shipped
+        // same as "not shipped locked": a locked pack is earned by finding its pictures at their
+        // campaign levels, after which Quick game and the Gallery both offer it. Judging by the shipped
         // flag alone left Surprise as the one place that never caught up, so a pack the player had
         // legitimately earned could still never turn up in it.
         if (pack?.IsWildcard == true)

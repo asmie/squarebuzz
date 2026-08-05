@@ -138,7 +138,11 @@ public partial class ContinueViewModel : LocalizedViewModel
         var total = CountFilledCells(puzzle);
         var done = Math.Min(save.FilledCount, total);
 
-        var name = puzzle.IsGenerated ? T("Puzzle_gen") : T($"Puzzle_{puzzle.Id}");
+        // A campaign level is named by its number; the mystery picture behind a generated
+        // quick game stays a mystery, and an authored picture keeps its name.
+        var name = save.Level is { } level && puzzle.IsGenerated
+            ? Strings.Format("levelN", level)
+            : puzzle.IsGenerated ? T("Puzzle_gen") : T($"Puzzle_{puzzle.Id}");
         var elapsed = $"{(int)save.Elapsed.TotalMinutes}:{save.Elapsed.Seconds:00}";
 
         return new SavedGameCard

@@ -111,6 +111,20 @@
   <data name="a11yPathDone" xml:space="preserve"><value>Stop {0}, {1}, finished. Play it again.</value></data>
   <data name="a11yPathCurrent" xml:space="preserve"><value>Stop {0}, {1} by {1}, next to play.</value></data>
   <data name="a11yPathLocked" xml:space="preserve"><value>Stop {0}, locked. Finish the stop before it.</value></data>
+  <!-- The Levels campaign behind the Play button. -->
+  <data name="quickGame" xml:space="preserve"><value>Quick game</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Pick your own size and pack</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Levels</value></data>
+  <data name="levelN" xml:space="preserve"><value>Level {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Level {0} done!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Next level</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>You finished every level!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} of {1} levels done</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Levels {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Level {0}, finished. Play it again.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Level {0}, {1} by {1}, next to play.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Level {0}, locked. Finish the level before it.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>A picture is hiding at this level.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trophies</value></data>
   <data name="timeUp" xml:space="preserve"><value>Out of time!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>The clock beat you this time. Have another go?</value></data>

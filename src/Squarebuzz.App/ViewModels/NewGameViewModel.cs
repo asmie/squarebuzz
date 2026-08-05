@@ -261,7 +261,7 @@ public partial class NewGameViewModel : LocalizedViewModel
                 Label = T($"Pack_{pack.Id}"),
 
                 // Not the content flag alone: a shipped-locked pack opens once its pictures
-                // have all been found on the Puzzle Path. See PackUnlocks.
+                // have all been found at their levels in the campaign. See PackUnlocks.
                 IsLocked = !_unlockedPacks.Contains(pack.Id),
                 IsSelected = pack.Id == SelectedPackId,
             });
