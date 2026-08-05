@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+
+    <!--
+      Test names read Subject_Scenario_Expectation, which CA1707 objects to because it is a rule
+      about public API surface. Suppressed here for the same reason as the other test projects:
+      build behaviour has to come from files the build owns, not from .editorconfig alone.
+    -->
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Squarebuzz.Core\Squarebuzz.Core.csproj" />
+    <ProjectReference Include="..\..\src\Squarebuzz.Presentation\Squarebuzz.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>

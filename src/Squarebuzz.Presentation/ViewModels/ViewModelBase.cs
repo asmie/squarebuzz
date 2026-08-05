@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>
 /// Base for every screen ViewModel. <see cref="ObservableObject"/> supplies change

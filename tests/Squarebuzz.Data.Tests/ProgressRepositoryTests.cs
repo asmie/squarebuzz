@@ -51,6 +51,28 @@ public class ProgressRepositoryTests
     }
 
     [Fact]
+    public async Task OverlappingCompletions_LoseNothing()
+    {
+        // The read used to happen outside the write's transaction, so two completions landing
+        // together could both read the same totals and the later write swallowed the earlier
+        // one's stars. Racing twenty of them makes that near-certain to surface if it regresses.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+
+        const int completions = 20;
+
+        await Task.WhenAll(Enumerable.Range(1, completions).Select(i => Task.Run(() =>
+            repository.RecordCompletionAsync(
+                Completion(puzzleId: null, stars: 1, Day1, blocks: 3) with { Level = i }))));
+
+        var progress = await repository.GetProgressAsync();
+
+        Assert.Equal(completions, progress.Stars);
+        Assert.Equal(completions * 3, progress.TotalBlocksFilled);
+        Assert.Equal(completions, progress.HighestLevelCompleted);
+    }
+
+    [Fact]
     public async Task FinishingALevel_AdvancesTheCampaign_ButNeverBackwards()
     {
         await using var temp = new TemporaryDatabase();

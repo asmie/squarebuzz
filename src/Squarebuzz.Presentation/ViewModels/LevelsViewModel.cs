@@ -2,12 +2,13 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Progression;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>One level on the map, ready for the item template.</summary>
 public sealed class LevelCard

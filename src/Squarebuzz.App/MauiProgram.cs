@@ -3,8 +3,9 @@ using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
 using Squarebuzz.App.Services;
-using Squarebuzz.App.ViewModels;
 using Squarebuzz.App.Views;
+using Squarebuzz.Presentation.Services;
+using Squarebuzz.Presentation.ViewModels;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Content;
 using Squarebuzz.Core.Generation;
@@ -81,6 +82,12 @@ public static class MauiProgram
         // both are statics that a test cannot substitute.
         services.AddSingleton<INavigationService, ShellNavigationService>();
         services.AddSingleton<IDeviceScreen, DeviceScreen>();
+
+        // The three seams that keep MAUI statics - MainThread, the dispatcher's timers and
+        // SemanticScreenReader - out of the ViewModel assembly.
+        services.AddSingleton<IUiThread, MauiUiThread>();
+        services.AddSingleton<IGameTimerFactory, DispatcherGameTimerFactory>();
+        services.AddSingleton<IScreenReader, MauiScreenReader>();
 
         RegisterDomain(services);
     }

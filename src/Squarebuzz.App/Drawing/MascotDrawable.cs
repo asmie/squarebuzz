@@ -1,12 +1,6 @@
-namespace Squarebuzz.App.Drawing;
+using Squarebuzz.Presentation.ViewModels;
 
-/// <summary>The mascot's expressions.</summary>
-public enum MascotPose
-{
-    Idle,
-    Cheer,
-    Think,
-}
+namespace Squarebuzz.App.Drawing;
 
 /// <summary>
 /// Draws the mascot as pixel art, from the same character grids the prototype used.

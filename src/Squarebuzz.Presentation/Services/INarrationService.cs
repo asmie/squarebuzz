@@ -1,6 +1,6 @@
 using Squarebuzz.Core.Model;
 
-namespace Squarebuzz.App.Services;
+namespace Squarebuzz.Presentation.Services;
 
 /// <summary>
 /// Reads the game's words aloud, for players who cannot yet read them.

@@ -1,8 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Core.Abstractions;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>
 /// The loading screen. Fills a progress bar while startup work happens, then moves on to
@@ -127,28 +128,33 @@ public partial class SplashViewModel : LocalizedViewModel
 
     private async Task<Core.Model.GameSettings> LoadSettingsAsync()
     {
+        Core.Model.GameSettings settings;
+
         try
         {
-            var settings = await _settingsRepository.LoadAsync();
-
-            _theme.Apply(settings.Theme, settings.Accent, settings.FollowSystemTheme);
-            Strings.SetLanguage(settings.Language);
-
-            // The reminder has to be armed before the first board opens, not when Options is
-            // first visited - a child who goes straight into a game must still be counted.
-            _screenTime.Configure(settings.ScreenTimeLimitMinutes);
-
-            // Applied before priming so the loop does not briefly start for a player who has
-            // music switched off; PrimeAsync re-applies once the assets are actually loaded.
-            _audio.Configure(settings.SoundEffects, settings.Music);
-
-            return settings;
+            settings = await _settingsRepository.LoadAsync();
         }
         catch (Exception)
         {
             // A corrupt or locked database must not strand the player on the splash screen.
             // Defaults get them into the game; Options can put things right.
-            return Core.Model.GameSettings.Default;
+            settings = Core.Model.GameSettings.Default;
         }
+
+        // Applied outside the try, so whichever settings were resolved - loaded or default -
+        // actually reach the services. A failed read used to skip this block entirely, leaving
+        // the audio service with everything off regardless of the defaults it reported.
+        _theme.Apply(settings.Theme, settings.Accent, settings.FollowSystemTheme);
+        Strings.SetLanguage(settings.Language);
+
+        // The reminder has to be armed before the first board opens, not when Options is
+        // first visited - a child who goes straight into a game must still be counted.
+        _screenTime.Configure(settings.ScreenTimeLimitMinutes);
+
+        // Applied before priming so the loop does not briefly start for a player who has
+        // music switched off; PrimeAsync re-applies once the assets are actually loaded.
+        _audio.Configure(settings.SoundEffects, settings.Music);
+
+        return settings;
     }
 }

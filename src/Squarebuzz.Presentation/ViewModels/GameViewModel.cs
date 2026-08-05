@@ -1,12 +1,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Progression;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>
 /// Drives the board screen: mode toggle, undo/redo, hints, the timer, pausing and completion.
@@ -17,7 +18,12 @@ namespace Squarebuzz.App.ViewModels;
 /// Pause and completion are overlays on this screen rather than separate routes, so the session
 /// never has to be serialised across a navigation just to show a summary over the board.
 /// </remarks>
-public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
+/// <remarks>
+/// Route parameters arrive through <see cref="ApplyQueryAttributes"/>. The MAUI head's
+/// <c>GamePage</c> implements Shell's <c>IQueryAttributable</c> and forwards here, so this
+/// assembly stays MAUI-free while Shell navigation keeps working.
+/// </remarks>
+public partial class GameViewModel : LocalizedViewModel
 {
     /// <summary>Route parameter naming the save to resume.</summary>
     public const string SaveIdParameter = "saveId";
@@ -52,8 +58,11 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     private readonly INarrationService _narration;
     private readonly IAccessibilityState _accessibility;
     private readonly IThemeService _theme;
+    private readonly IUiThread _uiThread;
+    private readonly IGameTimerFactory _timers;
+    private readonly IScreenReader _screenReader;
 
-    private IDispatcherTimer? _timer;
+    private IGameTimer? _timer;
     private GameSettings _settings = GameSettings.Default;
 
     /// <summary>Identity of this game's row in the save table, so autosaves replace rather than pile up.</summary>
@@ -85,7 +94,10 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         IAudioService audio,
         INarrationService narration,
         IAccessibilityState accessibility,
-        IThemeService theme)
+        IThemeService theme,
+        IUiThread uiThread,
+        IGameTimerFactory timers,
+        IScreenReader screenReader)
         : base(strings)
     {
         _sessions = sessions;
@@ -100,6 +112,9 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         _narration = narration;
         _accessibility = accessibility;
         _theme = theme;
+        _uiThread = uiThread;
+        _timers = timers;
+        _screenReader = screenReader;
 
         // The board canvas snapshots its palette when it draws, so a theme change mid-game -
         // OS dusk flip under Auto, or Options changed from the pause overlay one day - must
@@ -1146,6 +1161,16 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             return;
         }
 
+        // Everything the completion record needs, captured before the first await. The moment
+        // control yields, a quick tap on "Next" can replace the session, regenerate the save id
+        // and clear the daily flag - and this completion must be attributed to the game that was
+        // just won, not to the one that follows it. (A level recorded one-too-high would unlock
+        // a level that was never played.)
+        var saveId = _saveId;
+        var isDaily = _isDaily;
+        var level = CurrentLevel;
+        var completedAt = _clock.Now;
+
         StopTimer();
         IsSolved = true;
         IsPaused = false;
@@ -1165,7 +1190,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         {
             // Drop the save first: a completed puzzle in Continue would be a dead end, and it
             // must go even if recording progress then fails.
-            await _saveGames.DeleteAsync(_saveId);
+            await _saveGames.DeleteAsync(saveId);
         }
         catch (Exception)
         {
@@ -1178,13 +1203,13 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
             session.Elapsed,
             session.Puzzle.PictureCellCount,
             session.HintsUsed,
-            _clock.Now)
+            completedAt)
         {
             Size = session.Puzzle.Width,
             PackId = session.Puzzle.Pack,
             Mistakes = session.Mistakes,
-            IsDaily = _isDaily,
-            Level = CurrentLevel,
+            IsDaily = isDaily,
+            Level = level,
         };
 
         try
@@ -1303,16 +1328,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     {
         StopTimer();
 
-        var dispatcher = Application.Current?.Dispatcher;
-
-        if (dispatcher is null)
-        {
-            return;
-        }
-
-        _timer = dispatcher.CreateTimer();
-        _timer.Interval = TimeSpan.FromSeconds(1);
-        _timer.IsRepeating = true;
+        _timer = _timers.CreateSecondTimer();
         _timer.Tick += OnTimerTick;
         _timer.Start();
     }
@@ -1405,21 +1421,14 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
     /// unlike narration it is deliberately not tied to the Voice narration setting, because the
     /// player's screen reader is their choice rather than ours to switch off.
     /// </remarks>
-    private static void Announce(string text)
+    private void Announce(string text)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
             return;
         }
 
-        try
-        {
-            SemanticScreenReader.Default.Announce(text);
-        }
-        catch (Exception)
-        {
-            // Not every platform implements it, and an announcement is never worth a crash.
-        }
+        _screenReader.Announce(text);
     }
 
     private void ShowToast(string message)
@@ -1452,7 +1461,7 @@ public partial class GameViewModel : LocalizedViewModel, IQueryAttributable
         var token = ++_toastToken;
 
         _ = Task.Delay(1500).ContinueWith(
-            _ => MainThread.BeginInvokeOnMainThread(() =>
+            _ => _uiThread.BeginInvokeOnMainThread(() =>
             {
                 if (_toastToken == token && Toast == message)
                 {

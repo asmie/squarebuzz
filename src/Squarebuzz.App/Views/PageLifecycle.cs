@@ -7,7 +7,7 @@ namespace Squarebuzz.App.Views;
 /// <para>
 /// Nothing else ever disposes a transient ViewModel: the DI container does so only at process
 /// exit, and no page did at all. Every screen ViewModel subscribes to the language-changed event
-/// of an app-lifetime singleton (see <see cref="ViewModels.LocalizedViewModel"/>), so each visit
+/// of an app-lifetime singleton (see <see cref="Squarebuzz.Presentation.ViewModels.LocalizedViewModel"/>), so each visit
 /// to a screen used to leak the whole page through that handler list - and the game screen's
 /// one-second clock kept ticking after the player had left with the back gesture, inflating the
 /// saved time and the parental screen-time count.

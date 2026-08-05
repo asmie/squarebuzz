@@ -1,4 +1,4 @@
-namespace Squarebuzz.App.Services;
+namespace Squarebuzz.Presentation.Services;
 
 /// <summary>
 /// Reports whether the player is exploring the screen with a screen reader.

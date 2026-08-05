@@ -25,9 +25,12 @@ Dependencies flow strictly `App → Data → Core`. Core depends on nothing.
 
 ## Screen status
 
-Every screen is real. There is no placeholder page and no dead end in the menu: Splash,
-Onboarding, Menu, New Game, Board, Pause, Complete, Options, Continue, Gallery, About,
-How to Play and Trials are all implemented.
+Every screen is real: Splash, Onboarding, Menu, Levels, New Game, Board, Pause, Complete,
+Options, Continue, Gallery, About, How to Play and Trials are all implemented. One deliberate
+exception: About's Contact, Privacy and Rate buttons sit behind the parent gate and show an
+honest "unlocked" notice instead of opening anywhere — those destinations (support inbox,
+privacy policy, store listing) do not exist yet, and a dead link would be worse than a
+placeholder that says so.
 
 Every screen the prototype sketched now exists, including both Trials features that were
 deliberately held back until the domain could support them.

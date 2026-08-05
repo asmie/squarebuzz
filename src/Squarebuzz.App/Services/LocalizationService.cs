@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Presentation.Services;
 
 namespace Squarebuzz.App.Services;
 
@@ -107,20 +108,6 @@ public sealed class LocalizationService : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
         LanguageChanged?.Invoke(this, EventArgs.Empty);
     }
-}
-
-/// <summary>Injectable view of <see cref="LocalizationService"/>.</summary>
-public interface ILocalizationService
-{
-    event EventHandler? LanguageChanged;
-
-    AppLanguage Language { get; }
-
-    string GetString(string key);
-
-    string Format(string key, params object[] arguments);
-
-    void SetLanguage(AppLanguage language);
 }
 
 /// <summary>

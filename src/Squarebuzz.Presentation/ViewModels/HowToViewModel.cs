@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Services;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>One numbered lesson, with its worked diagram.</summary>
 public sealed class HowToSection

@@ -1,4 +1,4 @@
-using Squarebuzz.App.ViewModels;
+using Squarebuzz.Presentation.ViewModels;
 
 namespace Squarebuzz.App.Views;
 

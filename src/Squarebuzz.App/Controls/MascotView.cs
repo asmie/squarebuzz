@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using Squarebuzz.App.Drawing;
 using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.ViewModels;
 
 namespace Squarebuzz.App.Controls;
 

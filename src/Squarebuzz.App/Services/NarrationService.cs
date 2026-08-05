@@ -1,5 +1,7 @@
 using Squarebuzz.Core.Model;
 
+using Squarebuzz.Presentation.Services;
+
 namespace Squarebuzz.App.Services;
 
 /// <inheritdoc />
@@ -17,12 +19,20 @@ public sealed class NarrationService : INarrationService, IDisposable
     private CancellationTokenSource? _speaking;
     private bool _isEnabled;
     private bool _isDisposed;
+    private int _prepareGeneration;
 
     public bool IsAvailable { get; private set; }
 
     public async Task PrepareAsync(AppLanguage language)
     {
+        // Callers fire this without awaiting, and enumerating voices is slow - so a player
+        // flicking through the language list can have several of these in flight. Only the
+        // newest may commit its answer, or an older enumeration finishing last would quietly
+        // install the previous language's voice.
+        var generation = Interlocked.Increment(ref _prepareGeneration);
+
         var wanted = language.ToCultureCode();
+        Locale? found;
 
         try
         {
@@ -30,20 +40,27 @@ public sealed class NarrationService : INarrationService, IDisposable
 
             // Match on the language part only. Devices report "en-GB", "en-US", "en_US" and
             // occasionally just "en", and any English voice can read English text.
-            _locale = locales.FirstOrDefault(l =>
-                l.Language.StartsWith(wanted, StringComparison.OrdinalIgnoreCase));
-
+            //
             // Deliberately not falling back to some other language's voice. An English engine
             // reading Polish is not a degraded version of narration, it is noise - and a child
             // who cannot read the words cannot work out that the voice is wrong either.
-            IsAvailable = _locale is not null;
+            found = locales.FirstOrDefault(l =>
+                l.Language.StartsWith(wanted, StringComparison.OrdinalIgnoreCase));
         }
         catch (Exception)
         {
             // No engine at all: some Android images ship without one, and desktop support varies.
-            _locale = null;
-            IsAvailable = false;
+            found = null;
         }
+
+        if (generation != Volatile.Read(ref _prepareGeneration))
+        {
+            // A newer PrepareAsync started while this one was enumerating; its answer wins.
+            return;
+        }
+
+        _locale = found;
+        IsAvailable = found is not null;
 
         if (!IsAvailable)
         {

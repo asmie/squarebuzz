@@ -2,11 +2,12 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>One unfinished puzzle, as the Continue list shows it.</summary>
 public sealed class SavedGameCard

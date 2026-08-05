@@ -1,4 +1,4 @@
-namespace Squarebuzz.App.Services;
+namespace Squarebuzz.Presentation.Services;
 
 /// <summary>
 /// The sounds the game can make.

@@ -1,9 +1,9 @@
 using Squarebuzz.App.Controls;
-using Squarebuzz.App.ViewModels;
+using Squarebuzz.Presentation.ViewModels;
 
 namespace Squarebuzz.App.Views;
 
-public partial class GamePage : ContentPage
+public partial class GamePage : ContentPage, IQueryAttributable
 {
     private readonly GameViewModel _viewModel;
 
@@ -64,6 +64,14 @@ public partial class GamePage : ContentPage
         Board.LayoutChanged += (_, _) => UpdateMiniMap();
         BoardHost.Scrolled += (_, _) => UpdateMiniMapViewport();
     }
+
+    /// <summary>
+    /// Hands the route's parameters to the ViewModel. The forwarding exists because the
+    /// ViewModel lives in the MAUI-free Presentation assembly and cannot implement Shell's
+    /// <see cref="IQueryAttributable"/> itself.
+    /// </summary>
+    public void ApplyQueryAttributes(IDictionary<string, object> query) =>
+        _viewModel.ApplyQueryAttributes(query);
 
     private void OnBoardHostSizeChanged(object? sender, EventArgs e)
     {
@@ -243,7 +251,7 @@ public partial class GamePage : ContentPage
     /// <para>
     /// Only when a screen reader is actually running. A 20x20 grid is four hundred buttons, which
     /// is worth building for the player who cannot otherwise play and pure waste for everyone else;
-    /// see <see cref="Services.IAccessibilityState"/>.
+    /// see <see cref="Squarebuzz.Presentation.Services.IAccessibilityState"/>.
     /// </para>
     /// <para>
     /// Alignment comes from the board's own <c>BoardLayout</c> rather than from a second

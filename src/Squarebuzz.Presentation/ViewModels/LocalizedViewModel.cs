@@ -1,6 +1,6 @@
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Services;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>
 /// Base for screens whose labels come from resources.

@@ -2,11 +2,12 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>One row of the language picker in Options.</summary>
 public sealed class LanguageOption
@@ -38,6 +39,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     private readonly IScreenTimeMonitor _screenTime;
     private readonly IAudioService _audio;
     private readonly INarrationService _narration;
+    private readonly IUiThread _uiThread;
 
     private GameSettings _settings = GameSettings.Default;
 
@@ -52,7 +54,8 @@ public partial class OptionsViewModel : LocalizedViewModel
         INavigationService navigation,
         IScreenTimeMonitor screenTime,
         IAudioService audio,
-        INarrationService narration)
+        INarrationService narration,
+        IUiThread uiThread)
         : base(strings)
     {
         _settingsRepository = settingsRepository;
@@ -62,6 +65,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         _screenTime = screenTime;
         _audio = audio;
         _narration = narration;
+        _uiThread = uiThread;
 
         Gate = new ParentGate(strings);
     }
@@ -371,7 +375,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         Notice = message;
 
         _ = Task.Delay(2500).ContinueWith(
-            _ => MainThread.BeginInvokeOnMainThread(() =>
+            _ => _uiThread.BeginInvokeOnMainThread(() =>
             {
                 if (Notice == message)
                 {

@@ -3,9 +3,11 @@
     <Project Path="src/Squarebuzz.App/Squarebuzz.App.csproj" />
     <Project Path="src/Squarebuzz.Core/Squarebuzz.Core.csproj" />
     <Project Path="src/Squarebuzz.Data/Squarebuzz.Data.csproj" />
+    <Project Path="src/Squarebuzz.Presentation/Squarebuzz.Presentation.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj" />
     <Project Path="tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj" />
+    <Project Path="tests/Squarebuzz.Presentation.Tests/Squarebuzz.Presentation.Tests.csproj" />
   </Folder>
 </Solution>

@@ -1,3 +1,5 @@
+using Squarebuzz.Presentation.Services;
+
 namespace Squarebuzz.App.Services;
 
 /// <inheritdoc />

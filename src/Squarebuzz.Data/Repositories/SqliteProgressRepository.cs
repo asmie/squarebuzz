@@ -100,30 +100,36 @@ public sealed class SqliteProgressRepository : IProgressRepository
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
         var completedOn = DateOnly.FromDateTime(completion.CompletedAt.LocalDateTime);
 
-        var current = await GetProgressAsync(cancellationToken).ConfigureAwait(false);
-
-        var updated = current with
-        {
-            Stars = current.Stars + completion.Stars,
-            Streak = NextStreak(current, completedOn),
-            LastPlayedOn = completedOn,
-            TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
-
-            // Only a daily completion stamps this, so finishing a normal puzzle never marks
-            // today's daily as done.
-            LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
-
-            // Max, not assignment: replaying an already-finished level must never wind the
-            // campaign back.
-            HighestLevelCompleted = completion.Level is { } level
-                ? Math.Max(current.HighestLevelCompleted, level)
-                : current.HighestLevelCompleted,
-        };
+        var updated = PlayerProgress.Empty;
 
         // Progress and the solved-picture row move together: crediting stars without recording
-        // the picture (or the reverse) would show the player an inconsistent gallery.
+        // the picture (or the reverse) would show the player an inconsistent gallery. The read
+        // sits inside the same transaction as the write for the same reason: two completions
+        // landing together must serialise, or both read the same totals and the later write
+        // quietly swallows the earlier one's stars.
         await connection.RunInTransactionAsync(transaction =>
         {
+            var row = transaction.Find<ProgressEntity>(ProgressEntity.SingletonId);
+            var current = row is null ? PlayerProgress.Empty : ToModel(row);
+
+            updated = current with
+            {
+                Stars = current.Stars + completion.Stars,
+                Streak = NextStreak(current, completedOn),
+                LastPlayedOn = completedOn,
+                TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
+
+                // Only a daily completion stamps this, so finishing a normal puzzle never marks
+                // today's daily as done.
+                LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
+
+                // Max, not assignment: replaying an already-finished level must never wind the
+                // campaign back.
+                HighestLevelCompleted = completion.Level is { } level
+                    ? Math.Max(current.HighestLevelCompleted, level)
+                    : current.HighestLevelCompleted,
+            };
+
             transaction.InsertOrReplace(ToEntity(updated));
 
             if (completion.IsDaily)

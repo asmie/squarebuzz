@@ -1,8 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>
 /// About: what a nonogram is, and the grown-ups' links.
@@ -10,11 +11,13 @@ namespace Squarebuzz.App.ViewModels;
 public partial class AboutViewModel : LocalizedViewModel
 {
     private readonly INavigationService _navigation;
+    private readonly IUiThread _uiThread;
 
-    public AboutViewModel(ILocalizationService strings, INavigationService navigation)
+    public AboutViewModel(ILocalizationService strings, INavigationService navigation, IUiThread uiThread)
         : base(strings)
     {
         _navigation = navigation;
+        _uiThread = uiThread;
         Gate = new ParentGate(strings);
     }
 
@@ -88,7 +91,7 @@ public partial class AboutViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(HasNotice));
 
         _ = Task.Delay(2500).ContinueWith(
-            _ => MainThread.BeginInvokeOnMainThread(() =>
+            _ => _uiThread.BeginInvokeOnMainThread(() =>
             {
                 if (Notice == message)
                 {

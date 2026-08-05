@@ -1,6 +1,6 @@
 using Squarebuzz.Core.Model;
 
-namespace Squarebuzz.App.Services;
+namespace Squarebuzz.Presentation.Services;
 
 /// <summary>
 /// Applies the active <see cref="GameTheme"/> and <see cref="GameAccent"/> to the app's

@@ -2,6 +2,8 @@ using Squarebuzz.App.Resources.Themes;
 using Squarebuzz.App.Resources.Themes.Accents;
 using Squarebuzz.Core.Model;
 
+using Squarebuzz.Presentation.Services;
+
 namespace Squarebuzz.App.Services;
 
 /// <inheritdoc />

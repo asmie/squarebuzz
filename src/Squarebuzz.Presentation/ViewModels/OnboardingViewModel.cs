@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Squarebuzz.App.Drawing;
-using Squarebuzz.App.Services;
+using Squarebuzz.Presentation.Navigation;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 
-namespace Squarebuzz.App.ViewModels;
+namespace Squarebuzz.Presentation.ViewModels;
 
 /// <summary>
 /// The three cards a new player sees: what the numbers mean, why to mark X, and that a picture
@@ -62,7 +62,7 @@ public partial class OnboardingViewModel : LocalizedViewModel
     public string NextLabel => IsLastStep ? T("letsPlay") : T("next");
 
     /// <summary>Cheer on the final card, where the picture is revealed.</summary>
-    public MascotPose MascotPose => IsLastStep ? Drawing.MascotPose.Cheer : Drawing.MascotPose.Think;
+    public MascotPose MascotPose => IsLastStep ? MascotPose.Cheer : MascotPose.Think;
 
     /// <summary>
     /// A tiny picture illustrating each card. The last card shows a complete heart, because

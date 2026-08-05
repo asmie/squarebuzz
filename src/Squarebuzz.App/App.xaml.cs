@@ -1,5 +1,5 @@
-using Squarebuzz.App.Services;
 using Squarebuzz.Core.Model;
+using Squarebuzz.Presentation.Services;
 
 namespace Squarebuzz.App;
 
