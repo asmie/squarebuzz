@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Praleisti</value></data>
   <data name="next" xml:space="preserve"><value>Toliau</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Pažaiskim!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Naujas žaidimas</value></data>
   <data name="continueGame" xml:space="preserve"><value>Tęsti</value></data>
   <data name="trials" xml:space="preserve"><value>Išbandymai</value></data>
   <data name="options" xml:space="preserve"><value>Nustatymai</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · laiko daug</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · nesustok</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · nė sumirksėti</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Galvosūkių kelias</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Užbaik ankstesnę stotelę, kad atvertum kitą</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Stotelė {0}, {1}, įveikta. Gali žaisti dar kartą.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Stotelė {0}, {1} kartus {1}, ši – kita.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Stotelė {0}, užrakinta. Pirmiau užbaik ankstesnę.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Greitas žaidimas</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Pasirink dydį ir rinkinį</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Lygiai</value></data>
+  <data name="levelN" xml:space="preserve"><value>Lygis {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Lygis {0} įveiktas!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Kitas lygis</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Įveikei visus lygius!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>Įveikta {0} iš {1} lygių</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Lygiai {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Lygis {0}, įveiktas. Gali žaisti dar kartą.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Lygis {0}, {1} kartus {1}, kitas eilėje.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Lygis {0}, užrakintas. Pirmiau užbaik ankstesnį lygį.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Šiame lygyje slepiasi paveikslėlis.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofėjai</value></data>
   <data name="timeUp" xml:space="preserve"><value>Laikas baigėsi!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Šįkart laikrodis buvo greitesnis. Pabandysi dar?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Laikrodyje {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Šiandien</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Su laiku</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Kelias</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Laiko išbandymas</value></data>
   <data name="tr1" xml:space="preserve"><value>Pirmas paveikslėlis</value></data>
   <data name="tr2" xml:space="preserve"><value>Savaitė iš eilės</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Transportas</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Pasakos</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Nustebink mane</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Gamta</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Po vandeniu</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Muzika</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sportas</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Orai</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Širdelė</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Žuvelė</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Žvaigždė</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Lenktynių mašina</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raketa</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Karūna</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Kiškutis</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Ančiukas</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Šuniukas</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Drugelis</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Dino kiaušinis</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Pėdsakas</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Papartis</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Ugnikalnis</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegozauras</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Mėnulis</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Kometa</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planeta su žiedais</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Draugiškas ateivis</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Vyšnios</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Čiulpinukas</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Ledai</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Picos gabalėlis</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Autobusiukas</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Oro balionas</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Lėktuvas</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Didelis sunkvežimis</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Burtų lazdelė</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Auksinis raktas</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Pilis</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Drakoniukas</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Gėlė</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Lapas</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Gilė</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Medis</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Grybas</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Sraigė</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Kaktusas</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Kriauklė</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Jūrų žvaigždė</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Inkaras</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Aštuonkojis</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Krabas</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Banginis</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Povandeninis laivas</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Nata</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Varpelis</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Būgnas</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Gitara</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trimitas</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Pianinas</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medalis</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Lenktynių vėliava</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Taikinys</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Taurė</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Sportbatis</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Krepšinio kamuolys</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Saulutė</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Debesėlis</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Žaibas</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Lietaus lašas</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Skėtis</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Snaigė</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Vaivorykštė</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Paslaptingas paveikslėlis</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Rodo padidintą 3×3 vaizdą, kai spalvini. Iš pradžių išjungta.</value></data>

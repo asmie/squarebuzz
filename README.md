@@ -97,10 +97,11 @@ Verified that way: Giant unlocks, a 25×25 generates in about 4 seconds and rend
 wide layout appears in landscape and reverts in portrait, the session survives both rotations,
 and the phone layout is unchanged.
 
-## Daily puzzle, timed trials, the path, and trophies
+## Daily puzzle, timed trials, and trophies
 
-Trials holds today's puzzle, the Timed Trial ladder, the Puzzle Path and the trophy cabinet — the
-four tabs the design sketched.
+Trials holds today's puzzle, the Timed Trial ladder and the trophy cabinet. The winding trail that
+used to live here as a fourth tab grew into the Levels campaign behind the menu's Play button —
+see the Levels section below.
 
 ### Timed Trial
 
@@ -131,25 +132,32 @@ Some deliberate choices:
 - Elapsed time is clamped to the limit, so a loss does not get recorded as taking longer the
   coarser the caller's tick happens to be.
 
-### Puzzle Path
+### Levels (the Play campaign)
 
-The design's winding trail of twelve stops: finished ones show a star in the accent colour, the
-next one is drawn larger in the primary colour, and the rest are numbered and dimmed. Stops lean
-sideways on the prototype's eight-step cycle (0, 26, 46, 26, 0, −26, −46, −26 — a sampled sine), so
-a column of circles reads as a trail.
+The menu's primary button is **Play**: a 600-level campaign that replaced the old twelve-stop
+Puzzle Path. The trail keeps the Path's visual language — finished levels show a star in the
+accent colour, the current one is drawn larger in the primary colour, the rest are numbered and
+dimmed, and nodes lean sideways on the prototype's eight-step cycle (0, 26, 46, 26, 0, −26, −46,
+−26 — a sampled sine) — but it is a grouped, virtualizing `CollectionView`, because six hundred
+nodes cannot be built up front the way twelve could.
 
-**It stores nothing.** `PuzzlePath.Build` derives the whole thing from the twelve authored pictures
-and the solved table the game already keeps for the Gallery and the trophies, so the path cannot
-disagree with the rest of the game about what has been finished. The order is the order the content
-ships in, which already ramps — six 5×5 pictures then six 10×10 — and a test asserts a later stop
-is never smaller than an earlier one, because sorting here would silently reshuffle the path
-whenever a puzzle was added.
+Levels climb through the board sizes in bands — 1–40 are 5×5, 41–200 are 10×10, 201–400 are
+15×15, 401–600 are 20×20 — with generator difficulty ramping 1→5 inside each band. The campaign
+deliberately stops at 20×20: 25×25 is tablet-only, and a campaign whose last stretch is walled
+off on a phone would punish the players who got there. `LevelCatalog` is a pure function of the
+level number and the shipped content: every generated level's seed comes from the level number
+(the daily puzzle's mixing scheme with a different salt), and the 70 authored pictures are woven
+into their size's band as evenly spaced milestone levels, in content-file order, locked packs
+included — meeting a fairy-tale picture at its level is how that pack is earned.
 
-Finished stops are replayable; locked ones are shown, numbered and inert rather than hidden, which
-is the same call the design makes for the locked 25×25 size card: *visible, explained, not hidden*.
-A picture finished out of order from the Gallery counts as done, and the next stop is always the
-first *unsolved* one — the only reading that cannot leave the player with two current stops or
-none.
+The only stored campaign state is one integer, `highest_level` on the progress row: unlocking is
+strictly linear, completions record their level with max semantics (replaying an old level never
+winds the campaign back), and a parent's progress reset wipes it. Level games autosave and resume
+like any other, carrying their level number through the save table. Finished levels are
+replayable; locked ones are shown, numbered and inert rather than hidden — the same call the
+design makes for the locked 25×25 size card: *visible, explained, not hidden*. Quick game (the
+old New Game screen) keeps the free-choice flow, and its win screen's "Next" never serves the
+picture just solved twice in a row.
 
 The daily is **generated from the date**, not drawn from the twelve authored pictures — with
 only twelve a rotation would repeat every twelve days. `DailyPuzzle.SeedFor` hashes the day

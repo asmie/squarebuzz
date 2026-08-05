@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Παράλειψη</value></data>
   <data name="next" xml:space="preserve"><value>Επόμενο</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Πάμε να παίξουμε!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Νέο παιχνίδι</value></data>
   <data name="continueGame" xml:space="preserve"><value>Συνέχεια</value></data>
   <data name="trials" xml:space="preserve"><value>Προκλήσεις</value></data>
   <data name="options" xml:space="preserve"><value>Ρυθμίσεις</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · άφθονος χρόνος</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · κράτα ρυθμό</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · ούτε για ανοιγόκλεισμα</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Το μονοπάτι των παζλ</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Τελείωσε την προηγούμενη στάση για να ανοίξει η επόμενη</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Στάση {0}, {1}, τελειωμένη. Παίξ' την ξανά.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Στάση {0}, {1} επί {1}, η επόμενη για παιχνίδι.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Στάση {0}, κλειδωμένη. Τελείωσε τη στάση πριν από αυτή.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Γρήγορο παιχνίδι</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Διάλεξε εσύ μέγεθος και πακέτο</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Επίπεδα</value></data>
+  <data name="levelN" xml:space="preserve"><value>Επίπεδο {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Τέλος το επίπεδο {0}!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Επόμενο επίπεδο</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Τελείωσες όλα τα επίπεδα!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} από {1} επίπεδα έτοιμα</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Επίπεδα {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Επίπεδο {0}, τελειωμένο. Παίξ' το ξανά.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Επίπεδο {0}, {1} επί {1}, το επόμενο για παιχνίδι.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Επίπεδο {0}, κλειδωμένο. Τελείωσε το επίπεδο πριν από αυτό.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Σε αυτό το επίπεδο κρύβεται μια εικόνα.</value></data>
   <data name="trophies" xml:space="preserve"><value>Τρόπαια</value></data>
   <data name="timeUp" xml:space="preserve"><value>Τέλος χρόνου!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Το ρολόι σε νίκησε αυτή τη φορά. Θέλεις άλλη προσπάθεια;</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} στο ρολόι.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Ημερήσιο</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Με χρόνο</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Μονοπάτι</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Δοκιμασία με χρόνο</value></data>
   <data name="tr1" xml:space="preserve"><value>Πρώτη εικόνα</value></data>
   <data name="tr2" xml:space="preserve"><value>Εβδομάδα σερί</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Οχήματα</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Παραμύθι</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Έκπληξέ με</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Φύση</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Κάτω από τη θάλασσα</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Μουσική</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Αθλήματα</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Καιρός</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Καρδιά</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Ψαράκι</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Αστέρι</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Αγωνιστικό αυτοκίνητο</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Πύραυλος</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Στέμμα</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Κουνελάκι</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Παπάκι</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Σκυλάκι</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Πεταλούδα</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Αυγό δεινοσαύρου</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Πατημασιά</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Φτέρη</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Ηφαίστειο</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Στεγόσαυρος</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Φεγγάρι</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Κομήτης</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Πλανήτης με δαχτυλίδια</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Φιλικός εξωγήινος</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Κεράσια</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Γλειφιτζούρι</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Παγωτό</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Κομμάτι πίτσα</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Λεωφορειάκι</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Αερόστατο</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Αεροπλάνο</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Μεγάλο φορτηγό</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Μαγικό ραβδί</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Χρυσό κλειδί</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Κάστρο</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Δρακάκι</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Λουλούδι</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Φύλλο</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Βελανίδι</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Δέντρο</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Μανιτάρι</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Σαλιγκάρι</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Κάκτος</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Κοχύλι</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Αστερίας</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Άγκυρα</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Χταπόδι</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Καβούρι</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Φάλαινα</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Υποβρύχιο</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Νότα</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Καμπανάκι</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Τύμπανο</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Κιθάρα</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Τρομπέτα</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Πιάνο</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Μετάλλιο</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Σημαία αγώνων</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Στόχος</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Κύπελλο</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Αθλητικό παπούτσι</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Μπάλα του μπάσκετ</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Ήλιος</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Σύννεφο</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Αστραπή</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Σταγόνα βροχής</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Ομπρέλα</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Νιφάδα χιονιού</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Ουράνιο τόξο</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Μυστήρια εικόνα</value></data>
   <data name="magnifier" xml:space="preserve"><value>Μεγεθυντικός φακός</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Δείχνει μεγεθυμένη όψη 3×3 όσο ζωγραφίζεις. Κλειστό από προεπιλογή.</value></data>

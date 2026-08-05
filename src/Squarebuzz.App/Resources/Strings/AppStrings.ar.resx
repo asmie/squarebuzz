@@ -15,7 +15,6 @@
   <data name="skip" xml:space="preserve"><value>تخطّي</value></data>
   <data name="next" xml:space="preserve"><value>التالي</value></data>
   <data name="letsPlay" xml:space="preserve"><value>هيّا نلعب!</value></data>
-  <data name="newGame" xml:space="preserve"><value>لعبة جديدة</value></data>
   <data name="continueGame" xml:space="preserve"><value>متابعة</value></data>
   <data name="trials" xml:space="preserve"><value>تحدّيات</value></data>
   <data name="options" xml:space="preserve"><value>الإعدادات</value></data>
@@ -106,11 +105,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · وقت وفير</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · لا تتوقّف</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · لا وقت للرمش</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>مسار الألغاز</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>أكمل المحطّة السابقة لتفتح التالية</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>المحطّة {0}، {1}، مكتملة. العب مرّة أخرى.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>المحطّة {0}، {1} في {1}، التالية للعب.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>المحطّة {0}، مُقفلة. أكمل المحطّة التي قبلها.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>لعبة سريعة</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>اختر الحجم والمجموعة بنفسك</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>المستويات</value></data>
+  <data name="levelN" xml:space="preserve"><value>المستوى {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>أنجزت المستوى {0}!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>المستوى التالي</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>أنهيت كلّ المستويات!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>أنجزت {0} من {1} مستوى</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>المستويات {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>المستوى {0}، مكتمل. العب مرّة أخرى.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>المستوى {0}، {1} في {1}، التالي للعب.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>المستوى {0}، مُقفل. أكمل المستوى الذي قبله.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>صورة تختبئ في هذا المستوى.</value></data>
   <data name="trophies" xml:space="preserve"><value>الجوائز</value></data>
   <data name="timeUp" xml:space="preserve"><value>انتهى الوقت!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>سبقتك الساعة هذه المرّة. هل تجرّب مرّة أخرى؟</value></data>
@@ -118,7 +125,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} على الساعة.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>اليوم</value></data>
   <data name="tabTimed" xml:space="preserve"><value>توقيت</value></data>
-  <data name="tabPath" xml:space="preserve"><value>المسار</value></data>
   <data name="timedTrial" xml:space="preserve"><value>تحدّي الوقت</value></data>
   <data name="tr1" xml:space="preserve"><value>أوّل صورة</value></data>
   <data name="tr2" xml:space="preserve"><value>أسبوع كامل</value></data>
@@ -225,6 +231,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>المركبات</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>حكايات خياليّة</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>فاجئني</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>الطبيعة</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>تحت البحر</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>الموسيقى</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>الرياضة</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>الطقس</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>قلب</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>سمكة صغيرة</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>نجمة</value></data>
@@ -237,6 +248,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>سيّارة سباق</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>صاروخ</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>تاج</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>أرنب صغير</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>بطّة صغيرة</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>جرو</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>فراشة</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>بيضة ديناصور</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>أثر قدم</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>سرخس</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>بركان</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>ستيغوصورس</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>قمر</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>مذنّب</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>كوكب ذو حلقات</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>كائن فضائي لطيف</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>كرز</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>مصّاصة</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>مثلّجات</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>شريحة بيتزا</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>حافلة صغيرة</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>منطاد</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>طائرة</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>شاحنة كبيرة</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>عصا سحريّة</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>مفتاح ذهبي</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>قلعة</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>تنّين صغير</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>زهرة</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>ورقة شجر</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>بلّوطة</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>شجرة</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>فطر</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>حلزون</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>صبّار</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>صدفة</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>نجمة البحر</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>مرساة</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>أخطبوط</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>سلطعون</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>حوت</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>غوّاصة</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>نوتة موسيقيّة</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>جرس</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>طبل</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>غيتار</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>بوق</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>بيانو</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>ميداليّة</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>علم السباق</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>هدف</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>كأس</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>حذاء رياضي</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>كرة سلّة</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>شمس</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>غيمة</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>برق</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>قطرة مطر</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>مظلّة</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>ندفة ثلج</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>قوس قزح</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>صورة غامضة</value></data>
   <data name="magnifier" xml:space="preserve"><value>المكبّرة</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>تُظهر منظرًا مكبّرًا 3×3 أثناء التلوين. مغلقة في الأصل.</value></data>

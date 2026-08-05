@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Yeqa</value></data>
   <data name="next" xml:space="preserve"><value>Okulandelayo</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Asidlale!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Umdlalo omusha</value></data>
   <data name="continueGame" xml:space="preserve"><value>Qhubeka</value></data>
   <data name="trials" xml:space="preserve"><value>Izinselelo</value></data>
   <data name="options" xml:space="preserve"><value>Izilungiselelo</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · isikhathi sanele</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · qhubeka nejubane</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · asikho isikhathi sokucwayiza</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Indlela yamaphazili</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Qedela isiteshi esandulele ukuvula esilandelayo</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Isiteshi {0}, {1}, siphelele. Sidlale futhi.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Isiteshi {0}, {1} nge-{1}, esilandelayo ukudlalwa.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Isiteshi {0}, sikhiyiwe. Qedela isiteshi esingaphambi kwaso.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Umdlalo osheshayo</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Zikhethele ubukhulu nephakethe</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Amaleveli</value></data>
+  <data name="levelN" xml:space="preserve"><value>Ileveli {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Ileveli {0} liphelele!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Ileveli elilandelayo</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Uqede wonke amaleveli!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>Amaleveli angu-{0} kwangu-{1} aphelele</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Amaleveli {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Ileveli {0}, liphelele. Lidlale futhi.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Ileveli {0}, {1} nge-{1}, elilandelayo ukudlalwa.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Ileveli {0}, likhiyiwe. Qedela ileveli elingaphambi kwalo.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Kunesithombe esicashile kuleli leveli.</value></data>
   <data name="trophies" xml:space="preserve"><value>Izindebe</value></data>
   <data name="timeUp" xml:space="preserve"><value>Isikhathi siphelile!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Iwashi likunqobile kulokhu. Ufuna ukuzama futhi?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} ewashini.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Nsuku zonke</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Ngesikhathi</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Indlela</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Umzamo wesikhathi</value></data>
   <data name="tr1" xml:space="preserve"><value>Isithombe sokuqala</value></data>
   <data name="tr2" xml:space="preserve"><value>Isonto lilandelana</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Izimoto</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Inganekwane</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Ngimangaze</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Imvelo</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Ngaphansi kolwandle</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Umculo</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Ezemidlalo</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Isimo sezulu</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Inhliziyo</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Inhlanzi encane</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Inkanyezi</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Imoto yomjaho</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Irokhethi</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Umqhele</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Unogwaja</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Izinyane ledada</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Umdlwane</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Uvemvane</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Iqanda ledinosor</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Umkhondo</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Inkomankoma</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Intabamlilo</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>I-stegosaurus</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Inyanga</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Inkanyezi enomsila</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Iplanethi enamasongo</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Umngane wasemkhathini</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Amasheri</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Ilolipopu</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>U-ayisikhilimu</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Ucezu lwepitsa</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Ibhasi elincane</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Ibhaluni lomoya oshisayo</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Ibhanoyi</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Iloli elikhulu</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Induku yomlingo</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Isikhiye segolide</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Inqaba</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Udrako omncane</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Imbali</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Iqabunga</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Isithelo se-oki</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Isihlahla</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Ikhowe</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Umnenke</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Umdolofiya</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Igobolondo lasolwandle</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Inkanyezi yolwandle</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Ihange</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Imbambela</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Inkalankala</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Umkhomo</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Umkhumbi wangaphansi kwamanzi</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Inothi lomculo</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Insimbi</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Isigubhu</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Isigingci</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Icilongo</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Upiyano</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Indondo</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Ifulegi lomjaho</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Ithagethi</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Indebe</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Iteki</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Ibhola lebhasikidi</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Ilanga</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Ifu</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Umbani</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Iconsi lemvula</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Isambulela</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Iqhwa</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Uthingo lwenkosazana</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Isithombe esiyimfihlo</value></data>
   <data name="magnifier" xml:space="preserve"><value>Isikhulisi</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Sibonisa ukubuka okukhulisiwe okungu-3×3 ngesikhathi upenda. Kuvalwe ngokuzenzakalela.</value></data>

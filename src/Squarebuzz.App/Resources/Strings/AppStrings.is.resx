@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Sleppa</value></data>
   <data name="next" xml:space="preserve"><value>Næst</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Spilum!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nýr leikur</value></data>
   <data name="continueGame" xml:space="preserve"><value>Halda áfram</value></data>
   <data name="trials" xml:space="preserve"><value>Áskoranir</value></data>
   <data name="options" xml:space="preserve"><value>Stillingar</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · nægur tími</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · haltu ferðinni</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · enginn tími til að blikka</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Þrautaleiðin</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Fullgerðu stoppið á undan til að opna næsta</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Stopp {0}, {1}, lokið. Spilaðu það aftur.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Stopp {0}, {1} sinnum {1}, næst að spila.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Stopp {0}, læst. Fullgerðu stoppið á undan því.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Hraðleikur</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Veldu þína eigin stærð og pakka</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Borð</value></data>
+  <data name="levelN" xml:space="preserve"><value>Borð {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Borð {0} klárað!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Næsta borð</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Þú kláraðir öll borðin!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} af {1} borðum lokið</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Borð {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Borð {0}, lokið. Spilaðu það aftur.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Borð {0}, {1} sinnum {1}, næst að spila.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Borð {0}, læst. Kláraðu borðið á undan því.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Mynd leynist á þessu borði.</value></data>
   <data name="trophies" xml:space="preserve"><value>Verðlaun</value></data>
   <data name="timeUp" xml:space="preserve"><value>Tíminn er búinn!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Klukkan vann þessu sinni. Viltu prófa aftur?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} á klukkunni.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Daglegt</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Á tíma</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Leið</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Tímaáskorun</value></data>
   <data name="tr1" xml:space="preserve"><value>Fyrsta myndin</value></data>
   <data name="tr2" xml:space="preserve"><value>Vika í röð</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Farartæki</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Ævintýri</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Komdu mér á óvart</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Náttúran</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Neðansjávar</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Tónlist</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Íþróttir</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Veður</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Hjarta</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Lítill fiskur</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Stjarna</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Kappakstursbíll</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Eldflaug</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Kóróna</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Kanína</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Andarungi</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Hvolpur</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Fiðrildi</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Risaeðluegg</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Fótspor</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Burkni</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Eldfjall</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegósárus</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Tungl</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Halastjarna</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Pláneta með hringjum</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Vinaleg geimvera</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Kirsuber</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Sleikjó</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Ís</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Pitsusneið</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Lítill strætó</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Loftbelgur</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Flugvél</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Stór vörubíll</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Töfrasproti</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Gulllykill</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Kastali</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Drekaungi</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Blóm</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Laufblað</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Akarn</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Tré</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Sveppur</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Snigill</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Kaktus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Skel</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Krossfiskur</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Akkeri</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Kolkrabbi</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Krabbi</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Hvalur</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Kafbátur</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Nóta</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Bjalla</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Tromma</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Gítar</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trompet</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Píanó</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medalía</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Kappakstursfáni</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Skotmark</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Bikar</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Strigaskór</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Körfubolti</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Sól</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Ský</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Elding</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Regndropi</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Regnhlíf</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Snjókorn</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Regnbogi</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Dularfull mynd</value></data>
   <data name="magnifier" xml:space="preserve"><value>Stækkunargler</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Sýnir stækkaða 3×3 sýn meðan þú málar. Sjálfgefið af.</value></data>

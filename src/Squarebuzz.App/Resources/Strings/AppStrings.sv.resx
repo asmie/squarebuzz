@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Hoppa över</value></data>
   <data name="next" xml:space="preserve"><value>Nästa</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Nu spelar vi!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nytt spel</value></data>
   <data name="continueGame" xml:space="preserve"><value>Fortsätt</value></data>
   <data name="trials" xml:space="preserve"><value>Utmaningar</value></data>
   <data name="options" xml:space="preserve"><value>Inställningar</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · gott om tid</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · håll tempot</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · hinner inte blinka</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Pusselstigen</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Klara hållplatsen innan för att öppna nästa</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Hållplats {0}, {1}, klar. Spela den igen.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Hållplats {0}, {1} gånger {1}, nästa att spela.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Hållplats {0}, låst. Klara hållplatsen före den.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Snabbspel</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Välj storlek och paket själv</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Nivåer</value></data>
+  <data name="levelN" xml:space="preserve"><value>Nivå {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Nivå {0} klar!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Nästa nivå</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Du klarade alla nivåer!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} av {1} nivåer klara</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Nivå {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Nivå {0}, klar. Spela den igen.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Nivå {0}, {1} gånger {1}, nästa att spela.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Nivå {0}, låst. Klara nivån före den.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>En bild gömmer sig på den här nivån.</value></data>
   <data name="trophies" xml:space="preserve"><value>Troféer</value></data>
   <data name="timeUp" xml:space="preserve"><value>Tiden är ute!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Klockan vann den här gången. Vill du försöka igen?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} på klockan.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dagligt</value></data>
   <data name="tabTimed" xml:space="preserve"><value>På tid</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Stig</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Tidsutmaning</value></data>
   <data name="tr1" xml:space="preserve"><value>Första bilden</value></data>
   <data name="tr2" xml:space="preserve"><value>Veckosvit</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Fordon</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Saga</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Överraska mig</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Naturen</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Under havet</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Musik</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sport</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Väder</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Hjärta</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Liten fisk</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Stjärna</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Racerbil</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raket</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Krona</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Kanin</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Ankunge</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Valp</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Fjäril</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Dinoägg</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Fotspår</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Ormbunke</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Vulkan</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegosaurus</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Måne</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Komet</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planet med ringar</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Snäll rymdvarelse</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Körsbär</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Klubba</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Glass</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Pizzabit</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Liten buss</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Luftballong</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Flygplan</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Stor lastbil</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Trollstav</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Gyllene nyckel</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Slott</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Drakunge</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Blomma</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Löv</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Ekollon</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Träd</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Svamp</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Snigel</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Kaktus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Snäcka</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Sjöstjärna</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Ankare</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Bläckfisk</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Krabba</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Val</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Ubåt</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Musiknot</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Klocka</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Trumma</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Gitarr</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trumpet</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Piano</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medalj</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Målflagga</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Måltavla</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Pokal</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Gympasko</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Basketboll</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Solsken</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Moln</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Blixt</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Regndroppe</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Paraply</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Snöflinga</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Regnbåge</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Hemlig bild</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupp</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Visar en förstorad 3×3-vy medan du målar. Av som standard.</value></data>

@@ -15,7 +15,6 @@
   <data name="skip" xml:space="preserve"><value>Skip</value></data>
   <data name="next" xml:space="preserve"><value>Next</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Let's play!</value></data>
-  <data name="newGame" xml:space="preserve"><value>New Game</value></data>
   <data name="continueGame" xml:space="preserve"><value>Continue</value></data>
   <data name="trials" xml:space="preserve"><value>Trials</value></data>
   <data name="options" xml:space="preserve"><value>Options</value></data>
@@ -106,11 +105,6 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · plenty of time</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · keep moving</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · no time to blink</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Puzzle Path</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Finish the stop before to open the next one</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Stop {0}, {1}, finished. Play it again.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Stop {0}, {1} by {1}, next to play.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Stop {0}, locked. Finish the stop before it.</value></data>
   <!-- The Levels campaign behind the Play button. -->
   <data name="quickGame" xml:space="preserve"><value>Quick game</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Pick your own size and pack</value></data>
@@ -130,12 +124,10 @@
   <data name="timeUpBody" xml:space="preserve"><value>The clock beat you this time. Have another go?</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Try again</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} on the clock.</value></data>
-  <!-- Short forms for the four-up tab row. The full names stay on the panels themselves;
-       "Daily Puzzle" and "Puzzle Path" simply do not fit a quarter of a phone's width, and
-       truncating them leaves the useless pair "Daily" / "Puzzle". -->
+  <!-- Short forms for the tab row. The full names stay on the panels themselves;
+       "Daily Puzzle" simply does not fit a third of a phone's width. -->
   <data name="tabDaily" xml:space="preserve"><value>Daily</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Timed</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Path</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Timed Trial</value></data>
   <data name="tr1" xml:space="preserve"><value>First Picture</value></data>
   <data name="tr2" xml:space="preserve"><value>Week Streak</value></data>

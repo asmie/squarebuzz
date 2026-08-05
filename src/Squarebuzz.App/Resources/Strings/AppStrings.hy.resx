@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Բաց թողնել</value></data>
   <data name="next" xml:space="preserve"><value>Հաջորդը</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Խաղա՛նք</value></data>
-  <data name="newGame" xml:space="preserve"><value>Նոր խաղ</value></data>
   <data name="continueGame" xml:space="preserve"><value>Շարունակել</value></data>
   <data name="trials" xml:space="preserve"><value>Մարտահրավերներ</value></data>
   <data name="options" xml:space="preserve"><value>Կարգավորումներ</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · ժամանակը շատ է</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · պահիր տեմպը</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · աչք թարթելու ժամանակ չկա</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Հանելուկների ուղին</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Ավարտիր նախորդ կանգառը, որ հաջորդը բացվի</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Կանգառ {0}, {1}, ավարտված։ Խաղա նորից։</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Կանգառ {0}, {1} × {1}, հաջորդը խաղալու։</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Կանգառ {0}, փակված։ Ավարտիր նրանից առաջ եղած կանգառը։</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Արագ խաղ</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Ինքդ ընտրիր չափը և փաթեթը</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Մակարդակներ</value></data>
+  <data name="levelN" xml:space="preserve"><value>Մակարդակ {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Մակարդակ {0}-ն ավարտված է</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Հաջորդ մակարդակ</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Դու ավարտեցիր բոլոր մակարդակները</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{1} մակարդակից {0}-ն ավարտված</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Մակարդակներ {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Մակարդակ {0}, ավարտված։ Խաղա նորից։</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Մակարդակ {0}, {1} × {1}, հաջորդը խաղալու։</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Մակարդակ {0}, փակված։ Ավարտիր նրանից առաջ եղած մակարդակը։</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Այս մակարդակում նկար է թաքնված։</value></data>
   <data name="trophies" xml:space="preserve"><value>Գավաթներ</value></data>
   <data name="timeUp" xml:space="preserve"><value>Ժամանակը սպառվեց</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Այս անգամ ժամացույցը հաղթեց։ Էլի փորձե՞ս</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}։ {1}։ {2} ժամացույցի վրա։</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Օրվա</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Ժամանակով</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Ուղի</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Ժամանակային փորձ</value></data>
   <data name="tr1" xml:space="preserve"><value>Առաջին նկարը</value></data>
   <data name="tr2" xml:space="preserve"><value>Շաբաթ անընդմեջ</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Փոխադրամիջոցներ</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Հեքիաթ</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Զարմացրու ինձ</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Բնություն</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Ծովի տակ</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Երաժշտություն</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Սպորտ</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Եղանակ</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Սիրտ</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Փոքրիկ ձուկ</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Աստղ</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Մրցարշավի մեքենա</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Հրթիռ</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Թագ</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Նապաստակ</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Բադիկ</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Շնիկ</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Թիթեռ</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Դինոյի ձու</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Ոտնահետք</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Պտեր</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Հրաբուխ</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Ստեգոզավր</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Լուսին</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Գիսաստղ</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Օղակավոր մոլորակ</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Բարի այլմոլորակային</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Բալեր</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Փայտիկով կոնֆետ</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Պաղպաղակ</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Պիցցայի կտոր</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Փոքրիկ ավտոբուս</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Օդապարիկ</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Ինքնաթիռ</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Մեծ բեռնատար</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Կախարդական փայտիկ</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Ոսկե բանալի</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Ամրոց</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Փոքրիկ վիշապ</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Ծաղիկ</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Տերև</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Կաղին</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Ծառ</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Սունկ</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Խխունջ</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Կակտուս</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Խեցի</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Ծովաստղ</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Խարիսխ</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Ութոտնուկ</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Խեցգետին</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Կետ</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Սուզանավ</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Նոտա</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Զանգակ</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Թմբուկ</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Կիթառ</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Շեփոր</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Դաշնամուր</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Մեդալ</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Մրցարշավի դրոշ</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Թիրախ</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Գավաթ</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Սպորտային կոշիկ</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Բասկետբոլի գնդակ</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Արև</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Ամպ</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Կայծակ</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Անձրևի կաթիլ</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Հովանոց</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Ձյան փաթիլ</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Ծիածան</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Խորհրդավոր նկար</value></data>
   <data name="magnifier" xml:space="preserve"><value>Խոշորացույց</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Ներկելիս ցույց է տալիս խոշորացված 3×3 տեսք։ Լռելյայն անջատված է։</value></data>

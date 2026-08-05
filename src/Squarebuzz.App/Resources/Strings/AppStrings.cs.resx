@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Přeskočit</value></data>
   <data name="next" xml:space="preserve"><value>Dál</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Pojďme hrát!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nová hra</value></data>
   <data name="continueGame" xml:space="preserve"><value>Pokračovat</value></data>
   <data name="trials" xml:space="preserve"><value>Výzvy</value></data>
   <data name="options" xml:space="preserve"><value>Nastavení</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · času dost</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · nezastavuj</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · ani nemrkni</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Cesta hádanek</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Dokonči předchozí zastávku a otevře se další</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Zastávka {0}, {1}, dokončená. Zahraj si ji znovu.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Zastávka {0}, {1} na {1}, hraje se jako další.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Zastávka {0}, zamčená. Dokonči tu předchozí.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Rychlá hra</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Vyber si vlastní velikost a sadu</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Úrovně</value></data>
+  <data name="levelN" xml:space="preserve"><value>Úroveň {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Úroveň {0} hotová!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Další úroveň</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Všechny úrovně máš hotové!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>Hotovo {0} z {1} úrovní</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Úrovně {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Úroveň {0}, dokončená. Zahraj si ji znovu.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Úroveň {0}, {1} na {1}, hraje se jako další.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Úroveň {0}, zamčená. Dokonči úroveň před ní.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Na této úrovni se skrývá obrázek.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofeje</value></data>
   <data name="timeUp" xml:space="preserve"><value>Čas vypršel!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Tentokrát byly hodiny rychlejší. Zkusíš to znovu?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na hodinách.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dnes</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na čas</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Cesta</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Hra na čas</value></data>
   <data name="tr1" xml:space="preserve"><value>První obrázek</value></data>
   <data name="tr2" xml:space="preserve"><value>Týden v kuse</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Vozidla</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Pohádky</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Překvapení</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Příroda</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Pod mořem</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Hudba</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sport</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Počasí</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Srdce</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Rybka</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Hvězda</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Závodní auto</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raketa</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Korunka</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Zajíček</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Káčátko</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Štěňátko</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Motýlek</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Dinosauří vejce</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Stopa</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Kapradina</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Sopka</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegosaurus</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Měsíc</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Kometa</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planeta s prstenci</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Hodný mimozemšťan</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Třešně</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Lízátko</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Zmrzlina</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Kousek pizzy</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Malý autobus</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Horkovzdušný balón</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Letadlo</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Velký náklaďák</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Kouzelná hůlka</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Zlatý klíček</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Hrad</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Dráček</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Kytička</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Lístek</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Žalud</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Strom</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Hříbek</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Šneček</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Kaktus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Mušlička</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Hvězdice</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Kotva</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Chobotnice</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Krab</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Velryba</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Ponorka</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Nota</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Zvoneček</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Bubínek</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Kytara</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trumpeta</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Klavír</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medaile</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Závodní vlajka</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Terč</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Pohár</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Teniska</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Basketbalový míč</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Sluníčko</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Mráček</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Blesk</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Kapka deště</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Deštník</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Sněhová vločka</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Duha</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Tajemný obrázek</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Při malování ukazuje zvětšený výřez 3×3. Ve výchozím stavu vypnutá.</value></data>

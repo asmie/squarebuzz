@@ -15,7 +15,6 @@
   <data name="skip" xml:space="preserve"><value>Saltar</value></data>
   <data name="next" xml:space="preserve"><value>Siguiente</value></data>
   <data name="letsPlay" xml:space="preserve"><value>¡A jugar!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nueva partida</value></data>
   <data name="continueGame" xml:space="preserve"><value>Continuar</value></data>
   <data name="trials" xml:space="preserve"><value>Retos</value></data>
   <data name="options" xml:space="preserve"><value>Ajustes</value></data>
@@ -86,61 +85,47 @@
   <data name="hintUsed" xml:space="preserve"><value>¡Una gratis!</value></data>
   <data name="mistakeMsg" xml:space="preserve"><value>Esa no — inténtalo otra vez</value></data>
   <data name="genFailed" xml:space="preserve"><value>Esta vez no se pudo crear el puzle. ¡Inténtalo de nuevo!</value></data>
+  <data name="ok" xml:space="preserve"><value>OK</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Cuenta para los tableros grandes que inventa el juego: de 15×15 en adelante. Los dibujos pequeños están hechos a mano.</value></data>
+  <data name="a11yDailyCalendar" xml:space="preserve"><value>Puzles diarios completados este mes: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Sin pistas</value></data>
   <data name="lineDone" xml:space="preserve"><value>¡Línea lista!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Cuando quieras. ¡Elige un puzle!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Vas muy bien. ¿Otra más?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Hoy encontré dibujos nuevos.</value></data>
   <data name="winLine" xml:space="preserve"><value>Muy bien. ¿Otro?</value></data>
-  <data name="Pack_animals" xml:space="preserve"><value>Animales</value></data>
-  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurios</value></data>
-  <data name="Pack_space" xml:space="preserve"><value>Espacio</value></data>
-  <data name="Pack_food" xml:space="preserve"><value>Comida</value></data>
-  <data name="Pack_vehicles" xml:space="preserve"><value>Vehículos</value></data>
-  <data name="Pack_fairy" xml:space="preserve"><value>Cuentos</value></data>
-  <data name="Pack_surprise" xml:space="preserve"><value>Sorpresa</value></data>
-  <data name="Puzzle_heart" xml:space="preserve"><value>Corazón</value></data>
-  <data name="Puzzle_fish" xml:space="preserve"><value>Pececito</value></data>
-  <data name="Puzzle_star" xml:space="preserve"><value>Estrella</value></data>
-  <data name="Puzzle_ghost" xml:space="preserve"><value>Fantasma</value></data>
-  <data name="Puzzle_apple" xml:space="preserve"><value>Manzana</value></data>
-  <data name="Puzzle_boat" xml:space="preserve"><value>Velero</value></data>
-  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurio</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Gatito</value></data>
-  <data name="Puzzle_cupcake" xml:space="preserve"><value>Magdalena</value></data>
-  <data name="Puzzle_car" xml:space="preserve"><value>Coche</value></data>
-  <data name="Puzzle_rocket" xml:space="preserve"><value>Cohete</value></data>
-  <data name="Puzzle_crown" xml:space="preserve"><value>Corona</value></data>
-  <data name="Puzzle_gen" xml:space="preserve"><value>Dibujo misterioso</value></data>
-
-  <!-- Menú / general -->
   <data name="firstPuzzle" xml:space="preserve"><value>Empieza tu primer puzle</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Cómo jugar</value></data>
-  <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Cuenta para los tableros grandes que inventa el juego: de 15×15 en adelante. Los dibujos pequeños están hechos a mano.</value></data>
-  <data name="a11yDailyCalendar" xml:space="preserve"><value>Puzles diarios completados este mes: {0}</value></data>
-
-  <!-- Desafíos -->
   <data name="dailyTitle" xml:space="preserve"><value>Puzle del día</value></data>
   <data name="dailySub" xml:space="preserve"><value>Una imagen nueva cada mañana</value></data>
-  <data name="dailyDone" xml:space="preserve"><value>Hecho por hoy. ¡Hasta mañana!</value></data>
   <data name="play" xml:space="preserve"><value>Jugar</value></data>
-  <data name="tabDaily" xml:space="preserve"><value>Diario</value></data>
-  <data name="tabTimed" xml:space="preserve"><value>Reloj</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Sendero</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Prueba contrarreloj</value></data>
   <data name="timedName1" xml:space="preserve"><value>Calentamiento</value></data>
   <data name="timedName2" xml:space="preserve"><value>Constante</value></data>
   <data name="timedName3" xml:space="preserve"><value>Relámpago</value></data>
   <data name="timedSub1" xml:space="preserve"><value>5×5 · tiempo de sobra</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · sin pararte</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · sin pestañear</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Sendero de puzles</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Termina la parada anterior para abrir la siguiente</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Partida rápida</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Elige tú el tamaño y el pack</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Niveles</value></data>
+  <data name="levelN" xml:space="preserve"><value>Nivel {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>¡Nivel {0} listo!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Siguiente nivel</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>¡Has terminado todos los niveles!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} de {1} niveles listos</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Niveles {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Nivel {0}, terminado. Juégalo otra vez.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Nivel {0}, {1} por {1}, el siguiente para jugar.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Nivel {0}, bloqueado. Termina antes el nivel anterior.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>En este nivel se esconde un dibujo.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofeos</value></data>
   <data name="timeUp" xml:space="preserve"><value>¡Se acabó el tiempo!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Esta vez ganó el reloj. ¿Lo intentas de nuevo?</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Otra vez</value></data>
+  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} en el reloj.</value></data>
+  <data name="tabDaily" xml:space="preserve"><value>Diario</value></data>
+  <data name="tabTimed" xml:space="preserve"><value>Reloj</value></data>
+  <data name="timedTrial" xml:space="preserve"><value>Prueba contrarreloj</value></data>
   <data name="tr1" xml:space="preserve"><value>Primera imagen</value></data>
   <data name="tr2" xml:space="preserve"><value>Semana seguida</value></data>
   <data name="tr3" xml:space="preserve"><value>Sin pistas</value></data>
@@ -150,25 +135,33 @@
   <data name="tr7" xml:space="preserve"><value>Búho nocturno</value></data>
   <data name="tr8" xml:space="preserve"><value>Diez perfecto</value></data>
   <data name="tr9" xml:space="preserve"><value>Coleccionista</value></data>
-  <data name="trophyHint1" xml:space="preserve"><value>Termina tu primera imagen.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Juega siete días seguidos.</value></data>
-  <data name="trophyHint3" xml:space="preserve"><value>Termina una imagen sin ninguna pista.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Termina un 5×5 en menos de un minuto.</value></data>
-  <data name="trophyHint5" xml:space="preserve"><value>Rellena 100 bloques en total.</value></data>
-  <data name="trophyHint6" xml:space="preserve"><value>Encuentra todos los dinosaurios.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Termina una imagen después de las 8 de la tarde.</value></data>
-  <data name="trophyHint8" xml:space="preserve"><value>Tres estrellas en un 10×10, sin errores.</value></data>
-  <data name="trophyHint9" xml:space="preserve"><value>Encuentra todas las imágenes de la galería.</value></data>
-  <data name="galleryFound" xml:space="preserve"><value>{0} de {1} encontradas</value></data>
-
-  <!-- Opciones -->
-  <data name="audio" xml:space="preserve"><value>Sonido</value></data>
   <data name="sound" xml:space="preserve"><value>Efectos de sonido</value></data>
   <data name="music" xml:space="preserve"><value>Música</value></data>
   <data name="voice" xml:space="preserve"><value>Narración por voz</value></data>
   <data name="voiceReady" xml:space="preserve"><value>Ahora puedo leerte.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>No hay voz para este idioma en este dispositivo</value></data>
+  <data name="a11yCell" xml:space="preserve"><value>Fila {0}, columna {1}, {2}. Pista de fila: {3}. Pista de columna: {4}.</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>vacía</value></data>
+  <data name="a11yCellFilled" xml:space="preserve"><value>rellena</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>tachada</value></data>
+  <data name="a11yClueNone" xml:space="preserve"><value>ninguna</value></data>
+  <data name="a11yBoard" xml:space="preserve"><value>Tablero, {0} por {1}. {2} de {3} casillas rellenas.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Las casillas aún no se pueden usar con exploración táctil.</value></data>
+  <data name="a11yTime" xml:space="preserve"><value>Tiempo hasta ahora: {0}</value></data>
+  <data name="a11yStars" xml:space="preserve"><value>{0} estrellas en total</value></data>
+  <data name="a11yStreak" xml:space="preserve"><value>{0} días seguidos</value></data>
+  <data name="a11yResumeGame" xml:space="preserve"><value>Continuar con {0}</value></data>
+  <data name="a11yDeleteGame" xml:space="preserve"><value>Borrar {0}</value></data>
+  <data name="a11ySmaller" xml:space="preserve"><value>Casillas más pequeñas</value></data>
+  <data name="a11yBigger" xml:space="preserve"><value>Casillas más grandes</value></data>
+  <data name="a11yFound" xml:space="preserve"><value>{0}, encontrada, {1} estrellas</value></data>
+  <data name="a11yNotFound" xml:space="preserve"><value>Imagen aún sin descubrir. Juega para revelarla.</value></data>
+  <data name="a11yLockedCard" xml:space="preserve"><value>Imagen bloqueada</value></data>
+  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, conseguido. {1}</value></data>
+  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, aún no conseguido. {1}</value></data>
+  <data name="a11yStarRating" xml:space="preserve"><value>{0} de 3 estrellas</value></data>
   <data name="haptics" xml:space="preserve"><value>Vibrar al tocar</value></data>
+  <data name="audio" xml:space="preserve"><value>Sonido</value></data>
   <data name="look" xml:space="preserve"><value>Apariencia</value></data>
   <data name="controls" xml:space="preserve"><value>Controles</value></data>
   <data name="langGroup" xml:space="preserve"><value>Idioma</value></data>
@@ -192,8 +185,6 @@
   <data name="cellSize" xml:space="preserve"><value>Tamaño de casilla</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Números grandes</value></data>
   <data name="language" xml:space="preserve"><value>Idioma</value></data>
-  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Muestra una vista ampliada de 3×3 mientras pintas. Desactivada por defecto.</value></data>
   <data name="screenTime" xml:space="preserve"><value>Recordatorio de descanso</value></data>
   <data name="stOff" xml:space="preserve"><value>No</value></data>
   <data name="st15" xml:space="preserve"><value>15 min</value></data>
@@ -209,13 +200,10 @@
   <data name="reset" xml:space="preserve"><value>Restablecer</value></data>
   <data name="grownUps" xml:space="preserve"><value>Solo adultos</value></data>
   <data name="gateQ" xml:space="preserve"><value>¿Cuánto es 7 × 4?</value></data>
-  <data name="gateRetry" xml:space="preserve"><value>Pide ayuda a un adulto</value></data>
   <data name="cancel" xml:space="preserve"><value>Cancelar</value></data>
   <data name="resetTitle" xml:space="preserve"><value>¿Borrarlo todo?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Todos los puzles, estrellas y pegatinas desaparecerán. No se puede deshacer.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Sí, borrarlo todo</value></data>
-
-  <!-- Acerca de -->
   <data name="version" xml:space="preserve"><value>Versión 1.0 · compilación 128</value></data>
   <data name="noAds" xml:space="preserve"><value>Sin anuncios · sin compras en la app</value></data>
   <data name="whatIs" xml:space="preserve"><value>¿Qué es un nonograma?</value></data>
@@ -226,8 +214,6 @@
   <data name="aboutPrivacy" xml:space="preserve"><value>Política de privacidad</value></data>
   <data name="aboutContact" xml:space="preserve"><value>Enviar comentarios</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Valora squarebuzz</value></data>
-
-  <!-- Cómo jugar -->
   <data name="ht1" xml:space="preserve"><value>Lee las pistas</value></data>
   <data name="ht1b" xml:space="preserve"><value>Cada número es una tira seguida de bloques rellenos, en orden. La pista 3 1 significa tres juntos, al menos un hueco y luego uno solo.</value></data>
   <data name="ht2" xml:space="preserve"><value>Rellena y tacha</value></data>
@@ -238,30 +224,101 @@
   <data name="ht4b" xml:space="preserve"><value>Cuando una fila te da un bloque seguro, mira su columna. Ese bloque suele completar una pista de columna, lo que da más X, y esas X dan más bloques.</value></data>
   <data name="ht5" xml:space="preserve"><value>Tacha las líneas terminadas</value></data>
   <data name="ht5b" xml:space="preserve"><value>Cuando una línea cumple todas sus pistas, tacha las casillas que queden. Los números se atenúan para que sepas que esa línea está lista.</value></data>
-
-  <!-- Lector de pantalla -->
-  <data name="a11yCell" xml:space="preserve"><value>Fila {0}, columna {1}, {2}. Pista de fila: {3}. Pista de columna: {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>vacía</value></data>
-  <data name="a11yCellFilled" xml:space="preserve"><value>rellena</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>tachada</value></data>
-  <data name="a11yClueNone" xml:space="preserve"><value>ninguna</value></data>
-  <data name="a11yBoard" xml:space="preserve"><value>Tablero, {0} por {1}. {2} de {3} casillas rellenas.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Las casillas aún no se pueden usar con exploración táctil.</value></data>
-  <data name="a11yTime" xml:space="preserve"><value>Tiempo hasta ahora: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} estrellas en total</value></data>
-  <data name="a11yStreak" xml:space="preserve"><value>{0} días seguidos</value></data>
-  <data name="a11yResumeGame" xml:space="preserve"><value>Continuar con {0}</value></data>
-  <data name="a11yDeleteGame" xml:space="preserve"><value>Borrar {0}</value></data>
-  <data name="a11ySmaller" xml:space="preserve"><value>Casillas más pequeñas</value></data>
-  <data name="a11yBigger" xml:space="preserve"><value>Casillas más grandes</value></data>
-  <data name="a11yFound" xml:space="preserve"><value>{0}, encontrada, {1} estrellas</value></data>
-  <data name="a11yNotFound" xml:space="preserve"><value>Imagen aún sin descubrir. Juega para revelarla.</value></data>
-  <data name="a11yLockedCard" xml:space="preserve"><value>Imagen bloqueada</value></data>
-  <data name="a11yTrophyEarned" xml:space="preserve"><value>{0}, conseguido. {1}</value></data>
-  <data name="a11yTrophyLocked" xml:space="preserve"><value>{0}, aún no conseguido. {1}</value></data>
-  <data name="a11yStarRating" xml:space="preserve"><value>{0} de 3 estrellas</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Parada {0}, {1}, terminada. Juégala otra vez.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Parada {0}, {1} por {1}, la siguiente para jugar.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Parada {0}, bloqueada. Termina antes la anterior.</value></data>
-  <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} en el reloj.</value></data>
+  <data name="Pack_animals" xml:space="preserve"><value>Animales</value></data>
+  <data name="Pack_dinos" xml:space="preserve"><value>Dinosaurios</value></data>
+  <data name="Pack_space" xml:space="preserve"><value>Espacio</value></data>
+  <data name="Pack_food" xml:space="preserve"><value>Comida</value></data>
+  <data name="Pack_vehicles" xml:space="preserve"><value>Vehículos</value></data>
+  <data name="Pack_fairy" xml:space="preserve"><value>Cuentos</value></data>
+  <data name="Pack_surprise" xml:space="preserve"><value>Sorpresa</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Naturaleza</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Bajo el mar</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Música</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Deportes</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>El tiempo</value></data>
+  <data name="Puzzle_heart" xml:space="preserve"><value>Corazón</value></data>
+  <data name="Puzzle_fish" xml:space="preserve"><value>Pececito</value></data>
+  <data name="Puzzle_star" xml:space="preserve"><value>Estrella</value></data>
+  <data name="Puzzle_ghost" xml:space="preserve"><value>Fantasma</value></data>
+  <data name="Puzzle_apple" xml:space="preserve"><value>Manzana</value></data>
+  <data name="Puzzle_boat" xml:space="preserve"><value>Velero</value></data>
+  <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurio</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Gatito</value></data>
+  <data name="Puzzle_cupcake" xml:space="preserve"><value>Magdalena</value></data>
+  <data name="Puzzle_car" xml:space="preserve"><value>Coche</value></data>
+  <data name="Puzzle_rocket" xml:space="preserve"><value>Cohete</value></data>
+  <data name="Puzzle_crown" xml:space="preserve"><value>Corona</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Conejito</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Patito</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Perrito</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Mariposa</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Huevo de dino</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Huella</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Helecho</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Volcán</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Estegosaurio</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Luna</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Cometa</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planeta con anillos</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Alien simpático</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Cerezas</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Piruleta</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Helado</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Trozo de pizza</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Autobús pequeño</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Globo aerostático</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Avión</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Camión grande</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Varita mágica</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Llave dorada</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Castillo</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Dragoncito</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Flor</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Hoja</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Bellota</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Árbol</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Seta</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Caracol</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Cactus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Caracola</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Estrella de mar</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Ancla</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Pulpo</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Cangrejo</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Ballena</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Submarino</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Nota musical</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Campana</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Tambor</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Guitarra</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trompeta</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Piano</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medalla</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Bandera de carreras</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Diana</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Trofeo</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Zapatilla</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Balón de baloncesto</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Sol</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Nube</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Rayo</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Gota de lluvia</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Paraguas</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Copo de nieve</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Arcoíris</value></data>
+  <data name="Puzzle_gen" xml:space="preserve"><value>Dibujo misterioso</value></data>
+  <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Muestra una vista ampliada de 3×3 mientras pintas. Desactivada por defecto.</value></data>
+  <data name="gateRetry" xml:space="preserve"><value>Pide ayuda a un adulto</value></data>
+  <data name="galleryFound" xml:space="preserve"><value>{0} de {1} encontradas</value></data>
+  <data name="trophyHint1" xml:space="preserve"><value>Termina tu primera imagen.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Juega siete días seguidos.</value></data>
+  <data name="trophyHint3" xml:space="preserve"><value>Termina una imagen sin ninguna pista.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Termina un 5×5 en menos de un minuto.</value></data>
+  <data name="trophyHint5" xml:space="preserve"><value>Rellena 100 bloques en total.</value></data>
+  <data name="trophyHint6" xml:space="preserve"><value>Encuentra todos los dinosaurios.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Termina una imagen después de las 8 de la tarde.</value></data>
+  <data name="trophyHint8" xml:space="preserve"><value>Tres estrellas en un 10×10, sin errores.</value></data>
+  <data name="trophyHint9" xml:space="preserve"><value>Encuentra todas las imágenes de la galería.</value></data>
+  <data name="dailyDone" xml:space="preserve"><value>Hecho por hoy. ¡Hasta mañana!</value></data>
 </root>

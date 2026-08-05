@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Overslaan</value></data>
   <data name="next" xml:space="preserve"><value>Verder</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Laten we spelen!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nieuw spel</value></data>
   <data name="continueGame" xml:space="preserve"><value>Doorgaan</value></data>
   <data name="trials" xml:space="preserve"><value>Uitdagingen</value></data>
   <data name="options" xml:space="preserve"><value>Opties</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · genoeg tijd</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · blijf doorgaan</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · geen tijd om te knipperen</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Puzzelpad</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Maak de halte ervoor af om de volgende te openen</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Halte {0}, {1}, af. Speel hem nog eens.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Halte {0}, {1} bij {1}, nu aan de beurt.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Halte {0}, op slot. Maak eerst de halte ervoor af.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Snel spelletje</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Kies zelf je formaat en pakket</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Levels</value></data>
+  <data name="levelN" xml:space="preserve"><value>Level {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Level {0} gehaald!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Volgend level</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Je hebt alle levels gehaald!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} van {1} levels gehaald</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Levels {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Level {0}, af. Speel hem nog eens.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Level {0}, {1} bij {1}, nu aan de beurt.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Level {0}, op slot. Maak eerst het level ervoor af.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Bij dit level zit een tekening verstopt.</value></data>
   <data name="trophies" xml:space="preserve"><value>Bekers</value></data>
   <data name="timeUp" xml:space="preserve"><value>Tijd is om!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>De klok was deze keer sneller. Nog een keer proberen?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} op de klok.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Vandaag</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Tijd</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Pad</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Tijdrit</value></data>
   <data name="tr1" xml:space="preserve"><value>Eerste tekening</value></data>
   <data name="tr2" xml:space="preserve"><value>Week op rij</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Voertuigen</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Sprookjes</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Verras me</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Natuur</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Onder water</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Muziek</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sport</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Het weer</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Hart</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Visje</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Ster</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Raceauto</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raket</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Kroon</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Konijntje</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Eendje</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Puppy</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Vlinder</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Dino-ei</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Voetafdruk</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Varen</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Vulkaan</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegosaurus</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Maan</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Komeet</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planeet met ringen</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Vriendelijke alien</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Kersen</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Lolly</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>IJsje</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Pizzapunt</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Busje</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Luchtballon</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Vliegtuig</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Grote vrachtwagen</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Toverstokje</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Gouden sleutel</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Kasteel</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Babydraakje</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Bloemetje</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Blaadje</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Eikeltje</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Boom</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Paddenstoel</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Slakje</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Cactus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Schelp</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Zeester</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Anker</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Octopus</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Krab</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Walvis</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Duikboot</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Muzieknoot</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Bel</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Trommel</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Gitaar</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trompet</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Piano</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medaille</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Racevlag</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Doelwit</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Trofee</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Sneaker</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Basketbal</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Zonnetje</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Wolkje</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Bliksem</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Regendruppel</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Paraplu</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Sneeuwvlokje</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Regenboog</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Geheime tekening</value></data>
   <data name="magnifier" xml:space="preserve"><value>Loep</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Laat tijdens het inkleuren een uitvergroot stukje van 3×3 zien. Standaard uit.</value></data>

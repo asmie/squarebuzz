@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Salta</value></data>
   <data name="next" xml:space="preserve"><value>Avanti</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Giochiamo!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nuova partita</value></data>
   <data name="continueGame" xml:space="preserve"><value>Continua</value></data>
   <data name="trials" xml:space="preserve"><value>Sfide</value></data>
   <data name="options" xml:space="preserve"><value>Opzioni</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · tutto il tempo che vuoi</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · non rallentare</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · non battere ciglio</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Percorso di griglie</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Completa la tappa prima per aprire la prossima</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Tappa {0}, {1}, completata. Giocala di nuovo.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Tappa {0}, {1} per {1}, la prossima da giocare.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Tappa {0}, bloccata. Completa prima quella precedente.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Partita veloce</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Scegli tu la grandezza e il set</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Livelli</value></data>
+  <data name="levelN" xml:space="preserve"><value>Livello {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Livello {0} finito!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Prossimo livello</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Hai finito tutti i livelli!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} livelli finiti su {1}</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Livelli {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Livello {0}, finito. Giocalo di nuovo.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Livello {0}, {1} per {1}, il prossimo da giocare.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Livello {0}, bloccato. Completa prima quello precedente.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>A questo livello si nasconde un’immagine.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofei</value></data>
   <data name="timeUp" xml:space="preserve"><value>Tempo scaduto!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Questa volta ha vinto l’orologio. Ci riprovi?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} sull’orologio.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Oggi</value></data>
   <data name="tabTimed" xml:space="preserve"><value>A tempo</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Percorso</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Sfida a tempo</value></data>
   <data name="tr1" xml:space="preserve"><value>Primo disegno</value></data>
   <data name="tr2" xml:space="preserve"><value>Una settimana</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Veicoli</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Fiabe</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Sorpresa!</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Natura</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>In fondo al mare</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Musica</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sport</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Meteo</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Cuore</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Pesciolino</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Stella</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Auto da corsa</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Razzo</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Corona</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Coniglietto</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Anatroccolo</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Cucciolo</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Farfalla</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Uovo di dino</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Impronta</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Felce</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Vulcano</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegosauro</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Luna</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Cometa</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Pianeta con anelli</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Alieno simpatico</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Ciliegie</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Lecca-lecca</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Gelato</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Fetta di pizza</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Piccolo autobus</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Mongolfiera</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Aeroplano</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Camion grande</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Bacchetta magica</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Chiave d’oro</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Castello</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Draghetto</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Fiore</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Foglia</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Ghianda</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Albero</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Fungo</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Lumaca</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Cactus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Conchiglia</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Stella marina</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Ancora</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Polpo</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Granchio</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Balena</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Sottomarino</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Nota musicale</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Campana</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Tamburo</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Chitarra</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Tromba</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Pianoforte</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medaglia</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Bandiera da corsa</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Bersaglio</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Coppa</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Scarpa da ginnastica</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Palla da basket</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Sole</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Nuvola</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Fulmine</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Goccia di pioggia</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Ombrello</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Fiocco di neve</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Arcobaleno</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Disegno misterioso</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lente</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Mostra una vista ingrandita 3×3 mentre disegni. Normalmente è spenta.</value></data>

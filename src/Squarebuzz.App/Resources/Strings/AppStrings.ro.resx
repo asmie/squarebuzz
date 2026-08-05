@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Sari</value></data>
   <data name="next" xml:space="preserve"><value>Înainte</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Hai să jucăm!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Joc nou</value></data>
   <data name="continueGame" xml:space="preserve"><value>Continuă</value></data>
   <data name="trials" xml:space="preserve"><value>Provocări</value></data>
   <data name="options" xml:space="preserve"><value>Setări</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · timp din belșug</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · nu te opri</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · nici nu clipi</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Drumul jocurilor</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Termină oprirea de dinainte ca să deschizi următoarea</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Oprirea {0}, {1}, terminată. Joacă din nou.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Oprirea {0}, {1} pe {1}, urmează la joc.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Oprirea {0}, blocată. Termină oprirea de dinainte.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Joc rapid</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Alege tu mărimea și setul</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Niveluri</value></data>
+  <data name="levelN" xml:space="preserve"><value>Nivelul {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Nivelul {0} terminat!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Nivelul următor</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Ai terminat toate nivelurile!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{0} din {1} niveluri terminate</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Nivelurile {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Nivelul {0}, terminat. Joacă-l din nou.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Nivelul {0}, {1} pe {1}, urmează la joc.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Nivelul {0}, blocat. Termină mai întâi nivelul de dinainte.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>La acest nivel se ascunde o imagine.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofee</value></data>
   <data name="timeUp" xml:space="preserve"><value>S-a terminat timpul!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>De data asta ceasul a fost mai rapid. Mai încerci o dată?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} pe ceas.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Azi</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Pe timp</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Drum</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Probă pe timp</value></data>
   <data name="tr1" xml:space="preserve"><value>Prima imagine</value></data>
   <data name="tr2" xml:space="preserve"><value>O săptămână</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Vehicule</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Povești</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Surprinde-mă</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Natura</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Sub mare</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Muzică</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sport</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Vremea</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Inimă</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Peștișor</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Stea</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Mașină de curse</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Rachetă</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Coroană</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Iepuraș</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Rățușcă</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Cățeluș</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Fluturaș</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Ou de dinozaur</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Urmă de pas</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Ferigă</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Vulcan</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegozaur</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Lună</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Cometă</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planetă cu inele</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Extraterestru prietenos</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Cireșe</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Acadea</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Înghețată</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Felie de pizza</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Autobuz mic</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Balon cu aer cald</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Avion</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Camion mare</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Baghetă magică</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Cheie de aur</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Castel</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Pui de dragon</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Floare</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Frunză</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Ghindă</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Copac</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Ciupercă</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Melc</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Cactus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Scoică</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Stea de mare</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Ancoră</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Caracatiță</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Crab</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Balenă</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Submarin</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Notă muzicală</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Clopoțel</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Tobă</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Chitară</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trompetă</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Pian</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medalie</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Steag de curse</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Țintă</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Trofeu</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Pantof de sport</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Minge de baschet</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Soare</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Norișor</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Fulger</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Picătură de ploaie</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Umbrelă</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Fulg de nea</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Curcubeu</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Imagine misterioasă</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupă</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Arată o vedere mărită 3×3 în timp ce colorezi. Implicit este oprită.</value></data>

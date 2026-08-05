@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Preskoči</value></data>
   <data name="next" xml:space="preserve"><value>Dalje</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Igramo!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Nova igra</value></data>
   <data name="continueGame" xml:space="preserve"><value>Nastavi</value></data>
   <data name="trials" xml:space="preserve"><value>Izazovi</value></data>
   <data name="options" xml:space="preserve"><value>Postavke</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · puno vremena</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · ne zastajkuj</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · nema vremena za mig</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Staza zagonetki</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Dovrši prethodnu postaju da otvoriš sljedeću</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Postaja {0}, {1}, dovršena. Igraj ponovno.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Postaja {0}, {1} puta {1}, sljedeća na redu.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Postaja {0}, zaključana. Dovrši postaju prije nje.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Brza igra</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Sam odaberi veličinu i paket</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Razine</value></data>
+  <data name="levelN" xml:space="preserve"><value>Razina {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Razina {0} gotova!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Sljedeća razina</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Prošao si sve razine!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>Dovršeno {0} od {1} razina</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Razine {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Razina {0}, dovršena. Igraj ponovno.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Razina {0}, {1} puta {1}, sljedeća na redu.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Razina {0}, zaključana. Dovrši razinu prije nje.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Na ovoj se razini skriva slika.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofeji</value></data>
   <data name="timeUp" xml:space="preserve"><value>Vrijeme je isteklo!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Ovaj put je sat bio brži. Hoćeš još jednom?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na satu.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dnevno</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na vrijeme</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Staza</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Izazov na vrijeme</value></data>
   <data name="tr1" xml:space="preserve"><value>Prva slika</value></data>
   <data name="tr2" xml:space="preserve"><value>Tjedan u nizu</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Vozila</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Bajka</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Iznenadi me</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Priroda</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Pod morem</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Glazba</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sport</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Vrijeme</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Srce</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Ribica</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Zvijezda</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Bolid</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raketa</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Kruna</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Zeko</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Pače</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Psić</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Leptir</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Dino jaje</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Otisak stope</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Paprat</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Vulkan</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegosaur</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Mjesec</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Komet</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planet s prstenima</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Dobri izvanzemaljac</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Trešnje</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Lizalica</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Sladoled</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Kriška pizze</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Mali autobus</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Balon na vrući zrak</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Avion</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Veliki kamion</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Čarobni štapić</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Zlatni ključ</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Dvorac</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Zmajić</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Cvijet</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>List</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Žir</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Drvo</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Gljiva</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Puž</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Kaktus</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Školjka</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Morska zvijezda</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Sidro</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Hobotnica</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Rak</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Kit</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Podmornica</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Nota</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Zvono</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Bubanj</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Gitara</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Truba</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Klavir</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medalja</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Ciljna zastava</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Meta</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Pehar</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Tenisica</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Košarkaška lopta</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Sunce</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Oblak</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Munja</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Kap kiše</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Kišobran</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Pahulja</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Duga</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Tajanstvena slika</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Prikazuje povećani prikaz 3×3 dok bojiš. Isključeno prema zadanom.</value></data>

@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>এড়িয়ে যাও</value></data>
   <data name="next" xml:space="preserve"><value>পরের</value></data>
   <data name="letsPlay" xml:space="preserve"><value>চলো খেলি!</value></data>
-  <data name="newGame" xml:space="preserve"><value>নতুন খেলা</value></data>
   <data name="continueGame" xml:space="preserve"><value>চালিয়ে যাও</value></data>
   <data name="trials" xml:space="preserve"><value>চ্যালেঞ্জ</value></data>
   <data name="options" xml:space="preserve"><value>সেটিংস</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>৫×৫ · অনেক সময়</value></data>
   <data name="timedSub2" xml:space="preserve"><value>১০×১০ · তাল রাখো</value></data>
   <data name="timedSub3" xml:space="preserve"><value>১০×১০ · চোখ পিটপিট করার সময় নেই</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>ধাঁধার পথ</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>পরেরটা খুলতে আগের থামটা শেষ করো</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>থাম {0}, {1}, শেষ। আবার খেলো।</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>থাম {0}, {1} × {1}, এবার এটাই।</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>থাম {0}, বন্ধ। এর আগের থামটা শেষ করো।</value></data>
+  <data name="quickGame" xml:space="preserve"><value>ঝটপট খেলা</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>নিজের মতো মাপ আর প্যাক বেছে নাও</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>ধাপ</value></data>
+  <data name="levelN" xml:space="preserve"><value>ধাপ {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>ধাপ {0} শেষ!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>পরের ধাপ</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>সব ধাপ শেষ করেছ!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>{1}টির মধ্যে {0}টি ধাপ শেষ</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>ধাপ {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>ধাপ {0}, শেষ। আবার খেলো।</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>ধাপ {0}, {1} × {1}, এবার এটাই।</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>ধাপ {0}, বন্ধ। এর আগের ধাপটা শেষ করো।</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>এই ধাপে একটা ছবি লুকিয়ে আছে।</value></data>
   <data name="trophies" xml:space="preserve"><value>পুরস্কার</value></data>
   <data name="timeUp" xml:space="preserve"><value>সময় শেষ!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>এবার ঘড়ি জিতে গেল। আরেকবার চেষ্টা করবে?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}। {1}। ঘড়িতে {2}।</value></data>
   <data name="tabDaily" xml:space="preserve"><value>দৈনিক</value></data>
   <data name="tabTimed" xml:space="preserve"><value>সময় বাঁধা</value></data>
-  <data name="tabPath" xml:space="preserve"><value>পথ</value></data>
   <data name="timedTrial" xml:space="preserve"><value>সময়ের পরীক্ষা</value></data>
   <data name="tr1" xml:space="preserve"><value>প্রথম ছবি</value></data>
   <data name="tr2" xml:space="preserve"><value>টানা এক সপ্তাহ</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>গাড়ি</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>রূপকথা</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>চমকে দাও</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>প্রকৃতি</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>সাগরের নিচে</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>সংগীত</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>খেলাধুলা</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>আবহাওয়া</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>হৃদয়</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>ছোট্ট মাছ</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>তারা</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>রেসের গাড়ি</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>রকেট</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>মুকুট</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>খরগোশ ছানা</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>হাঁসের ছানা</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>কুকুরছানা</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>প্রজাপতি</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>ডাইনোর ডিম</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>পায়ের ছাপ</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>ফার্ন</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>আগ্নেয়গিরি</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>স্টেগোসরাস</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>চাঁদ</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>ধূমকেতু</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>বলয়ওয়ালা গ্রহ</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>বন্ধু এলিয়েন</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>চেরি</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>ললিপপ</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>আইসক্রিম</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>পিৎজার টুকরো</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>ছোট্ট বাস</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>গরম হাওয়ার বেলুন</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>উড়োজাহাজ</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>বড় ট্রাক</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>জাদুর কাঠি</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>সোনার চাবি</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>রাজপ্রাসাদ</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>ড্রাগন ছানা</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>ফুল</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>পাতা</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>ওক ফল</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>গাছ</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>ব্যাঙের ছাতা</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>শামুক</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>ক্যাকটাস</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>ঝিনুক</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>তারামাছ</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>নোঙর</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>অক্টোপাস</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>কাঁকড়া</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>তিমি</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>ডুবোজাহাজ</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>গানের নোট</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>ঘণ্টা</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>ঢোল</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>গিটার</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>ট্রাম্পেট</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>পিয়ানো</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>মেডেল</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>রেসের পতাকা</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>নিশানা</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>ট্রফি</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>কেডস</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>বাস্কেটবল</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>সূর্য</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>মেঘ</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>বিজলি</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>বৃষ্টির ফোঁটা</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>ছাতা</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>তুষারকণা</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>রংধনু</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>রহস্যময় ছবি</value></data>
   <data name="magnifier" xml:space="preserve"><value>আতশ কাচ</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>রং করার সময় ৩×৩-এর বড় করে দেখা যায়। সাধারণত বন্ধ।</value></data>

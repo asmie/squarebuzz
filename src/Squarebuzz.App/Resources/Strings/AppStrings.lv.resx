@@ -13,7 +13,6 @@
   <data name="skip" xml:space="preserve"><value>Izlaist</value></data>
   <data name="next" xml:space="preserve"><value>Tālāk</value></data>
   <data name="letsPlay" xml:space="preserve"><value>Spēlējam!</value></data>
-  <data name="newGame" xml:space="preserve"><value>Jauna spēle</value></data>
   <data name="continueGame" xml:space="preserve"><value>Turpināt</value></data>
   <data name="trials" xml:space="preserve"><value>Izaicinājumi</value></data>
   <data name="options" xml:space="preserve"><value>Iestatījumi</value></data>
@@ -104,11 +103,19 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · daudz laika</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · turi tempu</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · nav laika pamirkšķināt</value></data>
-  <data name="pathTitle" xml:space="preserve"><value>Mīklu ceļš</value></data>
-  <data name="pathLocked" xml:space="preserve"><value>Pabeidz iepriekšējo pieturu, lai atvērtu nākamo</value></data>
-  <data name="a11yPathDone" xml:space="preserve"><value>Pietura {0}, {1}, pabeigta. Vari spēlēt vēlreiz.</value></data>
-  <data name="a11yPathCurrent" xml:space="preserve"><value>Pietura {0}, {1} reiz {1}, nākamā spēlei.</value></data>
-  <data name="a11yPathLocked" xml:space="preserve"><value>Pietura {0}, aizslēgta. Vispirms pabeidz iepriekšējo.</value></data>
+  <data name="quickGame" xml:space="preserve"><value>Ātrā spēle</value></data>
+  <data name="quickGameSub" xml:space="preserve"><value>Izvēlies savu izmēru un komplektu</value></data>
+  <data name="levelsTitle" xml:space="preserve"><value>Līmeņi</value></data>
+  <data name="levelN" xml:space="preserve"><value>Līmenis {0}</value></data>
+  <data name="levelDone" xml:space="preserve"><value>Līmenis {0} pabeigts!</value></data>
+  <data name="nextLevel" xml:space="preserve"><value>Nākamais līmenis</value></data>
+  <data name="allLevelsDone" xml:space="preserve"><value>Tu pabeidzi visus līmeņus!</value></data>
+  <data name="levelsSummary" xml:space="preserve"><value>Pabeigti {0} no {1} līmeņiem</value></data>
+  <data name="levelsRange" xml:space="preserve"><value>Līmeņi {0}–{1}</value></data>
+  <data name="a11yLevelDone" xml:space="preserve"><value>Līmenis {0}, pabeigts. Vari spēlēt vēlreiz.</value></data>
+  <data name="a11yLevelCurrent" xml:space="preserve"><value>Līmenis {0}, {1} reiz {1}, nākamais spēlei.</value></data>
+  <data name="a11yLevelLocked" xml:space="preserve"><value>Līmenis {0}, aizslēgts. Vispirms pabeidz iepriekšējo līmeni.</value></data>
+  <data name="a11yMilestone" xml:space="preserve"><value>Šajā līmenī slēpjas bilde.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofejas</value></data>
   <data name="timeUp" xml:space="preserve"><value>Laiks beidzies!</value></data>
   <data name="timeUpBody" xml:space="preserve"><value>Šoreiz pulkstenis bija ātrāks. Pamēģini vēl?</value></data>
@@ -116,7 +123,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Pulkstenī {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Šodien</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Pret laiku</value></data>
-  <data name="tabPath" xml:space="preserve"><value>Ceļš</value></data>
   <data name="timedTrial" xml:space="preserve"><value>Laika pārbaude</value></data>
   <data name="tr1" xml:space="preserve"><value>Pirmā bilde</value></data>
   <data name="tr2" xml:space="preserve"><value>Nedēļa pēc kārtas</value></data>
@@ -223,6 +229,11 @@
   <data name="Pack_vehicles" xml:space="preserve"><value>Transports</value></data>
   <data name="Pack_fairy" xml:space="preserve"><value>Pasakas</value></data>
   <data name="Pack_surprise" xml:space="preserve"><value>Pārsteidz mani</value></data>
+  <data name="Pack_nature" xml:space="preserve"><value>Daba</value></data>
+  <data name="Pack_ocean" xml:space="preserve"><value>Zemūdens pasaule</value></data>
+  <data name="Pack_music" xml:space="preserve"><value>Mūzika</value></data>
+  <data name="Pack_sports" xml:space="preserve"><value>Sports</value></data>
+  <data name="Pack_weather" xml:space="preserve"><value>Laikapstākļi</value></data>
   <data name="Puzzle_heart" xml:space="preserve"><value>Sirsniņa</value></data>
   <data name="Puzzle_fish" xml:space="preserve"><value>Zivtiņa</value></data>
   <data name="Puzzle_star" xml:space="preserve"><value>Zvaigzne</value></data>
@@ -235,6 +246,64 @@
   <data name="Puzzle_car" xml:space="preserve"><value>Sacīkšu auto</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Rakete</value></data>
   <data name="Puzzle_crown" xml:space="preserve"><value>Kronis</value></data>
+  <data name="Puzzle_bunny" xml:space="preserve"><value>Zaķītis</value></data>
+  <data name="Puzzle_duck" xml:space="preserve"><value>Pīlēns</value></data>
+  <data name="Puzzle_dog" xml:space="preserve"><value>Kucēns</value></data>
+  <data name="Puzzle_butterfly" xml:space="preserve"><value>Tauriņš</value></data>
+  <data name="Puzzle_egg" xml:space="preserve"><value>Dino ola</value></data>
+  <data name="Puzzle_footprint" xml:space="preserve"><value>Pēdas nospiedums</value></data>
+  <data name="Puzzle_fern" xml:space="preserve"><value>Paparde</value></data>
+  <data name="Puzzle_volcano" xml:space="preserve"><value>Vulkāns</value></data>
+  <data name="Puzzle_stego" xml:space="preserve"><value>Stegozaurs</value></data>
+  <data name="Puzzle_moon" xml:space="preserve"><value>Mēness</value></data>
+  <data name="Puzzle_comet" xml:space="preserve"><value>Komēta</value></data>
+  <data name="Puzzle_planet" xml:space="preserve"><value>Planēta ar gredzeniem</value></data>
+  <data name="Puzzle_alien" xml:space="preserve"><value>Draudzīgs citplanētietis</value></data>
+  <data name="Puzzle_cherry" xml:space="preserve"><value>Ķirši</value></data>
+  <data name="Puzzle_lollipop" xml:space="preserve"><value>Ledenīte</value></data>
+  <data name="Puzzle_icecream" xml:space="preserve"><value>Saldējums</value></data>
+  <data name="Puzzle_pizza" xml:space="preserve"><value>Picas šķēle</value></data>
+  <data name="Puzzle_bus" xml:space="preserve"><value>Autobusiņš</value></data>
+  <data name="Puzzle_balloon" xml:space="preserve"><value>Gaisa balons</value></data>
+  <data name="Puzzle_plane" xml:space="preserve"><value>Lidmašīna</value></data>
+  <data name="Puzzle_truck" xml:space="preserve"><value>Liela kravas mašīna</value></data>
+  <data name="Puzzle_wand" xml:space="preserve"><value>Burvju nūjiņa</value></data>
+  <data name="Puzzle_key" xml:space="preserve"><value>Zelta atslēga</value></data>
+  <data name="Puzzle_castle" xml:space="preserve"><value>Pils</value></data>
+  <data name="Puzzle_dragon" xml:space="preserve"><value>Pūķēns</value></data>
+  <data name="Puzzle_flower" xml:space="preserve"><value>Puķīte</value></data>
+  <data name="Puzzle_leaf" xml:space="preserve"><value>Lapiņa</value></data>
+  <data name="Puzzle_acorn" xml:space="preserve"><value>Zīle</value></data>
+  <data name="Puzzle_tree" xml:space="preserve"><value>Koks</value></data>
+  <data name="Puzzle_mushroom" xml:space="preserve"><value>Sēnīte</value></data>
+  <data name="Puzzle_snail" xml:space="preserve"><value>Gliemezītis</value></data>
+  <data name="Puzzle_cactus" xml:space="preserve"><value>Kaktuss</value></data>
+  <data name="Puzzle_shell" xml:space="preserve"><value>Gliemežvāks</value></data>
+  <data name="Puzzle_starfish" xml:space="preserve"><value>Jūras zvaigzne</value></data>
+  <data name="Puzzle_anchor" xml:space="preserve"><value>Enkurs</value></data>
+  <data name="Puzzle_octopus" xml:space="preserve"><value>Astoņkājis</value></data>
+  <data name="Puzzle_crab" xml:space="preserve"><value>Krabis</value></data>
+  <data name="Puzzle_whale" xml:space="preserve"><value>Valis</value></data>
+  <data name="Puzzle_submarine" xml:space="preserve"><value>Zemūdene</value></data>
+  <data name="Puzzle_note" xml:space="preserve"><value>Notiņa</value></data>
+  <data name="Puzzle_bell" xml:space="preserve"><value>Zvaniņš</value></data>
+  <data name="Puzzle_drum" xml:space="preserve"><value>Bungas</value></data>
+  <data name="Puzzle_guitar" xml:space="preserve"><value>Ģitāra</value></data>
+  <data name="Puzzle_trumpet" xml:space="preserve"><value>Trompete</value></data>
+  <data name="Puzzle_piano" xml:space="preserve"><value>Klavieres</value></data>
+  <data name="Puzzle_medal" xml:space="preserve"><value>Medaļa</value></data>
+  <data name="Puzzle_flag" xml:space="preserve"><value>Sacīkšu karogs</value></data>
+  <data name="Puzzle_target" xml:space="preserve"><value>Mērķis</value></data>
+  <data name="Puzzle_trophy" xml:space="preserve"><value>Kauss</value></data>
+  <data name="Puzzle_sneaker" xml:space="preserve"><value>Sporta kurpe</value></data>
+  <data name="Puzzle_basketball" xml:space="preserve"><value>Basketbola bumba</value></data>
+  <data name="Puzzle_sun" xml:space="preserve"><value>Saulīte</value></data>
+  <data name="Puzzle_cloud" xml:space="preserve"><value>Mākonītis</value></data>
+  <data name="Puzzle_bolt" xml:space="preserve"><value>Zibens</value></data>
+  <data name="Puzzle_raindrop" xml:space="preserve"><value>Lietus lāsīte</value></data>
+  <data name="Puzzle_umbrella" xml:space="preserve"><value>Lietussargs</value></data>
+  <data name="Puzzle_snowflake" xml:space="preserve"><value>Sniegpārsliņa</value></data>
+  <data name="Puzzle_rainbow" xml:space="preserve"><value>Varavīksne</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Noslēpumainā bilde</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Rāda palielinātu 3×3 skatu, kamēr zīmē. Sākotnēji izslēgta.</value></data>
