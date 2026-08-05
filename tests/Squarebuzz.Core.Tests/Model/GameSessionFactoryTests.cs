@@ -1,3 +1,4 @@
+using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Content;
 using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
@@ -109,8 +110,12 @@ public class GameSessionFactoryTests
     [Fact]
     public void ASoleCandidate_IsServedDespiteTheExclusion()
     {
-        // 'dinos' ships exactly one 10x10 picture; excluding it must repeat it rather than fail.
-        var factory = NewFactory();
+        // A pack with exactly one picture at the requested size must repeat it rather than fail
+        // when it is excluded. Every shipped pack carries several 10x10 pictures now, so the
+        // scenario is pinned with a single-picture repository instead of shipped content.
+        var factory = new GameSessionFactory(
+            new SolePictureRepository(),
+            new UniqueSolutionGenerator(new BlobPuzzleGenerator()));
         var options = NewGameOptions.Default with { Size = GridSize.Normal, PackId = "dinos", Seed = 3 };
 
         var first = factory.Create(options);
@@ -151,5 +156,40 @@ public class GameSessionFactoryTests
 
         Assert.Same(dino, session.Puzzle);
         Assert.Equal(1, session.HintsRemaining);
+    }
+
+    /// <summary>
+    /// Exactly one 10x10 picture, so the sole-candidate path stays testable no matter how much
+    /// content the real packs grow.
+    /// </summary>
+    private sealed class SolePictureRepository : IPuzzleRepository
+    {
+        private readonly Puzzle _only = Puzzle.FromRows(
+            "solo",
+            "dinos",
+            "#59C36A",
+            new[]
+            {
+                "......###.",
+                ".....#####",
+                ".....##.##",
+                ".....#####",
+                ".....####.",
+                "..#######.",
+                ".#########",
+                ".########.",
+                "..##..##..",
+                "..##..##..",
+            });
+
+        public IReadOnlyList<PackDefinition> Packs { get; } =
+            new[] { new PackDefinition("dinos", "🦕", Locked: false, IsWildcard: false) };
+
+        public IReadOnlyList<Puzzle> Puzzles => new[] { _only };
+
+        public IReadOnlyList<Puzzle> Find(string packId, int size, IReadOnlySet<string>? unlockedPackIds = null) =>
+            packId == _only.Pack && size == _only.Width ? new[] { _only } : Array.Empty<Puzzle>();
+
+        public Puzzle? FindById(string puzzleId) => puzzleId == _only.Id ? _only : null;
     }
 }
