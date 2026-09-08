@@ -60,6 +60,35 @@ public static class ClueStrikeCalculator
         // for, or a single run can be claimed twice - see StrikeFromEnd.
         var claimedUpTo = StrikeFromStart(clues, line, struck);
         StrikeFromEnd(clues, line, struck, claimedUpTo);
+
+        // Every number struck is the visual language for "this line is finished", so it must
+        // never appear on a line that is not. Each individual strike above is defensible - the
+        // run is anchored and the right length - but the passes stop as soon as they run out of
+        // clue numbers, and an over-filled line has runs left over that neither pass ever looks
+        // at. A line reading `#x#` against the clue `1` struck its only number, telling a child
+        // the row was done while it carried an extra run.
+        //
+        // "All struck" and "does not match" is a contradiction rather than a judgement call: if
+        // every number were genuinely done the filled runs would spell out the clue, which is
+        // what MatchesMarks tests and what the fast path above already returns on. So the flags
+        // are simply wrong here, and the honest answer is to strike nothing.
+        if (AllStruck(struck, displayCount) && !ClueCalculator.MatchesMarks(clues, line))
+        {
+            struck[..displayCount].Clear();
+        }
+    }
+
+    private static bool AllStruck(ReadOnlySpan<bool> struck, int displayCount)
+    {
+        for (var i = 0; i < displayCount; i++)
+        {
+            if (!struck[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>Convenience overload for tests and non-hot paths.</summary>

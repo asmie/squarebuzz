@@ -40,6 +40,15 @@ public class ClueStrikeCalculatorTests
             _ => CellState.Empty,
         })];
 
+    /// <summary>The inverse of <see cref="Marks"/>, so an exhaustive failure names its line.</summary>
+    private static string Describe(IEnumerable<CellState> line) =>
+        string.Concat(line.Select(c => c switch
+        {
+            CellState.Filled => '#',
+            CellState.Crossed => 'x',
+            _ => '.',
+        }));
+
     [Fact]
     public void UntouchedLine_StrikesNothing()
     {
@@ -128,6 +137,88 @@ public class ClueStrikeCalculatorTests
         ClueStrikeCalculator.Compute(clues, line, struck);
 
         Assert.Equal(ClueStrikeCalculator.Compute(clues, line), struck.ToArray());
+    }
+
+    [Theory]
+    // The mirror of the over-crossed case: an *over-filled* line has runs left over that
+    // neither pass looks at, because both stop as soon as they run out of clue numbers.
+    // Striking every number still says "this row is finished" on a row that is not.
+    [InlineData("#x#", new[] { 1 })]
+    [InlineData("#x#.", new[] { 1 })]
+    [InlineData("#x.#", new[] { 1 })]
+    [InlineData("##x#", new[] { 2 })]
+    [InlineData("#x##", new[] { 1 })]
+    [InlineData("#x#x#", new[] { 1, 1 })]
+    [InlineData("x##xxx#x", new[] { 2 })]
+    public void AnOverFilledLine_DoesNotStrikeEveryClue(string line, int[] runs)
+    {
+        var clues = new LineClues(runs);
+
+        var struck = ClueStrikeCalculator.Compute(clues, Marks(line));
+
+        Assert.Contains(false, struck);
+    }
+
+    [Theory]
+    // The guard must not cost a line that genuinely is finished its strikes.
+    [InlineData("#x#", new[] { 1, 1 })]
+    [InlineData("###", new[] { 3 })]
+    [InlineData("##x#", new[] { 2, 1 })]
+    [InlineData(".#x#.", new[] { 1, 1 })]
+    [InlineData("xxx", new int[0])]
+    public void AFinishedLine_StrikesEveryClue(string line, int[] runs)
+    {
+        var clues = new LineClues(runs);
+
+        var struck = ClueStrikeCalculator.Compute(clues, Marks(line));
+
+        Assert.DoesNotContain(false, struck);
+    }
+
+    [Fact]
+    // The invariant behind both theories above, stated once: "every number struck" is how the
+    // board says a line is done, so it may only occur when the line really does match its clue.
+    public void EveryClueStruck_OnlyEverMeansTheLineMatches()
+    {
+        var states = new[] { CellState.Empty, CellState.Filled, CellState.Crossed };
+
+        for (var length = 1; length <= 8; length++)
+        {
+            var combinations = (int)Math.Pow(3, length);
+
+            for (var code = 0; code < combinations; code++)
+            {
+                var line = new CellState[length];
+                var remaining = code;
+
+                for (var i = 0; i < length; i++)
+                {
+                    line[i] = states[remaining % 3];
+                    remaining /= 3;
+                }
+
+                // Every clue a line of this length could carry, taken from every picture it
+                // could be drawn from.
+                for (var picture = 0; picture < 1 << length; picture++)
+                {
+                    var solution = new bool[length];
+                    for (var i = 0; i < length; i++)
+                    {
+                        solution[i] = (picture & (1 << i)) != 0;
+                    }
+
+                    var clues = ClueCalculator.FromSolution(solution);
+                    var struck = ClueStrikeCalculator.Compute(clues, line);
+
+                    if (Array.IndexOf(struck, false) < 0)
+                    {
+                        Assert.True(
+                            ClueCalculator.MatchesMarks(clues, line),
+                            $"every number struck for clue [{string.Join(',', clues.DisplayRuns)}] on line {Describe(line)}, which does not match it");
+                    }
+                }
+            }
+        }
     }
 
     [Fact]
