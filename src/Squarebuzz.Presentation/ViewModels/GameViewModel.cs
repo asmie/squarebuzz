@@ -894,10 +894,21 @@ public partial class GameViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(IsCampaignComplete));
     }
 
+    /// <summary>
+    /// True while an overlay is up: the pause screen, or the break reminder.
+    /// </summary>
+    /// <remarks>
+    /// One definition for every route onto the board - painting, tapping, hints, undo and redo -
+    /// so they cannot disagree about what "the game is not being played right now" means. They
+    /// did: the hint and undo buttons checked only for pause, so a child could keep spending
+    /// hints behind the break reminder, which is documented as stopping play.
+    /// </remarks>
+    private bool IsInputBlocked => IsPaused || IsBreakReminderOpen;
+
     /// <summary>Applies a paint request from the board view.</summary>
     public void Paint(int index, CellState target)
     {
-        if (Session is not { } session || IsSolved || IsPaused || IsBreakReminderOpen)
+        if (Session is not { } session || IsSolved || IsInputBlocked)
         {
             return;
         }
@@ -915,7 +926,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// </remarks>
     public void TapCell(int index)
     {
-        if (Session is not { } session || IsSolved || IsPaused || IsBreakReminderOpen)
+        if (Session is not { } session || IsSolved || IsInputBlocked)
         {
             return;
         }
@@ -991,7 +1002,7 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void Undo()
     {
-        if (Session?.Undo() != true)
+        if (IsInputBlocked || Session?.Undo() != true)
         {
             return;
         }
@@ -1003,7 +1014,7 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void Redo()
     {
-        if (Session?.Redo() != true)
+        if (IsInputBlocked || Session?.Redo() != true)
         {
             return;
         }
@@ -1015,7 +1026,7 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void UseHint()
     {
-        if (Session is not { } session || IsPaused)
+        if (Session is not { } session || IsInputBlocked)
         {
             return;
         }

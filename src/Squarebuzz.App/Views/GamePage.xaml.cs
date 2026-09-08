@@ -400,7 +400,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
             Math.Min(1, BoardHost.Height / Board.Height));
     }
 
-    private async void OnMistakeMade(object? sender, int index)
+    private void OnMistakeMade(object? sender, int index)
     {
         Buzz(HapticFeedbackType.LongPress);
 
@@ -411,7 +411,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
             _ = ShakeBoardAsync();
         }
 
-        await Board.FlashMistakeAsync(index);
+        Board.FlashMistake(index);
     }
 
     /// <summary>

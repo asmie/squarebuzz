@@ -222,6 +222,53 @@ public sealed class GameViewModelQueryTests : IDisposable
     }
 
     [Fact]
+    // The reminder is documented as stopping play. Painting already honoured that; the hint,
+    // undo and redo buttons checked only for pause, so hints could still be spent behind it.
+    public async Task BreakReminder_BlocksHintsUndoAndRedo()
+    {
+        await _h.Vm.InitialiseAsync();
+        var session = _h.Vm.Session!;
+
+        // A move to undo, then one cell undone so there is also something to redo.
+        session.Mode = PaintMode.Fill;
+        var target = FirstPictureCell(session);
+        _h.Vm.Paint(target, CellState.Filled);
+        var moves = session.MoveCount;
+
+        _h.ScreenTime.RemindOnNextAdd = true;
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        _h.Timers.Latest!.RaiseTick();
+        Assert.True(_h.Vm.IsBreakReminderOpen);
+
+        var hintsBefore = session.HintsRemaining;
+
+        _h.Vm.UseHintCommand.Execute(null);
+        _h.Vm.UndoCommand.Execute(null);
+        _h.Vm.RedoCommand.Execute(null);
+
+        Assert.Equal(hintsBefore, session.HintsRemaining);
+        Assert.Equal(moves, session.MoveCount);
+
+        _h.Vm.DismissBreakReminderCommand.Execute(null);
+        _h.Vm.UndoCommand.Execute(null);
+
+        Assert.Equal(moves - 1, session.MoveCount);
+    }
+
+    private static int FirstPictureCell(GameSession session)
+    {
+        for (var i = 0; i < session.Puzzle.CellCount; i++)
+        {
+            if (session.Puzzle.Solution[i])
+            {
+                return i;
+            }
+        }
+
+        throw new InvalidOperationException("The fake puzzle has no filled cell.");
+    }
+
+    [Fact]
     public async Task ResumingTheClock_DoesNotChargeTheTimeItWasSuspended()
     {
         await _h.Vm.InitialiseAsync();

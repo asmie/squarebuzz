@@ -48,6 +48,7 @@ public sealed partial class BoardView : GraphicsView
 
     private CellState _dragTarget = CellState.Empty;
     private int _hintGeneration;
+    private int _mistakeGeneration;
     private bool _isDragging;
     private CancellationTokenSource? _longPressCancellation;
     private int _pressedIndex = -1;
@@ -100,6 +101,10 @@ public sealed partial class BoardView : GraphicsView
             // generation also defuses any pending clear timer.
             view._hintGeneration++;
             view._drawable.HintIndex = -1;
+
+            // Same for a warn tint: a mistake on the last board is not a mistake on this one.
+            view._mistakeGeneration++;
+            view._drawable.MistakeIndex = -1;
 
             // Nor a mark still pending from a gesture on the board that has just gone away.
             view._deferredPaintIndex = -1;
@@ -247,16 +252,36 @@ public sealed partial class BoardView : GraphicsView
                 });
     }
 
-    /// <summary>Flashes a cell to show the fill was wrong.</summary>
-    public async Task FlashMistakeAsync(int index)
+    /// <summary>How long the warn tint stays on a wrongly filled cell.</summary>
+    private static readonly TimeSpan MistakeFlashDuration = TimeSpan.FromMilliseconds(520);
+
+    /// <summary>
+    /// Flashes a cell to show the fill was wrong.
+    /// </summary>
+    /// <remarks>
+    /// Guarded by a generation counter exactly as <see cref="ShowHint"/> is, and for the same
+    /// reason: a drag across a row of wrong cells raises one flash per cell, and without the
+    /// guard the first flash's timer cleared whichever cell was flashing when it fired - so the
+    /// tint on the later mistakes was cut short or never seen at all. Only the newest flash's
+    /// timer is allowed to clear the tint.
+    /// </remarks>
+    public void FlashMistake(int index)
     {
         _drawable.MistakeIndex = index;
         Invalidate();
 
-        await Task.Delay(520);
+        var generation = ++_mistakeGeneration;
 
-        _drawable.MistakeIndex = -1;
-        Invalidate();
+        Dispatcher.DispatchDelayed(MistakeFlashDuration, () =>
+        {
+            if (generation != _mistakeGeneration)
+            {
+                return;
+            }
+
+            _drawable.MistakeIndex = -1;
+            Invalidate();
+        });
     }
 
     public static readonly BindableProperty AvailableSizeProperty = BindableProperty.Create(
