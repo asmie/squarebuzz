@@ -339,6 +339,17 @@ public partial class GameViewModel : LocalizedViewModel
     public string ModeButtonText => IsCrossMode ? T("fill") : T("cross");
 
     /// <summary>
+    /// Whether the mode toggle belongs on screen at all.
+    /// </summary>
+    /// <remarks>
+    /// Only in <see cref="TapBehaviour.ModeButton"/>, which is the mode named after it. Under
+    /// hold-to-cross the gesture already chooses the mark, so the button is a second, redundant
+    /// way to say the same thing - and two input models on one board is how a child ends up
+    /// crossing when they meant to fill.
+    /// </remarks>
+    public bool ShowModeButton => _settings.TapBehaviour == TapBehaviour.ModeButton;
+
+    /// <summary>
     /// Hints and mistakes as one line, composed here rather than assembled in XAML from several
     /// localised spans - simpler markup, and the wording becomes testable.
     /// </summary>
@@ -634,6 +645,15 @@ public partial class GameViewModel : LocalizedViewModel
         // creation, so without this a helper flipped from the pause overlay's Options - the
         // auto-cross switch, say - would quietly do nothing until the next puzzle.
         session.ApplyHelpers(_settings.Helpers);
+
+        // Switching to hold-to-cross takes the mode button off the screen, so a session left in
+        // cross mode would keep crossing with nothing left to change it back. The gesture decides
+        // the mark in that mode, and its plain tap fills.
+        if (!ShowModeButton && IsCrossMode)
+        {
+            IsCrossMode = false;
+            session.Mode = PaintMode.Fill;
+        }
 
         SyncFromSession();
         NotifySettingsDependentProperties();
@@ -1256,6 +1276,7 @@ public partial class GameViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(ZoomPercent));
         OnPropertyChanged(nameof(BigNumbers));
         OnPropertyChanged(nameof(TapBehaviour));
+        OnPropertyChanged(nameof(ShowModeButton));
         OnPropertyChanged(nameof(ShowMagnifier));
         OnPropertyChanged(nameof(BoardDescription));
         OnPropertyChanged(nameof(HapticsEnabled));

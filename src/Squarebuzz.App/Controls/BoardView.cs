@@ -53,6 +53,14 @@ public sealed partial class BoardView : GraphicsView
     private int _pressedIndex = -1;
     private bool _wipeFrameQueued;
 
+    /// <summary>
+    /// The mark hold-to-cross is holding back, or -1 when nothing is pending.
+    /// </summary>
+    /// <remarks>
+    /// Only that mode defers a mark. See <see cref="OnStartInteraction"/> for why it must.
+    /// </remarks>
+    private int _deferredPaintIndex = -1;
+
     public BoardView()
     {
         Drawable = _drawable;
@@ -92,6 +100,9 @@ public sealed partial class BoardView : GraphicsView
             // generation also defuses any pending clear timer.
             view._hintGeneration++;
             view._drawable.HintIndex = -1;
+
+            // Nor a mark still pending from a gesture on the board that has just gone away.
+            view._deferredPaintIndex = -1;
 
             view.Refresh();
         });
@@ -393,12 +404,44 @@ public sealed partial class BoardView : GraphicsView
         _isDragging = true;
 
         Highlight(cell);
-        Paint(cell);
 
+        // Hold-to-cross holds the first mark back until the gesture has declared itself.
+        //
+        // Painting on touch-down and *then* crossing once the hold matured meant every cross was
+        // preceded by a fill. On a cell that is not part of the picture that fill is refused as a
+        // mistake, so the cross gesture - whose whole purpose is marking cells that stay blank -
+        // charged the player a mistake, a board shake and an "Oops" every single time, and two
+        // uses cost them a star. Deferring costs a tap the 480 ms it takes to prove it is not a
+        // hold, which is the price of the mode and not a bug.
         if (TapBehaviour == Core.Model.TapBehaviour.HoldToCross)
         {
+            _deferredPaintIndex = cell;
             StartLongPressTimer(cell);
+            return;
         }
+
+        Paint(cell);
+    }
+
+    /// <summary>
+    /// Commits the mark <see cref="_deferredPaintIndex"/> was holding, if any.
+    /// </summary>
+    /// <remarks>
+    /// Called from the two routes that prove a press was not a hold - the finger moved to another
+    /// cell, or it lifted. Cancellation deliberately does not call this: a gesture the platform
+    /// took away never became a tap.
+    /// </remarks>
+    private void FlushDeferredPaint()
+    {
+        if (_deferredPaintIndex < 0)
+        {
+            return;
+        }
+
+        var index = _deferredPaintIndex;
+        _deferredPaintIndex = -1;
+
+        Paint(index);
     }
 
     private void OnDragInteraction(object? sender, TouchEventArgs e)
@@ -424,8 +467,11 @@ public sealed partial class BoardView : GraphicsView
             return;
         }
 
-        // Moving off the pressed cell means this is a drag, not a hold.
+        // Moving off the pressed cell means this is a drag, not a hold - so the mark the hold was
+        // holding back is committed first, and the stroke starts where the finger went down.
         CancelLongPress();
+        FlushDeferredPaint();
+
         _pressedIndex = cell;
 
         Highlight(cell);
@@ -435,12 +481,20 @@ public sealed partial class BoardView : GraphicsView
     private void OnEndInteraction(object? sender, TouchEventArgs e)
     {
         CancelLongPress();
+
+        // Lifted before the hold matured, so it was a tap after all: the mark lands now.
+        FlushDeferredPaint();
+
         EndDrag();
     }
 
     private void OnCancelInteraction(object? sender, EventArgs e)
     {
         CancelLongPress();
+
+        // Not flushed: the platform took the gesture away, so it never became a tap.
+        _deferredPaintIndex = -1;
+
         EndDrag();
     }
 
@@ -458,6 +512,7 @@ public sealed partial class BoardView : GraphicsView
 
         _isDragging = false;
         _paintedThisDrag.Clear();
+        _deferredPaintIndex = -1;
 
         _drawable.HighlightRow = -1;
         _drawable.HighlightColumn = -1;
@@ -539,6 +594,10 @@ public sealed partial class BoardView : GraphicsView
 
                 // Stopping the drag here also stops the release from painting again.
                 _isDragging = false;
+
+                // The hold matured, so the fill it was holding back is abandoned rather than
+                // committed - this gesture was always going to be a cross.
+                _deferredPaintIndex = -1;
 
                 var target = session[index] == CellState.Crossed ? CellState.Empty : CellState.Crossed;
                 CellPainted?.Invoke(this, new CellPaintedEventArgs(index, target));
