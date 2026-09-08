@@ -66,6 +66,16 @@ public sealed class FakeClock : IClock
     public DateTimeOffset Now { get; set; } = new(2026, 8, 5, 10, 0, 0, TimeSpan.Zero);
 
     public DateOnly Today { get; set; } = new(2026, 8, 5);
+
+    /// <summary>Starts non-zero so a test cannot pass by accident against an unset reading.</summary>
+    public TimeSpan Monotonic { get; set; } = TimeSpan.FromHours(1);
+
+    /// <summary>Lets real time pass - the timer's tick alone advances nothing.</summary>
+    public void Advance(TimeSpan by)
+    {
+        Monotonic += by;
+        Now += by;
+    }
 }
 
 /// <summary>Runs posted work inline - tests are single-threaded on purpose.</summary>

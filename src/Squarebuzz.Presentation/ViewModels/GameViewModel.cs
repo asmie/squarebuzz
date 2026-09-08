@@ -44,7 +44,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
     /// only a few moves, rare enough that it never competes with drawing.
     /// </summary>
-    private const int AutosaveEverySeconds = 15;
+    private static readonly TimeSpan AutosaveEvery = TimeSpan.FromSeconds(15);
 
     private readonly GameSessionFactory _sessions;
     private readonly ISettingsRepository _settingsRepository;
@@ -73,7 +73,15 @@ public partial class GameViewModel : LocalizedViewModel
     private bool _isDaily;
     private TimedTier? _pendingTier;
     private int? _pendingLevel;
-    private int _secondsSinceAutosave;
+
+    /// <summary>Play time since the last write, so the periodic autosave fires on the clock rather than on a tick count.</summary>
+    private TimeSpan _sinceAutosave;
+
+    /// <summary>
+    /// <see cref="IClock.Monotonic"/> as of the last tick that counted, so the next tick can measure
+    /// how much time really passed rather than assuming its nominal interval did.
+    /// </summary>
+    private TimeSpan _lastTickAt;
 
     /// <summary>Move count as of the last successful write, so a periodic save can skip a no-op.</summary>
     private int _savedMoveCount = -1;
@@ -725,7 +733,7 @@ public partial class GameViewModel : LocalizedViewModel
             // The board matches the row it came from, so the next periodic save has nothing to
             // do until the player actually marks something.
             _savedMoveCount = Session.MoveCount;
-            _secondsSinceAutosave = 0;
+            _sinceAutosave = TimeSpan.Zero;
         }
         catch (Exception)
         {
@@ -782,7 +790,7 @@ public partial class GameViewModel : LocalizedViewModel
             // be worse. The next autosave will most likely succeed.
         }
 
-        _secondsSinceAutosave = 0;
+        _sinceAutosave = TimeSpan.Zero;
     }
 
     /// <summary>
@@ -831,7 +839,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         // A new game is a new row: restarting must not overwrite the save it came from.
         _saveId = Guid.NewGuid();
-        _secondsSinceAutosave = 0;
+        _sinceAutosave = TimeSpan.Zero;
         _savedMoveCount = -1;
 
         IsCrossMode = false;
@@ -1351,19 +1359,46 @@ public partial class GameViewModel : LocalizedViewModel
 
         _timer = _timers.CreateSecondTimer();
         _timer.Tick += OnTimerTick;
+
+        // Measured from here, so the first tick counts only the time since the clock started.
+        _lastTickAt = _clock.Monotonic;
+
         _timer.Start();
     }
 
+    /// <summary>
+    /// Advances the game by the time that really passed, not by the timer's nominal second.
+    /// </summary>
+    /// <remarks>
+    /// A dispatcher timer is a request, not a guarantee: under load the UI thread delivers its
+    /// ticks late or drops them outright, and counting each one as a second made the game clock
+    /// run slow by exactly the amount the device was struggling. In a timed trial that quietly
+    /// handed the player extra real time. Reading a monotonic clock on every tick charges the
+    /// true interval however unevenly the ticks arrive.
+    /// </remarks>
     private void OnTimerTick(object? sender, EventArgs e)
     {
+        var now = _clock.Monotonic;
+        var delta = now - _lastTickAt;
+        _lastTickAt = now;
+
+        // Moving the reference forward in the guarded cases too is what keeps the break reminder
+        // from charging its own duration to the game the moment it is dismissed: the timer keeps
+        // running behind the overlay, and without this the first tick after "A little longer"
+        // would measure the whole time the child spent reading it.
         if (Session is not { } session || session.IsOver || IsPaused || IsBreakReminderOpen)
         {
             return;
         }
 
-        var second = TimeSpan.FromSeconds(1);
+        // Monotonic cannot go backwards, but a zero-length interval is possible if two ticks are
+        // delivered together after a stall, and there is nothing to charge for it.
+        if (delta <= TimeSpan.Zero)
+        {
+            return;
+        }
 
-        session.Advance(second);
+        session.Advance(delta);
         UpdateElapsedText();
 
         if (session.IsTimeUp)
@@ -1374,7 +1409,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         // Counted here rather than in the monitor's own timer so that only time actually spent
         // playing counts - the guards above are exactly the cases that should not.
-        if (_screenTime.Add(second))
+        if (_screenTime.Add(delta))
         {
             IsBreakReminderOpen = true;
 
@@ -1387,7 +1422,9 @@ public partial class GameViewModel : LocalizedViewModel
             _ = AutosaveAsync();
         }
 
-        if (++_secondsSinceAutosave >= AutosaveEverySeconds)
+        _sinceAutosave += delta;
+
+        if (_sinceAutosave >= AutosaveEvery)
         {
             _ = AutosaveIfBoardChangedAsync();
         }

@@ -156,10 +156,87 @@ public sealed class GameViewModelQueryTests : IDisposable
     {
         await _h.Vm.InitialiseAsync();
 
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
         _h.Timers.Latest!.RaiseTick();
 
         Assert.Equal("0:01", _h.Vm.ElapsedText);
         Assert.Equal(TimeSpan.FromSeconds(1), _h.ScreenTime.Played);
+    }
+
+    [Fact]
+    // The clock charges the time that really passed, not the timer's nominal second. Under load
+    // the dispatcher delivers ticks late or drops them, and counting each as one second ran the
+    // game clock slow by exactly the shortfall - free time in a timed trial.
+    public async Task LateTick_ChargesTheWholeIntervalItCovers()
+    {
+        await _h.Vm.InitialiseAsync();
+
+        _h.Clock.Advance(TimeSpan.FromSeconds(3));
+        _h.Timers.Latest!.RaiseTick();
+
+        Assert.Equal(TimeSpan.FromSeconds(3), _h.Vm.Session!.Elapsed);
+        Assert.Equal("0:03", _h.Vm.ElapsedText);
+        Assert.Equal(TimeSpan.FromSeconds(3), _h.ScreenTime.Played);
+    }
+
+    [Fact]
+    public async Task TickWithNoTimePassed_ChargesNothing()
+    {
+        await _h.Vm.InitialiseAsync();
+
+        _h.Timers.Latest!.RaiseTick();
+        _h.Timers.Latest!.RaiseTick();
+
+        Assert.Equal(TimeSpan.Zero, _h.Vm.Session!.Elapsed);
+        Assert.Equal(TimeSpan.Zero, _h.ScreenTime.Played);
+    }
+
+    [Fact]
+    // The timer keeps running behind the break reminder, so the reference has to move forward
+    // while the overlay is up - or the first tick after "A little longer" would charge the whole
+    // time the child spent reading it.
+    public async Task TimeSpentBehindTheBreakReminder_IsNotChargedOnDismissal()
+    {
+        await _h.Vm.InitialiseAsync();
+        var timer = _h.Timers.Latest!;
+
+        _h.ScreenTime.RemindOnNextAdd = true;
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        timer.RaiseTick();
+        Assert.True(_h.Vm.IsBreakReminderOpen);
+        Assert.Equal(TimeSpan.FromSeconds(1), _h.Vm.Session!.Elapsed);
+
+        // Two minutes pass with the reminder up; its ticks must not accumulate.
+        _h.Clock.Advance(TimeSpan.FromMinutes(1));
+        timer.RaiseTick();
+        _h.Clock.Advance(TimeSpan.FromMinutes(1));
+        timer.RaiseTick();
+        Assert.Equal(TimeSpan.FromSeconds(1), _h.Vm.Session.Elapsed);
+
+        _h.Vm.DismissBreakReminderCommand.Execute(null);
+
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        timer.RaiseTick();
+
+        Assert.Equal(TimeSpan.FromSeconds(2), _h.Vm.Session.Elapsed);
+    }
+
+    [Fact]
+    public async Task ResumingTheClock_DoesNotChargeTheTimeItWasSuspended()
+    {
+        await _h.Vm.InitialiseAsync();
+
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        _h.Timers.Latest!.RaiseTick();
+
+        _h.Vm.SuspendClock();
+        _h.Clock.Advance(TimeSpan.FromMinutes(10));
+        _h.Vm.ResumeClock();
+
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        _h.Timers.Latest!.RaiseTick();
+
+        Assert.Equal(TimeSpan.FromSeconds(2), _h.Vm.Session!.Elapsed);
     }
 
     [Fact]
