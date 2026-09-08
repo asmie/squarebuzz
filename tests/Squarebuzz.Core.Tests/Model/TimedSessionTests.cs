@@ -182,4 +182,29 @@ public class TimedSessionTests
         Assert.Null(TimedTrial.Find(0));
         Assert.Null(TimedTrial.Find(4));
     }
+
+    [Fact]
+    // A save has no field for a time limit, so restoring one would silently drop the countdown.
+    // The rule is enforced where a save is made, not left to every caller to remember.
+    public void ATimedSession_CannotBeSaved()
+    {
+        var session = Timed(TimeSpan.FromMinutes(2));
+        session.Tap(0);
+
+        var error = Assert.Throws<ArgumentException>(
+            () => SavedGame.FromSession(session, Guid.NewGuid(), DateTimeOffset.UnixEpoch));
+
+        Assert.Equal("session", error.ParamName);
+    }
+
+    [Fact]
+    public void AnUntimedSession_StillSaves()
+    {
+        var session = Untimed();
+        session.Tap(0);
+
+        var save = SavedGame.FromSession(session, Guid.NewGuid(), DateTimeOffset.UnixEpoch);
+
+        Assert.Equal(session.Puzzle.Width, save.Size);
+    }
 }

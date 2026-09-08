@@ -85,6 +85,11 @@ public sealed class GameSessionFactory
     }
 
     /// <summary>Rebuilds a playable session from a save, marks and all.</summary>
+    /// <remarks>
+    /// The result is always untimed. That is not an omission here but a property of the save
+    /// itself: <see cref="SavedGame"/> carries no time limit and <see cref="SavedGame.FromSession"/>
+    /// refuses a timed session, so there is no countdown to restore.
+    /// </remarks>
     public GameSession Restore(SavedGame save, HelperSettings helpers)
     {
         ArgumentNullException.ThrowIfNull(save);

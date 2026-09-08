@@ -86,6 +86,19 @@ public sealed record SavedGame
                          "Create sessions through GameSessionFactory rather than the bare constructor.",
                          nameof(session));
 
+        // A save has no field for a time limit, on purpose: a trial is a race, and a race you can
+        // put down and pick up tomorrow is not one. Refusing here rather than silently writing the
+        // save means a caller that forgets the rule finds out at once, instead of the player
+        // resuming what was a two-minute dash as an untimed stroll with the clock reading 1:43.
+        if (session.IsTimed)
+        {
+            throw new ArgumentException(
+                "A timed session cannot be saved: SavedGame carries no time limit, so restoring it " +
+                "would drop the countdown. Callers must skip the save for timed games, as " +
+                "GameViewModel.AutosaveAsync does.",
+                nameof(session));
+        }
+
         return new SavedGame
         {
             Id = id,
