@@ -49,13 +49,16 @@ public sealed class SqliteProgressRepository : IProgressRepository
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
         var rows = await connection.Table<SolvedPuzzleEntity>().ToListAsync().ConfigureAwait(false);
 
+        // A solved picture is progress the player earned; a bad date or time on the row must not
+        // cost them the picture, the pack it unlocks or the trophy it counts towards. Fallbacks
+        // rather than throws - see RowGuards.
         return
         [
             .. rows.Select(r => new SolvedPuzzle(
                 r.PuzzleId,
-                DateOnly.FromDayNumber(r.FirstSolvedDayNumber),
+                RowGuards.DateOrMin(r.FirstSolvedDayNumber),
                 r.BestStars,
-                TimeSpan.FromSeconds(r.BestTimeSeconds),
+                RowGuards.SecondsOrZero(r.BestTimeSeconds),
                 r.TimesSolved))
         ];
     }
@@ -67,11 +70,13 @@ public sealed class SqliteProgressRepository : IProgressRepository
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
         var rows = await connection.Table<TrophyEntity>().ToListAsync().ConfigureAwait(false);
 
+        // The id was always filtered; the date now falls back instead of throwing, so a trophy
+        // with a damaged date is still a trophy in the cabinet.
         return
         [
             .. rows
                 .Where(r => Enum.IsDefined((TrophyId)r.TrophyId))
-                .Select(r => new EarnedTrophy((TrophyId)r.TrophyId, DateOnly.FromDayNumber(r.EarnedDayNumber)))
+                .Select(r => new EarnedTrophy((TrophyId)r.TrophyId, RowGuards.DateOrMin(r.EarnedDayNumber)))
         ];
     }
 
@@ -161,7 +166,15 @@ public sealed class SqliteProgressRepository : IProgressRepository
             else
             {
                 existing.BestStars = Math.Max(existing.BestStars, completion.Stars);
-                existing.BestTimeSeconds = Math.Min(existing.BestTimeSeconds, completion.Elapsed.TotalSeconds);
+
+                // Math.Min keeps a negative or infinite stored time for good - every real solve
+                // loses to it - so a stored time that is not a usable duration is simply beaten
+                // by the one just recorded. (NaN cannot occur: SQLite stores it as NULL, which the
+                // NOT NULL column refuses.)
+                existing.BestTimeSeconds = RowGuards.IsUsableSeconds(existing.BestTimeSeconds)
+                    ? Math.Min(existing.BestTimeSeconds, completion.Elapsed.TotalSeconds)
+                    : completion.Elapsed.TotalSeconds;
+
                 existing.TimesSolved++;
                 transaction.Update(existing);
             }
@@ -177,7 +190,19 @@ public sealed class SqliteProgressRepository : IProgressRepository
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
         var rows = await connection.Table<DailyCompletionEntity>().ToListAsync().ConfigureAwait(false);
 
-        return [.. rows.Select(r => DateOnly.FromDayNumber(r.DayNumber))];
+        // A day that is not a date is nothing on a calendar, so it is left out rather than
+        // faked - unlike a trophy or a picture, there is no progress behind it to preserve.
+        var days = new List<DateOnly>(rows.Count);
+
+        foreach (var row in rows)
+        {
+            if (RowGuards.DateOrNull(row.DayNumber) is { } day)
+            {
+                days.Add(day);
+            }
+        }
+
+        return days;
     }
 
     public async Task ResetAsync(CancellationToken cancellationToken = default)
@@ -224,9 +249,10 @@ public sealed class SqliteProgressRepository : IProgressRepository
         PlayerName = row.PlayerName,
         Stars = row.Stars,
         Streak = row.Streak,
-        LastPlayedOn = row.LastPlayedDayNumber is { } day ? DateOnly.FromDayNumber(day) : null,
+        // A day that is not a date reads as "never", which is the same answer a fresh row gives.
+        LastPlayedOn = RowGuards.DateOrNull(row.LastPlayedDayNumber),
         TotalBlocksFilled = row.TotalBlocksFilled,
-        LastDailyCompletedOn = row.LastDailyDayNumber is { } daily ? DateOnly.FromDayNumber(daily) : null,
+        LastDailyCompletedOn = RowGuards.DateOrNull(row.LastDailyDayNumber),
         HighestLevelCompleted = row.HighestLevel,
     };
 

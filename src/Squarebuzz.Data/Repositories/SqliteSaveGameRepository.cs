@@ -43,7 +43,19 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             .ToListAsync()
             .ConfigureAwait(false);
 
-        return [.. rows.Select(ToModel)];
+        // A row that cannot be read is left out rather than allowed to empty the whole list -
+        // see ToModel for what "cannot be read" is allowed to mean.
+        var saves = new List<SavedGame>(rows.Count);
+
+        foreach (var row in rows)
+        {
+            if (ToModel(row) is { } save)
+            {
+                saves.Add(save);
+            }
+        }
+
+        return saves;
     }
 
     public async Task<SavedGame?> GetAsync(Guid id, CancellationToken cancellationToken = default)
@@ -162,8 +174,23 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         };
     }
 
-    private static SavedGame ToModel(SavedGameEntity row)
+    /// <summary>
+    /// The row as a <see cref="SavedGame"/>, or null when it cannot be addressed at all.
+    /// </summary>
+    /// <remarks>
+    /// The cells and the challenge were always read defensively; the id, the duration and the
+    /// timestamp went through parsers that throw, so one bad row emptied the Continue screen for
+    /// every save at once. Now only an unparseable id drops the row - Resume and Delete address a
+    /// save by that id, so there is nothing to offer without it. Everything else falls back to a
+    /// visibly wrong value and keeps the player's board. See <see cref="RowGuards"/>.
+    /// </remarks>
+    private static SavedGame? ToModel(SavedGameEntity row)
     {
+        if (!Guid.TryParse(row.Id, out var id))
+        {
+            return null;
+        }
+
         var cells = new CellState[row.Cells.Length];
         for (var i = 0; i < cells.Length; i++)
         {
@@ -177,7 +204,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
 
         return new SavedGame
         {
-            Id = Guid.Parse(row.Id),
+            Id = id,
             PuzzleId = row.PuzzleId,
             Size = row.Size,
             Difficulty = row.Difficulty,
@@ -187,12 +214,14 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
                 ? (ChallengeLevel)row.Challenge
                 : ChallengeLevel.Relaxed,
             Cells = cells,
-            Elapsed = TimeSpan.FromSeconds(row.ElapsedSeconds),
-            HintsRemaining = row.HintsRemaining,
-            HintsUsed = row.HintsUsed,
-            Mistakes = row.Mistakes,
-            SavedAt = new DateTimeOffset(row.SavedAtUtcTicks, TimeSpan.Zero)
-                .ToOffset(new TimeSpan(row.SavedAtOffsetTicks)),
+            Elapsed = RowGuards.SecondsOrZero(row.ElapsedSeconds),
+
+            // Negative counters would make GameSession.Restore throw, and the resume path treats a
+            // throw as "start a fresh game" - so a slightly damaged row lost the board entirely.
+            HintsRemaining = RowGuards.NonNegative(row.HintsRemaining),
+            HintsUsed = RowGuards.NonNegative(row.HintsUsed),
+            Mistakes = RowGuards.NonNegative(row.Mistakes),
+            SavedAt = RowGuards.InstantOrEpoch(row.SavedAtUtcTicks, row.SavedAtOffsetTicks),
             GeneratorVersion = row.GeneratorVersion,
             Level = row.Level,
         };
