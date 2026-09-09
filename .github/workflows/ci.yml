@@ -13,11 +13,13 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 jobs:
-  # Fast feedback: the domain and persistence layers reference no MAUI workload, so they build
-  # and test in well under a minute. Run on both OSes because "Core runs anywhere" is a design
-  # goal - and because the SQLite tests exercise a native library that differs per platform.
+  # Fast feedback: the domain, persistence and ViewModel layers reference no MAUI workload, so
+  # they build and test in well under a minute. Run on both OSes because "Core runs anywhere" is
+  # a design goal - and because the SQLite tests exercise a native library that differs per
+  # platform. Presentation is here too: it targets plain net10.0 with only CommunityToolkit.Mvvm,
+  # and its tests sat unrun by CI for as long as the job listed only Core and Data.
   domain:
-    name: Domain & data (${{ matrix.os }})
+    name: Domain, data & ViewModels (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -40,16 +42,19 @@ jobs:
         run: |
           dotnet restore tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj
           dotnet restore tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj
+          dotnet restore tests/Squarebuzz.Presentation.Tests/Squarebuzz.Presentation.Tests.csproj
 
       - name: Build
         run: |
           dotnet build src/Squarebuzz.Core/Squarebuzz.Core.csproj -c Release --no-restore
           dotnet build src/Squarebuzz.Data/Squarebuzz.Data.csproj -c Release --no-restore
+          dotnet build src/Squarebuzz.Presentation/Squarebuzz.Presentation.csproj -c Release --no-restore
 
       - name: Test
         run: |
           dotnet test tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=core.trx" --results-directory artifacts/test-results
           dotnet test tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=data.trx" --results-directory artifacts/test-results
+          dotnet test tests/Squarebuzz.Presentation.Tests/Squarebuzz.Presentation.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=presentation.trx" --results-directory artifacts/test-results
 
       - name: Upload test results
         if: always()
@@ -58,6 +63,29 @@ jobs:
           name: test-results-${{ matrix.os }}
           path: artifacts/test-results
           if-no-files-found: ignore
+
+  # The two invariants the content depends on, enforced rather than hoped for. Both tools
+  # existed and both passed, but nothing ran them: a content edit could ship a puzzle that needs
+  # guessing, or a translation missing a key that then leaks raw into the UI in that language.
+  # check-strings' own header says it enforces "what nothing previously enforced" - this is the
+  # job that makes that true. File-based apps (`dotnet run file.cs`) need no project or restore.
+  content:
+    name: Content
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Translations match the neutral culture
+        run: dotnet run tools/check-strings.cs
+
+      - name: Every authored puzzle solves by pure line logic
+        run: dotnet run tools/validate-puzzles.cs
 
   android:
     name: Android
