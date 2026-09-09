@@ -157,7 +157,10 @@ public partial class GalleryViewModel : LocalizedViewModel
             });
         }
 
-        FoundSummary = Strings.Format("galleryFound", byId.Count, Cards.Count);
+        // Counted from the cards, not the solved rows. The two differ when a solved row outlives
+        // its picture - content removed between releases - and "71 of 70 found" is the kind of
+        // impossible number a child notices and a parent cannot explain.
+        FoundSummary = Strings.Format("galleryFound", Cards.Count(c => c.IsFound), Cards.Count);
     }
 
     /// <summary>
