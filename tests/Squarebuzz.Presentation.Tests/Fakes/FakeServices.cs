@@ -168,9 +168,10 @@ public sealed class FakeNarrationService : INarrationService
 
     public void Speak(string text) => Spoken.Add(text);
 
-    public void StopSpeaking()
-    {
-    }
+    /// <summary>How often speech was cut off - leaving a screen must do it exactly once.</summary>
+    public int StopCalls { get; private set; }
+
+    public void StopSpeaking() => StopCalls++;
 }
 
 public sealed class FakeAccessibilityState : IAccessibilityState

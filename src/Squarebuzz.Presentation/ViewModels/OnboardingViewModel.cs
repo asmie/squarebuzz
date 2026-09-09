@@ -114,9 +114,23 @@ public partial class OnboardingViewModel : LocalizedViewModel
         // Nobody wants card three read out over the menu they have just arrived at.
         _narration.StopSpeaking();
 
+        // The load and the save fail independently, so they are guarded independently. Under one
+        // try, a read that failed took the write down with it - and the flag is the whole point
+        // of this method. A player whose settings row could not be read for a moment should still
+        // not meet these cards again; defaults with the flag set are what a fresh player has anyway.
+        GameSettings settings;
+
         try
         {
-            var settings = await _settingsRepository.LoadAsync();
+            settings = await _settingsRepository.LoadAsync();
+        }
+        catch (Exception)
+        {
+            settings = GameSettings.Default;
+        }
+
+        try
+        {
             await _settingsRepository.SaveAsync(settings with { HasSeenOnboarding = true });
         }
         catch (Exception)
