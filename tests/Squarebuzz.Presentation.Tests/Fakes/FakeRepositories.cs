@@ -134,8 +134,14 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
     public Task<int> CountAsync(CancellationToken cancellationToken = default) =>
         Task.FromResult(Saves.Count);
 
-    public Task<int> PurgeUnrebuildableAsync(CancellationToken cancellationToken = default) =>
-        Task.FromResult(0);
+    /// <summary>How often the startup purge ran - the splash must run it exactly once per launch.</summary>
+    public int PurgeCalls { get; private set; }
+
+    public Task<int> PurgeUnrebuildableAsync(CancellationToken cancellationToken = default)
+    {
+        PurgeCalls++;
+        return Task.FromResult(0);
+    }
 }
 
 public sealed class FakePuzzleRepository : IPuzzleRepository

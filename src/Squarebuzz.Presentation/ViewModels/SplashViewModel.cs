@@ -88,29 +88,40 @@ public partial class SplashViewModel : LocalizedViewModel
     /// <summary>
     /// The startup work the splash screen exists to cover, in the order the first screens need it.
     /// </summary>
+    /// <remarks>
+    /// Three independent steps, each behind its own guard. They used to share one try block, which
+    /// read as tidy and meant an audio failure quietly skipped everything after it - including the
+    /// save purge, the one step the rest of the app relies on having run. Sound or narration
+    /// missing is a degraded game, not a broken one; a stale save that Continue then offers is a
+    /// board the player never played. Neither may stop the other, and neither may hold the player
+    /// on a splash screen that never ends.
+    /// </remarks>
     private async Task PrepareServicesAsync(Core.Model.GameSettings settings)
+    {
+        // Deliberately awaited: it is the difference between the first tap on a cell being
+        // silent and being audible.
+        await PrimeAudioAsync();
+
+        // Once per launch, before the menu can show a count or Continue can list anything.
+        // A generated save whose picture the current generator no longer produces would put
+        // the player's marks on a board they never played, so it goes.
+        await PurgeUnrebuildableSavesAsync();
+
+        // Enumerating the device's voices is the slowest of these, and it has to finish
+        // before the first onboarding card appears - that card is the one screen where a
+        // brand-new player most needs the words read out.
+        await PrepareNarrationAsync(settings);
+    }
+
+    private async Task PrimeAudioAsync()
     {
         try
         {
-            // Deliberately awaited: it is the difference between the first tap on a cell being
-            // silent and being audible.
             await _audio.PrimeAsync();
-
-            // Once per launch, before the menu can show a count or Continue can list anything.
-            // A generated save whose picture the current generator no longer produces would put
-            // the player's marks on a board they never played, so it goes.
-            await PurgeUnrebuildableSavesAsync();
-
-            // Enumerating the device's voices is the slowest of these, and it has to finish
-            // before the first onboarding card appears - that card is the one screen where a
-            // brand-new player most needs the words read out.
-            await _narration.PrepareAsync(settings.Language);
-            _narration.Configure(settings.VoiceNarration);
         }
         catch (Exception)
         {
-            // Sound or narration missing is a degraded game, not a broken one, and the player is
-            // better served by the menu than by a splash screen that never ends.
+            // A silent game is still a game.
         }
     }
 
@@ -123,6 +134,19 @@ public partial class SplashViewModel : LocalizedViewModel
         catch (Exception)
         {
             // Worst case a stale save survives to confuse someone. Not worth blocking startup.
+        }
+    }
+
+    private async Task PrepareNarrationAsync(Core.Model.GameSettings settings)
+    {
+        try
+        {
+            await _narration.PrepareAsync(settings.Language);
+            _narration.Configure(settings.VoiceNarration);
+        }
+        catch (Exception)
+        {
+            // No voice is a degraded game, not a broken one.
         }
     }
 

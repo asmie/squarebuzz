@@ -132,7 +132,12 @@ public sealed class FakeAudioService : IAudioService
 
     public bool IsAvailable => true;
 
-    public Task PrimeAsync() => Task.CompletedTask;
+    /// <summary>Makes <see cref="PrimeAsync"/> throw, as a missing or unplayable asset would.</summary>
+    public bool PrimeFails { get; set; }
+
+    public Task PrimeAsync() => PrimeFails
+        ? Task.FromException(new InvalidOperationException("no audio device"))
+        : Task.CompletedTask;
 
     public void Configure(bool soundEffects, bool music)
     {

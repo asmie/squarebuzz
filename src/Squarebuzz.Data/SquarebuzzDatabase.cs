@@ -13,7 +13,7 @@ namespace Squarebuzz.Data;
 /// Initialisation is guarded so that concurrent first calls from several repositories migrate
 /// exactly once.
 /// </remarks>
-public sealed class SquarebuzzDatabase : IAsyncDisposable
+public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
 {
     private static readonly IMigration[] Migrations =
     [
@@ -187,4 +187,19 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable
 
         _initialisationGate.Dispose();
     }
+
+    /// <summary>
+    /// The synchronous twin of <see cref="DisposeAsync"/>, for a container that shuts down
+    /// synchronously.
+    /// </summary>
+    /// <remarks>
+    /// This is registered as a DI singleton, and Microsoft.Extensions.DependencyInjection refuses
+    /// to dispose a singleton that implements only <see cref="IAsyncDisposable"/> from a
+    /// synchronous <c>Dispose</c>: it throws "type only implements IAsyncDisposable. Use
+    /// DisposeAsync to dispose the container." Whether the MAUI host takes the synchronous path
+    /// is the host's business; the database should not be the thing that turns shutdown into an
+    /// exception. Blocking here is safe - sqlite-net runs its async work on the thread pool, and
+    /// this only ever runs once, at exit.
+    /// </remarks>
+    public void Dispose() => DisposeAsync().AsTask().GetAwaiter().GetResult();
 }
