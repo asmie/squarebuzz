@@ -108,6 +108,22 @@ public partial class GameViewModel : LocalizedViewModel
         IScreenReader screenReader)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(sessions);
+        ArgumentNullException.ThrowIfNull(settingsRepository);
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(saveGames);
+        ArgumentNullException.ThrowIfNull(puzzles);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(clock);
+        ArgumentNullException.ThrowIfNull(screenTime);
+        ArgumentNullException.ThrowIfNull(audio);
+        ArgumentNullException.ThrowIfNull(narration);
+        ArgumentNullException.ThrowIfNull(accessibility);
+        ArgumentNullException.ThrowIfNull(theme);
+        ArgumentNullException.ThrowIfNull(uiThread);
+        ArgumentNullException.ThrowIfNull(timers);
+        ArgumentNullException.ThrowIfNull(screenReader);
+
         _sessions = sessions;
         _settingsRepository = settingsRepository;
         _progress = progress;

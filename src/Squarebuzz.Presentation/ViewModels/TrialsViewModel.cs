@@ -94,6 +94,11 @@ public partial class TrialsViewModel : LocalizedViewModel
         IClock clock)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(puzzles);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(clock);
+
         _progress = progress;
         _puzzles = puzzles;
         _navigation = navigation;

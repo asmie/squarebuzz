@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.Presentation.Services;
@@ -67,7 +68,13 @@ public sealed partial class ParentGate : ObservableObject
         var right = Random.Shared.Next(3, 10);
 
         _expectedAnswer = left * right;
-        Question = $"{left} × {right} = ?";
+
+        // Wrapped in an isolate (LRI ... PDI) so the sum reads left to right whatever the page's
+        // direction. Digits are weakly directional and "×", "=" and "?" not at all, so in an
+        // Arabic, Hebrew or Persian layout the bidi algorithm was free to lay this out as
+        // "? = 4 × 7" - a different-looking question for exactly the parents least able to
+        // tell a rendering quirk from a mistake.
+        Question = FormattableString.Invariant($"⁦{left} × {right} = ?⁩");
         Answer = string.Empty;
         HasFailed = false;
         IsOpen = true;
@@ -76,7 +83,7 @@ public sealed partial class ParentGate : ObservableObject
     [RelayCommand]
     private async Task SubmitAsync()
     {
-        if (!int.TryParse(Answer, out var answer) || answer != _expectedAnswer)
+        if (!TryReadAnswer(Answer, out var answer) || answer != _expectedAnswer)
         {
             HasFailed = true;
             Answer = string.Empty;
@@ -101,6 +108,52 @@ public sealed partial class ParentGate : ObservableObject
         HasFailed = false;
         Answer = string.Empty;
         _onPassed = null;
+    }
+
+    /// <summary>
+    /// Reads the typed answer as a whole number, however the device's keyboard chose to write it.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Not the plain <c>int.TryParse(string)</c>, which parses under the current culture and so
+    /// accepts thousands separators and a leading sign - "2,4" is a valid 24 in one culture and a
+    /// failure in the next, which made the gate's strictness depend on the language setting. The
+    /// settings repository is scrupulous about invariant parsing; this is the same rule applied to
+    /// the one place a person types a number.
+    /// </para>
+    /// <para>
+    /// Native digits are folded to ASCII first. A Persian or Bengali keyboard produces its own
+    /// digits by default, and a parent typing the right answer in their own numerals should not be
+    /// told to ask a grown-up.
+    /// </para>
+    /// </remarks>
+    private static bool TryReadAnswer(string? text, out int answer)
+    {
+        answer = 0;
+
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return false;
+        }
+
+        Span<char> digits = stackalloc char[text.Length];
+        var length = 0;
+
+        foreach (var c in text.Trim())
+        {
+            // GetNumericValue maps every Unicode decimal digit - ٤, ۴, ৪, ４ - to its value.
+            var value = char.GetNumericValue(c);
+
+            if (value is < 0 or > 9 || value != Math.Floor(value))
+            {
+                return false;
+            }
+
+            digits[length++] = (char)('0' + (int)value);
+        }
+
+        return length > 0
+               && int.TryParse(digits[..length], NumberStyles.None, CultureInfo.InvariantCulture, out answer);
     }
 
     /// <summary>Re-reads the localised labels after a language change.</summary>

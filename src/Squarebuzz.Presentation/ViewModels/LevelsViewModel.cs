@@ -71,6 +71,10 @@ public partial class LevelsViewModel : LocalizedViewModel
         INavigationService navigation)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(puzzles);
+        ArgumentNullException.ThrowIfNull(navigation);
+
         _progress = progress;
         _puzzles = puzzles;
         _navigation = navigation;

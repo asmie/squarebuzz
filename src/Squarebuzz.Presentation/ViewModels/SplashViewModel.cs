@@ -37,6 +37,14 @@ public partial class SplashViewModel : LocalizedViewModel
         ISaveGameRepository saveGames)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(settingsRepository);
+        ArgumentNullException.ThrowIfNull(theme);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(screenTime);
+        ArgumentNullException.ThrowIfNull(audio);
+        ArgumentNullException.ThrowIfNull(narration);
+        ArgumentNullException.ThrowIfNull(saveGames);
+
         _settingsRepository = settingsRepository;
         _theme = theme;
         _navigation = navigation;

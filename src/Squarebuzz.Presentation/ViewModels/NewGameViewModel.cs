@@ -80,6 +80,12 @@ public partial class NewGameViewModel : LocalizedViewModel
         IDeviceScreen screen)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(puzzles);
+        ArgumentNullException.ThrowIfNull(settingsRepository);
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(screen);
+
         _puzzles = puzzles;
         _settingsRepository = settingsRepository;
         _progress = progress;

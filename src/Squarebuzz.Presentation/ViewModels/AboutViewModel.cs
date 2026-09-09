@@ -16,6 +16,9 @@ public partial class AboutViewModel : LocalizedViewModel
     public AboutViewModel(ILocalizationService strings, INavigationService navigation, IUiThread uiThread)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(uiThread);
+
         _navigation = navigation;
         _uiThread = uiThread;
         Gate = new ParentGate(strings);

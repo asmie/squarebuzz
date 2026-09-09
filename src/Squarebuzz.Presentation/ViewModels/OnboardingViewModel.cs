@@ -26,6 +26,10 @@ public partial class OnboardingViewModel : LocalizedViewModel
         INarrationService narration)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(settingsRepository);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(narration);
+
         _settingsRepository = settingsRepository;
         _navigation = navigation;
         _narration = narration;

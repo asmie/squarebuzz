@@ -70,6 +70,10 @@ public partial class GalleryViewModel : LocalizedViewModel
         INavigationService navigation)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(puzzles);
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(navigation);
+
         _puzzles = puzzles;
         _progress = progress;
         _navigation = navigation;

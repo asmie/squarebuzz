@@ -23,7 +23,9 @@ public sealed class AboutViewModelTests : IDisposable
 
     private async Task PassGateAsync()
     {
-        var parts = _vm.Gate.Question.Split('×');
+        // The question is wrapped in a bidi isolate (LRI ... PDI) so it reads left to right on an
+        // RTL page; strip that before reading the factors.
+        var parts = _vm.Gate.Question.Trim('⁦', '⁩').Split('×');
         var left = int.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
         var right = int.Parse(parts[1].Replace("= ?", "", StringComparison.Ordinal).Trim(), CultureInfo.InvariantCulture);
 

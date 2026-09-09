@@ -26,6 +26,11 @@ public partial class MenuViewModel : LocalizedViewModel
         IClock clock)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(saveGames);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(clock);
+
         _progress = progress;
         _saveGames = saveGames;
         _navigation = navigation;

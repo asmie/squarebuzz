@@ -58,6 +58,15 @@ public partial class OptionsViewModel : LocalizedViewModel
         IUiThread uiThread)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(settingsRepository);
+        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(theme);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(screenTime);
+        ArgumentNullException.ThrowIfNull(audio);
+        ArgumentNullException.ThrowIfNull(narration);
+        ArgumentNullException.ThrowIfNull(uiThread);
+
         _settingsRepository = settingsRepository;
         _progress = progress;
         _theme = theme;

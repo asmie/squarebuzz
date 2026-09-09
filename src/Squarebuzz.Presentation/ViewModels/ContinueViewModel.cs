@@ -63,6 +63,11 @@ public partial class ContinueViewModel : LocalizedViewModel
         IClock clock)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(saveGames);
+        ArgumentNullException.ThrowIfNull(sessions);
+        ArgumentNullException.ThrowIfNull(navigation);
+        ArgumentNullException.ThrowIfNull(clock);
+
         _saveGames = saveGames;
         _sessions = sessions;
         _navigation = navigation;
