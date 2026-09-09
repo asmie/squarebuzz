@@ -28,7 +28,10 @@ public sealed class SavedGameCard
     /// <summary>e.g. "10×10 · 2:14".</summary>
     public required string Details { get; init; }
 
-    /// <summary>e.g. "34 of 58 blocks".</summary>
+    /// <summary>
+    /// e.g. "34 / 58" - filled blocks over the picture's total. Kept to digits and a slash on
+    /// purpose: it needs no translation, and a child who cannot yet read still reads a fraction.
+    /// </summary>
     public required string ProgressText { get; init; }
 
     /// <summary>0 to 1, for the progress bar.</summary>
@@ -141,7 +144,8 @@ public partial class ContinueViewModel : LocalizedViewModel
     {
         var puzzle = _sessions.ResolvePuzzle(save);
 
-        var total = CountFilledCells(puzzle);
+        // The puzzle precomputes this precisely so callers do not recount an immutable value.
+        var total = puzzle.PictureCellCount;
         var done = Math.Min(save.FilledCount, total);
 
         // A campaign level is named by its number; the mystery picture behind a generated
@@ -181,22 +185,6 @@ public partial class ContinueViewModel : LocalizedViewModel
             1 => savedOn.ToString("ddd", CultureInfo.CurrentCulture),
             _ => savedOn.ToString("d MMM", CultureInfo.CurrentCulture),
         };
-    }
-
-    private static int CountFilledCells(Puzzle puzzle)
-    {
-        var count = 0;
-        var solution = puzzle.Solution;
-
-        for (var i = 0; i < solution.Length; i++)
-        {
-            if (solution[i])
-            {
-                count++;
-            }
-        }
-
-        return count;
     }
 
     [RelayCommand]

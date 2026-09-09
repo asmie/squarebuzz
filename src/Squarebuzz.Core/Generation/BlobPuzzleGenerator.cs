@@ -33,6 +33,13 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(request.Width);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(request.Height);
 
+        // The request declares its own bounds and nothing enforced them. Out of range the density
+        // formula below still produces *something* - a 28%-fill board at 20, a bar down the mirror
+        // axis far beyond that - so a bad difficulty shipped a degenerate picture instead of an
+        // error. Settings are already sanitised to this range; this is the same rule at the source.
+        ArgumentOutOfRangeException.ThrowIfLessThan(request.Difficulty, PuzzleRequest.MinDifficulty);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(request.Difficulty, PuzzleRequest.MaxDifficulty);
+
         var width = request.Width;
         var height = request.Height;
         var random = new DeterministicRandom(request.Seed);

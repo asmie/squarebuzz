@@ -13,4 +13,10 @@
     <EmbeddedResource Include="Content\puzzles.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- EmbeddedPuzzleRepository's JSON constructor is the seam for proving what the loader
+         rejects, and it is internal so nothing in the app can bypass the shipped resource. -->
+    <InternalsVisibleTo Include="Squarebuzz.Core.Tests" />
+  </ItemGroup>
+
 </Project>

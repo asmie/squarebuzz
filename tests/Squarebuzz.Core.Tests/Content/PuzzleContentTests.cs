@@ -24,6 +24,30 @@ public class PuzzleContentTests
     }
 
     [Fact]
+    // The width and height fields used to be parsed and ignored - Puzzle.FromRows derives the
+    // real size from the rows - so an entry could declare 10x10 over a 5x5 grid and ship. The
+    // loader now checks the declaration against the grid it describes and names the culprit.
+    public void APuzzleWhoseDeclaredSizeDisagreesWithItsRows_IsRejectedAtLoad()
+    {
+        const string lying = """
+            {
+              "schemaVersion": 1,
+              "packs": [ { "id": "animals", "icon": "x", "locked": false, "isWildcard": false } ],
+              "puzzles": [
+                { "id": "fib", "pack": "animals", "width": 10, "height": 10, "color": "#000000",
+                  "rows": ["#####", "#...#", "#.#.#", "#...#", "#####"] }
+              ]
+            }
+            """;
+
+        var error = Assert.Throws<InvalidOperationException>(() => new Core.Content.EmbeddedPuzzleRepository(lying));
+
+        Assert.Contains("fib", error.Message, StringComparison.Ordinal);
+        Assert.Contains("10x10", error.Message, StringComparison.Ordinal);
+        Assert.Contains("5x5", error.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void PuzzleContent_IsEmbeddedInTheCoreAssembly()
     {
         var names = typeof(GameTheme).Assembly.GetManifestResourceNames();

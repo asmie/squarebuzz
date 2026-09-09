@@ -27,6 +27,32 @@ public class BlobPuzzleGeneratorTests
     public BlobPuzzleGeneratorTests(ITestOutputHelper output) => _output = output;
 
     [Theory]
+    // PuzzleRequest declares its own bounds and nothing enforced them. Out of range the density
+    // formula still produced something - a 28%-fill board at 20, a bar down the mirror axis far
+    // beyond - so a bad difficulty shipped a degenerate picture instead of an error.
+    [InlineData(PuzzleRequest.MinDifficulty - 1)]
+    [InlineData(-3)]
+    [InlineData(PuzzleRequest.MaxDifficulty + 1)]
+    [InlineData(20)]
+    public void ADifficultyOutsideTheDeclaredRange_IsRefused(int difficulty)
+    {
+        var error = Assert.Throws<ArgumentOutOfRangeException>(
+            () => _generator.Generate(new PuzzleRequest(10, 10, difficulty, "surprise", 1)));
+
+        Assert.Equal(difficulty, error.ActualValue);
+    }
+
+    [Theory]
+    [InlineData(PuzzleRequest.MinDifficulty)]
+    [InlineData(PuzzleRequest.MaxDifficulty)]
+    public void TheDeclaredBounds_AreInclusive(int difficulty)
+    {
+        var puzzle = _generator.Generate(new PuzzleRequest(10, 10, difficulty, "surprise", 1));
+
+        Assert.Equal(100, puzzle.CellCount);
+    }
+
+    [Theory]
     [InlineData(5)]
     [InlineData(10)]
     [InlineData(15)]

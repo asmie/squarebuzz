@@ -29,7 +29,7 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
 
         Packs = [.. content.Packs.Select(p => new PackDefinition(p.Id, p.Icon, p.Locked, p.IsWildcard))];
 
-        Puzzles = [.. content.Puzzles.Select(p => Puzzle.FromRows(p.Id, p.Pack, p.Color, p.Rows))];
+        Puzzles = [.. content.Puzzles.Select(ToPuzzle)];
 
         _byId = Puzzles.ToDictionary(p => p.Id, StringComparer.Ordinal);
 
@@ -76,6 +76,31 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
         ArgumentException.ThrowIfNullOrWhiteSpace(puzzleId);
 
         return _byId.GetValueOrDefault(puzzleId);
+    }
+
+    /// <summary>
+    /// Builds a puzzle from its content entry, refusing one whose declared size disagrees with its
+    /// rows.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="Puzzle.FromRows"/> derives the real dimensions from the rows, so the
+    /// <c>width</c> and <c>height</c> fields were parsed and then ignored - a declaration that
+    /// looked authoritative and bound nothing. An entry could say 10x10 over a 5x5 grid and ship.
+    /// The fields stay, because they make the file readable, but they are now checked against the
+    /// grid they describe, and a mismatch fails at load with the puzzle named rather than
+    /// surviving as a quiet lie.
+    /// </remarks>
+    private static Puzzle ToPuzzle(PuzzleDto dto)
+    {
+        var puzzle = Puzzle.FromRows(dto.Id, dto.Pack, dto.Color, dto.Rows);
+
+        if (dto.Width != puzzle.Width || dto.Height != puzzle.Height)
+        {
+            throw new InvalidOperationException(
+                $"Puzzle '{dto.Id}' declares {dto.Width}x{dto.Height} but its rows are {puzzle.Width}x{puzzle.Height}.");
+        }
+
+        return puzzle;
     }
 
     private static string ReadEmbeddedContent()
