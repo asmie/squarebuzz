@@ -178,10 +178,42 @@ public partial class NewGameViewModel : LocalizedViewModel
 
         SelectedSize = LargestPlayableSize(_settings.LastSize);
         SelectedDifficulty = _settings.LastDifficulty;
-        SelectedPackId = _settings.LastPackId;
+        SelectedPackId = OpenPackOrFallback(_settings.LastPackId);
         SelectedChallenge = _settings.LastChallenge;
 
         BuildOptions();
+    }
+
+    /// <summary>
+    /// The remembered pack if it is open, otherwise the first pack that is.
+    /// </summary>
+    /// <remarks>
+    /// The size has always had this treatment - a remembered 25x25 falls back to the largest a
+    /// phone can show - but the pack did not, and the gap mattered more than it looked. The
+    /// repository's <c>Find</c> for a named pack ignores locks by design (the wildcard is where
+    /// locks are applied), so a locked pack remembered in settings - a hand-edited database, or
+    /// an unlock rule that tightened between builds - would be shown selected, started, and
+    /// played. Falling back here keeps the screen's own rule - locked packs cannot be chosen -
+    /// true for the one choice the player did not make on this visit.
+    /// </remarks>
+    private string OpenPackOrFallback(string remembered)
+    {
+        if (_unlockedPacks.Contains(remembered))
+        {
+            return remembered;
+        }
+
+        foreach (var pack in _puzzles.Packs)
+        {
+            if (!pack.IsWildcard && _unlockedPacks.Contains(pack.Id))
+            {
+                return pack.Id;
+            }
+        }
+
+        // No open pack at all is not a state shipped content can be in; keep the memory rather
+        // than invent a pack that does not exist.
+        return remembered;
     }
 
     /// <summary>
@@ -278,6 +310,8 @@ public partial class NewGameViewModel : LocalizedViewModel
     [RelayCommand]
     private void SelectSize(SizeOption option)
     {
+        ArgumentNullException.ThrowIfNull(option);
+
         if (option.IsLocked)
         {
             return;
@@ -294,6 +328,8 @@ public partial class NewGameViewModel : LocalizedViewModel
     [RelayCommand]
     private void SelectDifficulty(DifficultyOption option)
     {
+        ArgumentNullException.ThrowIfNull(option);
+
         SelectedDifficulty = option.Level;
 
         foreach (var candidate in Difficulties)
@@ -305,6 +341,8 @@ public partial class NewGameViewModel : LocalizedViewModel
     [RelayCommand]
     private void SelectPack(PackOption option)
     {
+        ArgumentNullException.ThrowIfNull(option);
+
         if (option.IsLocked)
         {
             return;

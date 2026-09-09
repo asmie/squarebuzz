@@ -17,8 +17,16 @@ public sealed class FakeSettingsRepository : ISettingsRepository
         ? Task.FromException<GameSettings>(new InvalidOperationException("database is locked"))
         : Task.FromResult(Settings);
 
+    /// <summary>Makes <see cref="SaveAsync"/> throw, as a full disk or a locked database would.</summary>
+    public bool SaveFails { get; set; }
+
     public Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
     {
+        if (SaveFails)
+        {
+            return Task.FromException(new InvalidOperationException("disk full"));
+        }
+
         Settings = settings;
         Saved.Add(settings);
         return Task.CompletedTask;
