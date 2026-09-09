@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Поле загадки, {0} на {1}. Закрашено {2} клеток из {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Клетки пока нельзя обследовать касанием.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Прошло времени: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Осталось времени: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Дней подряд: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Продолжить: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Удалить: {0}</value></data>

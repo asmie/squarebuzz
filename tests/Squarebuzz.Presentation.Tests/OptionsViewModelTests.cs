@@ -205,6 +205,36 @@ public class OptionsViewModelTests : IDisposable
     }
 
     [Fact]
+    // The chips take their colours from the palette through a converter, which only runs when its
+    // bound property is raised. Applying a palette therefore has to re-raise the screen, or the
+    // one place the palette is chosen is the one place that keeps showing the old one.
+    public async Task ApplyingAPalette_RestylesTheScreen()
+    {
+        await _vm.OnAppearingAsync();
+
+        var raised = new List<string?>();
+        _vm.PropertyChanged += (_, e) => raised.Add(e.PropertyName);
+
+        _vm.SelectAccentCommand.Execute("grape");
+
+        Assert.Contains(raised, name => string.IsNullOrEmpty(name));
+    }
+
+    [Fact]
+    public async Task Disposing_StopsListeningToTheThemeService()
+    {
+        await _vm.OnAppearingAsync();
+        _vm.Dispose();
+
+        var raised = false;
+        _vm.PropertyChanged += (_, _) => raised = true;
+
+        _theme.RaiseChanged();
+
+        Assert.False(raised);
+    }
+
+    [Fact]
     public async Task PickingAnAccent_AppliesAndPersists()
     {
         await _vm.OnAppearingAsync();

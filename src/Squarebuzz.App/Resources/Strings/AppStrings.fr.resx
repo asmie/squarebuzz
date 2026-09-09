@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Grille de {0} sur {1}. {2} cases remplies sur {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Les cases ne sont pas encore accessibles à l’exploration tactile.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Temps écoulé : {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Temps restant : {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} jours de suite</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Continuer {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Supprimer {0}</value></data>

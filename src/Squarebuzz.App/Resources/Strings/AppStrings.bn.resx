@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>ধাঁধার বোর্ড, {0} × {1}। {3}টির মধ্যে {2}টি ঘর ভরা।</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>ছুঁয়ে খুঁজে ঘরগুলোতে এখনও পৌঁছানো যায় না।</value></data>
   <data name="a11yTime" xml:space="preserve"><value>এ পর্যন্ত সময়: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>বাকি সময়: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>টানা {0} দিন</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0} চালিয়ে যাও</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} মুছে ফেলো</value></data>

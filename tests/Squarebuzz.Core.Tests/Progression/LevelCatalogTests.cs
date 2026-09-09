@@ -147,6 +147,49 @@ public class LevelCatalogTests
         }
     }
 
+    [Theory]
+    // The sparse case above passes on the arithmetic alone. It is a *full* band that pins the
+    // rule: the shipped content puts 35 pictures in the 40-level 5x5 band, and the old
+    // Math.Max(1, ...) then placed the first one on level 1 - so the campaign opened by naming
+    // a shipped picture in the header instead of easing in on a plain board.
+    [InlineData(35)]
+    [InlineData(38)]
+    [InlineData(39)]
+    [InlineData(60)]
+    public void ASaturatedBand_StillOpensWithAPlainBoard(int pictures)
+    {
+        var all = LevelCatalog.All(Fake(tiny: pictures, normal: 0));
+
+        Assert.False(all.Single(s => s.Level == 1).IsMilestone);
+
+        var stops = all.Where(s => s.IsMilestone).Select(s => s.Level).ToList();
+
+        Assert.DoesNotContain(1, stops);
+        Assert.Equal(stops.Count, stops.Distinct().Count());
+        Assert.All(stops, level => Assert.InRange(level, 2, 40));
+    }
+
+    [Fact]
+    public void TheShippedContent_DoesNotRevealAPictureOnLevelOne()
+    {
+        var puzzles = Authored();
+
+        Assert.False(LevelCatalog.Get(1, puzzles).IsMilestone);
+        Assert.DoesNotContain(1, LevelCatalog.All(puzzles).Where(s => s.IsMilestone).Select(s => s.Level));
+    }
+
+    [Fact]
+    // More pictures than a band can hold must not spin the collision walk forever, and must not
+    // reach past the band to place them.
+    public void MorePicturesThanLevels_TerminatesAndStaysInsideTheBand()
+    {
+        var all = LevelCatalog.All(Fake(tiny: 200, normal: 0));
+        var stops = all.Where(s => s.IsMilestone).Select(s => s.Level).ToList();
+
+        Assert.Equal(stops.Count, stops.Distinct().Count());
+        Assert.All(stops, level => Assert.InRange(level, 2, 40));
+    }
+
     [Fact]
     public void NoAuthoredArt_MeansEveryLevelIsGenerated()
     {
@@ -159,13 +202,15 @@ public class LevelCatalogTests
     [Fact]
     public void MorePicturesThanLevelsInTheBand_StillPlacesEachLevelAtMostOnce()
     {
-        // 60 tiny pictures into a 40-level band: only 40 can fit, and none may collide.
+        // 60 tiny pictures into a 40-level band. Only 39 can fit, not 40: level 1 is reserved so
+        // the campaign opens on a plain board, which costs the band one slot.
         var all = LevelCatalog.All(Fake(tiny: 60, normal: 0));
         var band = all.Where(s => s.Size == GridSize.Tiny).ToList();
 
         Assert.Equal(40, band.Count);
-        Assert.Equal(40, band.Count(s => s.IsMilestone));
-        Assert.Equal(40, band.Where(s => s.IsMilestone).Select(s => s.PuzzleId).Distinct().Count());
+        Assert.Equal(39, band.Count(s => s.IsMilestone));
+        Assert.Equal(39, band.Where(s => s.IsMilestone).Select(s => s.PuzzleId).Distinct().Count());
+        Assert.False(band.Single(s => s.Level == 1).IsMilestone);
     }
 
     [Fact]

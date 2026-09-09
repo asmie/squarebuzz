@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Bord tal-puzzle, {0} bi {1}. {2} minn {3} kwadri mimlija.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Il-kwadri għadhom ma jintlaħqux bl-esplorazzjoni bil-mess.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Ħin s'issa: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Ħin li fadal: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} ijiem wara xulxin</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Kompli bi {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Ħassar {0}</value></data>

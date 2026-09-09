@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Поле загадки, {0} на {1}. Замальовано {2} клітинок із {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Клітинки поки не можна обстежити дотиком.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Минуло часу: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Залишилося часу: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Днів підряд: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Продовжити: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Видалити: {0}</value></data>

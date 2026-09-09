@@ -11,8 +11,8 @@
     <ContentPage.Resources>
         <!-- Declared per page so the theme dictionaries are already merged when it resolves. -->
         <conv:BoolSelectConverter x:Key="DotFill"
-                                  TrueValue="{StaticResource Primary}"
-                                  FalseValue="{StaticResource Line}" />
+                                  TrueKey="Primary"
+                                  FalseKey="Line" />
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource PagePadding}" RowSpacing="18">

@@ -78,6 +78,18 @@ public static class LevelCatalog
     /// <summary>Salt mixed into level seeds so they can never collide with the daily puzzle's.</summary>
     private const uint SeedSalt = 0x4C564Cu;
 
+    /// <summary>
+    /// Earliest level within a band that may reveal a picture, as an offset from its first level.
+    /// </summary>
+    /// <remarks>
+    /// Two, so the first level of the campaign is a plain generated board and the first picture
+    /// arrives as a reward rather than as the opening move. This was always the stated intent, but
+    /// <c>Math.Max(1, ...)</c> guaranteed the opposite whenever a band held nearly as many pictures
+    /// as levels: the 5x5 band has 35 pictures across 40 levels, so level 1 revealed the first
+    /// shipped picture - and named it in the header, since authored puzzles show their name.
+    /// </remarks>
+    private const int FirstMilestoneOffset = 2;
+
     private static readonly LevelBand[] Bands =
     [
         new(1, 40, GridSize.Tiny),
@@ -187,22 +199,23 @@ public static class LevelCatalog
             }
         }
 
-        var count = Math.Min(authored.Count, band.Length);
+        // One short of the band, because offset 1 is reserved - see FirstMilestoneOffset. That
+        // keeps a free slot available for the collision walk below, so it always terminates.
+        var count = Math.Min(authored.Count, band.Length - (FirstMilestoneOffset - 1));
         var taken = new HashSet<int>();
 
         for (var k = 0; k < count; k++)
         {
             // Picture k of M sits (k+1)/(M+1) of the way through the band, so the milestones
-            // divide it evenly and the first one is never level one - the campaign opens with
-            // a plain board and the first picture arrives as a small early reward.
-            var offset = Math.Max(1, (k + 1) * band.Length / (count + 1));
+            // divide it evenly.
+            var offset = Math.Max(FirstMilestoneOffset, (k + 1) * band.Length / (count + 1));
 
             // Integer division can land two pictures on the same level when they pack tightly;
-            // the later one walks forward to the next free slot, wrapping if it must. A free
-            // slot always exists because count never exceeds the band's length.
+            // the later one walks forward to the next free slot, wrapping if it must - back to
+            // the first *allowed* offset, never over level one.
             while (!taken.Add(offset))
             {
-                offset = offset >= band.Length ? 1 : offset + 1;
+                offset = offset >= band.Length ? FirstMilestoneOffset : offset + 1;
             }
 
             milestones[band.First + offset - 1] = authored[k].Id;

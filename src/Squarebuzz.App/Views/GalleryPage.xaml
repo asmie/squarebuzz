@@ -11,8 +11,8 @@
     <ContentPage.Resources>
         <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
         <conv:BoolSelectConverter x:Key="CardStroke"
-                                  TrueValue="{StaticResource Gold}"
-                                  FalseValue="{StaticResource Line}" />
+                                  TrueKey="Gold"
+                                  FalseKey="Line" />
     </ContentPage.Resources>
 
     <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,*" RowSpacing="10">

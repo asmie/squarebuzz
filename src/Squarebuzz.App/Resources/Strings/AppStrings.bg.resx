@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Игрално поле, {0} на {1}. Запълнени квадратчета: {2} от {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Квадратчетата още не се достигат с изследване чрез докосване.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Изминало време: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Оставащо време: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Дни подред: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Продължи с {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Изтрий {0}</value></data>

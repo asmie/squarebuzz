@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>パズルのばん、{0}かける{1}。{3}マスのうち{2}マスがぬってあるよ。</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>マスはまだ、なぞって見つけることができないよ。</value></data>
   <data name="a11yTime" xml:space="preserve"><value>ここまでの時間は{0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>残り時間は{0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0}日れんぞく</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0}をつづける</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0}をけす</value></data>

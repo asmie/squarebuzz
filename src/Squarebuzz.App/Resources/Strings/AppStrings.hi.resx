@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>पहेली का बोर्ड, {0} × {1}। {3} में से {2} खाने भरे।</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>खानों तक छूकर टहलने से अभी नहीं पहुँचा जा सकता।</value></data>
   <data name="a11yTime" xml:space="preserve"><value>अब तक का समय: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>बचा हुआ समय: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>लगातार {0} दिन</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0} जारी रखो</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} मिटाओ</value></data>

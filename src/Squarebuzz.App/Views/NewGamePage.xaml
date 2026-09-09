@@ -12,11 +12,11 @@
     <ContentPage.Resources>
         <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
         <conv:BoolSelectConverter x:Key="ChipBackground"
-                                  TrueValue="{StaticResource Primary}"
-                                  FalseValue="{StaticResource Surface2}" />
+                                  TrueKey="Primary"
+                                  FalseKey="Surface2" />
         <conv:BoolSelectConverter x:Key="ChipTextColor"
-                                  TrueValue="{StaticResource OnPrimary}"
-                                  FalseValue="{StaticResource Ink}" />
+                                  TrueKey="OnPrimary"
+                                  FalseKey="Ink" />
     </ContentPage.Resources>
 
     <Grid RowDefinitions="*,Auto">

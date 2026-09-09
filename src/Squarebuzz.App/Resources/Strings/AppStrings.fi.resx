@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Pulmataulu, {0} kertaa {1}. Ruutuja täytetty {2}, yhteensä {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Ruutuihin ei pääse vielä kosketusselauksella.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Aikaa kulunut: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Aikaa jäljellä: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Päiviä putkeen: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Jatka: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Poista: {0}</value></data>

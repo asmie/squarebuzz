@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Bulmaca tahtası, {0} çarpı {1}. {3} karenin {2} tanesi dolu.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Karelere henüz dokunarak keşifle ulaşılamıyor.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Şu ana kadarki süre: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Kalan süre: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Üst üste {0} gün</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0} ile devam et</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} bulmacasını sil</value></data>

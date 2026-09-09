@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>تختهٔ پازل، {0} در {1}. {2} از {3} خانه پر شده.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>خانه‌ها هنوز با کاوش لمسی در دسترس نیستند.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>زمان تا اینجا: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>زمان باقی‌مانده: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} روز پشت هم</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>ادامه با {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>حذف {0}</value></data>

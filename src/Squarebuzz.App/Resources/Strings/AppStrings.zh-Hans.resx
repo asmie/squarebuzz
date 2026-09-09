@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>谜题盘面，{0} 乘 {1}。已填 {3} 格中的 {2} 格。</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>目前还无法用触摸浏览摸到这些格子。</value></data>
   <data name="a11yTime" xml:space="preserve"><value>已用时间：{0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>剩余时间：{0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>连续 {0} 天</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>继续玩 {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>删除 {0}</value></data>

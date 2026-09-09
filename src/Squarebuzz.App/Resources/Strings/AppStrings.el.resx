@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ταμπλό παζλ, {0} επί {1}. {2} από {3} τετράγωνα γεμάτα.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Τα τετράγωνα δεν είναι ακόμη προσβάσιμα με εξερεύνηση αφής.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Χρόνος μέχρι τώρα: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Χρόνος που απομένει: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} μέρες σερί</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Συνέχισε με {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Διαγραφή {0}</value></data>

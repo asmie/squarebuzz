@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Fusha e enigmës, {0} me {1}. {2} nga {3} kuti të mbushura.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Kutitë nuk mund të kapen ende me shqyrtim me gisht.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Koha deri tani: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Koha e mbetur: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} ditë rresht</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Vazhdo me {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Fshi {0}</value></data>

@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Tabuleiro do puzzle, {0} por {1}. {2} de {3} quadrados pintados.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Ainda não se chega aos quadrados pela exploração ao toque.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tempo até agora: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Tempo restante: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dias seguidos</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Continuar {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Apagar {0}</value></data>

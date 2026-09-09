@@ -201,10 +201,20 @@ public sealed class FakeThemeService : IThemeService
 
     public void Apply(GameTheme theme, GameAccent accent, bool followSystem = false)
     {
+        // Raised when something actually changes, as the real ThemeService does - it is how a
+        // view knows to re-read the palette. The fake used to swallow it, which is why nothing
+        // caught the Options chips keeping their old colours.
+        var moved = theme != Theme || accent != Accent || followSystem != FollowsSystem;
+
         Theme = theme;
         Accent = accent;
         FollowsSystem = followSystem;
         ApplyCount++;
+
+        if (moved)
+        {
+            RaiseChanged();
+        }
     }
 
     public void RaiseChanged() => Changed?.Invoke(this, EventArgs.Empty);

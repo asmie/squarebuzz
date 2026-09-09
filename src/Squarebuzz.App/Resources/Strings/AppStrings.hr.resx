@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ploča zagonetke, {0} puta {1}. Ispunjeno {2} od {3} polja.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Polja se još ne mogu doseći istraživanjem dodirom.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Vrijeme do sada: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Preostalo vrijeme: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dana u nizu</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Nastavi s {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Izbriši {0}</value></data>

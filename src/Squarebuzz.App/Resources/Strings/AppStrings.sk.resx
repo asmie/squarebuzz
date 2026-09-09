@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Hracia plocha, {0} na {1}. Vyplnených {2} z {3} políčok.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Políčka sa zatiaľ nedajú preskúmavať dotykom.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Doterajší čas: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Zostávajúci čas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dní v rade: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Pokračovať: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Vymazať: {0}</value></data>

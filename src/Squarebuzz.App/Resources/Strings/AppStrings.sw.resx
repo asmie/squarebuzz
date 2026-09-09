@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ubao wa fumbo, {0} kwa {1}. Vijamba {2} kati ya {3} vimejaa.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Vijamba haviwezi kufikiwa kwa kuchunguza kwa kugusa bado.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Muda hadi sasa: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Muda uliobaki: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Siku {0} mfululizo</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Endelea na {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Futa {0}</value></data>

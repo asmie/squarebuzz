@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Žaidimo lenta, {0} kartus {1}. Užpildyta langelių: {2} iš {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Langelių dar negalima tyrinėti pirštu.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Laikas iki šiol: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Likęs laikas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dienų iš eilės: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Tęsti: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Ištrinti: {0}</value></data>

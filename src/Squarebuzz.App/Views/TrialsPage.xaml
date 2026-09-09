@@ -10,25 +10,25 @@
 
     <ContentPage.Resources>
         <conv:BoolSelectConverter x:Key="TabBackground"
-                                  TrueValue="{StaticResource Primary}"
-                                  FalseValue="{StaticResource Surface2}" />
+                                  TrueKey="Primary"
+                                  FalseKey="Surface2" />
         <conv:BoolSelectConverter x:Key="TabTextColor"
-                                  TrueValue="{StaticResource OnPrimary}"
-                                  FalseValue="{StaticResource Ink}" />
+                                  TrueKey="OnPrimary"
+                                  FalseKey="Ink" />
         <conv:BoolSelectConverter x:Key="TrophyStroke"
-                                  TrueValue="{StaticResource Gold}"
-                                  FalseValue="{StaticResource Line}" />
+                                  TrueKey="Gold"
+                                  FalseKey="Line" />
 
         <!-- Calendar day cells: done days filled, today outlined, the rest quiet. -->
         <conv:BoolSelectConverter x:Key="DayFill"
-                                  TrueValue="{StaticResource Primary}"
+                                  TrueKey="Primary"
                                   FalseValue="{x:Static Colors.Transparent}" />
         <conv:BoolSelectConverter x:Key="DayStroke"
-                                  TrueValue="{StaticResource PrimaryDeep}"
+                                  TrueKey="PrimaryDeep"
                                   FalseValue="{x:Static Colors.Transparent}" />
         <conv:BoolSelectConverter x:Key="DayText"
-                                  TrueValue="{StaticResource OnPrimary}"
-                                  FalseValue="{StaticResource Ink2}" />
+                                  TrueKey="OnPrimary"
+                                  FalseKey="Ink2" />
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="12">

@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Mängulaud, {0} korda {1}. Täidetud ruute {2}, kokku {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Ruute ei saa veel puutega uurida.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Kulunud aeg: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Aega jäänud: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Päevi järjest: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Jätka: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Kustuta: {0}</value></data>

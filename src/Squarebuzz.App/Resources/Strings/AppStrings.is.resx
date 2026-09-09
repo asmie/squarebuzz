@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Þrautaborð, {0} sinnum {1}. {2} af {3} rúðum fylltar.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Rúðurnar eru enn ekki aðgengilegar með könnun með fingri.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tími hingað til: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Tími eftir: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dagar í röð</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Haltu áfram með {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Eyða {0}</value></data>

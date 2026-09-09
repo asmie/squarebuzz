@@ -77,6 +77,33 @@ public partial class OptionsViewModel : LocalizedViewModel
         _uiThread = uiThread;
 
         Gate = new ParentGate(strings);
+
+        // Every selection chip on this screen picks its colours from the palette through a
+        // converter, and a converter only runs when its bound property is raised. Without this
+        // the screen where the palette is chosen was the one screen that did not restyle when it
+        // changed: the background followed (a DynamicResource) while the chips kept the old
+        // accent until the screen was left and re-entered. Unhooked in Dispose.
+        _theme.Changed += OnThemeServiceChanged;
+    }
+
+    /// <summary>
+    /// Re-raises every binding so the selection chips re-read the palette now in force.
+    /// </summary>
+    /// <remarks>
+    /// An empty name means "everything changed", the same lever <see cref="LocalizedViewModel"/>
+    /// pulls for a language change. It raises the event only - the generated
+    /// <c>On&lt;Name&gt;Changed</c> hooks fire on assignment, so nothing here re-enters Persist.
+    /// </remarks>
+    private void OnThemeServiceChanged(object? sender, EventArgs e) => OnPropertyChanged(string.Empty);
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _theme.Changed -= OnThemeServiceChanged;
+        }
+
+        base.Dispose(disposing);
     }
 
     // ---- Audio ----

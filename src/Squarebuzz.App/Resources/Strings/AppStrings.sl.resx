@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Igralna mreža, {0} krat {1}. Pobarvanih polj: {2} od {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Polj še ni mogoče doseči z raziskovanjem na dotik.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Čas doslej: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Preostali čas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dni zapored: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Igraj dalje: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Izbriši: {0}</value></data>

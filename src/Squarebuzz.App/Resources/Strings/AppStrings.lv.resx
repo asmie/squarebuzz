@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Spēles laukums, {0} reiz {1}. Aizpildītās rūtiņas: {2} no {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Rūtiņas vēl nevar izpētīt ar pieskārienu.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Līdz šim pagājis laiks: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Atlikušais laiks: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dienu skaits pēc kārtas: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Turpināt: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Dzēst: {0}</value></data>

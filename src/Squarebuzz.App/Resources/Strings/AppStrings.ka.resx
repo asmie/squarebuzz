@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>თავსატეხის დაფა, {0} × {1}. შევსებულია {2} კვადრატი {3}-დან.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>კვადრატებამდე შეხებით ძიებით ჯერ ვერ მიხვდები.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>დრო აქამდე: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>დარჩენილი დრო: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} დღე ზედიზედ</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>გააგრძელე {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>წაშალე {0}</value></data>

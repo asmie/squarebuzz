@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Pusselplan, {0} gånger {1}. {2} av {3} rutor fyllda.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Rutorna går ännu inte att nå med utforskning genom touch.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tid så här långt: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Tid kvar: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dagar i rad</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Fortsätt med {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Ta bort {0}</value></data>

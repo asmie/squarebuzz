@@ -140,6 +140,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Tablero, {0} por {1}. {2} de {3} casillas rellenas.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Las casillas aún no se pueden usar con exploración táctil.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tiempo hasta ahora: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Tiempo restante: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} días seguidos</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Continuar con {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Borrar {0}</value></data>

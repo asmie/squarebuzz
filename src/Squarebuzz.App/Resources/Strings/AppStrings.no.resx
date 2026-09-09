@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Puslebrett, {0} ganger {1}. {2} av {3} ruter fylt.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Rutene kan ennå ikke nås med utforsking ved berøring.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tid så langt: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Tid igjen: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dager på rad</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Fortsett med {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Slett {0}</value></data>

@@ -140,6 +140,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>لوحة اللغز، {0} في {1}. المربّعات الملوّنة: {2} من {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>لا يمكن الوصول إلى المربّعات باستكشاف اللمس بعد.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>الوقت حتى الآن: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>الوقت المتبقي: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>أيّام متتالية: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>أكمل: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>حذف: {0}</value></data>

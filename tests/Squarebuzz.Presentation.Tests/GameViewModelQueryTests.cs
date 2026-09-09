@@ -110,6 +110,35 @@ public sealed class GameViewModelQueryTests : IDisposable
     }
 
     [Fact]
+    // The clock shows what is *left* in a trial, so describing it as elapsed told a screen-reader
+    // player the opposite of what the number meant - and nothing visual gives that away, because
+    // the sighted player can see it counting down.
+    public async Task Tier_DescribesTheClockAsTimeLeft_NotTimeElapsed()
+    {
+        _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["tier"] = "3" });
+        await _h.Vm.InitialiseAsync();
+
+        _h.Clock.Advance(TimeSpan.FromSeconds(20));
+        _h.Timers.Latest!.RaiseTick();
+
+        // A 2:00 trial, 20 seconds in: the clock reads what remains.
+        Assert.Equal("1:40", _h.Vm.ElapsedText);
+        Assert.Equal($"a11yTimeLeft:{_h.Vm.ElapsedText}", _h.Vm.ElapsedDescription);
+    }
+
+    [Fact]
+    public async Task AnUntimedGame_StillDescribesTheClockAsTimeElapsed()
+    {
+        await _h.Vm.InitialiseAsync();
+
+        _h.Clock.Advance(TimeSpan.FromSeconds(20));
+        _h.Timers.Latest!.RaiseTick();
+
+        Assert.Equal("0:20", _h.Vm.ElapsedText);
+        Assert.Equal($"a11yTime:{_h.Vm.ElapsedText}", _h.Vm.ElapsedDescription);
+    }
+
+    [Fact]
     public async Task Tier_Unknown_IsIgnored()
     {
         _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["tier"] = "9" });

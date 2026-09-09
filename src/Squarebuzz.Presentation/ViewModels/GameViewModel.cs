@@ -547,8 +547,19 @@ public partial class GameViewModel : LocalizedViewModel
     private string Describe(LineClues clues) =>
         clues.IsBlank ? T("a11yClueNone") : string.Join(" ", clues);
 
-    /// <summary>The timer as a sentence; "5:26" alone is read as a pair of numbers.</summary>
-    public string ElapsedDescription => Strings.Format("a11yTime", ElapsedText);
+    /// <summary>
+    /// The timer as a sentence; "5:26" alone is read as a pair of numbers.
+    /// </summary>
+    /// <remarks>
+    /// A trial's clock counts <em>down</em> - <see cref="UpdateElapsedText"/> shows what is left,
+    /// not what has passed - so it needs its own wording. Both cases shared "Time so far", which
+    /// told a screen-reader player the exact opposite of what the number meant, on the one screen
+    /// where the number is the whole game. Nothing visual gives that away: the sighted player sees
+    /// it counting down.
+    /// </remarks>
+    public string ElapsedDescription => Strings.Format(
+        Session is { IsTimed: true } ? "a11yTimeLeft" : "a11yTime",
+        ElapsedText);
 
     /// <summary>
     /// Picks up a <c>saveId</c> from the route, if the player arrived from Continue.

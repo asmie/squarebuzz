@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Rätselfeld, {0} mal {1}. {2} von {3} Feldern gefüllt.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Die Felder lassen sich noch nicht durch Erkundung mit dem Finger erreichen.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Bisherige Zeit: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Verbleibende Zeit: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} Tage in Folge</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Weiterspielen: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} löschen</value></data>

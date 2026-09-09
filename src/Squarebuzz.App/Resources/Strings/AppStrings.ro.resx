@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Tabla jocului, {0} pe {1}. {2} din {3} pătrățele colorate.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Pătrățelele nu pot fi atinse încă prin explorare cu degetul.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Timp până acum: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Timp rămas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} zile la rând</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Continuă cu {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Șterge {0}</value></data>

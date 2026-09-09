@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ibhodi lephazili, {0} nge-{1}. Amabhokisi angu-{2} kwangu-{3} agcwele.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Amabhokisi awakafinyeleleki ngokuhlola ngokuthinta okwamanje.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Isikhathi kuze kube manje: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Isikhathi esisele: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Izinsuku ezingu-{0} zilandelana</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Qhubeka no-{0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Susa {0}</value></data>

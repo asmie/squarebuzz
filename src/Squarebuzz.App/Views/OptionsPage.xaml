@@ -10,11 +10,11 @@
     <ContentPage.Resources>
         <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
         <conv:BoolSelectConverter x:Key="SegBackground"
-                                  TrueValue="{StaticResource Primary}"
-                                  FalseValue="{StaticResource Surface2}" />
+                                  TrueKey="Primary"
+                                  FalseKey="Surface2" />
         <conv:BoolSelectConverter x:Key="SegTextColor"
-                                  TrueValue="{StaticResource OnPrimary}"
-                                  FalseValue="{StaticResource Ink}" />
+                                  TrueKey="OnPrimary"
+                                  FalseKey="Ink" />
 
         <Style x:Key="SectionHeading" TargetType="Label">
             <Setter Property="TextColor" Value="{DynamicResource Ink2}" />

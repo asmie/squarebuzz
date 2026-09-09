@@ -140,6 +140,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Plansza, {0} na {1}. Zamalowano {2} z {3} pól.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Pól nie można jeszcze używać przez eksplorację dotykiem.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Dotychczasowy czas: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Pozostały czas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dni z rzędu</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Graj dalej: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Usuń: {0}</value></data>

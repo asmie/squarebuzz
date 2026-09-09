@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>לוח חידה, {0} על {1}. {2} מתוך {3} משבצות מלאות.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>אי אפשר עוד להגיע למשבצות בסריקה במגע.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>זמן עד כה: {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>זמן שנותר: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} ימים ברצף</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>המשך עם {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>מחק {0}</value></data>

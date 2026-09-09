@@ -138,6 +138,7 @@
   <data name="a11yBoard" xml:space="preserve"><value>Հանելուկի դաշտ, {0} × {1}։ Լցված է {3}-ից {2} վանդակ։</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Վանդակներին դեռ հնարավոր չէ հասնել հպումով ուսումնասիրելիս։</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Ժամանակը մինչ այժմ՝ {0}</value></data>
+  <data name="a11yTimeLeft" xml:space="preserve"><value>Մնացած ժամանակը՝ {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} օր անընդմեջ</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Շարունակիր {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Ջնջել {0}</value></data>
