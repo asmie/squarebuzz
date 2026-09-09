@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>ग़लती पर चेताओ</value></data>
   <data name="showTimer" xml:space="preserve"><value>समय दिखाओ</value></data>
   <data name="allowHints" xml:space="preserve"><value>संकेत की अनुमति</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>पहेली चुनो</value></data>
-  <data name="random" xml:space="preserve"><value>कोई भी पहेली</value></data>
   <data name="gallery" xml:space="preserve"><value>गैलरी</value></data>
   <data name="locked" xml:space="preserve"><value>बंद</value></data>
-  <data name="preview" xml:space="preserve"><value>झलक</value></data>
   <data name="start" xml:space="preserve"><value>पहेली शुरू करो</value></data>
   <data name="fill" xml:space="preserve"><value>भरो</value></data>
   <data name="cross" xml:space="preserve"><value>X लगाओ</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>दोबारा</value></data>
   <data name="hint" xml:space="preserve"><value>संकेत</value></data>
   <data name="pause" xml:space="preserve"><value>रोको</value></data>
-  <data name="minimap" xml:space="preserve"><value>नक्शा</value></data>
   <data name="paused" xml:space="preserve"><value>रुका हुआ</value></data>
   <data name="resume" xml:space="preserve"><value>जारी रखो</value></data>
   <data name="restart" xml:space="preserve"><value>शुरू से</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>समय</value></data>
   <data name="hints" xml:space="preserve"><value>संकेत</value></data>
   <data name="mistakes" xml:space="preserve"><value>ओहो</value></data>
-  <data name="save" xml:space="preserve"><value>सहेजो</value></data>
-  <data name="share" xml:space="preserve"><value>साझा करो</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>आगे</value></data>
   <data name="menu" xml:space="preserve"><value>मेन्यू</value></data>
   <data name="onb1t" xml:space="preserve"><value>संख्याएँ गुटकों की कतारें हैं</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>जब तुम तैयार हो। पहेली चुनो!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>अच्छा चल रहा है। एक और?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>आज मुझे कुछ नई तस्वीरें मिलीं।</value></data>
-  <data name="winLine" xml:space="preserve"><value>वह अच्छी थी। एक और चाहिए?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>अपनी पहली पहेली शुरू करो</value></data>
   <data name="howToTitle" xml:space="preserve"><value>कैसे खेलें</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>आज की पहेली</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}। {1}। घड़ी पर {2}।</value></data>
   <data name="tabDaily" xml:space="preserve"><value>रोज़</value></data>
   <data name="tabTimed" xml:space="preserve"><value>समय वाली</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>समय की परीक्षा</value></data>
   <data name="tr1" xml:space="preserve"><value>पहली तस्वीर</value></data>
   <data name="tr2" xml:space="preserve"><value>पूरा हफ़्ता</value></data>
   <data name="tr3" xml:space="preserve"><value>बिना संकेत</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>पहेली का बोर्ड, {0} × {1}। {3} में से {2} खाने भरे।</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>खानों तक छूकर टहलने से अभी नहीं पहुँचा जा सकता।</value></data>
   <data name="a11yTime" xml:space="preserve"><value>अब तक का समय: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>कुल {0} तारे</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>लगातार {0} दिन</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0} जारी रखो</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} मिटाओ</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>खोलो</value></data>
   <data name="reset" xml:space="preserve"><value>मिटाओ</value></data>
   <data name="grownUps" xml:space="preserve"><value>सिर्फ़ बड़ों के लिए</value></data>
-  <data name="gateQ" xml:space="preserve"><value>7 × 4 कितना होता है?</value></data>
   <data name="cancel" xml:space="preserve"><value>रद्द</value></data>
   <data name="resetTitle" xml:space="preserve"><value>सब कुछ मिटा दें?</value></data>
   <data name="resetBody" xml:space="preserve"><value>सारी पहेलियाँ, तारे और स्टिकर चले जाएँगे। यह वापस नहीं आएगा।</value></data>

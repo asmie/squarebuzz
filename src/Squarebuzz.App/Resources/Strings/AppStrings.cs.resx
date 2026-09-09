@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Upozorňovat na chyby</value></data>
   <data name="showTimer" xml:space="preserve"><value>Zobrazit čas</value></data>
   <data name="allowHints" xml:space="preserve"><value>Povolit nápovědy</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Výběr hádanky</value></data>
-  <data name="random" xml:space="preserve"><value>Náhodná</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerie</value></data>
   <data name="locked" xml:space="preserve"><value>Zamčeno</value></data>
-  <data name="preview" xml:space="preserve"><value>Náhled</value></data>
   <data name="start" xml:space="preserve"><value>Začít hádanku</value></data>
   <data name="fill" xml:space="preserve"><value>Vyplnit</value></data>
   <data name="cross" xml:space="preserve"><value>Křížek</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Znovu</value></data>
   <data name="hint" xml:space="preserve"><value>Nápověda</value></data>
   <data name="pause" xml:space="preserve"><value>Pauza</value></data>
-  <data name="minimap" xml:space="preserve"><value>Mapa</value></data>
   <data name="paused" xml:space="preserve"><value>Pauza</value></data>
   <data name="resume" xml:space="preserve"><value>Hrát dál</value></data>
   <data name="restart" xml:space="preserve"><value>Od začátku</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Čas</value></data>
   <data name="hints" xml:space="preserve"><value>Nápovědy</value></data>
   <data name="mistakes" xml:space="preserve"><value>Chybky</value></data>
-  <data name="save" xml:space="preserve"><value>Uložit</value></data>
-  <data name="share" xml:space="preserve"><value>Sdílet</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Další</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
   <data name="onb1t" xml:space="preserve"><value>Čísla jsou řady kostiček</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Jsem připraven. Vyber si hádanku!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Jde ti to. Ještě jednu?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Dneska jsem našel nové obrázky.</value></data>
-  <data name="winLine" xml:space="preserve"><value>To byla dobrá. Chceš další?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Začni svou první hádanku</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Jak hrát</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Denní hádanka</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na hodinách.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dnes</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na čas</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Hra na čas</value></data>
   <data name="tr1" xml:space="preserve"><value>První obrázek</value></data>
   <data name="tr2" xml:space="preserve"><value>Týden v kuse</value></data>
   <data name="tr3" xml:space="preserve"><value>Bez nápovědy</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Hrací plocha, {0} na {1}. Vyplněno {2} z {3} políček.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Políčka se zatím nedají prozkoumávat dotykem.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Dosavadní čas: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Hvězdiček celkem: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dnů v řadě: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Pokračovat: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Smazat: {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Otevřít</value></data>
   <data name="reset" xml:space="preserve"><value>Vynulovat</value></data>
   <data name="grownUps" xml:space="preserve"><value>Jen pro dospělé</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Kolik je 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Zrušit</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Vymazat všechno?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Všechny hádanky, hvězdičky i samolepky zmizí. Tohle se nedá vrátit.</value></data>

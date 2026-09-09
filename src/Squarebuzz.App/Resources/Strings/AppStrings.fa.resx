@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>اشتباه‌ها را به من هشدار بده</value></data>
   <data name="showTimer" xml:space="preserve"><value>نمایش زمان</value></data>
   <data name="allowHints" xml:space="preserve"><value>اجازهٔ راهنما</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>یک پازل انتخاب کن</value></data>
-  <data name="random" xml:space="preserve"><value>پازل تصادفی</value></data>
   <data name="gallery" xml:space="preserve"><value>گالری</value></data>
   <data name="locked" xml:space="preserve"><value>قفل</value></data>
-  <data name="preview" xml:space="preserve"><value>پیش‌نمایش</value></data>
   <data name="start" xml:space="preserve"><value>شروع پازل</value></data>
   <data name="fill" xml:space="preserve"><value>پر کن</value></data>
   <data name="cross" xml:space="preserve"><value>ضربدر</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>دوباره</value></data>
   <data name="hint" xml:space="preserve"><value>راهنما</value></data>
   <data name="pause" xml:space="preserve"><value>توقف</value></data>
-  <data name="minimap" xml:space="preserve"><value>نقشه</value></data>
   <data name="paused" xml:space="preserve"><value>متوقف</value></data>
   <data name="resume" xml:space="preserve"><value>ادامه</value></data>
   <data name="restart" xml:space="preserve"><value>از اول</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>زمان</value></data>
   <data name="hints" xml:space="preserve"><value>راهنماها</value></data>
   <data name="mistakes" xml:space="preserve"><value>اوپس</value></data>
-  <data name="save" xml:space="preserve"><value>ذخیره</value></data>
-  <data name="share" xml:space="preserve"><value>هم‌رسانی</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>بعدی</value></data>
   <data name="menu" xml:space="preserve"><value>منو</value></data>
   <data name="onb1t" xml:space="preserve"><value>عددها رشته‌های مکعب هستند</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>هر وقت آماده بودی. یک پازل انتخاب کن!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>داری خوب پیش می‌روی. یکی دیگر؟</value></data>
   <data name="m_menu3" xml:space="preserve"><value>امروز چند تصویر تازه پیدا کردم.</value></data>
-  <data name="winLine" xml:space="preserve"><value>این یکی خوب بود. یکی دیگر می‌خواهی؟</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>اولین پازلت را شروع کن</value></data>
   <data name="howToTitle" xml:space="preserve"><value>چطور بازی کنیم</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>پازل روزانه</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} روی ساعت.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>روزانه</value></data>
   <data name="tabTimed" xml:space="preserve"><value>زمان‌دار</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>آزمون زمان‌دار</value></data>
   <data name="tr1" xml:space="preserve"><value>اولین تصویر</value></data>
   <data name="tr2" xml:space="preserve"><value>یک هفته پشت هم</value></data>
   <data name="tr3" xml:space="preserve"><value>بدون راهنما</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>تختهٔ پازل، {0} در {1}. {2} از {3} خانه پر شده.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>خانه‌ها هنوز با کاوش لمسی در دسترس نیستند.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>زمان تا اینجا: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>در کل {0} ستاره</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} روز پشت هم</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>ادامه با {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>حذف {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>باز کن</value></data>
   <data name="reset" xml:space="preserve"><value>بازنشانی</value></data>
   <data name="grownUps" xml:space="preserve"><value>فقط بزرگ‌ترها</value></data>
-  <data name="gateQ" xml:space="preserve"><value>۷ × ۴ چند است؟</value></data>
   <data name="cancel" xml:space="preserve"><value>لغو</value></data>
   <data name="resetTitle" xml:space="preserve"><value>همه چیز پاک شود؟</value></data>
   <data name="resetBody" xml:space="preserve"><value>همهٔ پازل‌ها، ستاره‌ها و برچسب‌ها از بین می‌روند. این کار برگشت‌پذیر نیست.</value></data>

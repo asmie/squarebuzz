@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Предупреждавай за грешки</value></data>
   <data name="showTimer" xml:space="preserve"><value>Показвай времето</value></data>
   <data name="allowHints" xml:space="preserve"><value>Разреши подсказки</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Избор на пъзел</value></data>
-  <data name="random" xml:space="preserve"><value>Случаен пъзел</value></data>
   <data name="gallery" xml:space="preserve"><value>Галерия</value></data>
   <data name="locked" xml:space="preserve"><value>Заключено</value></data>
-  <data name="preview" xml:space="preserve"><value>Преглед</value></data>
   <data name="start" xml:space="preserve"><value>Започни пъзела</value></data>
   <data name="fill" xml:space="preserve"><value>Запълни</value></data>
   <data name="cross" xml:space="preserve"><value>Сложи X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Върни</value></data>
   <data name="hint" xml:space="preserve"><value>Подсказка</value></data>
   <data name="pause" xml:space="preserve"><value>Пауза</value></data>
-  <data name="minimap" xml:space="preserve"><value>Карта</value></data>
   <data name="paused" xml:space="preserve"><value>Пауза</value></data>
   <data name="resume" xml:space="preserve"><value>Продължи</value></data>
   <data name="restart" xml:space="preserve"><value>Отначало</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Време</value></data>
   <data name="hints" xml:space="preserve"><value>Подсказки</value></data>
   <data name="mistakes" xml:space="preserve"><value>Опа</value></data>
-  <data name="save" xml:space="preserve"><value>Запази</value></data>
-  <data name="share" xml:space="preserve"><value>Сподели</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Напред</value></data>
   <data name="menu" xml:space="preserve"><value>Меню</value></data>
   <data name="onb1t" xml:space="preserve"><value>Числата са редици блокчета</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Готов съм. Избери пъзел!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Върви ти. Още един?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Днес намерих нови картинки.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Тази беше добра. Още една?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Започни първия си пъзел</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Как се играе</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Пъзел на деня</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} на часовника.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Днес</value></data>
   <data name="tabTimed" xml:space="preserve"><value>С време</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Изпитание с време</value></data>
   <data name="tr1" xml:space="preserve"><value>Първа картинка</value></data>
   <data name="tr2" xml:space="preserve"><value>Седмица подред</value></data>
   <data name="tr3" xml:space="preserve"><value>Без подсказки</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Игрално поле, {0} на {1}. Запълнени квадратчета: {2} от {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Квадратчетата още не се достигат с изследване чрез докосване.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Изминало време: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Звезди общо: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Дни подред: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Продължи с {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Изтрий {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Отвори</value></data>
   <data name="reset" xml:space="preserve"><value>Изчисти</value></data>
   <data name="grownUps" xml:space="preserve"><value>Само за големи</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Колко е 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Отказ</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Да изтрия всичко?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Всички пъзели, звезди и стикери ще изчезнат. Това не може да се върне.</value></data>

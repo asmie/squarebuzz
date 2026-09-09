@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Hatalarda beni uyar</value></data>
   <data name="showTimer" xml:space="preserve"><value>Süreyi göster</value></data>
   <data name="allowHints" xml:space="preserve"><value>İpuçlarına izin ver</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Bulmaca seç</value></data>
-  <data name="random" xml:space="preserve"><value>Rastgele bulmaca</value></data>
   <data name="gallery" xml:space="preserve"><value>Galeri</value></data>
   <data name="locked" xml:space="preserve"><value>Kilitli</value></data>
-  <data name="preview" xml:space="preserve"><value>Önizleme</value></data>
   <data name="start" xml:space="preserve"><value>Bulmacayı Başlat</value></data>
   <data name="fill" xml:space="preserve"><value>Doldur</value></data>
   <data name="cross" xml:space="preserve"><value>X koy</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Yinele</value></data>
   <data name="hint" xml:space="preserve"><value>İpucu</value></data>
   <data name="pause" xml:space="preserve"><value>Mola</value></data>
-  <data name="minimap" xml:space="preserve"><value>Harita</value></data>
   <data name="paused" xml:space="preserve"><value>Duraklatıldı</value></data>
   <data name="resume" xml:space="preserve"><value>Devam</value></data>
   <data name="restart" xml:space="preserve"><value>Baştan başla</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Süre</value></data>
   <data name="hints" xml:space="preserve"><value>İpucu</value></data>
   <data name="mistakes" xml:space="preserve"><value>Hoppa</value></data>
-  <data name="save" xml:space="preserve"><value>Kaydet</value></data>
-  <data name="share" xml:space="preserve"><value>Paylaş</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>İleri</value></data>
   <data name="menu" xml:space="preserve"><value>Menü</value></data>
   <data name="onb1t" xml:space="preserve"><value>Sayılar blok dizileridir</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Sen hazır olunca başlarız. Bir bulmaca seç!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Çok iyi gidiyorsun. Bir tane daha?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Bugün yeni resimler buldum.</value></data>
-  <data name="winLine" xml:space="preserve"><value>İyiydi. Bir tane daha ister misin?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>İlk bulmacana başla</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Nasıl Oynanır</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Günlük Bulmaca</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Saatte {2} var.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Günlük</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Süreli</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Süreli Deneme</value></data>
   <data name="tr1" xml:space="preserve"><value>İlk Resim</value></data>
   <data name="tr2" xml:space="preserve"><value>Haftalık Seri</value></data>
   <data name="tr3" xml:space="preserve"><value>İpucusuz</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Bulmaca tahtası, {0} çarpı {1}. {3} karenin {2} tanesi dolu.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Karelere henüz dokunarak keşifle ulaşılamıyor.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Şu ana kadarki süre: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Toplam {0} yıldız</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Üst üste {0} gün</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0} ile devam et</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} bulmacasını sil</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Aç</value></data>
   <data name="reset" xml:space="preserve"><value>Sıfırla</value></data>
   <data name="grownUps" xml:space="preserve"><value>Sadece yetişkinler</value></data>
-  <data name="gateQ" xml:space="preserve"><value>7 × 4 kaçtır?</value></data>
   <data name="cancel" xml:space="preserve"><value>İptal</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Her şey silinsin mi?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Bütün bulmacalar, yıldızlar ve çıkartmalar gidecek. Bu geri alınamaz.</value></data>

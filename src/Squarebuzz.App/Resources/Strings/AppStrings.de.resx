@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Bei Fehlern warnen</value></data>
   <data name="showTimer" xml:space="preserve"><value>Zeit anzeigen</value></data>
   <data name="allowHints" xml:space="preserve"><value>Tipps erlauben</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Rätsel wählen</value></data>
-  <data name="random" xml:space="preserve"><value>Zufällig</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerie</value></data>
   <data name="locked" xml:space="preserve"><value>Gesperrt</value></data>
-  <data name="preview" xml:space="preserve"><value>Vorschau</value></data>
   <data name="start" xml:space="preserve"><value>Rätsel starten</value></data>
   <data name="fill" xml:space="preserve"><value>Malen</value></data>
   <data name="cross" xml:space="preserve"><value>X setzen</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Wiederholen</value></data>
   <data name="hint" xml:space="preserve"><value>Tipp</value></data>
   <data name="pause" xml:space="preserve"><value>Pause</value></data>
-  <data name="minimap" xml:space="preserve"><value>Karte</value></data>
   <data name="paused" xml:space="preserve"><value>Pause</value></data>
   <data name="resume" xml:space="preserve"><value>Weiterspielen</value></data>
   <data name="restart" xml:space="preserve"><value>Von vorn</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Zeit</value></data>
   <data name="hints" xml:space="preserve"><value>Tipps</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
-  <data name="save" xml:space="preserve"><value>Speichern</value></data>
-  <data name="share" xml:space="preserve"><value>Teilen</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Weiter</value></data>
   <data name="menu" xml:space="preserve"><value>Menü</value></data>
   <data name="onb1t" xml:space="preserve"><value>Zahlen sind Reihen von Klötzchen</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Ich bin bereit. Wähl ein Rätsel aus!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Du bist in Fahrt. Noch eins?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Ich habe heute neue Bilder gefunden.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Das war ein schönes. Noch eins?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Starte dein erstes Rätsel</value></data>
   <data name="howToTitle" xml:space="preserve"><value>So wird gespielt</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Tagesrätsel</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} auf der Uhr.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Heute</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Zeit</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Zeitrennen</value></data>
   <data name="tr1" xml:space="preserve"><value>Erstes Bild</value></data>
   <data name="tr2" xml:space="preserve"><value>Ganze Woche</value></data>
   <data name="tr3" xml:space="preserve"><value>Ohne Tipps</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Rätselfeld, {0} mal {1}. {2} von {3} Feldern gefüllt.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Die Felder lassen sich noch nicht durch Erkundung mit dem Finger erreichen.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Bisherige Zeit: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} Sterne insgesamt</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} Tage in Folge</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Weiterspielen: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0} löschen</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Öffnen</value></data>
   <data name="reset" xml:space="preserve"><value>Löschen</value></data>
   <data name="grownUps" xml:space="preserve"><value>Nur für Erwachsene</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Was ist 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Abbrechen</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Alles löschen?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Alle Rätsel, Sterne und Sticker sind dann weg. Das kann man nicht zurückholen.</value></data>

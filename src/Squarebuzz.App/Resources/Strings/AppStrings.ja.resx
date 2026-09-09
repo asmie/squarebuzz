@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>まちがいを教えてね</value></data>
   <data name="showTimer" xml:space="preserve"><value>時間を見せる</value></data>
   <data name="allowHints" xml:space="preserve"><value>ヒントを使える</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>パズルのえらび方</value></data>
-  <data name="random" xml:space="preserve"><value>ランダムのパズル</value></data>
   <data name="gallery" xml:space="preserve"><value>ギャラリー</value></data>
   <data name="locked" xml:space="preserve"><value>ロック中</value></data>
-  <data name="preview" xml:space="preserve"><value>プレビュー</value></data>
   <data name="start" xml:space="preserve"><value>パズルをはじめる</value></data>
   <data name="fill" xml:space="preserve"><value>ぬる</value></data>
   <data name="cross" xml:space="preserve"><value>バツ</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>すすめる</value></data>
   <data name="hint" xml:space="preserve"><value>ヒント</value></data>
   <data name="pause" xml:space="preserve"><value>ポーズ</value></data>
-  <data name="minimap" xml:space="preserve"><value>マップ</value></data>
   <data name="paused" xml:space="preserve"><value>ポーズ中</value></data>
   <data name="resume" xml:space="preserve"><value>つづける</value></data>
   <data name="restart" xml:space="preserve"><value>はじめから</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>時間</value></data>
   <data name="hints" xml:space="preserve"><value>ヒント</value></data>
   <data name="mistakes" xml:space="preserve"><value>おっと</value></data>
-  <data name="save" xml:space="preserve"><value>ほぞん</value></data>
-  <data name="share" xml:space="preserve"><value>シェア</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>つぎへ</value></data>
   <data name="menu" xml:space="preserve"><value>メニュー</value></data>
   <data name="onb1t" xml:space="preserve"><value>数字はブロックのならび</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>いつでもいいよ。パズルをえらんで！</value></data>
   <data name="m_menu2" xml:space="preserve"><value>いいちょうしだね。もう1つやる？</value></data>
   <data name="m_menu3" xml:space="preserve"><value>今日は新しい絵を見つけたよ。</value></data>
-  <data name="winLine" xml:space="preserve"><value>いいパズルだったね。もう1つやる？</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>はじめてのパズルをやってみよう</value></data>
   <data name="howToTitle" xml:space="preserve"><value>あそび方</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>毎日パズル</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}。{1}。もち時間は{2}。</value></data>
   <data name="tabDaily" xml:space="preserve"><value>毎日</value></data>
   <data name="tabTimed" xml:space="preserve"><value>タイム</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>タイムトライアル</value></data>
   <data name="tr1" xml:space="preserve"><value>はじめの絵</value></data>
   <data name="tr2" xml:space="preserve"><value>1週間れんぞく</value></data>
   <data name="tr3" xml:space="preserve"><value>ヒントなし</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>パズルのばん、{0}かける{1}。{3}マスのうち{2}マスがぬってあるよ。</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>マスはまだ、なぞって見つけることができないよ。</value></data>
   <data name="a11yTime" xml:space="preserve"><value>ここまでの時間は{0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>星はぜんぶで{0}こ</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0}日れんぞく</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>{0}をつづける</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>{0}をけす</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>ひらく</value></data>
   <data name="reset" xml:space="preserve"><value>リセット</value></data>
   <data name="grownUps" xml:space="preserve"><value>おとなの人だけ</value></data>
-  <data name="gateQ" xml:space="preserve"><value>7 × 4 は？</value></data>
   <data name="cancel" xml:space="preserve"><value>やめる</value></data>
   <data name="resetTitle" xml:space="preserve"><value>ぜんぶけす？</value></data>
   <data name="resetBody" xml:space="preserve"><value>パズル・星・シールがぜんぶなくなるよ。もとにはもどせないよ。</value></data>

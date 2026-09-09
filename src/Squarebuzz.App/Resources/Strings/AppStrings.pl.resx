@@ -50,11 +50,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Ostrzegaj o błędach</value></data>
   <data name="showTimer" xml:space="preserve"><value>Pokaż czas</value></data>
   <data name="allowHints" xml:space="preserve"><value>Pozwól na podpowiedzi</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Wybór zagadki</value></data>
-  <data name="random" xml:space="preserve"><value>Losowa</value></data>
   <data name="gallery" xml:space="preserve"><value>Z galerii</value></data>
   <data name="locked" xml:space="preserve"><value>Zablokowane</value></data>
-  <data name="preview" xml:space="preserve"><value>Podgląd</value></data>
   <data name="start" xml:space="preserve"><value>Zacznij</value></data>
   <data name="fill" xml:space="preserve"><value>Wypełnij</value></data>
   <data name="cross" xml:space="preserve"><value>Znak X</value></data>
@@ -62,7 +59,6 @@
   <data name="redo" xml:space="preserve"><value>Ponów</value></data>
   <data name="hint" xml:space="preserve"><value>Podpowiedź</value></data>
   <data name="pause" xml:space="preserve"><value>Pauza</value></data>
-  <data name="minimap" xml:space="preserve"><value>Mapa</value></data>
   <data name="paused" xml:space="preserve"><value>Pauza</value></data>
   <data name="resume" xml:space="preserve"><value>Wróć</value></data>
   <data name="restart" xml:space="preserve"><value>Od nowa</value></data>
@@ -72,8 +68,6 @@
   <data name="time" xml:space="preserve"><value>Czas</value></data>
   <data name="hints" xml:space="preserve"><value>Podp.</value></data>
   <data name="mistakes" xml:space="preserve"><value>Błędy</value></data>
-  <data name="save" xml:space="preserve"><value>Zapisz</value></data>
-  <data name="share" xml:space="preserve"><value>Udostępnij</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Dalej</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
   <data name="onb1t" xml:space="preserve"><value>Liczby to ciągi klocków</value></data>
@@ -93,7 +87,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Czekam na ciebie. Wybierz zagadkę!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Nieźle ci idzie. Jeszcze jedna?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Znalazłem dziś nowe obrazki.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Dobra robota. Jeszcze jedna?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Zacznij swoją pierwszą układankę</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Jak grać</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Codzienna układanka</value></data>
@@ -125,7 +118,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na zegarze.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dziś</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na czas</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Próba na czas</value></data>
   <data name="tr1" xml:space="preserve"><value>Pierwszy obrazek</value></data>
   <data name="tr2" xml:space="preserve"><value>Tydzień z rzędu</value></data>
   <data name="tr3" xml:space="preserve"><value>Bez podpowiedzi</value></data>
@@ -148,7 +140,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Plansza, {0} na {1}. Zamalowano {2} z {3} pól.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Pól nie można jeszcze używać przez eksplorację dotykiem.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Dotychczasowy czas: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Łącznie gwiazdek: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dni z rzędu</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Graj dalej: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Usuń: {0}</value></data>
@@ -199,7 +190,6 @@
   <data name="open" xml:space="preserve"><value>Otwórz</value></data>
   <data name="reset" xml:space="preserve"><value>Wyzeruj</value></data>
   <data name="grownUps" xml:space="preserve"><value>Tylko dla dorosłych</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Ile to 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Anuluj</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Wymazać wszystko?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Wszystkie układanki, gwiazdki i naklejki znikną. Nie da się tego cofnąć.</value></data>

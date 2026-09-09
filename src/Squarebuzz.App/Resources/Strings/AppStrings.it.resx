@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Avvisami sugli errori</value></data>
   <data name="showTimer" xml:space="preserve"><value>Mostra il tempo</value></data>
   <data name="allowHints" xml:space="preserve"><value>Permetti gli indizi</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Scegli una griglia</value></data>
-  <data name="random" xml:space="preserve"><value>Griglia casuale</value></data>
   <data name="gallery" xml:space="preserve"><value>Galleria</value></data>
   <data name="locked" xml:space="preserve"><value>Bloccato</value></data>
-  <data name="preview" xml:space="preserve"><value>Anteprima</value></data>
   <data name="start" xml:space="preserve"><value>Inizia</value></data>
   <data name="fill" xml:space="preserve"><value>Riempi</value></data>
   <data name="cross" xml:space="preserve"><value>Segna X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Ripeti</value></data>
   <data name="hint" xml:space="preserve"><value>Indizio</value></data>
   <data name="pause" xml:space="preserve"><value>Pausa</value></data>
-  <data name="minimap" xml:space="preserve"><value>Mappa</value></data>
   <data name="paused" xml:space="preserve"><value>In pausa</value></data>
   <data name="resume" xml:space="preserve"><value>Riprendi</value></data>
   <data name="restart" xml:space="preserve"><value>Ricomincia</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Tempo</value></data>
   <data name="hints" xml:space="preserve"><value>Indizi</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ops</value></data>
-  <data name="save" xml:space="preserve"><value>Salva</value></data>
-  <data name="share" xml:space="preserve"><value>Condividi</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Avanti</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
   <data name="onb1t" xml:space="preserve"><value>I numeri sono gruppi di caselle</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Quando vuoi. Scegli una griglia!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Stai andando forte. Un’altra?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Oggi ho trovato dei disegni nuovi.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Questa era bella. Ne facciamo un’altra?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Inizia la tua prima griglia</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Come si gioca</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Griglia del giorno</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} sull’orologio.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Oggi</value></data>
   <data name="tabTimed" xml:space="preserve"><value>A tempo</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Sfida a tempo</value></data>
   <data name="tr1" xml:space="preserve"><value>Primo disegno</value></data>
   <data name="tr2" xml:space="preserve"><value>Una settimana</value></data>
   <data name="tr3" xml:space="preserve"><value>Senza indizi</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Griglia di {0} per {1}. {2} caselle piene su {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Le caselle non si possono ancora raggiungere con l’esplorazione al tatto.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tempo finora: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} stelle in tutto</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} giorni di fila</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Continua {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Elimina {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Apri</value></data>
   <data name="reset" xml:space="preserve"><value>Azzera</value></data>
   <data name="grownUps" xml:space="preserve"><value>Solo per adulti</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Quanto fa 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Annulla</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Cancellare tutto?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Tutte le griglie, le stelle e gli adesivi spariranno. Non si può tornare indietro.</value></data>

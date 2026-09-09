@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Upozori me na greške</value></data>
   <data name="showTimer" xml:space="preserve"><value>Prikaži vrijeme</value></data>
   <data name="allowHints" xml:space="preserve"><value>Dopusti tragove</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Odaberi zagonetku</value></data>
-  <data name="random" xml:space="preserve"><value>Slučajna zagonetka</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerija</value></data>
   <data name="locked" xml:space="preserve"><value>Zaključano</value></data>
-  <data name="preview" xml:space="preserve"><value>Pregled</value></data>
   <data name="start" xml:space="preserve"><value>Počni zagonetku</value></data>
   <data name="fill" xml:space="preserve"><value>Ispuni</value></data>
   <data name="cross" xml:space="preserve"><value>Označi X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Ponovi</value></data>
   <data name="hint" xml:space="preserve"><value>Trag</value></data>
   <data name="pause" xml:space="preserve"><value>Pauza</value></data>
-  <data name="minimap" xml:space="preserve"><value>Karta</value></data>
   <data name="paused" xml:space="preserve"><value>Pauzirano</value></data>
   <data name="resume" xml:space="preserve"><value>Nastavi</value></data>
   <data name="restart" xml:space="preserve"><value>Počni ispočetka</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Vrijeme</value></data>
   <data name="hints" xml:space="preserve"><value>Tragovi</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
-  <data name="save" xml:space="preserve"><value>Spremi</value></data>
-  <data name="share" xml:space="preserve"><value>Podijeli</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Dalje</value></data>
   <data name="menu" xml:space="preserve"><value>Izbornik</value></data>
   <data name="onb1t" xml:space="preserve"><value>Brojevi su nizovi kockica</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Spreman kad si i ti. Odaberi zagonetku!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Ide ti odlično. Još jedna?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Danas sam našao nove slike.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Ta je bila dobra. Želiš još jednu?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Počni svoju prvu zagonetku</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Kako se igra</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Dnevna zagonetka</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na satu.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dnevno</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na vrijeme</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Izazov na vrijeme</value></data>
   <data name="tr1" xml:space="preserve"><value>Prva slika</value></data>
   <data name="tr2" xml:space="preserve"><value>Tjedan u nizu</value></data>
   <data name="tr3" xml:space="preserve"><value>Bez tragova</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ploča zagonetke, {0} puta {1}. Ispunjeno {2} od {3} polja.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Polja se još ne mogu doseći istraživanjem dodirom.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Vrijeme do sada: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Ukupno {0} zvjezdica</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dana u nizu</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Nastavi s {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Izbriši {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Otvori</value></data>
   <data name="reset" xml:space="preserve"><value>Poništi</value></data>
   <data name="grownUps" xml:space="preserve"><value>Samo za odrasle</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Koliko je 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Odustani</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Izbrisati sve?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Sve zagonetke, zvjezdice i naljepnice će nestati. To se ne može vratiti.</value></data>

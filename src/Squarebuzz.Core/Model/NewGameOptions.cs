@@ -37,7 +37,7 @@ public sealed record NewGameOptions(
     /// </summary>
     /// <remarks>
     /// The daily puzzle needs this. It wants a comfortable 10x10, but 10x10 is within the
-    /// authored range, so without it the factory would hand out one of the twelve shipped
+    /// authored range, so without it the factory would hand out one of the seventy shipped
     /// pictures - which would repeat within a week and spoil gallery entries the player had not
     /// found yet.
     /// </remarks>

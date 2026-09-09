@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Anunță-mă la greșeli</value></data>
   <data name="showTimer" xml:space="preserve"><value>Arată timpul</value></data>
   <data name="allowHints" xml:space="preserve"><value>Permite indicii</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Alege jocul</value></data>
-  <data name="random" xml:space="preserve"><value>Joc la întâmplare</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerie</value></data>
   <data name="locked" xml:space="preserve"><value>Blocat</value></data>
-  <data name="preview" xml:space="preserve"><value>Vezi înainte</value></data>
   <data name="start" xml:space="preserve"><value>Începe</value></data>
   <data name="fill" xml:space="preserve"><value>Colorează</value></data>
   <data name="cross" xml:space="preserve"><value>Pune X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Refă</value></data>
   <data name="hint" xml:space="preserve"><value>Indiciu</value></data>
   <data name="pause" xml:space="preserve"><value>Pauză</value></data>
-  <data name="minimap" xml:space="preserve"><value>Hartă</value></data>
   <data name="paused" xml:space="preserve"><value>În pauză</value></data>
   <data name="resume" xml:space="preserve"><value>Continuă</value></data>
   <data name="restart" xml:space="preserve"><value>De la capăt</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Timp</value></data>
   <data name="hints" xml:space="preserve"><value>Indicii</value></data>
   <data name="mistakes" xml:space="preserve"><value>Hopa</value></data>
-  <data name="save" xml:space="preserve"><value>Salvează</value></data>
-  <data name="share" xml:space="preserve"><value>Trimite</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Înainte</value></data>
   <data name="menu" xml:space="preserve"><value>Meniu</value></data>
   <data name="onb1t" xml:space="preserve"><value>Numerele sunt șiruri de pătrățele</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Sunt gata când vrei tu. Alege un joc!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Îți merge grozav. Încă unul?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Am găsit niște imagini noi azi.</value></data>
-  <data name="winLine" xml:space="preserve"><value>A fost bun. Mai vrei unul?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Începe primul tău joc</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Cum se joacă</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Jocul zilei</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} pe ceas.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Azi</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Pe timp</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Probă pe timp</value></data>
   <data name="tr1" xml:space="preserve"><value>Prima imagine</value></data>
   <data name="tr2" xml:space="preserve"><value>O săptămână</value></data>
   <data name="tr3" xml:space="preserve"><value>Fără indicii</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Tabla jocului, {0} pe {1}. {2} din {3} pătrățele colorate.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Pătrățelele nu pot fi atinse încă prin explorare cu degetul.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Timp până acum: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} stele în total</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} zile la rând</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Continuă cu {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Șterge {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Deschide</value></data>
   <data name="reset" xml:space="preserve"><value>Șterge</value></data>
   <data name="grownUps" xml:space="preserve"><value>Numai pentru adulți</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Cât fac 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Anulează</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Ștergem tot?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Toate jocurile, stelele și abțibildurile vor dispărea. Asta nu se mai poate reface.</value></data>

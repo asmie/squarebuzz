@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Hoiata vigadest</value></data>
   <data name="showTimer" xml:space="preserve"><value>Näita kella</value></data>
   <data name="allowHints" xml:space="preserve"><value>Luba vihjed</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Vali mõistatus</value></data>
-  <data name="random" xml:space="preserve"><value>Juhuslik</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerii</value></data>
   <data name="locked" xml:space="preserve"><value>Lukus</value></data>
-  <data name="preview" xml:space="preserve"><value>Eelvaade</value></data>
   <data name="start" xml:space="preserve"><value>Alusta mõistatust</value></data>
   <data name="fill" xml:space="preserve"><value>Täida</value></data>
   <data name="cross" xml:space="preserve"><value>Märgi X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Tee uuesti</value></data>
   <data name="hint" xml:space="preserve"><value>Vihje</value></data>
   <data name="pause" xml:space="preserve"><value>Paus</value></data>
-  <data name="minimap" xml:space="preserve"><value>Kaart</value></data>
   <data name="paused" xml:space="preserve"><value>Pausil</value></data>
   <data name="resume" xml:space="preserve"><value>Jätka</value></data>
   <data name="restart" xml:space="preserve"><value>Alusta uuesti</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Aeg</value></data>
   <data name="hints" xml:space="preserve"><value>Vihjed</value></data>
   <data name="mistakes" xml:space="preserve"><value>Uups</value></data>
-  <data name="save" xml:space="preserve"><value>Salvesta</value></data>
-  <data name="share" xml:space="preserve"><value>Jaga</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Edasi</value></data>
   <data name="menu" xml:space="preserve"><value>Menüü</value></data>
   <data name="onb1t" xml:space="preserve"><value>Numbrid on klotsijadad</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Olen valmis. Vali mõistatus!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Sul läheb hästi. Veel üks?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Leidsin täna uusi pilte.</value></data>
-  <data name="winLine" xml:space="preserve"><value>See oli tore. Võtame veel ühe?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Alusta oma esimest mõistatust</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Kuidas mängida</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Päeva mõistatus</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Aega {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Päev</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Aeg</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Ajakatse</value></data>
   <data name="tr1" xml:space="preserve"><value>Esimene pilt</value></data>
   <data name="tr2" xml:space="preserve"><value>Nädal järjest</value></data>
   <data name="tr3" xml:space="preserve"><value>Ilma vihjeta</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Mängulaud, {0} korda {1}. Täidetud ruute {2}, kokku {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Ruute ei saa veel puutega uurida.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Kulunud aeg: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Tähti kokku: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Päevi järjest: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Jätka: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Kustuta: {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Ava</value></data>
   <data name="reset" xml:space="preserve"><value>Lähtesta</value></data>
   <data name="grownUps" xml:space="preserve"><value>Ainult täiskasvanutele</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Palju on 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Tühista</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Kas kustutame kõik?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Kõik mõistatused, tähed ja kleepsud kaovad. Seda ei saa tagasi võtta.</value></data>

@@ -152,19 +152,33 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
                 continue;
             }
 
-            await connection.RunInTransactionAsync(transaction =>
+            try
             {
-                migration.Apply(transaction);
-
-                // Inside the same transaction as the step itself, so the version can never be
-                // recorded for a migration that did not fully land - nor the step land without
-                // its version and be re-attempted over the top of itself.
-                transaction.Insert(new SchemaVersionEntity
+                await connection.RunInTransactionAsync(transaction =>
                 {
-                    Version = migration.Version,
-                    AppliedAtUtc = DateTime.UtcNow,
-                });
-            }).ConfigureAwait(false);
+                    migration.Apply(transaction);
+
+                    // Inside the same transaction as the step itself, so the version can never be
+                    // recorded for a migration that did not fully land - nor the step land without
+                    // its version and be re-attempted over the top of itself.
+                    transaction.Insert(new SchemaVersionEntity
+                    {
+                        Version = migration.Version,
+                        AppliedAtUtc = DateTime.UtcNow,
+                    });
+                }).ConfigureAwait(false);
+            }
+            catch (Exception ex) when (ex is not OutOfMemoryException)
+            {
+                // The raw SQLite error names a column or a table; it does not say which of the
+                // numbered steps was running, and the number alone is only meaningful with the
+                // source open. This is the one place IMigration.Name is read, and the failure that
+                // brings the database down at launch is exactly where a human-readable label pays.
+                throw new InvalidOperationException(
+                    $"Database migration {migration.Version} ({migration.Name}) failed and was rolled back. " +
+                    "It will be retried on the next launch.",
+                    ex);
+            }
         }
     }
 

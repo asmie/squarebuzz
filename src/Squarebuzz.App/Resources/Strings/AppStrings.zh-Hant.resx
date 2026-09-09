@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>出錯時提醒我</value></data>
   <data name="showTimer" xml:space="preserve"><value>顯示時間</value></data>
   <data name="allowHints" xml:space="preserve"><value>允許提示</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>挑一個謎題</value></data>
-  <data name="random" xml:space="preserve"><value>隨機謎題</value></data>
   <data name="gallery" xml:space="preserve"><value>圖庫</value></data>
   <data name="locked" xml:space="preserve"><value>已鎖定</value></data>
-  <data name="preview" xml:space="preserve"><value>預覽</value></data>
   <data name="start" xml:space="preserve"><value>開始謎題</value></data>
   <data name="fill" xml:space="preserve"><value>填塗</value></data>
   <data name="cross" xml:space="preserve"><value>標叉</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>重做</value></data>
   <data name="hint" xml:space="preserve"><value>提示</value></data>
   <data name="pause" xml:space="preserve"><value>暫停</value></data>
-  <data name="minimap" xml:space="preserve"><value>地圖</value></data>
   <data name="paused" xml:space="preserve"><value>已暫停</value></data>
   <data name="resume" xml:space="preserve"><value>繼續</value></data>
   <data name="restart" xml:space="preserve"><value>重新開始</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>時間</value></data>
   <data name="hints" xml:space="preserve"><value>提示</value></data>
   <data name="mistakes" xml:space="preserve"><value>哎呀</value></data>
-  <data name="save" xml:space="preserve"><value>儲存</value></data>
-  <data name="share" xml:space="preserve"><value>分享</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>下一個</value></data>
   <data name="menu" xml:space="preserve"><value>選單</value></data>
   <data name="onb1t" xml:space="preserve"><value>數字是一連串方塊</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>你準備好我就好。挑一個謎題吧！</value></data>
   <data name="m_menu2" xml:space="preserve"><value>你勢頭正好。再來一個？</value></data>
   <data name="m_menu3" xml:space="preserve"><value>我今天找到了一些新圖畫。</value></data>
-  <data name="winLine" xml:space="preserve"><value>這個不錯。想再來一個嗎？</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>開始你的第一個謎題</value></data>
   <data name="howToTitle" xml:space="preserve"><value>怎麼玩</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>每日謎題</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}。{1}。時鐘上還有 {2}。</value></data>
   <data name="tabDaily" xml:space="preserve"><value>每日</value></data>
   <data name="tabTimed" xml:space="preserve"><value>計時</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>計時挑戰</value></data>
   <data name="tr1" xml:space="preserve"><value>第一幅圖</value></data>
   <data name="tr2" xml:space="preserve"><value>連續一週</value></data>
   <data name="tr3" xml:space="preserve"><value>不用提示</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>謎題盤面，{0} 乘 {1}。已填 {3} 格中的 {2} 格。</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>目前還無法用觸控瀏覽摸到這些格子。</value></data>
   <data name="a11yTime" xml:space="preserve"><value>已用時間：{0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>一共 {0} 顆星</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>連續 {0} 天</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>繼續玩 {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>刪除 {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>打開</value></data>
   <data name="reset" xml:space="preserve"><value>重設</value></data>
   <data name="grownUps" xml:space="preserve"><value>僅限大人</value></data>
-  <data name="gateQ" xml:space="preserve"><value>7 × 4 等於多少？</value></data>
   <data name="cancel" xml:space="preserve"><value>取消</value></data>
   <data name="resetTitle" xml:space="preserve"><value>全部清除嗎？</value></data>
   <data name="resetBody" xml:space="preserve"><value>所有謎題、星星和貼紙都會消失。這無法復原。</value></data>

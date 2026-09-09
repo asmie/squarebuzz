@@ -7,8 +7,8 @@ namespace Squarebuzz.Core.Progression;
 /// </summary>
 /// <remarks>
 /// <para>
-/// The daily is generated rather than drawn from the twelve authored pictures. With only twelve,
-/// a rotation would repeat every twelve days and every child would soon have seen them all;
+/// The daily is generated rather than drawn from the seventy authored pictures. A rotation
+/// through those would repeat inside ten weeks and every child would soon have seen them all;
 /// generating gives a genuinely new picture each morning, and the uniqueness-checking generator
 /// guarantees it is still fair.
 /// </para>
@@ -54,7 +54,7 @@ public static class DailyPuzzle
             Seed = SeedFor(date),
 
             // Essential: 10x10 is within the authored range, so without this the factory would
-            // serve one of the twelve shipped pictures instead of a fresh one.
+            // serve one of the seventy shipped pictures instead of a fresh one.
             ForceGenerated = true,
         };
     }

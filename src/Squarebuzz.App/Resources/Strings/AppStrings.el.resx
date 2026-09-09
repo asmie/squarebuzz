@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Να με ειδοποιείς για λάθη</value></data>
   <data name="showTimer" xml:space="preserve"><value>Εμφάνιση χρόνου</value></data>
   <data name="allowHints" xml:space="preserve"><value>Να επιτρέπονται βοήθειες</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Διάλεξε παζλ</value></data>
-  <data name="random" xml:space="preserve"><value>Τυχαίο παζλ</value></data>
   <data name="gallery" xml:space="preserve"><value>Συλλογή</value></data>
   <data name="locked" xml:space="preserve"><value>Κλειδωμένο</value></data>
-  <data name="preview" xml:space="preserve"><value>Προεπισκόπηση</value></data>
   <data name="start" xml:space="preserve"><value>Ξεκίνα το παζλ</value></data>
   <data name="fill" xml:space="preserve"><value>Γέμισε</value></data>
   <data name="cross" xml:space="preserve"><value>Βάλε Χ</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Επανάληψη</value></data>
   <data name="hint" xml:space="preserve"><value>Βοήθεια</value></data>
   <data name="pause" xml:space="preserve"><value>Παύση</value></data>
-  <data name="minimap" xml:space="preserve"><value>Χάρτης</value></data>
   <data name="paused" xml:space="preserve"><value>Σε παύση</value></data>
   <data name="resume" xml:space="preserve"><value>Συνέχεια</value></data>
   <data name="restart" xml:space="preserve"><value>Ξεκίνα από την αρχή</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Χρόνος</value></data>
   <data name="hints" xml:space="preserve"><value>Βοήθειες</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ουπς</value></data>
-  <data name="save" xml:space="preserve"><value>Αποθήκευση</value></data>
-  <data name="share" xml:space="preserve"><value>Κοινοποίηση</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Επόμενο</value></data>
   <data name="menu" xml:space="preserve"><value>Μενού</value></data>
   <data name="onb1t" xml:space="preserve"><value>Οι αριθμοί είναι σειρές από τουβλάκια</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Έτοιμος όποτε θέλεις. Διάλεξε παζλ!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Πάει καλά! Άλλο ένα;</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Βρήκα καινούριες εικόνες σήμερα.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Αυτό ήταν καλό. Θέλεις άλλο;</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Ξεκίνα το πρώτο σου παζλ</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Πώς παίζεται</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Παζλ της ημέρας</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} στο ρολόι.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Ημερήσιο</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Με χρόνο</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Δοκιμασία με χρόνο</value></data>
   <data name="tr1" xml:space="preserve"><value>Πρώτη εικόνα</value></data>
   <data name="tr2" xml:space="preserve"><value>Εβδομάδα σερί</value></data>
   <data name="tr3" xml:space="preserve"><value>Χωρίς βοήθειες</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ταμπλό παζλ, {0} επί {1}. {2} από {3} τετράγωνα γεμάτα.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Τα τετράγωνα δεν είναι ακόμη προσβάσιμα με εξερεύνηση αφής.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Χρόνος μέχρι τώρα: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} αστέρια συνολικά</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} μέρες σερί</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Συνέχισε με {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Διαγραφή {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Άνοιγμα</value></data>
   <data name="reset" xml:space="preserve"><value>Μηδενισμός</value></data>
   <data name="grownUps" xml:space="preserve"><value>Μόνο για μεγάλους</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Πόσο κάνει 7 × 4;</value></data>
   <data name="cancel" xml:space="preserve"><value>Άκυρο</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Να σβηστούν όλα;</value></data>
   <data name="resetBody" xml:space="preserve"><value>Όλα τα παζλ, τα αστέρια και τα αυτοκόλλητα θα χαθούν. Αυτό δεν αναιρείται.</value></data>

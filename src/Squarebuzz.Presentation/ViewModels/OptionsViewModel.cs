@@ -209,7 +209,7 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     /// <summary>
     /// Every shipped language, in the order the picker lists them. A list rather than one flag per
-    /// language: at twenty-two of them, a property each would be unreadable, and the set is
+    /// language: at thirty-nine of them, a property each would be unreadable, and the set is
     /// content - see <see cref="AppLanguages.All"/>.
     /// </summary>
     public ObservableCollection<LanguageOption> Languages { get; } =

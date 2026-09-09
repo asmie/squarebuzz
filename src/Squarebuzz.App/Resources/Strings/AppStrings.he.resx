@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>הזהר אותי בטעויות</value></data>
   <data name="showTimer" xml:space="preserve"><value>הצג זמן</value></data>
   <data name="allowHints" xml:space="preserve"><value>אפשר רמזים</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>בחר חידה</value></data>
-  <data name="random" xml:space="preserve"><value>חידה אקראית</value></data>
   <data name="gallery" xml:space="preserve"><value>גלריה</value></data>
   <data name="locked" xml:space="preserve"><value>נעול</value></data>
-  <data name="preview" xml:space="preserve"><value>תצוגה מקדימה</value></data>
   <data name="start" xml:space="preserve"><value>התחל חידה</value></data>
   <data name="fill" xml:space="preserve"><value>מלא</value></data>
   <data name="cross" xml:space="preserve"><value>סמן איקס</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>בצע שוב</value></data>
   <data name="hint" xml:space="preserve"><value>רמז</value></data>
   <data name="pause" xml:space="preserve"><value>השהה</value></data>
-  <data name="minimap" xml:space="preserve"><value>מפה</value></data>
   <data name="paused" xml:space="preserve"><value>מושהה</value></data>
   <data name="resume" xml:space="preserve"><value>המשך</value></data>
   <data name="restart" xml:space="preserve"><value>התחל מחדש</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>זמן</value></data>
   <data name="hints" xml:space="preserve"><value>רמזים</value></data>
   <data name="mistakes" xml:space="preserve"><value>אופס</value></data>
-  <data name="save" xml:space="preserve"><value>שמור</value></data>
-  <data name="share" xml:space="preserve"><value>שתף</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>הבא</value></data>
   <data name="menu" xml:space="preserve"><value>תפריט</value></data>
   <data name="onb1t" xml:space="preserve"><value>המספרים הם רצפים של קוביות</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>מוכן כשתהיה. בחר חידה!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>הולך לך מעולה. עוד אחת?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>מצאתי תמונות חדשות היום.</value></data>
-  <data name="winLine" xml:space="preserve"><value>זו הייתה טובה. רוצה עוד אחת?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>התחל את החידה הראשונה שלך</value></data>
   <data name="howToTitle" xml:space="preserve"><value>איך משחקים</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>חידת היום</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} על השעון.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>יומי</value></data>
   <data name="tabTimed" xml:space="preserve"><value>על הזמן</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>מבחן זמן</value></data>
   <data name="tr1" xml:space="preserve"><value>התמונה הראשונה</value></data>
   <data name="tr2" xml:space="preserve"><value>שבוע ברצף</value></data>
   <data name="tr3" xml:space="preserve"><value>בלי רמזים</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>לוח חידה, {0} על {1}. {2} מתוך {3} משבצות מלאות.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>אי אפשר עוד להגיע למשבצות בסריקה במגע.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>זמן עד כה: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} כוכבים בסך הכול</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} ימים ברצף</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>המשך עם {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>מחק {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>פתח</value></data>
   <data name="reset" xml:space="preserve"><value>אפס</value></data>
   <data name="grownUps" xml:space="preserve"><value>למבוגרים בלבד</value></data>
-  <data name="gateQ" xml:space="preserve"><value>כמה זה 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>ביטול</value></data>
   <data name="resetTitle" xml:space="preserve"><value>למחוק הכול?</value></data>
   <data name="resetBody" xml:space="preserve"><value>כל החידות, הכוכבים והמדבקות ייעלמו. אין דרך לבטל את זה.</value></data>

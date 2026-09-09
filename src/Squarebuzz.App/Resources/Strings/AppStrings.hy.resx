@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Զգուշացնել սխալների մասին</value></data>
   <data name="showTimer" xml:space="preserve"><value>Ցույց տալ ժամանակը</value></data>
   <data name="allowHints" xml:space="preserve"><value>Թույլ տալ հուշումներ</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Ընտրիր հանելուկ</value></data>
-  <data name="random" xml:space="preserve"><value>Պատահական հանելուկ</value></data>
   <data name="gallery" xml:space="preserve"><value>Պատկերասրահ</value></data>
   <data name="locked" xml:space="preserve"><value>Փակված</value></data>
-  <data name="preview" xml:space="preserve"><value>Նախադիտում</value></data>
   <data name="start" xml:space="preserve"><value>Սկսել հանելուկը</value></data>
   <data name="fill" xml:space="preserve"><value>Լցնել</value></data>
   <data name="cross" xml:space="preserve"><value>Դնել X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Կրկնել</value></data>
   <data name="hint" xml:space="preserve"><value>Հուշում</value></data>
   <data name="pause" xml:space="preserve"><value>Դադար</value></data>
-  <data name="minimap" xml:space="preserve"><value>Քարտեզ</value></data>
   <data name="paused" xml:space="preserve"><value>Դադարեցված</value></data>
   <data name="resume" xml:space="preserve"><value>Շարունակել</value></data>
   <data name="restart" xml:space="preserve"><value>Սկսել նորից</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Ժամանակ</value></data>
   <data name="hints" xml:space="preserve"><value>Հուշումներ</value></data>
   <data name="mistakes" xml:space="preserve"><value>Վա՛յ</value></data>
-  <data name="save" xml:space="preserve"><value>Պահել</value></data>
-  <data name="share" xml:space="preserve"><value>Կիսվել</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Հաջորդը</value></data>
   <data name="menu" xml:space="preserve"><value>Ընտրացանկ</value></data>
   <data name="onb1t" xml:space="preserve"><value>Թվերը խորանարդիկների շարքեր են</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Պատրաստ եմ, երբ դու պատրաստ լինես։ Ընտրիր հանելուկ</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Լավ է գնում։ Էլ մեկը՞</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Այսօր նոր նկարներ գտա։</value></data>
-  <data name="winLine" xml:space="preserve"><value>Լավն էր։ Ուրիշն ուզո՞ւմ ես</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Սկսիր քո առաջին հանելուկը</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Օրվա հանելուկ</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}։ {1}։ {2} ժամացույցի վրա։</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Օրվա</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Ժամանակով</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Ժամանակային փորձ</value></data>
   <data name="tr1" xml:space="preserve"><value>Առաջին նկարը</value></data>
   <data name="tr2" xml:space="preserve"><value>Շաբաթ անընդմեջ</value></data>
   <data name="tr3" xml:space="preserve"><value>Առանց հուշումների</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Հանելուկի դաշտ, {0} × {1}։ Լցված է {3}-ից {2} վանդակ։</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Վանդակներին դեռ հնարավոր չէ հասնել հպումով ուսումնասիրելիս։</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Ժամանակը մինչ այժմ՝ {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Ընդհանուր {0} աստղ</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} օր անընդմեջ</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Շարունակիր {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Ջնջել {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Բացել</value></data>
   <data name="reset" xml:space="preserve"><value>Զրոյացնել</value></data>
   <data name="grownUps" xml:space="preserve"><value>Միայն մեծերի համար</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Ինչքա՞ն է 7 × 4</value></data>
   <data name="cancel" xml:space="preserve"><value>Չեղարկել</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Ջնջե՞լ ամեն ինչ</value></data>
   <data name="resetBody" xml:space="preserve"><value>Բոլոր հանելուկները, աստղերն ու կպչուն պիտակները կվերանան։ Սա հետ չի բերվում։</value></data>

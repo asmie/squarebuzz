@@ -64,10 +64,16 @@ public class MigrationAtomicityTests
 
         try
         {
-            // First launch: the broken build. Opening must fail - the migration is genuinely bad.
+            // First launch: the broken build. Opening must fail - the migration is genuinely bad -
+            // and the failure must say which step, by number and by name, over the raw SQLite
+            // error that only names a column.
             var broken = new SquarebuzzDatabase(path, [new CreateProbe(), new AddColumnThenFail()]);
-            await Assert.ThrowsAnyAsync<SQLiteException>(() => broken.GetConnectionAsync());
+            var error = await Assert.ThrowsAsync<InvalidOperationException>(() => broken.GetConnectionAsync());
             await broken.DisposeAsync();
+
+            Assert.Contains("migration 2", error.Message, StringComparison.Ordinal);
+            Assert.Contains("add b, then break", error.Message, StringComparison.Ordinal);
+            Assert.IsAssignableFrom<SQLiteException>(error.InnerException);
 
             // Inspect the file as it was left. The first step committed; the second must have
             // rolled back entirely - no column, no version row.

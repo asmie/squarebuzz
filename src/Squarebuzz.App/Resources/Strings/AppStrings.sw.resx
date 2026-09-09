@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Nikumbushe nikikosea</value></data>
   <data name="showTimer" xml:space="preserve"><value>Onyesha muda</value></data>
   <data name="allowHints" xml:space="preserve"><value>Ruhusu vidokezo</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Chagua fumbo</value></data>
-  <data name="random" xml:space="preserve"><value>Fumbo lolote</value></data>
   <data name="gallery" xml:space="preserve"><value>Ghala</value></data>
   <data name="locked" xml:space="preserve"><value>Imefungwa</value></data>
-  <data name="preview" xml:space="preserve"><value>Mwonekano</value></data>
   <data name="start" xml:space="preserve"><value>Anza fumbo</value></data>
   <data name="fill" xml:space="preserve"><value>Jaza</value></data>
   <data name="cross" xml:space="preserve"><value>Tia X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Rudia</value></data>
   <data name="hint" xml:space="preserve"><value>Dokezo</value></data>
   <data name="pause" xml:space="preserve"><value>Simamisha</value></data>
-  <data name="minimap" xml:space="preserve"><value>Ramani</value></data>
   <data name="paused" xml:space="preserve"><value>Imesimama</value></data>
   <data name="resume" xml:space="preserve"><value>Endelea</value></data>
   <data name="restart" xml:space="preserve"><value>Anza upya</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Muda</value></data>
   <data name="hints" xml:space="preserve"><value>Vidokezo</value></data>
   <data name="mistakes" xml:space="preserve"><value>Oh</value></data>
-  <data name="save" xml:space="preserve"><value>Hifadhi</value></data>
-  <data name="share" xml:space="preserve"><value>Shiriki</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Ifuatayo</value></data>
   <data name="menu" xml:space="preserve"><value>Menyu</value></data>
   <data name="onb1t" xml:space="preserve"><value>Namba ni mifuatano ya vitalu</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Niko tayari wakati wowote. Chagua fumbo!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Unaenda vizuri. Moja zaidi?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Nimepata picha mpya leo.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Hiyo ilikuwa nzuri. Unataka nyingine?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Anza fumbo lako la kwanza</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Jinsi ya kucheza</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Fumbo la siku</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} kwenye saa.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Kila siku</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Kwa muda</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Jaribio la muda</value></data>
   <data name="tr1" xml:space="preserve"><value>Picha ya kwanza</value></data>
   <data name="tr2" xml:space="preserve"><value>Wiki mfululizo</value></data>
   <data name="tr3" xml:space="preserve"><value>Bila vidokezo</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ubao wa fumbo, {0} kwa {1}. Vijamba {2} kati ya {3} vimejaa.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Vijamba haviwezi kufikiwa kwa kuchunguza kwa kugusa bado.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Muda hadi sasa: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Nyota {0} kwa jumla</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Siku {0} mfululizo</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Endelea na {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Futa {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Fungua</value></data>
   <data name="reset" xml:space="preserve"><value>Anzisha upya</value></data>
   <data name="grownUps" xml:space="preserve"><value>Kwa watu wazima tu</value></data>
-  <data name="gateQ" xml:space="preserve"><value>7 × 4 ni ngapi?</value></data>
   <data name="cancel" xml:space="preserve"><value>Ghairi</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Futa kila kitu?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Mafumbo yote, nyota na vibandiko vitatoweka. Hii haiwezi kurudishwa.</value></data>

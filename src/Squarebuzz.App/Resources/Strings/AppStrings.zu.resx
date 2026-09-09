@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Ngixwayise ngamaphutha</value></data>
   <data name="showTimer" xml:space="preserve"><value>Bonisa isikhathi</value></data>
   <data name="allowHints" xml:space="preserve"><value>Vumela izinkomba</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Khetha iphazili</value></data>
-  <data name="random" xml:space="preserve"><value>Iphazili elingahleliwe</value></data>
   <data name="gallery" xml:space="preserve"><value>Igalari</value></data>
   <data name="locked" xml:space="preserve"><value>Kukhiyiwe</value></data>
-  <data name="preview" xml:space="preserve"><value>Ukubuka kuqala</value></data>
   <data name="start" xml:space="preserve"><value>Qala iphazili</value></data>
   <data name="fill" xml:space="preserve"><value>Gcwalisa</value></data>
   <data name="cross" xml:space="preserve"><value>Faka u-X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Yenza futhi</value></data>
   <data name="hint" xml:space="preserve"><value>Inkomba</value></data>
   <data name="pause" xml:space="preserve"><value>Misa</value></data>
-  <data name="minimap" xml:space="preserve"><value>Imephu</value></data>
   <data name="paused" xml:space="preserve"><value>Kumisiwe</value></data>
   <data name="resume" xml:space="preserve"><value>Qhubeka</value></data>
   <data name="restart" xml:space="preserve"><value>Qala phansi</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Isikhathi</value></data>
   <data name="hints" xml:space="preserve"><value>Izinkomba</value></data>
   <data name="mistakes" xml:space="preserve"><value>Yeyi</value></data>
-  <data name="save" xml:space="preserve"><value>Londoloza</value></data>
-  <data name="share" xml:space="preserve"><value>Yabelana</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Okulandelayo</value></data>
   <data name="menu" xml:space="preserve"><value>Imenyu</value></data>
   <data name="onb1t" xml:space="preserve"><value>Izinombolo ziyimigqa yezigaxa</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Ngilungile noma nini. Khetha iphazili!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Kuhamba kahle. Elinye futhi?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Ngithole izithombe ezintsha namuhla.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Lelo belilihle. Ufuna elinye?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Qala iphazili lakho lokuqala</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Indlela yokudlala</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Iphazili losuku</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} ewashini.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Nsuku zonke</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Ngesikhathi</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Umzamo wesikhathi</value></data>
   <data name="tr1" xml:space="preserve"><value>Isithombe sokuqala</value></data>
   <data name="tr2" xml:space="preserve"><value>Isonto lilandelana</value></data>
   <data name="tr3" xml:space="preserve"><value>Ngaphandle kwezinkomba</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Ibhodi lephazili, {0} nge-{1}. Amabhokisi angu-{2} kwangu-{3} agcwele.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Amabhokisi awakafinyeleleki ngokuhlola ngokuthinta okwamanje.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Isikhathi kuze kube manje: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Izinkanyezi ezingu-{0} sezizonke</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Izinsuku ezingu-{0} zilandelana</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Qhubeka no-{0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Susa {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Vula</value></data>
   <data name="reset" xml:space="preserve"><value>Setha kabusha</value></data>
   <data name="grownUps" xml:space="preserve"><value>Abadala kuphela</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Ngukuphi u-7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Khansela</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Susa konke?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Wonke amaphazili, izinkanyezi nezitikha zizonyamalala. Lokhu akubuyiseki.</value></data>

@@ -124,7 +124,7 @@ Some deliberate choices:
 
 - A trial is **generated and Sharp**. Racing a clock with the helpers on measures tapping speed
   rather than reading clues, and both trial sizes fall inside the authored range — so without
-  `ForceGenerated` a trial would hand out one of the twelve shipped pictures, which a player may
+  `ForceGenerated` a trial would hand out one of the seventy shipped pictures, which a player may
   already know by heart.
 - **Trials are never saved.** A race you can put down and pick up tomorrow is not a race, and a
   countdown frozen in the Continue list would mean nothing. `AutosaveAsync` skips timed sessions,
@@ -162,8 +162,8 @@ design makes for the locked 25×25 size card: *visible, explained, not hidden*. 
 old New Game screen) keeps the free-choice flow, and its win screen's "Next" never serves the
 picture just solved twice in a row.
 
-The daily is **generated from the date**, not drawn from the twelve authored pictures — with
-only twelve a rotation would repeat every twelve days. `DailyPuzzle.SeedFor` hashes the day
+The daily is **generated from the date**, not drawn from the seventy authored pictures — a
+rotation through those would repeat inside ten weeks. `DailyPuzzle.SeedFor` hashes the day
 number, so every player gets the same picture on the same day and closing the app returns to
 the identical board. It forces generation explicitly (`NewGameOptions.ForceGenerated`) because
 10×10 falls inside the authored range and the factory would otherwise serve a shipped picture.

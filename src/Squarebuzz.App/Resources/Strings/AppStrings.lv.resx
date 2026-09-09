@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Brīdināt par kļūdām</value></data>
   <data name="showTimer" xml:space="preserve"><value>Rādīt laiku</value></data>
   <data name="allowHints" xml:space="preserve"><value>Atļaut norādes</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Izvēlies mīklu</value></data>
-  <data name="random" xml:space="preserve"><value>Nejauša</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerija</value></data>
   <data name="locked" xml:space="preserve"><value>Aizslēgta</value></data>
-  <data name="preview" xml:space="preserve"><value>Priekšskats</value></data>
   <data name="start" xml:space="preserve"><value>Sākt</value></data>
   <data name="fill" xml:space="preserve"><value>Aizpildīt</value></data>
   <data name="cross" xml:space="preserve"><value>Atzīmēt X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Atjaunot</value></data>
   <data name="hint" xml:space="preserve"><value>Norāde</value></data>
   <data name="pause" xml:space="preserve"><value>Pauze</value></data>
-  <data name="minimap" xml:space="preserve"><value>Karte</value></data>
   <data name="paused" xml:space="preserve"><value>Pauze</value></data>
   <data name="resume" xml:space="preserve"><value>Turpināt</value></data>
   <data name="restart" xml:space="preserve"><value>No jauna</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Laiks</value></data>
   <data name="hints" xml:space="preserve"><value>Norādes</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
-  <data name="save" xml:space="preserve"><value>Saglabāt</value></data>
-  <data name="share" xml:space="preserve"><value>Dalīties</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Tālāk</value></data>
   <data name="menu" xml:space="preserve"><value>Izvēlne</value></data>
   <data name="onb1t" xml:space="preserve"><value>Skaitļi ir klucīšu virknes</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Es esmu gatavs. Izvēlies mīklu!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Tev lieliski sokas. Vēl vienu?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Šodien atradu jaunas bildes.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Šī bija laba. Vēl vienu?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Sāc savu pirmo mīklu</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Kā spēlēt</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Dienas mīkla</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Pulkstenī {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Šodien</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Pret laiku</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Laika pārbaude</value></data>
   <data name="tr1" xml:space="preserve"><value>Pirmā bilde</value></data>
   <data name="tr2" xml:space="preserve"><value>Nedēļa pēc kārtas</value></data>
   <data name="tr3" xml:space="preserve"><value>Bez norādēm</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Spēles laukums, {0} reiz {1}. Aizpildītās rūtiņas: {2} no {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Rūtiņas vēl nevar izpētīt ar pieskārienu.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Līdz šim pagājis laiks: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Zvaigžņu skaits kopā: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dienu skaits pēc kārtas: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Turpināt: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Dzēst: {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Atvērt</value></data>
   <data name="reset" xml:space="preserve"><value>Atiestatīt</value></data>
   <data name="grownUps" xml:space="preserve"><value>Tikai pieaugušajiem</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Cik ir 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Atcelt</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Izdzēst visu?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Visas mīklas, zvaigznes un uzlīmes pazudīs. To vairs nevarēs atsaukt.</value></data>

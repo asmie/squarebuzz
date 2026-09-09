@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Предупреждать об ошибках</value></data>
   <data name="showTimer" xml:space="preserve"><value>Показывать время</value></data>
   <data name="allowHints" xml:space="preserve"><value>Разрешить подсказки</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Выбор загадки</value></data>
-  <data name="random" xml:space="preserve"><value>Случайная</value></data>
   <data name="gallery" xml:space="preserve"><value>Галерея</value></data>
   <data name="locked" xml:space="preserve"><value>Закрыто</value></data>
-  <data name="preview" xml:space="preserve"><value>Просмотр</value></data>
   <data name="start" xml:space="preserve"><value>Начать</value></data>
   <data name="fill" xml:space="preserve"><value>Красить</value></data>
   <data name="cross" xml:space="preserve"><value>Крестик</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Вернуть</value></data>
   <data name="hint" xml:space="preserve"><value>Подсказка</value></data>
   <data name="pause" xml:space="preserve"><value>Пауза</value></data>
-  <data name="minimap" xml:space="preserve"><value>Карта</value></data>
   <data name="paused" xml:space="preserve"><value>Пауза</value></data>
   <data name="resume" xml:space="preserve"><value>Продолжить</value></data>
   <data name="restart" xml:space="preserve"><value>Заново</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Время</value></data>
   <data name="hints" xml:space="preserve"><value>Подск.</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ой</value></data>
-  <data name="save" xml:space="preserve"><value>Сохранить</value></data>
-  <data name="share" xml:space="preserve"><value>Поделиться</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Далее</value></data>
   <data name="menu" xml:space="preserve"><value>Меню</value></data>
   <data name="onb1t" xml:space="preserve"><value>Числа — это цепочки блоков</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Всё готово. Выбирай загадку!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>У тебя здорово получается. Ещё одну?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Я нашёл сегодня новые картинки.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Хорошая была загадка. Хочешь ещё?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Начни свою первую загадку</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Как играть</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Загадка дня</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. На часах {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Сегодня</value></data>
   <data name="tabTimed" xml:space="preserve"><value>На время</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Испытание на время</value></data>
   <data name="tr1" xml:space="preserve"><value>Первая картинка</value></data>
   <data name="tr2" xml:space="preserve"><value>Неделя подряд</value></data>
   <data name="tr3" xml:space="preserve"><value>Без подсказок</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Поле загадки, {0} на {1}. Закрашено {2} клеток из {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Клетки пока нельзя обследовать касанием.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Прошло времени: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Всего звёзд: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Дней подряд: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Продолжить: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Удалить: {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Открыть</value></data>
   <data name="reset" xml:space="preserve"><value>Сбросить</value></data>
   <data name="grownUps" xml:space="preserve"><value>Только для взрослых</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Сколько будет 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Отмена</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Стереть всё?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Все загадки, звёзды и наклейки исчезнут. Отменить это будет нельзя.</value></data>

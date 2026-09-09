@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Wissini fuq l-iżbalji</value></data>
   <data name="showTimer" xml:space="preserve"><value>Uri l-ħin</value></data>
   <data name="allowHints" xml:space="preserve"><value>Ħalli l-ħjiel</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Agħżel puzzle</value></data>
-  <data name="random" xml:space="preserve"><value>Puzzle bl-addoċċ</value></data>
   <data name="gallery" xml:space="preserve"><value>Gallerija</value></data>
   <data name="locked" xml:space="preserve"><value>Msakkar</value></data>
-  <data name="preview" xml:space="preserve"><value>Ħarsa</value></data>
   <data name="start" xml:space="preserve"><value>Ibda l-puzzle</value></data>
   <data name="fill" xml:space="preserve"><value>Imla</value></data>
   <data name="cross" xml:space="preserve"><value>Immarka X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Erġa' agħmel</value></data>
   <data name="hint" xml:space="preserve"><value>Ħjiel</value></data>
   <data name="pause" xml:space="preserve"><value>Waqqaf</value></data>
-  <data name="minimap" xml:space="preserve"><value>Mappa</value></data>
   <data name="paused" xml:space="preserve"><value>Imwaqqaf</value></data>
   <data name="resume" xml:space="preserve"><value>Kompli</value></data>
   <data name="restart" xml:space="preserve"><value>Ibda mill-bidu</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Ħin</value></data>
   <data name="hints" xml:space="preserve"><value>Ħjiel</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ops</value></data>
-  <data name="save" xml:space="preserve"><value>Issejvja</value></data>
-  <data name="share" xml:space="preserve"><value>Aqsam</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Li jmiss</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
   <data name="onb1t" xml:space="preserve"><value>In-numri huma serje ta' blokki</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Lest meta tkun int. Agħżel puzzle!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Sejjer tajjeb. Waħda oħra?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Sibt xi stampi ġodda llum.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Dik kienet tajba. Trid oħra?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Ibda l-ewwel puzzle tiegħek</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Kif tilgħab</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Puzzle ta' kuljum</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} fuq l-arloġġ.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Kuljum</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Bil-ħin</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Sfida bil-ħin</value></data>
   <data name="tr1" xml:space="preserve"><value>L-ewwel stampa</value></data>
   <data name="tr2" xml:space="preserve"><value>Ġimgħa sħiħa</value></data>
   <data name="tr3" xml:space="preserve"><value>Bla ħjiel</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Bord tal-puzzle, {0} bi {1}. {2} minn {3} kwadri mimlija.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Il-kwadri għadhom ma jintlaħqux bl-esplorazzjoni bil-mess.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Ħin s'issa: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>{0} stilel b'kollox</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} ijiem wara xulxin</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Kompli bi {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Ħassar {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Iftaħ</value></data>
   <data name="reset" xml:space="preserve"><value>Erġa' ibda</value></data>
   <data name="grownUps" xml:space="preserve"><value>Għall-kbar biss</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Kemm hu 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Ikkanċella</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Tħassar kollox?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Il-puzzles, l-istilel u l-istickers kollha jmorru. Dan ma jistax jitreġġa' lura.</value></data>

@@ -48,11 +48,8 @@
   <data name="warnMistakes" xml:space="preserve"><value>Varoita virheistä</value></data>
   <data name="showTimer" xml:space="preserve"><value>Näytä kello</value></data>
   <data name="allowHints" xml:space="preserve"><value>Salli vihjeet</value></data>
-  <data name="pickStyle" xml:space="preserve"><value>Valitse pulma</value></data>
-  <data name="random" xml:space="preserve"><value>Satunnainen</value></data>
   <data name="gallery" xml:space="preserve"><value>Galleria</value></data>
   <data name="locked" xml:space="preserve"><value>Lukossa</value></data>
-  <data name="preview" xml:space="preserve"><value>Esikatselu</value></data>
   <data name="start" xml:space="preserve"><value>Aloita pulma</value></data>
   <data name="fill" xml:space="preserve"><value>Täytä</value></data>
   <data name="cross" xml:space="preserve"><value>Rasti X</value></data>
@@ -60,7 +57,6 @@
   <data name="redo" xml:space="preserve"><value>Uudelleen</value></data>
   <data name="hint" xml:space="preserve"><value>Vihje</value></data>
   <data name="pause" xml:space="preserve"><value>Tauko</value></data>
-  <data name="minimap" xml:space="preserve"><value>Kartta</value></data>
   <data name="paused" xml:space="preserve"><value>Tauolla</value></data>
   <data name="resume" xml:space="preserve"><value>Jatka</value></data>
   <data name="restart" xml:space="preserve"><value>Aloita alusta</value></data>
@@ -70,8 +66,6 @@
   <data name="time" xml:space="preserve"><value>Aika</value></data>
   <data name="hints" xml:space="preserve"><value>Vihjeet</value></data>
   <data name="mistakes" xml:space="preserve"><value>Hupsis</value></data>
-  <data name="save" xml:space="preserve"><value>Tallenna</value></data>
-  <data name="share" xml:space="preserve"><value>Jaa</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Seuraava</value></data>
   <data name="menu" xml:space="preserve"><value>Valikko</value></data>
   <data name="onb1t" xml:space="preserve"><value>Numerot ovat palikkajonoja</value></data>
@@ -91,7 +85,6 @@
   <data name="m_menu1" xml:space="preserve"><value>Olen valmiina. Valitse pulma!</value></data>
   <data name="m_menu2" xml:space="preserve"><value>Sinulla menee lujaa. Vielä yksi?</value></data>
   <data name="m_menu3" xml:space="preserve"><value>Löysin tänään uusia kuvia.</value></data>
-  <data name="winLine" xml:space="preserve"><value>Tuo oli hyvä. Otetaanko toinen?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Aloita ensimmäinen pulma</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Miten pelataan</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Päivän pulma</value></data>
@@ -123,7 +116,6 @@
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Aikaa {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Päivä</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Aika</value></data>
-  <data name="timedTrial" xml:space="preserve"><value>Aikahaaste</value></data>
   <data name="tr1" xml:space="preserve"><value>Ensimmäinen kuva</value></data>
   <data name="tr2" xml:space="preserve"><value>Viikko putkeen</value></data>
   <data name="tr3" xml:space="preserve"><value>Ei vihjeitä</value></data>
@@ -146,7 +138,6 @@
   <data name="a11yBoard" xml:space="preserve"><value>Pulmataulu, {0} kertaa {1}. Ruutuja täytetty {2}, yhteensä {3}.</value></data>
   <data name="a11yBoardNote" xml:space="preserve"><value>Ruutuihin ei pääse vielä kosketusselauksella.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Aikaa kulunut: {0}</value></data>
-  <data name="a11yStars" xml:space="preserve"><value>Tähtiä yhteensä: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Päiviä putkeen: {0}</value></data>
   <data name="a11yResumeGame" xml:space="preserve"><value>Jatka: {0}</value></data>
   <data name="a11yDeleteGame" xml:space="preserve"><value>Poista: {0}</value></data>
@@ -197,7 +188,6 @@
   <data name="open" xml:space="preserve"><value>Avaa</value></data>
   <data name="reset" xml:space="preserve"><value>Nollaa</value></data>
   <data name="grownUps" xml:space="preserve"><value>Vain aikuisille</value></data>
-  <data name="gateQ" xml:space="preserve"><value>Paljonko on 7 × 4?</value></data>
   <data name="cancel" xml:space="preserve"><value>Peruuta</value></data>
   <data name="resetTitle" xml:space="preserve"><value>Pyyhitäänkö kaikki?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Kaikki pulmat, tähdet ja tarrat katoavat. Tätä ei voi peruuttaa.</value></data>
