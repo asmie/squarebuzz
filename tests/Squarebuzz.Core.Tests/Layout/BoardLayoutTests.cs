@@ -27,6 +27,24 @@ public class BoardLayoutTests
     }
 
     [Fact]
+    // The renderer sizes its per-line strike buffers from these, and ClueStrikeCalculator throws
+    // if a buffer is shorter than a line's clue count - so the figure must cover every line, and
+    // the layout must agree with the puzzle rather than keep a copy that could go stale.
+    public void ThePuzzleOwnsItsClueMaxima_AndTheLayoutAgrees()
+    {
+        foreach (var puzzle in new EmbeddedPuzzleRepository().Puzzles)
+        {
+            Assert.Equal(puzzle.RowClues.Max(c => c.DisplayRuns.Count), puzzle.MaxRowClueCount);
+            Assert.Equal(puzzle.ColumnClues.Max(c => c.DisplayRuns.Count), puzzle.MaxColumnClueCount);
+
+            var layout = BoardLayout.Calculate(puzzle, 400, 700);
+
+            Assert.Equal(puzzle.MaxRowClueCount, layout.MaxRowClues);
+            Assert.Equal(puzzle.MaxColumnClueCount, layout.MaxColumnClues);
+        }
+    }
+
+    [Fact]
     public void ABlankLineStillReservesOneClueSlot()
     {
         // Row 0 of this picture is empty, so its clue is blank - but the gutter must not

@@ -92,17 +92,9 @@ public readonly record struct BoardLayout
     {
         ArgumentNullException.ThrowIfNull(puzzle);
 
-        var maxRowClues = 1;
-        for (var y = 0; y < puzzle.Height; y++)
-        {
-            maxRowClues = Math.Max(maxRowClues, puzzle.RowClues[y].DisplayRuns.Count);
-        }
-
-        var maxColumnClues = 1;
-        for (var x = 0; x < puzzle.Width; x++)
-        {
-            maxColumnClues = Math.Max(maxColumnClues, puzzle.ColumnClues[x].DisplayRuns.Count);
-        }
+        // The puzzle owns these; re-deriving them here was a second source of the same truth.
+        var maxRowClues = puzzle.MaxRowClueCount;
+        var maxColumnClues = puzzle.MaxColumnClueCount;
 
         // Guard against a zero or negative viewport, which happens for one layout pass before
         // MAUI has measured the view.

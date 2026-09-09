@@ -137,6 +137,16 @@ public sealed class BoardDrawable : IDrawable
 
         var layout = Layout;
 
+        // The layout is geometry for *this* puzzle or it is nothing. The cell-count check above
+        // catches a board of a different size; this catches a layout still describing the
+        // previous board, which drew the new one's cells at the old one's stride. Both belong to
+        // the moment between one property landing and the next, and the right answer to that
+        // moment is a skipped frame, not a garbled one.
+        if (layout.Columns != puzzle.Width || layout.Rows != puzzle.Height)
+        {
+            return;
+        }
+
         _sawUnfinishedWipe = false;
 
         DrawGutterBackgrounds(canvas, layout);
@@ -387,14 +397,19 @@ public sealed class BoardDrawable : IDrawable
     {
         var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
-        Span<bool> struck = stackalloc bool[Math.Max(4, layout.MaxColumnClues)];
-        Span<CellState> column = stackalloc CellState[layout.Rows];
 
-        for (var x = 0; x < layout.Columns; x++)
+        // Sized from the puzzle, not the layout. ClueStrikeCalculator.Compute throws if the buffer
+        // is shorter than a line's clue count, and the layout's copy of that maximum belongs to
+        // whatever puzzle it was calculated for - two same-size puzzles can differ in it, and the
+        // size check in Draw cannot tell them apart. The puzzle's own figure cannot be stale.
+        Span<bool> struck = stackalloc bool[Math.Max(4, puzzle.MaxColumnClueCount)];
+        Span<CellState> column = stackalloc CellState[puzzle.Height];
+
+        for (var x = 0; x < puzzle.Width; x++)
         {
-            for (var y = 0; y < layout.Rows; y++)
+            for (var y = 0; y < puzzle.Height; y++)
             {
-                column[y] = Cells[(y * layout.Columns) + x];
+                column[y] = Cells[(y * puzzle.Width) + x];
             }
 
             var clues = puzzle.ColumnClues[x];
@@ -427,12 +442,14 @@ public sealed class BoardDrawable : IDrawable
     {
         var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
-        Span<bool> struck = stackalloc bool[Math.Max(4, layout.MaxRowClues)];
 
-        for (var y = 0; y < layout.Rows; y++)
+        // From the puzzle for the same reason as the column pass.
+        Span<bool> struck = stackalloc bool[Math.Max(4, puzzle.MaxRowClueCount)];
+
+        for (var y = 0; y < puzzle.Height; y++)
         {
             var clues = puzzle.RowClues[y];
-            ClueStrikeCalculator.Compute(clues, Cells.AsSpan(y * layout.Columns, layout.Columns), struck);
+            ClueStrikeCalculator.Compute(clues, Cells.AsSpan(y * puzzle.Width, puzzle.Width), struck);
 
             var runs = clues.DisplayRuns;
             var (_, cellY) = layout.CellOrigin(0, y);

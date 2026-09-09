@@ -55,6 +55,25 @@ public sealed class Puzzle
 
         RowClues = rowClues;
         ColumnClues = columnClues;
+
+        // Computed once with the clues, so the layout and the renderer size their gutters and
+        // buffers from the same answer instead of each re-deriving it - or, worse, one of them
+        // reading it off a layout that was built for a different puzzle.
+        MaxRowClueCount = MaxDisplayRuns(rowClues);
+        MaxColumnClueCount = MaxDisplayRuns(columnClues);
+    }
+
+    private static int MaxDisplayRuns(LineClues[] clues)
+    {
+        // At least one: a blank line still displays a "0", so no line ever has fewer than one slot.
+        var max = 1;
+
+        foreach (var line in clues)
+        {
+            max = Math.Max(max, line.DisplayRuns.Count);
+        }
+
+        return max;
     }
 
     public string Id { get; }
@@ -76,6 +95,15 @@ public sealed class Puzzle
 
     /// <summary>How many cells the finished picture fills - the denominator of "how far along".</summary>
     public int PictureCellCount { get; }
+
+    /// <summary>
+    /// Most clue numbers any single row displays - what sizes the row gutter, and the buffer a
+    /// renderer needs per row. Never less than one, since a blank line shows a "0".
+    /// </summary>
+    public int MaxRowClueCount { get; }
+
+    /// <summary>The column counterpart of <see cref="MaxRowClueCount"/>.</summary>
+    public int MaxColumnClueCount { get; }
 
     /// <summary>Clue for each row, top to bottom.</summary>
     public IReadOnlyList<LineClues> RowClues { get; }
