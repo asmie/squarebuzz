@@ -28,7 +28,7 @@ public sealed class LocalizationService : INotifyPropertyChanged
         "Squarebuzz.App.Resources.Strings.AppStrings",
         typeof(LocalizationService).Assembly);
 
-    private CultureInfo _culture = CultureInfo.GetCultureInfo("en");
+    private CultureInfo _culture = CultureFor(AppLanguage.English);
 
     /// <summary>
     /// Shared instance, needed because XAML bindings reach it through <c>x:Static</c>.
@@ -70,6 +70,14 @@ public sealed class LocalizationService : INotifyPropertyChanged
     }
 
     /// <summary>Formats a localised string, e.g. "{n} in progress".</summary>
+    /// <remarks>
+    /// Never throws, for the same reason <see cref="GetString"/> does not: the templates are
+    /// hand-translated in thirty-nine languages, and a stray brace or a <c>{1}</c> where the code
+    /// passes one argument is a translation slip, not a reason to take the board down at render
+    /// time. The template comes back as-is, which is ugly and obvious - the right outcome for a
+    /// mistake somebody has to go and fix. <c>tools/check-strings.cs</c> catches these before
+    /// they ship; this is the net under it.
+    /// </remarks>
     public string Format(string key, params object[] arguments)
     {
         var template = GetString(key);
@@ -81,7 +89,14 @@ public sealed class LocalizationService : INotifyPropertyChanged
             return template.Replace("{n}", arguments[0]?.ToString() ?? string.Empty, StringComparison.Ordinal);
         }
 
-        return string.Format(_culture, template, arguments);
+        try
+        {
+            return string.Format(_culture, template, arguments);
+        }
+        catch (FormatException)
+        {
+            return template;
+        }
     }
 
     public void SetLanguage(AppLanguage language)
@@ -92,7 +107,7 @@ public sealed class LocalizationService : INotifyPropertyChanged
         }
 
         Language = language;
-        _culture = CultureInfo.GetCultureInfo(language.ToCultureCode());
+        _culture = CultureFor(language);
 
         // Affects date and number formatting too, not just our own strings. The Default* pair
         // matters as much as the Current* pair: Current only changes *this* thread, and the
@@ -107,6 +122,43 @@ public sealed class LocalizationService : INotifyPropertyChanged
         // An empty property name means "everything changed" - every indexer binding re-reads.
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
         LanguageChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// The culture for a shipped language, or the nearest one this device can actually supply.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// <see cref="CultureInfo.GetCultureInfo(string)"/> throws when the platform's ICU data does
+    /// not know the code. Directory.Build.props keeps invariant globalisation off for exactly this
+    /// reason, but a trimmed or unusual OS image can still lack a culture - and the one place that
+    /// would have surfaced it was the language picker, taking the app down on the tap.
+    /// </para>
+    /// <para>
+    /// The fallback is English, then invariant. <see cref="Language"/> still records what the
+    /// player chose: the choice is theirs and is persisted; the culture is what this device can
+    /// do with it, and a later device may do better.
+    /// </para>
+    /// </remarks>
+    private static CultureInfo CultureFor(AppLanguage language)
+    {
+        try
+        {
+            return CultureInfo.GetCultureInfo(language.ToCultureCode());
+        }
+        catch (CultureNotFoundException)
+        {
+            // Fall through to the defaults below.
+        }
+
+        try
+        {
+            return CultureInfo.GetCultureInfo("en");
+        }
+        catch (CultureNotFoundException)
+        {
+            return CultureInfo.InvariantCulture;
+        }
     }
 }
 
