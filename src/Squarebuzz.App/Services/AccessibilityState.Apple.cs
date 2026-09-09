@@ -1,3 +1,4 @@
+#if IOS || MACCATALYST
 using Foundation;
 using UIKit;
 
@@ -38,7 +39,10 @@ public sealed partial class AccessibilityState
     {
         try
         {
-            _observer = UIAccessibility.Notifications.ObserveVoiceOverStatusDidChange((_, _) =>
+            // UIApplication.Notifications, not UIAccessibility's - the latter has no nested
+            // Notifications class. The binding replicates these observer helpers onto several
+            // UIKit types from the same notification constant; UIApplication is the canonical one.
+            _observer = UIApplication.Notifications.ObserveVoiceOverStatusDidChange((_, _) =>
             {
                 // Delivered on the main thread already, but marshalled anyway: everything
                 // downstream touches UI, and RaiseChanged drops repeats by re-reading the state.
@@ -57,3 +61,5 @@ public sealed partial class AccessibilityState
         _observer = null;
     }
 }
+
+#endif

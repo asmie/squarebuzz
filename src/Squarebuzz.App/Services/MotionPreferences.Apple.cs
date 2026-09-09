@@ -1,3 +1,4 @@
+#if IOS || MACCATALYST
 using UIKit;
 
 namespace Squarebuzz.App.Services;
@@ -21,3 +22,5 @@ public static partial class MotionPreferences
         }
     }
 }
+
+#endif

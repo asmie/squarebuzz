@@ -1,3 +1,4 @@
+#if IOS || MACCATALYST
 using UIKit;
 
 namespace Squarebuzz.App.Controls;
@@ -48,3 +49,5 @@ public sealed partial class BoardView
         }
     }
 }
+
+#endif
