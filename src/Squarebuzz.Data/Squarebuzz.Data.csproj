@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Squarebuzz.Core\Squarebuzz.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- The migration runner's guarantees are proved with a migration built to fail part-way,
+         which needs the internal IMigration and the internal constructor that accepts one. -->
+    <InternalsVisibleTo Include="Squarebuzz.Data.Tests" />
+  </ItemGroup>
+
 </Project>

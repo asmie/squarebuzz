@@ -18,12 +18,11 @@ internal sealed class Migration0005SavedHintsUsed : IMigration
 
     public string Name => "Hints used on saved games";
 
-    public async Task ApplyAsync(SQLiteAsyncConnection connection)
+    public void Apply(SQLiteConnection connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
 
-        await connection.ExecuteAsync(
-            "ALTER TABLE saved_game ADD COLUMN hints_used INTEGER NOT NULL DEFAULT 0")
-            .ConfigureAwait(false);
+        connection.Execute(
+            "ALTER TABLE saved_game ADD COLUMN hints_used INTEGER NOT NULL DEFAULT 0");
     }
 }

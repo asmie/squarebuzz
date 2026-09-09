@@ -26,19 +26,19 @@ internal sealed class Migration0001Initial : IMigration
 
     public string Name => "Initial schema";
 
-    public async Task ApplyAsync(SQLiteAsyncConnection connection)
+    public void Apply(SQLiteConnection connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
 
-        await connection.ExecuteAsync(
+        connection.Execute(
             """
             CREATE TABLE IF NOT EXISTS setting (
                 key   TEXT PRIMARY KEY NOT NULL,
                 value TEXT NULL
             )
-            """).ConfigureAwait(false);
+            """);
 
-        await connection.ExecuteAsync(
+        connection.Execute(
             """
             CREATE TABLE IF NOT EXISTS saved_game (
                 id                    TEXT PRIMARY KEY NOT NULL,
@@ -55,14 +55,13 @@ internal sealed class Migration0001Initial : IMigration
                 saved_at_ticks        INTEGER NOT NULL,
                 saved_at_offset_ticks INTEGER NOT NULL
             )
-            """).ConfigureAwait(false);
+            """);
 
         // Continue lists saves newest first, so the ordering column is indexed.
-        await connection.ExecuteAsync(
-            "CREATE INDEX IF NOT EXISTS ix_saved_game_saved_at ON saved_game (saved_at_ticks)")
-            .ConfigureAwait(false);
+        connection.Execute(
+            "CREATE INDEX IF NOT EXISTS ix_saved_game_saved_at ON saved_game (saved_at_ticks)");
 
-        await connection.ExecuteAsync(
+        connection.Execute(
             """
             CREATE TABLE IF NOT EXISTS progress (
                 id                  INTEGER PRIMARY KEY NOT NULL,
@@ -72,9 +71,9 @@ internal sealed class Migration0001Initial : IMigration
                 last_played_day     INTEGER NULL,
                 total_blocks_filled INTEGER NOT NULL
             )
-            """).ConfigureAwait(false);
+            """);
 
-        await connection.ExecuteAsync(
+        connection.Execute(
             """
             CREATE TABLE IF NOT EXISTS solved_puzzle (
                 puzzle_id         TEXT PRIMARY KEY NOT NULL,
@@ -83,14 +82,14 @@ internal sealed class Migration0001Initial : IMigration
                 best_time_seconds REAL NOT NULL,
                 times_solved      INTEGER NOT NULL
             )
-            """).ConfigureAwait(false);
+            """);
 
-        await connection.ExecuteAsync(
+        connection.Execute(
             """
             CREATE TABLE IF NOT EXISTS trophy (
                 trophy_id  INTEGER PRIMARY KEY NOT NULL,
                 earned_day INTEGER NOT NULL
             )
-            """).ConfigureAwait(false);
+            """);
     }
 }

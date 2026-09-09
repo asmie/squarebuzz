@@ -16,12 +16,11 @@ internal sealed class Migration0004DailyHistory : IMigration
 
     public string Name => "Daily completion history";
 
-    public async Task ApplyAsync(SQLiteAsyncConnection connection)
+    public void Apply(SQLiteConnection connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
 
-        await connection.ExecuteAsync(
-            "CREATE TABLE IF NOT EXISTS daily_completion (day INTEGER NOT NULL PRIMARY KEY)")
-            .ConfigureAwait(false);
+        connection.Execute(
+            "CREATE TABLE IF NOT EXISTS daily_completion (day INTEGER NOT NULL PRIMARY KEY)");
     }
 }

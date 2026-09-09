@@ -18,12 +18,11 @@ internal sealed class Migration0003GeneratorVersion : IMigration
 
     public string Name => "Generator version on saved games";
 
-    public async Task ApplyAsync(SQLiteAsyncConnection connection)
+    public void Apply(SQLiteConnection connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
 
-        await connection.ExecuteAsync(
-            "ALTER TABLE saved_game ADD COLUMN generator_version INTEGER NOT NULL DEFAULT 0")
-            .ConfigureAwait(false);
+        connection.Execute(
+            "ALTER TABLE saved_game ADD COLUMN generator_version INTEGER NOT NULL DEFAULT 0");
     }
 }

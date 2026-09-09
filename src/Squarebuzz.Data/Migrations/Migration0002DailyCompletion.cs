@@ -16,13 +16,12 @@ internal sealed class Migration0002DailyCompletion : IMigration
 
     public string Name => "Track daily-puzzle completion";
 
-    public async Task ApplyAsync(SQLiteAsyncConnection connection)
+    public void Apply(SQLiteConnection connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
 
         // sqlite-net's CreateTable would add the column on an existing table too, but being
         // explicit documents the change and avoids relying on that behaviour.
-        await connection.ExecuteAsync("ALTER TABLE progress ADD COLUMN last_daily_day INTEGER NULL")
-            .ConfigureAwait(false);
+        connection.Execute("ALTER TABLE progress ADD COLUMN last_daily_day INTEGER NULL");
     }
 }

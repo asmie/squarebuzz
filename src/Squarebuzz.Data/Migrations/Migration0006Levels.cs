@@ -19,16 +19,14 @@ internal sealed class Migration0006Levels : IMigration
 
     public string Name => "Levels campaign progress";
 
-    public async Task ApplyAsync(SQLiteAsyncConnection connection)
+    public void Apply(SQLiteConnection connection)
     {
         ArgumentNullException.ThrowIfNull(connection);
 
-        await connection.ExecuteAsync(
-            "ALTER TABLE progress ADD COLUMN highest_level INTEGER NOT NULL DEFAULT 0")
-            .ConfigureAwait(false);
+        connection.Execute(
+            "ALTER TABLE progress ADD COLUMN highest_level INTEGER NOT NULL DEFAULT 0");
 
-        await connection.ExecuteAsync(
-            "ALTER TABLE saved_game ADD COLUMN level INTEGER NULL")
-            .ConfigureAwait(false);
+        connection.Execute(
+            "ALTER TABLE saved_game ADD COLUMN level INTEGER NULL");
     }
 }

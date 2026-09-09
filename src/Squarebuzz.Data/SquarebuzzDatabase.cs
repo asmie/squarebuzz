@@ -27,14 +27,27 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable
 
     private readonly SemaphoreSlim _initialisationGate = new(1, 1);
     private readonly string _databasePath;
+    private readonly IReadOnlyList<IMigration> _migrations;
 
     private SQLiteAsyncConnection? _connection;
 
     public SquarebuzzDatabase(string databasePath)
+        : this(databasePath, Migrations)
+    {
+    }
+
+    /// <summary>
+    /// Testing seam: runs a caller-supplied chain instead of the shipped one, so the runner's own
+    /// guarantees - one transaction per step, nothing recorded for a step that failed - can be
+    /// proved with a migration built to fail part-way.
+    /// </summary>
+    internal SquarebuzzDatabase(string databasePath, IReadOnlyList<IMigration> migrations)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(databasePath);
+        ArgumentNullException.ThrowIfNull(migrations);
 
         _databasePath = databasePath;
+        _migrations = migrations;
     }
 
     /// <summary>Schema version this build expects.</summary>
@@ -117,28 +130,40 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable
     }
 
     /// <summary>Applies every migration the database has not seen yet, in order.</summary>
-    private static async Task MigrateAsync(SQLiteAsyncConnection connection)
+    /// <remarks>
+    /// Each step runs in its own transaction together with its <c>schema_version</c> row, so the
+    /// two commit as one or not at all. That is what makes the retry-on-next-launch design
+    /// actually work: without it, a migration of several statements that failed after its first
+    /// left that statement's change behind with nothing recorded, and the retry re-ran it into
+    /// "duplicate column name" - on every launch, for ever. Migration0006 adds two columns and
+    /// was exactly that shape. SQLite's DDL is transactional, so the rollback is real.
+    /// </remarks>
+    private async Task MigrateAsync(SQLiteAsyncConnection connection)
     {
         await connection.CreateTableAsync<SchemaVersionEntity>().ConfigureAwait(false);
 
         var applied = await connection.Table<SchemaVersionEntity>().ToListAsync().ConfigureAwait(false);
         var appliedVersions = applied.Select(v => v.Version).ToHashSet();
 
-        foreach (var migration in Migrations.OrderBy(m => m.Version))
+        foreach (var migration in _migrations.OrderBy(m => m.Version))
         {
             if (appliedVersions.Contains(migration.Version))
             {
                 continue;
             }
 
-            await migration.ApplyAsync(connection).ConfigureAwait(false);
-
-            // Recorded only after the migration succeeds, so a failure part-way through is
-            // retried on next launch rather than silently skipped.
-            await connection.InsertAsync(new SchemaVersionEntity
+            await connection.RunInTransactionAsync(transaction =>
             {
-                Version = migration.Version,
-                AppliedAtUtc = DateTime.UtcNow,
+                migration.Apply(transaction);
+
+                // Inside the same transaction as the step itself, so the version can never be
+                // recorded for a migration that did not fully land - nor the step land without
+                // its version and be re-attempted over the top of itself.
+                transaction.Insert(new SchemaVersionEntity
+                {
+                    Version = migration.Version,
+                    AppliedAtUtc = DateTime.UtcNow,
+                });
             }).ConfigureAwait(false);
         }
     }
