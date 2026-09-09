@@ -10,8 +10,12 @@ public sealed class FakeSettingsRepository : ISettingsRepository
 
     public List<GameSettings> Saved { get; } = [];
 
-    public Task<GameSettings> LoadAsync(CancellationToken cancellationToken = default) =>
-        Task.FromResult(Settings);
+    /// <summary>Makes <see cref="LoadAsync"/> throw, as a locked or corrupt database would.</summary>
+    public bool LoadFails { get; set; }
+
+    public Task<GameSettings> LoadAsync(CancellationToken cancellationToken = default) => LoadFails
+        ? Task.FromException<GameSettings>(new InvalidOperationException("database is locked"))
+        : Task.FromResult(Settings);
 
     public Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
     {
@@ -81,8 +85,12 @@ public sealed class FakeProgressRepository : IProgressRepository
     public Task<IReadOnlyList<DateOnly>> GetDailyCompletionsAsync(CancellationToken cancellationToken = default) =>
         Task.FromResult<IReadOnlyList<DateOnly>>([.. DailyCompletions]);
 
+    /// <summary>How often progress was wiped - a destructive action a test wants to count exactly.</summary>
+    public int ResetCalls { get; private set; }
+
     public Task ResetAsync(CancellationToken cancellationToken = default)
     {
+        ResetCalls++;
         Progress = PlayerProgress.Empty;
         Solved.Clear();
         Trophies.Clear();
