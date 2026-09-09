@@ -77,4 +77,14 @@
     <ProjectReference Include="..\Squarebuzz.Presentation\Squarebuzz.Presentation.csproj" />
   </ItemGroup>
 
+  <!--
+    iOS and Mac Catalyst share UIKit, so the platform partials that talk to it live once in
+    Platforms\Apple rather than twice. The MAUI SDK compiles only the folder named after the
+    current head, so anything else under Platforms\ has to be added back by hand for the heads
+    it belongs to.
+  -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' OR $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <Compile Include="Platforms\Apple\**\*.cs" />
+  </ItemGroup>
+
 </Project>

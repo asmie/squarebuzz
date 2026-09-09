@@ -21,7 +21,10 @@ public static partial class MotionPreferences
     /// <summary>True when animations should be skipped.</summary>
     public static bool ReduceMotion => GetReduceMotion();
 
-#if !ANDROID
+    // Each shipped platform supplies its own answer in Platforms/. This fallback is only for a
+    // head none of them cover - and until every head had a partial, it was silently the answer
+    // on iOS, Mac Catalyst and Windows too, so the OS setting was honoured on Android alone.
+#if !ANDROID && !IOS && !MACCATALYST && !WINDOWS
     private static bool GetReduceMotion() => false;
 #endif
 }

@@ -55,7 +55,10 @@ public sealed partial class AccessibilityState : IAccessibilityState, IDisposabl
 
     partial void DisposePlatform();
 
-#if !ANDROID
+    // Each shipped platform supplies its own answer in Platforms/. Until every head had one, this
+    // was silently the answer on iOS, Mac Catalyst and Windows: the per-cell overlay that makes
+    // the board reachable was never built for VoiceOver or Narrator users at all.
+#if !ANDROID && !IOS && !MACCATALYST && !WINDOWS
     private static bool GetIsScreenReaderActive() => false;
 #endif
 }
