@@ -33,15 +33,13 @@ public sealed class ThemeService : IThemeService
 
         var app = Application.Current;
 
-        // Following the OS means we must not force a theme on it. UserAppTheme overrides
-        // PlatformAppTheme, so leaving it Unspecified is what keeps the OS value readable -
-        // and it is also what lets MAUI's own AppThemeBinding-driven chrome follow along.
+        // Apply the native theme policy even if the resolved palette is unchanged. Auto may
+        // already be showing Light when the player explicitly chooses Light, for example.
         if (app is not null)
         {
-            if (followSystem)
-            {
-                app.UserAppTheme = AppTheme.Unspecified;
-            }
+            app.UserAppTheme = followSystem
+                ? AppTheme.Unspecified
+                : theme == GameTheme.Dark ? AppTheme.Dark : AppTheme.Light;
 
             Subscribe(app, followSystem);
         }
@@ -95,7 +93,13 @@ public sealed class ThemeService : IThemeService
         // Resources are touched, so this has to be on the UI thread; the event can arrive on
         // a platform thread.
         MainThread.BeginInvokeOnMainThread(() =>
-            ApplyResolved(Resolve(_chosenTheme, followSystem: true), Accent));
+        {
+            // A queued OS notification must not undo an explicit choice made before it ran.
+            if (FollowsSystem)
+            {
+                ApplyResolved(Resolve(_chosenTheme, followSystem: true), Accent);
+            }
+        });
     }
 
     private void ApplyResolved(GameTheme theme, GameAccent accent)
@@ -135,14 +139,6 @@ public sealed class ThemeService : IThemeService
         Theme = theme;
         Accent = accent;
         _hasApplied = true;
-
-        // Keep the platform chrome (status bar, title bar) in step with our own palette. Under
-        // Auto this is left alone: forcing it here would override PlatformAppTheme and cut off
-        // the very signal we are following.
-        if (!FollowsSystem && Application.Current is { } app)
-        {
-            app.UserAppTheme = theme == GameTheme.Dark ? AppTheme.Dark : AppTheme.Light;
-        }
 
         // After the dictionaries are in place, so a listener that re-reads colours sees the new
         // ones. Main thread by construction: Options calls Apply from the UI, and the system

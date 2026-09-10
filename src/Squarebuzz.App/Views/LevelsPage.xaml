@@ -2,31 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Squarebuzz.Presentation.ViewModels;assembly=Squarebuzz.Presentation"
-             xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
              x:Class="Squarebuzz.App.Views.LevelsPage"
              x:DataType="vm:LevelsViewModel"
              Title="{Binding Heading}"
              Shell.NavBarIsVisible="True"
              BackgroundColor="{DynamicResource Bg}">
-
-    <ContentPage.Resources>
-        <conv:LevelStateSelectConverter x:Key="NodeFill"
-                                        DoneValue="{StaticResource Accent}"
-                                        CurrentValue="{StaticResource Primary}"
-                                        LockedValue="{StaticResource Surface}" />
-        <conv:LevelStateSelectConverter x:Key="NodeStroke"
-                                        DoneValue="{StaticResource AccentDeep}"
-                                        CurrentValue="{StaticResource PrimaryDeep}"
-                                        LockedValue="{StaticResource Line}" />
-        <conv:LevelStateSelectConverter x:Key="NodeInk"
-                                        DoneValue="{StaticResource OnAccent}"
-                                        CurrentValue="{StaticResource OnPrimary}"
-                                        LockedValue="{StaticResource Ink2}" />
-        <conv:LevelStateSelectConverter x:Key="TrailInk"
-                                        DoneValue="{StaticResource Accent}"
-                                        CurrentValue="{StaticResource Line}"
-                                        LockedValue="{StaticResource Line}" />
-    </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="12">
 
@@ -64,8 +45,7 @@
                     <VerticalStackLayout Spacing="0" TranslationX="{Binding Offset}">
                         <Grid HorizontalOptions="Center">
                             <Border SemanticProperties.Description="{Binding Description}"
-                                    BackgroundColor="{Binding State, Converter={StaticResource NodeFill}}"
-                                    Stroke="{Binding State, Converter={StaticResource NodeStroke}}"
+                                    controls:LevelAppearance.State="{Binding State}"
                                     StrokeThickness="3"
                                     WidthRequest="{Binding Diameter}"
                                     HeightRequest="{Binding Diameter}"
@@ -82,7 +62,7 @@
                                 <Label Text="{Binding Caption}"
                                        FontFamily="Display"
                                        FontSize="{Binding FontSize}"
-                                       TextColor="{Binding State, Converter={StaticResource NodeInk}}"
+                                       controls:LevelAppearance.State="{Binding State}"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"
                                        InputTransparent="True" />
@@ -106,11 +86,11 @@
                                              HorizontalOptions="Center"
                                              IsVisible="{Binding IsLast, Converter={StaticResource InvertBool}}">
                             <BoxView WidthRequest="5" HeightRequest="5" CornerRadius="3"
-                                     Color="{Binding State, Converter={StaticResource TrailInk}}" />
+                                     controls:LevelAppearance.State="{Binding State}" />
                             <BoxView WidthRequest="5" HeightRequest="5" CornerRadius="3"
-                                     Color="{Binding State, Converter={StaticResource TrailInk}}" />
+                                     controls:LevelAppearance.State="{Binding State}" />
                             <BoxView WidthRequest="5" HeightRequest="5" CornerRadius="3"
-                                     Color="{Binding State, Converter={StaticResource TrailInk}}" />
+                                     controls:LevelAppearance.State="{Binding State}" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </DataTemplate>
