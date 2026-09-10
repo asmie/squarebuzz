@@ -142,8 +142,8 @@ static void WriteMusic(string path)
 static double Quantise(double hz, double loopSeconds) =>
     Math.Round(hz * loopSeconds) / loopSeconds;
 
-// Renders the segments back to back, cross-fading the joins so a multi-note sound is one
-// continuous waveform rather than several with silence and clicks between them.
+// Renders segments back to back, with a separate attack/release envelope for each note.
+// At each join the outgoing note reaches zero before the next note ramps up.
 static double[] Render((double Hz, int Ms)[] segments)
 {
     var total = segments.Sum(s => s.Ms) * SampleRate / 1000;
