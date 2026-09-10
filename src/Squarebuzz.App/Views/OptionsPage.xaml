@@ -21,13 +21,13 @@
         <Style x:Key="SectionHeading" TargetType="Label">
             <Setter Property="TextColor" Value="{DynamicResource Ink2}" />
             <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontFamily" Value="BodyBold" />
             <Setter Property="Margin" Value="4,10,0,0" />
         </Style>
 
         <Style x:Key="RowLabel" TargetType="Label">
             <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontFamily" Value="BodyBold" />
             <Setter Property="VerticalOptions" Value="Center" />
         </Style>
 
@@ -35,7 +35,7 @@
             <Setter Property="CornerRadius" Value="14" />
             <Setter Property="HeightRequest" Value="48" />
             <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontFamily" Value="BodyBold" />
             <Setter Property="Padding" Value="4,0" />
         </Style>
     </ContentPage.Resources>
