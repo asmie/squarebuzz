@@ -53,8 +53,8 @@ public sealed class Puzzle
             columnClues[x] = ClueCalculator.FromSolution(column);
         }
 
-        RowClues = rowClues;
-        ColumnClues = columnClues;
+        RowClues = Array.AsReadOnly(rowClues);
+        ColumnClues = Array.AsReadOnly(columnClues);
 
         // Computed once with the clues, so the layout and the renderer size their gutters and
         // buffers from the same answer instead of each re-deriving it - or, worse, one of them

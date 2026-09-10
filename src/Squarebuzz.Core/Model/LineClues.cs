@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace Squarebuzz.Core.Model;
 
@@ -7,13 +8,13 @@ namespace Squarebuzz.Core.Model;
 /// A row reading <c>##.#</c> has the clue <c>2 1</c>.
 /// </summary>
 /// <remarks>
-/// A line with no filled cells has an empty <see cref="Runs"/> collection. The UI renders
+/// A line with no filled cells has an empty run collection. The UI renders
 /// that as a single "0", which is why <see cref="DisplayRuns"/> exists - but the solver
 /// wants the genuinely empty sequence, so the two are kept apart deliberately.
 /// </remarks>
 public sealed class LineClues : IReadOnlyList<int>, IEquatable<LineClues>
 {
-    private static readonly int[] ZeroDisplay = [0];
+    private static readonly ReadOnlyCollection<int> ZeroDisplay = Array.AsReadOnly<int>([0]);
 
     private readonly int[] _runs;
 
@@ -47,7 +48,7 @@ public sealed class LineClues : IReadOnlyList<int>, IEquatable<LineClues>
     /// <summary>
     /// The runs as the player sees them: a blank line shows a single "0" rather than nothing.
     /// </summary>
-    public IReadOnlyList<int> DisplayRuns => _runs.Length == 0 ? ZeroDisplay : _runs;
+    public IReadOnlyList<int> DisplayRuns => _runs.Length == 0 ? ZeroDisplay : this;
 
     public int Count => _runs.Length;
 
