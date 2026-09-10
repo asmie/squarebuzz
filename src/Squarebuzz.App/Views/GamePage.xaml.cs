@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Squarebuzz.App.Controls;
 using Squarebuzz.Presentation.Services;
 using Squarebuzz.Presentation.ViewModels;
@@ -12,8 +13,8 @@ public partial class GamePage : ContentPage, IQueryAttributable
     /// <summary>Cell the magnifier is centred on, or -1 when it is hidden.</summary>
     private int _magnifiedIndex = -1;
 
-    /// <summary>Null until the first size is known, so the first layout always applies.</summary>
-    private bool? _isWideLayout;
+    /// <summary>The last applied arrangement, including the controls' side in wide layouts.</summary>
+    private (bool IsWide, bool ControlsOnRight)? _appliedLayout;
 
     /// <summary>True while the mistake shake is running, so a second one cannot overlap it.</summary>
     private bool _isShaking;
@@ -55,8 +56,9 @@ public partial class GamePage : ContentPage, IQueryAttributable
         BoardHost.SizeChanged += OnBoardHostSizeChanged;
 
         // The page's own size decides the arrangement, and it changes on rotation as well as at
-        // first layout.
+        // first layout. Settings can arrive later or change while Options covers this page.
         SizeChanged += (_, _) => ApplyLayout();
+        _viewModel.PropertyChanged += OnLayoutSettingsChanged;
 
         // The overlay has to follow the board's geometry, which changes with zoom and rotation -
         // and the screen-reader state, which can flip mid-game.
@@ -84,8 +86,16 @@ public partial class GamePage : ContentPage, IQueryAttributable
         }
     }
 
+    private void OnLayoutSettingsChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName is null or "" or nameof(GameViewModel.IsWideControlsOnRight))
+        {
+            ApplyLayout();
+        }
+    }
+
     /// <summary>
-    /// Switches between the phone layout and the wide-landscape one.
+    /// Applies the phone or wide-landscape layout, with controls on the chosen hand's side.
     /// </summary>
     /// <remarks>
     /// <para>
@@ -101,10 +111,8 @@ public partial class GamePage : ContentPage, IQueryAttributable
     /// there must only ever be one of it.
     /// </para>
     /// <para>
-    /// Deviation worth knowing about: the doc puts a mini-map and clue helpers in the right-hand
-    /// column and keeps the toolbar at the bottom edge. Neither of those exists yet, and on a
-    /// tablet the whole board is visible at once so a mini-map would show nothing new. The
-    /// controls go there instead, on the side the player's hand is on.
+    /// The controls sit beside the board on the side the player's hand is on. The mini-map and
+    /// magnifier remain in the board's column when those columns swap.
     /// </para>
     /// </remarks>
     private void ApplyLayout()
@@ -115,13 +123,14 @@ public partial class GamePage : ContentPage, IQueryAttributable
         const double ControlsWidth = 320;
 
         var wide = Width >= WideThreshold && Width > Height;
+        var layout = (IsWide: wide, ControlsOnRight: wide && _viewModel.IsWideControlsOnRight);
 
-        if (_isWideLayout == wide)
+        if (_appliedLayout == layout)
         {
             return;
         }
 
-        _isWideLayout = wide;
+        _appliedLayout = layout;
         _viewModel.IsWideLayout = wide;
 
         if (!wide)
@@ -152,7 +161,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         }
 
         // Controls take the side the hand is on, which is the same setting that orders them.
-        var controlsFirst = !_viewModel.IsWideControlsOnRight;
+        var controlsFirst = !layout.ControlsOnRight;
 
         PlayLayout.ColumnDefinitions = controlsFirst
             ? [new ColumnDefinition(ControlsWidth), new ColumnDefinition(GridLength.Star)]
