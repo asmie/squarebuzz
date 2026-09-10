@@ -131,14 +131,14 @@ public class TimedSessionTests
     }
 
     [Fact]
-    public void SolvingOnTheFinalTick_CountsAsAWinRatherThanALoss()
+    public void ZeroRemainingTime_RejectsASolve_AndLaterAdvancesCannotUndoAnEarlierWin()
     {
-        // The nastiest ordering in the feature: elapsed exactly equals the limit, so IsTimeUp and
-        // IsSolved would both be true if solving did not take precedence.
         var session = Timed(TimeSpan.FromSeconds(10));
 
         session.Advance(TimeSpan.FromSeconds(10));
+        SolveIt(session);
         Assert.True(session.IsTimeUp);
+        Assert.False(session.IsSolved);
 
         var fresh = Timed(TimeSpan.FromSeconds(10));
         SolveIt(fresh);

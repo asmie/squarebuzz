@@ -80,10 +80,10 @@ public partial class GameViewModel : LocalizedViewModel
     private TimeSpan _sinceAutosave;
 
     /// <summary>
-    /// <see cref="IClock.Monotonic"/> as of the last tick that counted, so the next tick can measure
-    /// how much time really passed rather than assuming its nominal interval did.
+    /// <see cref="IClock.Monotonic"/> as of the last accounting point, shared by input, saves,
+    /// suspension and timer ticks so every interval is charged once.
     /// </summary>
-    private TimeSpan _lastTickAt;
+    private TimeSpan _lastAccountedAt;
 
     /// <summary>The exact snapshot last written for the current session.</summary>
     private SavedGame? _lastSavedGame;
@@ -746,6 +746,8 @@ public partial class GameViewModel : LocalizedViewModel
 
     private async Task<bool> TryResumeAsync(Guid id)
     {
+        AccountElapsedTime();
+        StopTimer();
         try
         {
             _settings = await _settingsRepository.LoadAsync();
@@ -792,7 +794,12 @@ public partial class GameViewModel : LocalizedViewModel
     /// Writes the game in progress to the save table. Called on pause, on quit and on leaving the
     /// screen, plus periodically while playing.
     /// </summary>
-    public Task AutosaveAsync() => QueueAutosaveAsync(onlyIfChanged: false);
+    public Task AutosaveAsync()
+    {
+        // This call is already a save point, including if accounting opens the break reminder.
+        AccountElapsedTime(saveOnBreak: false);
+        return QueueAutosaveAsync(onlyIfChanged: false);
+    }
 
     private Task QueueAutosaveAsync(bool onlyIfChanged)
     {
@@ -860,6 +867,9 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
     {
+        // Settle the outgoing attempt before replacing it. Loading and generation are not play.
+        AccountElapsedTime();
+        StopTimer();
         _settings = await LoadSettingsSafelyAsync();
 
         // A null seed means "surprise me", so replaying gives a different picture rather than
@@ -946,7 +956,7 @@ public partial class GameViewModel : LocalizedViewModel
     }
 
     /// <summary>
-    /// True while an overlay is up: the pause screen, or the break reminder.
+    /// True while the game is suspended or a pause/break overlay is up.
     /// </summary>
     /// <remarks>
     /// One definition for every route onto the board - painting, tapping, hints, undo and redo -
@@ -954,12 +964,13 @@ public partial class GameViewModel : LocalizedViewModel
     /// did: the hint and undo buttons checked only for pause, so a child could keep spending
     /// hints behind the break reminder, which is documented as stopping play.
     /// </remarks>
-    private bool IsInputBlocked => IsPaused || IsBreakReminderOpen;
+    private bool IsInputBlocked => _isClockSuspended || IsPaused || IsBreakReminderOpen;
 
     /// <summary>Applies a paint request from the board view.</summary>
     public void Paint(int index, CellState target)
     {
-        if (Session is not { } session || IsSolved || IsInputBlocked)
+        AccountElapsedTime();
+        if (Session is not { IsOver: false } session || IsInputBlocked)
         {
             return;
         }
@@ -977,7 +988,8 @@ public partial class GameViewModel : LocalizedViewModel
     /// </remarks>
     public void TapCell(int index)
     {
-        if (Session is not { } session || IsSolved || IsInputBlocked)
+        AccountElapsedTime();
+        if (Session is not { IsOver: false } session || IsInputBlocked)
         {
             return;
         }
@@ -1041,7 +1053,8 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void ToggleMode()
     {
-        if (Session is not { } session)
+        AccountElapsedTime();
+        if (Session is not { IsOver: false } session || IsInputBlocked)
         {
             return;
         }
@@ -1053,6 +1066,7 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void Undo()
     {
+        AccountElapsedTime();
         if (IsInputBlocked || Session?.Undo() != true)
         {
             return;
@@ -1065,6 +1079,7 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void Redo()
     {
+        AccountElapsedTime();
         if (IsInputBlocked || Session?.Redo() != true)
         {
             return;
@@ -1077,7 +1092,8 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private void UseHint()
     {
-        if (Session is not { } session || IsInputBlocked)
+        AccountElapsedTime();
+        if (Session is not { IsOver: false } session || IsInputBlocked)
         {
             return;
         }
@@ -1114,7 +1130,8 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private async Task PauseAsync()
     {
-        if (IsSolved)
+        AccountElapsedTime();
+        if (Session is not { IsOver: false } || IsInputBlocked)
         {
             return;
         }
@@ -1136,7 +1153,17 @@ public partial class GameViewModel : LocalizedViewModel
 
     /// <summary>Dismisses the break reminder and carries on playing.</summary>
     [RelayCommand]
-    private void DismissBreakReminder() => IsBreakReminderOpen = false;
+    private void DismissBreakReminder()
+    {
+        if (!IsBreakReminderOpen)
+        {
+            return;
+        }
+
+        // A reminder can be dismissed between ticks, or after no ticks at all.
+        _lastAccountedAt = _clock.Monotonic;
+        IsBreakReminderOpen = false;
+    }
 
     [RelayCommand]
     private async Task RestartAsync()
@@ -1219,6 +1246,7 @@ public partial class GameViewModel : LocalizedViewModel
     [RelayCommand]
     private async Task QuitAsync()
     {
+        AccountElapsedTime();
         StopTimer();
         await AutosaveAsync();
         await _navigation.ResetToAsync(Routes.Menu);
@@ -1358,6 +1386,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// </summary>
     public void SuspendClock()
     {
+        AccountElapsedTime();
         _isClockSuspended = true;
         StopTimer();
     }
@@ -1385,44 +1414,53 @@ public partial class GameViewModel : LocalizedViewModel
         _timer.Tick += OnTimerTick;
 
         // Measured from here, so the first tick counts only the time since the clock started.
-        _lastTickAt = _clock.Monotonic;
+        _lastAccountedAt = _clock.Monotonic;
 
         _timer.Start();
     }
 
     /// <summary>
-    /// Advances the game by the time that really passed, not by the timer's nominal second.
+    /// Refreshes the clock and runs periodic saves. Input and lifecycle events also account
+    /// for elapsed time, so a delayed tick cannot extend a trial's deadline.
     /// </summary>
-    /// <remarks>
-    /// A dispatcher timer is a request, not a guarantee: under load the UI thread delivers its
-    /// ticks late or drops them outright, and counting each one as a second made the game clock
-    /// run slow by exactly the amount the device was struggling. In a timed trial that quietly
-    /// handed the player extra real time. Reading a monotonic clock on every tick charges the
-    /// true interval however unevenly the ticks arrive.
-    /// </remarks>
     private void OnTimerTick(object? sender, EventArgs e)
     {
-        var now = _clock.Monotonic;
-        var delta = now - _lastTickAt;
-        _lastTickAt = now;
-
-        // Moving the reference forward in the guarded cases too is what keeps the break reminder
-        // from charging its own duration to the game the moment it is dismissed: the timer keeps
-        // running behind the overlay, and without this the first tick after "A little longer"
-        // would measure the whole time the child spent reading it.
-        if (Session is not { } session || session.IsOver || IsPaused || IsBreakReminderOpen)
+        // Ignore an event already queued by a timer that has since stopped or been replaced.
+        if (!ReferenceEquals(sender, _timer))
         {
             return;
         }
 
-        // Monotonic cannot go backwards, but a zero-length interval is possible if two ticks are
-        // delivered together after a stall, and there is nothing to charge for it.
+        AccountElapsedTime();
+        if (_sinceAutosave >= AutosaveEvery && !IsInputBlocked && Session is { IsOver: false })
+        {
+            _ = AutosaveIfBoardChangedAsync();
+        }
+    }
+
+    /// <summary>Charges active play through now, before any operation can observe stale time.</summary>
+    private void AccountElapsedTime(bool saveOnBreak = true)
+    {
+        if (_timer is not { IsRunning: true } || IsInputBlocked || Session is not { IsOver: false } session)
+        {
+            return;
+        }
+
+        var now = _clock.Monotonic;
+        var delta = now - _lastAccountedAt;
         if (delta <= TimeSpan.Zero)
         {
             return;
         }
 
+        _lastAccountedAt = now;
+        var before = session.Elapsed;
         session.Advance(delta);
+        // Advance clamps timed sessions at their deadline. Do not count dispatcher delay after
+        // that deadline as play time, but do include the final interval of a losing attempt.
+        var played = session.Elapsed - before;
+        _sinceAutosave += played;
+        var needsBreak = _screenTime.Add(played);
         UpdateElapsedText();
 
         if (session.IsTimeUp)
@@ -1431,9 +1469,7 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        // Counted here rather than in the monitor's own timer so that only time actually spent
-        // playing counts - the guards above are exactly the cases that should not.
-        if (_screenTime.Add(delta))
+        if (needsBreak)
         {
             IsBreakReminderOpen = true;
 
@@ -1443,14 +1479,10 @@ public partial class GameViewModel : LocalizedViewModel
             Announce(reminder);
 
             // Nothing about a break should risk the board, so this is a save point too.
-            _ = AutosaveAsync();
-        }
-
-        _sinceAutosave += delta;
-
-        if (_sinceAutosave >= AutosaveEvery)
-        {
-            _ = AutosaveIfBoardChangedAsync();
+            if (saveOnBreak)
+            {
+                _ = QueueAutosaveAsync(onlyIfChanged: false);
+            }
         }
     }
 
@@ -1488,6 +1520,7 @@ public partial class GameViewModel : LocalizedViewModel
         StopTimer();
 
         IsTimeUp = true;
+        SyncFromSession();
 
         var message = $"{TimeUpTitle} {TimeUpBody}";
 

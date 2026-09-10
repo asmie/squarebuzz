@@ -81,8 +81,8 @@ public sealed class GameSession
     /// The clock ran out before the picture was finished - the game's only way to lose.
     /// </summary>
     /// <remarks>
-    /// Solving on the very last tick counts as a win: <see cref="IsSolved"/> is checked first, and
-    /// <see cref="Advance"/> stops the clock the moment the puzzle is done.
+    /// An unfinished puzzle expires at zero remaining time. A puzzle already solved stays won:
+    /// <see cref="Advance"/> stops counting once the session is over.
     /// </remarks>
     public bool IsTimeUp => IsTimed && !IsSolved && Remaining == TimeSpan.Zero;
 
