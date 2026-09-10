@@ -36,7 +36,7 @@
     <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 
     <ApplicationTitle>squarebuzz</ApplicationTitle>
-    <ApplicationId>co.equilibrium.squarebuzz</ApplicationId>
+    <ApplicationId>fun.asmie.squarebuzz</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
 
