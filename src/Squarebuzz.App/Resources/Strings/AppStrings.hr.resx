@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tri zvjezdice na 10×10, bez greške.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Nađi svaku sliku u galeriji.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Gotovo za danas — vidimo se sutra!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Pohrana nije dostupna. Pokušaj ponovno.</value>
+  </data>
 </root>

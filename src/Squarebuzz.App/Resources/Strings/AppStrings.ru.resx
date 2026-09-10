@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Три звезды на поле 10×10 и ни одной ошибки.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Найди все картинки в галерее.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>На сегодня всё — до завтра!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Хранилище недоступно. Попробуй ещё раз.</value>
+  </data>
 </root>

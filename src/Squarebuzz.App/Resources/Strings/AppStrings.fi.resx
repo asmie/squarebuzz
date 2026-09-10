@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Kolme tähteä 10×10-pulmasta ilman virheitä.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Löydä galleriasta kaikki kuvat.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Tämä päivä tehty — huomiseen!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Tallennustila ei ole käytettävissä. Yritä uudelleen.</value>
+  </data>
 </root>

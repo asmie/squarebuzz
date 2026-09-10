@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>在 10×10 上拿到三顆星，且沒有錯誤。</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>找到圖庫裡的每一幅圖。</value></data>
   <data name="dailyDone" xml:space="preserve"><value>今天就到這裡——明天見！</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>儲存空間無法使用。請再試一次。</value>
+  </data>
 </root>

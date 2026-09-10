@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Trys žvaigždutės 10×10 be nė vienos klaidos.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Surask visus galerijos paveikslėlius.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Šiandien atlikta — iki rytojaus!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Saugykla nepasiekiama. Bandyk dar kartą.</value>
+  </data>
 </root>

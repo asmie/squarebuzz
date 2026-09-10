@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Три зірки на полі 10×10 і жодної помилки.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Знайди всі малюнки в галереї.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>На сьогодні все — до завтра!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Сховище недоступне. Спробуй ще раз.</value>
+  </data>
 </root>

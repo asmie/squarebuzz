@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Þrjár stjörnur á 10×10, án mistaka.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Finndu allar myndir í safninu.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Búið í dag — sjáumst á morgun!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Geymsla er ekki tiltæk. Reyndu aftur.</value>
+  </data>
 </root>

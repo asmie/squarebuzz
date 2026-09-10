@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Trīs zvaigznes 10×10 bez nevienas kļūdas.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Atrodi visas bildes galerijā.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Šodien padarīts — līdz rītam!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Krātuve nav pieejama. Mēģini vēlreiz.</value>
+  </data>
 </root>

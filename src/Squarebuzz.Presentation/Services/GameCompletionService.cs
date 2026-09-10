@@ -13,13 +13,18 @@ public sealed class GameCompletionService
     private readonly IProgressRepository _progress;
     private readonly Dictionary<Guid, PuzzleCompletion> _pending = [];
     private Task _operations = Task.CompletedTask;
+    private readonly IPersistenceDiagnostics _diagnostics;
+    public bool HasFailure { get; private set; }
+    public event EventHandler? Changed;
 
-    public GameCompletionService(IGameCompletionRepository completions, IProgressRepository progress)
+    public GameCompletionService(IGameCompletionRepository completions, IProgressRepository progress,
+        IPersistenceDiagnostics? diagnostics = null)
     {
         ArgumentNullException.ThrowIfNull(completions);
         ArgumentNullException.ThrowIfNull(progress);
         _completions = completions;
         _progress = progress;
+        _diagnostics = diagnostics ?? NullPersistenceDiagnostics.Instance;
     }
 
     public Task CompleteAsync(Guid sessionId, PuzzleCompletion completion, Task precedingSave)
@@ -40,12 +45,22 @@ public sealed class GameCompletionService
 
     public Task ResetAsync() => Enqueue(async () =>
     {
-        await _progress.ResetAsync();
+        try
+        {
+            await _progress.ResetAsync();
+        }
+        catch (Exception error) when (error is not OperationCanceledException)
+        {
+            _diagnostics.Report(PersistenceOperation.ResetProgress, error);
+            throw;
+        }
         _pending.Clear();
+        SetFailure(false);
     });
 
     private async Task RetryCoreAsync()
     {
+        var failed = false;
         foreach (var (id, completion) in _pending.ToArray())
         {
             try
@@ -53,8 +68,14 @@ public sealed class GameCompletionService
                 await _completions.JournalAsync(id, completion);
                 _pending.Remove(id);
             }
-            catch (Exception)
+            catch (OperationCanceledException)
             {
+                return;
+            }
+            catch (Exception error)
+            {
+                failed = true;
+                _diagnostics.Report(PersistenceOperation.JournalCompletion, error, id);
                 // Retain even a result whose initial journal write failed. Once that write
                 // succeeds, the repository also protects it across application restarts.
                 // Keep later results behind it so recovery cannot apply older streak dates last.
@@ -66,10 +87,27 @@ public sealed class GameCompletionService
         {
             await _completions.RetryPendingAsync();
         }
-        catch (Exception)
+        catch (OperationCanceledException)
         {
+            return;
+        }
+        catch (Exception error)
+        {
+            failed = true;
+            _diagnostics.Report(PersistenceOperation.ApplyCompletions, error);
             // The durable journal is unchanged; retry on the next resume/startup/completion.
         }
+        SetFailure(failed);
+    }
+
+    private void SetFailure(bool value)
+    {
+        if (HasFailure == value)
+        {
+            return;
+        }
+        HasFailure = value;
+        Changed?.Invoke(this, EventArgs.Empty);
     }
 
     private Task Enqueue(Func<Task> operation)

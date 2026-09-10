@@ -35,6 +35,20 @@ App is the composition root: `MauiProgram` wires the repository implementations 
 interfaces declared in Core. Presentation uses those interfaces and has no dependency on Data.
 Core has no project or package dependencies.
 
+`SessionOrigin` resolves a game request into its challenge mode, picture and seed. Saves,
+completion credit and replay use that identity; a daily puzzle keeps its original date.
+The game page owns `GameSaveService` (ordered snapshots across restarts) and `GameTimeTracker`
+(active elapsed time and autosave cadence). `GameCompletionService` has app lifetime so completion
+retries survive page disposal and stay ordered with progress resets.
+
+Game, Continue and Options show a persistent retry action when storage operations fail. Failed
+reads retain known values; Options disables editing until its preferences can be read. Completion
+recovery uses the existing journal. Persistence diagnostics are local JSON Lines under
+`FileSystem.AppDataDirectory/diagnostics`, with two files capped at 256 KiB each. They contain
+operation, time, exception type, stack and optional session ID, excluding exception messages,
+settings and board contents. Logging failures never interrupt recovery; cancellation is not logged
+as a storage error.
+
 ## Build, run, test
 
 Requires the exact .NET SDK and workload-set versions in [global.json](global.json).

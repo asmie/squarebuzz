@@ -89,6 +89,8 @@ public static class MauiProgram
         services.AddSingleton<IGameTimerFactory, DispatcherGameTimerFactory>();
         services.AddSingleton<GameLifecycle>();
         services.AddSingleton<GameCompletionService>();
+        services.AddTransient<GameSaveService>();
+        services.AddTransient<GameTimeTracker>();
         services.AddSingleton<IScreenReader, MauiScreenReader>();
 
         RegisterDomain(services);
@@ -125,6 +127,9 @@ public static class MauiProgram
     /// </summary>
     private static void RegisterPersistence(IServiceCollection services)
     {
+        services.AddSingleton<IPersistenceDiagnostics>(_ => new FilePersistenceDiagnostics(
+            Path.Combine(FileSystem.AppDataDirectory, "diagnostics")));
+
         // One connection for the whole app - see SquarebuzzDatabase for why sharing matters.
         services.AddSingleton(_ => new SquarebuzzDatabase(
             Path.Combine(FileSystem.AppDataDirectory, "squarebuzz.db3")));
@@ -140,7 +145,8 @@ public static class MauiProgram
         // writes already submitted, including those still waiting for an earlier write.
         services.AddSingleton<ISettingsRepository>(provider =>
             new OrderedSettingsRepository(
-                new SqliteSettingsRepository(provider.GetRequiredService<SquarebuzzDatabase>(), deviceLanguage)));
+                new SqliteSettingsRepository(provider.GetRequiredService<SquarebuzzDatabase>(), deviceLanguage),
+                provider.GetRequiredService<IPersistenceDiagnostics>()));
         services.AddSingleton<ISaveGameRepository, SqliteSaveGameRepository>();
         services.AddSingleton<IProgressRepository, SqliteProgressRepository>();
         services.AddSingleton<IGameCompletionRepository, SqliteGameCompletionRepository>();

@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>10×10 पर तीन तारे, बिना ग़लती।</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>गैलरी की हर तस्वीर खोजो।</value></data>
   <data name="dailyDone" xml:space="preserve"><value>आज के लिए हो गया — कल मिलते हैं!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>स्टोरेज उपलब्ध नहीं है। फिर से कोशिश करें।</value>
+  </data>
 </root>

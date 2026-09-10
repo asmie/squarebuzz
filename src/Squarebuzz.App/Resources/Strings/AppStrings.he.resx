@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>שלושה כוכבים על 10×10, בלי טעויות.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>מצא כל תמונה בגלריה.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>גמרנו להיום — נתראה מחר!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>האחסון אינו זמין. יש לנסות שוב.</value>
+  </data>
 </root>

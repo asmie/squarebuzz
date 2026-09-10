@@ -10,26 +10,42 @@ namespace Squarebuzz.Presentation.Services;
 public sealed class OrderedSettingsRepository : ISettingsRepository
 {
     private readonly ISettingsRepository _inner;
+    private readonly IPersistenceDiagnostics _diagnostics;
     private readonly object _gate = new();
     private Task _pending = Task.CompletedTask;
 
-    public OrderedSettingsRepository(ISettingsRepository inner)
+    public OrderedSettingsRepository(ISettingsRepository inner, IPersistenceDiagnostics? diagnostics = null)
     {
         ArgumentNullException.ThrowIfNull(inner);
         _inner = inner;
+        _diagnostics = diagnostics ?? NullPersistenceDiagnostics.Instance;
     }
 
     public Task<GameSettings> LoadAsync(CancellationToken cancellationToken = default) =>
-        EnqueueAsync(() => _inner.LoadAsync(cancellationToken), cancellationToken);
+        EnqueueAsync(() => DiagnoseAsync(PersistenceOperation.LoadSettings,
+            () => _inner.LoadAsync(cancellationToken)), cancellationToken);
 
     public Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(settings);
-        return EnqueueAsync(async () =>
+        return EnqueueAsync(() => DiagnoseAsync(PersistenceOperation.SaveSettings, async () =>
         {
             await _inner.SaveAsync(settings, cancellationToken).ConfigureAwait(false);
             return true;
-        }, cancellationToken);
+        }), cancellationToken);
+    }
+
+    private async Task<T> DiagnoseAsync<T>(PersistenceOperation operation, Func<Task<T>> action)
+    {
+        try
+        {
+            return await action().ConfigureAwait(false);
+        }
+        catch (Exception error) when (error is not OperationCanceledException)
+        {
+            _diagnostics.Report(operation, error);
+            throw;
+        }
     }
 
     private Task<T> EnqueueAsync<T>(Func<Task<T>> operation, CancellationToken cancellationToken)

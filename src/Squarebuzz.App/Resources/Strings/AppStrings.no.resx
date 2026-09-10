@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tre stjerner på en 10×10, uten feil.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Finn alle bildene i galleriet.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Ferdig for i dag — vi ses i morgen!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Lagring er utilgjengelig. Prøv igjen.</value>
+  </data>
 </root>

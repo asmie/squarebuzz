@@ -13,6 +13,17 @@ public sealed class GameViewModelQueryTests : IDisposable
     public void Dispose() => _h.Dispose();
 
     [Fact]
+    public async Task ANewQuickGame_DoesNotInheritThePreviousTimedRouteOnRestart()
+    {
+        _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["tier"] = "2" });
+        await _h.Vm.InitialiseAsync();
+        await _h.Vm.StartAsync(NewGameOptions.Default);
+        await _h.Vm.RestartCommand.ExecuteAsync(null);
+        Assert.False(_h.Vm.Session!.IsTimed);
+        Assert.Equal(SessionMode.QuickGame, _h.Vm.Session.Origin!.Mode);
+    }
+
+    [Fact]
     public async Task Level_InRange_StartsThatCampaignLevel()
     {
         _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["level"] = "5" });

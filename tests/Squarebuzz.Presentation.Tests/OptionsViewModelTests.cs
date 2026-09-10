@@ -48,6 +48,54 @@ public class OptionsViewModelTests : IDisposable
     /// <summary>The most recent write, which is what the next launch will read.</summary>
     private GameSettings LastSaved => _settings.Saved[^1];
 
+    [Fact]
+    public async Task FailedReset_StaysOnOptions_AndRetryReopensConfirmation()
+    {
+        _progress.ResetError = new IOException("busy");
+        await _vm.ConfirmResetCommand.ExecuteAsync(null);
+        Assert.True(_vm.HasPersistenceFailure);
+        Assert.Null(_navigation.Last);
+        await _vm.RetryPersistenceCommand.ExecuteAsync(null);
+        Assert.True(_vm.IsResetConfirmOpen);
+        Assert.Equal(1, _progress.ResetCalls);
+        _progress.ResetError = null;
+        await _vm.ConfirmResetCommand.ExecuteAsync(null);
+        Assert.False(_vm.HasPersistenceFailure);
+        Assert.Equal(new FakeNavigationService.Request(Routes.Menu, null, IsReset: true), _navigation.Last);
+    }
+
+    [Fact]
+    public async Task FailedLoad_DisablesEditingUntilRetryLoadsStoredPreferences()
+    {
+        _settings.Settings = GameSettings.Default with { BigNumbers = true };
+        _settings.LoadFails = true;
+        await _vm.OnAppearingAsync();
+        Assert.True(_vm.HasPersistenceFailure);
+        Assert.False(_vm.CanEditSettings);
+        Assert.Empty(_settings.Saved);
+        _settings.LoadFails = false;
+        await _vm.RetryPersistenceCommand.ExecuteAsync(null);
+        Assert.False(_vm.HasPersistenceFailure);
+        Assert.True(_vm.CanEditSettings);
+        Assert.True(_vm.BigNumbers);
+        Assert.Empty(_settings.Saved);
+    }
+
+    [Fact]
+    public async Task FailedWrite_RetrySavesLatestChoices()
+    {
+        await _vm.OnAppearingAsync();
+        _settings.SaveFails = true;
+        _vm.BigNumbers = true;
+        _vm.CellZoomPercent = 130;
+        Assert.True(_vm.HasPersistenceFailure);
+        _settings.SaveFails = false;
+        await _vm.RetryPersistenceCommand.ExecuteAsync(null);
+        Assert.False(_vm.HasPersistenceFailure);
+        Assert.True(LastSaved.BigNumbers);
+        Assert.Equal(130, LastSaved.CellZoomPercent);
+    }
+
     // ---- Opening the screen ----
 
     [Fact]

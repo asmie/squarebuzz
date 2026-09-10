@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>১০×১০-এ তিন তারা, একটাও ভুল ছাড়া।</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>গ্যালারির সব ছবি খুঁজে বের করো।</value></data>
   <data name="dailyDone" xml:space="preserve"><value>আজকের মতো শেষ — কাল দেখা হবে!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>স্টোরেজ ব্যবহার করা যাচ্ছে না। আবার চেষ্টা করুন।</value>
+  </data>
 </root>

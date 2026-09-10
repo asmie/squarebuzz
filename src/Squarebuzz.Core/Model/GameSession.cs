@@ -24,7 +24,7 @@ public sealed class GameSession
 
         Puzzle = puzzle;
         Rules = rules;
-        Origin = origin;
+        Origin = origin is null ? null : new SessionOrigin(puzzle, origin, seed);
         Seed = seed;
         _cells = new CellState[puzzle.CellCount];
         HintsRemaining = rules.HintAllowance;
@@ -35,10 +35,10 @@ public sealed class GameSession
     public GameRules Rules { get; private set; }
 
     /// <summary>
-    /// The choices this session was created from. Carried so a save can record the player's
-    /// actual difficulty and challenge rather than guessing them back out of the rules.
+    /// Resolved challenge identity and replay choices. Saves and completion use the same
+    /// picture, seed and mode rather than guessing them back out of the rules or route.
     /// </summary>
-    public NewGameOptions? Origin { get; }
+    public SessionOrigin? Origin { get; }
 
     /// <summary>Seed that reproduces this puzzle, so a save need not store the picture.</summary>
     public int Seed { get; }

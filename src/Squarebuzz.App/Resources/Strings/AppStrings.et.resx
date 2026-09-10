@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Kolm tähte 10×10 mõistatuses, ilma ühegi veata.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Leia galeriist kõik pildid.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Tänaseks tehtud — homme näeme!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Salvestusruum pole saadaval. Proovi uuesti.</value>
+  </data>
 </root>

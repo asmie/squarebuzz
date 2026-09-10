@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tri zvezdice na 10×10, brez napake.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Najdi vse slike v galeriji.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Za danes opravljeno — se vidiva jutri!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Shramba ni na voljo. Poskusi znova.</value>
+  </data>
 </root>

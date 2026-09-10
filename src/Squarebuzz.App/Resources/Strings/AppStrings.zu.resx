@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Izinkanyezi ezintathu ku-10×10, ngaphandle kwamaphutha.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Thola sonke isithombe egalari.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Sekwanele namuhla — sizobonana kusasa!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Isitoreji asitholakali. Sicela uzame futhi.</value>
+  </data>
 </root>

@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tre stelle su una 10×10, senza nemmeno un errore.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Trova tutti i disegni della galleria.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Fatto per oggi — a domani!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Lo spazio di archiviazione non è disponibile. Riprova.</value>
+  </data>
 </root>

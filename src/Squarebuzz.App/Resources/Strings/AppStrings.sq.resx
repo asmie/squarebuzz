@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tre yje në një 10×10, pa gabime.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Gjej çdo figurë në galeri.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Mbaroi për sot — shihemi nesër!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Hapësira ruajtëse nuk është e disponueshme. Provo përsëri.</value>
+  </data>
 </root>

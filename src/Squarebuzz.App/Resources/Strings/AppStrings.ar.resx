@@ -312,4 +312,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>ثلاث نجوم في لوحة 10×10 بلا أي خطأ.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>اعثر على كل الصور في المعرض.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>انتهى لغز اليوم — إلى الغد!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>التخزين غير متاح. يرجى المحاولة مرة أخرى.</value>
+  </data>
 </root>

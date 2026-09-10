@@ -323,4 +323,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Three stars on a 10×10, with no mistakes.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Find every picture in the gallery.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Done today — see you tomorrow!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Storage is unavailable. Please try again.</value>
+  </data>
 </root>

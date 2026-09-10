@@ -102,10 +102,12 @@ public sealed class FakeProgressRepository : IProgressRepository
 
     /// <summary>How often progress was wiped - a destructive action a test wants to count exactly.</summary>
     public int ResetCalls { get; private set; }
+    public Exception? ResetError { get; set; }
 
     public Task ResetAsync(CancellationToken cancellationToken = default)
     {
         ResetCalls++;
+        if (ResetError is { } error) return Task.FromException(error);
         Progress = PlayerProgress.Empty;
         Solved.Clear();
         Trophies.Clear();
@@ -117,6 +119,8 @@ public sealed class FakeProgressRepository : IProgressRepository
 
 public sealed class FakeSaveGameRepository : ISaveGameRepository
 {
+    public Exception? LoadError { get; set; }
+    public Exception? SaveError { get; set; }
     public Dictionary<Guid, SavedGame> Saves { get; } = [];
 
     public List<SavedGame> SaveAttempts { get; } = [];
@@ -130,10 +134,11 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
     public TaskCompletionSource? DeleteGate { get; set; }
 
     public Task<IReadOnlyList<SavedGame>> GetAllAsync(CancellationToken cancellationToken = default) =>
-        Task.FromResult<IReadOnlyList<SavedGame>>([.. Saves.Values.OrderByDescending(s => s.SavedAt)]);
+        LoadError is { } error ? Task.FromException<IReadOnlyList<SavedGame>>(error)
+            : Task.FromResult<IReadOnlyList<SavedGame>>([.. Saves.Values.OrderByDescending(s => s.SavedAt)]);
 
     public Task<SavedGame?> GetAsync(Guid id, CancellationToken cancellationToken = default) =>
-        Task.FromResult(Saves.GetValueOrDefault(id));
+        LoadError is { } error ? Task.FromException<SavedGame?>(error) : Task.FromResult(Saves.GetValueOrDefault(id));
 
     public async Task SaveAsync(SavedGame game, CancellationToken cancellationToken = default)
     {
@@ -143,6 +148,10 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
             await gate.Task;
         }
 
+        if (SaveError is { } error)
+        {
+            throw error;
+        }
         Saves[game.Id] = game;
     }
 

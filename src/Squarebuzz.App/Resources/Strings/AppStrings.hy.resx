@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Երեք աստղ 10×10-ի վրա՝ առանց սխալի։</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Գտիր պատկերասրահի բոլոր նկարները։</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Այսօրվա համար վերջ — վաղը կտեսնվենք</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Պահոցը հասանելի չէ։ Փորձիր կրկին։</value>
+  </data>
 </root>

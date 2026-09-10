@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>10×10でまちがいなし、星3つをとろう。</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>ギャラリーの絵をぜんぶ見つけよう。</value></data>
   <data name="dailyDone" xml:space="preserve"><value>今日はおしまい — また明日ね！</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>ストレージを利用できません。もう一度お試しください。</value>
+  </data>
 </root>

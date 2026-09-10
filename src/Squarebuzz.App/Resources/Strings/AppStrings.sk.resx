@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tri hviezdičky na 10×10 bez jedinej chyby.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Nájdi všetky obrázky v galérii.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Dnes hotovo — zajtra zas!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Úložisko nie je dostupné. Skús to znova.</value>
+  </data>
 </root>

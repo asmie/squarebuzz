@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Nyota tatu kwenye 10×10, bila makosa.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Pata kila picha kwenye ghala.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Tumemaliza kwa leo — tutaonana kesho!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Hifadhi haipatikani. Tafadhali jaribu tena.</value>
+  </data>
 </root>

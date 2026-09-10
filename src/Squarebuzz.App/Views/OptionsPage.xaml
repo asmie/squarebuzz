@@ -40,8 +40,19 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid>
-        <ScrollView>
+    <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0" IsVisible="{Binding HasPersistenceFailure}"
+                BackgroundColor="{DynamicResource Surface2}" Stroke="{DynamicResource Line}"
+                Padding="12,8">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="{Binding PersistenceFailureText}" TextColor="{DynamicResource Ink}"
+                       SemanticProperties.HeadingLevel="Level2" />
+                <Button Text="{Binding RetryPersistenceText}" Command="{Binding RetryPersistenceCommand}"
+                        Style="{StaticResource SecondaryButton}" />
+            </VerticalStackLayout>
+        </Border>
+        <Grid Grid.Row="1">
+        <ScrollView IsEnabled="{Binding CanEditSettings}">
             <VerticalStackLayout Padding="{StaticResource PagePadding}"
                                  Spacing="6"
                                  MaximumWidthRequest="{StaticResource FrameMaxWidth}"
@@ -377,6 +388,7 @@
                             Style="{StaticResource SecondaryButton}" HeightRequest="48" />
                 </VerticalStackLayout>
             </Border>
+        </Grid>
         </Grid>
     </Grid>
 

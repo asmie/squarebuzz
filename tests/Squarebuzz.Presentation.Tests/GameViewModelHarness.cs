@@ -16,18 +16,19 @@ public sealed class GameViewModelHarness : IDisposable
     {
         Sessions = sessions ?? new GameSessionFactory(PuzzleRepository, Generator);
         Completions = new FakeGameCompletionRepository(Progress, SaveGames);
-        CompletionService = new GameCompletionService(Completions, Progress);
+        CompletionService = new GameCompletionService(Completions, Progress, Diagnostics);
+        Saves = new GameSaveService(SaveGames, Clock, Diagnostics);
 
         Vm = new GameViewModel(
             Sessions,
             settings ?? Settings,
             Progress,
-            SaveGames,
+            Saves,
             PuzzleRepository,
             Strings,
             Navigation,
             Clock,
-            ScreenTime,
+            new GameTimeTracker(Clock, ScreenTime),
             Audio,
             Narration,
             Accessibility,
@@ -35,8 +36,13 @@ public sealed class GameViewModelHarness : IDisposable
             UiThread,
             Timers,
             ScreenReader,
-            CompletionService);
+            CompletionService,
+            Diagnostics);
     }
+
+    public FakePersistenceDiagnostics Diagnostics { get; } = new();
+
+    public GameSaveService Saves { get; }
 
     public FakeLocalizationService Strings { get; } = new();
 

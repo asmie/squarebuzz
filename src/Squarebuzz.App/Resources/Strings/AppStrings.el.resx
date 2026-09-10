@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Τρία αστέρια σε ένα 10×10, χωρίς λάθη.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Βρες κάθε εικόνα στη συλλογή.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Τελείωσε για σήμερα — τα λέμε αύριο!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Ο χώρος αποθήκευσης δεν είναι διαθέσιμος. Δοκίμασε ξανά.</value>
+  </data>
 </root>

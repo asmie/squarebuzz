@@ -9,7 +9,7 @@
              Shell.NavBarIsVisible="True"
              BackgroundColor="{DynamicResource Bg}">
 
-    <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,*">
+    <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,Auto,*">
 
         <Label Grid.Row="0"
                Text="{Binding Heading}"
@@ -17,8 +17,18 @@
                SemanticProperties.HeadingLevel="Level1"
                Margin="0,0,0,12" />
 
-        <!-- Empty state: a mascot and a way out, rather than a blank screen. -->
-        <VerticalStackLayout Grid.Row="1"
+        <Border Grid.Row="1" IsVisible="{Binding HasPersistenceFailure}"
+                BackgroundColor="{DynamicResource Surface2}" Stroke="{DynamicResource Line}" Padding="12,8">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="{Binding PersistenceFailureText}" TextColor="{DynamicResource Ink}"
+                       SemanticProperties.HeadingLevel="Level2" />
+                <Button Text="{Binding RetryPersistenceText}" Command="{Binding RetryPersistenceCommand}"
+                        Style="{StaticResource SecondaryButton}" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Empty state is shown only after a successful read. -->
+        <VerticalStackLayout Grid.Row="2"
                              IsVisible="{Binding IsEmpty}"
                              VerticalOptions="Center"
                              Spacing="18">
@@ -31,7 +41,7 @@
                     HeightRequest="56" />
         </VerticalStackLayout>
 
-        <CollectionView Grid.Row="1"
+        <CollectionView Grid.Row="2"
                         IsVisible="{Binding HasSaves}"
                         ItemsSource="{Binding Saves}"
                         SelectionMode="None">

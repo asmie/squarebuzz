@@ -9,6 +9,22 @@ namespace Squarebuzz.Presentation.Tests;
 public sealed class OrderedSettingsRepositoryTests
 {
     [Fact]
+    public async Task Diagnostics_ReportFailedOperations_ButNotCancellation()
+    {
+        var storage = new FakeSettingsRepository { SaveFails = true, LoadFails = true };
+        var diagnostics = new FakePersistenceDiagnostics();
+        var settings = new OrderedSettingsRepository(storage, diagnostics);
+        await Assert.ThrowsAsync<InvalidOperationException>(() => settings.SaveAsync(GameSettings.Default));
+        await Assert.ThrowsAsync<InvalidOperationException>(() => settings.LoadAsync());
+        Assert.Equal([PersistenceOperation.SaveSettings, PersistenceOperation.LoadSettings],
+            diagnostics.Reports.Select(r => r.Operation));
+        using var cancellation = new CancellationTokenSource();
+        cancellation.Cancel();
+        await Assert.ThrowsAsync<OperationCanceledException>(() => settings.LoadAsync(cancellation.Token));
+        Assert.Equal(2, diagnostics.Reports.Count);
+    }
+
+    [Fact]
     public async Task ReturningFromOptions_WaitsForAllChangesEvenAfterThePageIsDisposed()
     {
         var storage = new FakeSettingsRepository();

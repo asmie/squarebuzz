@@ -312,4 +312,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Trzy gwiazdki na 10×10, bez żadnej pomyłki.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Znajdź każdy obrazek w galerii.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Zrobione na dziś — do jutra!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Pamięć jest niedostępna. Spróbuj ponownie.</value>
+  </data>
 </root>

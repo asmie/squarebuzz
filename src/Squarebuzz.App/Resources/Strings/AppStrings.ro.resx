@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Trei stele la un 10×10, fără greșeli.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Găsește toate imaginile din galerie.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Gata pentru azi — pe mâine!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Stocarea nu este disponibilă. Încearcă din nou.</value>
+  </data>
 </root>

@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Drie sterren op een 10×10, zonder fouten.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Vind elke tekening in de galerij.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Klaar voor vandaag — tot morgen!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>De opslag is niet beschikbaar. Probeer het opnieuw.</value>
+  </data>
 </root>

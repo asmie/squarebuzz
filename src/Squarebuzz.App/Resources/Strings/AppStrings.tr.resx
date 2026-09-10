@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>10×10'da hiç hata yapmadan üç yıldız.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Galerideki her resmi bul.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Bugünlük tamam — yarın görüşürüz!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Depolama kullanılamıyor. Lütfen tekrar dene.</value>
+  </data>
 </root>

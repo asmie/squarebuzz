@@ -8,7 +8,18 @@
              BackgroundColor="{DynamicResource Bg}">
 
     <!-- Outer grid layers the pause and win overlays over the board. -->
-    <Grid>
+    <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0" IsVisible="{Binding HasPersistenceFailure}"
+                BackgroundColor="{DynamicResource Surface2}" Stroke="{DynamicResource Line}"
+                Padding="12,8">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="{Binding PersistenceFailureText}" TextColor="{DynamicResource Ink}"
+                       SemanticProperties.HeadingLevel="Level2" />
+                <Button Text="{Binding RetryPersistenceText}" Command="{Binding RetryPersistenceCommand}"
+                        Style="{StaticResource SecondaryButton}" />
+            </VerticalStackLayout>
+        </Border>
+        <Grid Grid.Row="1">
     <!--
       Row layout on a phone, and a two-column layout on a wide landscape screen - see
       GamePage.ApplyLayout. The definitions and the children's positions are set from code
@@ -416,6 +427,7 @@
                             HeightRequest="50" />
                 </VerticalStackLayout>
             </Border>
+        </Grid>
         </Grid>
     </Grid>
 

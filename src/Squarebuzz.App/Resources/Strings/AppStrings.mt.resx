@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>Tliet stilel fuq 10×10, bla żbalji.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Sib kull stampa fil-gallerija.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Lest għal llum — narak għada!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>Il-ħażna mhix disponibbli. Erġa’ pprova.</value>
+  </data>
 </root>

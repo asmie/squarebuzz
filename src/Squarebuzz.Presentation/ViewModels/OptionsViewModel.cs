@@ -43,6 +43,9 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     /// <summary>Suppresses write-back while the screen is populating its own controls.</summary>
     private bool _isLoading;
+    private bool _loadFailed;
+    private bool _saveFailed;
+    private bool _resetFailed;
 
     public OptionsViewModel(
         ILocalizationService strings,
@@ -430,10 +433,18 @@ public partial class OptionsViewModel : LocalizedViewModel
         try
         {
             _settings = await _settingsRepository.LoadAsync();
+            _loadFailed = false;
+            _saveFailed = false;
+        }
+        catch (OperationCanceledException)
+        {
+            _isLoading = false;
+            return;
         }
         catch (Exception)
         {
-            _settings = GameSettings.Default;
+            // Keep the last known values; a failed read is not a fresh installation.
+            _loadFailed = true;
         }
 
         SoundEffects = _settings.SoundEffects;
@@ -465,6 +476,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         SyncLanguageSelection(Language);
 
         _isLoading = false;
+        NotifyPersistenceState();
 
         // The splash already probed for a voice; this just re-reads the answer, since the note
         // under the switch is bound to it and this screen may be built long afterwards.
@@ -728,18 +740,45 @@ public partial class OptionsViewModel : LocalizedViewModel
             // Settings survive deliberately: erasing progress must not also undo a child's
             // accessibility choices. See SqliteProgressRepository.ResetAsync.
             await _completions.ResetAsync();
+            _resetFailed = false;
+            NotifyPersistenceState();
+        }
+        catch (OperationCanceledException)
+        {
+            return;
         }
         catch (Exception)
         {
-            // Nothing useful to tell a parent here; the next screen will simply show zeroes.
+            _resetFailed = true;
+            NotifyPersistenceState();
+            return;
         }
 
         await _navigation.ResetToAsync(Routes.Menu);
     }
 
+    public bool HasPersistenceFailure => _loadFailed || _saveFailed || _resetFailed;
+    public bool CanEditSettings => !_loadFailed;
+    public string PersistenceFailureText => T("storageUnavailable");
+    public string RetryPersistenceText => T("tryAgain");
+
+    private void NotifyPersistenceState() => _uiThread.BeginInvokeOnMainThread(() =>
+    {
+        OnPropertyChanged(nameof(HasPersistenceFailure));
+        OnPropertyChanged(nameof(CanEditSettings));
+    });
+
+    [RelayCommand]
+    private async Task RetryPersistenceAsync()
+    {
+        if (_loadFailed) await OnAppearingAsync();
+        if (_saveFailed && !_loadFailed) await SaveSettingsAsync(_settings);
+        if (_resetFailed) IsResetConfirmOpen = true;
+    }
+
     private void Persist()
     {
-        if (_isLoading)
+        if (_isLoading || _loadFailed)
         {
             return;
         }
@@ -779,11 +818,24 @@ public partial class OptionsViewModel : LocalizedViewModel
     {
         try
         {
-            await _settingsRepository.SaveAsync(settings).ConfigureAwait(false);
+            await _settingsRepository.SaveAsync(settings);
+            if (ReferenceEquals(settings, _settings))
+            {
+                _saveFailed = false;
+                NotifyPersistenceState();
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // Cancellation is not a storage failure; retain any earlier recovery state.
         }
         catch (Exception)
         {
-            // A lost preference is a minor annoyance; an error dialog mid-toggle is worse.
+            if (ReferenceEquals(settings, _settings))
+            {
+                _saveFailed = true;
+                NotifyPersistenceState();
+            }
         }
     }
 }

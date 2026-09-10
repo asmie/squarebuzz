@@ -43,21 +43,19 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>Typed options selected for a Quick Game, independent of saved preferences.</summary>
     public const string NewGameOptionsParameter = "options";
 
-    /// <summary>
-    /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
-    /// only a few moves, rare enough that it never competes with drawing.
-    /// </summary>
-    private static readonly TimeSpan AutosaveEvery = TimeSpan.FromSeconds(15);
-
     private readonly GameSessionFactory _sessions;
     private readonly ISettingsRepository _settingsRepository;
     private readonly IProgressRepository _progress;
-    private readonly ISaveGameRepository _saveGames;
+    private readonly GameSaveService _saves;
+    private readonly IPersistenceDiagnostics _diagnostics;
+    private bool _settingsLoadFailed;
+    private bool _progressLoadFailed;
+    private Guid? _failedResumeId;
     private readonly GameCompletionService _completions;
     private readonly IPuzzleRepository _puzzles;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
-    private readonly IScreenTimeMonitor _screenTime;
+    private readonly GameTimeTracker _time;
     private readonly IAudioService _audio;
     private readonly INarrationService _narration;
     private readonly IAccessibilityState _accessibility;
@@ -70,33 +68,12 @@ public partial class GameViewModel : LocalizedViewModel
     private bool _isClockSuspended;
     private GameSettings _settings = GameSettings.Default;
 
-    /// <summary>Identity of this game's row in the save table, so autosaves replace rather than pile up.</summary>
-    private Guid _saveId = Guid.NewGuid();
-
     private Guid? _pendingResumeId;
     private string? _pendingPuzzleId;
     private bool _pendingDaily;
     private TimedTier? _pendingTier;
     private int? _pendingLevel;
     private NewGameOptions? _pendingOptions;
-
-    /// <summary>Play time since the last write, so the periodic autosave fires on the clock rather than on a tick count.</summary>
-    private TimeSpan _sinceAutosave;
-
-    /// <summary>
-    /// <see cref="IClock.Monotonic"/> as of the last accounting point, shared by input, saves,
-    /// suspension and timer ticks so every interval is charged once.
-    /// </summary>
-    private TimeSpan _lastAccountedAt;
-
-    /// <summary>The exact snapshot last written for the current session.</summary>
-    private SavedGame? _lastSavedGame;
-
-    /// <summary>True once a save has been loaded or requested, even if its board is now empty.</summary>
-    private bool _hasSave;
-
-    /// <summary>Orders saves and completion persistence, including across a restart.</summary>
-    private Task _pendingSave = Task.CompletedTask;
 
     /// <summary>Identifies the most recent toast, so only its own dismissal takes effect.</summary>
     private int _toastToken;
@@ -105,12 +82,12 @@ public partial class GameViewModel : LocalizedViewModel
         GameSessionFactory sessions,
         ISettingsRepository settingsRepository,
         IProgressRepository progress,
-        ISaveGameRepository saveGames,
+        GameSaveService saves,
         IPuzzleRepository puzzles,
         ILocalizationService strings,
         INavigationService navigation,
         IClock clock,
-        IScreenTimeMonitor screenTime,
+        GameTimeTracker time,
         IAudioService audio,
         INarrationService narration,
         IAccessibilityState accessibility,
@@ -118,17 +95,18 @@ public partial class GameViewModel : LocalizedViewModel
         IUiThread uiThread,
         IGameTimerFactory timers,
         IScreenReader screenReader,
-        GameCompletionService completions)
+        GameCompletionService completions,
+        IPersistenceDiagnostics? diagnostics = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(sessions);
         ArgumentNullException.ThrowIfNull(settingsRepository);
         ArgumentNullException.ThrowIfNull(progress);
-        ArgumentNullException.ThrowIfNull(saveGames);
+        ArgumentNullException.ThrowIfNull(saves);
         ArgumentNullException.ThrowIfNull(puzzles);
         ArgumentNullException.ThrowIfNull(navigation);
         ArgumentNullException.ThrowIfNull(clock);
-        ArgumentNullException.ThrowIfNull(screenTime);
+        ArgumentNullException.ThrowIfNull(time);
         ArgumentNullException.ThrowIfNull(audio);
         ArgumentNullException.ThrowIfNull(narration);
         ArgumentNullException.ThrowIfNull(accessibility);
@@ -141,11 +119,12 @@ public partial class GameViewModel : LocalizedViewModel
         _sessions = sessions;
         _settingsRepository = settingsRepository;
         _progress = progress;
-        _saveGames = saveGames;
+        _saves = saves;
+        _diagnostics = diagnostics ?? NullPersistenceDiagnostics.Instance;
         _puzzles = puzzles;
         _navigation = navigation;
         _clock = clock;
-        _screenTime = screenTime;
+        _time = time;
         _audio = audio;
         _narration = narration;
         _accessibility = accessibility;
@@ -154,6 +133,8 @@ public partial class GameViewModel : LocalizedViewModel
         _timers = timers;
         _screenReader = screenReader;
         _completions = completions;
+        _saves.Changed += OnPersistenceChanged;
+        _completions.Changed += OnPersistenceChanged;
 
         // The board canvas snapshots its palette when it draws, so a theme change mid-game -
         // OS dusk flip under Auto, or Options changed from the pause overlay one day - must
@@ -423,7 +404,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// </summary>
     public string BreakBody => Strings.Format(
         "breakBody",
-        Math.Max(1, (int)Math.Ceiling(_screenTime.Played.TotalMinutes)));
+        Math.Max(1, (int)Math.Ceiling(_time.Played.TotalMinutes)));
 
     public string BreakKeepText => T("breakKeep");
 
@@ -630,17 +611,17 @@ public partial class GameViewModel : LocalizedViewModel
         {
             _pendingResumeId = null;
 
-            if (await TryResumeAsync(id))
+            if (await TryResumeAsync(id) || _failedResumeId is not null)
             {
                 return;
             }
 
-            // The save vanished or its picture no longer ships - fall through to a new game
-            // rather than leaving the player on an empty board.
+            // Only a missing row falls through to a new game; read/rebuild failures expose retry.
         }
 
         if (_pendingTier is { } tier)
         {
+            _pendingTier = null;
             _settings = await LoadSettingsSafelyAsync();
 
             await StartAsync(tier.ToOptions(_settings.Helpers));
@@ -726,20 +707,27 @@ public partial class GameViewModel : LocalizedViewModel
 
         if (!isWildcard)
         {
+            _progressLoadFailed = false;
+            OnPersistenceChanged(this, EventArgs.Empty);
             return null;
         }
 
         try
         {
             var solved = await _progress.GetSolvedPuzzlesAsync();
+            _progressLoadFailed = false;
+            OnPersistenceChanged(this, EventArgs.Empty);
 
             return PackUnlocks.UnlockedPackIds(
                 _puzzles.Packs,
                 _puzzles.Puzzles,
                 [.. solved.Select(s => s.PuzzleId)]);
         }
-        catch (Exception)
+        catch (Exception error) when (error is not OperationCanceledException)
         {
+            ReportReadFailure(PersistenceOperation.LoadProgress, error);
+            _progressLoadFailed = true;
+            OnPersistenceChanged(this, EventArgs.Empty);
             // Unreadable progress must not stop a game starting; the shipped locks still apply.
             return null;
         }
@@ -749,12 +737,18 @@ public partial class GameViewModel : LocalizedViewModel
     {
         try
         {
-            return await _settingsRepository.LoadAsync();
+            var settings = await _settingsRepository.LoadAsync();
+            _settingsLoadFailed = false;
+            OnPersistenceChanged(this, EventArgs.Empty);
+            return settings;
         }
-        catch (Exception)
+        catch (Exception error) when (error is not OperationCanceledException)
         {
-            // Defaults get the player into a game; Options can put things right.
-            return GameSettings.Default;
+            ReportReadFailure(PersistenceOperation.LoadSettings, error);
+            _settingsLoadFailed = true;
+            OnPersistenceChanged(this, EventArgs.Empty);
+            // Keep known preferences during a temporary storage outage.
+            return _settings;
         }
     }
 
@@ -764,9 +758,11 @@ public partial class GameViewModel : LocalizedViewModel
         StopTimer();
         try
         {
-            _settings = await _settingsRepository.LoadAsync();
+            _settings = await LoadSettingsSafelyAsync();
 
-            var save = await _saveGames.GetAsync(id);
+            var save = await _saves.LoadAsync(id);
+            _failedResumeId = null;
+            OnPersistenceChanged(this, EventArgs.Empty);
 
             if (save is null)
             {
@@ -774,14 +770,14 @@ public partial class GameViewModel : LocalizedViewModel
             }
 
             Session = _sessions.Restore(save, _settings.Helpers);
-            _saveId = save.Id;
-
-            _lastSavedGame = save;
-            _hasSave = true;
-            _sinceAutosave = TimeSpan.Zero;
+            _saves.Attach(Session, save);
+            _time.Saved();
         }
-        catch (Exception)
+        catch (Exception error) when (error is not OperationCanceledException)
         {
+            ReportReadFailure(PersistenceOperation.LoadGame, error, id);
+            _failedResumeId = id;
+            OnPersistenceChanged(this, EventArgs.Empty);
             return false;
         }
 
@@ -815,64 +811,9 @@ public partial class GameViewModel : LocalizedViewModel
 
     private Task QueueAutosaveAsync(bool onlyIfChanged)
     {
-        if (Session is not { } session || session.IsOver || session.IsTimed)
-        {
-            return Task.CompletedTask;
-        }
-
-        if (!_hasSave && session.Mistakes == 0 && session.HintsUsed == 0
-            && !session.Cells.ContainsAnyExcept(CellState.Empty))
-        {
-            // Keep untouched games out of Continue, but preserve counters and replace an
-            // existing (or pending) save when the player undoes its board back to empty.
-            return Task.CompletedTask;
-        }
-
-        var snapshot = SavedGame.FromSession(session, _saveId, _clock.Now);
-        _hasSave = true;
-        _sinceAutosave = TimeSpan.Zero;
-        _pendingSave = SaveAfterAsync(_pendingSave, session, snapshot, onlyIfChanged);
-        return _pendingSave;
+        _time.Saved();
+        return _saves.SaveAsync(onlyIfChanged);
     }
-
-    private async Task SaveAfterAsync(Task previous, GameSession session, SavedGame snapshot, bool onlyIfChanged)
-    {
-        // Each operation catches storage failures, so a failed write cannot break the queue.
-        await previous;
-
-        if (session.IsOver || (onlyIfChanged && HasSameProgress(snapshot, _lastSavedGame)))
-        {
-            return;
-        }
-
-        try
-        {
-            await _saveGames.SaveAsync(snapshot);
-
-            // The player may have changed the board or started another game during I/O.
-            // Acknowledge only what this operation wrote, and only for its own session.
-            if (ReferenceEquals(Session, session) && _saveId == snapshot.Id)
-            {
-                _lastSavedGame = snapshot;
-            }
-        }
-        catch (Exception)
-        {
-            // Keep the previous snapshot so the next periodic save retries the changed state.
-        }
-    }
-
-    /// <summary>
-    /// Compares persisted progress, not undo depth. Elapsed time alone is saved at explicit
-    /// lifecycle save points rather than rewriting an idle board every fifteen seconds.
-    /// </summary>
-    private static bool HasSameProgress(SavedGame snapshot, SavedGame? saved) =>
-        saved is not null
-        && snapshot.Id == saved.Id
-        && snapshot.Mistakes == saved.Mistakes
-        && snapshot.HintsUsed == saved.HintsUsed
-        && snapshot.HintsRemaining == saved.HintsRemaining
-        && snapshot.Cells.SequenceEqual(saved.Cells);
 
     private Task AutosaveIfBoardChangedAsync() => QueueAutosaveAsync(onlyIfChanged: true);
 
@@ -909,10 +850,10 @@ public partial class GameViewModel : LocalizedViewModel
         }
 
         // A new game is a new row: restarting must not overwrite the save it came from.
-        _saveId = Guid.NewGuid();
-        _sinceAutosave = TimeSpan.Zero;
-        _lastSavedGame = null;
-        _hasSave = false;
+        _saves.Attach(Session);
+        _failedResumeId = null;
+        OnPersistenceChanged(this, EventArgs.Empty);
+        _time.Saved();
 
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
@@ -1171,7 +1112,7 @@ public partial class GameViewModel : LocalizedViewModel
         }
 
         // A reminder can be dismissed between ticks, or after no ticks at all.
-        _lastAccountedAt = _clock.Monotonic;
+        _time.Rebase();
         IsBreakReminderOpen = false;
     }
 
@@ -1210,48 +1151,8 @@ public partial class GameViewModel : LocalizedViewModel
     /// their fixed puzzle; ordinary games get a fresh seed. Null without a session, so
     /// <see cref="StartAsync"/> falls back to saved settings.
     /// </summary>
-    private NewGameOptions? SameSettingsFreshPuzzle(bool restartDaily = true)
-    {
-        if (_pendingTier is { } tier)
-        {
-            // A new picture and a full clock. Handing back the same grid would let a player learn
-            // it and "beat" the trial by memory rather than by reading the clues.
-            return tier.ToOptions(_settings.Helpers);
-        }
-
-        // A daily belongs to the date it was started, even after midnight or a later resume.
-        if (restartDaily && Session?.Origin?.DailyDate is { } dailyDate)
-        {
-            return DailyPuzzle.OptionsFor(dailyDate, _settings.Helpers);
-        }
-
-        // Written out rather than as `Session?.Origin with { ... }`, which compiles but
-        // dereferences a possibly-null value and would throw once Origin was ever null.
-        var origin = Session?.Origin;
-
-        if (origin is null)
-        {
-            return null;
-        }
-
-        // A restart of a campaign level replays that exact level: its seed and picture are in
-        // the origin already, and deterministic is the whole point of a level.
-        if (origin.Level is not null)
-        {
-            return origin;
-        }
-
-        return origin with
-        {
-            Seed = null,
-            DailyDate = null,
-
-            // A picture chosen from the Gallery must not stick to every following "Next" - and
-            // the picture just solved must not come straight back either.
-            PuzzleId = null,
-            ExcludePuzzleId = Session is { Puzzle.IsGenerated: false } current ? current.Puzzle.Id : null,
-        };
-    }
+    private NewGameOptions? SameSettingsFreshPuzzle(bool restartDaily = true) =>
+        Session?.Origin?.Replay(_settings.Helpers, restartDaily);
 
     [RelayCommand]
     private async Task QuitAsync()
@@ -1290,10 +1191,7 @@ public partial class GameViewModel : LocalizedViewModel
         // and leave daily mode - and this completion must be attributed to the game that was
         // just won, not to the one that follows it. (A level recorded one-too-high would unlock
         // a level that was never played.)
-        var saveId = _saveId;
-        var dailyDate = session.Origin?.DailyDate;
-        var level = CurrentLevel;
-        var completedAt = _clock.Now;
+        var completion = _saves.CaptureCompletion(session);
 
         StopTimer();
         IsSolved = true;
@@ -1310,26 +1208,8 @@ public partial class GameViewModel : LocalizedViewModel
 
         PuzzleSolved?.Invoke(this, EventArgs.Empty);
 
-        var completion = new PuzzleCompletion(
-            session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
-            session.StarRating,
-            session.Elapsed,
-            session.Puzzle.PictureCellCount,
-            session.HintsUsed,
-            completedAt)
-        {
-            Size = session.Puzzle.Width,
-            PackId = session.Puzzle.Pack,
-            Mistakes = session.Mistakes,
-            IsDaily = dailyDate is not null,
-            DailyDate = dailyDate,
-            Level = level,
-        };
-
-        // Finish older saves first. Completion owns save removal and every earned update in
-        // one transaction; the app-lifetime service retains failures after this page is gone.
-        _pendingSave = _completions.CompleteAsync(saveId, completion, _pendingSave);
-        await _pendingSave;
+        // The app-lifetime completion service retains failures after this page is gone.
+        await _saves.CompleteAsync(completion, _completions);
     }
 
 
@@ -1424,7 +1304,7 @@ public partial class GameViewModel : LocalizedViewModel
         _timer.Tick += OnTimerTick;
 
         // Measured from here, so the first tick counts only the time since the clock started.
-        _lastAccountedAt = _clock.Monotonic;
+        _time.Rebase();
 
         _timer.Start();
     }
@@ -1442,7 +1322,7 @@ public partial class GameViewModel : LocalizedViewModel
         }
 
         AccountElapsedTime();
-        if (_sinceAutosave >= AutosaveEvery && !IsInputBlocked && Session is { IsOver: false })
+        if (_time.IsSaveDue && !IsInputBlocked && Session is { IsOver: false })
         {
             _ = AutosaveIfBoardChangedAsync();
         }
@@ -1456,21 +1336,7 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        var now = _clock.Monotonic;
-        var delta = now - _lastAccountedAt;
-        if (delta <= TimeSpan.Zero)
-        {
-            return;
-        }
-
-        _lastAccountedAt = now;
-        var before = session.Elapsed;
-        session.Advance(delta);
-        // Advance clamps timed sessions at their deadline. Do not count dispatcher delay after
-        // that deadline as play time, but do include the final interval of a losing attempt.
-        var played = session.Elapsed - before;
-        _sinceAutosave += played;
-        var needsBreak = _screenTime.Add(played);
+        var needsBreak = _time.Account(session);
         UpdateElapsedText();
 
         if (session.IsTimeUp)
@@ -1613,6 +1479,47 @@ public partial class GameViewModel : LocalizedViewModel
         }
     }
 
+    public bool HasPersistenceFailure => _saves.HasFailure || _completions.HasFailure
+        || _settingsLoadFailed || _progressLoadFailed || _failedResumeId is not null;
+
+    public string PersistenceFailureText => T("storageUnavailable");
+    public string RetryPersistenceText => T("tryAgain");
+
+    private void OnPersistenceChanged(object? sender, EventArgs e) =>
+        _uiThread.BeginInvokeOnMainThread(() => OnPropertyChanged(nameof(HasPersistenceFailure)));
+
+    private void ReportReadFailure(PersistenceOperation operation, Exception error, Guid? id = null)
+    {
+        if (error is not OperationCanceledException)
+        {
+            _diagnostics.Report(operation, error, id);
+        }
+    }
+
+    [RelayCommand]
+    private async Task RetryPersistenceAsync()
+    {
+        if (_failedResumeId is { } id)
+        {
+            if (!await TryResumeAsync(id) && _failedResumeId is null)
+            {
+                await StartAsync();
+            }
+        }
+        else if (_settingsLoadFailed)
+        {
+            await RefreshSettingsAsync();
+        }
+
+        if (_progressLoadFailed && Session?.Origin is { } origin)
+        {
+            await LoadUnlockedPacksAsync(origin.Options);
+        }
+
+        await AutosaveAsync();
+        await _completions.RetryAsync();
+    }
+
     private void OnThemeChanged(object? sender, EventArgs e) =>
         PaletteChanged?.Invoke(this, EventArgs.Empty);
 
@@ -1636,6 +1543,8 @@ public partial class GameViewModel : LocalizedViewModel
         if (disposing)
         {
             SuspendClock();
+            _saves.Changed -= OnPersistenceChanged;
+            _completions.Changed -= OnPersistenceChanged;
             _theme.Changed -= OnThemeChanged;
             _accessibility.ScreenReaderStateChanged -= OnScreenReaderStateChanged;
         }

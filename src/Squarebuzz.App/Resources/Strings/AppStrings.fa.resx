@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>سه ستاره روی یک ۱۰×۱۰، بدون اشتباه.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>همهٔ تصویرهای گالری را پیدا کن.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>برای امروز تمام — فردا می‌بینمت!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>فضای ذخیره‌سازی در دسترس نیست. لطفاً دوباره تلاش کنید.</value>
+  </data>
 </root>

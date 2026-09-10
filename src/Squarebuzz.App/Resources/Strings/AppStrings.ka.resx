@@ -310,4 +310,7 @@
   <data name="trophyHint8" xml:space="preserve"><value>სამი ვარსკვლავი 10×10-ზე, შეცდომების გარეშე.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>იპოვე გალერეის ყველა სურათი.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>დღეისთვის სულ — ხვალ გნახავ!</value></data>
+  <data name="storageUnavailable" xml:space="preserve">
+    <value>საცავი მიუწვდომელია. სცადე ხელახლა.</value>
+  </data>
 </root>

@@ -105,11 +105,11 @@ public sealed record SavedGame
         return new SavedGame
         {
             Id = id,
-            PuzzleId = session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
+            PuzzleId = origin.PuzzleId,
             Size = session.Puzzle.Width,
             Difficulty = origin.Difficulty,
             PackId = origin.PackId,
-            Seed = session.Seed,
+            Seed = origin.Seed,
             Challenge = origin.Challenge,
             Cells = [.. session.Cells],
             Elapsed = session.Elapsed,
@@ -121,9 +121,7 @@ public sealed record SavedGame
             DailyDate = origin.DailyDate,
 
             // Only a generated picture depends on the algorithm; an authored one is content.
-            GeneratorVersion = session.Puzzle.IsGenerated
-                ? Generation.GeneratorVersion.Current
-                : Generation.GeneratorVersion.Unknown,
+            GeneratorVersion = origin.GeneratorVersion,
         };
     }
 }

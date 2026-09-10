@@ -57,13 +57,16 @@ public partial class ContinueViewModel : LocalizedViewModel
     private readonly GameSessionFactory _sessions;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
+    private readonly IPersistenceDiagnostics _diagnostics;
+    private SavedGameCard? _failedDelete;
 
     public ContinueViewModel(
         ILocalizationService strings,
         ISaveGameRepository saveGames,
         GameSessionFactory sessions,
         INavigationService navigation,
-        IClock clock)
+        IClock clock,
+        IPersistenceDiagnostics? diagnostics = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(saveGames);
@@ -75,6 +78,7 @@ public partial class ContinueViewModel : LocalizedViewModel
         _sessions = sessions;
         _navigation = navigation;
         _clock = clock;
+        _diagnostics = diagnostics ?? NullPersistenceDiagnostics.Instance;
     }
 
     public ObservableCollection<SavedGameCard> Saves { get; } = [];
@@ -83,7 +87,13 @@ public partial class ContinueViewModel : LocalizedViewModel
     [NotifyPropertyChangedFor(nameof(HasSaves))]
     public partial bool IsEmpty { get; private set; } = true;
 
-    public bool HasSaves => !IsEmpty;
+    public bool HasSaves => Saves.Count > 0;
+
+    [ObservableProperty]
+    public partial bool HasPersistenceFailure { get; private set; }
+
+    public string PersistenceFailureText => T("storageUnavailable");
+    public string RetryPersistenceText => T("tryAgain");
 
     public string Heading => T("continueGame");
 
@@ -109,20 +119,26 @@ public partial class ContinueViewModel : LocalizedViewModel
 
     private async Task ReloadAsync()
     {
-        Saves.Clear();
-
         IReadOnlyList<SavedGame> saves;
 
         try
         {
             saves = await _saveGames.GetAllAsync();
         }
-        catch (Exception)
+        catch (OperationCanceledException)
         {
-            IsEmpty = true;
+            return;
+        }
+        catch (Exception exception)
+        {
+            _diagnostics.Report(PersistenceOperation.LoadGames, exception);
+            HasPersistenceFailure = true;
+            IsEmpty = false;
             return;
         }
 
+        Saves.Clear();
+        HasPersistenceFailure = _failedDelete is not null;
         foreach (var save in saves)
         {
             // A save whose picture can no longer be produced is skipped rather than crashing the
@@ -131,13 +147,16 @@ public partial class ContinueViewModel : LocalizedViewModel
             {
                 Saves.Add(BuildCard(save));
             }
-            catch (Exception)
+            catch (Exception exception) when (exception is not OperationCanceledException)
             {
+                _diagnostics.Report(PersistenceOperation.RebuildGame, exception, save.Id);
+                HasPersistenceFailure = true;
                 continue;
             }
         }
 
-        IsEmpty = Saves.Count == 0;
+        IsEmpty = Saves.Count == 0 && !HasPersistenceFailure;
+        OnPropertyChanged(nameof(HasSaves));
     }
 
     private SavedGameCard BuildCard(SavedGame save)
@@ -206,13 +225,28 @@ public partial class ContinueViewModel : LocalizedViewModel
         {
             await _saveGames.DeleteAsync(card.Id);
         }
-        catch (Exception)
+        catch (OperationCanceledException)
         {
             return;
         }
+        catch (Exception exception)
+        {
+            _diagnostics.Report(PersistenceOperation.DeleteGame, exception, card.Id);
+            _failedDelete = card;
+            HasPersistenceFailure = true;
+            return;
+        }
 
+        _failedDelete = null;
         Saves.Remove(card);
-        IsEmpty = Saves.Count == 0;
+        await ReloadAsync();
+    }
+
+    [RelayCommand]
+    private async Task RetryPersistenceAsync()
+    {
+        if (_failedDelete is { } card) await DeleteAsync(card);
+        else await OnAppearingAsync();
     }
 
     [RelayCommand]
