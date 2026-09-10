@@ -63,6 +63,7 @@ public partial class GameViewModel : LocalizedViewModel
     private readonly IScreenReader _screenReader;
 
     private IGameTimer? _timer;
+    private bool _isClockSuspended;
     private GameSettings _settings = GameSettings.Default;
 
     /// <summary>Identity of this game's row in the save table, so autosaves replace rather than pile up.</summary>
@@ -782,6 +783,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         SyncFromSession();
         UpdateElapsedText();
+        StopTimer();
         StartTimer();
         NotifySettingsDependentProperties();
         NotifyLevelDependentProperties();
@@ -920,6 +922,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         SyncFromSession();
         UpdateElapsedText();
+        StopTimer();
         StartTimer();
 
         NotifySettingsDependentProperties();
@@ -1407,10 +1410,14 @@ public partial class GameViewModel : LocalizedViewModel
     }
 
     /// <summary>
-    /// Stops the clock while the game is not in front. Called from the page's OnDisappearing,
-    /// which covers backgrounding as well as a page pushed over the game.
+    /// Suspends timing while the page is covered or the window is in the background.
+    /// The suspension also applies to a session whose initialization has not finished yet.
     /// </summary>
-    public void SuspendClock() => StopTimer();
+    public void SuspendClock()
+    {
+        _isClockSuspended = true;
+        StopTimer();
+    }
 
     /// <summary>
     /// Restarts the clock suspended by <see cref="SuspendClock"/>, unless the game has ended in
@@ -1418,14 +1425,17 @@ public partial class GameViewModel : LocalizedViewModel
     /// </summary>
     public void ResumeClock()
     {
-        if (Session is { IsOver: false })
-        {
-            StartTimer();
-        }
+        _isClockSuspended = false;
+        StartTimer();
     }
 
     private void StartTimer()
     {
+        if (_isClockSuspended || IsPaused || Session is not { IsOver: false } || _timer is { IsRunning: true })
+        {
+            return;
+        }
+
         StopTimer();
 
         _timer = _timers.CreateSecondTimer();
@@ -1623,7 +1633,7 @@ public partial class GameViewModel : LocalizedViewModel
     {
         if (disposing)
         {
-            StopTimer();
+            SuspendClock();
             _theme.Changed -= OnThemeChanged;
             _accessibility.ScreenReaderStateChanged -= OnScreenReaderStateChanged;
         }

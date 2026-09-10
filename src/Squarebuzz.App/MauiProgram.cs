@@ -87,6 +87,7 @@ public static class MauiProgram
         // SemanticScreenReader - out of the ViewModel assembly.
         services.AddSingleton<IUiThread, MauiUiThread>();
         services.AddSingleton<IGameTimerFactory, DispatcherGameTimerFactory>();
+        services.AddSingleton<GameLifecycle>();
         services.AddSingleton<IScreenReader, MauiScreenReader>();
 
         RegisterDomain(services);

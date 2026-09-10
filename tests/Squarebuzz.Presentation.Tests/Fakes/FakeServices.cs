@@ -180,8 +180,11 @@ public sealed class FakeAccessibilityState : IAccessibilityState
 
     public event EventHandler? ScreenReaderStateChanged;
 
+    public int RefreshCalls { get; private set; }
+
     public void Refresh()
     {
+        RefreshCalls++;
     }
 
     public void RaiseChanged() => ScreenReaderStateChanged?.Invoke(this, EventArgs.Empty);

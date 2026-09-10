@@ -7,11 +7,13 @@ public partial class App : Application
 {
     private readonly IServiceProvider _services;
     private readonly IAudioService _audio;
+    private readonly GameLifecycle _gameLifecycle;
 
-    public App(IServiceProvider services, IThemeService themeService, IAudioService audio)
+    public App(IServiceProvider services, IThemeService themeService, IAudioService audio, GameLifecycle gameLifecycle)
     {
         _services = services;
         _audio = audio;
+        _gameLifecycle = gameLifecycle;
 
         InitializeComponent();
 
@@ -29,12 +31,26 @@ public partial class App : Application
 
         var window = new Window(shell) { Title = "squarebuzz" };
 
-        // Background music that carries on after the child has switched to something else is a
-        // bug, not a feature - and on a phone it is the kind that gets an app deleted. Stopped
-        // and Resumed are the window-level equivalents of the old OnSleep/OnResume.
-        window.Stopped += (_, _) => _audio.SuspendMusic();
-        window.Resumed += (_, _) => _audio.ResumeMusic();
+        // Page disappearance only covers in-app navigation. Window events cover Home,
+        // app switching and minimizing; stop the game before awaiting its background save.
+        window.Stopped += async (_, _) =>
+        {
+            var saving = _gameLifecycle.SuspendAsync();
+            _audio.SuspendMusic();
+            await saving;
+        };
+        window.Resumed += OnWindowResumed;
+
+        // Desktop visibility/focus restoration also arrives through Activated. Both handlers
+        // are idempotent, so activation after a mobile Resumed event cannot reset the clock.
+        window.Activated += OnWindowResumed;
 
         return window;
+    }
+
+    private void OnWindowResumed(object? sender, EventArgs e)
+    {
+        _gameLifecycle.Resume();
+        _audio.ResumeMusic();
     }
 }

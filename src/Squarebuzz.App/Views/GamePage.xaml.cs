@@ -1,4 +1,5 @@
 using Squarebuzz.App.Controls;
+using Squarebuzz.Presentation.Services;
 using Squarebuzz.Presentation.ViewModels;
 
 namespace Squarebuzz.App.Views;
@@ -6,6 +7,7 @@ namespace Squarebuzz.App.Views;
 public partial class GamePage : ContentPage, IQueryAttributable
 {
     private readonly GameViewModel _viewModel;
+    private readonly GameLifecycle _lifecycle;
 
     /// <summary>Cell the magnifier is centred on, or -1 when it is hidden.</summary>
     private int _magnifiedIndex = -1;
@@ -19,11 +21,12 @@ public partial class GamePage : ContentPage, IQueryAttributable
     /// <summary>Guards the minimap's un-dim timer, so a stale timer cannot undo a newer hint's dim.</summary>
     private int _hintOverlayGeneration;
 
-    public GamePage(GameViewModel viewModel)
+    public GamePage(GameViewModel viewModel, GameLifecycle lifecycle)
     {
         InitializeComponent();
 
         _viewModel = viewModel;
+        _lifecycle = lifecycle;
         BindingContext = viewModel;
 
         // Beyond the usual leak (see PageLifecycle), disposing this ViewModel is what stops the
@@ -187,10 +190,9 @@ public partial class GamePage : ContentPage, IQueryAttributable
     {
         base.OnAppearing();
 
-        // TalkBack may have been switched on from the system settings while the app was in the
-        // background, where the change listener cannot reach us. Screen open is the right place
-        // to re-read it; the board itself only ever sees the cached answer.
-        _viewModel.RefreshAccessibilityState();
+        // Register before awaiting initialization so a window stop during loading can keep
+        // the new session suspended. Window resume also refreshes accessibility state.
+        _lifecycle.Show(_viewModel);
 
         if (_viewModel.Session is null)
         {
@@ -199,10 +201,8 @@ public partial class GamePage : ContentPage, IQueryAttributable
         }
         else
         {
-            // Coming back from backgrounding or from a page pushed over the game - How to play,
-            // or Options, whose changes must show on the board right away.
+            // Returning from How to play or Options: apply its settings to the existing board.
             await _viewModel.RefreshSettingsAsync();
-            _viewModel.ResumeClock();
         }
     }
 
@@ -210,12 +210,8 @@ public partial class GamePage : ContentPage, IQueryAttributable
     {
         base.OnDisappearing();
 
-        // Covers backgrounding and back-navigation, which are the routes out of the game that
-        // no button handles. The clock stops first: time on the home screen or on a page pushed
-        // over the game is not time spent playing, and it must not count against a timed trial
-        // or the parental screen-time limit.
-        _viewModel.SuspendClock();
-        await _viewModel.AutosaveAsync();
+        // This covers page navigation; App forwards actual window background/resume events.
+        await _lifecycle.HideAsync(_viewModel);
     }
 
     private void OnCellPainted(object? sender, Controls.CellPaintedEventArgs e) =>
