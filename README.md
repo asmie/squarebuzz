@@ -37,18 +37,25 @@ Core has no project or package dependencies.
 
 ## Build, run, test
 
-Requires the exact .NET SDK version in [global.json](global.json) with the `maui-windows`,
-`android`, `ios` and `maccatalyst` workloads,
-and Visual Studio 2026 for the `.slnx` solution. iOS and Mac Catalyst need a paired Mac with Xcode
-to deploy; the managed code compiles on Windows.
+Requires the exact .NET SDK and workload-set versions in [global.json](global.json).
+Install the MAUI workload for each platform you build (for example, `maui-android` or
+`maui-windows`), running `dotnet workload install` from the repository root so it reads the pin.
+Visual Studio 2026 supports the `.slnx` solution. Native iOS and Mac Catalyst builds need a Mac
+with **Xcode 26.6 on macOS 26.2 or later**. For iOS development on Windows, pair Visual Studio
+with that Mac.
+These are the [requirements of the Apple SDK in the pinned workload set](https://github.com/dotnet/macios/releases/tag/dotnet-10.0.1xx-xcode26.6-10301).
 
 Local builds and every CI job use that SDK version, with automatic SDK roll-forward disabled.
-Install it side by side with other SDKs if necessary. Update `global.json` when adopting an SDK
-update (including security patches), then run the tests, content validators and platform builds
-before merging. This pins the compiler and bundled analyzers; MAUI workloads and Xcode are still
-selected separately and are not pinned by this file.
+Install it side by side with other SDKs if necessary. When adopting toolchain updates (including
+security patches), update `global.json` and check the matching Apple SDK release notes. Update
+CI's `XCODE_VERSION` and macOS runner together if required, then run the tests, content validators
+and platform builds before merging. Workload sets pin platform manifests as well as the MAUI SDK;
+the iOS CI job explicitly selects Xcode instead of following the runner's default or newest copy.
 
 ```bash
+dotnet workload install maui-android     # or maui-windows / maui-ios / maui-maccatalyst
+dotnet workload --version                # should match sdk.workloadVersion in global.json
+
 dotnet build squarebuzz.slnx                                   # everything
 dotnet test tests/Squarebuzz.Core.Tests                        # or Data.Tests / Presentation.Tests
 
@@ -63,6 +70,10 @@ dotnet run tools/check-strings.cs         # every translation matches the neutra
 dotnet run tools/generate-sounds.cs       # regenerates Resources/Raw/*.wav
 cd design && npm start                    # the prototype, at http://127.0.0.1:5173
 ```
+
+For a tests/tools-only environment, set `MSBuildEnableWorkloadResolver=false` in the environment
+before running the plain .NET projects or file-based validators. The domain and content CI jobs
+do this so they need no workload installation. Leave the resolver enabled for MAUI app builds.
 
 Use `-t:Run` for Android rather than `adb install` — Debug builds use Fast Deployment, and a
 hand-installed APK crashes on launch with *No assemblies found*. On Windows, `REGDB_E_CLASSNOTREG`

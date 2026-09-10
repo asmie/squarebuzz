@@ -21,6 +21,9 @@ jobs:
   domain:
     name: Domain, data & ViewModels (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    # These projects target plain net10.0; they do not need workload-set metadata or MAUI packs.
+    env:
+      MSBuildEnableWorkloadResolver: 'false'
     strategy:
       fail-fast: false
       matrix:
@@ -70,6 +73,9 @@ jobs:
   content:
     name: Content
     runs-on: ubuntu-latest
+    # Both file-based tools and their Core project reference are MAUI-free.
+    env:
+      MSBuildEnableWorkloadResolver: 'false'
 
     steps:
       - uses: actions/checkout@v4
@@ -97,8 +103,7 @@ jobs:
         with:
           global-json-file: global.json
 
-      # The runner ships MAUI workloads, but not necessarily matching this SDK band, so they are
-      # installed explicitly. Only the Android ones are needed for this job.
+      # Install this platform's workloads from the workload set pinned in global.json.
       - name: Install MAUI Android workload
         run: dotnet workload install maui-android
 
@@ -122,7 +127,9 @@ jobs:
 
   ios:
     name: iOS
-    runs-on: macos-latest
+    runs-on: macos-26
+    env:
+      XCODE_VERSION: '26.6'
 
     steps:
       - uses: actions/checkout@v4
@@ -132,54 +139,23 @@ jobs:
         with:
           global-json-file: global.json
 
-      # Choosing an Xcode here needs two things to be true at once, and the runner image does not
-      # make either obvious:
-      #
-      #  * The .NET for iOS pack refuses an Xcode older than the one it was built for. The first
-      #    run failed with "requires Xcode 26.6, the current version of Xcode is 26.5" - and 26.5
-      #    is the image *default*, with 26.6 installed alongside it.
-      #  * Merely selecting the newest one is not enough either. The second run got further and then
-      #    failed in actool: "SDK .../MacOSX.sdk cannot be located". A non-default Xcode has not had
-      #    its first-launch component install run, so xcodebuild cannot resolve its SDKs yet.
-      #
-      # So rather than encode a version or an assumption, try each Xcode newest-first and keep the
-      # first one whose toolchain actually resolves the macOS SDK and actool - which is precisely
-      # what the build later needs. Real bundles only: the image also ships symlinks such as
-      # Xcode_26.6.0.app pointing at Xcode_26.6.app, and selecting through those adds nothing.
-      - name: Select a working Xcode
+      # Workload set 10.0.400 contains iOS SDK 26.5.10301, which requires Xcode 26.6.
+      # Keep this selection in sync with global.json and the README toolchain requirements.
+      - name: Select pinned Xcode
+        shell: bash
         run: |
-          echo "Xcode bundles on this runner:"
-          ls -d /Applications/Xcode*.app
-
-          candidates="$(find /Applications -maxdepth 1 -name 'Xcode_*.app' -type d \
-            | sed -E 's#.*/Xcode_(.+)\.app#\1#' \
-            | sort -t. -k1,1nr -k2,2nr -k3,3nr)"    # per-key nr: a trailing -r does not reverse a keyed sort
-
-          chosen=""
-          for version in $candidates; do
-            echo "--- trying Xcode $version"
-            sudo xcode-select -s "/Applications/Xcode_${version}.app" || continue
-
-            # Idempotent, and the step a non-default Xcode is missing.
-            sudo xcodebuild -runFirstLaunch || true
-
-            if xcrun --sdk macosx --find actool >/dev/null 2>&1; then
-              echo "--- Xcode $version can resolve the macOS SDK and actool"
-              chosen="$version"
-              break
-            fi
-
-            echo "--- Xcode $version cannot resolve actool; trying the next one"
-          done
-
-          if [ -z "$chosen" ]; then
-            echo "No installed Xcode could resolve actool. Versions tried: $candidates"
+          xcode_path="/Applications/Xcode_${XCODE_VERSION}.app"
+          if [ ! -d "$xcode_path" ]; then
+            echo "::error::Required Xcode ${XCODE_VERSION} is missing from this runner."
             exit 1
           fi
 
-          echo "Using Xcode $chosen"
+          sudo xcode-select -s "$xcode_path"
+          # Initialize SDK components before actool is needed; initialization failure is fatal.
+          sudo xcodebuild -runFirstLaunch
           xcodebuild -version
           xcrun --sdk macosx --find actool
+          xcrun --sdk iphonesimulator --show-sdk-path
 
       - name: Install MAUI iOS workload
         run: dotnet workload install maui-ios
