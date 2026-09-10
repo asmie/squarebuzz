@@ -211,9 +211,9 @@
             </Grid>
 
             <!--
-              Mode toggle is the widest, lowest button: it is the control used most often - but
-              only in the mode it belongs to. Hold-to-cross picks the mark from the gesture, so
-              the button would be a redundant second way to choose. See ShowModeButton.
+              Mode toggle is the widest, lowest button. It is also available with hold-to-cross
+              when a screen reader is active: accessible cell buttons activate the selected mark
+              without the canvas's long-press gesture. See ShowModeButton.
             -->
             <Button Style="{StaticResource PrimaryButton}"
                     Command="{Binding ToggleModeCommand}"

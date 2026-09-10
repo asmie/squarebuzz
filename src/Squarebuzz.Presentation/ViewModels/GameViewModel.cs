@@ -377,12 +377,10 @@ public partial class GameViewModel : LocalizedViewModel
     /// Whether the mode toggle belongs on screen at all.
     /// </summary>
     /// <remarks>
-    /// Only in <see cref="TapBehaviour.ModeButton"/>, which is the mode named after it. Under
-    /// hold-to-cross the gesture already chooses the mark, so the button is a second, redundant
-    /// way to say the same thing - and two input models on one board is how a child ends up
-    /// crossing when they meant to fill.
+    /// The accessible cell buttons use activation rather than the canvas's long-press gesture,
+    /// so screen-reader users need the toggle even with hold-to-cross selected in Options.
     /// </remarks>
-    public bool ShowModeButton => _settings.TapBehaviour == TapBehaviour.ModeButton;
+    public bool ShowModeButton => _settings.TapBehaviour == TapBehaviour.ModeButton || NeedsCellOverlay;
 
     /// <summary>
     /// Hints and mistakes as one line, composed here rather than assembled in XAML from several
@@ -692,14 +690,7 @@ public partial class GameViewModel : LocalizedViewModel
         // auto-cross switch, say - would quietly do nothing until the next puzzle.
         session.ApplyHelpers(_settings.Helpers);
 
-        // Switching to hold-to-cross takes the mode button off the screen, so a session left in
-        // cross mode would keep crossing with nothing left to change it back. The gesture decides
-        // the mark in that mode, and its plain tap fills.
-        if (!ShowModeButton && IsCrossMode)
-        {
-            IsCrossMode = false;
-            session.Mode = PaintMode.Fill;
-        }
+        ResetModeIfButtonHidden();
 
         SyncFromSession();
         NotifySettingsDependentProperties();
@@ -1570,12 +1561,25 @@ public partial class GameViewModel : LocalizedViewModel
     /// </summary>
     public void RefreshAccessibilityState() => _accessibility.Refresh();
 
+    private void ResetModeIfButtonHidden()
+    {
+        // Returning to gesture-only controls must not leave Cross selected with no toggle
+        // available. Keep the selection while the accessible overlay still needs that toggle.
+        if (!ShowModeButton && IsCrossMode && Session is { } session)
+        {
+            IsCrossMode = false;
+            session.Mode = PaintMode.Fill;
+        }
+    }
+
     private void OnThemeChanged(object? sender, EventArgs e) =>
         PaletteChanged?.Invoke(this, EventArgs.Empty);
 
     private void OnScreenReaderStateChanged(object? sender, EventArgs e)
     {
+        ResetModeIfButtonHidden();
         OnPropertyChanged(nameof(NeedsCellOverlay));
+        OnPropertyChanged(nameof(ShowModeButton));
 
         // The summary's "cannot be reached" caveat depends on whether the overlay exists.
         OnPropertyChanged(nameof(BoardDescription));
