@@ -20,7 +20,8 @@ public partial class App : Application
         // App.xaml merges only the colour-agnostic styles, so the theme and accent
         // dictionaries must be applied before the first page is built - otherwise every
         // DynamicResource colour lookup misses and the UI falls back to platform defaults.
-        // Once settings persistence lands these values come from the saved settings.
+        // This is the initial palette. SplashViewModel loads and applies saved preferences
+        // before navigating to onboarding or the menu.
         themeService.Apply(GameTheme.Light, GameAccent.Tangerine);
     }
 

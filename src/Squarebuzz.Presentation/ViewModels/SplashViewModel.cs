@@ -68,9 +68,8 @@ public partial class SplashViewModel : LocalizedViewModel
 
     public override async Task OnAppearingAsync()
     {
-        // Settings are read first, and awaited, so the rest of the app - and this very screen -
-        // is already in the player's chosen theme and language before anything is shown. It is
-        // one row from a local database, so it is not what makes a launch slow.
+        // Load and apply saved preferences before preparing services or navigating onward.
+        // The splash starts with App's initial palette while this asynchronous read is pending.
         var settings = await LoadSettingsAsync();
 
         // The slow work runs *behind* the progress bar rather than in front of it. Priming the
