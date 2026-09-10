@@ -100,7 +100,7 @@ jobs:
       # The runner ships MAUI workloads, but not necessarily matching this SDK band, so they are
       # installed explicitly. Only the Android ones are needed for this job.
       - name: Install MAUI Android workload
-        run: dotnet workload install maui-android --skip-sign-check
+        run: dotnet workload install maui-android
 
       # TargetFrameworks is overridden rather than passing -f, because restore covers every
       # framework a project declares regardless of which one is being built. With the four in
@@ -182,7 +182,7 @@ jobs:
           xcrun --sdk macosx --find actool
 
       - name: Install MAUI iOS workload
-        run: dotnet workload install maui-ios --skip-sign-check
+        run: dotnet workload install maui-ios
 
       # This job exists because iOS cannot be built on the Windows dev machine - it needs a Mac
       # with Xcode. Without it, an iOS-only break would go unnoticed until release. No signing
@@ -211,7 +211,7 @@ jobs:
           global-json-file: global.json
 
       - name: Install MAUI Windows workload
-        run: dotnet workload install maui-windows --skip-sign-check
+        run: dotnet workload install maui-windows
 
       - name: Build with warnings as errors
         run: >
