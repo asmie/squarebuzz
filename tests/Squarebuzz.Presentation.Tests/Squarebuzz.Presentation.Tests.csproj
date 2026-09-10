@@ -15,11 +15,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Exercise the app's MAUI-independent composition helper against the real DI container. -->
+    <Compile Include="..\..\src\Squarebuzz.App\Services\PageRegistration.cs" Link="App\PageRegistration.cs" />
     <ProjectReference Include="..\..\src\Squarebuzz.Core\Squarebuzz.Core.csproj" />
     <ProjectReference Include="..\..\src\Squarebuzz.Presentation\Squarebuzz.Presentation.csproj" />
   </ItemGroup>

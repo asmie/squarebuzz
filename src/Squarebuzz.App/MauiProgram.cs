@@ -145,34 +145,26 @@ public static class MauiProgram
 
     private static void RegisterViewModels(IServiceCollection services)
     {
-        // Transient: a fresh ViewModel per navigation, so screens never inherit stale state.
-        services.AddTransient<SplashViewModel>();
-        services.AddTransient<OnboardingViewModel>();
-        services.AddTransient<MenuViewModel>();
-        services.AddTransient<NewGameViewModel>();
-        services.AddTransient<GameViewModel>();
-        services.AddTransient<OptionsViewModel>();
-        services.AddTransient<ContinueViewModel>();
-        services.AddTransient<GalleryViewModel>();
-        services.AddTransient<AboutViewModel>();
-        services.AddTransient<HowToViewModel>();
-        services.AddTransient<TrialsViewModel>();
-        services.AddTransient<LevelsViewModel>();
+        // Shell caches these three root screens for the app's lifetime. Pushed screens own
+        // their view models instead; they must not be retained by root DI disposal tracking.
+        services.AddSingleton<SplashViewModel>();
+        services.AddSingleton<OnboardingViewModel>();
+        services.AddSingleton<MenuViewModel>();
     }
 
     private static void RegisterPages(IServiceCollection services)
     {
-        services.AddTransient<SplashPage>();
-        services.AddTransient<OnboardingPage>();
-        services.AddTransient<MenuPage>();
-        services.AddTransient<NewGamePage>();
-        services.AddTransient<GamePage>();
-        services.AddTransient<OptionsPage>();
-        services.AddTransient<ContinuePage>();
-        services.AddTransient<GalleryPage>();
-        services.AddTransient<AboutPage>();
-        services.AddTransient<HowToPage>();
-        services.AddTransient<TrialsPage>();
-        services.AddTransient<LevelsPage>();
+        services.AddSingleton<SplashPage>();
+        services.AddSingleton<OnboardingPage>();
+        services.AddSingleton<MenuPage>();
+        services.AddPageWithViewModel<NewGamePage, NewGameViewModel>();
+        services.AddPageWithViewModel<GamePage, GameViewModel>();
+        services.AddPageWithViewModel<OptionsPage, OptionsViewModel>();
+        services.AddPageWithViewModel<ContinuePage, ContinueViewModel>();
+        services.AddPageWithViewModel<GalleryPage, GalleryViewModel>();
+        services.AddPageWithViewModel<AboutPage, AboutViewModel>();
+        services.AddPageWithViewModel<HowToPage, HowToViewModel>();
+        services.AddPageWithViewModel<TrialsPage, TrialsViewModel>();
+        services.AddPageWithViewModel<LevelsPage, LevelsViewModel>();
     }
 }

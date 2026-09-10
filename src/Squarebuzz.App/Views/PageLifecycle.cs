@@ -5,17 +5,15 @@ namespace Squarebuzz.App.Views;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Nothing else ever disposes a transient ViewModel: the DI container does so only at process
-/// exit, and no page did at all. Every screen ViewModel subscribes to the language-changed event
-/// of an app-lifetime singleton (see <see cref="Squarebuzz.Presentation.ViewModels.LocalizedViewModel"/>), so each visit
-/// to a screen used to leak the whole page through that handler list - and the game screen's
-/// one-second clock kept ticking after the player had left with the back gesture, inflating the
-/// saved time and the parental screen-time count.
+/// Pushed view models are created outside DI disposal tracking by PageRegistration, so this
+/// hook owns their cleanup. Disposing unsubscribes app-lifetime language/theme events and
+/// stops the game's clock, allowing the page and view model to be collected together.
 /// </para>
 /// <para>
 /// Being popped is detected as no longer being on the navigation stack, because
 /// <see cref="Page.NavigatedFrom"/> also fires when the page is merely covered by a deeper push
 /// (game to How-to-play), where the ViewModel must survive.
+/// Parent removal also handles covered pages removed while clearing a stack.
 /// </para>
 /// <para>
 /// For routed pages only. The three ShellContent roots - splash, onboarding, menu - are cached
@@ -26,12 +24,37 @@ internal static class PageLifecycle
 {
     public static void DisposeViewModelWhenPopped(this ContentPage page)
     {
-        page.NavigatedFrom += (_, _) =>
+        var wasParented = page.Parent is not null;
+        page.NavigatedFrom += OnNavigatedFrom;
+        page.ParentChanged += OnParentChanged;
+
+        void OnNavigatedFrom(object? sender, NavigatedFromEventArgs e)
         {
             if (!page.Navigation.NavigationStack.Contains(page))
             {
-                (page.BindingContext as IDisposable)?.Dispose();
+                DisposeViewModel();
             }
-        };
+        }
+
+        void OnParentChanged(object? sender, EventArgs e)
+        {
+            if (page.Parent is not null)
+            {
+                wasParented = true;
+            }
+            else if (wasParented)
+            {
+                DisposeViewModel();
+            }
+        }
+
+        void DisposeViewModel()
+        {
+            // Both notifications can occur during one pop. Unhook before disposing so the
+            // page's owner releases the view model once, even if disposal triggers more events.
+            page.NavigatedFrom -= OnNavigatedFrom;
+            page.ParentChanged -= OnParentChanged;
+            (page.BindingContext as IDisposable)?.Dispose();
+        }
     }
 }

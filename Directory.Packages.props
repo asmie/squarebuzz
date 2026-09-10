@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Tests">
+    <!-- Test the Release DI runtime without pinning the app's newer Debug logging dependencies. -->
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0"
+                    Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Presentation.Tests'" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
