@@ -23,8 +23,16 @@ public sealed class ConfettiView : GraphicsView
         Drawable = _drawable;
         InputTransparent = true;
 
-        Loaded += (_, _) => SyncTimer();
-        Unloaded += (_, _) => StopTimer();
+        Loaded += (_, _) =>
+        {
+            MotionPreferences.Changed += OnMotionPreferenceChanged;
+            SyncTimer();
+        };
+        Unloaded += (_, _) =>
+        {
+            MotionPreferences.Changed -= OnMotionPreferenceChanged;
+            StopTimer();
+        };
     }
 
     public static readonly BindableProperty IsRunningProperty = BindableProperty.Create(
@@ -40,6 +48,8 @@ public sealed class ConfettiView : GraphicsView
         get => (bool)GetValue(IsRunningProperty);
         set => SetValue(IsRunningProperty, value);
     }
+
+    private void OnMotionPreferenceChanged(object? sender, EventArgs e) => SyncTimer();
 
     private void SyncTimer()
     {

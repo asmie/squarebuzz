@@ -1,3 +1,5 @@
+using Android.Database;
+using Android.OS;
 using Android.Provider;
 using Application = Android.App.Application;
 
@@ -9,6 +11,30 @@ namespace Squarebuzz.App.Services;
 /// </summary>
 public static partial class MotionPreferences
 {
+    // One observer for the app's lifetime; controls release their Changed subscriptions on unload.
+    private static MotionObserver? _observer;
+
+    static partial void PlatformInitialize()
+    {
+        var resolver = Application.Context.ContentResolver;
+        var uri = Settings.Global.GetUriFor(Settings.Global.AnimatorDurationScale);
+        if (resolver is null || uri is null)
+        {
+            return;
+        }
+
+        _observer = new MotionObserver();
+        resolver.RegisterContentObserver(uri, notifyForDescendants: false, _observer);
+    }
+
+    private sealed class MotionObserver() : ContentObserver(new Handler(Looper.MainLooper!))
+    {
+        public override void OnChange(bool selfChange) =>
+            MainThread.BeginInvokeOnMainThread(Refresh);
+
+        public override void OnChange(bool selfChange, Android.Net.Uri? uri) => OnChange(selfChange);
+    }
+
     private static bool GetReduceMotion()
     {
         try

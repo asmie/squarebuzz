@@ -1,4 +1,5 @@
 #if IOS || MACCATALYST
+using Foundation;
 using UIKit;
 
 namespace Squarebuzz.App.Services;
@@ -9,6 +10,13 @@ namespace Squarebuzz.App.Services;
 /// </summary>
 public static partial class MotionPreferences
 {
+    // Keep the notification token alive for the app's lifetime.
+    private static NSObject? _observer;
+
+    static partial void PlatformInitialize() =>
+        _observer = UIApplication.Notifications.ObserveReduceMotionStatusDidChange((_, _) =>
+            MainThread.BeginInvokeOnMainThread(Refresh));
+
     private static bool GetReduceMotion()
     {
         try

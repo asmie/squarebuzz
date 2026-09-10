@@ -1,4 +1,5 @@
 using Squarebuzz.App.Drawing;
+using Squarebuzz.App.Services;
 using Squarebuzz.Core.Model;
 
 namespace Squarebuzz.App.Controls;
@@ -7,10 +8,12 @@ namespace Squarebuzz.App.Controls;
 public sealed class PuzzleArtView : GraphicsView
 {
     private readonly PuzzleArtDrawable _drawable = new();
+    private int _revealGeneration;
 
     public PuzzleArtView()
     {
         Drawable = _drawable;
+        Unloaded += (_, _) => CompleteReveal();
     }
 
     public static readonly BindableProperty PuzzleProperty = BindableProperty.Create(
@@ -21,7 +24,7 @@ public sealed class PuzzleArtView : GraphicsView
         {
             var view = (PuzzleArtView)bindable;
             view._drawable.Puzzle = (Puzzle?)value;
-            view.Invalidate();
+            view.CompleteReveal();
         });
 
     public Puzzle? Puzzle
@@ -66,18 +69,58 @@ public sealed class PuzzleArtView : GraphicsView
         set => SetValue(IsMaskedProperty, value);
     }
 
-    /// <summary>Animates the picture in, cell by cell, over <paramref name="duration"/>.</summary>
+    /// <summary>Reveals the picture over <paramref name="duration"/>, or immediately under reduced motion.</summary>
     public async Task RevealAsync(TimeSpan duration)
     {
-        const int frames = 24;
-        var frameDelay = (int)(duration.TotalMilliseconds / frames);
-
-        for (var frame = 1; frame <= frames; frame++)
+        if (MotionPreferences.ReduceMotion || duration <= TimeSpan.Zero)
         {
-            _drawable.RevealProgress = frame / (double)frames;
-            Invalidate();
-
-            await Task.Delay(frameDelay);
+            CompleteReveal();
+            return;
         }
+
+        var generation = ++_revealGeneration;
+        const int frames = 24;
+        var frameDelay = duration / frames;
+
+        MotionPreferences.Changed += OnMotionPreferenceChanged;
+        try
+        {
+            for (var frame = 1; frame <= frames; frame++)
+            {
+                if (generation != _revealGeneration)
+                {
+                    return;
+                }
+
+                if (MotionPreferences.ReduceMotion)
+                {
+                    CompleteReveal();
+                    return;
+                }
+
+                _drawable.RevealProgress = frame / (double)frames;
+                Invalidate();
+                await Task.Delay(frameDelay);
+            }
+        }
+        finally
+        {
+            MotionPreferences.Changed -= OnMotionPreferenceChanged;
+        }
+    }
+
+    private void OnMotionPreferenceChanged(object? sender, EventArgs e)
+    {
+        if (MotionPreferences.ReduceMotion)
+        {
+            CompleteReveal();
+        }
+    }
+
+    private void CompleteReveal()
+    {
+        _revealGeneration++;
+        _drawable.RevealProgress = 1;
+        Invalidate();
     }
 }

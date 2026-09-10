@@ -50,6 +50,7 @@ public partial class App : Application
 
     private void OnWindowResumed(object? sender, EventArgs e)
     {
+        Services.MotionPreferences.Refresh();
         _gameLifecycle.Resume();
         _audio.ResumeMusic();
     }

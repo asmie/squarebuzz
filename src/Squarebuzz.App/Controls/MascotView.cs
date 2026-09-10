@@ -46,12 +46,14 @@ public sealed class MascotView : GraphicsView
 
         Loaded += (_, _) =>
         {
+            MotionPreferences.Changed += OnMotionPreferenceChanged;
             WatchAncestors();
             SyncIdleMotion();
         };
 
         Unloaded += (_, _) =>
         {
+            MotionPreferences.Changed -= OnMotionPreferenceChanged;
             ReleaseAncestors();
             SyncIdleMotion();
         };
@@ -131,6 +133,8 @@ public sealed class MascotView : GraphicsView
         }
     }
 
+    private void OnMotionPreferenceChanged(object? sender, EventArgs e) => SyncIdleMotion();
+
     /// <summary>Starts or stops the bob and the blink to match the mascot's current state.</summary>
     private void SyncIdleMotion()
     {
@@ -182,10 +186,17 @@ public sealed class MascotView : GraphicsView
         // A blink caught mid-wink would otherwise be the pose the mascot is wearing when the
         // overlay it lives in is next shown.
         _drawable.EyesClosed = false;
+        Invalidate();
     }
 
     private async void OnBlinkTick(object? sender, EventArgs e)
     {
+        if (!_isMoving || MotionPreferences.ReduceMotion)
+        {
+            SyncIdleMotion();
+            return;
+        }
+
         _drawable.EyesClosed = true;
         Invalidate();
 

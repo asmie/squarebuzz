@@ -544,7 +544,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
             return;
         }
 
-        // The reveal is the reward, so it is animated rather than snapped in.
+        // The view reveals instantly when reduced motion is enabled.
         Reveal.Puzzle = session.Puzzle;
 
         Buzz(HapticFeedbackType.Click);
