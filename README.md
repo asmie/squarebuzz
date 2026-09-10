@@ -54,7 +54,7 @@ dotnet build src/Squarebuzz.App -c Release -p:SquarebuzzTargetFramework=net10.0-
 dotnet run tools/validate-puzzles.cs      # every authored puzzle solves by logic alone
 dotnet run tools/check-strings.cs         # every translation matches the neutral culture
 dotnet run tools/generate-sounds.cs       # regenerates Resources/Raw/*.wav
-cd design && npm start                    # the prototype, at http://localhost:5173
+cd design && npm start                    # the prototype, at http://127.0.0.1:5173
 ```
 
 Use `-t:Run` for Android rather than `adb install` — Debug builds use Fast Deployment, and a
