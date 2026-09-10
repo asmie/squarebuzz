@@ -2,6 +2,18 @@ using SQLite;
 
 namespace Squarebuzz.Data.Entities;
 
+/// <summary>A pending result, or a compact receipt (null payload) once it has been applied.</summary>
+[Table("game_completion")]
+internal sealed class GameCompletionEntity
+{
+    [PrimaryKey]
+    [Column("id")]
+    public string Id { get; set; } = string.Empty;
+
+    [Column("payload")]
+    public string? Payload { get; set; }
+}
+
 /// <summary>
 /// Tracks which migrations have run. A single row per applied version, so the runner can tell
 /// a fresh database from a partly-upgraded one.

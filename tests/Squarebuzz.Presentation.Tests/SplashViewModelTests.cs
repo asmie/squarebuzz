@@ -1,6 +1,7 @@
 using Squarebuzz.Presentation.Navigation;
 using Squarebuzz.Presentation.Tests.Fakes;
 using Squarebuzz.Presentation.ViewModels;
+using Squarebuzz.Presentation.Services;
 using Xunit;
 
 namespace Squarebuzz.Presentation.Tests;
@@ -14,6 +15,10 @@ public class SplashViewModelTests
     private readonly FakeAudioService _audio = new();
     private readonly FakeSaveGameRepository _saveGames = new();
     private readonly FakeNavigationService _navigation = new();
+    private readonly FakeProgressRepository _progress = new();
+    private readonly FakeGameCompletionRepository _completions;
+
+    public SplashViewModelTests() => _completions = new FakeGameCompletionRepository(_progress, _saveGames);
 
     private SplashViewModel NewSplash() => new(
         new FakeLocalizationService(),
@@ -23,7 +28,8 @@ public class SplashViewModelTests
         new FakeScreenTimeMonitor(),
         _audio,
         new FakeNarrationService(),
-        _saveGames);
+        _saveGames,
+        new GameCompletionService(_completions, _progress));
 
     [Fact]
     public async Task ANormalLaunch_PurgesUnrebuildableSavesExactlyOnce()
@@ -35,6 +41,7 @@ public class SplashViewModelTests
         await splash.OnAppearingAsync();
 
         Assert.Equal(1, _saveGames.PurgeCalls);
+        Assert.Equal(1, _completions.RetryCalls);
         // Default settings have not seen onboarding, so a first launch resets there rather than to
         // the menu. What matters here is that the splash moved on at all, with a reset so the back
         // gesture cannot return to it.

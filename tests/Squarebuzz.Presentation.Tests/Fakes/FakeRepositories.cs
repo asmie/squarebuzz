@@ -170,6 +170,53 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
     }
 }
 
+public sealed class FakeGameCompletionRepository(FakeProgressRepository progress, FakeSaveGameRepository saves)
+    : IGameCompletionRepository
+{
+    private readonly Dictionary<Guid, PuzzleCompletion> _pending = [];
+    private readonly HashSet<Guid> _applied = [];
+    public List<(Guid Id, PuzzleCompletion Completion)> Attempts { get; } = [];
+    public bool Fails { get; set; }
+    public TaskCompletionSource? CompleteGate { get; set; }
+    public int RetryCalls { get; private set; }
+
+    public async Task JournalAsync(Guid sessionId, PuzzleCompletion completion)
+    {
+        Attempts.Add((sessionId, completion));
+        if (CompleteGate is { } gate)
+        {
+            await gate.Task;
+        }
+
+        if (Fails)
+        {
+            throw new IOException("Completion storage unavailable");
+        }
+
+        if (!_applied.Contains(sessionId))
+        {
+            _pending.TryAdd(sessionId, completion);
+        }
+    }
+
+    public async Task RetryPendingAsync()
+    {
+        RetryCalls++;
+        if (Fails)
+        {
+            throw new IOException("Completion storage unavailable");
+        }
+
+        foreach (var (id, completion) in _pending.ToArray())
+        {
+            await progress.RecordCompletionAsync(completion);
+            await saves.DeleteAsync(id);
+            _applied.Add(id);
+            _pending.Remove(id);
+        }
+    }
+}
+
 public sealed class FakePuzzleRepository : IPuzzleRepository
 {
     public List<PackDefinition> PacksList { get; } = [];

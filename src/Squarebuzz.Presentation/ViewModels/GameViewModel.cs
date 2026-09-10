@@ -50,6 +50,7 @@ public partial class GameViewModel : LocalizedViewModel
     private readonly ISettingsRepository _settingsRepository;
     private readonly IProgressRepository _progress;
     private readonly ISaveGameRepository _saveGames;
+    private readonly GameCompletionService _completions;
     private readonly IPuzzleRepository _puzzles;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
@@ -90,7 +91,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>True once a save has been loaded or requested, even if its board is now empty.</summary>
     private bool _hasSave;
 
-    /// <summary>Orders saves and completion deletion, including across a restart.</summary>
+    /// <summary>Orders saves and completion persistence, including across a restart.</summary>
     private Task _pendingSave = Task.CompletedTask;
 
     /// <summary>Identifies the most recent toast, so only its own dismissal takes effect.</summary>
@@ -112,7 +113,8 @@ public partial class GameViewModel : LocalizedViewModel
         IThemeService theme,
         IUiThread uiThread,
         IGameTimerFactory timers,
-        IScreenReader screenReader)
+        IScreenReader screenReader,
+        GameCompletionService completions)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(sessions);
@@ -130,6 +132,7 @@ public partial class GameViewModel : LocalizedViewModel
         ArgumentNullException.ThrowIfNull(uiThread);
         ArgumentNullException.ThrowIfNull(timers);
         ArgumentNullException.ThrowIfNull(screenReader);
+        ArgumentNullException.ThrowIfNull(completions);
 
         _sessions = sessions;
         _settingsRepository = settingsRepository;
@@ -146,6 +149,7 @@ public partial class GameViewModel : LocalizedViewModel
         _uiThread = uiThread;
         _timers = timers;
         _screenReader = screenReader;
+        _completions = completions;
 
         // The board canvas snapshots its palette when it draws, so a theme change mid-game -
         // OS dusk flip under Auto, or Options changed from the pause overlay one day - must
@@ -861,20 +865,6 @@ public partial class GameViewModel : LocalizedViewModel
 
     private Task AutosaveIfBoardChangedAsync() => QueueAutosaveAsync(onlyIfChanged: true);
 
-    private async Task DeleteSaveAfterAsync(Task previous, Guid saveId)
-    {
-        await previous;
-
-        try
-        {
-            await _saveGames.DeleteAsync(saveId);
-        }
-        catch (Exception)
-        {
-            // Leaves a stale save behind; the player can delete it from Continue.
-        }
-    }
-
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
     {
@@ -1294,11 +1284,6 @@ public partial class GameViewModel : LocalizedViewModel
 
         PuzzleSolved?.Invoke(this, EventArgs.Empty);
 
-        // A save already in flight must finish before deletion, or it could put the completed
-        // game back into Continue. Queued saves re-check IsOver and skip completed sessions.
-        _pendingSave = DeleteSaveAfterAsync(_pendingSave, saveId);
-        await _pendingSave;
-
         var completion = new PuzzleCompletion(
             session.Puzzle.IsGenerated ? null : session.Puzzle.Id,
             session.StarRating,
@@ -1314,41 +1299,10 @@ public partial class GameViewModel : LocalizedViewModel
             Level = level,
         };
 
-        try
-        {
-            var progress = await _progress.RecordCompletionAsync(completion);
-
-            await AwardTrophiesAsync(completion, progress);
-        }
-        catch (Exception)
-        {
-            // Losing a progress write must not spoil the win. The star total will simply be
-            // short next launch, which is far better than an error dialog after a child wins.
-        }
-    }
-
-    /// <summary>
-    /// Awards whatever the completion just earned. Evaluated from a snapshot taken after the
-    /// completion was recorded, so streak and running totals are already up to date.
-    /// </summary>
-    private async Task AwardTrophiesAsync(PuzzleCompletion completion, PlayerProgress progress)
-    {
-        var solved = await _progress.GetSolvedPuzzlesAsync();
-        var alreadyEarned = (await _progress.GetTrophiesAsync()).Select(t => t.Trophy).ToHashSet();
-
-        var newlyEarned = TrophyEvaluator.Evaluate(new TrophyContext(
-            completion,
-            progress,
-            solved,
-            _puzzles.Puzzles,
-            alreadyEarned));
-
-        var today = _clock.Today;
-
-        foreach (var trophy in newlyEarned)
-        {
-            await _progress.AwardTrophyAsync(trophy, today);
-        }
+        // Finish older saves first. Completion owns save removal and every earned update in
+        // one transaction; the app-lifetime service retains failures after this page is gone.
+        _pendingSave = _completions.CompleteAsync(saveId, completion, _pendingSave);
+        await _pendingSave;
     }
 
 

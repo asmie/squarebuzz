@@ -30,7 +30,7 @@ public sealed class LanguageOption
 public partial class OptionsViewModel : LocalizedViewModel
 {
     private readonly ISettingsRepository _settingsRepository;
-    private readonly IProgressRepository _progress;
+    private readonly GameCompletionService _completions;
 
     /// <summary>Tail of the save chain - see <see cref="SaveAfterAsync"/>.</summary>
     private Task _pendingSave = Task.CompletedTask;
@@ -49,7 +49,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     public OptionsViewModel(
         ILocalizationService strings,
         ISettingsRepository settingsRepository,
-        IProgressRepository progress,
+        GameCompletionService completions,
         IThemeService theme,
         INavigationService navigation,
         IScreenTimeMonitor screenTime,
@@ -59,7 +59,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(settingsRepository);
-        ArgumentNullException.ThrowIfNull(progress);
+        ArgumentNullException.ThrowIfNull(completions);
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentNullException.ThrowIfNull(navigation);
         ArgumentNullException.ThrowIfNull(screenTime);
@@ -68,7 +68,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         ArgumentNullException.ThrowIfNull(uiThread);
 
         _settingsRepository = settingsRepository;
-        _progress = progress;
+        _completions = completions;
         _theme = theme;
         _navigation = navigation;
         _screenTime = screenTime;
@@ -727,7 +727,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         {
             // Settings survive deliberately: erasing progress must not also undo a child's
             // accessibility choices. See SqliteProgressRepository.ResetAsync.
-            await _progress.ResetAsync();
+            await _completions.ResetAsync();
         }
         catch (Exception)
         {

@@ -7,7 +7,9 @@ namespace Squarebuzz.Presentation.Tests;
 public sealed class GameLifecycleTests : IDisposable
 {
     private readonly GameViewModelHarness _h = new();
-    private readonly GameLifecycle _lifecycle = new();
+    private readonly GameLifecycle _lifecycle;
+
+    public GameLifecycleTests() => _lifecycle = new GameLifecycle(_h.CompletionService);
 
     public void Dispose() => _h.Dispose();
 

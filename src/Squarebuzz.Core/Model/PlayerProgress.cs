@@ -63,7 +63,7 @@ public sealed record PlayerProgress
 }
 
 /// <summary>
-/// The result of finishing a puzzle, handed to the progress repository to record.
+/// The result of finishing a puzzle, journaled before updating earned progress.
 /// </summary>
 /// <param name="PuzzleId">Authored puzzle id, or null for a generated one (not gallery-tracked).</param>
 /// <param name="Stars">Stars awarded, 1-3.</param>

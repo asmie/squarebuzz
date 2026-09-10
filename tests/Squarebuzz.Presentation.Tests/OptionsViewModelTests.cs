@@ -30,7 +30,7 @@ public class OptionsViewModelTests : IDisposable
         _vm = new OptionsViewModel(
             _strings,
             _settings,
-            _progress,
+            new GameCompletionService(new FakeGameCompletionRepository(_progress, new FakeSaveGameRepository()), _progress),
             _theme,
             _navigation,
             _screenTime,

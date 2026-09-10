@@ -8,8 +8,15 @@ namespace Squarebuzz.Presentation.Services;
 /// </summary>
 public sealed class GameLifecycle
 {
+    private readonly GameCompletionService _completions;
     private GameViewModel? _visibleGame;
     private bool _isForeground = true;
+
+    public GameLifecycle(GameCompletionService completions)
+    {
+        ArgumentNullException.ThrowIfNull(completions);
+        _completions = completions;
+    }
 
     public void Show(GameViewModel game)
     {
@@ -57,6 +64,7 @@ public sealed class GameLifecycle
         }
 
         _isForeground = true;
+        _ = _completions.RetryAsync();
         _visibleGame?.RefreshAccessibilityState();
         _visibleGame?.ResumeClock();
     }

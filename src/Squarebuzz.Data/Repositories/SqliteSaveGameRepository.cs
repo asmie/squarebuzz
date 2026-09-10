@@ -80,7 +80,14 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
 
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
 
-        await connection.InsertOrReplaceAsync(ToEntity(game)).ConfigureAwait(false);
+        await connection.RunInTransactionAsync(transaction =>
+        {
+            // A delayed save from another page must not resurrect a journaled/completed game.
+            if (transaction.Find<GameCompletionEntity>(game.Id.ToString("D")) is null)
+            {
+                transaction.InsertOrReplace(ToEntity(game));
+            }
+        }).ConfigureAwait(false);
         await TrimToMostRecentAsync(connection).ConfigureAwait(false);
     }
 

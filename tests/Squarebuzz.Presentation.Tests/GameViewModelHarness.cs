@@ -1,6 +1,7 @@
 using Squarebuzz.Core.Model;
 using Squarebuzz.Presentation.Tests.Fakes;
 using Squarebuzz.Presentation.ViewModels;
+using Squarebuzz.Presentation.Services;
 
 namespace Squarebuzz.Presentation.Tests;
 
@@ -13,6 +14,8 @@ public sealed class GameViewModelHarness : IDisposable
     public GameViewModelHarness()
     {
         Sessions = new GameSessionFactory(PuzzleRepository, Generator);
+        Completions = new FakeGameCompletionRepository(Progress, SaveGames);
+        CompletionService = new GameCompletionService(Completions, Progress);
 
         Vm = new GameViewModel(
             Sessions,
@@ -30,7 +33,8 @@ public sealed class GameViewModelHarness : IDisposable
             Theme,
             UiThread,
             Timers,
-            ScreenReader);
+            ScreenReader,
+            CompletionService);
     }
 
     public FakeLocalizationService Strings { get; } = new();
@@ -66,6 +70,10 @@ public sealed class GameViewModelHarness : IDisposable
     public FakeScreenReader ScreenReader { get; } = new();
 
     public GameSessionFactory Sessions { get; }
+
+    public FakeGameCompletionRepository Completions { get; }
+
+    public GameCompletionService CompletionService { get; }
 
     public GameViewModel Vm { get; }
 

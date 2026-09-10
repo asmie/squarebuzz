@@ -88,6 +88,7 @@ public static class MauiProgram
         services.AddSingleton<IUiThread, MauiUiThread>();
         services.AddSingleton<IGameTimerFactory, DispatcherGameTimerFactory>();
         services.AddSingleton<GameLifecycle>();
+        services.AddSingleton<GameCompletionService>();
         services.AddSingleton<IScreenReader, MauiScreenReader>();
 
         RegisterDomain(services);
@@ -139,6 +140,7 @@ public static class MauiProgram
             new SqliteSettingsRepository(provider.GetRequiredService<SquarebuzzDatabase>(), deviceLanguage));
         services.AddSingleton<ISaveGameRepository, SqliteSaveGameRepository>();
         services.AddSingleton<IProgressRepository, SqliteProgressRepository>();
+        services.AddSingleton<IGameCompletionRepository, SqliteGameCompletionRepository>();
     }
 
     private static void RegisterViewModels(IServiceCollection services)

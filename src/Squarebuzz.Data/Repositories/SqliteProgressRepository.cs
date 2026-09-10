@@ -1,3 +1,4 @@
+using SQLite;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Data.Entities;
@@ -54,12 +55,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
         // rather than throws - see RowGuards.
         return
         [
-            .. rows.Select(r => new SolvedPuzzle(
-                r.PuzzleId,
-                RowGuards.DateOrMin(r.FirstSolvedDayNumber),
-                r.BestStars,
-                RowGuards.SecondsOrZero(r.BestTimeSeconds),
-                r.TimesSolved))
+            .. rows.Select(ToModel)
         ];
     }
 
@@ -103,82 +99,80 @@ public sealed class SqliteProgressRepository : IProgressRepository
         cancellationToken.ThrowIfCancellationRequested();
 
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
-        var completedOn = DateOnly.FromDateTime(completion.CompletedAt.LocalDateTime);
-
         var updated = PlayerProgress.Empty;
-
-        // Progress and the solved-picture row move together: crediting stars without recording
-        // the picture (or the reverse) would show the player an inconsistent gallery. The read
-        // sits inside the same transaction as the write for the same reason: two completions
-        // landing together must serialise, or both read the same totals and the later write
-        // quietly swallows the earlier one's stars.
         await connection.RunInTransactionAsync(transaction =>
+            updated = RecordCompletion(transaction, completion)).ConfigureAwait(false);
+        return updated;
+    }
+
+    // Shared by the legacy progress API and the atomic completion journal transaction.
+    internal static PlayerProgress RecordCompletion(SQLiteConnection transaction, PuzzleCompletion completion)
+    {
+        var completedOn = DateOnly.FromDateTime(completion.CompletedAt.DateTime);
+        var row = transaction.Find<ProgressEntity>(ProgressEntity.SingletonId);
+        var current = row is null ? PlayerProgress.Empty : ToModel(row);
+
+        var updated = current with
         {
-            var row = transaction.Find<ProgressEntity>(ProgressEntity.SingletonId);
-            var current = row is null ? PlayerProgress.Empty : ToModel(row);
+            Stars = current.Stars + completion.Stars,
+            Streak = NextStreak(current, completedOn),
+            LastPlayedOn = completedOn,
+            TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
 
-            updated = current with
+            // Only a daily completion stamps this, so finishing a normal puzzle never marks
+            // today's daily as done.
+            LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
+
+            // Max, not assignment: replaying an already-finished level must never wind the
+            // campaign back.
+            HighestLevelCompleted = completion.Level is { } level
+                ? Math.Max(current.HighestLevelCompleted, level)
+                : current.HighestLevelCompleted,
+        };
+
+        transaction.InsertOrReplace(ToEntity(updated));
+
+        if (completion.IsDaily)
+        {
+            // The calendar's memory. Keyed on the day, so finishing is naturally once-per-day.
+            transaction.InsertOrReplace(new DailyCompletionEntity { DayNumber = completedOn.DayNumber });
+        }
+
+        if (completion.PuzzleId is not { } puzzleId)
+        {
+            // Generated puzzles earn stars but are not gallery pictures, so there is
+            // nothing to merge.
+            return updated;
+        }
+
+        var existing = transaction.Find<SolvedPuzzleEntity>(puzzleId);
+
+        if (existing is null)
+        {
+            transaction.Insert(new SolvedPuzzleEntity
             {
-                Stars = current.Stars + completion.Stars,
-                Streak = NextStreak(current, completedOn),
-                LastPlayedOn = completedOn,
-                TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
+                PuzzleId = puzzleId,
+                FirstSolvedDayNumber = completedOn.DayNumber,
+                BestStars = completion.Stars,
+                BestTimeSeconds = completion.Elapsed.TotalSeconds,
+                TimesSolved = 1,
+            });
+        }
+        else
+        {
+            existing.BestStars = Math.Max(existing.BestStars, completion.Stars);
 
-                // Only a daily completion stamps this, so finishing a normal puzzle never marks
-                // today's daily as done.
-                LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
+            // Math.Min keeps a negative or infinite stored time for good - every real solve
+            // loses to it - so a stored time that is not a usable duration is simply beaten
+            // by the one just recorded. (NaN cannot occur: SQLite stores it as NULL, which the
+            // NOT NULL column refuses.)
+            existing.BestTimeSeconds = RowGuards.IsUsableSeconds(existing.BestTimeSeconds)
+                ? Math.Min(existing.BestTimeSeconds, completion.Elapsed.TotalSeconds)
+                : completion.Elapsed.TotalSeconds;
 
-                // Max, not assignment: replaying an already-finished level must never wind the
-                // campaign back.
-                HighestLevelCompleted = completion.Level is { } level
-                    ? Math.Max(current.HighestLevelCompleted, level)
-                    : current.HighestLevelCompleted,
-            };
-
-            transaction.InsertOrReplace(ToEntity(updated));
-
-            if (completion.IsDaily)
-            {
-                // The calendar's memory. Keyed on the day, so finishing is naturally once-per-day.
-                transaction.InsertOrReplace(new DailyCompletionEntity { DayNumber = completedOn.DayNumber });
-            }
-
-            if (completion.PuzzleId is not { } puzzleId)
-            {
-                // Generated puzzles earn stars but are not gallery pictures, so there is
-                // nothing to merge.
-                return;
-            }
-
-            var existing = transaction.Find<SolvedPuzzleEntity>(puzzleId);
-
-            if (existing is null)
-            {
-                transaction.Insert(new SolvedPuzzleEntity
-                {
-                    PuzzleId = puzzleId,
-                    FirstSolvedDayNumber = completedOn.DayNumber,
-                    BestStars = completion.Stars,
-                    BestTimeSeconds = completion.Elapsed.TotalSeconds,
-                    TimesSolved = 1,
-                });
-            }
-            else
-            {
-                existing.BestStars = Math.Max(existing.BestStars, completion.Stars);
-
-                // Math.Min keeps a negative or infinite stored time for good - every real solve
-                // loses to it - so a stored time that is not a usable duration is simply beaten
-                // by the one just recorded. (NaN cannot occur: SQLite stores it as NULL, which the
-                // NOT NULL column refuses.)
-                existing.BestTimeSeconds = RowGuards.IsUsableSeconds(existing.BestTimeSeconds)
-                    ? Math.Min(existing.BestTimeSeconds, completion.Elapsed.TotalSeconds)
-                    : completion.Elapsed.TotalSeconds;
-
-                existing.TimesSolved++;
-                transaction.Update(existing);
-            }
-        }).ConfigureAwait(false);
+            existing.TimesSolved++;
+            transaction.Update(existing);
+        }
 
         return updated;
     }
@@ -220,6 +214,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
             transaction.DeleteAll<TrophyEntity>();
             transaction.DeleteAll<SavedGameEntity>();
             transaction.DeleteAll<DailyCompletionEntity>();
+            transaction.DeleteAll<GameCompletionEntity>();
         }).ConfigureAwait(false);
     }
 
@@ -255,6 +250,13 @@ public sealed class SqliteProgressRepository : IProgressRepository
         LastDailyCompletedOn = RowGuards.DateOrNull(row.LastDailyDayNumber),
         HighestLevelCompleted = row.HighestLevel,
     };
+
+    internal static SolvedPuzzle ToModel(SolvedPuzzleEntity row) => new(
+        row.PuzzleId,
+        RowGuards.DateOrMin(row.FirstSolvedDayNumber),
+        row.BestStars,
+        RowGuards.SecondsOrZero(row.BestTimeSeconds),
+        row.TimesSolved);
 
     private static ProgressEntity ToEntity(PlayerProgress progress) => new()
     {

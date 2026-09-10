@@ -33,7 +33,7 @@ public sealed class CompletionAttributionTests : IDisposable
 
         // Stall the first persistence step of the completion pipeline, so "Next" lands while
         // the win is still being written - the exact interleaving of the original bug.
-        _h.SaveGames.DeleteGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _h.Completions.CompleteGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
 
         _h.SolveCurrentPuzzle();
 
@@ -45,7 +45,7 @@ public sealed class CompletionAttributionTests : IDisposable
         Assert.Equal(4, _h.Vm.Session!.Origin!.Level);
 
         // Only now does the stalled completion write finish.
-        _h.SaveGames.DeleteGate.SetResult();
+        _h.Completions.CompleteGate.SetResult();
         await GameViewModelHarness.WaitUntilAsync(() => _h.Progress.Completions.Count == 1);
 
         var completion = Assert.Single(_h.Progress.Completions);

@@ -25,6 +25,7 @@ public partial class SplashViewModel : LocalizedViewModel
     private readonly IAudioService _audio;
     private readonly INarrationService _narration;
     private readonly ISaveGameRepository _saveGames;
+    private readonly GameCompletionService _completions;
 
     public SplashViewModel(
         ILocalizationService strings,
@@ -34,7 +35,8 @@ public partial class SplashViewModel : LocalizedViewModel
         IScreenTimeMonitor screenTime,
         IAudioService audio,
         INarrationService narration,
-        ISaveGameRepository saveGames)
+        ISaveGameRepository saveGames,
+        GameCompletionService completions)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(settingsRepository);
@@ -44,6 +46,7 @@ public partial class SplashViewModel : LocalizedViewModel
         ArgumentNullException.ThrowIfNull(audio);
         ArgumentNullException.ThrowIfNull(narration);
         ArgumentNullException.ThrowIfNull(saveGames);
+        ArgumentNullException.ThrowIfNull(completions);
 
         _settingsRepository = settingsRepository;
         _theme = theme;
@@ -52,6 +55,7 @@ public partial class SplashViewModel : LocalizedViewModel
         _audio = audio;
         _narration = narration;
         _saveGames = saveGames;
+        _completions = completions;
     }
 
     /// <summary>0 to 1, so it binds straight to <c>ProgressBar.Progress</c> with no converter.</summary>
@@ -97,7 +101,7 @@ public partial class SplashViewModel : LocalizedViewModel
     /// The startup work the splash screen exists to cover, in the order the first screens need it.
     /// </summary>
     /// <remarks>
-    /// Three independent steps, each behind its own guard. They used to share one try block, which
+    /// Independent steps, each behind its own guard. They used to share one try block, which
     /// read as tidy and meant an audio failure quietly skipped everything after it - including the
     /// save purge, the one step the rest of the app relies on having run. Sound or narration
     /// missing is a degraded game, not a broken one; a stale save that Continue then offers is a
@@ -109,6 +113,9 @@ public partial class SplashViewModel : LocalizedViewModel
         // Deliberately awaited: it is the difference between the first tap on a cell being
         // silent and being audible.
         await PrimeAudioAsync();
+
+        // Recover journaled wins before the first screen reads progress or lists saves.
+        await _completions.RetryAsync();
 
         // Once per launch, before the menu can show a count or Continue can list anything.
         // A generated save whose picture the current generator no longer produces would put
