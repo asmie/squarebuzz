@@ -249,19 +249,67 @@ public class NewGameViewModelTests : IDisposable
         Assert.Equal(ChallengeLevel.Sharp, remembered.LastChallenge);
 
         // A push, not a reset: the back gesture from the board returns here.
-        Assert.Equal(new FakeNavigationService.Request(Routes.Game, null, IsReset: false), _navigation.Last);
+        var navigation = Assert.Single(_navigation.Requests);
+        Assert.Equal(Routes.Game, navigation.Route);
+        Assert.False(navigation.IsReset);
+        var options = Assert.IsType<NewGameOptions>(navigation.Parameters![GameViewModel.NewGameOptionsParameter]);
+        Assert.Equal(remembered.ToNewGameOptions(), options);
     }
 
-    [Fact]
-    // Losing the preference is a small annoyance; refusing to start the game is not.
-    public async Task Start_StillOpensTheBoardWhenTheSaveFails()
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(false, true)]
+    [InlineData(true, false)]
+    [InlineData(true, true)]
+    public async Task Start_PlaysTheChosenGameEvenWhenPreferencesCannotBePersistedOrLoaded(
+        bool saveFails, bool loadFails)
     {
         await _vm.OnAppearingAsync();
-        _settings.SaveFails = true;
+        _vm.SelectSizeCommand.Execute(Size(GridSize.Normal));
+        _vm.SelectDifficultyCommand.Execute(_vm.Difficulties.Single(d => d.Level == 4));
+        _vm.SelectPackCommand.Execute(Pack("surprise"));
+        _vm.SelectChallengeCommand.Execute("sharp");
+        _settings.SaveFails = saveFails;
 
         await _vm.StartCommand.ExecuteAsync(null);
 
         Assert.Equal(Routes.Game, _navigation.Last?.Route);
+        using var game = new GameViewModelHarness();
+        game.Settings.Settings = _settings.Settings;
+        game.Settings.LoadFails = loadFails;
+        game.Vm.ApplyQueryAttributes(_navigation.Last!.Parameters ?? new Dictionary<string, object>());
+        await game.Vm.InitialiseAsync();
+
+        // Verify the destination's actual generation request, not merely that navigation ran.
+        var request = Assert.Single(game.Generator.Requests);
+        Assert.Equal(GridSize.Normal, request.Width);
+        Assert.Equal(GridSize.Normal, request.Height);
+        Assert.Equal(4, request.Difficulty);
+        Assert.Equal("surprise", request.Pack);
+        Assert.Equal(ChallengeLevel.Sharp, game.Vm.Session!.Origin!.Challenge);
+        Assert.Null(game.Vm.Session.Origin.Level);
+        Assert.Null(game.Vm.Session.Origin.DailyDate);
+    }
+
+    [Fact]
+    public async Task Start_CapturesTheSelectionBeforeWaitingForThePreferenceWrite()
+    {
+        await _vm.OnAppearingAsync();
+        _vm.SelectSizeCommand.Execute(Size(GridSize.Normal));
+        var gate = _settings.SaveGate = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        var starting = _vm.StartCommand.ExecuteAsync(null);
+        Assert.False(starting.IsCompleted);
+
+        // Another selection while storage is busy belongs to a later request.
+        _vm.SelectSizeCommand.Execute(Size(GridSize.Tiny));
+        gate.SetResult();
+        await starting;
+
+        var options = Assert.IsType<NewGameOptions>(
+            _navigation.Last!.Parameters![GameViewModel.NewGameOptionsParameter]);
+        Assert.Equal(GridSize.Normal, options.Size);
+        Assert.Equal(GridSize.Normal, Assert.Single(_settings.Saved).LastSize);
+        Assert.Equal(GridSize.Tiny, _vm.SelectedSize);
     }
 
     [Fact]

@@ -20,16 +20,23 @@ public sealed class FakeSettingsRepository : ISettingsRepository
     /// <summary>Makes <see cref="SaveAsync"/> throw, as a full disk or a locked database would.</summary>
     public bool SaveFails { get; set; }
 
-    public Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
+    /// <summary>When set, holds a settings write until the test releases it.</summary>
+    public TaskCompletionSource? SaveGate { get; set; }
+
+    public async Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
     {
+        if (SaveGate is { } gate)
+        {
+            await gate.Task;
+        }
+
         if (SaveFails)
         {
-            return Task.FromException(new InvalidOperationException("disk full"));
+            throw new InvalidOperationException("disk full");
         }
 
         Settings = settings;
         Saved.Add(settings);
-        return Task.CompletedTask;
     }
 }
 

@@ -372,22 +372,30 @@ public partial class NewGameViewModel : LocalizedViewModel
     [RelayCommand]
     private async Task StartAsync()
     {
-        // The choices are saved so the next New Game - and the Continue tile - reopen on them.
+        // Capture the request before awaiting persistence: the selection can change while the
+        // write is pending, and starting this game must not depend on that write succeeding.
+        var selectedSettings = _settings with
+        {
+            LastSize = SelectedSize,
+            LastDifficulty = SelectedDifficulty,
+            LastPackId = SelectedPackId,
+            LastChallenge = SelectedChallenge,
+        };
+        var options = selectedSettings.ToNewGameOptions();
+
+        // Remember these choices for the next visit to New Game.
         try
         {
-            await _settingsRepository.SaveAsync(_settings with
-            {
-                LastSize = SelectedSize,
-                LastDifficulty = SelectedDifficulty,
-                LastPackId = SelectedPackId,
-                LastChallenge = SelectedChallenge,
-            });
+            await _settingsRepository.SaveAsync(selectedSettings);
         }
         catch (Exception)
         {
             // Losing the preference is a small annoyance; refusing to start the game is not.
         }
 
-        await _navigation.GoToAsync(Routes.Game);
+        await _navigation.GoToAsync(Routes.Game, new Dictionary<string, object>
+        {
+            [GameViewModel.NewGameOptionsParameter] = options,
+        });
     }
 }

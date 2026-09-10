@@ -40,6 +40,9 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>Route parameter naming the campaign level to play.</summary>
     public const string LevelParameter = "level";
 
+    /// <summary>Typed options selected for a Quick Game, independent of saved preferences.</summary>
+    public const string NewGameOptionsParameter = "options";
+
     /// <summary>
     /// How often play is written to disk. Frequent enough that a crash or a task-kill costs
     /// only a few moves, rare enough that it never competes with drawing.
@@ -75,6 +78,7 @@ public partial class GameViewModel : LocalizedViewModel
     private bool _pendingDaily;
     private TimedTier? _pendingTier;
     private int? _pendingLevel;
+    private NewGameOptions? _pendingOptions;
 
     /// <summary>Play time since the last write, so the periodic autosave fires on the clock rather than on a tick count.</summary>
     private TimeSpan _sinceAutosave;
@@ -571,11 +575,16 @@ public partial class GameViewModel : LocalizedViewModel
         ElapsedText);
 
     /// <summary>
-    /// Picks up a <c>saveId</c> from the route, if the player arrived from Continue.
+    /// Picks up the requested save, game mode, picture or typed Quick Game options.
     /// </summary>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         ArgumentNullException.ThrowIfNull(query);
+
+        if (query.TryGetValue(NewGameOptionsParameter, out var options) && options is NewGameOptions selected)
+        {
+            _pendingOptions = selected;
+        }
 
         if (query.TryGetValue(SaveIdParameter, out var raw)
             && Guid.TryParse(raw?.ToString(), out var id))
@@ -668,7 +677,9 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        await StartAsync();
+        var options = _pendingOptions;
+        _pendingOptions = null;
+        await StartAsync(options);
     }
 
     /// <summary>
@@ -864,7 +875,7 @@ public partial class GameViewModel : LocalizedViewModel
 
     private Task AutosaveIfBoardChangedAsync() => QueueAutosaveAsync(onlyIfChanged: true);
 
-    /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
+    /// <summary>Starts the requested puzzle, falling back to saved choices when no options are supplied.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
     {
         // Settle the outgoing attempt before replacing it. Loading and generation are not play.
