@@ -94,6 +94,52 @@ public class MoveHistoryTests
     }
 
     [Fact]
+    public void Stroke_RetainedInputCannotRewriteHistory()
+    {
+        var original = new CellChange(7, CellState.Empty, CellState.Filled);
+        CellChange[] changes = [original];
+        var history = new MoveHistory();
+        history.Push(new Stroke(changes));
+
+        changes[0] = new CellChange(99, CellState.Crossed, CellState.Empty);
+
+        Assert.Equal(original, Assert.Single(Assert.IsType<Stroke>(history.Undo()).Changes));
+        Assert.Equal(original, Assert.Single(Assert.IsType<Stroke>(history.Redo()).Changes));
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Stroke_ExposedChangesCannotRewriteHistory(bool alreadyUndone)
+    {
+        var original = new CellChange(7, CellState.Empty, CellState.Filled);
+        var history = new MoveHistory();
+        var stroke = new Stroke([original]);
+        history.Push(stroke);
+
+        if (alreadyUndone)
+        {
+            stroke = Assert.IsType<Stroke>(history.Undo());
+        }
+
+        // Read-only collections may expose IList, but must reject replacement of stored moves.
+        if (stroke.Changes is IList<CellChange> mutable)
+        {
+            Assert.Throws<NotSupportedException>(() =>
+                mutable[0] = new CellChange(99, CellState.Crossed, CellState.Empty));
+        }
+
+        if (!alreadyUndone)
+        {
+            Assert.Equal(original, Assert.Single(Assert.IsType<Stroke>(history.Undo()).Changes));
+        }
+
+        Assert.Equal(original, Assert.Single(Assert.IsType<Stroke>(history.Redo()).Changes));
+        Assert.Equal(1, stroke.DirectChangeCount);
+        Assert.Equal(0, stroke.AutoCrossedCount);
+    }
+
+    [Fact]
     public void Stroke_SeparatesDirectChangesFromAutoCrossedOnes()
     {
         var stroke = new Stroke(
