@@ -52,6 +52,7 @@ public static class DailyPuzzle
         {
             Helpers = helpers,
             Seed = SeedFor(date),
+            DailyDate = date,
 
             // Essential: 10x10 is within the authored range, so without this the factory would
             // serve one of the seventy shipped pictures instead of a fresh one.

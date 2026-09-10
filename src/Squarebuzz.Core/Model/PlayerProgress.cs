@@ -49,7 +49,7 @@ public sealed record PlayerProgress
     public int TotalBlocksFilled { get; init; }
 
     /// <summary>
-    /// Day the daily puzzle was last completed, so Trials knows whether today's is still open.
+    /// Latest daily puzzle date completed, so Trials knows whether today's is still open.
     /// </summary>
     public DateOnly? LastDailyCompletedOn { get; init; }
 
@@ -87,6 +87,12 @@ public sealed record PuzzleCompletion(
 
     /// <summary>True when this was the daily puzzle rather than a freely chosen one.</summary>
     public bool IsDaily { get; init; }
+
+    /// <summary>
+    /// The daily puzzle date to credit, even when finished later. Null for ordinary games and
+    /// older journal entries, whose daily credit falls back to the completion date.
+    /// </summary>
+    public DateOnly? DailyDate { get; init; }
 
     /// <summary>Mistakes made. Zero is what "perfect" means for the trophies.</summary>
     public int Mistakes { get; init; }

@@ -113,6 +113,10 @@ internal sealed class SavedGameEntity
     /// <summary>Campaign level this game plays, or null outside the Levels mode. Added by Migration0006.</summary>
     [Column("level")]
     public int? Level { get; set; }
+
+    /// <summary>Original daily puzzle date, or null. Added by Migration0008.</summary>
+    [Column("daily_day")]
+    public int? DailyDayNumber { get; set; }
 }
 
 /// <summary>The player's standing. Exactly one row, pinned to <see cref="SingletonId"/>.</summary>
@@ -141,7 +145,7 @@ internal sealed class ProgressEntity
     [Column("total_blocks_filled")]
     public int TotalBlocksFilled { get; set; }
 
-    /// <summary>Day the daily was last completed, or null. Added by Migration0002.</summary>
+    /// <summary>Latest daily puzzle date completed, or null. Added by Migration0002.</summary>
     [Column("last_daily_day")]
     public int? LastDailyDayNumber { get; set; }
 

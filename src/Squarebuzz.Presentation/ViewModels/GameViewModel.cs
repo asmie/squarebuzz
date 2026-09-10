@@ -72,7 +72,7 @@ public partial class GameViewModel : LocalizedViewModel
 
     private Guid? _pendingResumeId;
     private string? _pendingPuzzleId;
-    private bool _isDaily;
+    private bool _pendingDaily;
     private TimedTier? _pendingTier;
     private int? _pendingLevel;
 
@@ -605,7 +605,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         if (query.ContainsKey(DailyParameter))
         {
-            _isDaily = true;
+            _pendingDaily = true;
         }
     }
 
@@ -646,8 +646,9 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        if (_isDaily)
+        if (_pendingDaily)
         {
+            _pendingDaily = false;
             _settings = await LoadSettingsSafelyAsync();
 
             // Seeded from today's date, so it is the same puzzle for everyone and survives a
@@ -1163,23 +1164,17 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        // Moving on from the daily means leaving it behind: the next puzzle is an ordinary one,
-        // and must not be recorded as today's daily.
-        _isDaily = false;
-
-        await StartAsync(SameSettingsFreshPuzzle());
+        // Moving on leaves daily mode; only Restart preserves the original daily date.
+        await StartAsync(SameSettingsFreshPuzzle(restartDaily: false));
     }
 
     /// <summary>
-    /// The current options with the seed cleared, so a replay keeps the player's size, pack and
-    /// challenge but draws a different picture. Null when there is no session yet, in which case
+    /// Keeps the current choices for the next game. Campaign levels and daily restarts retain
+    /// their fixed puzzle; ordinary games get a fresh seed. Null without a session, so
     /// <see cref="StartAsync"/> falls back to saved settings.
     /// </summary>
-    private NewGameOptions? SameSettingsFreshPuzzle()
+    private NewGameOptions? SameSettingsFreshPuzzle(bool restartDaily = true)
     {
-        // Restarting the daily has to give back the same puzzle - it is *today's* picture, and
-        // handing out a different one would also let a different picture be recorded as the
-        // daily. Only an ordinary game gets a new seed.
         if (_pendingTier is { } tier)
         {
             // A new picture and a full clock. Handing back the same grid would let a player learn
@@ -1187,9 +1182,10 @@ public partial class GameViewModel : LocalizedViewModel
             return tier.ToOptions(_settings.Helpers);
         }
 
-        if (_isDaily)
+        // A daily belongs to the date it was started, even after midnight or a later resume.
+        if (restartDaily && Session?.Origin?.DailyDate is { } dailyDate)
         {
-            return DailyPuzzle.OptionsFor(_clock.Today, _settings.Helpers);
+            return DailyPuzzle.OptionsFor(dailyDate, _settings.Helpers);
         }
 
         // Written out rather than as `Session?.Origin with { ... }`, which compiles but
@@ -1211,6 +1207,7 @@ public partial class GameViewModel : LocalizedViewModel
         return origin with
         {
             Seed = null,
+            DailyDate = null,
 
             // A picture chosen from the Gallery must not stick to every following "Next" - and
             // the picture just solved must not come straight back either.
@@ -1252,11 +1249,11 @@ public partial class GameViewModel : LocalizedViewModel
 
         // Everything the completion record needs, captured before the first await. The moment
         // control yields, a quick tap on "Next" can replace the session, regenerate the save id
-        // and clear the daily flag - and this completion must be attributed to the game that was
+        // and leave daily mode - and this completion must be attributed to the game that was
         // just won, not to the one that follows it. (A level recorded one-too-high would unlock
         // a level that was never played.)
         var saveId = _saveId;
-        var isDaily = _isDaily;
+        var dailyDate = session.Origin?.DailyDate;
         var level = CurrentLevel;
         var completedAt = _clock.Now;
 
@@ -1286,7 +1283,8 @@ public partial class GameViewModel : LocalizedViewModel
             Size = session.Puzzle.Width,
             PackId = session.Puzzle.Pack,
             Mistakes = session.Mistakes,
-            IsDaily = isDaily,
+            IsDaily = dailyDate is not null,
+            DailyDate = dailyDate,
             Level = level,
         };
 

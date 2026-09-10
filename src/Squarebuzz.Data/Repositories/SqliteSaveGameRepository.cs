@@ -178,6 +178,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             SavedAtOffsetTicks = game.SavedAt.Offset.Ticks,
             GeneratorVersion = game.GeneratorVersion,
             Level = game.Level,
+            DailyDayNumber = game.DailyDate?.DayNumber,
         };
     }
 
@@ -231,6 +232,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             SavedAt = RowGuards.InstantOrEpoch(row.SavedAtUtcTicks, row.SavedAtOffsetTicks),
             GeneratorVersion = row.GeneratorVersion,
             Level = row.Level,
+            DailyDate = RowGuards.DateOrNull(row.DailyDayNumber),
         };
     }
 }

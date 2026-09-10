@@ -112,6 +112,8 @@ public sealed class SqliteProgressRepository : IProgressRepository
         var row = transaction.Find<ProgressEntity>(ProgressEntity.SingletonId);
         var current = row is null ? PlayerProgress.Empty : ToModel(row);
 
+        var dailyDate = completion.IsDaily ? completion.DailyDate ?? completedOn : (DateOnly?)null;
+
         var updated = current with
         {
             Stars = current.Stars + completion.Stars,
@@ -119,9 +121,11 @@ public sealed class SqliteProgressRepository : IProgressRepository
             LastPlayedOn = completedOn,
             TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
 
-            // Only a daily completion stamps this, so finishing a normal puzzle never marks
-            // today's daily as done.
-            LastDailyCompletedOn = completion.IsDaily ? completedOn : current.LastDailyCompletedOn,
+            // Finishing an older daily must not make a newer completed daily available again.
+            LastDailyCompletedOn = dailyDate is { } day
+                && (current.LastDailyCompletedOn is not { } lastDaily || day > lastDaily)
+                    ? day
+                    : current.LastDailyCompletedOn,
 
             // Max, not assignment: replaying an already-finished level must never wind the
             // campaign back.
@@ -132,10 +136,10 @@ public sealed class SqliteProgressRepository : IProgressRepository
 
         transaction.InsertOrReplace(ToEntity(updated));
 
-        if (completion.IsDaily)
+        if (dailyDate is { } dailyDay)
         {
             // The calendar's memory. Keyed on the day, so finishing is naturally once-per-day.
-            transaction.InsertOrReplace(new DailyCompletionEntity { DayNumber = completedOn.DayNumber });
+            transaction.InsertOrReplace(new DailyCompletionEntity { DayNumber = dailyDay.DayNumber });
         }
 
         if (completion.PuzzleId is not { } puzzleId)

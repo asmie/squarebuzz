@@ -100,6 +100,7 @@ public sealed class GameSessionFactory
             Helpers = helpers,
             Seed = save.Seed,
             Level = save.Level,
+            DailyDate = save.DailyDate,
         };
 
         var puzzle = ResolvePuzzle(save);

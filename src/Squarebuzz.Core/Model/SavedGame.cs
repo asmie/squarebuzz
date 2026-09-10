@@ -50,6 +50,9 @@ public sealed record SavedGame
     /// <summary>Campaign level this game plays, or null for anything outside the Levels mode.</summary>
     public int? Level { get; init; }
 
+    /// <summary>The original daily puzzle date, or null for ordinary games and legacy saves.</summary>
+    public DateOnly? DailyDate { get; init; }
+
     /// <summary>
     /// Generation algorithm that produced this puzzle, or <see cref="GeneratorVersion.Unknown"/>
     /// for an authored one and for saves written before versioning existed.
@@ -115,6 +118,7 @@ public sealed record SavedGame
             Mistakes = session.Mistakes,
             SavedAt = savedAt,
             Level = origin.Level,
+            DailyDate = origin.DailyDate,
 
             // Only a generated picture depends on the algorithm; an authored one is content.
             GeneratorVersion = session.Puzzle.IsGenerated

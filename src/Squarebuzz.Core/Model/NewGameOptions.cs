@@ -61,6 +61,9 @@ public sealed record NewGameOptions(
     /// </remarks>
     public int? Level { get; init; }
 
+    /// <summary>The daily puzzle's date, or null for a game outside daily mode.</summary>
+    public DateOnly? DailyDate { get; init; }
+
     /// <summary>
     /// A picture the factory should avoid handing out, or null to allow any.
     /// </summary>
