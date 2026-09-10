@@ -32,7 +32,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          global-json-file: global.json
 
       # One project per invocation: MSBuild takes a single project or solution argument and
       # rejects the second as an unknown switch (MSB1008). Restoring the solution instead is not
@@ -77,7 +77,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          global-json-file: global.json
 
       - name: Translations match the neutral culture
         run: dotnet run tools/check-strings.cs
@@ -95,7 +95,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          global-json-file: global.json
 
       # The runner ships MAUI workloads, but not necessarily matching this SDK band, so they are
       # installed explicitly. Only the Android ones are needed for this job.
@@ -130,7 +130,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          global-json-file: global.json
 
       # Choosing an Xcode here needs two things to be true at once, and the runner image does not
       # make either obvious:
@@ -208,7 +208,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          global-json-file: global.json
 
       - name: Install MAUI Windows workload
         run: dotnet workload install maui-windows --skip-sign-check

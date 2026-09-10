@@ -37,9 +37,16 @@ Core has no project or package dependencies.
 
 ## Build, run, test
 
-Requires the .NET 10 SDK with the `maui-windows`, `android`, `ios` and `maccatalyst` workloads,
+Requires the exact .NET SDK version in [global.json](global.json) with the `maui-windows`,
+`android`, `ios` and `maccatalyst` workloads,
 and Visual Studio 2026 for the `.slnx` solution. iOS and Mac Catalyst need a paired Mac with Xcode
 to deploy; the managed code compiles on Windows.
+
+Local builds and every CI job use that SDK version, with automatic SDK roll-forward disabled.
+Install it side by side with other SDKs if necessary. Update `global.json` when adopting an SDK
+update (including security patches), then run the tests, content validators and platform builds
+before merging. This pins the compiler and bundled analyzers; MAUI workloads and Xcode are still
+selected separately and are not pinned by this file.
 
 ```bash
 dotnet build squarebuzz.slnx                                   # everything
