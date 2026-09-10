@@ -64,11 +64,9 @@ jobs:
           path: artifacts/test-results
           if-no-files-found: ignore
 
-  # The two invariants the content depends on, enforced rather than hoped for. Both tools
-  # existed and both passed, but nothing ran them: a content edit could ship a puzzle that needs
-  # guessing, or a translation missing a key that then leaks raw into the UI in that language.
-  # check-strings' own header says it enforces "what nothing previously enforced" - this is the
-  # job that makes that true. File-based apps (`dotnet run file.cs`) need no project or restore.
+  # Run both content validators so edits cannot ship puzzles that need guessing or translations
+  # with missing keys. dotnet run builds and restores these file-based apps as needed;
+  # validate-puzzles.cs declares a Core project reference through its #:project directive.
   content:
     name: Content
     runs-on: ubuntu-latest
