@@ -4,11 +4,15 @@
        xmlns:views="clr-namespace:Squarebuzz.App.Views"
        x:Class="Squarebuzz.App.AppShell"
        FlyoutBehavior="Disabled"
+       Shell.BackgroundColor="{DynamicResource Bg}"
+       Shell.ForegroundColor="{DynamicResource Ink}"
+       Shell.TitleColor="{DynamicResource Ink}"
        Shell.NavBarIsVisible="False">
 
     <!--
       The game drives its own full-screen navigation, so Shell chrome stays hidden by default
-      and individual pages opt back in. Splash and Menu are declared as ShellContent so
+      and secondary pages opt back in for a visible back button. Splash, Onboarding and Menu
+      are declared as ShellContent so
       ResetToAsync("//route") can replace the stack; everything else is a pushed route
       registered in AppShell.xaml.cs.
     -->

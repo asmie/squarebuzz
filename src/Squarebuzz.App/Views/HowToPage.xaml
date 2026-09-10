@@ -5,6 +5,8 @@
              xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
              x:Class="Squarebuzz.App.Views.HowToPage"
              x:DataType="vm:HowToViewModel"
+             Title="{Binding Heading}"
+             Shell.NavBarIsVisible="True"
              BackgroundColor="{DynamicResource Bg}">
 
     <!--

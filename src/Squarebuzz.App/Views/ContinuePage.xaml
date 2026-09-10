@@ -5,6 +5,8 @@
              xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
              x:Class="Squarebuzz.App.Views.ContinuePage"
              x:DataType="vm:ContinueViewModel"
+             Title="{Binding Heading}"
+             Shell.NavBarIsVisible="True"
              BackgroundColor="{DynamicResource Bg}">
 
     <Grid Padding="{StaticResource PagePadding}" RowDefinitions="Auto,*">

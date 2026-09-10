@@ -280,6 +280,8 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     // ---- Section and row labels ----
 
+    public string Heading => T("options");
+
     public string AudioSection => T("audio");
 
     public string LookSection => T("look");

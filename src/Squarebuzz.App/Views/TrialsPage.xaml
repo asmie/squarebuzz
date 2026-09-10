@@ -6,6 +6,8 @@
              xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
              x:Class="Squarebuzz.App.Views.TrialsPage"
              x:DataType="vm:TrialsViewModel"
+             Title="{Binding Heading}"
+             Shell.NavBarIsVisible="True"
              BackgroundColor="{DynamicResource Bg}">
 
     <ContentPage.Resources>

@@ -5,6 +5,8 @@
              xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
              x:Class="Squarebuzz.App.Views.AboutPage"
              x:DataType="vm:AboutViewModel"
+             Title="{Binding Heading}"
+             Shell.NavBarIsVisible="True"
              BackgroundColor="{DynamicResource Bg}">
 
     <Grid>
