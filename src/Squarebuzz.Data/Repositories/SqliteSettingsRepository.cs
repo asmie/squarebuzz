@@ -10,7 +10,7 @@ namespace Squarebuzz.Data.Repositories;
 /// </summary>
 /// <remarks>
 /// Enums are persisted by name, not ordinal, so inserting a value into an enum later cannot
-/// silently reinterpret a saved setting. Anything missing or unparseable falls back to the
+/// silently reinterpret a saved setting. Anything missing, unparseable or undefined falls back to the
 /// default, which is what makes the table tolerant of both older and newer builds.
 /// </remarks>
 public sealed class SqliteSettingsRepository : ISettingsRepository
@@ -183,7 +183,12 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
         values.TryGetValue(key, out var raw) && !string.IsNullOrWhiteSpace(raw) ? raw : fallback;
 
     private static bool ReadBool(Dictionary<string, string?> values, string key, bool fallback) =>
-        values.TryGetValue(key, out var raw) && raw is not null ? raw == "1" : fallback;
+        values.GetValueOrDefault(key) switch
+        {
+            "1" => true,
+            "0" => false,
+            _ => fallback,
+        };
 
     private static int ReadInt(Dictionary<string, string?> values, string key, int fallback) =>
         values.TryGetValue(key, out var raw)
@@ -200,6 +205,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
     private static TEnum ReadEnum<TEnum>(Dictionary<string, string?> values, string key, TEnum fallback)
         where TEnum : struct, Enum =>
         values.TryGetValue(key, out var raw) && Enum.TryParse<TEnum>(raw, ignoreCase: true, out var parsed)
+            && Enum.IsDefined(parsed)
             ? parsed
             : fallback;
 

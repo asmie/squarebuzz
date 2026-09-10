@@ -80,21 +80,159 @@ public class CorruptRowTests
         Assert.Equal(DateTimeOffset.UnixEpoch, save.SavedAt);
     }
 
-    [Fact]
-    public async Task ABadOffsetKeepsTheInstant_ShownInUtc()
+    [Theory]
+    [InlineData(long.MinValue)]
+    [InlineData(long.MaxValue)]
+    [InlineData(1)]
+    [InlineData(-1)]
+    [InlineData(TimeSpan.TicksPerMinute + 1)]
+    [InlineData(-TimeSpan.TicksPerMinute - 1)]
+    public async Task ABadOffsetKeepsTheInstant_ShownInUtc(long offsetTicks)
     {
         await using var temp = new TemporaryDatabase();
         var connection = await temp.Database.GetConnectionAsync();
         var repository = new SqliteSaveGameRepository(temp.Database);
 
         var when = new DateTimeOffset(2026, 7, 29, 12, 0, 0, TimeSpan.Zero);
-        await InsertSaveAsync(connection, Good.ToString("D"), savedAtTicks: when.UtcTicks, offsetTicks: long.MinValue);
+        await InsertSaveAsync(connection, Good.ToString("D"), savedAtTicks: when.UtcTicks, offsetTicks: offsetTicks);
+
+        // A damaged row must not prevent the Continue list from loading its healthy neighbour.
+        await InsertSaveAsync(connection, Guid.NewGuid().ToString("D"));
+        Assert.Equal(2, (await repository.GetAllAsync()).Count);
 
         var save = await repository.GetAsync(Good);
 
         Assert.NotNull(save);
         Assert.Equal(when, save.SavedAt);
         Assert.Equal(TimeSpan.Zero, save.SavedAt.Offset);
+    }
+
+    [Theory]
+    [InlineData(-840)]
+    [InlineData(-1)]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(840)]
+    public async Task AValidOffset_PreservesBothTheInstantAndLocalTime(int offsetMinutes)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+        var when = new DateTimeOffset(2026, 7, 29, 12, 0, 0, TimeSpan.Zero);
+        var offset = TimeSpan.FromMinutes(offsetMinutes);
+        await InsertSaveAsync(connection, Good.ToString("D"), savedAtTicks: when.UtcTicks, offsetTicks: offset.Ticks);
+
+        var save = await repository.GetAsync(Good);
+
+        Assert.NotNull(save);
+        Assert.Equal(when, save.SavedAt);
+        Assert.Equal(offset, save.SavedAt.Offset);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task AnOffsetThatOverflowsTheLocalDate_KeepsTheInstantInUtc(bool atMaximum)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+        var when = atMaximum ? DateTimeOffset.MaxValue : DateTimeOffset.MinValue;
+        var offsetTicks = atMaximum ? TimeSpan.TicksPerMinute : -TimeSpan.TicksPerMinute;
+        await InsertSaveAsync(connection, Good.ToString("D"), savedAtTicks: when.UtcTicks, offsetTicks: offsetTicks);
+
+        var save = await repository.GetAsync(Good);
+
+        Assert.NotNull(save);
+        Assert.Equal(when, save.SavedAt);
+        Assert.Equal(TimeSpan.Zero, save.SavedAt.Offset);
+    }
+
+    [Theory]
+    [InlineData(int.MinValue, 0)]
+    [InlineData(-1, 0)]
+    [InlineData(0, 0)]
+    [InlineData(2, 2)]
+    [InlineData(3, 3)]
+    [InlineData(4, 3)]
+    [InlineData(int.MaxValue, 3)]
+    public async Task ASolvedPicturesStars_AreBoundedWithoutLosingThePicture(int stored, int expected)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        var repository = new SqliteProgressRepository(temp.Database);
+        await connection.ExecuteAsync(
+            "INSERT INTO solved_puzzle (puzzle_id, first_solved_day, best_stars, best_time_seconds, times_solved) VALUES ('heart', 20000, ?, 45, 1)",
+            stored);
+
+        var heart = Assert.Single(await repository.GetSolvedPuzzlesAsync());
+
+        Assert.Equal("heart", heart.PuzzleId);
+        Assert.Equal(expected, heart.BestStars);
+        Assert.Equal(TimeSpan.FromSeconds(45), heart.BestTime);
+        Assert.Equal(1, heart.TimesSolved);
+    }
+
+    [Theory]
+    [InlineData("999")]
+    [InlineData("-1")]
+    [InlineData("2147483647")]
+    [InlineData("-2147483648")]
+    [InlineData("unknown")]
+    public async Task UndefinedSettingsEnums_FallBackToDefaults(string stored)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        string[] keys = ["look.theme", "look.accent", "controls.tapBehaviour", "controls.handedness", "language", "lastGame.challenge"];
+        foreach (var key in keys)
+        {
+            await connection.ExecuteAsync("INSERT INTO setting (key, value) VALUES (?, ?)", key, stored);
+        }
+
+        Assert.Equal(GameSettings.Default, await new SqliteSettingsRepository(temp.Database).LoadAsync());
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("garbage")]
+    [InlineData("2")]
+    [InlineData("-1")]
+    [InlineData("true")]
+    [InlineData("false")]
+    public async Task MalformedBooleans_UseTheIndividualSettingsDefault(string? stored)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        string[] keys = ["audio.soundEffects", "audio.music", "helpers.autoCross", "firstRun.hasSeenOnboarding"];
+        foreach (var key in keys)
+        {
+            await connection.ExecuteAsync("INSERT INTO setting (key, value) VALUES (?, ?)", key, stored);
+        }
+
+        Assert.Equal(GameSettings.Default, await new SqliteSettingsRepository(temp.Database).LoadAsync());
+    }
+
+    [Theory]
+    [InlineData("-2147483648", GameSettings.MinCellZoomPercent, 1)]
+    [InlineData("2147483647", GameSettings.MaxCellZoomPercent, 5)]
+    [InlineData("2147483648", GameSettings.DefaultCellZoomPercent, 2)]
+    [InlineData("-2147483649", GameSettings.DefaultCellZoomPercent, 2)]
+    public async Task SettingsIntegerBoundaries_UseSupportedValues(string stored, int expectedZoom, int expectedDifficulty)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        string[] keys = ["controls.cellZoomPercent", "lastGame.difficulty", "lastGame.size"];
+        foreach (var key in keys)
+        {
+            await connection.ExecuteAsync("INSERT INTO setting (key, value) VALUES (?, ?)", key, stored);
+        }
+
+        var settings = await new SqliteSettingsRepository(temp.Database).LoadAsync();
+
+        Assert.Equal(expectedZoom, settings.CellZoomPercent);
+        Assert.Equal(expectedDifficulty, settings.LastDifficulty);
+        Assert.Equal(GridSize.Tiny, settings.LastSize);
     }
 
     [Fact]

@@ -69,8 +69,9 @@ internal static class RowGuards
         var utc = new DateTimeOffset(utcTicks, TimeSpan.Zero);
         var offset = new TimeSpan(offsetTicks);
 
-        // DateTimeOffset allows offsets within fourteen hours either way and rejects the rest.
-        if (offset < TimeSpan.FromHours(-14) || offset > TimeSpan.FromHours(14))
+        // DateTimeOffset requires whole-minute offsets within fourteen hours either way.
+        if (offsetTicks % TimeSpan.TicksPerMinute != 0
+            || offset < TimeSpan.FromHours(-14) || offset > TimeSpan.FromHours(14))
         {
             return utc;
         }

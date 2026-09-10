@@ -258,7 +258,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
     internal static SolvedPuzzle ToModel(SolvedPuzzleEntity row) => new(
         row.PuzzleId,
         RowGuards.DateOrMin(row.FirstSolvedDayNumber),
-        row.BestStars,
+        Math.Clamp(row.BestStars, 0, 3),
         RowGuards.SecondsOrZero(row.BestTimeSeconds),
         row.TimesSolved);
 
