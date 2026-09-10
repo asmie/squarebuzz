@@ -20,7 +20,20 @@ tools/                       File-based scripts: puzzle validation, string check
 design/                      The original Claude Design prototype — the visual source of truth.
 ```
 
-Dependencies flow strictly `App → Presentation → Data → Core`. Core depends on nothing.
+Project references point in these directions:
+
+```mermaid
+graph TD
+    App --> Presentation
+    App --> Data
+    App --> Core
+    Presentation --> Core
+    Data --> Core
+```
+
+App is the composition root: `MauiProgram` wires the repository implementations in Data to the
+interfaces declared in Core. Presentation uses those interfaces and has no dependency on Data.
+Core has no project or package dependencies.
 
 ## Build, run, test
 
