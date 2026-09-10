@@ -50,7 +50,7 @@ Install it side by side with other SDKs if necessary. When adopting toolchain up
 security patches), update `global.json` and check the matching Apple SDK release notes. Update
 CI's `XCODE_VERSION` and macOS runner together if required, then run the tests, content validators
 and platform builds before merging. Workload sets pin platform manifests as well as the MAUI SDK;
-the iOS CI job explicitly selects Xcode instead of following the runner's default or newest copy.
+the Apple CI jobs explicitly select Xcode instead of following the runner's default or newest copy.
 
 ```bash
 dotnet workload install maui-android     # or maui-windows / maui-ios / maui-maccatalyst
@@ -143,21 +143,22 @@ only where it covers the script — see `AppLanguages.All`.
 
 ## Continuous integration
 
-`.github/workflows/ci.yml` runs five jobs on push and pull request:
+`.github/workflows/ci.yml` defines five jobs on push and pull request; the domain and Apple
+matrices each run two independent builds:
 
 | Job | Runner | Covers |
 |---|---|---|
 | `domain` | ubuntu + windows | Builds and tests Core, Data and Presentation. No MAUI workload. |
 | `content` | ubuntu | `check-strings.cs` and `validate-puzzles.cs`. |
 | `android` | windows | Builds and uploads the APK. |
-| `ios` | macos | Builds the simulator target — the only iOS compile check for a Windows dev machine. |
+| `apple` | macos-26 | Builds iOS for the ARM64 simulator and Mac Catalyst for ARM64 in separate matrix jobs. |
 | `app-warnings` | windows | Rebuilds the MAUI head with `-warnaserror`, which the project relaxes locally. |
 
 CI builds a clean checkout; a local build is incremental and will not re-run analysers on
 up-to-date outputs, nor notice a file that was never committed. To reproduce CI faithfully build
-from `git archive HEAD`, not from the working directory. The `ios` job picks its Xcode by trying
-each installed version newest-first until one resolves the macOS SDK; the reasoning is in the
-workflow file.
+from `git archive HEAD`, not from the working directory. Both Apple builds use the pinned
+workload set and Xcode version described above. Mac Catalyst signing is disabled for this
+compile check; release signing, installation and device testing are separate steps.
 
 ## Conventions
 

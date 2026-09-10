@@ -125,9 +125,23 @@ jobs:
           path: src/Squarebuzz.App/bin/Release/net10.0-android/*-Signed.apk
           if-no-files-found: warn
 
-  ios:
-    name: iOS
+  apple:
+    name: ${{ matrix.name }}
     runs-on: macos-26
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: iOS
+            workload: maui-ios
+            framework: net10.0-ios
+            runtime: iossimulator-arm64
+            code-signing: 'true'
+          - name: Mac Catalyst
+            workload: maui-maccatalyst
+            framework: net10.0-maccatalyst
+            runtime: maccatalyst-arm64
+            code-signing: 'false'
     env:
       XCODE_VERSION: '26.6'
 
@@ -139,7 +153,7 @@ jobs:
         with:
           global-json-file: global.json
 
-      # Workload set 10.0.400 contains iOS SDK 26.5.10301, which requires Xcode 26.6.
+      # Workload set 10.0.400 contains Apple SDKs 26.5.10301, which require Xcode 26.6.
       # Keep this selection in sync with global.json and the README toolchain requirements.
       - name: Select pinned Xcode
         shell: bash
@@ -157,19 +171,19 @@ jobs:
           xcrun --sdk macosx --find actool
           xcrun --sdk iphonesimulator --show-sdk-path
 
-      - name: Install MAUI iOS workload
-        run: dotnet workload install maui-ios
+      - name: Install MAUI workload
+        run: dotnet workload install ${{ matrix.workload }}
 
-      # This job exists because iOS cannot be built on the Windows dev machine - it needs a Mac
-      # with Xcode. Without it, an iOS-only break would go unnoticed until release. No signing
-      # identity is available on a public runner, so the simulator target is built instead: it
-      # compiles and links the real thing without needing a provisioning profile.
-      - name: Build for iOS simulator
+      # Compile both Apple heads independently so a failure in one does not skip the other.
+      # iOS uses the simulator; Mac Catalyst disables signing for this compile check. Neither
+      # needs a distribution identity or provisioning profile, and neither build is published.
+      - name: Build Apple target
         run: >
           dotnet build src/Squarebuzz.App/Squarebuzz.App.csproj
           -c Release
-          -p:SquarebuzzTargetFramework=net10.0-ios
-          -p:RuntimeIdentifier=iossimulator-arm64
+          -p:SquarebuzzTargetFramework=${{ matrix.framework }}
+          -p:RuntimeIdentifier=${{ matrix.runtime }}
+          -p:EnableCodeSigning=${{ matrix.code-signing }}
           -p:CodesignRequireProvisioningProfile=false
 
   # Analysers run as errors in Core and Data, so a warning there already fails those jobs. This
