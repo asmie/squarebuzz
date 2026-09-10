@@ -156,9 +156,9 @@ public sealed class GameSession
     /// Rehydrates a session from a save.
     /// </summary>
     /// <remarks>
-    /// Deliberately bypasses the move rules: these marks were already validated when the
-    /// player made them, and re-checking would count old mistakes twice. Undo history starts
-    /// empty, so a resumed game cannot be unwound past the point it was saved.
+    /// Validates saved values before changing the session, but does not replay move rules:
+    /// replaying would count old mistakes twice. Undo history starts empty after a successful
+    /// restore, so a resumed game cannot be unwound past the point it was saved.
     /// </remarks>
     public void Restore(
         IReadOnlyList<CellState> cells,
@@ -178,12 +178,24 @@ public sealed class GameSession
 
         ArgumentOutOfRangeException.ThrowIfNegative(mistakes);
         ArgumentOutOfRangeException.ThrowIfNegative(hintsRemaining);
+        ArgumentOutOfRangeException.ThrowIfNegative(hintsUsed);
+        ArgumentOutOfRangeException.ThrowIfLessThan(elapsed, TimeSpan.Zero);
 
+        // Read and validate the complete board before replacing live state. A bad cell or a
+        // failing source collection must not leave a partially restored board and old counters.
+        var restoredCells = new CellState[_cells.Length];
         for (var i = 0; i < cells.Count; i++)
         {
-            _cells[i] = cells[i];
+            var state = cells[i];
+            if (!Enum.IsDefined(state))
+            {
+                throw new ArgumentException($"Saved board cell {i} has invalid state {(byte)state}.", nameof(cells));
+            }
+
+            restoredCells[i] = state;
         }
 
+        restoredCells.CopyTo(_cells, 0);
         RecountFilled();
 
         Elapsed = elapsed;
@@ -193,7 +205,7 @@ public sealed class GameSession
         // from the one the game was saved under - switching hints off in Options is enough -
         // and deriving it would hand back hints the player had already spent, restoring a star
         // and the "no hints" trophy along with them.
-        HintsUsed = Math.Max(0, hintsUsed);
+        HintsUsed = hintsUsed;
 
         Mistakes = mistakes;
         _history.Clear();

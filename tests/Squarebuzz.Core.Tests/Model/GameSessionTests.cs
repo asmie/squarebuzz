@@ -24,6 +24,83 @@ public class GameSessionTests
     private static GameSession NewSession(GameRules? rules = null) =>
         new(Plus(), rules ?? GameRules.Relaxed);
 
+    [Theory]
+    [InlineData(3)]
+    [InlineData(255)]
+    public void Restore_InvalidCellStateLeavesSessionUntouched(byte invalidState)
+    {
+        var cells = new CellState[25];
+        cells[^1] = (CellState)invalidState;
+
+        AssertRejectedRestoreKeepsSession(
+            session => session.Restore(cells, TimeSpan.FromSeconds(30), 1, 2, 3), "cells");
+    }
+
+    [Theory]
+    [InlineData("elapsed")]
+    [InlineData("hintsRemaining")]
+    [InlineData("hintsUsed")]
+    [InlineData("mistakes")]
+    public void Restore_NegativeValueLeavesSessionUntouched(string parameter)
+    {
+        AssertRejectedRestoreKeepsSession(session => session.Restore(
+            new CellState[25],
+            parameter == "elapsed" ? TimeSpan.FromTicks(-1) : TimeSpan.FromSeconds(30),
+            parameter == "hintsRemaining" ? -1 : 1,
+            parameter == "hintsUsed" ? -1 : 2,
+            parameter == "mistakes" ? -1 : 3), parameter);
+    }
+
+    [Fact]
+    public void Restore_ValidSnapshotReplacesHistoryAndDoesNotRetainInput()
+    {
+        var session = NewSession();
+        session.Paint(2, CellState.Filled);
+        var cells = new CellState[25];
+        cells[0] = CellState.Crossed;
+        cells[7] = CellState.Filled;
+
+        session.Restore(cells, TimeSpan.FromSeconds(30), 1, 2, 3);
+        cells[7] = CellState.Empty;
+
+        Assert.Equal(CellState.Crossed, session[0]);
+        Assert.Equal(CellState.Empty, session[2]);
+        Assert.Equal(CellState.Filled, session[7]);
+        Assert.Equal(1, session.FilledCount);
+        Assert.Equal(TimeSpan.FromSeconds(30), session.Elapsed);
+        Assert.Equal(1, session.HintsRemaining);
+        Assert.Equal(2, session.HintsUsed);
+        Assert.Equal(3, session.Mistakes);
+        Assert.False(session.IsSolved);
+        Assert.False(session.CanUndo);
+        Assert.False(session.CanRedo);
+        Assert.Equal(0, session.MoveCount);
+    }
+
+    private static void AssertRejectedRestoreKeepsSession(Action<GameSession> restore, string parameter)
+    {
+        var session = NewSession();
+        session.Paint(2, CellState.Filled);
+        session.Advance(TimeSpan.FromSeconds(5));
+        var originalCells = session.Cells.ToArray();
+        var originalHints = session.HintsRemaining;
+
+        var error = Assert.ThrowsAny<ArgumentException>(() => restore(session));
+
+        Assert.Equal(parameter, error.ParamName);
+        Assert.Equal(originalCells, session.Cells.ToArray());
+        Assert.Equal(1, session.FilledCount);
+        Assert.Equal(TimeSpan.FromSeconds(5), session.Elapsed);
+        Assert.Equal(originalHints, session.HintsRemaining);
+        Assert.Equal(0, session.HintsUsed);
+        Assert.Equal(0, session.Mistakes);
+        Assert.False(session.IsOver);
+        Assert.Equal(1, session.MoveCount);
+        Assert.True(session.Undo());
+        Assert.True(session.Redo());
+        Assert.Equal(originalCells, session.Cells.ToArray());
+    }
+
     private static void FillEntireSolution(GameSession session)
     {
         for (var i = 0; i < session.Puzzle.CellCount; i++)
