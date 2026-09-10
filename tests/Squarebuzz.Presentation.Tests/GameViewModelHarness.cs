@@ -1,3 +1,4 @@
+using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Presentation.Tests.Fakes;
 using Squarebuzz.Presentation.ViewModels;
@@ -11,7 +12,7 @@ namespace Squarebuzz.Presentation.Tests;
 /// </summary>
 public sealed class GameViewModelHarness : IDisposable
 {
-    public GameViewModelHarness(GameSessionFactory? sessions = null)
+    public GameViewModelHarness(GameSessionFactory? sessions = null, ISettingsRepository? settings = null)
     {
         Sessions = sessions ?? new GameSessionFactory(PuzzleRepository, Generator);
         Completions = new FakeGameCompletionRepository(Progress, SaveGames);
@@ -19,7 +20,7 @@ public sealed class GameViewModelHarness : IDisposable
 
         Vm = new GameViewModel(
             Sessions,
-            Settings,
+            settings ?? Settings,
             Progress,
             SaveGames,
             PuzzleRepository,

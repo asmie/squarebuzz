@@ -32,8 +32,6 @@ public partial class OptionsViewModel : LocalizedViewModel
     private readonly ISettingsRepository _settingsRepository;
     private readonly GameCompletionService _completions;
 
-    /// <summary>Tail of the save chain - see <see cref="SaveAfterAsync"/>.</summary>
-    private Task _pendingSave = Task.CompletedTask;
     private readonly IThemeService _theme;
     private readonly INavigationService _navigation;
     private readonly IScreenTimeMonitor _screenTime;
@@ -771,17 +769,14 @@ public partial class OptionsViewModel : LocalizedViewModel
             },
         };
 
-        // Fire and forget so the switches never feel sticky - but *chained*, not loose: two
-        // quick toggles otherwise race their writes through the thread pool, and the older
-        // snapshot can commit last, quietly undoing the newer change.
-        _pendingSave = SaveAfterAsync(_pendingSave, _settings);
+        // Submit every snapshot immediately. The shared OrderedSettingsRepository sequences
+        // writes and reads across screens; a local queue would hide later changes from the
+        // game's load when the player goes back before these writes finish.
+        _ = SaveSettingsAsync(_settings);
     }
 
-    private async Task SaveAfterAsync(Task previous, GameSettings settings)
+    private async Task SaveSettingsAsync(GameSettings settings)
     {
-        // Never faults: the body below swallows its own exception, so awaiting the chain is safe.
-        await previous.ConfigureAwait(false);
-
         try
         {
             await _settingsRepository.SaveAsync(settings).ConfigureAwait(false);

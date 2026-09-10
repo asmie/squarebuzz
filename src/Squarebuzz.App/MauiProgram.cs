@@ -136,8 +136,11 @@ public static class MauiProgram
         // the region, so pl-PL and pt-BR resolve, and anything unshipped lands on English.
         var deviceLanguage = AppLanguages.FromCultureCode(CultureInfo.CurrentUICulture.Name);
 
+        // All screens share the ordering boundary: a returning page's load waits for Options
+        // writes already submitted, including those still waiting for an earlier write.
         services.AddSingleton<ISettingsRepository>(provider =>
-            new SqliteSettingsRepository(provider.GetRequiredService<SquarebuzzDatabase>(), deviceLanguage));
+            new OrderedSettingsRepository(
+                new SqliteSettingsRepository(provider.GetRequiredService<SquarebuzzDatabase>(), deviceLanguage)));
         services.AddSingleton<ISaveGameRepository, SqliteSaveGameRepository>();
         services.AddSingleton<IProgressRepository, SqliteProgressRepository>();
         services.AddSingleton<IGameCompletionRepository, SqliteGameCompletionRepository>();

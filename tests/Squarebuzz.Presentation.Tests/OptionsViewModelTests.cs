@@ -126,8 +126,8 @@ public class OptionsViewModelTests : IDisposable
     }
 
     [Fact]
-    // Writes are chained, not raced: two quick changes must both survive into the last snapshot,
-    // in the order made, or the older write could commit last and quietly undo the newer one.
+    // Every snapshot includes the earlier choices. OrderedSettingsRepositoryTests covers
+    // pending writes and reads from other screens while persistence is still busy.
     public async Task QuickSuccessiveChanges_AllLandInTheFinalSnapshot()
     {
         await _vm.OnAppearingAsync();
