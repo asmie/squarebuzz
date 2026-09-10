@@ -99,6 +99,10 @@ public sealed class GameSessionFactory
         {
             Helpers = helpers,
             Seed = save.Seed,
+            // Restart recreates the session from this origin. Preserve the saved picture
+            // selection instead of letting size and pack choose a different one.
+            PuzzleId = save.PuzzleId,
+            ForceGenerated = save.IsGenerated,
             Level = save.Level,
             DailyDate = save.DailyDate,
         };

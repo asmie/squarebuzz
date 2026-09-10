@@ -11,9 +11,9 @@ namespace Squarebuzz.Presentation.Tests;
 /// </summary>
 public sealed class GameViewModelHarness : IDisposable
 {
-    public GameViewModelHarness()
+    public GameViewModelHarness(GameSessionFactory? sessions = null)
     {
-        Sessions = new GameSessionFactory(PuzzleRepository, Generator);
+        Sessions = sessions ?? new GameSessionFactory(PuzzleRepository, Generator);
         Completions = new FakeGameCompletionRepository(Progress, SaveGames);
         CompletionService = new GameCompletionService(Completions, Progress);
 
