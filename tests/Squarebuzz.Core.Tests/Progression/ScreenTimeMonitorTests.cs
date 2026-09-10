@@ -5,6 +5,40 @@ namespace Squarebuzz.Core.Tests.Progression;
 
 public class ScreenTimeMonitorTests
 {
+    [Theory]
+    [InlineData(null)]
+    [InlineData(1)]
+    public void HugeElapsed_SaturatesAndPreservesReminderAndRestartBehavior(int? limitMinutes)
+    {
+        var monitor = new ScreenTimeMonitor();
+        monitor.Configure(limitMinutes);
+        Assert.False(monitor.Add(TimeSpan.FromSeconds(20)));
+
+        Assert.Equal(limitMinutes.HasValue, monitor.Add(TimeSpan.MaxValue));
+        Assert.Equal(TimeSpan.MaxValue, monitor.Played);
+        Assert.False(monitor.Add(TimeSpan.FromSeconds(1)));
+        Assert.Equal(TimeSpan.MaxValue, monitor.Played);
+
+        monitor.Restart();
+
+        Assert.Equal(TimeSpan.Zero, monitor.Played);
+        Assert.Equal(limitMinutes, monitor.LimitMinutes);
+        Assert.Equal(limitMinutes.HasValue, monitor.Add(TimeSpan.FromMinutes(1)));
+        Assert.Equal(TimeSpan.FromMinutes(1), monitor.Played);
+    }
+
+    [Fact]
+    public void HugeElapsed_AfterReminderFiredDoesNotOverflowOrFireAgain()
+    {
+        var monitor = new ScreenTimeMonitor();
+        monitor.Configure(1);
+        Assert.True(monitor.Add(TimeSpan.FromMinutes(1)));
+
+        Assert.False(monitor.Add(TimeSpan.MaxValue));
+        Assert.False(monitor.Add(TimeSpan.MaxValue));
+        Assert.Equal(TimeSpan.MaxValue, monitor.Played);
+    }
+
     [Fact]
     public void WithNoLimit_NothingEverFires()
     {

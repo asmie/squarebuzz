@@ -64,7 +64,8 @@ public sealed class ScreenTimeMonitor : IScreenTimeMonitor
 
         lock (_gate)
         {
-            _played += elapsed;
+            // Saturate before adding so even a very large duration reaches the reminder check.
+            _played = elapsed >= TimeSpan.MaxValue - _played ? TimeSpan.MaxValue : _played + elapsed;
 
             if (_hasFired || _limitMinutes is not { } minutes)
             {
