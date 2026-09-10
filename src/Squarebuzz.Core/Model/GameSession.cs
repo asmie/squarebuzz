@@ -135,21 +135,20 @@ public sealed class GameSession
 
     public CellState At(int x, int y) => _cells[Puzzle.IndexOf(x, y)];
 
+    /// <summary>Adds nonnegative play time, capped at the deadline or the largest representable duration.</summary>
     public void Advance(TimeSpan delta)
     {
+        ArgumentOutOfRangeException.ThrowIfLessThan(delta, TimeSpan.Zero);
+
         if (IsOver)
         {
             return;
         }
 
-        Elapsed += delta;
-
-        // Clamped so a timed game never reports having run longer than its own limit, which would
-        // make the recorded time of a loss depend on how coarsely the caller happened to tick.
-        if (TimeLimit is { } limit && Elapsed > limit)
-        {
-            Elapsed = limit;
-        }
+        // Compare before adding: a large delta can overflow even when the result would be
+        // clamped afterward. Untimed games keep accepting moves when their clock saturates.
+        var limit = TimeLimit ?? TimeSpan.MaxValue;
+        Elapsed = delta >= limit - Elapsed ? limit : Elapsed + delta;
     }
 
     /// <summary>

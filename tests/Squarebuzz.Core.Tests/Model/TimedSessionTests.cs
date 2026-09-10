@@ -26,6 +26,73 @@ public class TimedSessionTests
 
     private static GameSession Untimed() => new(Plus(), GameRules.Relaxed, NewGameOptions.Default);
 
+    [Theory]
+    [InlineData(false, false)]
+    [InlineData(true, false)]
+    [InlineData(false, true)]
+    [InlineData(true, true)]
+    public void Advance_NegativeDurationIsRejectedWithoutChangingTheClock(bool timed, bool finished)
+    {
+        var session = timed ? Timed(TimeSpan.FromMinutes(1)) : Untimed();
+        session.Advance(TimeSpan.FromSeconds(20));
+        if (finished)
+        {
+            SolveIt(session);
+        }
+
+        var elapsed = session.Elapsed;
+        var remaining = session.Remaining;
+
+        var error = Assert.Throws<ArgumentOutOfRangeException>(() => session.Advance(TimeSpan.FromTicks(-1)));
+
+        Assert.Equal("delta", error.ParamName);
+        Assert.Equal(elapsed, session.Elapsed);
+        Assert.Equal(remaining, session.Remaining);
+        Assert.Equal(finished, session.IsOver);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Advance_ZeroDurationLeavesTheClockUnchanged(bool timed)
+    {
+        var session = timed ? Timed(TimeSpan.FromMinutes(1)) : Untimed();
+        session.Advance(TimeSpan.FromSeconds(20));
+
+        session.Advance(TimeSpan.Zero);
+
+        Assert.Equal(TimeSpan.FromSeconds(20), session.Elapsed);
+        Assert.False(session.IsOver);
+    }
+
+    [Fact]
+    public void Advance_HugeDurationExpiresTimedSessionWithoutOverflow()
+    {
+        var limit = TimeSpan.FromMinutes(1);
+        var session = Timed(limit);
+        session.Advance(TimeSpan.FromSeconds(20));
+
+        session.Advance(TimeSpan.MaxValue);
+
+        Assert.Equal(limit, session.Elapsed);
+        Assert.Equal(TimeSpan.Zero, session.Remaining);
+        Assert.True(session.IsTimeUp);
+    }
+
+    [Fact]
+    public void Advance_UntimedClockSaturatesWithoutOverflow()
+    {
+        var session = Untimed();
+        session.Advance(TimeSpan.FromSeconds(20));
+
+        session.Advance(TimeSpan.MaxValue);
+        session.Advance(TimeSpan.FromTicks(1));
+
+        Assert.Equal(TimeSpan.MaxValue, session.Elapsed);
+        Assert.False(session.IsOver);
+        Assert.Equal(MoveResult.Applied, session.Paint(2, CellState.Filled).Result);
+    }
+
     private static void SolveIt(GameSession session)
     {
         for (var i = 0; i < session.Puzzle.CellCount; i++)
