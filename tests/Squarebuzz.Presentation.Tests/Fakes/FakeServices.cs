@@ -1,3 +1,4 @@
+using System.Globalization;
 using Squarebuzz.Core.Abstractions;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Presentation.Services;
@@ -6,7 +7,8 @@ namespace Squarebuzz.Presentation.Tests.Fakes;
 
 /// <summary>
 /// Returns the key itself (and <c>key:arg,arg</c> from Format), so assertions are culture-free
-/// and pin which resource a screen composed rather than any particular translation.
+/// and pin which resource a screen composed rather than any particular translation. Tests of
+/// language changes can supply translations to distinguish freshly read text from cached text.
 /// </summary>
 public sealed class FakeLocalizationService : ILocalizationService
 {
@@ -14,10 +16,14 @@ public sealed class FakeLocalizationService : ILocalizationService
 
     public AppLanguage Language { get; private set; } = AppLanguage.English;
 
-    public string GetString(string key) => key;
+    public Dictionary<(AppLanguage Language, string Key), string> Translations { get; } = [];
+
+    public string GetString(string key) => Translations.GetValueOrDefault((Language, key), key);
 
     public string Format(string key, params object[] arguments) =>
-        $"{key}:{string.Join(",", arguments)}";
+        Translations.TryGetValue((Language, key), out var format)
+            ? string.Format(CultureInfo.InvariantCulture, format, arguments)
+            : $"{key}:{string.Join(",", arguments)}";
 
     public void SetLanguage(AppLanguage language)
     {

@@ -64,6 +64,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         // and the screen-reader state, which can flip mid-game.
         Board.LayoutChanged += (_, _) => BuildCellOverlay();
         _viewModel.OverlayNeedChanged += (_, _) => BuildCellOverlay();
+        _viewModel.CellDescriptionsChanged += (_, _) => RefreshCellDescriptions();
 
         // The mini-map tracks the board's geometry and the scroll window over it.
         Board.LayoutChanged += (_, _) => UpdateMiniMap();
@@ -331,7 +332,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         CellOverlay.IsVisible = true;
     }
 
-    /// <summary>Re-reads every square's description after a move, without rebuilding the overlay.</summary>
+    /// <summary>Re-reads every square's description after a move or language change, preserving focus.</summary>
     private void RefreshCellDescriptions()
     {
         if (!CellOverlay.IsVisible)

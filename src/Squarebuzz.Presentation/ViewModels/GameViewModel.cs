@@ -174,6 +174,9 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>Raised when <see cref="NeedsCellOverlay"/> changed, so the page rebuilds it.</summary>
     public event EventHandler? OverlayNeedChanged;
 
+    /// <summary>Raised when cell descriptions need translating, without rebuilding their controls.</summary>
+    public event EventHandler? CellDescriptionsChanged;
+
     /// <summary>Raised with a cell index when a fill was wrong, so the view can flash it.</summary>
     public event EventHandler<int>? MistakeMade;
 
@@ -187,6 +190,7 @@ public partial class GameViewModel : LocalizedViewModel
     public event EventHandler? PuzzleSolved;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PuzzleName))]
     public partial GameSession? Session { get; private set; }
 
     [ObservableProperty]
@@ -268,8 +272,7 @@ public partial class GameViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial bool CanUseHint { get; private set; }
 
-    [ObservableProperty]
-    public partial string PuzzleName { get; private set; } = string.Empty;
+    public string PuzzleName => NameForPuzzle();
 
     public bool HasToast => !string.IsNullOrEmpty(Toast);
 
@@ -788,8 +791,6 @@ public partial class GameViewModel : LocalizedViewModel
         IsBreakReminderOpen = false;
         Toast = string.Empty;
 
-        PuzzleName = NameForPuzzle();
-
         SyncFromSession();
         UpdateElapsedText();
         StopTimer();
@@ -920,8 +921,6 @@ public partial class GameViewModel : LocalizedViewModel
         IsPaused = false;
         IsBreakReminderOpen = false;
         Toast = string.Empty;
-
-        PuzzleName = NameForPuzzle();
 
         SyncFromSession();
         UpdateElapsedText();
@@ -1616,6 +1615,9 @@ public partial class GameViewModel : LocalizedViewModel
 
     private void OnThemeChanged(object? sender, EventArgs e) =>
         PaletteChanged?.Invoke(this, EventArgs.Empty);
+
+    protected override void OnLanguageChangedCore() =>
+        CellDescriptionsChanged?.Invoke(this, EventArgs.Empty);
 
     private void OnScreenReaderStateChanged(object? sender, EventArgs e)
     {
