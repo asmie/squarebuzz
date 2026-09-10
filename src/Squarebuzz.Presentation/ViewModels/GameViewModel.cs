@@ -83,8 +83,14 @@ public partial class GameViewModel : LocalizedViewModel
     /// </summary>
     private TimeSpan _lastTickAt;
 
-    /// <summary>Move count as of the last successful write, so a periodic save can skip a no-op.</summary>
-    private int _savedMoveCount = -1;
+    /// <summary>The exact snapshot last written for the current session.</summary>
+    private SavedGame? _lastSavedGame;
+
+    /// <summary>True once a save has been loaded or requested, even if its board is now empty.</summary>
+    private bool _hasSave;
+
+    /// <summary>Orders saves and completion deletion, including across a restart.</summary>
+    private Task _pendingSave = Task.CompletedTask;
 
     /// <summary>Identifies the most recent toast, so only its own dismissal takes effect.</summary>
     private int _toastToken;
@@ -757,9 +763,8 @@ public partial class GameViewModel : LocalizedViewModel
             Session = _sessions.Restore(save, _settings.Helpers);
             _saveId = save.Id;
 
-            // The board matches the row it came from, so the next periodic save has nothing to
-            // do until the player actually marks something.
-            _savedMoveCount = Session.MoveCount;
+            _lastSavedGame = save;
+            _hasSave = true;
             _sinceAutosave = TimeSpan.Zero;
         }
         catch (Exception)
@@ -789,51 +794,84 @@ public partial class GameViewModel : LocalizedViewModel
     /// Writes the game in progress to the save table. Called on pause, on quit and on leaving the
     /// screen, plus periodically while playing.
     /// </summary>
-    public async Task AutosaveAsync()
+    public Task AutosaveAsync() => QueueAutosaveAsync(onlyIfChanged: false);
+
+    private Task QueueAutosaveAsync(bool onlyIfChanged)
     {
-        if (Session is not { } session || session.IsOver || session.MoveCount == 0)
+        if (Session is not { } session || session.IsOver || session.IsTimed)
         {
-            // Nothing worth keeping: an untouched board would clutter Continue with a game the
-            // player never actually started.
-            return;
+            return Task.CompletedTask;
         }
 
-        if (session.IsTimed)
+        if (!_hasSave && session.Mistakes == 0 && session.HintsUsed == 0
+            && !session.Cells.ContainsAnyExcept(CellState.Empty))
         {
-            // A trial is a race, and a race you can put down and pick up tomorrow is not one.
-            // Skipping the save also keeps trials out of Continue, where a countdown frozen at
-            // whatever it read when the player left would be meaningless.
+            // Keep untouched games out of Continue, but preserve counters and replace an
+            // existing (or pending) save when the player undoes its board back to empty.
+            return Task.CompletedTask;
+        }
+
+        var snapshot = SavedGame.FromSession(session, _saveId, _clock.Now);
+        _hasSave = true;
+        _sinceAutosave = TimeSpan.Zero;
+        _pendingSave = SaveAfterAsync(_pendingSave, session, snapshot, onlyIfChanged);
+        return _pendingSave;
+    }
+
+    private async Task SaveAfterAsync(Task previous, GameSession session, SavedGame snapshot, bool onlyIfChanged)
+    {
+        // Each operation catches storage failures, so a failed write cannot break the queue.
+        await previous;
+
+        if (session.IsOver || (onlyIfChanged && HasSameProgress(snapshot, _lastSavedGame)))
+        {
             return;
         }
 
         try
         {
-            await _saveGames.SaveAsync(SavedGame.FromSession(session, _saveId, _clock.Now));
-            _savedMoveCount = session.MoveCount;
+            await _saveGames.SaveAsync(snapshot);
+
+            // The player may have changed the board or started another game during I/O.
+            // Acknowledge only what this operation wrote, and only for its own session.
+            if (ReferenceEquals(Session, session) && _saveId == snapshot.Id)
+            {
+                _lastSavedGame = snapshot;
+            }
         }
         catch (Exception)
         {
-            // A failed autosave costs the player their place, but surfacing it mid-play would
-            // be worse. The next autosave will most likely succeed.
+            // Keep the previous snapshot so the next periodic save retries the changed state.
         }
-
-        _sinceAutosave = TimeSpan.Zero;
     }
 
     /// <summary>
-    /// The periodic save: skipped while the board is exactly as it was last written.
+    /// Compares persisted progress, not undo depth. Elapsed time alone is saved at explicit
+    /// lifecycle save points rather than rewriting an idle board every fifteen seconds.
     /// </summary>
-    /// <remarks>
-    /// A child studying a 25x25 grid can sit without moving for minutes, and this was rewriting
-    /// the row - and flushing it - every few seconds throughout, to record nothing but a larger
-    /// elapsed time. The reliable save point is leaving the screen, which always writes; this
-    /// one only exists in case the app is killed, and being killed with no moves since the last
-    /// write costs a few seconds off the clock and nothing else.
-    /// </remarks>
-    private Task AutosaveIfBoardChangedAsync() =>
-        Session is { } session && session.MoveCount == _savedMoveCount
-            ? Task.CompletedTask
-            : AutosaveAsync();
+    private static bool HasSameProgress(SavedGame snapshot, SavedGame? saved) =>
+        saved is not null
+        && snapshot.Id == saved.Id
+        && snapshot.Mistakes == saved.Mistakes
+        && snapshot.HintsUsed == saved.HintsUsed
+        && snapshot.HintsRemaining == saved.HintsRemaining
+        && snapshot.Cells.SequenceEqual(saved.Cells);
+
+    private Task AutosaveIfBoardChangedAsync() => QueueAutosaveAsync(onlyIfChanged: true);
+
+    private async Task DeleteSaveAfterAsync(Task previous, Guid saveId)
+    {
+        await previous;
+
+        try
+        {
+            await _saveGames.DeleteAsync(saveId);
+        }
+        catch (Exception)
+        {
+            // Leaves a stale save behind; the player can delete it from Continue.
+        }
+    }
 
     /// <summary>Starts a new puzzle from the player's saved preferences.</summary>
     public async Task StartAsync(NewGameOptions? options = null)
@@ -867,7 +905,8 @@ public partial class GameViewModel : LocalizedViewModel
         // A new game is a new row: restarting must not overwrite the save it came from.
         _saveId = Guid.NewGuid();
         _sinceAutosave = TimeSpan.Zero;
-        _savedMoveCount = -1;
+        _lastSavedGame = null;
+        _hasSave = false;
 
         IsCrossMode = false;
         Session.Mode = PaintMode.Fill;
@@ -1252,16 +1291,10 @@ public partial class GameViewModel : LocalizedViewModel
 
         PuzzleSolved?.Invoke(this, EventArgs.Empty);
 
-        try
-        {
-            // Drop the save first: a completed puzzle in Continue would be a dead end, and it
-            // must go even if recording progress then fails.
-            await _saveGames.DeleteAsync(saveId);
-        }
-        catch (Exception)
-        {
-            // Leaves a stale save behind; the player can delete it from Continue.
-        }
+        // A save already in flight must finish before deletion, or it could put the completed
+        // game back into Continue. Queued saves re-check IsOver and skip completed sessions.
+        _pendingSave = DeleteSaveAfterAsync(_pendingSave, saveId);
+        await _pendingSave;
 
         var completion = new PuzzleCompletion(
             session.Puzzle.IsGenerated ? null : session.Puzzle.Id,

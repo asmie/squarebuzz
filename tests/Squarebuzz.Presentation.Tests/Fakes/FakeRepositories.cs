@@ -112,6 +112,11 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
 {
     public Dictionary<Guid, SavedGame> Saves { get; } = [];
 
+    public List<SavedGame> SaveAttempts { get; } = [];
+
+    /// <summary>When set, saves wait before committing their snapshot.</summary>
+    public TaskCompletionSource? SaveGate { get; set; }
+
     public List<Guid> Deleted { get; } = [];
 
     /// <summary>When set, <see cref="DeleteAsync"/> stalls until the test releases it.</summary>
@@ -123,10 +128,15 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
     public Task<SavedGame?> GetAsync(Guid id, CancellationToken cancellationToken = default) =>
         Task.FromResult(Saves.GetValueOrDefault(id));
 
-    public Task SaveAsync(SavedGame game, CancellationToken cancellationToken = default)
+    public async Task SaveAsync(SavedGame game, CancellationToken cancellationToken = default)
     {
+        SaveAttempts.Add(game);
+        if (SaveGate is { } gate)
+        {
+            await gate.Task;
+        }
+
         Saves[game.Id] = game;
-        return Task.CompletedTask;
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
