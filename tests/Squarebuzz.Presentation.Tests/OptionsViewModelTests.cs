@@ -401,9 +401,16 @@ public class OptionsViewModelTests : IDisposable
     {
         _progress.Progress = PlayerProgress.Empty with { Stars = 42 };
         await _vm.OnAppearingAsync();
+        Assert.False(_vm.HasOptionsOverlay);
+        var overlayChanges = new List<bool>();
+        _vm.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(_vm.HasOptionsOverlay)) overlayChanges.Add(_vm.HasOptionsOverlay);
+        };
 
         _vm.OpenResetGateCommand.Execute(null);
         Assert.True(_vm.Gate.IsOpen);
+        Assert.True(_vm.HasOptionsOverlay);
         Assert.False(_vm.IsResetConfirmOpen);
 
         _vm.Gate.Answer = CorrectAnswer(_vm.Gate);
@@ -411,11 +418,14 @@ public class OptionsViewModelTests : IDisposable
 
         Assert.False(_vm.Gate.IsOpen);
         Assert.True(_vm.IsResetConfirmOpen);
+        Assert.True(_vm.HasOptionsOverlay);
         Assert.Equal(0, _progress.ResetCalls);
 
         // Backing out of the confirmation wipes nothing.
         _vm.CancelResetCommand.Execute(null);
         Assert.False(_vm.IsResetConfirmOpen);
+        Assert.False(_vm.HasOptionsOverlay);
+        Assert.Equal([true, false, true, false], overlayChanges);
         Assert.Equal(0, _progress.ResetCalls);
     }
 

@@ -40,7 +40,7 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*" SafeAreaEdges="All">
         <Border Grid.Row="0" IsVisible="{Binding HasPersistenceFailure}"
                 BackgroundColor="{DynamicResource Surface2}" Stroke="{DynamicResource Line}"
                 Padding="12,8">
@@ -52,7 +52,8 @@
             </VerticalStackLayout>
         </Border>
         <Grid Grid.Row="1">
-        <ScrollView IsEnabled="{Binding CanEditSettings}">
+        <ScrollView IsEnabled="{Binding CanEditSettings}"
+                    AutomationProperties.ExcludedWithChildren="{Binding HasOptionsOverlay}">
             <VerticalStackLayout Padding="{StaticResource PagePadding}"
                                  Spacing="6"
                                  MaximumWidthRequest="{StaticResource FrameMaxWidth}"
@@ -96,9 +97,9 @@
                 <Label Text="{Binding LookSection}" Style="{StaticResource SectionHeading}" />
                 <Border Style="{StaticResource Card}" Padding="16,12">
                     <VerticalStackLayout Spacing="14">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding ThemeLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Grid.Row="0" Text="{Binding ThemeLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="8">
                                 <Button Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding LightLabel}"
                                         Command="{Binding SelectThemeCommand}" CommandParameter="light"
@@ -116,7 +117,7 @@
                                         BackgroundColor="{Binding IsAutoTheme, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsAutoTheme, Converter={StaticResource SegTextColor}}" />
                             </Grid>
-                        </VerticalStackLayout>
+                        </Grid>
 
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <VerticalStackLayout VerticalOptions="Center" Spacing="2">
@@ -127,9 +128,9 @@
                                     OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
                         </Grid>
 
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding AccentLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Grid.Row="0" Text="{Binding AccentLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="8">
                                 <Button Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding TangerineLabel}"
                                         Command="{Binding SelectAccentCommand}" CommandParameter="tangerine"
@@ -146,7 +147,7 @@
                                         BackgroundColor="{Binding IsTrio, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsTrio, Converter={StaticResource SegTextColor}}" />
                             </Grid>
-                        </VerticalStackLayout>
+                        </Grid>
 
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding BigNumbersLabel}" Style="{StaticResource RowLabel}" />
@@ -160,9 +161,9 @@
                 <Label Text="{Binding ControlsSection}" Style="{StaticResource SectionHeading}" />
                 <Border Style="{StaticResource Card}" Padding="16,12">
                     <VerticalStackLayout Spacing="14">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding TapBehaviourLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Grid.Row="0" Text="{Binding TapBehaviourLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="8">
                                 <Button Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding ModeLabel}"
                                         Command="{Binding SelectTapBehaviourCommand}" CommandParameter="mode"
@@ -174,11 +175,11 @@
                                         BackgroundColor="{Binding IsHoldToCross, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsHoldToCross, Converter={StaticResource SegTextColor}}" />
                             </Grid>
-                        </VerticalStackLayout>
+                        </Grid>
 
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding HandedLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Grid.Row="0" Text="{Binding HandedLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="8">
                                 <Button Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding LeftLabel}"
                                         Command="{Binding SelectHandednessCommand}" CommandParameter="left"
@@ -190,7 +191,7 @@
                                         BackgroundColor="{Binding IsRightHanded, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsRightHanded, Converter={StaticResource SegTextColor}}" />
                             </Grid>
-                        </VerticalStackLayout>
+                        </Grid>
 
                         <Grid ColumnDefinitions="*,Auto,Auto,Auto" MinimumHeightRequest="56" ColumnSpacing="8">
                             <Label Text="{Binding CellSizeLabel}" Style="{StaticResource RowLabel}" />
@@ -280,9 +281,9 @@
                           stop a child wiping their own progress, and a break reminder is not
                           destructive - gating it would only get in a parent's way.
                         -->
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding ScreenTimeLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+                        <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Grid.Row="0" Text="{Binding ScreenTimeLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
                                 <Button Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding ScreenTimeOffLabel}"
                                         Command="{Binding SelectScreenTimeCommand}" CommandParameter="off"
@@ -304,7 +305,7 @@
                                         BackgroundColor="{Binding IsScreenTime60, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsScreenTime60, Converter={StaticResource SegTextColor}}" />
                             </Grid>
-                        </VerticalStackLayout>
+                        </Grid>
 
                         <Label Text="{Binding Gate.Title}" Style="{StaticResource Subtle}" FontSize="12" />
 
@@ -342,52 +343,60 @@
 
         <!-- Parent gate: a small sum before anything destructive. -->
         <Grid IsVisible="{Binding Gate.IsOpen}" BackgroundColor="#CC000000">
-            <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="300" Padding="24">
-                <VerticalStackLayout Spacing="14">
-                    <Label Text="{Binding Gate.Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
-                    <Label Text="{Binding Gate.Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+            <ScrollView x:Name="GateIsOpenScroll" Margin="16">
+                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference GateIsOpenScroll}, x:DataType=ScrollView}">
+                    <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Fill"
+                            MaximumWidthRequest="300" Padding="24">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+                            <Label Grid.Row="0" Text="{Binding Gate.Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                            <Label Grid.Row="1" Text="{Binding Gate.Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
 
-                    <Entry Text="{Binding Gate.Answer}"
-                           Keyboard="Numeric"
-                           HorizontalTextAlignment="Center"
-                           FontSize="22"
-                           BackgroundColor="{DynamicResource Surface2}"
-                           TextColor="{DynamicResource Ink}" />
+                            <Entry Grid.Row="2" Text="{Binding Gate.Answer}"
+                                   Keyboard="Numeric"
+                                   HorizontalTextAlignment="Center"
+                                   FontSize="22"
+                                   BackgroundColor="{DynamicResource Surface2}"
+                                   TextColor="{DynamicResource Ink}" />
 
-                    <Label Text="{Binding Gate.RetryMessage}"
-                           IsVisible="{Binding Gate.HasFailed}"
-                           TextColor="{DynamicResource WarnDeep}"
-                           FontFamily="BodyBold"
-                           HorizontalTextAlignment="Center" />
+                            <Label Grid.Row="3" Text="{Binding Gate.RetryMessage}"
+                                   IsVisible="{Binding Gate.HasFailed}"
+                                   TextColor="{DynamicResource WarnDeep}"
+                                   FontFamily="BodyBold"
+                                   HorizontalTextAlignment="Center" />
 
-                    <Button Text="{Binding Gate.SubmitLabel}" Command="{Binding Gate.SubmitCommand}"
-                            Style="{StaticResource PrimaryButton}" HeightRequest="52" />
-                    <Button Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
-                            Style="{StaticResource SecondaryButton}" HeightRequest="48" />
-                </VerticalStackLayout>
-            </Border>
+                            <Button Grid.Row="4" Text="{Binding Gate.SubmitLabel}" Command="{Binding Gate.SubmitCommand}"
+                                    Style="{StaticResource PrimaryButton}" MinimumHeightRequest="52" />
+                            <Button Grid.Row="5" Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
+                                    Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ScrollView>
         </Grid>
 
         <!-- Reset confirmation, once past the gate. -->
         <Grid IsVisible="{Binding IsResetConfirmOpen}" BackgroundColor="#E6000000">
-            <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="310" Padding="24">
-                <VerticalStackLayout Spacing="14">
-                    <Label Text="{Binding ResetTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
-                    <Label Text="{Binding ResetBody}" Style="{StaticResource Subtle}" HorizontalTextAlignment="Center" />
+            <ScrollView x:Name="IsResetConfirmOpenScroll" Margin="16">
+                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference IsResetConfirmOpenScroll}, x:DataType=ScrollView}">
+                    <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Fill"
+                            MaximumWidthRequest="310" Padding="24">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="14">
+                            <Label Grid.Row="0" Text="{Binding ResetTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                            <Label Grid.Row="1" Text="{Binding ResetBody}" Style="{StaticResource Subtle}" HorizontalTextAlignment="Center" />
 
-                    <Button Text="{Binding ResetConfirm}"
-                            Command="{Binding ConfirmResetCommand}"
-                            BackgroundColor="{DynamicResource Warn}"
-                            TextColor="{DynamicResource OnWarn}"
-                            CornerRadius="16"
-                            FontFamily="BodyBold"
-                            HeightRequest="52" />
-                    <Button Text="{Binding CancelLabel}" Command="{Binding CancelResetCommand}"
-                            Style="{StaticResource SecondaryButton}" HeightRequest="48" />
-                </VerticalStackLayout>
-            </Border>
+                            <Button Grid.Row="2" Text="{Binding ResetConfirm}"
+                                    Command="{Binding ConfirmResetCommand}"
+                                    BackgroundColor="{DynamicResource Warn}"
+                                    TextColor="{DynamicResource OnWarn}"
+                                    CornerRadius="16"
+                                    FontFamily="BodyBold"
+                                    MinimumHeightRequest="52" />
+                            <Button Grid.Row="3" Text="{Binding CancelLabel}" Command="{Binding CancelResetCommand}"
+                                    Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ScrollView>
         </Grid>
         </Grid>
     </Grid>

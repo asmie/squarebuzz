@@ -10,6 +10,42 @@ public sealed class GameAccessibilityTests : IDisposable
 
     public void Dispose() => _h.Dispose();
 
+    [Fact]
+    public async Task PauseAndResume_NotifyThatTheBoardLeavesAndReentersAccessibilityNavigation()
+    {
+        await StartAsync(TapBehaviour.ModeButton, screenReaderActive: true);
+        var changes = new List<bool>();
+        _h.Vm.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(_h.Vm.HasGameOverlay)) changes.Add(_h.Vm.HasGameOverlay);
+        };
+        await _h.Vm.PauseCommand.ExecuteAsync(null);
+        Assert.True(_h.Vm.HasGameOverlay);
+        _h.Vm.ResumeCommand.Execute(null);
+        Assert.False(_h.Vm.HasGameOverlay);
+        Assert.Equal([true, false], changes);
+    }
+
+    [Fact]
+    public async Task SolvedOverlay_HidesTheBoardUntilTheNextGame()
+    {
+        await StartAsync(TapBehaviour.ModeButton, screenReaderActive: true);
+        _h.SolveCurrentPuzzle();
+        Assert.True(_h.Vm.HasGameOverlay);
+        await _h.Vm.StartAsync();
+        Assert.False(_h.Vm.HasGameOverlay);
+    }
+
+    [Fact]
+    public async Task TimeUpOverlay_HidesTheBoard()
+    {
+        await _h.Vm.StartAsync(NewGameOptions.Default with { TimeLimit = TimeSpan.FromSeconds(1) });
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        _h.Timers.Latest!.RaiseTick();
+        Assert.True(_h.Vm.IsTimeUp);
+        Assert.True(_h.Vm.HasGameOverlay);
+    }
+
     private async Task StartAsync(TapBehaviour behaviour, bool screenReaderActive)
     {
         _h.Settings.Settings = GameSettings.Default with

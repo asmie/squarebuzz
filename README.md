@@ -157,6 +157,10 @@ only where it covers the script — see `AppLanguages.All`.
 
 ## Continuous integration
 
+Installed Release acceptance cases and the Android smoke/evidence runner are documented in
+[tests/Native/README.md](tests/Native/README.md). The [execution record](tests/Native/RESULTS.md)
+distinguishes verified device behavior from checks still awaiting hardware or current CI results.
+
 `.github/workflows/ci.yml` defines five jobs on push and pull request; the domain and Apple
 matrices each run two independent builds:
 

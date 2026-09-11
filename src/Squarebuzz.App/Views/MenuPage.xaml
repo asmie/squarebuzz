@@ -7,6 +7,8 @@
              x:DataType="vm:MenuViewModel"
              BackgroundColor="{DynamicResource Bg}">
 
+    <!-- ScrollView defaults do not apply Android system-bar insets. The layout owns them. -->
+    <Grid SafeAreaEdges="All">
     <ScrollView>
         <VerticalStackLayout Padding="{StaticResource PagePadding}"
                              Spacing="18"
@@ -159,5 +161,6 @@
                     MinimumHeightRequest="48" />
         </VerticalStackLayout>
     </ScrollView>
+    </Grid>
 
 </ContentPage>

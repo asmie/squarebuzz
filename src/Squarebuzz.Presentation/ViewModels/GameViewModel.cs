@@ -193,6 +193,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// </remarks>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SolvedTimeText))]
+    [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsSolved { get; private set; }
 
     /// <summary>
@@ -200,9 +201,11 @@ public partial class GameViewModel : LocalizedViewModel
     /// game's only loss, and the two overlays say opposite things.
     /// </summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsTimeUp { get; private set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsPaused { get; private set; }
 
     /// <summary>
@@ -215,7 +218,11 @@ public partial class GameViewModel : LocalizedViewModel
     /// </remarks>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(BreakBody))]
+    [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsBreakReminderOpen { get; private set; }
+
+    /// <summary>Hides the covered board and controls from accessibility navigation.</summary>
+    public bool HasGameOverlay => IsPaused || IsSolved || IsTimeUp || IsBreakReminderOpen;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StatusText))]

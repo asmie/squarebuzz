@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -78,6 +79,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         _uiThread = uiThread;
 
         Gate = new ParentGate(strings);
+        Gate.PropertyChanged += OnGateChanged;
 
         // Every selection chip on this screen picks its colours from the palette through a
         // converter, and a converter only runs when its bound property is raised. Without this
@@ -97,11 +99,18 @@ public partial class OptionsViewModel : LocalizedViewModel
     /// </remarks>
     private void OnThemeServiceChanged(object? sender, EventArgs e) => OnPropertyChanged(string.Empty);
 
+    private void OnGateChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName is nameof(ParentGate.IsOpen) or null or "")
+            OnPropertyChanged(nameof(HasOptionsOverlay));
+    }
+
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
             _theme.Changed -= OnThemeServiceChanged;
+            Gate.PropertyChanged -= OnGateChanged;
         }
 
         base.Dispose(disposing);
@@ -255,7 +264,11 @@ public partial class OptionsViewModel : LocalizedViewModel
     public ParentGate Gate { get; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasOptionsOverlay))]
     public partial bool IsResetConfirmOpen { get; private set; }
+
+    /// <summary>Excludes settings covered by the gate or reset confirmation from accessibility.</summary>
+    public bool HasOptionsOverlay => Gate.IsOpen || IsResetConfirmOpen;
 
     /// <summary>Minutes of play before the break reminder, or null for off.</summary>
     /// <remarks>

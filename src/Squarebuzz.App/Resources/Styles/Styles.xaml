@@ -34,9 +34,16 @@
     -->
     <SolidColorBrush x:Key="FocusRing" Color="#4FA8F5" />
 
-    <Style TargetType="Page" ApplyToDerivedTypes="True">
+    <Style x:Key="BasePage" TargetType="Page">
         <Setter Property="BackgroundColor" Value="{DynamicResource Bg}" />
         <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style TargetType="Page" BasedOn="{StaticResource BasePage}" ApplyToDerivedTypes="True" />
+    <!-- MAUI 10 pages default to edge-to-edge. Keep scroll-only pages out of system bars,
+         and keep parent-gate entries and buttons above the on-screen keyboard. -->
+    <Style TargetType="ContentPage" BasedOn="{StaticResource BasePage}" ApplyToDerivedTypes="True">
+        <Setter Property="SafeAreaEdges" Value="All" />
     </Style>
 
     <!--
