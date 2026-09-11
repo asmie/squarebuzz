@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Squarebuzz.App.Drawing;
 using Squarebuzz.Core.Layout;
 using Squarebuzz.Core.Model;
@@ -72,6 +73,29 @@ public sealed partial class BoardView : GraphicsView
         DragInteraction += OnDragInteraction;
         EndInteraction += OnEndInteraction;
         CancelInteraction += OnCancelInteraction;
+    }
+
+    protected override void OnHandlerChanged()
+    {
+        base.OnHandlerChanged();
+
+        if (Handler?.MauiContext?.Services is not { } services)
+        {
+            return;
+        }
+
+        // Resolve once per handler, not on every draw. Android needs the actual asset name;
+        // Apple needs the registered native face, and Windows also needs the family fragment.
+#if WINDOWS
+        var name = services.GetRequiredService<IFontManager>()
+            .GetFontFamily(Microsoft.Maui.Font.OfSize("BodyBold", 12)).Source;
+#else
+        var name = services.GetRequiredService<IFontRegistrar>().GetFont("BodyBold");
+#endif
+        _drawable.ClueFont = string.IsNullOrEmpty(name)
+            ? Microsoft.Maui.Graphics.Font.DefaultBold
+            : new Microsoft.Maui.Graphics.Font(name, FontWeights.Bold);
+        Invalidate();
     }
 
     public event EventHandler<CellPaintedEventArgs>? CellPainted;

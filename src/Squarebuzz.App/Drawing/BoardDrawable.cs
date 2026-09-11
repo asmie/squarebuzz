@@ -24,10 +24,10 @@ public sealed class BoardDrawable : IDrawable
     private const float StruckClueOpacity = 0.42f;
 
     /// <summary>
-    /// The clue face. "BodyBold" is the alias registered in <c>MauiProgram</c>; a canvas resolves
-    /// it through the same font registry the XAML styles use, so there is one source of truth.
+    /// The platform-resolved clue face, supplied by BoardView when its handler connects.
+    /// Graphics canvases do not resolve the font aliases registered for MAUI controls.
     /// </summary>
-    private static readonly Microsoft.Maui.Graphics.Font ClueFont = new("BodyBold");
+    public IFont ClueFont { get; set; } = Microsoft.Maui.Graphics.Font.DefaultBold;
 
     /// <summary>The puzzle being drawn. Null before a game starts.</summary>
     public Puzzle? Puzzle { get; set; }

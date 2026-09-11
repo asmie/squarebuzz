@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Tests">
+    <!-- Managed MAUI controls for the host profiling tool; keep aligned with the app workload. -->
+    <PackageVersion Include="Microsoft.Maui.Controls.Core" Version="10.0.60"
+                    Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Profiling'" />
     <!-- Test the Release DI runtime without pinning the app's newer Debug logging dependencies. -->
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0"
                     Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Presentation.Tests'" />

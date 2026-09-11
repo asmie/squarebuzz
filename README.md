@@ -161,6 +161,10 @@ Installed Release acceptance cases and the Android smoke/evidence runner are doc
 [tests/Native/README.md](tests/Native/README.md). The [execution record](tests/Native/RESULTS.md)
 distinguishes verified device behavior from checks still awaiting hardware or current CI results.
 
+The separate [profiling guide](tools/Profiling/README.md) includes a repeatable host runner and
+physical Android scenarios. Its [results](tools/Profiling/RESULTS.md) distinguish host elapsed-time
+and allocation measurements from verified phone behavior and remaining hardware coverage.
+
 `.github/workflows/ci.yml` defines five jobs on push and pull request; the domain and Apple
 matrices each run two independent builds:
 
