@@ -31,6 +31,9 @@ public sealed record SavedGame
     /// <summary>The player's marks, row-major.</summary>
     public required IReadOnlyList<CellState> Cells { get; init; }
 
+    /// <summary>Row-major automatic-mark flags. Empty for legacy saves with unknown provenance.</summary>
+    public IReadOnlyList<bool> AutoCrossedCells { get; init; } = [];
+
     public required TimeSpan Elapsed { get; init; }
 
     public required int HintsRemaining { get; init; }
@@ -115,6 +118,7 @@ public sealed record SavedGame
             Seed = origin.Seed,
             Challenge = origin.Challenge,
             Cells = [.. session.Cells],
+            AutoCrossedCells = [.. session.AutoCrossedCells],
             Elapsed = session.Elapsed,
             HintsRemaining = session.HintsRemaining,
             HintsUsed = session.HintsUsed,

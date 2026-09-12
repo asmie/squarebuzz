@@ -170,6 +170,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             Seed = game.Seed,
             Challenge = (int)game.Challenge,
             Cells = cells,
+            AutomaticCrosses = game.AutoCrossedCells.Select(automatic => automatic ? (byte)1 : (byte)0).ToArray(),
             ElapsedSeconds = game.Elapsed.TotalSeconds,
             HintsRemaining = game.HintsRemaining,
             HintsUsed = game.HintsUsed,
@@ -211,6 +212,16 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
                 : CellState.Empty;
         }
 
+        // Damaged or absent metadata must not turn manual marks into erasable crosses.
+        var automaticCrosses = new bool[cells.Length];
+        if (row.AutomaticCrosses is { } stored && stored.Length == cells.Length)
+        {
+            for (var i = 0; i < cells.Length; i++)
+            {
+                automaticCrosses[i] = stored[i] == 1 && cells[i] == CellState.Crossed;
+            }
+        }
+
         return new SavedGame
         {
             Id = id,
@@ -223,6 +234,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
                 ? (ChallengeLevel)row.Challenge
                 : ChallengeLevel.Relaxed,
             Cells = cells,
+            AutoCrossedCells = automaticCrosses,
             Elapsed = RowGuards.SecondsOrZero(row.ElapsedSeconds),
 
             // Negative counters would make GameSession.Restore throw, and the resume path treats a

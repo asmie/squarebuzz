@@ -152,4 +152,17 @@ public class MoveHistoryTests
 
         Assert.Equal(2, stroke.AutoCrossedCount);
     }
+
+    [Fact]
+    public void Stroke_DoesNotCountRemovedCrossesAsNewAutomaticMarks()
+    {
+        var stroke = new Stroke(
+        [
+            new CellChange(0, CellState.Filled, CellState.Empty),
+            new CellChange(1, CellState.Crossed, CellState.Empty) { FromAutoCrossed = true },
+            new CellChange(2, CellState.Empty, CellState.Crossed) { ToAutoCrossed = true },
+        ]);
+
+        Assert.Equal(1, stroke.AutoCrossedCount);
+    }
 }

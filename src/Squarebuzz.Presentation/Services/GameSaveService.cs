@@ -119,5 +119,6 @@ public sealed class GameSaveService(ISaveGameRepository saves, IClock clock, IPe
         saved is not null && snapshot.Id == saved.Id && snapshot.Mistakes == saved.Mistakes
         && snapshot.HintsUsed == saved.HintsUsed && snapshot.HintsRemaining == saved.HintsRemaining
         && snapshot.HintBudget == saved.HintBudget
-        && snapshot.Cells.SequenceEqual(saved.Cells);
+        && snapshot.Cells.SequenceEqual(saved.Cells)
+        && snapshot.AutoCrossedCells.SequenceEqual(saved.AutoCrossedCells);
 }

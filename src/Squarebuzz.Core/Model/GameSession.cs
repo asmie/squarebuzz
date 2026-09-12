@@ -15,6 +15,7 @@ public sealed class GameSession
     private const int HintsBeforeLosingAStar = 1;
 
     private readonly CellState[] _cells;
+    private readonly bool[] _autoCrossed;
     private readonly MoveHistory _history = new();
 
     public GameSession(Puzzle puzzle, GameRules rules, NewGameOptions? origin = null, int seed = 0)
@@ -28,6 +29,7 @@ public sealed class GameSession
         Origin = origin is null ? null : new SessionOrigin(puzzle, origin with { HintBudget = HintBudget }, seed);
         Seed = seed;
         _cells = new CellState[puzzle.CellCount];
+        _autoCrossed = new bool[puzzle.CellCount];
         HintsRemaining = rules.HintAllowance;
     }
 
@@ -54,6 +56,9 @@ public sealed class GameSession
     public PaintMode Mode { get; set; } = PaintMode.Fill;
 
     public ReadOnlySpan<CellState> Cells => _cells;
+
+    /// <summary>Marks created by completed lines, rather than by the player or a hint.</summary>
+    public ReadOnlySpan<bool> AutoCrossedCells => _autoCrossed;
 
     /// <summary>Remaining finite hints. Zero for unlimited games; use CanUseHint to check availability.</summary>
     public int HintsRemaining { get; private set; }
@@ -171,7 +176,8 @@ public sealed class GameSession
         TimeSpan elapsed,
         int hintsRemaining,
         int hintsUsed,
-        int mistakes)
+        int mistakes,
+        IReadOnlyList<bool>? autoCrossedCells = null)
     {
         ArgumentNullException.ThrowIfNull(cells);
 
@@ -201,7 +207,30 @@ public sealed class GameSession
             restoredCells[i] = state;
         }
 
+        var restoredAutoCrossed = new bool[_cells.Length];
+        if (autoCrossedCells is { Count: > 0 })
+        {
+            if (autoCrossedCells.Count != restoredCells.Length)
+            {
+                throw new ArgumentException("Automatic marks must match the saved board size.", nameof(autoCrossedCells));
+            }
+
+            for (var i = 0; i < restoredAutoCrossed.Length; i++)
+            {
+                var automatic = autoCrossedCells[i];
+                if (automatic && restoredCells[i] != CellState.Crossed)
+                {
+                    throw new ArgumentException("Only crossed cells can be automatic.", nameof(autoCrossedCells));
+                }
+
+                restoredAutoCrossed[i] = automatic;
+            }
+        }
+
+        // Legacy saves have no provenance. Keep their crosses rather than guessing which
+        // ones were made by the player and silently erasing them later.
         restoredCells.CopyTo(_cells, 0);
+        restoredAutoCrossed.CopyTo(_autoCrossed, 0);
         RecountFilled();
 
         Elapsed = elapsed;
@@ -291,7 +320,7 @@ public sealed class GameSession
 
         var current = _cells[index];
 
-        if (current == target)
+        if (current == target && !_autoCrossed[index])
         {
             return MoveOutcome.NoChange;
         }
@@ -312,21 +341,20 @@ public sealed class GameSession
         var rowWasSatisfied = IsRowSatisfied(y);
         var columnWasSatisfied = IsColumnSatisfied(x);
 
+        var wasAutoCrossed = _autoCrossed[index];
         Write(index, target);
 
         var completedALine = (!rowWasSatisfied && IsRowSatisfied(y))
                              || (!columnWasSatisfied && IsColumnSatisfied(x));
 
-        // One entry is the whole story for the overwhelming majority of moves, so that is what
-        // is reserved. Only a move that just completed a line has blanks left to cross, and only
-        // then is the worst case - this cell plus every blank in its row and column - worth the
-        // several hundred bytes it costs at 25x25.
-        var changes = new List<CellChange>(completedALine ? 1 + Puzzle.Width + Puzzle.Height : 1)
+        // Reserve for line-wide consequences only when a line completes or is broken.
+        var changes = new List<CellChange>(completedALine || rowWasSatisfied || columnWasSatisfied
+            ? 1 + Puzzle.Width + Puzzle.Height : 1)
         {
-            new(index, current, target),
+            new(index, current, target) { FromAutoCrossed = wasAutoCrossed },
         };
 
-        var autoCrossed = Rules.AutoCrossCompletedLines ? AutoCrossLinesThrough(changes, x, y) : 0;
+        var autoCrossed = UpdateAutoCrossesThrough(changes, x, y);
 
         _history.Push(new Stroke(changes) { DirectChangeCount = 1 });
 
@@ -336,9 +364,10 @@ public sealed class GameSession
     }
 
     /// <summary>Sets a cell and keeps <see cref="FilledCount"/> in step.</summary>
-    private void Write(int index, CellState value)
+    private void Write(int index, CellState value, bool automatic = false)
     {
         var previous = _cells[index];
+        _autoCrossed[index] = automatic;
 
         if (previous == value)
         {
@@ -416,9 +445,12 @@ public sealed class GameSession
             return false;
         }
 
-        foreach (var change in stroke.Changes)
+        // A cell can be cleared directly and then re-crossed by its still-complete line.
+        // Reverse deltas in order as well as value so repeated indices restore correctly.
+        for (var i = stroke.Changes.Count - 1; i >= 0; i--)
         {
-            Write(change.Index, change.From);
+            var change = stroke.Changes[i];
+            Write(change.Index, change.From, change.FromAutoCrossed);
         }
 
         return true;
@@ -440,7 +472,7 @@ public sealed class GameSession
 
         foreach (var change in stroke.Changes)
         {
-            Write(change.Index, change.To);
+            Write(change.Index, change.To, change.ToAutoCrossed);
         }
 
         EvaluateSolved();
@@ -477,15 +509,12 @@ public sealed class GameSession
 
         var changes = new List<CellChange>(1 + Puzzle.Width + Puzzle.Height)
         {
-            new(hint.Index, _cells[hint.Index], hint.Value),
+            new(hint.Index, _cells[hint.Index], hint.Value) { FromAutoCrossed = _autoCrossed[hint.Index] },
         };
 
         Write(hint.Index, hint.Value);
 
-        if (Rules.AutoCrossCompletedLines)
-        {
-            AutoCrossLinesThrough(changes, hint.Index % Puzzle.Width, hint.Index / Puzzle.Width);
-        }
+        UpdateAutoCrossesThrough(changes, hint.Index % Puzzle.Width, hint.Index / Puzzle.Width);
 
         _history.Push(new Stroke(changes) { DirectChangeCount = 1 });
         EvaluateSolved();
@@ -494,32 +523,49 @@ public sealed class GameSession
     }
 
     /// <summary>
-    /// Crosses off the remaining cells of a row or column whose filled cells already match its
-    /// clue. The changes are appended to <paramref name="changes"/> rather than committed
-    /// separately, so undoing the stroke takes them back too.
+    /// Adds crosses for completed lines and removes automatic crosses no longer supported
+    /// by either intersecting line. Every consequence belongs to the same undoable stroke.
     /// </summary>
     /// <remarks>
-    /// The prototype applied auto-crossing outside its history, so undo left the automatic
-    /// crosses stranded on the board. Folding them into the same stroke fixes that.
+    /// Only marks in the touched row and column can lose support. Before removing one,
+    /// check its perpendicular line too. Manual and hint crosses are never removed here.
+    /// Existing automatic marks still lose support when the helper is switched off.
     /// </remarks>
-    /// <summary>
-    /// Crosses off the blanks of the row and column through one cell, if either now matches its
-    /// clue.
-    /// </summary>
-    /// <remarks>
-    /// Only those two lines are examined, because only those two can have changed. Crossing a
-    /// cell never alters a line's <em>filled</em> runs, so an auto-cross cannot complete some
-    /// other line as a knock-on - which means the old sweep over all fifty lines of a 25x25
-    /// board re-derived forty-eight clue sets per move for nothing. Measured, that sweep was
-    /// 87% of the time and 85% of the allocation of a painted cell.
-    /// </remarks>
-    private int AutoCrossLinesThrough(List<CellChange> changes, int x, int y)
+    private int UpdateAutoCrossesThrough(List<CellChange> changes, int x, int y)
     {
-        var added = CrossRowIfSatisfied(changes, y);
+        if (!IsRowSatisfied(y))
+        {
+            for (var column = 0; column < Puzzle.Width; column++)
+            {
+                var index = (y * Puzzle.Width) + column;
+                if (_autoCrossed[index] && !IsColumnSatisfied(column))
+                {
+                    ClearAutomaticCross(changes, index);
+                }
+            }
+        }
 
-        added += CrossColumnIfSatisfied(changes, x);
+        if (!IsColumnSatisfied(x))
+        {
+            for (var row = 0; row < Puzzle.Height; row++)
+            {
+                var index = (row * Puzzle.Width) + x;
+                if (_autoCrossed[index] && !IsRowSatisfied(row))
+                {
+                    ClearAutomaticCross(changes, index);
+                }
+            }
+        }
 
-        return added;
+        return Rules.AutoCrossCompletedLines
+            ? CrossRowIfSatisfied(changes, y) + CrossColumnIfSatisfied(changes, x)
+            : 0;
+    }
+
+    private void ClearAutomaticCross(List<CellChange> changes, int index)
+    {
+        changes.Add(new CellChange(index, CellState.Crossed, CellState.Empty) { FromAutoCrossed = true });
+        Write(index, CellState.Empty);
     }
 
     /// <summary>
@@ -596,11 +642,11 @@ public sealed class GameSession
             return false;
         }
 
-        changes.Add(new CellChange(index, CellState.Empty, CellState.Crossed));
+        changes.Add(new CellChange(index, CellState.Empty, CellState.Crossed) { ToAutoCrossed = true });
 
         // Empty to Crossed, so FilledCount cannot move - but go through Write anyway rather
         // than reaching past it, so there is exactly one place that touches the board.
-        Write(index, CellState.Crossed);
+        Write(index, CellState.Crossed, automatic: true);
 
         return true;
     }

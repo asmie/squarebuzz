@@ -82,6 +82,9 @@ internal sealed class SavedGameEntity
     [Column("cells")]
     public byte[] Cells { get; set; } = [];
 
+    [Column("automatic_crosses")]
+    public byte[]? AutomaticCrosses { get; set; }
+
     [Column("elapsed_seconds")]
     public double ElapsedSeconds { get; set; }
 

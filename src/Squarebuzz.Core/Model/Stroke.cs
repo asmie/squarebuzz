@@ -6,7 +6,11 @@ namespace Squarebuzz.Core.Model;
 /// <param name="Index">Row-major cell index.</param>
 /// <param name="From">Value before the change.</param>
 /// <param name="To">Value after the change.</param>
-public readonly record struct CellChange(int Index, CellState From, CellState To);
+public readonly record struct CellChange(int Index, CellState From, CellState To)
+{
+    public bool FromAutoCrossed { get; init; }
+    public bool ToAutoCrossed { get; init; }
+}
 
 /// <summary>
 /// An immutable snapshot of a single undoable action. A cell edit and any cells auto-crossed
@@ -35,5 +39,6 @@ public sealed class Stroke
     public int DirectChangeCount { get; init; } = 1;
 
     /// <summary>Cells crossed automatically because a line became complete.</summary>
-    public int AutoCrossedCount => _changes.Count - DirectChangeCount;
+    public int AutoCrossedCount => _changes.Skip(DirectChangeCount)
+        .Count(change => change.From != CellState.Crossed && change.To == CellState.Crossed);
 }

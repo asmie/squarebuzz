@@ -111,7 +111,7 @@ public sealed class GameSessionFactory
         var puzzle = ResolvePuzzle(save);
 
         var session = new GameSession(puzzle, GameRules.Create(save.Challenge, helpers, options.HintBudget), options, save.Seed);
-        session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.HintsUsed, save.Mistakes);
+        session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.HintsUsed, save.Mistakes, save.AutoCrossedCells);
 
         return session;
     }
