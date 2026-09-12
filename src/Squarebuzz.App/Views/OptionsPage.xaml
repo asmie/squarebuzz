@@ -33,10 +33,11 @@
 
         <Style x:Key="SegButton" TargetType="Button">
             <Setter Property="CornerRadius" Value="14" />
-            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
             <Setter Property="FontSize" Value="13" />
             <Setter Property="FontFamily" Value="BodyBold" />
-            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="Padding" Value="12,10" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
         </Style>
     </ContentPage.Resources>
 
@@ -163,13 +164,13 @@
                     <VerticalStackLayout Spacing="14">
                         <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
                             <Label Grid.Row="0" Text="{Binding TapBehaviourLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="8">
-                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                            <Grid Grid.Row="1" RowDefinitions="Auto,Auto" RowSpacing="8">
+                                <Button Grid.Row="0" Style="{StaticResource SegButton}"
                                         Text="{Binding ModeLabel}"
                                         Command="{Binding SelectTapBehaviourCommand}" CommandParameter="mode"
                                         BackgroundColor="{Binding IsModeButton, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsModeButton, Converter={StaticResource SegTextColor}}" />
-                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                <Button Grid.Row="1" Style="{StaticResource SegButton}"
                                         Text="{Binding HoldLabel}"
                                         Command="{Binding SelectTapBehaviourCommand}" CommandParameter="hold"
                                         BackgroundColor="{Binding IsHoldToCross, Converter={StaticResource SegBackground}}"
