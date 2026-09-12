@@ -19,17 +19,8 @@
             <!--
               Values are declared as explicit x:Double rather than attribute strings, so the
               converter hands the binding a double instead of relying on string coercion into
-              Opacity and StrokeThickness.
+              Opacity.
             -->
-            <conv:BoolSelectConverter x:Key="ChipStrokeThickness">
-                <conv:BoolSelectConverter.TrueValue>
-                    <x:Double>0</x:Double>
-                </conv:BoolSelectConverter.TrueValue>
-                <conv:BoolSelectConverter.FalseValue>
-                    <x:Double>2</x:Double>
-                </conv:BoolSelectConverter.FalseValue>
-            </conv:BoolSelectConverter>
-
             <!-- Locked options stay visible but clearly out of reach. -->
             <conv:BoolSelectConverter x:Key="LockedOpacity">
                 <conv:BoolSelectConverter.TrueValue>

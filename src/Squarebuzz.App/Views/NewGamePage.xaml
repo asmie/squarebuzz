@@ -39,12 +39,16 @@
                                 Margin="0,4,0,0">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:SizeOption">
-                                <Border Margin="0,0,8,8"
+                                <!-- Selection hides the outline without changing content bounds. -->
+                                <Border Stroke="{DynamicResource Line}" StrokeThickness="2" Margin="0,0,8,8"
                                         Padding="14,10"
                                         BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
-                                        Stroke="{DynamicResource Line}"
-                                        StrokeThickness="{Binding IsSelected, Converter={StaticResource ChipStrokeThickness}}"
                                         Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="Stroke" Value="Transparent" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="16" />
                                     </Border.StrokeShape>
@@ -81,11 +85,14 @@
                     <FlexLayout BindableLayout.ItemsSource="{Binding Difficulties}" Wrap="Wrap" JustifyContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:DifficultyOption">
-                                <Border Margin="0,0,8,8"
+                                <Border Stroke="{DynamicResource Line}" StrokeThickness="2" Margin="0,0,8,8"
                                         Padding="12,10"
-                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
-                                        Stroke="{DynamicResource Line}"
-                                        StrokeThickness="{Binding IsSelected, Converter={StaticResource ChipStrokeThickness}}">
+                                        BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}">
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="Stroke" Value="Transparent" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="16" />
                                     </Border.StrokeShape>
@@ -153,12 +160,15 @@
                     <FlexLayout BindableLayout.ItemsSource="{Binding Packs}" Wrap="Wrap" JustifyContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:PackOption">
-                                <Border Margin="0,0,8,8"
+                                <Border Stroke="{DynamicResource Line}" StrokeThickness="2" Margin="0,0,8,8"
                                         Padding="12,10"
                                         BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
-                                        Stroke="{DynamicResource Line}"
-                                        StrokeThickness="{Binding IsSelected, Converter={StaticResource ChipStrokeThickness}}"
                                         Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="Stroke" Value="Transparent" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="16" />
                                     </Border.StrokeShape>
