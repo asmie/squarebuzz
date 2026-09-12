@@ -315,4 +315,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Pamięć jest niedostępna. Spróbuj ponownie.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Podpowiedzi w nowych grach</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Bez limitu</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Wpisz liczbę całkowitą nie mniejszą niż 1.</value></data>
 </root>

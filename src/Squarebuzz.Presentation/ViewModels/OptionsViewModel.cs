@@ -228,7 +228,20 @@ public partial class OptionsViewModel : LocalizedViewModel
     public partial bool ShowTimer { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanEditHintLimit), nameof(HasHintLimitError))]
     public partial bool AllowHints { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanEditHintLimit), nameof(HasHintLimitError))]
+    public partial bool UnlimitedHints { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasHintLimitError))]
+    public partial string HintLimitText { get; set; } = "3";
+
+    public bool CanEditHintLimit => AllowHints && !UnlimitedHints;
+
+    public bool HasHintLimitError => CanEditHintLimit && !TryGetHintLimit(out _);
 
     // ---- Language ----
 
@@ -373,6 +386,12 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string HintsLabel => T("allowHints");
 
+    public string HintLimitLabel => $"{T("hintLimit")} ({T("relaxed")})";
+
+    public string UnlimitedHintsLabel => T("unlimited");
+
+    public string HintLimitError => T("hintLimitInvalid");
+
     public string ScreenTimeLabel => T("screenTime");
 
     public string ScreenTimeOffLabel => T("stOff");
@@ -480,6 +499,8 @@ public partial class OptionsViewModel : LocalizedViewModel
         WarnOnMistakes = _settings.Helpers.WarnOnMistakes;
         ShowTimer = _settings.Helpers.ShowTimer;
         AllowHints = _settings.Helpers.AllowHints;
+        HintLimitText = (_settings.Helpers.HintBudget.Limit ?? 3).ToString(CultureInfo.CurrentCulture);
+        UnlimitedHints = _settings.Helpers.HintBudget.Limit is null;
 
         Language = _settings.Language;
         ScreenTimeLimitMinutes = _settings.ScreenTimeLimitMinutes;
@@ -551,6 +572,31 @@ public partial class OptionsViewModel : LocalizedViewModel
     partial void OnShowTimerChanged(bool value) => Persist();
 
     partial void OnAllowHintsChanged(bool value) => Persist();
+
+    partial void OnHintLimitTextChanged(string value)
+    {
+        if (TryGetHintLimit(out _))
+        {
+            Persist();
+        }
+    }
+
+    partial void OnUnlimitedHintsChanged(bool value)
+    {
+        if (!value && !TryGetHintLimit(out _))
+        {
+            HintLimitText = "3";
+        }
+
+        Persist();
+    }
+
+    private bool TryGetHintLimit(out int limit) =>
+        int.TryParse(HintLimitText, NumberStyles.Integer, CultureInfo.CurrentCulture, out limit) && limit >= 1;
+
+    private HintBudget SelectedHintBudget() => UnlimitedHints
+        ? HintBudget.Unlimited
+        : TryGetHintLimit(out var limit) ? new HintBudget(limit) : _settings.Helpers.HintBudget;
 
     partial void OnCellZoomPercentChanged(int value) => Persist();
 
@@ -818,6 +864,7 @@ public partial class OptionsViewModel : LocalizedViewModel
                 WarnOnMistakes = WarnOnMistakes,
                 ShowTimer = ShowTimer,
                 AllowHints = AllowHints,
+                HintBudget = SelectedHintBudget(),
             },
         };
 

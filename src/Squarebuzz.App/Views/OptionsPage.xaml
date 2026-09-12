@@ -243,6 +243,21 @@
                             <Switch Grid.Column="1" IsToggled="{Binding AllowHints}" VerticalOptions="Center"
                                     OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
                         </Grid>
+                        <VerticalStackLayout IsVisible="{Binding AllowHints}" Spacing="8" Margin="0,4,0,10">
+                            <Label Text="{Binding HintLimitLabel}" Style="{StaticResource RowLabel}" />
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" MinimumHeightRequest="56">
+                                <Label Text="{Binding UnlimitedHintsLabel}" Style="{StaticResource RowLabel}" />
+                                <Switch Grid.Column="1" IsToggled="{Binding UnlimitedHints}" VerticalOptions="Center"
+                                        OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            </Grid>
+                            <Entry Text="{Binding HintLimitText}" Keyboard="Numeric"
+                                   IsEnabled="{Binding CanEditHintLimit}"
+                                   SemanticProperties.Description="{Binding HintLimitLabel}"
+                                   FontFamily="BodyBold" TextColor="{DynamicResource Ink}"
+                                   MinimumHeightRequest="56" />
+                            <Label Text="{Binding HintLimitError}" IsVisible="{Binding HasHintLimitError}"
+                                   TextColor="{DynamicResource OnWarnSoft}" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 

@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>საცავი მიუწვდომელია. სცადე ხელახლა.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>მინიშნებები ახალ თამაშებში</value></data>
+  <data name="unlimited" xml:space="preserve"><value>შეუზღუდავი</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>შეიყვანეთ მთელი რიცხვი, არანაკლებ 1-ისა.</value></data>
 </root>

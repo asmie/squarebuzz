@@ -7,6 +7,36 @@ namespace Squarebuzz.Presentation.Tests;
 
 public sealed class PuzzleRestartTests
 {
+    [Theory]
+    [InlineData(1)]
+    [InlineData(null)]
+    public async Task HintBudget_RestartKeepsIt_NextReadsNewPreferences(int? limit)
+    {
+        var factory = new GameSessionFactory(new EmbeddedPuzzleRepository(), new UniqueSolutionGenerator(new BlobPuzzleGenerator()));
+        using var playing = new GameViewModelHarness(factory);
+        playing.Settings.Settings = GameSettings.Default with
+        {
+            Helpers = HelperSettings.Default with { HintBudget = new HintBudget(limit) },
+        };
+        await playing.Vm.StartAsync(NewGameOptions.Default with { Seed = 42 });
+        Assert.Equal(limit is null, playing.Vm.HasUnlimitedHints);
+        if (limit is null) Assert.Contains("∞", playing.Vm.StatusText);
+        playing.Vm.UseHintCommand.Execute(null);
+        Assert.Equal(limit is null, playing.Vm.CanUseHint);
+        playing.Settings.Settings = GameSettings.Default with
+        {
+            Helpers = HelperSettings.Default with { HintBudget = new HintBudget(8) },
+        };
+
+        await playing.Vm.RestartCommand.ExecuteAsync(null);
+        Assert.Equal(limit, playing.Vm.Session!.HintBudget.Limit);
+        Assert.True(playing.Vm.CanUseHint);
+        Assert.Equal(0, playing.Vm.Session.HintsUsed);
+        await playing.Vm.NextPuzzleCommand.ExecuteAsync(null);
+        Assert.Equal(8, playing.Vm.HintsRemaining);
+        Assert.False(playing.Vm.HasUnlimitedHints);
+    }
+
     [Fact]
     public async Task NextPuzzle_StillSelectsAnotherAuthoredPicture()
     {

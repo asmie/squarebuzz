@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Stocarea nu este disponibilă. Încearcă din nou.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Indicii în jocurile noi</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Nelimitat</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Introdu un număr întreg de cel puțin 1.</value></data>
 </root>

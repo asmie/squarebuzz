@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Salvestusruum pole saadaval. Proovi uuesti.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Vihjed uutes mängudes</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Piiramatu</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Sisesta täisarv, mis on vähemalt 1.</value></data>
 </root>

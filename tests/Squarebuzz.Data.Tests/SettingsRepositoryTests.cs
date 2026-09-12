@@ -45,6 +45,7 @@ public class SettingsRepositoryTests
                 WarnOnMistakes = false,
                 ShowTimer = false,
                 AllowHints = false,
+                HintBudget = new HintBudget(17),
             },
             LastSize = GridSize.Huge,
             LastDifficulty = 5,

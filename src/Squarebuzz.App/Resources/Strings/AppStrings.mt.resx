@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Il-ħażna mhix disponibbli. Erġa’ pprova.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Ħjiel fil-logħob il-ġdid</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Bla limitu</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Daħħal numru sħiħ ta’ mill-inqas 1.</value></data>
 </root>

@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>ストレージを利用できません。もう一度お試しください。</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>新しいゲームのヒント数</value></data>
+  <data name="unlimited" xml:space="preserve"><value>無制限</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>1以上の整数を入力してください。</value></data>
 </root>

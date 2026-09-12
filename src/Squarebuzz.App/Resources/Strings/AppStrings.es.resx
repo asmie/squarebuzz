@@ -315,4 +315,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>El almacenamiento no está disponible. Inténtalo de nuevo.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Pistas en partidas nuevas</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Sin límite</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Introduce un número entero de al menos 1.</value></data>
 </root>

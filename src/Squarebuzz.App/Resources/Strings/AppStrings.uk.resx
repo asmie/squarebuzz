@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Сховище недоступне. Спробуй ще раз.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Підказки в нових іграх</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Без обмежень</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Введіть ціле число не менше 1.</value></data>
 </root>

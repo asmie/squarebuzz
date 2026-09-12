@@ -92,6 +92,10 @@ internal sealed class SavedGameEntity
     [Column("hints_used")]
     public int HintsUsed { get; set; }
 
+    /// <summary>Null for legacy saves; zero for unlimited; otherwise the initial finite budget.</summary>
+    [Column("hint_limit")]
+    public int? HintLimit { get; set; }
+
     [Column("mistakes")]
     public int Mistakes { get; set; }
 

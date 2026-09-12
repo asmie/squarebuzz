@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Hifadhi haipatikani. Tafadhali jaribu tena.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Vidokezo katika michezo mipya</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Bila kikomo</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Weka nambari nzima isiyopungua 1.</value></data>
 </root>

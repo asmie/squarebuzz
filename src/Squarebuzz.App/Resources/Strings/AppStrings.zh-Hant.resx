@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>儲存空間無法使用。請再試一次。</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>新遊戲的提示次數</value></data>
+  <data name="unlimited" xml:space="preserve"><value>無限制</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>請輸入不小於 1 的整數。</value></data>
 </root>

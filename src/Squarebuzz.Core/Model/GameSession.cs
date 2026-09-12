@@ -24,7 +24,8 @@ public sealed class GameSession
 
         Puzzle = puzzle;
         Rules = rules;
-        Origin = origin is null ? null : new SessionOrigin(puzzle, origin, seed);
+        HintBudget = rules.HintBudget;
+        Origin = origin is null ? null : new SessionOrigin(puzzle, origin with { HintBudget = HintBudget }, seed);
         Seed = seed;
         _cells = new CellState[puzzle.CellCount];
         HintsRemaining = rules.HintAllowance;
@@ -33,6 +34,12 @@ public sealed class GameSession
     public Puzzle Puzzle { get; }
 
     public GameRules Rules { get; private set; }
+
+    public HintBudget HintBudget { get; }
+
+    public bool HasUnlimitedHints => Rules.HasUnlimitedHints;
+
+    public bool CanUseHint => !IsOver && (HasUnlimitedHints || HintsRemaining > 0);
 
     /// <summary>
     /// Resolved challenge identity and replay choices. Saves and completion use the same
@@ -48,12 +55,12 @@ public sealed class GameSession
 
     public ReadOnlySpan<CellState> Cells => _cells;
 
+    /// <summary>Remaining finite hints. Zero for unlimited games; use CanUseHint to check availability.</summary>
     public int HintsRemaining { get; private set; }
 
     /// <summary>
     /// Hints actually spent. A counter of its own rather than allowance-minus-remaining,
-    /// because <see cref="ApplyHelpers"/> can change the allowance mid-game and the stars
-    /// must keep charging for the help that was really taken.
+    /// so unlimited games and toggling hints off still charge stars for help actually taken.
     /// </summary>
     public int HintsUsed { get; private set; }
 
@@ -219,9 +226,8 @@ public sealed class GameSession
     /// <para>
     /// Without this, the pause overlay's Options entry would be a lie: rules are resolved when
     /// a session is created, so a helper flipped mid-game would change nothing until the next
-    /// puzzle. The challenge the game was started with is kept, so Sharp keeps counting
-    /// mistakes and keeps its single hint, and the hint budget is recomputed against hints
-    /// already spent - toggling hints off and back on cannot mint fresh ones.
+    /// puzzle. The original hint budget is kept, and remaining hints are recomputed against
+    /// hints already spent - toggling hints off and back on cannot mint fresh ones.
     /// </para>
     /// <para>
     /// Switching auto-crossing <em>on</em> also catches up the lines already finished, as one
@@ -238,7 +244,7 @@ public sealed class GameSession
 
         // Origin is present on every session the app creates; the Relaxed fallback only
         // matters for bare test constructions.
-        Rules = GameRules.Create(Origin?.Challenge ?? ChallengeLevel.Relaxed, helpers);
+        Rules = GameRules.Create(Origin?.Challenge ?? ChallengeLevel.Relaxed, helpers, HintBudget);
         HintsRemaining = Math.Max(0, Rules.HintAllowance - HintsUsed);
 
         if (IsOver || wasAutoCrossing || !Rules.AutoCrossCompletedLines)
@@ -447,7 +453,7 @@ public sealed class GameSession
     /// </summary>
     public Hint? UseHint()
     {
-        if (IsOver || HintsRemaining <= 0)
+        if (!CanUseHint)
         {
             return null;
         }
@@ -459,8 +465,15 @@ public sealed class GameSession
             return null;
         }
 
-        HintsRemaining--;
-        HintsUsed++;
+        if (!HasUnlimitedHints)
+        {
+            HintsRemaining--;
+        }
+
+        if (HintsUsed < int.MaxValue)
+        {
+            HintsUsed++;
+        }
 
         var changes = new List<CellChange>(1 + Puzzle.Width + Puzzle.Height)
         {

@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Lagringen är inte tillgänglig. Försök igen.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Ledtrådar i nya spel</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Obegränsat</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Ange ett heltal som är minst 1.</value></data>
 </root>

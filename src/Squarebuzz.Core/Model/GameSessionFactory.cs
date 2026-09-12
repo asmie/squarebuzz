@@ -37,7 +37,7 @@ public sealed class GameSessionFactory
 
         var seed = options.Seed ?? Random.Shared.Next();
         var puzzle = SelectPuzzle(options, seed, unlockedPackIds);
-        var rules = GameRules.Create(options.Challenge, options.Helpers);
+        var rules = GameRules.Create(options.Challenge, options.Helpers, options.HintBudget);
 
         // The resolved seed is recorded even when the caller left it null, so this exact
         // game can be saved and resumed.
@@ -105,11 +105,12 @@ public sealed class GameSessionFactory
             ForceGenerated = save.IsGenerated,
             Level = save.Level,
             DailyDate = save.DailyDate,
+            HintBudget = save.HintBudget ?? HintBudget.LegacyFor(save.Challenge),
         };
 
         var puzzle = ResolvePuzzle(save);
 
-        var session = new GameSession(puzzle, GameRules.Create(save.Challenge, helpers), options, save.Seed);
+        var session = new GameSession(puzzle, GameRules.Create(save.Challenge, helpers, options.HintBudget), options, save.Seed);
         session.Restore(save.Cells, save.Elapsed, save.HintsRemaining, save.HintsUsed, save.Mistakes);
 
         return session;

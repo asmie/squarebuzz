@@ -315,4 +315,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>التخزين غير متاح. يرجى المحاولة مرة أخرى.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>التلميحات في الألعاب الجديدة</value></data>
+  <data name="unlimited" xml:space="preserve"><value>بلا حدود</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>أدخل عددًا صحيحًا لا يقل عن 1.</value></data>
 </root>

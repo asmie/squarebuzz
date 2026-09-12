@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>स्टोरेज उपलब्ध नहीं है। फिर से कोशिश करें।</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>नए खेलों में संकेत</value></data>
+  <data name="unlimited" xml:space="preserve"><value>असीमित</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>कम से कम 1 की पूर्ण संख्या दर्ज करें।</value></data>
 </root>

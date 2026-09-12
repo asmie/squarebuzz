@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Krātuve nav pieejama. Mēģini vēlreiz.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Norādes jaunās spēlēs</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Neierobežoti</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Ievadiet veselu skaitli, kas nav mazāks par 1.</value></data>
 </root>

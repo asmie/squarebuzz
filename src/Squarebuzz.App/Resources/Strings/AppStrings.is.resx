@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Geymsla er ekki tiltæk. Reyndu aftur.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Vísbendingar í nýjum leikjum</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Ótakmarkað</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Sláðu inn heiltölu sem er að minnsta kosti 1.</value></data>
 </root>

@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>O armazenamento está indisponível. Tenta novamente.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Dicas em novos jogos</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Sem limite</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Introduz um número inteiro de pelo menos 1.</value></data>
 </root>

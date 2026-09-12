@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>存储不可用。请重试。</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>新游戏的提示次数</value></data>
+  <data name="unlimited" xml:space="preserve"><value>无限制</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>请输入不小于 1 的整数。</value></data>
 </root>

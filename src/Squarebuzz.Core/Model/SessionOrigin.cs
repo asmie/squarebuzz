@@ -74,6 +74,7 @@ public sealed class SessionOrigin
             Helpers = helpers,
             Seed = null,
             DailyDate = null,
+            HintBudget = null,
             PuzzleId = null,
             ExcludePuzzleId = Mode == SessionMode.TimedTrial ? null : PuzzleId,
         };

@@ -43,6 +43,9 @@ public sealed record SavedGame
     /// </summary>
     public int HintsUsed { get; init; }
 
+    /// <summary>Initial budget, including unlimited. Null identifies a legacy save.</summary>
+    public HintBudget? HintBudget { get; init; }
+
     public required int Mistakes { get; init; }
 
     public required DateTimeOffset SavedAt { get; init; }
@@ -115,6 +118,7 @@ public sealed record SavedGame
             Elapsed = session.Elapsed,
             HintsRemaining = session.HintsRemaining,
             HintsUsed = session.HintsUsed,
+            HintBudget = session.HintBudget,
             Mistakes = session.Mistakes,
             SavedAt = savedAt,
             Level = origin.Level,

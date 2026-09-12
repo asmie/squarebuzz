@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Tallennustila ei ole käytettävissä. Yritä uudelleen.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Vihjeet uusissa peleissä</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Rajattomasti</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Anna kokonaisluku, joka on vähintään 1.</value></data>
 </root>

@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Ο χώρος αποθήκευσης δεν είναι διαθέσιμος. Δοκίμασε ξανά.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Υποδείξεις σε νέα παιχνίδια</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Απεριόριστες</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Εισάγετε έναν ακέραιο αριθμό τουλάχιστον 1.</value></data>
 </root>

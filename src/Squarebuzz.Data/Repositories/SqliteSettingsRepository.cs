@@ -70,6 +70,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
                 WarnOnMistakes = ReadBool(values, Keys.HelperWarnOnMistakes, defaults.Helpers.WarnOnMistakes),
                 ShowTimer = ReadBool(values, Keys.HelperShowTimer, defaults.Helpers.ShowTimer),
                 AllowHints = ReadBool(values, Keys.HelperAllowHints, defaults.Helpers.AllowHints),
+                HintBudget = ReadHintBudget(values),
             },
 
             LastSize = ReadInt(values, Keys.LastSize, defaults.LastSize),
@@ -143,6 +144,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             Row(Keys.HelperWarnOnMistakes, settings.Helpers.WarnOnMistakes),
             Row(Keys.HelperShowTimer, settings.Helpers.ShowTimer),
             Row(Keys.HelperAllowHints, settings.Helpers.AllowHints),
+            Row(Keys.HelperHintLimit, settings.Helpers.HintBudget.Limit ?? 0),
 
             Row(Keys.LastSize, settings.LastSize),
             Row(Keys.LastDifficulty, settings.LastDifficulty),
@@ -202,6 +204,14 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             ? parsed
             : null;
 
+    private static HintBudget ReadHintBudget(Dictionary<string, string?> values) =>
+        ReadNullableInt(values, Keys.HelperHintLimit) switch
+        {
+            0 => HintBudget.Unlimited,
+            > 0 and var count => new HintBudget(count),
+            _ => HintBudget.Default,
+        };
+
     private static TEnum ReadEnum<TEnum>(Dictionary<string, string?> values, string key, TEnum fallback)
         where TEnum : struct, Enum =>
         values.TryGetValue(key, out var raw) && Enum.TryParse<TEnum>(raw, ignoreCase: true, out var parsed)
@@ -236,6 +246,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
         public const string HelperWarnOnMistakes = "helpers.warnOnMistakes";
         public const string HelperShowTimer = "helpers.showTimer";
         public const string HelperAllowHints = "helpers.allowHints";
+        public const string HelperHintLimit = "helpers.hintLimit";
 
         public const string LastSize = "lastGame.size";
         public const string LastDifficulty = "lastGame.difficulty";

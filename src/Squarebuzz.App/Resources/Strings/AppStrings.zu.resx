@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Isitoreji asitholakali. Sicela uzame futhi.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Amacebo emidlalweni emisha</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Akunamkhawulo</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Faka inombolo ephelele engu-1 noma ngaphezulu.</value></data>
 </root>

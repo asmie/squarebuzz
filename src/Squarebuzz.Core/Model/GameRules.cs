@@ -6,10 +6,10 @@ namespace Squarebuzz.Core.Model;
 /// </summary>
 public enum ChallengeLevel
 {
-    /// <summary>Helpers on, no limits.</summary>
+    /// <summary>Relaxed challenge identity; assists follow the player's preferences.</summary>
     Relaxed,
 
-    /// <summary>Mistakes counted, one hint.</summary>
+    /// <summary>One hint, also used for timed trials.</summary>
     Sharp,
 }
 
@@ -24,6 +24,9 @@ public sealed record HelperSettings
 
     public bool AllowHints { get; init; } = true;
 
+    /// <summary>Budget for new games. Existing sessions keep their initial budget.</summary>
+    public HintBudget HintBudget { get; init; } = HintBudget.Default;
+
     public static HelperSettings Default { get; } = new();
 }
 
@@ -34,17 +37,20 @@ public sealed record HelperSettings
 /// </summary>
 public sealed record GameRules
 {
-    private const int RelaxedHintAllowance = 3;
-    private const int SharpHintAllowance = 1;
-
     /// <summary>Cross off the rest of a line automatically once its clue is satisfied.</summary>
     public bool AutoCrossCompletedLines { get; init; }
 
     /// <summary>Refuse a fill that contradicts the picture, instead of letting it stand.</summary>
     public bool WarnOnMistakes { get; init; }
 
-    /// <summary>Hints available for this puzzle. Zero when hints are switched off entirely.</summary>
-    public int HintAllowance { get; init; }
+    public HintBudget HintBudget { get; init; } = HintBudget.Default;
+
+    public bool AllowHints { get; init; } = true;
+
+    /// <summary>Finite allowance; zero when disabled or unlimited. See HasUnlimitedHints.</summary>
+    public int HintAllowance => AllowHints ? HintBudget.Limit ?? 0 : 0;
+
+    public bool HasUnlimitedHints => AllowHints && HintBudget.Limit is null;
 
     public bool ShowTimer { get; init; }
 
@@ -56,11 +62,10 @@ public sealed record GameRules
     /// relaxed challenge as well, which made the Options switch look broken to anyone playing
     /// Sharp: the toggle said one thing and the board did another. Crossing off blanks a
     /// completed clue has already proved is bookkeeping, not a hint - it reveals nothing the
-    /// player has not deduced - so withholding it made Sharp tedious rather than harder. What
-    /// still separates Sharp is what it is actually about: mistakes are counted and there is
-    /// one hint instead of three.
+    /// player has not deduced. Sharp keeps one hint; Relaxed follows the configured budget.
+    /// A supplied budget preserves the identity of a saved or restarted game.
     /// </remarks>
-    public static GameRules Create(ChallengeLevel level, HelperSettings helpers)
+    public static GameRules Create(ChallengeLevel level, HelperSettings helpers, HintBudget? budget = null)
     {
         ArgumentNullException.ThrowIfNull(helpers);
 
@@ -69,9 +74,8 @@ public sealed record GameRules
             AutoCrossCompletedLines = helpers.AutoCross,
             WarnOnMistakes = helpers.WarnOnMistakes,
             ShowTimer = helpers.ShowTimer,
-            HintAllowance = helpers.AllowHints
-                ? level == ChallengeLevel.Sharp ? SharpHintAllowance : RelaxedHintAllowance
-                : 0,
+            HintBudget = budget ?? (level == ChallengeLevel.Sharp ? HintBudget.LegacyFor(level) : helpers.HintBudget),
+            AllowHints = helpers.AllowHints,
         };
     }
 

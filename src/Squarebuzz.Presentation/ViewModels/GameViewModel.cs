@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.Presentation.Navigation;
@@ -230,6 +231,10 @@ public partial class GameViewModel : LocalizedViewModel
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StatusText))]
+    public partial bool HasUnlimitedHints { get; private set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(StatusText))]
     public partial int Mistakes { get; private set; }
 
     /// <summary>Hints spent this game, for the win overlay's tiles.</summary>
@@ -381,7 +386,7 @@ public partial class GameViewModel : LocalizedViewModel
     /// Hints and mistakes as one line, composed here rather than assembled in XAML from several
     /// localised spans - simpler markup, and the wording becomes testable.
     /// </summary>
-    public string StatusText => $"{T("hints")} {HintsRemaining}    {T("mistakes")} {Mistakes}";
+    public string StatusText => $"{T("hints")} {(HasUnlimitedHints ? "∞" : HintsRemaining.ToString(CultureInfo.CurrentCulture))}    {T("mistakes")} {Mistakes}";
 
     public string UndoText => T("undo");
 
@@ -1055,7 +1060,7 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        if (session.HintsRemaining <= 0)
+        if (!session.CanUseHint)
         {
             ShowToast(T("noHints"));
             return;
@@ -1249,6 +1254,7 @@ public partial class GameViewModel : LocalizedViewModel
         }
 
         HintsRemaining = session.HintsRemaining;
+        HasUnlimitedHints = session.HasUnlimitedHints;
         HintsUsed = session.HintsUsed;
 
         var pictureSize = session.Puzzle.PictureCellCount;
@@ -1258,7 +1264,7 @@ public partial class GameViewModel : LocalizedViewModel
         StarRating = session.StarRating;
         CanUndo = session.CanUndo;
         CanRedo = session.CanRedo;
-        CanUseHint = session.HintsRemaining > 0 && !session.IsOver;
+        CanUseHint = session.CanUseHint;
         IsSolved = session.IsSolved;
 
         // The board's accessible description carries the filled count, so it goes stale on every

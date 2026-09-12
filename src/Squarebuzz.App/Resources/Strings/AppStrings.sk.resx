@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Úložisko nie je dostupné. Skús to znova.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Nápovedy v nových hrách</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Bez obmedzenia</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Zadajte celé číslo aspoň 1.</value></data>
 </root>

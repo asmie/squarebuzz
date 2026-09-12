@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>האחסון אינו זמין. יש לנסות שוב.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>רמזים במשחקים חדשים</value></data>
+  <data name="unlimited" xml:space="preserve"><value>ללא הגבלה</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>יש להזין מספר שלם של 1 ומעלה.</value></data>
 </root>

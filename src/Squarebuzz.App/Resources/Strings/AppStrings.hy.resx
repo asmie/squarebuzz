@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Պահոցը հասանելի չէ։ Փորձիր կրկին։</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Հուշումներ նոր խաղերում</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Անսահմանափակ</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Մուտքագրեք առնվազն 1 ամբողջ թիվ։</value></data>
 </root>

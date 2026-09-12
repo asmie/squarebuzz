@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Saugykla nepasiekiama. Bandyk dar kartą.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Užuominos naujuose žaidimuose</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Neribotai</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Įveskite sveikąjį skaičių, ne mažesnį už 1.</value></data>
 </root>

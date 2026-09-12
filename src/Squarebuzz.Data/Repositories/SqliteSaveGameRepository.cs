@@ -173,6 +173,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             ElapsedSeconds = game.Elapsed.TotalSeconds,
             HintsRemaining = game.HintsRemaining,
             HintsUsed = game.HintsUsed,
+            HintLimit = game.HintBudget is { } budget ? budget.Limit ?? 0 : null,
             Mistakes = game.Mistakes,
             SavedAtUtcTicks = game.SavedAt.UtcTicks,
             SavedAtOffsetTicks = game.SavedAt.Offset.Ticks,
@@ -228,6 +229,12 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             // throw as "start a fresh game" - so a slightly damaged row lost the board entirely.
             HintsRemaining = RowGuards.NonNegative(row.HintsRemaining),
             HintsUsed = RowGuards.NonNegative(row.HintsUsed),
+            HintBudget = row.HintLimit switch
+            {
+                0 => HintBudget.Unlimited,
+                > 0 => new HintBudget(row.HintLimit),
+                _ => null,
+            },
             Mistakes = RowGuards.NonNegative(row.Mistakes),
             SavedAt = RowGuards.InstantOrEpoch(row.SavedAtUtcTicks, row.SavedAtOffsetTicks),
             GeneratorVersion = row.GeneratorVersion,

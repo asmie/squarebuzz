@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Lo spazio di archiviazione non è disponibile. Riprova.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Suggerimenti nelle nuove partite</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Illimitati</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Inserisci un numero intero di almeno 1.</value></data>
 </root>

@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Lagring er utilgjengelig. Prøv igjen.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Hint i nye spill</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Ubegrenset</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Skriv inn et heltall på minst 1.</value></data>
 </root>

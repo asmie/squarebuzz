@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Хранилището е недостъпно. Опитайте отново.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Подсказки в новите игри</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Без ограничение</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Въведете цяло число, не по-малко от 1.</value></data>
 </root>

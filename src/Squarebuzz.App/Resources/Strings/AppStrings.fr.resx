@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Le stockage est indisponible. Réessaie.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Indices dans les nouvelles parties</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Illimités</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Saisissez un nombre entier supérieur ou égal à 1.</value></data>
 </root>

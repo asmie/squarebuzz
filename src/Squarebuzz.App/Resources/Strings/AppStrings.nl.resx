@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>De opslag is niet beschikbaar. Probeer het opnieuw.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Hints in nieuwe spellen</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Onbeperkt</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Voer een geheel getal van minimaal 1 in.</value></data>
 </root>

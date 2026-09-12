@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Pohrana nije dostupna. Pokušaj ponovno.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Savjeti u novim igrama</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Neograničeno</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Unesite cijeli broj od najmanje 1.</value></data>
 </root>

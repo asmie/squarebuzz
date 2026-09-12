@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>فضای ذخیره‌سازی در دسترس نیست. لطفاً دوباره تلاش کنید.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>راهنمایی‌ها در بازی‌های جدید</value></data>
+  <data name="unlimited" xml:space="preserve"><value>نامحدود</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>یک عدد صحیح حداقل ۱ وارد کنید.</value></data>
 </root>

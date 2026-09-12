@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>স্টোরেজ ব্যবহার করা যাচ্ছে না। আবার চেষ্টা করুন।</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>নতুন খেলায় ইঙ্গিত</value></data>
+  <data name="unlimited" xml:space="preserve"><value>সীমাহীন</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>কমপক্ষে 1-এর একটি পূর্ণসংখ্যা লিখুন।</value></data>
 </root>

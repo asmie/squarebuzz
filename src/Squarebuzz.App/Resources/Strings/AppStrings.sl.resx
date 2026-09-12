@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Shramba ni na voljo. Poskusi znova.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Namigi v novih igrah</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Neomejeno</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Vnesite celo število, ki je vsaj 1.</value></data>
 </root>

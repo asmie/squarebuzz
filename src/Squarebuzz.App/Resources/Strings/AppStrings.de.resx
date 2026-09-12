@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Der Speicher ist nicht verfügbar. Bitte versuche es erneut.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Hinweise in neuen Spielen</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Unbegrenzt</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Gib eine ganze Zahl ab 1 ein.</value></data>
 </root>

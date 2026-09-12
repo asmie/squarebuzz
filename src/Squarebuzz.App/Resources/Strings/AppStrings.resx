@@ -326,4 +326,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Storage is unavailable. Please try again.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Hints in new games</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Unlimited</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Enter a whole number of at least 1.</value></data>
 </root>

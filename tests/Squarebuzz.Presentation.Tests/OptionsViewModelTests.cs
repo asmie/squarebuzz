@@ -48,6 +48,55 @@ public class OptionsViewModelTests : IDisposable
     /// <summary>The most recent write, which is what the next launch will read.</summary>
     private GameSettings LastSaved => _settings.Saved[^1];
 
+    [Theory]
+    [InlineData(1)]
+    [InlineData(27)]
+    [InlineData(null)]
+    public async Task HintBudget_LoadsWithoutWriting_AndCanBeChanged(int? limit)
+    {
+        _settings.Settings = GameSettings.Default with
+        {
+            Helpers = HelperSettings.Default with { HintBudget = new HintBudget(limit) },
+        };
+        await _vm.OnAppearingAsync();
+        Assert.Empty(_settings.Saved);
+        Assert.Equal(limit is null, _vm.UnlimitedHints);
+        Assert.Equal(limit is not null, _vm.CanEditHintLimit);
+        if (limit is not null) Assert.Equal(limit.Value.ToString(CultureInfo.CurrentCulture), _vm.HintLimitText);
+
+        _vm.UnlimitedHints = false;
+        _vm.HintLimitText = "12";
+        Assert.Equal(12, LastSaved.Helpers.HintBudget.Limit);
+        _vm.UnlimitedHints = true;
+        Assert.Equal(HintBudget.Unlimited, LastSaved.Helpers.HintBudget);
+        Assert.False(_vm.CanEditHintLimit);
+        _vm.UnlimitedHints = false;
+        Assert.Equal(12, LastSaved.Helpers.HintBudget.Limit);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("0")]
+    [InlineData("-1")]
+    [InlineData("1.5")]
+    [InlineData("abc")]
+    [InlineData("2147483648")]
+    public async Task InvalidHintLimit_DoesNotOverwriteTheSavedBudget(string invalid)
+    {
+        await _vm.OnAppearingAsync();
+        _vm.HintLimitText = "7";
+        _vm.HintLimitText = invalid;
+        Assert.True(_vm.HasHintLimitError);
+        _vm.ShowTimer = false;
+        Assert.Equal(7, LastSaved.Helpers.HintBudget.Limit);
+        _vm.UnlimitedHints = true;
+        Assert.False(_vm.HasHintLimitError);
+        Assert.Equal(HintBudget.Unlimited, LastSaved.Helpers.HintBudget);
+        _vm.UnlimitedHints = false;
+        Assert.False(_vm.HasHintLimitError);
+        Assert.Equal(3, LastSaved.Helpers.HintBudget.Limit);
+    }
+
     [Fact]
     public async Task FailedReset_StaysOnOptions_AndRetryReopensConfirmation()
     {

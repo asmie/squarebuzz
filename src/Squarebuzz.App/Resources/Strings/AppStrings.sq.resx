@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Hapësira ruajtëse nuk është e disponueshme. Provo përsëri.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Ndihma në lojërat e reja</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Pa kufi</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>Shkruaj një numër të plotë të paktën 1.</value></data>
 </root>

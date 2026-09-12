@@ -16,6 +16,9 @@ public sealed record NewGameOptions(
     /// <summary>The player's helper preferences from Options.</summary>
     public HelperSettings Helpers { get; init; } = HelperSettings.Default;
 
+    /// <summary>Frozen budget for a restart; null lets a new game use the current preference.</summary>
+    public HintBudget? HintBudget { get; init; }
+
     /// <summary>
     /// Fixes which picture is chosen or generated. Leave null for a fresh random puzzle;
     /// set it to reproduce a specific one, as the daily puzzle and saved games do.

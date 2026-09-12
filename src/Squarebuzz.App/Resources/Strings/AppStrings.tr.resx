@@ -313,4 +313,7 @@
   <data name="storageUnavailable" xml:space="preserve">
     <value>Depolama kullanılamıyor. Lütfen tekrar dene.</value>
   </data>
+  <data name="hintLimit" xml:space="preserve"><value>Yeni oyunlarda ipuçları</value></data>
+  <data name="unlimited" xml:space="preserve"><value>Sınırsız</value></data>
+  <data name="hintLimitInvalid" xml:space="preserve"><value>En az 1 olan bir tam sayı girin.</value></data>
 </root>
