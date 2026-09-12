@@ -43,7 +43,7 @@ public sealed class SessionOriginTests
     public void CampaignRestart_PinsTheResolvedPicture(bool generated)
     {
         var origin = new SessionOrigin(Picture(generated), NewGameOptions.Default with { Level = 7 }, 42);
-        var replay = origin.Replay(HelperSettings.Default);
+        var replay = origin.Restart(HelperSettings.Default);
         Assert.Equal(SessionMode.Campaign, origin.Mode);
         Assert.Equal(7, replay.Level);
         Assert.Equal(42, replay.Seed);
@@ -58,18 +58,18 @@ public sealed class SessionOriginTests
         var options = DailyPuzzle.OptionsFor(date, HelperSettings.Default);
         var origin = new SessionOrigin(Picture(true), options, options.Seed!.Value);
         Assert.Equal(SessionMode.Daily, origin.Mode);
-        Assert.Equal(options, origin.Replay(HelperSettings.Default));
-        var next = origin.Replay(HelperSettings.Default, restartDaily: false);
+        Assert.Equal(options, origin.Restart(HelperSettings.Default));
+        var next = origin.NextPuzzle(HelperSettings.Default);
         Assert.Null(next.DailyDate);
         Assert.Null(next.Seed);
     }
 
     [Fact]
-    public void TimedRestart_KeepsLimitAndDrawsAfresh()
+    public void NextTimedPuzzle_KeepsLimitAndDrawsAfresh()
     {
         var limit = TimeSpan.FromMinutes(2);
         var origin = new SessionOrigin(Picture(true), NewGameOptions.Default with { TimeLimit = limit, ForceGenerated = true }, 42);
-        var replay = origin.Replay(HelperSettings.Default);
+        var replay = origin.NextPuzzle(HelperSettings.Default);
         Assert.Equal(SessionMode.TimedTrial, origin.Mode);
         Assert.Equal(limit, replay.TimeLimit);
         Assert.Null(replay.Seed);
@@ -78,12 +78,33 @@ public sealed class SessionOriginTests
     }
 
     [Fact]
-    public void QuickReplay_AvoidsTheResolvedAuthoredPicture()
+    public void NextQuickPuzzle_AvoidsTheResolvedAuthoredPicture()
     {
         var origin = new SessionOrigin(Picture(), NewGameOptions.Default, 42);
-        var replay = origin.Replay(HelperSettings.Default);
+        var replay = origin.NextPuzzle(HelperSettings.Default);
         Assert.Null(replay.Seed);
         Assert.Null(replay.PuzzleId);
         Assert.Equal("resolved", replay.ExcludePuzzleId);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Restart_PinsTheResolvedPictureInsteadOfTheOriginalSelection(bool generated)
+    {
+        var origin = new SessionOrigin(Picture(generated), NewGameOptions.Default with
+        {
+            PuzzleId = "missing",
+            ExcludePuzzleId = "previous",
+        }, 42);
+        var helpers = HelperSettings.Default with { AutoCross = false };
+
+        var restart = origin.Restart(helpers);
+
+        Assert.Equal(42, restart.Seed);
+        Assert.Equal(generated ? null : "resolved", restart.PuzzleId);
+        Assert.Equal(generated, restart.ForceGenerated);
+        Assert.Null(restart.ExcludePuzzleId);
+        Assert.Equal(helpers, restart.Helpers);
     }
 }

@@ -832,8 +832,7 @@ public partial class GameViewModel : LocalizedViewModel
         StopTimer();
         _settings = await LoadSettingsSafelyAsync();
 
-        // A null seed means "surprise me", so replaying gives a different picture rather than
-        // the same one over and over.
+        // New games may request a random seed; Restart supplies the current puzzle's identity.
         var effective = (options ?? _settings.ToNewGameOptions()) with { Helpers = _settings.Helpers };
 
         try
@@ -1127,7 +1126,7 @@ public partial class GameViewModel : LocalizedViewModel
     private async Task RestartAsync()
     {
         IsPaused = false;
-        await StartAsync(SameSettingsFreshPuzzle());
+        await StartAsync(Session?.Origin?.Restart(_settings.Helpers));
     }
 
     /// <summary>
@@ -1150,16 +1149,8 @@ public partial class GameViewModel : LocalizedViewModel
         }
 
         // Moving on leaves daily mode; only Restart preserves the original daily date.
-        await StartAsync(SameSettingsFreshPuzzle(restartDaily: false));
+        await StartAsync(Session?.Origin?.NextPuzzle(_settings.Helpers));
     }
-
-    /// <summary>
-    /// Keeps the current choices for the next game. Campaign levels and daily restarts retain
-    /// their fixed puzzle; ordinary games get a fresh seed. Null without a session, so
-    /// <see cref="StartAsync"/> falls back to saved settings.
-    /// </summary>
-    private NewGameOptions? SameSettingsFreshPuzzle(bool restartDaily = true) =>
-        Session?.Origin?.Replay(_settings.Helpers, restartDaily);
 
     [RelayCommand]
     private async Task QuitAsync()

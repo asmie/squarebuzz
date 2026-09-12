@@ -1,3 +1,5 @@
+using Squarebuzz.Core.Content;
+using Squarebuzz.Core.Generation;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Progression;
 using Xunit;
@@ -54,12 +56,26 @@ public sealed class DailyGameTests : IDisposable
     [InlineData(true)]
     public async Task RestartAfterMidnight_KeepsTheOriginalDailyPuzzle(bool resumeFirst)
     {
-        await StartDailyAsync();
-        using var resumed = new GameViewModelHarness();
-        var playing = _h;
+        // A saved game records actual dimensions; the generic 2x2 fake is not a supported
+        // restart size. Use real generation to verify the daily picture as well as its date.
+        var factory = new GameSessionFactory(new EmbeddedPuzzleRepository(),
+            new UniqueSolutionGenerator(new BlobPuzzleGenerator()));
+        using var original = new GameViewModelHarness(factory);
+        original.Clock.Today = _dailyDate;
+        original.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["daily"] = "1" });
+        await original.Vm.InitialiseAsync();
+        var puzzle = original.Vm.Session!.Puzzle;
+        original.Vm.Paint(Array.FindIndex(puzzle.Solution.ToArray(), filled => filled), CellState.Filled);
+
+        using var resumed = new GameViewModelHarness(factory);
+        var playing = original;
         if (resumeFirst)
         {
-            await ResumeIntoAsync(resumed);
+            await original.Vm.AutosaveAsync();
+            var save = Assert.Single(original.SaveGames.Saves).Value;
+            resumed.SaveGames.Saves[save.Id] = save;
+            resumed.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["saveId"] = save.Id.ToString("D") });
+            await resumed.Vm.InitialiseAsync();
             playing = resumed;
         }
 
@@ -70,6 +86,7 @@ public sealed class DailyGameTests : IDisposable
         Assert.Equal(DailyPuzzle.SeedFor(_dailyDate), playing.Vm.Session!.Seed);
         Assert.Equal(_dailyDate, playing.Vm.Session.Origin!.DailyDate);
         Assert.True(playing.Vm.Session.Origin.ForceGenerated);
+        Assert.Equal(puzzle.Solution.ToArray(), playing.Vm.Session.Puzzle.Solution.ToArray());
         Assert.All(playing.Vm.Session.Cells.ToArray(), cell => Assert.Equal(CellState.Empty, cell));
     }
 

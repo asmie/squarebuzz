@@ -1,5 +1,3 @@
-using Squarebuzz.Core.Progression;
-
 namespace Squarebuzz.Core.Model;
 
 public enum SessionMode
@@ -47,18 +45,28 @@ public sealed class SessionOrigin
     public ChallengeLevel Challenge => Options.Challenge;
     public bool ForceGenerated => Options.ForceGenerated;
 
-    /// <summary>Campaign and daily restarts preserve identity; ordinary and timed games draw afresh.</summary>
-    public NewGameOptions Replay(HelperSettings helpers, bool restartDaily = true)
+    /// <summary>Restarts the resolved picture, keeping its seed, daily date and time limit.</summary>
+    public NewGameOptions Restart(HelperSettings helpers)
     {
         ArgumentNullException.ThrowIfNull(helpers);
-        if (Mode == SessionMode.Daily && restartDaily)
+
+        return Options with
         {
-            return DailyPuzzle.OptionsFor(DailyDate!.Value, helpers);
-        }
+            Helpers = helpers,
+            PuzzleId = PuzzleId,
+            ForceGenerated = PuzzleId is null,
+            ExcludePuzzleId = null,
+        };
+    }
+
+    /// <summary>Draws afresh and leaves daily mode. Campaign progression is selected by the caller.</summary>
+    public NewGameOptions NextPuzzle(HelperSettings helpers)
+    {
+        ArgumentNullException.ThrowIfNull(helpers);
 
         if (Mode == SessionMode.Campaign)
         {
-            return Options with { Helpers = helpers, PuzzleId = PuzzleId, ForceGenerated = PuzzleId is null };
+            return Restart(helpers);
         }
 
         return Options with
