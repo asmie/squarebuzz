@@ -7,8 +7,8 @@ namespace Squarebuzz.Core.Tests.Model;
 
 public sealed class SessionOriginTests
 {
-    private static Puzzle Picture(bool generated = false) =>
-        Puzzle.FromRows("resolved", "animals", "#000000", ["#.", ".#"], generated);
+    private static Puzzle Picture(bool generated = false, int revision = 1) =>
+        Puzzle.FromRows("resolved", "animals", "#000000", ["#.", ".#"], generated, revision);
 
     [Theory]
     [InlineData(false)]
@@ -92,9 +92,10 @@ public sealed class SessionOriginTests
     [InlineData(true)]
     public void Restart_PinsTheResolvedPictureInsteadOfTheOriginalSelection(bool generated)
     {
-        var origin = new SessionOrigin(Picture(generated), NewGameOptions.Default with
+        var origin = new SessionOrigin(Picture(generated, revision: 2), NewGameOptions.Default with
         {
             PuzzleId = "missing",
+            PuzzleRevision = 99,
             ExcludePuzzleId = "previous",
         }, 42);
         var helpers = HelperSettings.Default with { AutoCross = false };
@@ -103,6 +104,7 @@ public sealed class SessionOriginTests
 
         Assert.Equal(42, restart.Seed);
         Assert.Equal(generated ? null : "resolved", restart.PuzzleId);
+        Assert.Equal(generated ? (int?)null : 2, restart.PuzzleRevision);
         Assert.Equal(generated, restart.ForceGenerated);
         Assert.Null(restart.ExcludePuzzleId);
         Assert.Equal(helpers, restart.Helpers);

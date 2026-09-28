@@ -43,6 +43,7 @@ public class AuthoredSaveCompatibilityTests
             Cells = marks,
             Elapsed = TimeSpan.FromSeconds(60),
             HintsRemaining = 2,
+            HintsUsed = 1,
             Mistakes = 0,
             SavedAt = DateTimeOffset.UtcNow,
         };
@@ -54,6 +55,7 @@ public class AuthoredSaveCompatibilityTests
         Assert.Equal(save.Elapsed, restored.Elapsed);
         Assert.Equal(save.Mistakes, restored.Mistakes);
         Assert.Equal(save.HintsRemaining, restored.HintsRemaining);
+        Assert.Equal(save.HintsUsed, restored.HintsUsed);
 
         var restarted = factory.Create(restored.Origin!.Restart(HelperSettings.Default));
         Assert.True(original.Solution.SequenceEqual(restarted.Puzzle.Solution));

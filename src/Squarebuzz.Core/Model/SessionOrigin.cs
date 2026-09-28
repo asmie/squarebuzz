@@ -57,7 +57,7 @@ public sealed class SessionOrigin
         {
             Helpers = helpers,
             PuzzleId = PuzzleId,
-            PuzzleRevision = PuzzleRevision,
+            PuzzleRevision = PuzzleId is null ? null : PuzzleRevision,
             ForceGenerated = PuzzleId is null,
             ExcludePuzzleId = null,
         };

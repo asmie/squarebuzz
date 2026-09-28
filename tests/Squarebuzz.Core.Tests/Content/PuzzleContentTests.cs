@@ -22,6 +22,50 @@ public class PuzzleContentTests
     }
 
     [Fact]
+    public void LegacyContent_WithoutRevisionsOrArchives_LoadsAsRevisionOne()
+    {
+        const string json = """
+            {
+              "schemaVersion": 1,
+              "packs": [ { "id": "animals", "icon": "x" } ],
+              "puzzles": [
+                { "id": "legacy", "pack": "animals", "width": 2, "height": 2, "color": "#000000",
+                  "rows": ["#.", ".#"] }
+              ]
+            }
+            """;
+
+        var repository = new Core.Content.EmbeddedPuzzleRepository(json);
+        var puzzle = Assert.Single(repository.Puzzles);
+
+        Assert.Equal(1, puzzle.Revision);
+        Assert.Same(puzzle, repository.FindById("legacy"));
+        Assert.Same(puzzle, repository.FindById("legacy", 1));
+        Assert.Null(repository.FindById("legacy", 2));
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void ExplicitInvalidRevision_IsRejectedAtLoad(int revision)
+    {
+        var json = $$"""
+            {
+              "schemaVersion": 1,
+              "packs": [ { "id": "animals", "icon": "x" } ],
+              "puzzles": [
+                { "id": "invalid", "revision": {{revision}}, "pack": "animals", "width": 2, "height": 2,
+                  "color": "#000000", "rows": ["#.", ".#"] }
+              ]
+            }
+            """;
+
+        var error = Assert.Throws<ArgumentOutOfRangeException>(() => new Core.Content.EmbeddedPuzzleRepository(json));
+
+        Assert.Equal("revision", error.ParamName);
+    }
+
+    [Fact]
     // Declared dimensions must match the rows from which Puzzle derives its actual size.
     public void APuzzleWhoseDeclaredSizeDisagreesWithItsRows_IsRejectedAtLoad()
     {
