@@ -17,7 +17,8 @@ public sealed class Puzzle
         int height,
         string colorHex,
         bool[] solution,
-        bool isGenerated)
+        bool isGenerated,
+        int revision)
     {
         Id = id;
         Pack = pack;
@@ -25,6 +26,7 @@ public sealed class Puzzle
         Height = height;
         ColorHex = colorHex;
         IsGenerated = isGenerated;
+        Revision = revision;
         _solution = solution;
 
         var rowClues = new LineClues[height];
@@ -78,6 +80,9 @@ public sealed class Puzzle
 
     public string Id { get; }
 
+    /// <summary>Immutable authored-board revision. Original content uses revision 1.</summary>
+    public int Revision { get; }
+
     /// <summary>Pack this picture belongs to, e.g. <c>animals</c>.</summary>
     public string Pack { get; }
 
@@ -123,12 +128,14 @@ public sealed class Puzzle
         string pack,
         string colorHex,
         IReadOnlyList<string> rows,
-        bool isGenerated = false)
+        bool isGenerated = false,
+        int revision = 1)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
         ArgumentException.ThrowIfNullOrWhiteSpace(pack);
         ArgumentException.ThrowIfNullOrWhiteSpace(colorHex);
         ArgumentNullException.ThrowIfNull(rows);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(revision);
 
         if (rows.Count == 0)
         {
@@ -169,7 +176,7 @@ public sealed class Puzzle
             }
         }
 
-        return new Puzzle(id, pack, width, height, colorHex, solution, isGenerated);
+        return new Puzzle(id, pack, width, height, colorHex, solution, isGenerated, revision);
     }
 
     /// <summary>Builds a puzzle from a row-major solution grid, as the generator produces.</summary>
@@ -180,13 +187,15 @@ public sealed class Puzzle
         int width,
         int height,
         ReadOnlySpan<bool> solution,
-        bool isGenerated = true)
+        bool isGenerated = true,
+        int revision = 1)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
         ArgumentException.ThrowIfNullOrWhiteSpace(pack);
         ArgumentException.ThrowIfNullOrWhiteSpace(colorHex);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(width);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(height);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(revision);
 
         if (solution.Length != width * height)
         {
@@ -195,7 +204,7 @@ public sealed class Puzzle
                 nameof(solution));
         }
 
-        return new Puzzle(id, pack, width, height, colorHex, solution.ToArray(), isGenerated);
+        return new Puzzle(id, pack, width, height, colorHex, solution.ToArray(), isGenerated, revision);
     }
 
     public bool IsFilled(int x, int y) => _solution[(y * Width) + x];

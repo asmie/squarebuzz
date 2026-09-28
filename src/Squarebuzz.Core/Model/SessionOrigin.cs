@@ -29,17 +29,20 @@ public sealed class SessionOrigin
             : options.DailyDate is not null ? SessionMode.Daily
             : SessionMode.QuickGame;
         PuzzleId = puzzle.IsGenerated ? null : puzzle.Id;
+        PuzzleRevision = puzzle.Revision;
         GeneratorVersion = puzzle.IsGenerated ? Generation.GeneratorVersion.Current : Generation.GeneratorVersion.Unknown;
     }
 
     public NewGameOptions Options { get; }
     public SessionMode Mode { get; }
     public string? PuzzleId { get; }
+    public int PuzzleRevision { get; }
     public int GeneratorVersion { get; }
     public int Seed => Options.Seed!.Value;
     public int? Level => Options.Level;
     public DateOnly? DailyDate => Options.DailyDate;
     public TimeSpan? TimeLimit => Options.TimeLimit;
+    public int? TimedTier => Options.TimedTier;
     public int Difficulty => Options.Difficulty;
     public string PackId => Options.PackId;
     public ChallengeLevel Challenge => Options.Challenge;
@@ -54,6 +57,7 @@ public sealed class SessionOrigin
         {
             Helpers = helpers,
             PuzzleId = PuzzleId,
+            PuzzleRevision = PuzzleRevision,
             ForceGenerated = PuzzleId is null,
             ExcludePuzzleId = null,
         };
@@ -76,6 +80,7 @@ public sealed class SessionOrigin
             DailyDate = null,
             HintBudget = null,
             PuzzleId = null,
+            PuzzleRevision = null,
             ExcludePuzzleId = Mode == SessionMode.TimedTrial ? null : PuzzleId,
         };
     }

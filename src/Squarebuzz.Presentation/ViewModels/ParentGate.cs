@@ -5,18 +5,9 @@ using Squarebuzz.Presentation.Services;
 
 namespace Squarebuzz.Presentation.ViewModels;
 
-/// <summary>
-/// A small multiplication question in front of anything meant for a grown-up.
-/// </summary>
+/// <summary>Shared multiplication prompt before parent actions.</summary>
 /// <remarks>
-/// <para>
-/// A speed bump, not security, and honest about being one: it exists so a six-year-old does not
-/// wander into "erase everything" or an external link, not to withstand a determined ten-year-old.
-/// </para>
-/// <para>
-/// Shared by Options and About rather than reimplemented in each. Two independent copies of a
-/// guard like this drift apart, and the weaker one becomes the way in.
-/// </para>
+/// This prevents accidental access; it is not an authentication or security boundary.
 /// </remarks>
 public sealed partial class ParentGate : ObservableObject
 {

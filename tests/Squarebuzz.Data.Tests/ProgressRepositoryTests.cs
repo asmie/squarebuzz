@@ -246,6 +246,21 @@ public class ProgressRepositoryTests
     }
 
     [Fact]
+    public async Task AnOlderResultAppliedLate_KeepsTheStreakAndTheLastDay()
+    {
+        // A retried completion, or a clock set back, arrives dated before the last day played.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteProgressRepository(temp.Database);
+
+        await repository.RecordCompletionAsync(Completion("heart", 3, Day1));
+        await repository.RecordCompletionAsync(Completion("star", 3, Day1.AddDays(1)));
+        await repository.RecordCompletionAsync(Completion("fish", 3, Day1));
+        var progress = await repository.RecordCompletionAsync(Completion("duck", 3, Day1.AddDays(2)));
+
+        Assert.Equal(3, progress.Streak);
+    }
+
+    [Fact]
     public async Task Trophies_AreAwardedAndListed()
     {
         await using var temp = new TemporaryDatabase();

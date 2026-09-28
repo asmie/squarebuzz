@@ -25,6 +25,15 @@ public enum TrophyId
     NightOwl = 7,
     PerfectTen = 8,
     Collector = 9,
+    BeatTheClock = 10,
+    MarathonChamp = 11,
+    MonthStreak = 12,
+    BigPicture = 13,
+    ThousandBlocks = 14,
+    StarGazer = 15,
+    Explorer = 16,
+    PackMaster = 17,
+    Flawless = 18,
 }
 
 /// <summary>A trophy the player has earned.</summary>
@@ -99,4 +108,7 @@ public sealed record PuzzleCompletion(
 
     /// <summary>Campaign level this completion finished, or null outside the Levels mode.</summary>
     public int? Level { get; init; }
+
+    /// <summary>Timed-trial rung this completion won, or null for an untimed game.</summary>
+    public int? TimedTier { get; init; }
 }

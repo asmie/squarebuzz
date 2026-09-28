@@ -6,11 +6,14 @@ using Squarebuzz.Core.Model;
 namespace Squarebuzz.App.Controls;
 
 /// <summary>Raised when the player marks a cell, so the ViewModel can apply it to the session.</summary>
-public sealed class CellPaintedEventArgs(int index, CellState target) : EventArgs
+public sealed class CellPaintedEventArgs(int index, CellState target, bool continuesStroke = false) : EventArgs
 {
     public int Index { get; } = index;
 
     public CellState Target { get; } = target;
+
+    /// <summary>True for every square of a drag after the first. See GameSession.Paint.</summary>
+    public bool ContinuesStroke { get; } = continuesStroke;
 }
 
 /// <summary>Reports which cell the finger is over.</summary>
@@ -23,15 +26,9 @@ public sealed class TouchedCellEventArgs(int index, bool isInLeftHalf) : EventAr
     public bool IsInLeftHalf { get; } = isInLeftHalf;
 }
 
-/// <summary>
-/// The interactive board: a single <see cref="GraphicsView"/> that draws every cell and turns
-/// touches into paint requests.
-/// </summary>
+/// <summary>Draws the board and converts touch gestures into paint requests.</summary>
 /// <remarks>
-/// Reproduces the prototype's drag semantics exactly, because they are what make the board feel
-/// right on a phone. The <em>first</em> cell touched decides the target value by toggling; the
-/// drag then paints that same value into each newly entered cell. A <c>seen</c> set stops a
-/// wobbling finger from flipping a cell back and forth as it re-enters it.
+/// The first touched cell determines the drag value. Each cell is visited at most once per stroke.
 /// </remarks>
 public sealed partial class BoardView : GraphicsView
 {
@@ -118,7 +115,7 @@ public sealed partial class BoardView : GraphicsView
         {
             var view = (BoardView)bindable;
 
-            // A different game's strikes are not news - they seed silently on first draw.
+            // Seed the new board's existing clue strikes without animation.
             view._drawable.ResetStrikeAnimations();
 
             // A new game must not inherit the previous one's hint ring; bumping the
@@ -126,7 +123,7 @@ public sealed partial class BoardView : GraphicsView
             view._hintGeneration++;
             view._drawable.HintIndex = -1;
 
-            // Same for a warn tint: a mistake on the last board is not a mistake on this one.
+            // Clear the previous board's mistake highlight.
             view._mistakeGeneration++;
             view._drawable.MistakeIndex = -1;
 
@@ -180,14 +177,9 @@ public sealed partial class BoardView : GraphicsView
         set => SetValue(TapBehaviourProperty, value);
     }
 
-    /// <summary>
-    /// Highlights a hinted cell for <see cref="HintDisplayDuration"/>, announcing itself with
-    /// two quick pulses of the gold ring - a static ring is easy to miss on a busy board.
-    /// </summary>
+    /// <summary>Highlights a hinted cell for HintDisplayDuration.</summary>
     /// <remarks>
-    /// The hinted mark is already applied to the board by the session, so the ring is pure
-    /// attention direction. It clears itself on a timer rather than on the next touch: a player
-    /// reaching for the board must not wipe the very thing they paid a hint to see.
+    /// The session has already applied the hint. A timer clears the ring independently of later touches.
     /// </remarks>
     public void ShowHint(int index)
     {
@@ -238,10 +230,7 @@ public sealed partial class BoardView : GraphicsView
                 });
     }
 
-    /// <summary>
-    /// Pops the cell that was just marked: small, overshoot, settle. What makes a fill feel
-    /// placed rather than switched on.
-    /// </summary>
+    /// <summary>Animates a newly filled cell with a short scale overshoot.</summary>
     public void PopCell(int index)
     {
         if (Services.MotionPreferences.ReduceMotion)
@@ -279,16 +268,7 @@ public sealed partial class BoardView : GraphicsView
     /// <summary>How long the warn tint stays on a wrongly filled cell.</summary>
     private static readonly TimeSpan MistakeFlashDuration = TimeSpan.FromMilliseconds(520);
 
-    /// <summary>
-    /// Flashes a cell to show the fill was wrong.
-    /// </summary>
-    /// <remarks>
-    /// Guarded by a generation counter exactly as <see cref="ShowHint"/> is, and for the same
-    /// reason: a drag across a row of wrong cells raises one flash per cell, and without the
-    /// guard the first flash's timer cleared whichever cell was flashing when it fired - so the
-    /// tint on the later mistakes was cut short or never seen at all. Only the newest flash's
-    /// timer is allowed to clear the tint.
-    /// </remarks>
+    /// <summary>Flashes an incorrect fill. Only the latest flash timer may clear the highlight.</summary>
     public void FlashMistake(int index)
     {
         _drawable.MistakeIndex = index;
@@ -315,14 +295,9 @@ public sealed partial class BoardView : GraphicsView
         Size.Zero,
         propertyChanged: (bindable, _, _) => ((BoardView)bindable).Refresh());
 
-    /// <summary>
-    /// Space the host is willing to give the board.
-    /// </summary>
+    /// <summary>Available board size supplied by the parent.</summary>
     /// <remarks>
-    /// Supplied by the parent rather than read from this view's own <c>Width</c>. Sizing from
-    /// its own size cannot work: the view's size comes from the WidthRequest that Refresh sets,
-    /// so it would feed on its own output and stay stuck at whatever the first unmeasured pass
-    /// produced - which is the minimum cell size.
+    /// Using this control's own requested size would create a layout feedback loop.
     /// </remarks>
     public Size AvailableSize
     {
@@ -377,20 +352,13 @@ public sealed partial class BoardView : GraphicsView
 
         _drawable.Cells = session.Cells.ToArray();
 
-        // One frame. If the move newly satisfied a clue, the draw will notice its strike is
-        // mid-wipe and ask for the next frame itself through OnWipeInProgress - so the extra
-        // frames happen when there is genuinely something moving, not after every cell.
+        // Invalidate once. An active clue-strike animation requests additional frames as needed.
         Invalidate();
     }
 
-    /// <summary>
-    /// Keeps a clue strike's wipe going, one frame at a time, for exactly as long as the drawable
-    /// reports it unfinished.
-    /// </summary>
+    /// <summary>Schedules frames while a clue-strike animation is active.</summary>
     /// <remarks>
-    /// Dispatched rather than invalidated straight away: this arrives from inside
-    /// <see cref="BoardDrawable.Draw"/>, and asking a view to redraw part-way through its own
-    /// draw is how platforms produce a dropped frame or a re-entrancy assert.
+    /// Dispatch the invalidation after Draw returns to avoid drawing re-entry.
     /// </remarks>
     private void OnWipeInProgress(object? sender, EventArgs e)
     {
@@ -436,9 +404,7 @@ public sealed partial class BoardView : GraphicsView
             return;
         }
 
-        // From here the gesture is the board's. Without this the scrolling host takes it back
-        // the moment the finger travels past the system touch slop, which is a fraction of one
-        // square: a drag across ten cells used to paint two and then be cancelled.
+        // Capture board gestures so the scroll host does not intercept a paint drag.
         ClaimGestureFromScrollers(true);
 
         _pressedIndex = cell;
@@ -454,14 +420,8 @@ public sealed partial class BoardView : GraphicsView
 
         Highlight(cell);
 
-        // Hold-to-cross holds the first mark back until the gesture has declared itself.
-        //
-        // Painting on touch-down and *then* crossing once the hold matured meant every cross was
-        // preceded by a fill. On a cell that is not part of the picture that fill is refused as a
-        // mistake, so the cross gesture - whose whole purpose is marking cells that stay blank -
-        // charged the player a mistake, a board shake and an "Oops" every single time, and two
-        // uses cost them a star. Deferring costs a tap the 480 ms it takes to prove it is not a
-        // hold, which is the price of the mode and not a bug.
+        // Defer the first mark until release, drag or hold detection. Painting immediately would
+        // charge a wrong-fill mistake before a valid cross gesture was recognized.
         if (TapBehaviour == Core.Model.TapBehaviour.HoldToCross)
         {
             _deferredPaintIndex = cell;
@@ -507,10 +467,7 @@ public sealed partial class BoardView : GraphicsView
             return;
         }
 
-        // A finger crossing one cell produces a touch sample per frame, and everything below is
-        // per-cell work: the crosshair, the magnifier notification, and the paint request that
-        // ends in a full session update. Samples that did not change cell are dropped here
-        // rather than deduplicated three layers down.
+        // Ignore repeated touch samples in the same cell before updating painting or magnification.
         if (cell == _pressedIndex)
         {
             return;
@@ -579,7 +536,10 @@ public sealed partial class BoardView : GraphicsView
             return;
         }
 
-        CellPainted?.Invoke(this, new CellPaintedEventArgs(index, _dragTarget));
+        // The first square painted starts the stroke; everything after continues it.
+        var continuesStroke = _paintedThisDrag.Count > 1;
+
+        CellPainted?.Invoke(this, new CellPaintedEventArgs(index, _dragTarget, continuesStroke));
     }
 
     private void Highlight(int index)

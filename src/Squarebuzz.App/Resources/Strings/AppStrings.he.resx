@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · הרבה זמן</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · שמור על קצב</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · אין זמן למצמץ</value></data>
+  <data name="timedName4" xml:space="preserve"><value>ספרינט</value></data>
+  <data name="timedName5" xml:space="preserve"><value>המרוץ הגדול</value></data>
+  <data name="timedName6" xml:space="preserve"><value>מרתון</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · אצבעות זריזות</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · מרוץ ארוך</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · המרוץ האולטימטיבי</value></data>
   <data name="quickGame" xml:space="preserve"><value>משחק מהיר</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>בחר בעצמך גודל וחבילה</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>שלבים</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>ציפור לילה</value></data>
   <data name="tr8" xml:space="preserve"><value>עשר מושלמת</value></data>
   <data name="tr9" xml:space="preserve"><value>אספן</value></data>
+  <data name="tr10" xml:space="preserve"><value>מנצח את השעון</value></data>
+  <data name="tr11" xml:space="preserve"><value>אלוף המרתון</value></data>
+  <data name="tr12" xml:space="preserve"><value>חודש ברצף</value></data>
+  <data name="tr13" xml:space="preserve"><value>תמונה גדולה</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 קוביות</value></data>
+  <data name="tr15" xml:space="preserve"><value>צופה בכוכבים</value></data>
+  <data name="tr16" xml:space="preserve"><value>מגלה ארצות</value></data>
+  <data name="tr17" xml:space="preserve"><value>אלוף החבילה</value></data>
+  <data name="tr18" xml:space="preserve"><value>ללא רבב</value></data>
   <data name="sound" xml:space="preserve"><value>אפקטים קוליים</value></data>
   <data name="music" xml:space="preserve"><value>מוזיקה</value></data>
   <data name="voice" xml:space="preserve"><value>קריאה בקול</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>תפוח</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>סירת מפרש</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>דינוזאור</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>פני חתול</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>חתול</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>קאפקייק</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>מכונית מרוץ</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>טיל</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>מטרייה</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>פתית שלג</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>קשת בענן</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>ינשוף</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>שועל</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>צב</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>פיל</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>פינגווין</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>ג'ירפה</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>טי-רקס</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>פטרודקטיל</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>עצם</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>ברונטוזאורוס</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>טריצרטופס</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>אסטרונאוט</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>עב"ם</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>לוויין</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>טלסקופ</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>מעבורת חלל</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>נחתת ירח</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>חד-קרן</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>שיקוי קסמים</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>כובע מכשפה</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>בננה</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>גזר</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>המבורגר</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>דונאט</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>אגס</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>גבינה</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>אופניים</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>רכבת</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>מסוק</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>טרקטור</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>קטנוע</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>יאכטה</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>צבעוני</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>אצטרובל</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>חמנייה</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>דבורה</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>פרת משה רבנו</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>עץ דקל</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>מנורת קסם</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>איש שלג</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>סוסון ים</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>מדוזה</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>מגדלור</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>כריש</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>דולפין</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>גל</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>כינור</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>מיקרופון</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>אוזניות</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>סקסופון</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>מרקס</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>כדורגל</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>מחבט טניס</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>סקייטבורד</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>קסדה</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>משרוקית</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>טורנדו</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>מדחום</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>שרוול רוח</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>ענן גשם</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>תמונה מסתורית</value></data>
   <data name="magnifier" xml:space="preserve"><value>זכוכית מגדלת</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>מציגה תצוגה מוגדלת 3×3 בזמן הצביעה. כבוי כברירת מחדל.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>השלם תמונה אחרי שמונה בערב.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>שלושה כוכבים על 10×10, בלי טעויות.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>מצא כל תמונה בגלריה.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>נצח בכל אתגר על הזמן.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>נצח באתגר מרתון.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>שחק 30 ימים ברצף.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>השלם 15×15 או גדול יותר.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>מלא 1000 קוביות בסך הכול.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>אסוף 100 כוכבים.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>השלם את שלב 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>מצא כל תמונה בחבילה אחת.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>השלם 15×15 או גדול יותר בלי רמזים ובלי טעויות.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>גמרנו להיום — נתראה מחר!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>האחסון אינו זמין. יש לנסות שוב.</value>

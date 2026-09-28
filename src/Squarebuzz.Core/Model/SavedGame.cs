@@ -1,14 +1,9 @@
 namespace Squarebuzz.Core.Model;
 
-/// <summary>
-/// A puzzle the player left unfinished.
-/// </summary>
+/// <summary>Snapshot of an unfinished puzzle.</summary>
 /// <remarks>
-/// The picture itself is never stored - only how to obtain it again. Authored puzzles are
-/// referenced by <see cref="PuzzleId"/>; generated ones are rebuilt from
-/// <see cref="Seed"/> and the request that produced them, which is exactly what
-/// <see cref="Generation.DeterministicRandom"/> and the seeded generator make possible. Only
-/// the player's own marks need persisting.
+/// Authored pictures are identified by ID and revision. Generated pictures are rebuilt
+/// from their request, seed and generator version. Cells contain the player's marks.
 /// </remarks>
 public sealed record SavedGame
 {
@@ -16,6 +11,9 @@ public sealed record SavedGame
 
     /// <summary>Authored puzzle this game is playing, or null when the puzzle was generated.</summary>
     public string? PuzzleId { get; init; }
+
+    /// <summary>Authored-board revision. Saves written before versioning use the original revision 1.</summary>
+    public int PuzzleRevision { get; init; } = 1;
 
     public required int Size { get; init; }
 
@@ -38,12 +36,7 @@ public sealed record SavedGame
 
     public required int HintsRemaining { get; init; }
 
-    /// <summary>
-    /// Hints actually spent. Stored rather than derived from the allowance: the allowance can
-    /// change between saving and resuming - the player only has to switch hints off in Options -
-    /// and the stars must keep charging for help that was really taken. See
-    /// <see cref="GameSession.HintsUsed"/>.
-    /// </summary>
+    /// <summary>Hints spent before saving. Independent of the current allowance because it affects scoring.</summary>
     public int HintsUsed { get; init; }
 
     /// <summary>Initial budget, including unlimited. Null identifies a legacy save.</summary>
@@ -71,7 +64,8 @@ public sealed record SavedGame
     /// True when the picture this save refers to can still be reproduced.
     /// </summary>
     /// <remarks>
-    /// An authored puzzle is shipped content, so it always can. A generated one only can while the
+    /// Authored revisions are retained in shipped content; the repository must resolve the exact
+    /// revision rather than substitute the latest board. A generated one only can while the
     /// generator still turns its seed into the same picture - see
     /// <see cref="Generation.GeneratorVersion"/>. Resuming a save that fails this test would put
     /// the player's marks on a board they never played.
@@ -95,10 +89,7 @@ public sealed record SavedGame
                          "Create sessions through GameSessionFactory rather than the bare constructor.",
                          nameof(session));
 
-        // A save has no field for a time limit, on purpose: a trial is a race, and a race you can
-        // put down and pick up tomorrow is not one. Refusing here rather than silently writing the
-        // save means a caller that forgets the rule finds out at once, instead of the player
-        // resuming what was a two-minute dash as an untimed stroll with the clock reading 1:43.
+        // Timed games cannot be saved: the snapshot has no countdown or deadline.
         if (session.IsTimed)
         {
             throw new ArgumentException(
@@ -112,6 +103,7 @@ public sealed record SavedGame
         {
             Id = id,
             PuzzleId = origin.PuzzleId,
+            PuzzleRevision = origin.PuzzleRevision,
             Size = session.Puzzle.Width,
             Difficulty = origin.Difficulty,
             PackId = origin.PackId,

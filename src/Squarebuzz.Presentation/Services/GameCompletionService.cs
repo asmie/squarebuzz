@@ -11,7 +11,11 @@ public sealed class GameCompletionService
 {
     private readonly IGameCompletionRepository _completions;
     private readonly IProgressRepository _progress;
-    private readonly Dictionary<Guid, PuzzleCompletion> _pending = [];
+
+    // A list, not a dictionary: results must be journaled in the order they were won, and a
+    // dictionary reuses a removed entry's slot, so a later win could enumerate ahead of an
+    // earlier one that is still failing.
+    private readonly List<(Guid Id, PuzzleCompletion Completion)> _pending = [];
     private Task _operations = Task.CompletedTask;
     private readonly IPersistenceDiagnostics _diagnostics;
     public bool HasFailure { get; private set; }
@@ -36,7 +40,11 @@ public sealed class GameCompletionService
             // Register in the service queue before waiting for saves, so a later reset cannot
             // overtake this win and then have the delayed completion restore erased progress.
             await precedingSave;
-            _pending.TryAdd(sessionId, completion);
+            if (!_pending.Exists(entry => entry.Id == sessionId))
+            {
+                _pending.Add((sessionId, completion));
+            }
+
             await RetryCoreAsync();
         });
     }
@@ -66,7 +74,7 @@ public sealed class GameCompletionService
             try
             {
                 await _completions.JournalAsync(id, completion);
-                _pending.Remove(id);
+                _pending.RemoveAll(entry => entry.Id == id);
             }
             catch (OperationCanceledException)
             {

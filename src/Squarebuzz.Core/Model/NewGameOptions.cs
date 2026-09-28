@@ -31,29 +31,24 @@ public sealed record NewGameOptions(
     /// <remarks>
     /// Set by the Gallery, where the player picks a specific picture. Takes precedence over
     /// <see cref="PackId"/> and <see cref="Size"/>, which are then only carried through for the
-    /// save record. Ignored if no picture with that id ships.
+    /// save record. A missing id is ignored unless <see cref="PuzzleRevision"/> pins an exact board.
     /// </remarks>
     public string? PuzzleId { get; init; }
 
-    /// <summary>
-    /// Generate the picture even at a size that has authored artwork.
-    /// </summary>
-    /// <remarks>
-    /// The daily puzzle needs this. It wants a comfortable 10x10, but 10x10 is within the
-    /// authored range, so without it the factory would hand out one of the seventy shipped
-    /// pictures - which would repeat within a week and spoil gallery entries the player had not
-    /// found yet.
-    /// </remarks>
+    /// <summary>Exact authored revision for a restart; null selects the current artwork.</summary>
+    public int? PuzzleRevision { get; init; }
+
+    /// <summary>Forces generation at sizes that also have authored artwork, as daily puzzles require.</summary>
     public bool ForceGenerated { get; init; }
 
-    /// <summary>
-    /// Countdown for a timed trial, or null for an ordinary game with no limit.
-    /// </summary>
-    /// <remarks>
-    /// Null rather than <see cref="TimeSpan.Zero"/> for "no limit": zero is a perfectly meaningful
-    /// limit that would end the game instantly, so the two must not share a representation.
-    /// </remarks>
+    /// <summary>Trial countdown duration. Null means untimed; zero means an immediate deadline.</summary>
     public TimeSpan? TimeLimit { get; init; }
+
+    /// <summary>
+    /// Which rung of the timed-trial ladder this is, or null outside a trial. Carried through to
+    /// the completion so trophies can tell one race from another.
+    /// </summary>
+    public int? TimedTier { get; init; }
 
     /// <summary>
     /// The campaign level this game plays, or null for anything outside the Levels mode.

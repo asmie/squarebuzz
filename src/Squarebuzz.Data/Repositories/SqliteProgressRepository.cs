@@ -118,7 +118,9 @@ public sealed class SqliteProgressRepository : IProgressRepository
         {
             Stars = current.Stars + completion.Stars,
             Streak = NextStreak(current, completedOn),
-            LastPlayedOn = completedOn,
+            // Never moved backwards: a result applied late, or a clock set back, must not make
+            // the next real day look like a gap.
+            LastPlayedOn = current.LastPlayedOn is { } last && last > completedOn ? last : completedOn,
             TotalBlocksFilled = current.TotalBlocksFilled + completion.BlocksFilled,
 
             // Finishing an older daily must not make a newer completed daily available again.
@@ -224,7 +226,8 @@ public sealed class SqliteProgressRepository : IProgressRepository
 
     /// <summary>
     /// Extends the streak on consecutive days, leaves it alone for a second puzzle on the same
-    /// day, and restarts it after a gap.
+    /// day, and restarts it after a gap. A completion dated before the last one played - a
+    /// retried result, or a clock set back - leaves the streak as it is.
     /// </summary>
     private static int NextStreak(PlayerProgress current, DateOnly completedOn)
     {
@@ -239,6 +242,7 @@ public sealed class SqliteProgressRepository : IProgressRepository
         {
             0 => Math.Max(1, current.Streak),
             1 => current.Streak + 1,
+            < 0 => Math.Max(1, current.Streak),
             _ => 1,
         };
     }

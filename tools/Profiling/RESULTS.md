@@ -1,13 +1,16 @@
 # Profiling results — 2026-09-11
 
+Historical evidence for the revisions listed below. Re-run the relevant cases for the September 28
+artwork and dependency changes; see [audit status](../../docs/audit.md).
+
 The four investigations have host measurements and physical Android phone evidence. The
 production change resolves the registered clue font before drawing: Android no longer throws
 and catches an asset-loading exception for the `BodyBold` alias. Other proposed optimizations
 remain deferred for the reasons below. This is not a claim that every device meets a frame-rate
-budget. Lower-end Android and tablet hardware are unavailable, as confirmed by the user;
+budget. Lower-end Android and tablet hardware are unavailable, during this run;
 native 25×25 coverage and Apple rendering of the font change remain unverified.
 
-The user passed the physical TalkBack check on the final normal Release APK: empty and filled
+The recorded physical TalkBack check passed on the final normal Release APK: empty and filled
 cell descriptions matched their row, column, clues and state; double-tapping changed the selected
 cell; moving focus away and back announced the updated state, with focus remaining usable.
 This completes the available phone checks for this batch, subject to the hardware limits above.

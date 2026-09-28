@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · kohë me bollëk</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · mos ndalo</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · pa kohë për të pulitur</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sprint</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Gara e madhe</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maratonë</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · gishta të shpejtë</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · një garë e gjatë</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · gara më e madhe</value></data>
   <data name="quickGame" xml:space="preserve"><value>Lojë e shpejtë</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Zgjidh vetë madhësinë dhe paketën</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Nivelet</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Zog nate</value></data>
   <data name="tr8" xml:space="preserve"><value>Dhjeta e përsosur</value></data>
   <data name="tr9" xml:space="preserve"><value>Koleksionist</value></data>
+  <data name="tr10" xml:space="preserve"><value>Më i shpejtë se ora</value></data>
+  <data name="tr11" xml:space="preserve"><value>Kampion maratone</value></data>
+  <data name="tr12" xml:space="preserve"><value>Muaj pa shkëputje</value></data>
+  <data name="tr13" xml:space="preserve"><value>Figurë e madhe</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 kuba</value></data>
+  <data name="tr15" xml:space="preserve"><value>Mbledhës yjesh</value></data>
+  <data name="tr16" xml:space="preserve"><value>Eksplorues</value></data>
+  <data name="tr17" xml:space="preserve"><value>Mjeshtër paketash</value></data>
+  <data name="tr18" xml:space="preserve"><value>I përsosur</value></data>
   <data name="sound" xml:space="preserve"><value>Efekte zanore</value></data>
   <data name="music" xml:space="preserve"><value>Muzika</value></data>
   <data name="voice" xml:space="preserve"><value>Lexim me zë</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>Molla</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>Barkë me vela</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaur</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Fytyrë maceje</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Mace</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>Tortë e vogël</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>Makinë gare</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raketë</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Çadër</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Flok dëbore</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Ylber</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Buf</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Dhelpër</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Breshkë</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Elefant</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pinguin</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Gjirafë</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktil</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Kockë</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontosaur</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronaut</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>UFO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Satelit</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Teleskop</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Anije kozmike</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Modul hënor</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Njëbrirësh</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Eliksir magjik</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Kapelë shtrige</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banane</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Karotë</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Hamburger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donut</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Dardhë</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Djathë</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Biçikletë</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Tren</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopter</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktor</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Motoskuter</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jaht</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulipan</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Boçe pishe</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Luledielli</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Bletë</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Mollëkuqe</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palmë</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Llambë magjike</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Burrë bore</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Kalë deti</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Kandil deti</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Far</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Peshkaqen</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfin</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Dallgë</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Violinë</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofon</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Kufje</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksofon</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakas</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Top futbolli</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Raketë tenisi</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Skejtbord</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Kaskë</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Bilbil</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornado</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Termometër</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Mëngë ere</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Re shiu</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Figurë misterioze</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Shfaq një pamje 3×3 të zmadhuar ndërsa ngjyros. E çaktivizuar si parazgjedhje.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Mbaro një figurë pas orës 20.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tre yje në një 10×10, pa gabime.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Gjej çdo figurë në galeri.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Fito çdo sfidë me kohë.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Fito sfidën Maratonë.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Loz 30 ditë rresht.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Mbaro një 15×15 ose më të madhe.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Mbush 1000 kuba gjithsej.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Mblidh 100 yje.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Mbaro nivelin 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Gjej çdo figurë në një paketë.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Mbaro një 15×15 ose më të madhe pa ndihmesa dhe pa gabime.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Mbaroi për sot — shihemi nesër!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Hapësira ruajtëse nuk është e disponueshme. Provo përsëri.</value>

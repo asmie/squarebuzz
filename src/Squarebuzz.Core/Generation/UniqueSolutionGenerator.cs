@@ -71,8 +71,7 @@ public sealed class UniqueSolutionGenerator : IPuzzleGenerator
 
         LastAttemptCount = _maxAttempts;
 
-        // Failing loudly is the right call: shipping an unsolvable puzzle to a child is
-        // worse than surfacing a generation problem the caller can retry differently.
+        // Reject the request if no candidate passes the solver within the attempt budget.
         throw new PuzzleGenerationException(
             $"No logically solvable {request.Width}x{request.Height} puzzle found for pack '{request.Pack}' " +
             $"at difficulty {request.Difficulty} within {_maxAttempts} attempts. " +

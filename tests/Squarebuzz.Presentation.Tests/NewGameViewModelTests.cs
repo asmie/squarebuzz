@@ -76,6 +76,16 @@ public class NewGameViewModelTests : IDisposable
     }
 
     [Fact]
+    // One pack of a dozen pictures ran dry long before the whole collection did.
+    public async Task AFirstVisit_DrawsFromEveryPack()
+    {
+        await _vm.OnAppearingAsync();
+
+        Assert.Equal("surprise", _vm.SelectedPackId);
+        Assert.True(Pack("surprise").IsSelected);
+    }
+
+    [Fact]
     public async Task AFailedSettingsLoad_StartsFromTheDefaults()
     {
         _settings.LoadFails = true;
@@ -169,8 +179,8 @@ public class NewGameViewModelTests : IDisposable
         await _vm.OnAppearingAsync();
 
         Assert.True(Pack("fairy").IsLocked);
-        Assert.Equal("animals", _vm.SelectedPackId);
-        Assert.Equal(["animals"], _vm.Packs.Where(p => p.IsSelected).Select(p => p.Id));
+        Assert.Equal(GameSettings.DefaultPackId, _vm.SelectedPackId);
+        Assert.Equal([GameSettings.DefaultPackId], _vm.Packs.Where(p => p.IsSelected).Select(p => p.Id));
     }
 
     [Fact]
@@ -180,7 +190,7 @@ public class NewGameViewModelTests : IDisposable
 
         _vm.SelectPackCommand.Execute(Pack("fairy"));
 
-        Assert.Equal("animals", _vm.SelectedPackId);
+        Assert.Equal(GameSettings.DefaultPackId, _vm.SelectedPackId);
         Assert.False(Pack("fairy").IsSelected);
     }
 
@@ -245,7 +255,7 @@ public class NewGameViewModelTests : IDisposable
         var remembered = Assert.Single(_settings.Saved);
         Assert.Equal(GridSize.Normal, remembered.LastSize);
         Assert.Equal(3, remembered.LastDifficulty);
-        Assert.Equal("animals", remembered.LastPackId);
+        Assert.Equal(GameSettings.DefaultPackId, remembered.LastPackId);
         Assert.Equal(ChallengeLevel.Sharp, remembered.LastChallenge);
 
         // A push, not a reset: the back gesture from the board returns here.

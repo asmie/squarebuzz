@@ -79,6 +79,15 @@ public partial class TrialsViewModel : LocalizedViewModel
         [TrophyId.NightOwl] = "🦉",
         [TrophyId.PerfectTen] = "💯",
         [TrophyId.Collector] = "🏆",
+        [TrophyId.BeatTheClock] = "⏱",
+        [TrophyId.MarathonChamp] = "🏁",
+        [TrophyId.MonthStreak] = "📅",
+        [TrophyId.BigPicture] = "🗺",
+        [TrophyId.ThousandBlocks] = "🏰",
+        [TrophyId.StarGazer] = "🌟",
+        [TrophyId.Explorer] = "🧭",
+        [TrophyId.PackMaster] = "🎒",
+        [TrophyId.Flawless] = "💎",
     };
 
     private readonly IProgressRepository _progress;
@@ -108,7 +117,7 @@ public partial class TrialsViewModel : LocalizedViewModel
     public ObservableCollection<TrophyCard> Trophies { get; } = [];
 
     /// <summary>
-    /// The three rungs, built once: they are fixed content, not player state.
+    /// The ladder's rungs, built once: they are fixed content, not player state.
     /// </summary>
     public ObservableCollection<TimedCard> Timed { get; } = [];
 

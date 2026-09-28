@@ -16,6 +16,9 @@ internal sealed class PuzzleContentDto
 
     [JsonPropertyName("puzzles")]
     public IReadOnlyList<PuzzleDto> Puzzles { get; init; } = [];
+
+    [JsonPropertyName("archivedPuzzles")]
+    public IReadOnlyList<PuzzleDto> ArchivedPuzzles { get; init; } = [];
 }
 
 internal sealed class PackDto
@@ -35,6 +38,9 @@ internal sealed class PackDto
 
 internal sealed class PuzzleDto
 {
+    [JsonPropertyName("revision")]
+    public int Revision { get; init; } = 1;
+
     [JsonPropertyName("id")]
     public string Id { get; init; } = string.Empty;
 

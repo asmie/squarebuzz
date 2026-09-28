@@ -3,11 +3,7 @@ using Squarebuzz.Core.Solving;
 
 namespace Squarebuzz.Core.Model;
 
-/// <summary>
-/// One puzzle in progress: the board, the move history, and the counters that decide the
-/// final star rating. This is the aggregate root for gameplay - all board mutation goes
-/// through here so the rules cannot be sidestepped.
-/// </summary>
+/// <summary>Owns the board, undo history, timing and scoring for one puzzle. All board mutations pass through this class.</summary>
 public sealed class GameSession
 {
     private const int MaxStars = 3;
@@ -17,6 +13,11 @@ public sealed class GameSession
     private readonly CellState[] _cells;
     private readonly bool[] _autoCrossed;
     private readonly MoveHistory _history = new();
+
+    // What the first square of the current drag held, and whether the drag has already been
+    // charged a mistake. See Paint.
+    private CellState _strokeSource;
+    private bool _strokeChargedAMistake;
 
     public GameSession(Puzzle puzzle, GameRules rules, NewGameOptions? origin = null, int seed = 0)
     {
@@ -63,10 +64,7 @@ public sealed class GameSession
     /// <summary>Remaining finite hints. Zero for unlimited games; use CanUseHint to check availability.</summary>
     public int HintsRemaining { get; private set; }
 
-    /// <summary>
-    /// Hints actually spent. A counter of its own rather than allowance-minus-remaining,
-    /// so unlimited games and toggling hints off still charge stars for help actually taken.
-    /// </summary>
+    /// <summary>Hints spent, retained independently of the current allowance for scoring and trophies.</summary>
     public int HintsUsed { get; private set; }
 
     public int Mistakes { get; private set; }
@@ -81,10 +79,7 @@ public sealed class GameSession
     /// <summary>Whether this session is racing a clock at all.</summary>
     public bool IsTimed => TimeLimit is not null;
 
-    /// <summary>
-    /// Time left on the clock, never negative. <see cref="TimeSpan.Zero"/> for an untimed game,
-    /// which callers should not be showing in the first place - check <see cref="IsTimed"/>.
-    /// </summary>
+    /// <summary>Nonnegative time remaining. Check IsTimed before displaying it for an ordinary game.</summary>
     public TimeSpan Remaining => TimeLimit is { } limit
         ? (limit > Elapsed ? limit - Elapsed : TimeSpan.Zero)
         : TimeSpan.Zero;
@@ -131,16 +126,7 @@ public sealed class GameSession
         }
     }
 
-    /// <summary>
-    /// Squares the player has filled in.
-    /// </summary>
-    /// <remarks>
-    /// Crossed squares do not count. This is progress towards the picture, and the count is what a
-    /// screen reader is told about the board - a canvas has nothing for it to read otherwise.
-    /// Kept as a running total rather than counted on demand: it is read on every move, from a
-    /// binding that re-reads whenever the board changes, so scanning the grid for it made every
-    /// painted cell walk all 625 squares twice over.
-    /// </remarks>
+    /// <summary>Number of filled cells, maintained on each write for the progress display and accessibility summary.</summary>
     public int FilledCount { get; private set; }
 
     public CellState this[int index] => _cells[index];
@@ -227,19 +213,16 @@ public sealed class GameSession
             }
         }
 
-        // Legacy saves have no provenance. Keep their crosses rather than guessing which
-        // ones were made by the player and silently erasing them later.
+        // Preserve legacy crosses whose automatic/manual origin is unknown.
         restoredCells.CopyTo(_cells, 0);
         restoredAutoCrossed.CopyTo(_autoCrossed, 0);
         RecountFilled();
 
         Elapsed = elapsed;
-        HintsRemaining = Math.Min(hintsRemaining, Rules.HintAllowance);
+        // Recompute remaining hints from the original budget and recorded usage.
+        HintsRemaining = Math.Max(0, Rules.HintAllowance - hintsUsed);
 
-        // Taken from the save, never re-derived from the allowance. The allowance can differ
-        // from the one the game was saved under - switching hints off in Options is enough -
-        // and deriving it would hand back hints the player had already spent, restoring a star
-        // and the "no hints" trophy along with them.
+        // Restore hint usage directly; a changed allowance must not alter past scoring.
         HintsUsed = hintsUsed;
 
         Mistakes = mistakes;
@@ -248,22 +231,10 @@ public sealed class GameSession
         EvaluateSolved();
     }
 
-    /// <summary>
-    /// Re-resolves the rules after the player changed a helper in Options mid-game.
-    /// </summary>
+    /// <summary>Applies helper preferences to the active session.</summary>
     /// <remarks>
-    /// <para>
-    /// Without this, the pause overlay's Options entry would be a lie: rules are resolved when
-    /// a session is created, so a helper flipped mid-game would change nothing until the next
-    /// puzzle. The original hint budget is kept, and remaining hints are recomputed against
-    /// hints already spent - toggling hints off and back on cannot mint fresh ones.
-    /// </para>
-    /// <para>
-    /// Switching auto-crossing <em>on</em> also catches up the lines already finished, as one
-    /// undoable stroke. Ordinary moves only ever examine the row and column they touched, which
-    /// is all that can have changed - so without this sweep those older lines would keep their
-    /// blanks for the rest of the game and the switch would look broken.
-    /// </para>
+    /// The original hint budget and usage remain unchanged. Enabling automatic crosses also
+    /// updates previously completed lines as one undoable stroke.
     /// </remarks>
     public void ApplyHelpers(HelperSettings helpers)
     {
@@ -305,14 +276,16 @@ public sealed class GameSession
         return Paint(index, target);
     }
 
-    /// <summary>
-    /// Sets a specific cell to a specific value - what a drag gesture uses, having decided
-    /// the value from the first cell it touched.
-    /// </summary>
-    public MoveOutcome Paint(int index, CellState target)
+    /// <summary>Sets a cell to the value selected at the start of a drag.</summary>
+    /// <param name="index">Cell index.</param>
+    /// <param name="target">Requested mark.</param>
+    /// <param name="continuesStroke">
+    /// True after the first cell of a drag. Only cells matching the first cell's original state
+    /// are painted, and the entire drag can charge at most one mistake.
+    /// </param>
+    public MoveOutcome Paint(int index, CellState target, bool continuesStroke = false)
     {
-        // IsOver, not IsSolved: a timed trial whose clock has run out is finished too, and must
-        // not keep accepting marks while the view catches up with the fact.
+        // Expired trials reject input as soon as the deadline is reached.
         if (IsOver)
         {
             return MoveOutcome.NoChange;
@@ -320,22 +293,34 @@ public sealed class GameSession
 
         var current = _cells[index];
 
+        if (!continuesStroke)
+        {
+            _strokeSource = current;
+            _strokeChargedAMistake = false;
+        }
+        else if (current != _strokeSource)
+        {
+            return MoveOutcome.NoChange;
+        }
+
         if (current == target && !_autoCrossed[index])
         {
             return MoveOutcome.NoChange;
         }
 
-        // Filling a cell that is not part of the picture is refused rather than recorded, so
-        // the board never holds a state the clues contradict.
+        // With mistake warnings enabled, reject incorrect fills before changing the board.
         if (target == CellState.Filled && Rules.WarnOnMistakes && !Puzzle.Solution[index])
         {
-            Mistakes++;
+            if (!_strokeChargedAMistake)
+            {
+                Mistakes++;
+                _strokeChargedAMistake = true;
+            }
+
             return MoveOutcome.Mistake;
         }
 
-        // Sampled before and after the change so the outcome reports a *transition*: only the
-        // move that makes a line newly match its clue is a completion, not every later mark in
-        // an already-finished line.
+        // Report line completion only on the transition from incomplete to complete.
         var x = index % Puzzle.Width;
         var y = index / Puzzle.Width;
         var rowWasSatisfied = IsRowSatisfied(y);
@@ -394,8 +379,7 @@ public sealed class GameSession
     /// <summary>Whether a column's filled runs already match its clue, crossed or not.</summary>
     private bool IsColumnSatisfied(int x)
     {
-        // stackalloc, not a heap array: a Span over `new CellState[]` still allocates, and this
-        // runs several times per painted cell. The largest supported grid is 25 rows.
+        // Use stack storage for the column buffer; this runs several times per move.
         Span<CellState> column = stackalloc CellState[Puzzle.Height];
 
         CopyColumn(x, column);
@@ -568,14 +552,7 @@ public sealed class GameSession
         Write(index, CellState.Empty);
     }
 
-    /// <summary>
-    /// Crosses off every blank of every satisfied line on the board.
-    /// </summary>
-    /// <remarks>
-    /// The catch-up sweep, for the one moment the cheap two-line check cannot cover: auto-cross
-    /// being switched on part-way through a game, when lines finished earlier are still carrying
-    /// their blanks. See <see cref="ApplyHelpers"/>.
-    /// </remarks>
+    /// <summary>Adds automatic crosses to all completed lines when the helper is enabled mid-game.</summary>
     private int CrossAllSatisfiedLines(List<CellChange> changes)
     {
         var added = 0;
@@ -644,23 +621,16 @@ public sealed class GameSession
 
         changes.Add(new CellChange(index, CellState.Empty, CellState.Crossed) { ToAutoCrossed = true });
 
-        // Empty to Crossed, so FilledCount cannot move - but go through Write anyway rather
-        // than reaching past it, so there is exactly one place that touches the board.
+        // Use Write to keep all cell changes on the same mutation path.
         Write(index, CellState.Crossed, automatic: true);
 
         return true;
     }
 
-    /// <summary>
-    /// The puzzle is won when the filled cells are exactly the picture. Crossing off the blanks
-    /// is a bookkeeping aid for the player, not a requirement - but *filling* a blank blocks the
-    /// win until it is cleared.
-    /// </summary>
+    /// <summary>A win requires filled cells to match the solution exactly. Crosses are optional.</summary>
     /// <remarks>
-    /// The second half of the check only matters when <see cref="GameRules.WarnOnMistakes"/> is
-    /// off: with it on, a wrong fill is refused at <see cref="Paint"/> and can never be on the
-    /// board. Without this clause, warn-off would accept painting the whole grid as a win -
-    /// three stars for defeating the point of the game.
+    /// When mistake warnings are disabled, the board may contain extra fills; those must also
+    /// be checked before declaring a win.
     /// </remarks>
     private bool EvaluateSolved()
     {

@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · ħin biżżejjed</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · żomm il-pass</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · lanqas ħin biex tteptep</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sprint</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Tellieqa Kbira</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maratona</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · subgħajk ħfief</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · tellieqa twila</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · l-akbar tellieqa</value></data>
   <data name="quickGame" xml:space="preserve"><value>Logħba ta' malajr</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Agħżel int id-daqs u l-pakkett</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Livelli</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Għasfur tal-lejl</value></data>
   <data name="tr8" xml:space="preserve"><value>Għaxra perfetta</value></data>
   <data name="tr9" xml:space="preserve"><value>Kollettur</value></data>
+  <data name="tr10" xml:space="preserve"><value>Egħleb il-ħin</value></data>
+  <data name="tr11" xml:space="preserve"><value>Ċampjin tal-maratona</value></data>
+  <data name="tr12" xml:space="preserve"><value>Xahar sħiħ</value></data>
+  <data name="tr13" xml:space="preserve"><value>Stampa kbira</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 blokka</value></data>
+  <data name="tr15" xml:space="preserve"><value>Kaċċatur tal-istilel</value></data>
+  <data name="tr16" xml:space="preserve"><value>Esploratur</value></data>
+  <data name="tr17" xml:space="preserve"><value>Kaptan tal-pakkett</value></data>
+  <data name="tr18" xml:space="preserve"><value>Perfett</value></data>
   <data name="sound" xml:space="preserve"><value>Effetti tal-ħoss</value></data>
   <data name="music" xml:space="preserve"><value>Mużika</value></data>
   <data name="voice" xml:space="preserve"><value>Qari bil-leħen</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>Tuffieħa</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>Dgħajsa bil-qlugħ</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>Dinosawru</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Wiċċ ta' qattus</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Qattus</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>Cupcake</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>Karozza tat-tellieqa</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Rokit</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Umbrella</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Fjokka tal-borra</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Qawsalla</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Kokka</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Volpi</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Fekruna</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Iljunfant</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pingwin</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Ġiraffa</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodattilu</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Għadma</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontosawru</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triċeratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronawta</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>UFO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Satellita</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Teleskopju</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Navetta spazjali</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Modulu lunari</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Unikorn</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Pozzjoni maġika</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Kappell tas-saħħara</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banana</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Karrotta</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Burger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donut</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Lanġasa</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Ġobon</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Rota</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Ferrovija</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Ħelikopter</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Trattur</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Scooter</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jott</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulipan</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Koċċla tal-arżnu</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Ġirasol</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Naħla</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Nannakola</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palma</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Lampa maġika</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Raġel tas-silġ</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Żiemel il-baħar</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Bruma</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Fanal</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Kelb il-baħar</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfin</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Mewġa</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Vjolin</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofonu</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Headphones</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saxofonu</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakas</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Ballun tal-futbol</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Rakketta tat-tennis</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Skateboard</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Elmu</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Sfafar</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornado</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Termometru</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Kalzetta tar-riħ</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Sħaba tax-xita</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Stampa misterjuża</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lenti</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Turi ħarsa mkabbra 3×3 waqt li tpitter. Mitfija awtomatikament.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Lesti stampa wara t-8 ta' filgħaxija.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tliet stilel fuq 10×10, bla żbalji.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Sib kull stampa fil-gallerija.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Irbaħ kwalunkwe sfida bil-ħin.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Irbaħ l-isfida Maratona.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Ilgħab 30 jum wara xulxin.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Lesti 15×15 jew akbar.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Imla 1000 blokka b'kollox.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Iġbor 100 stilla.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Lesti l-livell 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Sib kull stampa f'pakkett wieħed.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Lesti 15×15 jew akbar bla ħjiel u bla żbalji.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Lest għal llum — narak għada!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Il-ħażna mhix disponibbli. Erġa’ pprova.</value>

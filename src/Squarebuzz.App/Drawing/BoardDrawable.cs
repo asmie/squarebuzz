@@ -4,15 +4,7 @@ using Squarebuzz.Core.Model;
 
 namespace Squarebuzz.App.Drawing;
 
-/// <summary>
-/// Draws the whole nonogram - clue gutters, cells, crosses and group separators - onto a single
-/// canvas.
-/// </summary>
-/// <remarks>
-/// One view for the entire board, rather than a view per cell. At 25x25 the per-cell approach
-/// would mean 625 live views with 625 bindings; here it is one <c>Invalidate()</c> and a few
-/// hundred fill calls, which is what keeps drag-painting smooth on a mid-range phone.
-/// </remarks>
+/// <summary>Draws cells, clues, crosses and separators on one canvas.</summary>
 public sealed class BoardDrawable : IDrawable
 {
     private const float CellInset = 0.5f;
@@ -62,29 +54,14 @@ public sealed class BoardDrawable : IDrawable
     /// <summary>How long a clue strike takes to wipe across the number.</summary>
     private const double StrikeWipeMilliseconds = 180;
 
-    /// <summary>
-    /// When each clue strike first appeared, keyed by line and run, so a newly satisfied clue
-    /// wipes its line in over <see cref="StrikeWipeMilliseconds"/> instead of snapping. Strikes
-    /// present when a board is first drawn - a resumed save - are seeded as ancient, because a
-    /// restore is not news.
-    /// </summary>
+    /// <summary>Start times for clue-strike animations. Strikes present on initial draw are already settled.</summary>
     private readonly Dictionary<long, long> _strikeBirths = [];
 
     private bool _seedStrikesSilently = true;
 
     private bool _sawUnfinishedWipe;
 
-    /// <summary>
-    /// Raised at the end of a draw that left a clue strike part-way through its wipe, so the host
-    /// knows to ask for another frame.
-    /// </summary>
-    /// <remarks>
-    /// A strike's progress comes from wall time, so only the draw itself can tell whether one is
-    /// still moving. Reporting it afterwards lets the board animate exactly while something is
-    /// animating. The alternative - and what this replaced - was for every move to commit a
-    /// fixed 240ms ticker on the chance that it completed a line; a ten-cell drag bought a
-    /// hundred and forty full redraws to show a wipe that usually was not there.
-    /// </remarks>
+    /// <summary>Requests another frame when a clue-strike animation is still active.</summary>
     public event EventHandler? WipeInProgress;
 
     /// <summary>Forget every strike and treat the next draw as a fresh board.</summary>
@@ -137,11 +114,7 @@ public sealed class BoardDrawable : IDrawable
 
         var layout = Layout;
 
-        // The layout is geometry for *this* puzzle or it is nothing. The cell-count check above
-        // catches a board of a different size; this catches a layout still describing the
-        // previous board, which drew the new one's cells at the old one's stride. Both belong to
-        // the moment between one property landing and the next, and the right answer to that
-        // moment is a skipped frame, not a garbled one.
+        // Skip a frame when the puzzle and layout describe different boards during a session change.
         if (layout.Columns != puzzle.Width || layout.Rows != puzzle.Height)
         {
             return;
@@ -151,20 +124,14 @@ public sealed class BoardDrawable : IDrawable
 
         DrawGutterBackgrounds(canvas, layout);
 
-        // Layered passes rather than everything cell by cell. The grid is one uniform lattice,
-        // so stroking it once costs 52 lines at 25x25 where a rectangle per cell cost 625 - and
-        // drawing the crosses afterwards means a neighbouring cell's border can no longer clip
-        // them, which it could when each cell drew its own. The hint ring goes last of all so
-        // the heavier group separators cannot bisect it - the ring sits on the cell boundary.
+        // Draw fills, a shared grid, then crosses. Draw the hint ring last so separators cannot cover it.
         DrawCellFills(canvas, layout);
         DrawGridLines(canvas, layout);
         DrawCellMarks(canvas, layout);
         DrawGroupSeparators(canvas, layout);
         DrawHintRing(canvas, layout);
 
-        // Set once for the whole gutter. A canvas does not inherit the XAML styles, so the clue
-        // numerals have to carry their own font - but it is the same font at the same size for
-        // every one of them, and there are up to a hundred and fifty on a 25x25 board.
+        // Set the clue font once per gutter; the canvas does not inherit XAML font styles.
         canvas.Font = ClueFont;
         canvas.FontSize = (float)layout.ClueFontSize();
 
@@ -232,8 +199,7 @@ public sealed class BoardDrawable : IDrawable
 
                 if (state == CellState.Filled || index == MistakeIndex)
                 {
-                    // A cell mid-pop is drawn scaled around its own centre - small, overshoot,
-                    // settle - which is what makes a mark feel placed rather than switched on.
+                    // Scale the cell around its centre during the fill animation.
                     var scale = index == PopIndex ? PopScale : 1f;
                     var size = (cellSize - (CellInset * 2)) * scale;
                     var offset = (cellSize - size) / 2f;
@@ -255,15 +221,7 @@ public sealed class BoardDrawable : IDrawable
         }
     }
 
-    /// <summary>
-    /// The grid, as one lattice of full-length lines rather than a rectangle around every cell.
-    /// </summary>
-    /// <remarks>
-    /// Identical on screen: adjacent cells shared every interior edge, so a per-cell rectangle
-    /// was drawing each of them twice. One line per boundary is 52 strokes on the largest board
-    /// against 625 rectangles - and a rectangle is four segments, so it is nearer fifty times
-    /// the work on the axis that matters, which is calls into the canvas while a finger drags.
-    /// </remarks>
+    /// <summary>Draws one line per grid boundary, including group separators.</summary>
     private void DrawGridLines(ICanvas canvas, BoardLayout layout)
     {
         canvas.StrokeColor = Palette.CellLine;
@@ -398,10 +356,7 @@ public sealed class BoardDrawable : IDrawable
         var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
 
-        // Sized from the puzzle, not the layout. ClueStrikeCalculator.Compute throws if the buffer
-        // is shorter than a line's clue count, and the layout's copy of that maximum belongs to
-        // whatever puzzle it was calculated for - two same-size puzzles can differ in it, and the
-        // size check in Draw cannot tell them apart. The puzzle's own figure cannot be stale.
+        // Size strike buffers from the current puzzle; equal-sized boards can have different clue counts.
         Span<bool> struck = stackalloc bool[Math.Max(4, puzzle.MaxColumnClueCount)];
         Span<CellState> column = stackalloc CellState[puzzle.Height];
 
@@ -507,9 +462,7 @@ public sealed class BoardDrawable : IDrawable
 
         if (isStruck && strikeProgress > 0f)
         {
-            // A line through the number, so "done" is not conveyed by opacity alone - it has
-            // to survive the colour-blind palette and a washed-out screen in sunlight. A new
-            // strike wipes in from the left; progress is 1 for anything already settled.
+            // Use a line as well as opacity to mark completed clues. New strikes animate from the left.
             canvas.Alpha = 1f;
             canvas.StrokeColor = Palette.Warn;
             canvas.StrokeSize = Math.Max(1.5f, fontSize * (float)StrikeThicknessRatio);

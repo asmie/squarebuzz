@@ -96,23 +96,10 @@ public sealed record LanguageInfo(
 /// <summary>Maps <see cref="AppLanguage"/> to and from the culture codes .NET resources use.</summary>
 public static class AppLanguages
 {
-    /// <summary>
-    /// Every shipped language, in the order the picker lists them: English first as the source
-    /// culture, then the rest alphabetically by their own name, which is the order a player
-    /// scanning for their language expects.
-    /// </summary>
+    /// <summary>Supported languages in picker order: English first, followed by the established language groups.</summary>
     /// <remarks>
-    /// <para>
-    /// <c>DisplayFontCovers: false</c> records a measured fact about the bundled Fredoka display
-    /// face, not a preference: its 320 mapped codepoints stop short of several Latin Extended
-    /// letters and every non-Latin script here. Without the flag, a heading renders most of its
-    /// word in Fredoka and the one uncovered letter in whatever the platform substitutes - so
-    /// Czech "Jak těžké?" came out with a thin system-font "ě" wedged mid-word. Headings in these
-    /// languages use the body face instead, which is uniform even where it is also substituted.
-    /// </para>
-    /// <para>
-    /// Re-measure this list whenever a font is re-cut; see Resources/Fonts/README.md.
-    /// </para>
+    /// DisplayFontCovers records coverage of the bundled display font. Recheck it when fonts
+    /// change; see Resources/Fonts/README.md.
     /// </remarks>
     public static IReadOnlyList<LanguageInfo> All { get; } =
     [
@@ -144,20 +131,14 @@ public static class AppLanguages
         new(AppLanguage.Swedish, "sv", "Svenska"),
         new(AppLanguage.Turkish, "tr", "Türkçe"),
 
-        // Non-Latin scripts, grouped by script at the end. Alphabetising these against the Latin
-        // names is meaningless - no collation orders Greek against Georgian in a way a child
-        // scanning the list would predict - so they are kept together, and a player looking for
-        // their own writing system finds a block of it. Arabic sits further up only because it
-        // was there before these arrived; moving it would reshuffle a list people already know.
+        // Group these entries by script while preserving the established picker order.
         new(AppLanguage.Ukrainian, "uk", "Українська", DisplayFontCovers: false),
         new(AppLanguage.Russian, "ru", "Русский", DisplayFontCovers: false),
         new(AppLanguage.Greek, "el", "Ελληνικά", DisplayFontCovers: false),
         new(AppLanguage.Armenian, "hy", "Հայերեն", DisplayFontCovers: false),
         new(AppLanguage.Georgian, "ka", "ქართული", DisplayFontCovers: false),
 
-        // Hebrew is the exception the measurement turned up: Fredoka ships Hebrew glyphs even
-        // though Quicksand does not, so headings keep the display face here while the body text
-        // is the substituted one - the opposite way round from every other script in this block.
+        // Fredoka includes Hebrew glyphs; Quicksand uses platform fallback for Hebrew body text.
         new(AppLanguage.Hebrew, "he", "עברית", IsRightToLeft: true),
 
         new(AppLanguage.Persian, "fa", "فارسی", IsRightToLeft: true, DisplayFontCovers: false),
@@ -328,14 +309,7 @@ public sealed record GameSettings
     /// <summary>Board zoom as a percentage, clamped to 70-160.</summary>
     public int CellZoomPercent { get; init; } = DefaultCellZoomPercent;
 
-    /// <summary>
-    /// Shows a magnified 3x3 view of the cells around the finger while painting.
-    /// </summary>
-    /// <remarks>
-    /// Off by default. It genuinely helps on a crowded 25x25 board, but it also puts a panel on
-    /// screen during every touch, which is a distraction most players do not want - so it is
-    /// something you turn on when you need it rather than something imposed.
-    /// </remarks>
+    /// <summary>Optional 3x3 magnifier around the touched cell. Disabled by default.</summary>
     public bool ShowMagnifier { get; init; }
 
     public AppLanguage Language { get; init; } = AppLanguage.English;
@@ -346,7 +320,10 @@ public sealed record GameSettings
 
     public int LastDifficulty { get; init; } = 2;
 
-    public string LastPackId { get; init; } = "animals";
+    /// <summary>Initial Quick Game pack. Surprise draws from all unlocked packs.</summary>
+    public const string DefaultPackId = "surprise";
+
+    public string LastPackId { get; init; } = DefaultPackId;
 
     public ChallengeLevel LastChallenge { get; init; } = ChallengeLevel.Relaxed;
 
@@ -370,7 +347,7 @@ public sealed record GameSettings
         CellZoomPercent = Math.Clamp(CellZoomPercent, MinCellZoomPercent, MaxCellZoomPercent),
         LastDifficulty = Math.Clamp(LastDifficulty, PuzzleRequest_MinDifficulty, PuzzleRequest_MaxDifficulty),
         LastSize = GridSize.IsSupported(LastSize) ? LastSize : GridSize.Tiny,
-        LastPackId = string.IsNullOrWhiteSpace(LastPackId) ? "animals" : LastPackId,
+        LastPackId = string.IsNullOrWhiteSpace(LastPackId) ? DefaultPackId : LastPackId,
     };
 
     // Mirrors Generation.PuzzleRequest's bounds without taking a dependency on it, since

@@ -1,16 +1,7 @@
-// Validates the authored puzzle content, as an authoring aid.
-//
-//   dotnet run tools/validate-puzzles.cs [path-to-puzzles.json]
-//
-// The xUnit content tests remain the CI gate; this tool exists for the edit-validate loop while
-// drawing new pictures, because it can show WHERE a puzzle is ambiguous, which a red test cannot.
-// It reads the JSON from disk - not the embedded copy - so there is no rebuild between edits.
-//
-// For every puzzle it re-checks the data rules the tests enforce (dimensions, characters, unique
-// ids, declared pack, at most two fully-empty rows and columns per axis), then runs the real
-// solver. A puzzle that needs guessing gets its partial solve printed with '?' marking the cells
-// line logic could not reach - the exact region the author has to disambiguate. The Passes
-// column doubles as the difficulty metric used to order the content file.
+// dotnet run tools/validate-puzzles.cs [path-to-puzzles.json] [--suggest]
+// Reads content from disk, validates revisions and grids, and runs the production line solver.
+// --suggest lists single-cell changes that make an unresolved board solvable. Review their
+// appearance before applying them. Archived boards are checked for structure, not solvability.
 
 #:project ../src/Squarebuzz.Core/Squarebuzz.Core.csproj
 
@@ -18,7 +9,9 @@ using System.Text.Json;
 using Squarebuzz.Core.Model;
 using Squarebuzz.Core.Solving;
 
-var path = args.Length > 0 ? args[0] : Path.Combine("src", "Squarebuzz.Core", "Content", "puzzles.json");
+var suggest = args.Contains("--suggest");
+var path = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal))
+    ?? Path.Combine("src", "Squarebuzz.Core", "Content", "puzzles.json");
 
 if (!File.Exists(path))
 {
@@ -47,6 +40,44 @@ void Fail(string id, string message)
     Console.Error.WriteLine($"FAIL {id}: {message}");
 }
 
+var revisions = new HashSet<(string Id, int Revision)>();
+var currentEntries = root.GetProperty("puzzles").EnumerateArray().ToArray();
+var archives = root.TryGetProperty("archivedPuzzles", out var archived)
+    ? archived.EnumerateArray().ToArray() : [];
+foreach (var entry in currentEntries.Concat(archives))
+{
+    var id = entry.GetProperty("id").GetString() ?? string.Empty;
+    var revision = entry.TryGetProperty("revision", out var version) ? version.GetInt32() : 1;
+    if (revision < 1 || !revisions.Add((id, revision)))
+    {
+        Fail(id, $"invalid or duplicate revision {revision}.");
+    }
+}
+
+foreach (var entry in currentEntries)
+{
+    var id = entry.GetProperty("id").GetString() ?? string.Empty;
+    var revision = entry.TryGetProperty("revision", out var version) ? version.GetInt32() : 1;
+    for (var previous = 1; previous < revision; previous++)
+    {
+        if (!revisions.Contains((id, previous))) Fail(id, $"missing archived revision {previous}.");
+    }
+}
+
+foreach (var entry in archives)
+{
+    var id = entry.GetProperty("id").GetString() ?? string.Empty;
+    var rows = entry.GetProperty("rows").EnumerateArray().Select(row => row.GetString() ?? string.Empty).ToArray();
+    var width = entry.GetProperty("width").GetInt32();
+    var height = entry.GetProperty("height").GetInt32();
+    if (width <= 0 || height <= 0 || rows.Length != height
+        || rows.Any(row => row.Length != width || row.AsSpan().IndexOfAnyExcept('#', '.') >= 0)
+        || !packIds.Contains(entry.GetProperty("pack").GetString() ?? string.Empty))
+    {
+        Fail(id, "invalid archived grid or pack.");
+    }
+}
+
 foreach (var element in root.GetProperty("puzzles").EnumerateArray())
 {
     var id = element.GetProperty("id").GetString() ?? string.Empty;
@@ -61,7 +92,7 @@ foreach (var element in root.GetProperty("puzzles").EnumerateArray())
         rows.Add(row.GetString() ?? string.Empty);
     }
 
-    // The data rules PuzzleContentTests pins, re-checked here so authoring fails fast.
+    // Check grid structure before invoking the solver.
     if (!seenIds.Add(id))
     {
         Fail(id, "duplicate id.");
@@ -105,7 +136,21 @@ foreach (var element in root.GetProperty("puzzles").EnumerateArray())
         Fail(id, $"{emptyRows} empty rows / {emptyColumns} empty columns; at most 2 per axis are allowed.");
     }
 
-    // The real gate: pure line logic must reach the exact picture, no guessing.
+    // Report symmetry and density for visual review; these do not fail validation.
+    var filledCells = rows.Sum(r => r.Count(c => c == '#'));
+    var mirrored = rows.All(r => r.SequenceEqual(r.Reverse()));
+
+    if (mirrored && width > 5)
+    {
+        Console.WriteLine($"note {id}: an exact left-right mirror image - the player can solve one half and copy it.");
+    }
+
+    if (width == 10 && (filledCells < 45 || filledCells > 65))
+    {
+        Console.WriteLine($"note {id}: {filledCells}% filled; 10x10 pictures target 45-65%.");
+    }
+
+    // Line logic must resolve every cell without guessing.
     var puzzle = Puzzle.FromRows(id, pack, color, rows);
     var analysis = PuzzleSolver.Analyse(puzzle);
 
@@ -120,8 +165,7 @@ foreach (var element in root.GetProperty("puzzles").EnumerateArray())
 
     Fail(id, $"{analysis.Outcome} after {analysis.Passes} passes, {analysis.UndeterminedCells} cells undetermined.");
 
-    // Show the author exactly which region is ambiguous: '#' deduced filled, '.' deduced
-    // empty, '?' unreachable by line logic. Fixes are always local to the '?' cells.
+    // Show deductions: '#' filled, '.' empty, '?' unresolved by line logic.
     var board = new CellState[puzzle.CellCount];
     PuzzleSolver.Solve(puzzle, board);
 
@@ -139,6 +183,11 @@ foreach (var element in root.GetProperty("puzzles").EnumerateArray())
         }
 
         Console.Error.WriteLine($"       {new string(line)}");
+    }
+
+    if (suggest)
+    {
+        Suggest(id, pack, color, rows, board, width, height);
     }
 }
 
@@ -163,3 +212,64 @@ if (failures > 0)
 
 Console.WriteLine("All puzzles pass.");
 return 0;
+
+// Try single-cell flips in unresolved areas and their neighbours; print up to eight
+// candidates that the line solver can finish.
+static void Suggest(string id, string pack, string color, List<string> rows, CellState[] board, int width, int height)
+{
+    var candidates = new List<int>();
+    var seen = new HashSet<int>();
+
+    void Add(int x, int y)
+    {
+        if (x >= 0 && x < width && y >= 0 && y < height && seen.Add((y * width) + x))
+        {
+            candidates.Add((y * width) + x);
+        }
+    }
+
+    for (var i = 0; i < board.Length; i++)
+    {
+        if (board[i] == CellState.Empty)
+        {
+            Add(i % width, i / width);
+        }
+    }
+
+    foreach (var i in candidates.ToArray())
+    {
+        var (x, y) = (i % width, i / width);
+        Add(x - 1, y);
+        Add(x + 1, y);
+        Add(x, y - 1);
+        Add(x, y + 1);
+    }
+
+    var found = 0;
+
+    foreach (var index in candidates)
+    {
+        var (x, y) = (index % width, index / width);
+        var flipped = rows.ToList();
+        var chars = flipped[y].ToCharArray();
+        chars[x] = chars[x] == '#' ? '.' : '#';
+        flipped[y] = new string(chars);
+
+        if (!PuzzleSolver.Analyse(Puzzle.FromRows(id, pack, color, flipped)).IsSolvable)
+        {
+            continue;
+        }
+
+        Console.Error.WriteLine($"       fix: {(chars[x] == '#' ? "fill" : "clear")} row {y + 1}, column {x + 1}");
+
+        if (++found == 8)
+        {
+            break;
+        }
+    }
+
+    if (found == 0)
+    {
+        Console.Error.WriteLine("       no single-square fix; the ambiguous region needs redrawing.");
+    }
+}

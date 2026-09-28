@@ -2,29 +2,15 @@ using Squarebuzz.Core.Model;
 
 namespace Squarebuzz.Core.Generation;
 
-/// <summary>
-/// Scatters overlapping circular blobs across the grid and mirrors the left half onto the
-/// right, producing symmetrical creature-like shapes. Ported from the prototype's
-/// <c>PuzzleGen.stub</c>, including its constants, so generated pictures keep the same
-/// character as the design.
-/// </summary>
+/// <summary>Builds a mirrored blob shape, then adds asymmetric details.</summary>
 /// <remarks>
-/// This generator makes no claim about solvability - a raw blob grid is often ambiguous.
-/// Wrap it in <see cref="UniqueSolutionGenerator"/> before handing anything to a player.
+/// Raw candidates may be ambiguous. Use UniqueSolutionGenerator for playable puzzles.
 /// </remarks>
 public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 {
     private const string GeneratedColorHex = "#8B5CF6";
 
-    /// <summary>
-    /// Chance that a cell inside a blob is actually filled, which keeps blob edges organic
-    /// rather than perfectly circular.
-    /// </summary>
-    /// <remarks>
-    /// High on purpose. The prototype thinned blobs by roughly a third, which speckles the
-    /// picture with isolated cells - and an isolated cell is a clue run of 1, so a speckled
-    /// picture is also a noisy, tedious set of clues.
-    /// </remarks>
+    /// <summary>Probability of filling a cell within a blob. High solidity limits isolated cells and short clues.</summary>
     private const double BlobSolidity = 0.85;
 
     public Puzzle Generate(PuzzleRequest request)
@@ -33,10 +19,7 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(request.Width);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(request.Height);
 
-        // The request declares its own bounds and nothing enforced them. Out of range the density
-        // formula below still produces *something* - a 28%-fill board at 20, a bar down the mirror
-        // axis far beyond that - so a bad difficulty shipped a degenerate picture instead of an
-        // error. Settings are already sanitised to this range; this is the same rule at the source.
+        // Validate difficulty before using it to calculate density.
         ArgumentOutOfRangeException.ThrowIfLessThan(request.Difficulty, PuzzleRequest.MinDifficulty);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(request.Difficulty, PuzzleRequest.MaxDifficulty);
 
@@ -56,22 +39,10 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         var wanted = (int)Math.Round(halfWidth * height * targetFill);
         var maxRadius = Math.Max(2, width / 5);
 
-        // Blob centres come from a shuffled list of every cell in the half, consumed in order.
-        // A permutation cannot leave a band of rows uncovered, which uniformly random centres
-        // regularly did: at 10x10 the old generator placed four small blobs and most rows came
-        // out empty, so FillEmptyLines "repaired" them into a bar down the mirror axis. That bar
-        // was the dominant feature of most generated 10x10 pictures - the daily puzzle's size.
+        // Visit shuffled left-half centres to spread blobs across the grid before repairing empty lines.
         var centres = ShuffledHalfCells(halfWidth, height, random);
 
-        // Blobs are added until the half is as full as the difficulty asks, so coverage scales
-        // with the grid instead of being a fixed count that happened to suit 5x5.
-        //
-        // The last blob is the one that decides how close to the target we land, so its radius
-        // is capped by what is still wanted. Without that cap the loop only checked the total
-        // *before* stamping, and a full-size final blob could overshoot by its whole area -
-        // enough that every difficulty came out 5-6 points too full and the sparse end never
-        // arrived. Adjacent settings then produced the same picture for a third to a half of
-        // all seeds, so the slider did nothing for those players.
+        // Add blobs to the target density. Limit the last radius by the remaining cells to reduce overshoot.
         var filled = 0;
 
         for (var i = 0; i < centres.Length && filled < wanted; i++)
@@ -83,6 +54,7 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         }
 
         MirrorLeftHalfOntoRight(cells, width, height);
+        BreakSymmetry(cells, width, height, request.Difficulty, random);
         FillEmptyLines(cells, width, height);
 
         return Puzzle.FromSolution(
@@ -117,14 +89,9 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         return cells;
     }
 
-    /// <summary>
-    /// The largest radius whose blob should still fit inside <paramref name="remaining"/>.
-    /// </summary>
+    /// <summary>Estimates the largest blob radius that fits the remaining cell budget.</summary>
     /// <remarks>
-    /// A radius-r blob covers about pi*r^2 cells, of which <see cref="BlobSolidity"/> land. That
-    /// is an estimate, not a promise - the shape is clipped at the edges and the solidity roll is
-    /// random - so a small overshoot is still possible and fine. What it prevents is the large
-    /// overshoot: a radius-4 blob dropped when only two cells were still wanted.
+    /// The estimate uses pi*r² and BlobSolidity. Clipping and random fill allow small deviations.
     /// </remarks>
     private static int RadiusCapFor(int remaining, int maxRadius)
     {
@@ -133,13 +100,9 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         return Math.Clamp(affordable, 1, maxRadius);
     }
 
-    /// <summary>
-    /// Stamps one blob and reports how many <em>new</em> left-half cells it filled.
-    /// </summary>
+    /// <summary>Stamps a blob and returns the number of newly filled left-half cells.</summary>
     /// <remarks>
-    /// Only the left half counts: the right is mirrored from it afterwards, so anything stamped
-    /// beyond the axis is discarded. Returning the delta also lets the caller keep a running
-    /// total instead of recounting the half after every blob, which was quadratic in the grid.
+    /// The right half is replaced by mirroring, so it is excluded from the count.
     /// </remarks>
     private static int StampBlob(
         bool[] cells,
@@ -192,6 +155,110 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
     }
 
 
+    /// <summary>
+    /// Share of the grid rewritten asymmetrically after mirroring, at the easiest difficulty and
+    /// per difficulty step above it.
+    /// </summary>
+    private const double AsymmetryBase = 0.04;
+    private const double AsymmetryPerDifficulty = 0.02;
+
+    /// <summary>Adds asymmetric details while balancing added and removed cells.</summary>
+    /// <remarks>
+    /// The detail budget increases with difficulty. Only cells whose value changes count towards it.
+    /// </remarks>
+    private static void BreakSymmetry(bool[] cells, int width, int height, int difficulty, DeterministicRandom random)
+    {
+        var wanted = (int)Math.Round(cells.Length * (AsymmetryBase + (AsymmetryPerDifficulty * (difficulty - 1))));
+        var maxRadius = Math.Max(1, width / 8);
+        var changed = 0;
+        var net = 0;
+
+        // Bounded so a pathological grid (all full or all empty) cannot spin forever.
+        for (var attempt = 0; attempt < cells.Length && changed < wanted; attempt++)
+        {
+            var centreX = random.Next(width);
+            var centreY = random.Next(height);
+            var radius = 1 + random.Next(maxRadius);
+
+            // Carve whenever more has been added than taken away, so density holds its target.
+            var fill = net <= 0;
+
+            // Start on the edge of the shape: an addition grows out of it and a carving bites
+            // into it. Either one floating in open space would only add speckle.
+            if (cells[(centreY * width) + centreX] == fill || !HasNeighbour(cells, width, height, centreX, centreY, fill))
+            {
+                continue;
+            }
+
+            var stamped = StampDetail(cells, width, height, centreX, centreY, radius, fill);
+            changed += stamped;
+            net += fill ? stamped : -stamped;
+        }
+    }
+
+    /// <summary>Whether the cell is on the grid and filled.</summary>
+    private static bool IsFilled(bool[] cells, int width, int height, int x, int y) =>
+        x >= 0 && x < width && y >= 0 && y < height && cells[(y * width) + x];
+
+    /// <summary>Whether any orthogonal neighbour of the cell holds <paramref name="value"/>.</summary>
+    private static bool HasNeighbour(bool[] cells, int width, int height, int x, int y, bool value) =>
+        (x > 0 && cells[(y * width) + x - 1] == value)
+        || (x < width - 1 && cells[(y * width) + x + 1] == value)
+        || (y > 0 && cells[((y - 1) * width) + x] == value)
+        || (y < height - 1 && cells[((y + 1) * width) + x] == value);
+
+    /// <summary>Writes <paramref name="value"/> over a small blob and returns the changed-cell count.</summary>
+    /// <remarks>
+    /// Each edit extends or shortens an existing run. Additions must touch the shape; carvings
+    /// must not split a run along either axis.
+    /// </remarks>
+    private static int StampDetail(
+        bool[] cells,
+        int width,
+        int height,
+        int centreX,
+        int centreY,
+        int radius,
+        bool value)
+    {
+        var radiusSquared = radius * radius;
+        var changed = 0;
+
+        for (var y = Math.Max(0, centreY - radius); y <= Math.Min(height - 1, centreY + radius); y++)
+        {
+            for (var x = Math.Max(0, centreX - radius); x <= Math.Min(width - 1, centreX + radius); x++)
+            {
+                var dx = x - centreX;
+                var dy = y - centreY;
+
+                if ((dx * dx) + (dy * dy) > radiusSquared)
+                {
+                    continue;
+                }
+
+                var index = (y * width) + x;
+
+                if (cells[index] == value)
+                {
+                    continue;
+                }
+
+                var keepsRuns = value
+                    ? HasNeighbour(cells, width, height, x, y, true)
+                    : !(IsFilled(cells, width, height, x - 1, y) && IsFilled(cells, width, height, x + 1, y))
+                      && !(IsFilled(cells, width, height, x, y - 1) && IsFilled(cells, width, height, x, y + 1));
+
+                if (keepsRuns)
+                {
+                    cells[index] = value;
+                    changed++;
+                }
+            }
+        }
+
+        return changed;
+    }
+
     /// <summary>Vertical symmetry is what makes the blobs read as creatures rather than noise.</summary>
     private static void MirrorLeftHalfOntoRight(bool[] cells, int width, int height)
     {
@@ -206,24 +273,10 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
         }
     }
 
-    /// <summary>
-    /// A completely blank row or column is legal nonogram-wise but reads as a mistake in the
-    /// picture, so each one is given a cell that continues the shape beside it.
-    /// </summary>
+    /// <summary>Fills empty lines by extending nearby occupied rows or columns.</summary>
     /// <remarks>
-    /// <para>
-    /// Each repair is mirrored, because this runs after
-    /// <see cref="MirrorLeftHalfOntoRight"/> and would otherwise undo the symmetry it just
-    /// established. (The prototype wrote only one cell and so produced subtly lop-sided
-    /// pictures at 20x20.)
-    /// </para>
-    /// <para>
-    /// The cell is placed under a filled cell of the nearest occupied row rather than on the
-    /// mirror axis. Putting every repair on the axis was what made generated pictures look like
-    /// they had a bar down the middle: the repairs all lined up with each other instead of with
-    /// the shape. Attaching them to their neighbour reads as the shape tapering off, which is
-    /// what a row with one or two cells in it should look like.
-    /// </para>
+    /// Repairs are mirrored at this stage. Prefer positions attached to the body to avoid
+    /// creating a vertical stripe down the centre.
     /// </remarks>
     private static void FillEmptyLines(bool[] cells, int width, int height)
     {

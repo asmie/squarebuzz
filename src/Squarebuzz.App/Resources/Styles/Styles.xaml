@@ -125,6 +125,21 @@
                             </Setter>
                         </VisualState.Setters>
                     </VisualState>
+                    <!--
+                      Without this a disabled button looked exactly like an enabled one: the
+                      explicit background overrides the platform's own greyed-out look. The same state
+                      is on SecondaryButton: the hint button with hints switched off, and undo
+                      with nothing to undo, read as broken rather than unavailable.
+                    -->
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.4" />
+                            <Setter Property="TranslationY" Value="0" />
+                            <Setter Property="Shadow">
+                                <Shadow Brush="Transparent" Radius="0" Offset="0,0" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
@@ -164,6 +179,15 @@
                         <VisualState.Setters>
                             <Setter Property="Shadow">
                                 <Shadow Brush="{StaticResource FocusRing}" Radius="8" Offset="0,0" />
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.4" />
+                            <Setter Property="TranslationY" Value="0" />
+                            <Setter Property="Shadow">
+                                <Shadow Brush="Transparent" Radius="0" Offset="0,0" />
                             </Setter>
                         </VisualState.Setters>
                     </VisualState>

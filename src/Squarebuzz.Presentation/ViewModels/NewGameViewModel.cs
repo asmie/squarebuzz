@@ -116,7 +116,7 @@ public partial class NewGameViewModel : LocalizedViewModel
     public partial int SelectedDifficulty { get; private set; } = 2;
 
     [ObservableProperty]
-    public partial string SelectedPackId { get; private set; } = "animals";
+    public partial string SelectedPackId { get; private set; } = GameSettings.DefaultPackId;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRelaxed))]
@@ -185,7 +185,8 @@ public partial class NewGameViewModel : LocalizedViewModel
     }
 
     /// <summary>
-    /// The remembered pack if it is open, otherwise the first pack that is.
+    /// The remembered pack if it is open, otherwise the default (every open pack), otherwise the
+    /// first pack that is open.
     /// </summary>
     /// <remarks>
     /// The size has always had this treatment - a remembered 25x25 falls back to the largest a
@@ -201,6 +202,11 @@ public partial class NewGameViewModel : LocalizedViewModel
         if (_unlockedPacks.Contains(remembered))
         {
             return remembered;
+        }
+
+        if (_unlockedPacks.Contains(GameSettings.DefaultPackId))
+        {
+            return GameSettings.DefaultPackId;
         }
 
         foreach (var pack in _puzzles.Packs)

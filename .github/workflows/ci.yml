@@ -13,11 +13,7 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 jobs:
-  # Fast feedback: the domain, persistence and ViewModel layers reference no MAUI workload, so
-  # they build and test in well under a minute. Run on both OSes because "Core runs anywhere" is
-  # a design goal - and because the SQLite tests exercise a native library that differs per
-  # platform. Presentation is here too: it targets plain net10.0 with only CommunityToolkit.Mvvm,
-  # and its tests sat unrun by CI for as long as the job listed only Core and Data.
+  # Core, Data and Presentation tests on both supported host operating systems.
   domain:
     name: Domain, data & ViewModels (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -30,17 +26,14 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6.0.0
         with:
           global-json-file: global.json
 
-      # One project per invocation: MSBuild takes a single project or solution argument and
-      # rejects the second as an unknown switch (MSB1008). Restoring the solution instead is not
-      # an option here - that would pull in the MAUI head, whose workloads this job does not
-      # install on purpose.
+      # Restore test projects separately so this job does not require MAUI workloads.
       - name: Restore
         run: |
           dotnet restore tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj
@@ -53,23 +46,27 @@ jobs:
           dotnet build src/Squarebuzz.Data/Squarebuzz.Data.csproj -c Release --no-restore
           dotnet build src/Squarebuzz.Presentation/Squarebuzz.Presentation.csproj -c Release --no-restore
 
-      - name: Test
-        run: |
-          dotnet test tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=core.trx" --results-directory artifacts/test-results
-          dotnet test tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=data.trx" --results-directory artifacts/test-results
-          dotnet test tests/Squarebuzz.Presentation.Tests/Squarebuzz.Presentation.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=presentation.trx" --results-directory artifacts/test-results
+      - name: Test Core
+        run: >
+          dotnet test tests/Squarebuzz.Core.Tests/Squarebuzz.Core.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=core.trx" --results-directory artifacts/test-results -- RunConfiguration.TreatNoTestsAsError=true
+
+      - name: Test Data
+        run: >
+          dotnet test tests/Squarebuzz.Data.Tests/Squarebuzz.Data.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=data.trx" --results-directory artifacts/test-results -- RunConfiguration.TreatNoTestsAsError=true
+
+      - name: Test Presentation
+        run: >
+          dotnet test tests/Squarebuzz.Presentation.Tests/Squarebuzz.Presentation.Tests.csproj -c Release --no-restore --logger "trx;LogFileName=presentation.trx" --results-directory artifacts/test-results -- RunConfiguration.TreatNoTestsAsError=true
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: test-results-${{ matrix.os }}
           path: artifacts/test-results
           if-no-files-found: ignore
 
-  # Run both content validators so edits cannot ship puzzles that need guessing or translations
-  # with missing keys. dotnet run builds and restores these file-based apps as needed;
-  # validate-puzzles.cs declares a Core project reference through its #:project directive.
+  # Validate puzzle data and resource files.
   content:
     name: Content
     runs-on: ubuntu-latest
@@ -78,10 +75,10 @@ jobs:
       MSBuildEnableWorkloadResolver: 'false'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6.0.0
         with:
           global-json-file: global.json
 
@@ -96,10 +93,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6.0.0
         with:
           global-json-file: global.json
 
@@ -107,11 +104,7 @@ jobs:
       - name: Install MAUI Android workload
         run: dotnet workload install maui-android
 
-      # TargetFrameworks is overridden rather than passing -f, because restore covers every
-      # framework a project declares regardless of which one is being built. With the four in
-      # Squarebuzz.App.csproj that means restore alone would demand the iOS, Mac Catalyst and
-      # Windows workloads this job deliberately does not install, and fail with NETSDK1147.
-      # A command-line property is global, so the csproj cannot append Windows back onto it.
+      # Select only the Android app target; referenced libraries retain net10.0.
       - name: Build APK
         run: >
           dotnet build src/Squarebuzz.App/Squarebuzz.App.csproj
@@ -119,7 +112,7 @@ jobs:
           -p:SquarebuzzTargetFramework=net10.0-android
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: android-apk
           path: src/Squarebuzz.App/bin/Release/net10.0-android/*-Signed.apk
@@ -146,15 +139,14 @@ jobs:
       XCODE_VERSION: '26.6'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6.0.0
         with:
           global-json-file: global.json
 
-      # Workload set 10.0.400 contains Apple SDKs 26.5.10301, which require Xcode 26.6.
-      # Keep this selection in sync with global.json and the README toolchain requirements.
+      # Workload set 10.0.401 uses Apple SDK 26.5.10318. Keep Xcode aligned with its requirements.
       - name: Select pinned Xcode
         shell: bash
         run: |
@@ -174,9 +166,7 @@ jobs:
       - name: Install MAUI workload
         run: dotnet workload install ${{ matrix.workload }}
 
-      # Compile both Apple heads independently so a failure in one does not skip the other.
-      # iOS uses the simulator; Mac Catalyst disables signing for this compile check. Neither
-      # needs a distribution identity or provisioning profile, and neither build is published.
+      # Build iOS simulator and Mac Catalyst independently. These are compile checks, not deployment.
       - name: Build Apple target
         run: >
           dotnet build src/Squarebuzz.App/Squarebuzz.App.csproj
@@ -186,17 +176,16 @@ jobs:
           -p:EnableCodeSigning=${{ matrix.code-signing }}
           -p:CodesignRequireProvisioningProfile=false
 
-  # Analysers run as errors in Core and Data, so a warning there already fails those jobs. This
-  # catches anything the MAUI head reports, which is built with warnings-as-errors relaxed.
+  # Check warnings from the MAUI Windows target as errors.
   app-warnings:
     name: App warnings
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6.0.0
         with:
           global-json-file: global.json
 

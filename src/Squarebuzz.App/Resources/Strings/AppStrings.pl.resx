@@ -98,6 +98,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · mnóstwo czasu</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · nie zwalniaj</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · ani mrugnij</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sprint</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Wielki wyścig</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maraton</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · szybkie palce</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · długi wyścig</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · najtrudniejszy wyścig</value></data>
   <data name="quickGame" xml:space="preserve"><value>Szybka gra</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Wybierz swój rozmiar i zestaw</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Poziomy</value></data>
@@ -127,6 +133,15 @@
   <data name="tr7" xml:space="preserve"><value>Nocny marek</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfekcyjna dziesiątka</value></data>
   <data name="tr9" xml:space="preserve"><value>Kolekcjoner</value></data>
+  <data name="tr10" xml:space="preserve"><value>Pokonaj zegar</value></data>
+  <data name="tr11" xml:space="preserve"><value>Mistrz maratonu</value></data>
+  <data name="tr12" xml:space="preserve"><value>Miesiąc z rzędu</value></data>
+  <data name="tr13" xml:space="preserve"><value>Wielki obraz</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 klocków</value></data>
+  <data name="tr15" xml:space="preserve"><value>Gwiezdny zbieracz</value></data>
+  <data name="tr16" xml:space="preserve"><value>Odkrywca</value></data>
+  <data name="tr17" xml:space="preserve"><value>Mistrz zestawu</value></data>
+  <data name="tr18" xml:space="preserve"><value>Bez skazy</value></data>
   <data name="sound" xml:space="preserve"><value>Dźwięki</value></data>
   <data name="music" xml:space="preserve"><value>Muzyka</value></data>
   <data name="voice" xml:space="preserve"><value>Czytanie na głos</value></data>
@@ -234,7 +249,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>Jabłko</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>Żaglówka</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>Dinozaur</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Kotek</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kot</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>Babeczka</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>Wyścigówka</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Rakieta</value></data>
@@ -297,6 +312,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Parasolka</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Śnieżynka</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Tęcza</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Sowa</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Lis</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Żółw</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Słoń</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pingwin</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Żyrafa</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktyl</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Kość</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontozaur</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronauta</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>UFO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Satelita</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Teleskop</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Prom kosmiczny</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Lądownik</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Jednorożec</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Eliksir</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Kapelusz czarownicy</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banan</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Marchewka</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Burger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Pączek</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Gruszka</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Ser</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Rower</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Pociąg</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopter</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktor</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Skuter</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jacht</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulipan</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Szyszka</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Słonecznik</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Pszczoła</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Biedronka</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palma</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Czarodziejska lampa</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Bałwan</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Konik morski</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Meduza</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Latarnia morska</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Rekin</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfin</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Fala</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Skrzypce</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofon</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Słuchawki</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksofon</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakasy</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Piłka nożna</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Rakieta tenisowa</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Deskorolka</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Kask</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Gwizdek</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornado</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Termometr</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Rękaw wiatrowy</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Deszczowa chmura</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Tajemniczy obrazek</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Pokazuje powiększony widok 3×3 podczas malowania. Domyślnie wyłączona.</value></data>
@@ -311,6 +386,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Ukończ obrazek po 20:00.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Trzy gwiazdki na 10×10, bez żadnej pomyłki.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Znajdź każdy obrazek w galerii.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Wygraj dowolne wyzwanie na czas.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Wygraj Maraton.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Graj 30 dni z rzędu.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Ukończ planszę 15×15 lub większą.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Zamaluj łącznie 1000 klocków.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Zbierz 100 gwiazdek.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Ukończ poziom 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Znajdź wszystkie obrazki z jednego zestawu.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Ukończ planszę 15×15 lub większą bez podpowiedzi i bez błędów.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Zrobione na dziś — do jutra!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Pamięć jest niedostępna. Spróbuj ponownie.</value>

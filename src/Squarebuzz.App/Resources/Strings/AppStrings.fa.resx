@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>۵×۵ · وقت زیاد</value></data>
   <data name="timedSub2" xml:space="preserve"><value>۱۰×۱۰ · تند بمان</value></data>
   <data name="timedSub3" xml:space="preserve"><value>۱۰×۱۰ · وقت پلک زدن نیست</value></data>
+  <data name="timedName4" xml:space="preserve"><value>دوی سرعت</value></data>
+  <data name="timedName5" xml:space="preserve"><value>مسابقهٔ بزرگ</value></data>
+  <data name="timedName6" xml:space="preserve"><value>ماراتن</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>۵×۵ · انگشتان تند</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>۱۵×۱۵ · یک مسابقهٔ طولانی</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>۲۰×۲۰ · بزرگ‌ترین مسابقه</value></data>
   <data name="quickGame" xml:space="preserve"><value>بازی سریع</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>اندازه و بسته را خودت انتخاب کن</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>مرحله‌ها</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>شب‌بیدار</value></data>
   <data name="tr8" xml:space="preserve"><value>دهِ بی‌نقص</value></data>
   <data name="tr9" xml:space="preserve"><value>جمع‌کننده</value></data>
+  <data name="tr10" xml:space="preserve"><value>جلوتر از ساعت</value></data>
+  <data name="tr11" xml:space="preserve"><value>قهرمان ماراتن</value></data>
+  <data name="tr12" xml:space="preserve"><value>یک ماه پشت هم</value></data>
+  <data name="tr13" xml:space="preserve"><value>تصویر بزرگ</value></data>
+  <data name="tr14" xml:space="preserve"><value>۱۰۰۰ مکعب</value></data>
+  <data name="tr15" xml:space="preserve"><value>ستاره‌نگر</value></data>
+  <data name="tr16" xml:space="preserve"><value>کاشف</value></data>
+  <data name="tr17" xml:space="preserve"><value>استاد بسته</value></data>
+  <data name="tr18" xml:space="preserve"><value>بی‌نقص</value></data>
   <data name="sound" xml:space="preserve"><value>جلوه‌های صوتی</value></data>
   <data name="music" xml:space="preserve"><value>موسیقی</value></data>
   <data name="voice" xml:space="preserve"><value>خواندن با صدا</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>سیب</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>قایق بادی</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>دایناسور</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>صورت گربه</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>گربه</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>کیک فنجانی</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>ماشین مسابقه</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>موشک</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>چتر</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>دانه برف</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>رنگین‌کمان</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>جغد</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>روباه</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>لاک‌پشت</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>فیل</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>پنگوئن</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>زرافه</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>تی‌رکس</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>پتروداکتیل</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>استخوان</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>برونتوسور</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>تریسراتوپس</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>فضانورد</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>بشقاب پرنده</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>ماهواره</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>تلسکوپ</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>شاتل فضایی</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>فرودگر ماه</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>اسب تک‌شاخ</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>معجون جادویی</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>کلاه جادوگر</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>موز</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>هویج</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>همبرگر</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>دونات</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>گلابی</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>پنیر</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>دوچرخه</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>قطار</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>هلیکوپتر</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>تراکتور</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>اسکوتر</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>کشتی تفریحی</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>لاله</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>میوه کاج</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>آفتابگردان</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>زنبور</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>کفشدوزک</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>درخت نخل</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>چراغ جادو</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>آدم‌برفی</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>اسب دریایی</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>عروس دریایی</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>فانوس دریایی</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>کوسه</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>دلفین</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>موج</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>ویولن</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>میکروفون</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>هدفون</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>ساکسیفون</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>ماراکاس</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>توپ فوتبال</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>راکت تنیس</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>اسکیت‌برد</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>کلاه ایمنی</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>سوت</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>گردباد</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>دماسنج</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>بادنما</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>ابر بارانی</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>تصویر مرموز</value></data>
   <data name="magnifier" xml:space="preserve"><value>ذره‌بین</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>هنگام رنگ‌کردن نمای بزرگ‌شدهٔ ۳×۳ نشان می‌دهد. به‌طور پیش‌فرض خاموش.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>تصویری را بعد از ساعت ۸ شب کامل کن.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>سه ستاره روی یک ۱۰×۱۰، بدون اشتباه.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>همهٔ تصویرهای گالری را پیدا کن.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>در هر چالش زمان‌دار برنده شو.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>در چالش ماراتن برنده شو.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>۳۰ روز پشت هم بازی کن.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>یک ۱۵×۱۵ یا بزرگ‌تر را کامل کن.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>در کل ۱۰۰۰ مکعب پر کن.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>۱۰۰ ستاره جمع کن.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>مرحلهٔ ۵۰ را کامل کن.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>همهٔ تصویرهای یک بسته را پیدا کن.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>یک ۱۵×۱۵ یا بزرگ‌تر را بدون راهنما و بدون اشتباه کامل کن.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>برای امروز تمام — فردا می‌بینمت!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>فضای ذخیره‌سازی در دسترس نیست. لطفاً دوباره تلاش کنید.</value>

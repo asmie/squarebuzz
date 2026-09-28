@@ -125,19 +125,37 @@ public class UniqueSolutionGeneratorTests
         }
     }
 
-    [Fact]
-    public void GeneratedPuzzle_IsVerticallySymmetrical()
+    [Theory]
+    [InlineData(10)]
+    [InlineData(16)]
+    [InlineData(25)]
+    public void GeneratedPuzzle_IsMirroredButNotAMirrorImage(int size)
     {
-        // The mirroring is what makes the blobs read as creatures; losing it would be a
-        // visual regression rather than a logic one, so it is pinned here.
-        var puzzle = new BlobPuzzleGenerator().Generate(new PuzzleRequest(16, 16, 3, "surprise", 31337));
+        // The mirrored body is what makes the blobs read as creatures, so most of the picture
+        // must still match its reflection. But an exact mirror hands the player half the answer
+        // - solve one side, copy it - which made the generated levels too easy.
+        var generator = new BlobPuzzleGenerator();
 
-        for (var y = 0; y < puzzle.Height; y++)
+        for (var seed = 1; seed <= 40; seed++)
         {
-            for (var x = 0; x < puzzle.Width / 2; x++)
+            var puzzle = generator.Generate(new PuzzleRequest(size, size, 3, "surprise", seed));
+            var differing = 0;
+
+            for (var y = 0; y < puzzle.Height; y++)
             {
-                Assert.Equal(puzzle.IsFilled(x, y), puzzle.IsFilled(puzzle.Width - 1 - x, y));
+                for (var x = 0; x < puzzle.Width; x++)
+                {
+                    if (puzzle.IsFilled(x, y) != puzzle.IsFilled(puzzle.Width - 1 - x, y))
+                    {
+                        differing++;
+                    }
+                }
             }
+
+            var share = differing / (double)puzzle.CellCount;
+
+            Assert.True(share > 0, $"seed {seed}: {size}x{size} picture is an exact mirror image.");
+            Assert.True(share <= 0.3, $"seed {seed}: {share:P0} of the picture differs from its reflection.");
         }
     }
 

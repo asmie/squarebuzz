@@ -20,13 +20,9 @@ public sealed class LanguageOption
     public required string Endonym { get; init; }
 }
 
-/// <summary>
-/// Options: sound, appearance, controls, language, and the grown-ups' section.
-/// </summary>
+/// <summary>Coordinates sound, display, input, language and parent settings.</summary>
 /// <remarks>
-/// Every change is applied immediately and written straight through - there is no Save button,
-/// because a child should not have to understand one. Theme and language also take effect at
-/// once, which is why this screen sets them on the services as well as persisting them.
+/// Changes apply immediately and persist without a separate Save action.
 /// </remarks>
 public partial class OptionsViewModel : LocalizedViewModel
 {
@@ -81,11 +77,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         Gate = new ParentGate(strings);
         Gate.PropertyChanged += OnGateChanged;
 
-        // Every selection chip on this screen picks its colours from the palette through a
-        // converter, and a converter only runs when its bound property is raised. Without this
-        // the screen where the palette is chosen was the one screen that did not restyle when it
-        // changed: the background followed (a DynamicResource) while the chips kept the old
-        // accent until the screen was left and re-entered. Unhooked in Dispose.
+        // Notify colour-converter bindings when the theme changes. Dispose removes the subscription.
         _theme.Changed += OnThemeServiceChanged;
     }
 
@@ -127,10 +119,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial bool VoiceNarration { get; set; }
 
-    /// <summary>
-    /// True when the device has no voice installed for the chosen language, in which case the
-    /// switch is shown with a note saying so rather than left to fail silently.
-    /// </summary>
+    /// <summary>Indicates that narration has no installed voice for the chosen language.</summary>
     public bool HasNoVoice => !_narration.IsAvailable;
 
     [ObservableProperty]
@@ -142,27 +131,12 @@ public partial class OptionsViewModel : LocalizedViewModel
     [NotifyPropertyChangedFor(nameof(IsLightTheme), nameof(IsDarkTheme), nameof(IsColorBlind))]
     public partial GameTheme Theme { get; set; }
 
-    /// <summary>
-    /// The "Auto" third option next to Light and Dark: light/dark comes from the phone.
-    /// </summary>
-    /// <remarks>
-    /// Stored alongside <see cref="Theme"/> rather than as a fourth <see cref="GameTheme"/>,
-    /// because the player's explicit choice still has to be remembered - turning Auto off has
-    /// to go back to the theme they picked, not to an arbitrary default.
-    /// </remarks>
+    /// <summary>Follows the system brightness while retaining the explicit theme for when Auto is disabled.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLightTheme), nameof(IsDarkTheme), nameof(IsAutoTheme))]
     public partial bool FollowSystemTheme { get; set; }
 
-    /// <summary>
-    /// Two-way companion for the colour-blind switch.
-    /// </summary>
-    /// <remarks>
-    /// The palette is a switch to the player but a third <see cref="GameTheme"/> underneath, and
-    /// a <c>Switch</c> cannot bind to a computed read-only flag. This settable property bridges
-    /// the two, and turning it off returns to light because "not colour-blind" has to land
-    /// somewhere concrete.
-    /// </remarks>
+    /// <summary>Writable binding for the colour-blind palette switch. Disabling it selects the light theme.</summary>
     [ObservableProperty]
     public partial bool ColorBlindEnabled { get; set; }
 
@@ -257,11 +231,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial LanguageOption? SelectedLanguage { get; set; }
 
-    /// <summary>
-    /// Every shipped language, in the order the picker lists them. A list rather than one flag per
-    /// language: at thirty-nine of them, a property each would be unreadable, and the set is
-    /// content - see <see cref="AppLanguages.All"/>.
-    /// </summary>
+    /// <summary>Supported languages in picker order, from AppLanguages.All.</summary>
     public ObservableCollection<LanguageOption> Languages { get; } =
     [
         .. AppLanguages.All.Select(info => new LanguageOption
@@ -283,12 +253,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     /// <summary>Excludes settings covered by the gate or reset confirmation from accessibility.</summary>
     public bool HasOptionsOverlay => Gate.IsOpen || IsResetConfirmOpen;
 
-    /// <summary>Minutes of play before the break reminder, or null for off.</summary>
-    /// <remarks>
-    /// Not behind the parent gate. The gate exists to stop a child wiping their own progress;
-    /// choosing when to be reminded of a break is not destructive, and putting a sum in front
-    /// of it would only stop parents using it.
-    /// </remarks>
+    /// <summary>Minutes of play before a break reminder, or null to disable it. This setting is outside the parent gate.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(
         nameof(IsScreenTimeOff),
@@ -372,8 +337,7 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string BiggerLabel => T("a11yBigger");
 
-    // The magnifier is new, so these keys were added to AppStrings.resx rather than ported.
-    // English only for now, which is exactly how the partial pl/es satellites already behave.
+    // Magnifier labels use the shared localised resources.
     public string MagnifierLabel => T("magnifier");
 
     public string MagnifierNote => T("magnifierSub");
@@ -423,10 +387,7 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public string NoAdsLabel => T("noAds");
 
-    /// <summary>
-    /// Shown after the gated privacy row is unlocked. Like About's links, the destination does
-    /// not exist yet, so this says so rather than pretending.
-    /// </summary>
+    /// <summary>Placeholder privacy message shown after the parent gate is passed.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasNotice))]
     public partial string Notice { get; private set; } = string.Empty;
@@ -505,8 +466,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         Language = _settings.Language;
         ScreenTimeLimitMinutes = _settings.ScreenTimeLimitMinutes;
 
-        // Explicitly, not only through the change hook: assigning the language it already holds
-        // raises nothing, so a screen reopened on a non-default language would show no chip lit.
+        // Synchronize the picker even when assigning the current language does not raise a change event.
         SyncLanguageSelection(Language);
 
         _isLoading = false;
@@ -517,20 +477,12 @@ public partial class OptionsViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(HasNoVoice));
     }
 
-    // Every control funnels into the same persist step. The generator only calls these hooks for
-    // properties that declare one, though, so a missing hook is a silently unsaved setting -
-    // Handedness and TapBehaviour were both listed in Persist() but had no hook, so they only
-    // ever reached the database if the player happened to change something else afterwards.
+    // Every editable setting needs a change hook that calls Persist.
     partial void OnSoundEffectsChanged(bool value)
     {
         _audio.Configure(value, Music);
 
-        // Play the sound the switch just turned on. Silence would be an ambiguous answer to
-        // "did that work?", and a child needs to hear what they have chosen.
-        //
-        // Only when the player did it. This hook also runs while the screen is copying saved
-        // settings into its own controls, and opening Options should not make a noise - which is
-        // exactly what it did until dumpsys showed the effect player had been started on arrival.
+        // Preview sound only for a user change, not while loading saved settings.
         if (value && !_isLoading)
         {
             _audio.Play(GameSound.Fill);
@@ -549,8 +501,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     {
         _narration.Configure(value);
 
-        // Same reasoning as the effects switch: the confirmation is the feature demonstrating
-        // itself, and it is the only way a player finds out their device has no voice installed.
+        // Preview narration after a user change so voice availability is apparent.
         if (value && !_isLoading)
         {
             _narration.Speak(T("voiceReady"));
@@ -604,16 +555,9 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     partial void OnTapBehaviourChanged(TapBehaviour value) => Persist();
 
-    /// <summary>
-    /// True while <see cref="OnAppearingAsync"/> is copying stored settings onto the controls, so
-    /// a hook can tell "the player changed this" from "the screen is being populated".
-    /// </summary>
+    /// <summary>True while stored settings are being copied to the controls.</summary>
     /// <remarks>
-    /// Side effects have to check it, not only <see cref="Persist"/>. Everything on this screen
-    /// is already in force - the splash applied it at launch from the very same row - so
-    /// re-applying it while the controls are filled in is pure repetition. Opening Options rebuilt
-    /// the whole resource dictionary three times over, once each for the theme, the follow-system
-    /// switch and the accent.
+    /// Change hooks must skip persistence and previews during population.
     /// </remarks>
     private bool IsPopulatingControls => _isLoading;
 
@@ -652,10 +596,8 @@ public partial class OptionsViewModel : LocalizedViewModel
             return;
         }
 
-        // Applied to the live monitor as well as persisted, so a parent who sets a limit
-        // mid-afternoon does not have to restart the game for it to count. Not while populating:
-        // the splash already armed the monitor, and re-configuring it here would restart the
-        // count every time a parent looked at this screen.
+        // Update the active break monitor when the preference changes. Skip this during population
+        // to retain the elapsed interval already configured at startup.
         _screenTime.Configure(value);
         Persist();
     }
@@ -688,9 +630,7 @@ public partial class OptionsViewModel : LocalizedViewModel
         // Applied before persisting so the screen relabels itself the moment it is tapped.
         Strings.SetLanguage(value);
 
-        // A voice is per-language, so switching to Polish on a device with only an English one
-        // has to turn the note on and narration off. Fire-and-forget: enumerating voices is slow
-        // enough to stall the button, and nothing else waits on the answer.
+        // Refresh installed-voice availability asynchronously when the language changes.
         _ = RefreshNarrationVoiceAsync(value);
 
         Persist();
@@ -740,11 +680,7 @@ public partial class OptionsViewModel : LocalizedViewModel
     private void SelectHandedness(string hand) =>
         Handedness = hand == "left" ? Handedness.Left : Handedness.Right;
 
-    /// <summary>
-    /// The player picked a row. Null is ignored rather than treated as a choice: a Picker reports
-    /// it while its items are being rebuilt, and taking that as "no language" would reset them to
-    /// English on every relabel.
-    /// </summary>
+    /// <summary>Applies a picker selection. Ignore null while the picker rebuilds its items.</summary>
     partial void OnSelectedLanguageChanged(LanguageOption? value)
     {
         if (value is not null)

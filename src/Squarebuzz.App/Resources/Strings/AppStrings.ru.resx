@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · времени много</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · не тормози</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · глазом не моргнуть</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Спринт</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Большая гонка</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Марафон</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · быстрые пальцы</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · долгая гонка</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · главная гонка</value></data>
   <data name="quickGame" xml:space="preserve"><value>Быстрая игра</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Выбери свой размер и набор</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Уровни</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Ночная сова</value></data>
   <data name="tr8" xml:space="preserve"><value>Идеальная десятка</value></data>
   <data name="tr9" xml:space="preserve"><value>Коллекционер</value></data>
+  <data name="tr10" xml:space="preserve"><value>Быстрее часов</value></data>
+  <data name="tr11" xml:space="preserve"><value>Чемпион марафона</value></data>
+  <data name="tr12" xml:space="preserve"><value>Месяц подряд</value></data>
+  <data name="tr13" xml:space="preserve"><value>Большая картинка</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 блоков</value></data>
+  <data name="tr15" xml:space="preserve"><value>Звездочёт</value></data>
+  <data name="tr16" xml:space="preserve"><value>Исследователь</value></data>
+  <data name="tr17" xml:space="preserve"><value>Мастер наборов</value></data>
+  <data name="tr18" xml:space="preserve"><value>Безупречно</value></data>
   <data name="sound" xml:space="preserve"><value>Звуки</value></data>
   <data name="music" xml:space="preserve"><value>Музыка</value></data>
   <data name="voice" xml:space="preserve"><value>Чтение вслух</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Зонтик</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Снежинка</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Радуга</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Сова</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Лиса</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Черепаха</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Слон</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Пингвин</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Жираф</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>Ти-рекс</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Птеродактиль</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Косточка</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Бронтозавр</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Трицератопс</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Космонавт</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>НЛО</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Спутник</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Телескоп</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Шаттл</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Лунный модуль</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Единорог</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Волшебное зелье</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Шляпа ведьмы</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Банан</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Морковка</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Бургер</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Пончик</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Груша</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Сыр</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Велосипед</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Поезд</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Вертолёт</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Трактор</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Мотороллер</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Яхта</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Тюльпан</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Шишка</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Подсолнух</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Пчёлка</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Божья коровка</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Пальма</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Волшебная лампа</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Снеговик</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Морской конёк</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Медуза</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Маяк</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Акула</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Дельфин</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Волна</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Скрипка</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Микрофон</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Наушники</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Саксофон</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Маракасы</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Футбольный мяч</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Теннисная ракетка</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Скейтборд</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Шлем</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Свисток</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Торнадо</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Градусник</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Ветроуказатель</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Дождевая туча</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Тайная картинка</value></data>
   <data name="magnifier" xml:space="preserve"><value>Лупа</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Показывает увеличенный вид 3×3, пока ты красишь. По умолчанию выключена.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Закончи картинку после 20:00.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Три звезды на поле 10×10 и ни одной ошибки.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Найди все картинки в галерее.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Выиграй любое испытание на время.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Выиграй испытание «Марафон».</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Играй 30 дней подряд.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Закончи поле 15×15 или больше.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Закрась в сумме 1000 блоков.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Собери 100 звёзд.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Пройди уровень 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Найди все картинки в одном наборе.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Закончи поле 15×15 или больше без подсказок и без ошибок.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>На сегодня всё — до завтра!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Хранилище недоступно. Попробуй ещё раз.</value>

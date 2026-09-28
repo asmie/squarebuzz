@@ -190,6 +190,7 @@ public class GameSessionFactoryTests
         public IReadOnlyList<Puzzle> Find(string packId, int size, IReadOnlySet<string>? unlockedPackIds = null) =>
             packId == _only.Pack && size == _only.Width ? new[] { _only } : Array.Empty<Puzzle>();
 
-        public Puzzle? FindById(string puzzleId) => puzzleId == _only.Id ? _only : null;
+        public Puzzle? FindById(string puzzleId, int? revision = null) =>
+            puzzleId == _only.Id && (revision is null || revision == _only.Revision) ? _only : null;
     }
 }

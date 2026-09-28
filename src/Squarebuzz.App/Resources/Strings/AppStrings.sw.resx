@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · muda wa kutosha</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · endelea kusonga</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · hakuna muda wa kupepesa</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Mbio fupi</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Mbio kubwa</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Marathoni</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · vidole vyepesi</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · mbio ndefu</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · mbio kuu kabisa</value></data>
   <data name="quickGame" xml:space="preserve"><value>Mchezo wa haraka</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Chagua ukubwa na kifurushi wewe mwenyewe</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Hatua</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Bundi wa usiku</value></data>
   <data name="tr8" xml:space="preserve"><value>Kumi kamili</value></data>
   <data name="tr9" xml:space="preserve"><value>Mkusanyaji</value></data>
+  <data name="tr10" xml:space="preserve"><value>Shinda saa</value></data>
+  <data name="tr11" xml:space="preserve"><value>Bingwa wa marathoni</value></data>
+  <data name="tr12" xml:space="preserve"><value>Mwezi mfululizo</value></data>
+  <data name="tr13" xml:space="preserve"><value>Picha kubwa</value></data>
+  <data name="tr14" xml:space="preserve"><value>Vitalu 1000</value></data>
+  <data name="tr15" xml:space="preserve"><value>Mtazama nyota</value></data>
+  <data name="tr16" xml:space="preserve"><value>Mvumbuzi</value></data>
+  <data name="tr17" xml:space="preserve"><value>Bingwa wa vifurushi</value></data>
+  <data name="tr18" xml:space="preserve"><value>Bila dosari</value></data>
   <data name="sound" xml:space="preserve"><value>Athari za sauti</value></data>
   <data name="music" xml:space="preserve"><value>Muziki</value></data>
   <data name="voice" xml:space="preserve"><value>Kusomewa kwa sauti</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>Tofaa</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>Mashua ya tanga</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaria</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Uso wa paka</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Paka</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>Keki ndogo</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>Gari la mashindano</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Roketi</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Mwavuli</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Chembe ya theluji</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Upinde wa mvua</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Bundi</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Mbweha</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Kobe</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Tembo</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pengwini</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Twiga</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodakti</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Mfupa</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontosaurus</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Mwanaanga</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>UFO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Setilaiti</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Darubini</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Chombo cha angani</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Chombo cha mwezini</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Farasi mwenye pembe</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Dawa ya uchawi</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Kofia ya mchawi</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Ndizi</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Karoti</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Baga</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donati</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Pea</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Jibini</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Baiskeli</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Treni</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopta</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Trekta</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Skuta</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Yoti</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulipu</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Koni ya msonobari</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Alizeti</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Nyuki</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Mdudu wa madoa</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Mnazi</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Taa ya uchawi</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Mtu wa theluji</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Farasi bahari</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Kiwavi cha bahari</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Mnara wa taa</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Papa</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Pomboo</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Wimbi</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Fidla</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Kipaza sauti</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Vipokea sauti</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksafoni</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakasi</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Mpira wa miguu</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Raketi ya tenisi</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Ubao wa kuteleza</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Kofia ngumu</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Filimbi</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Kimbunga</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Kipimajoto</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Soksi ya upepo</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Wingu la mvua</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Picha ya siri</value></data>
   <data name="magnifier" xml:space="preserve"><value>Kioo cha kukuza</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Huonyesha mwonekano mkubwa wa 3×3 unapopaka. Imezimwa kwa kawaida.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Kamilisha picha baada ya saa mbili usiku.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Nyota tatu kwenye 10×10, bila makosa.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Pata kila picha kwenye ghala.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Shinda changamoto yoyote ya muda.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Shinda changamoto ya Marathoni.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Cheza siku 30 mfululizo.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Kamilisha 15×15 au kubwa zaidi.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Jaza vitalu 1000 kwa jumla.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Kusanya nyota 100.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Kamilisha hatua ya 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Pata kila picha katika kifurushi kimoja.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Kamilisha 15×15 au kubwa zaidi bila vidokezo na bila makosa.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Tumemaliza kwa leo — tutaonana kesho!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Hifadhi haipatikani. Tafadhali jaribu tena.</value>

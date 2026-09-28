@@ -27,10 +27,7 @@ public partial class AboutViewModel : LocalizedViewModel
     /// <summary>The shared grown-ups' check in front of the outward-facing links.</summary>
     public ParentGate Gate { get; }
 
-    /// <summary>
-    /// Shown after a gated link is unlocked. The destinations do not exist yet, so this says so
-    /// rather than pretending - a dead link would be worse than an honest message.
-    /// </summary>
+    /// <summary>Placeholder notice for external destinations that have not yet been configured.</summary>
     [ObservableProperty]
     public partial string Notice { get; private set; } = string.Empty;
 

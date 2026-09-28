@@ -45,24 +45,10 @@ public sealed record LevelSpec(int Level, int Size, int Difficulty, string? Puzz
     }
 }
 
-/// <summary>
-/// The 600-level campaign behind the Play button: every level's size, difficulty and picture,
-/// as a pure function of the level number and the shipped content.
-/// </summary>
+/// <summary>Maps the 600 campaign levels to deterministic boards and authored milestones.</summary>
 /// <remarks>
-/// <para>
-/// Nothing here is stored. The player's only campaign state is
-/// <see cref="PlayerProgress.HighestLevelCompleted"/>; everything else - what level 317 looks
-/// like, where the authored pictures sit - is recomputed from this catalog, so it cannot
-/// disagree with itself across screens.
-/// </para>
-/// <para>
-/// Levels climb through the board sizes in bands, with difficulty ramping 1-5 inside each band.
-/// The authored pictures are woven into their size's band as evenly spaced milestones, in
-/// content-file order - the same "the content file is the single place that decides" rule the
-/// old Puzzle Path followed. Locked packs are deliberately included: meeting a fairy-tale
-/// picture on the path is how that pack is earned.
-/// </para>
+/// The catalog is derived from level number and current content. Authored pictures retain
+/// content order within each size band. Locked packs are included so milestones can unlock them.
 /// </remarks>
 public static class LevelCatalog
 {
@@ -78,16 +64,7 @@ public static class LevelCatalog
     /// <summary>Salt mixed into level seeds so they can never collide with the daily puzzle's.</summary>
     private const uint SeedSalt = 0x4C564Cu;
 
-    /// <summary>
-    /// Earliest level within a band that may reveal a picture, as an offset from its first level.
-    /// </summary>
-    /// <remarks>
-    /// Two, so the first level of the campaign is a plain generated board and the first picture
-    /// arrives as a reward rather than as the opening move. This was always the stated intent, but
-    /// <c>Math.Max(1, ...)</c> guaranteed the opposite whenever a band held nearly as many pictures
-    /// as levels: the 5x5 band has 35 pictures across 40 levels, so level 1 revealed the first
-    /// shipped picture - and named it in the header, since authored puzzles show their name.
-    /// </remarks>
+    /// <summary>First allowed milestone offset within a band. Offset 1 is reserved for a generated board.</summary>
     private const int FirstMilestoneOffset = 2;
 
     private static readonly LevelBand[] Bands =
@@ -96,8 +73,7 @@ public static class LevelCatalog
         new(41, 200, GridSize.Normal),
         new(201, 400, GridSize.Big),
 
-        // The campaign tops out at 20x20 on purpose: 25x25 is tablet-only, and a campaign that
-        // walls off its last stretch on a phone would punish the players who got there.
+        // The campaign ends at 20x20 so every level remains available on phones.
         new(401, 600, GridSize.Huge),
     ];
 

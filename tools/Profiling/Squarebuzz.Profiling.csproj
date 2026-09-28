@@ -15,7 +15,7 @@
     <Using Include="Microsoft.Maui.Graphics" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Exercise production code, without platform handlers or pretending to render pixels. -->
+    <!-- Compile production controls and drawing code against the host fixture. -->
     <Compile Include="../../src/Squarebuzz.App/Controls/BoardView.cs" Link="App/BoardView.cs" />
     <Compile Include="../../src/Squarebuzz.App/Controls/BoardMiniMapView.cs" Link="App/BoardMiniMapView.cs" />
     <Compile Include="../../src/Squarebuzz.App/Controls/MagnifierView.cs" Link="App/MagnifierView.cs" />

@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · 時間充裕</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · 別停下來</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · 連眨眼都來不及</value></data>
+  <data name="timedName4" xml:space="preserve"><value>衝刺</value></data>
+  <data name="timedName5" xml:space="preserve"><value>大賽跑</value></data>
+  <data name="timedName6" xml:space="preserve"><value>馬拉松</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · 手指要快</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · 漫長的賽跑</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · 終極賽跑</value></data>
   <data name="quickGame" xml:space="preserve"><value>快速遊戲</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>自己挑尺寸和圖畫包</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>關卡</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>夜貓子</value></data>
   <data name="tr8" xml:space="preserve"><value>完美十格</value></data>
   <data name="tr9" xml:space="preserve"><value>收藏家</value></data>
+  <data name="tr10" xml:space="preserve"><value>戰勝時鐘</value></data>
+  <data name="tr11" xml:space="preserve"><value>馬拉松冠軍</value></data>
+  <data name="tr12" xml:space="preserve"><value>連續一個月</value></data>
+  <data name="tr13" xml:space="preserve"><value>大幅圖</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 個方塊</value></data>
+  <data name="tr15" xml:space="preserve"><value>摘星人</value></data>
+  <data name="tr16" xml:space="preserve"><value>探險家</value></data>
+  <data name="tr17" xml:space="preserve"><value>圖畫包大師</value></data>
+  <data name="tr18" xml:space="preserve"><value>零失誤</value></data>
   <data name="sound" xml:space="preserve"><value>音效</value></data>
   <data name="music" xml:space="preserve"><value>音樂</value></data>
   <data name="voice" xml:space="preserve"><value>語音朗讀</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>蘋果</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>帆船</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>恐龍</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>貓臉</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>貓咪</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>杯子蛋糕</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>賽車</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>火箭</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>雨傘</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>雪花</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>彩虹</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>貓頭鷹</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>狐狸</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>烏龜</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>大象</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>企鵝</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>長頸鹿</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>暴龍</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>翼龍</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>骨頭</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>雷龍</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>三角龍</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>太空人</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>幽浮</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>衛星</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>望遠鏡</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>太空梭</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>登月艇</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>獨角獸</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>魔法藥水</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>女巫帽</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>香蕉</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>紅蘿蔔</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>漢堡</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>甜甜圈</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>梨子</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>起司</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>腳踏車</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>火車</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>直升機</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>曳引機</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>機車</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>遊艇</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>鬱金香</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>松果</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>向日葵</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>小蜜蜂</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>瓢蟲</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>椰子樹</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>神燈</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>雪人</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>海馬</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>水母</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>燈塔</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>鯊魚</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>海豚</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>海浪</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>小提琴</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>麥克風</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>耳機</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>薩克斯風</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>沙鈴</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>足球</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>網球拍</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>滑板</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>安全帽</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>哨子</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>龍捲風</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>溫度計</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>風向袋</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>雨雲</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>神秘圖畫</value></data>
   <data name="magnifier" xml:space="preserve"><value>放大鏡</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>填塗時顯示放大的 3×3 檢視。預設關閉。</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>晚上八點以後完成一幅圖。</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>在 10×10 上拿到三顆星，且沒有錯誤。</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>找到圖庫裡的每一幅圖。</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>贏得任一場計時挑戰。</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>贏得馬拉松挑戰。</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>連續玩 30 天。</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>完成一個 15×15 或更大的圖。</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>累計填塗 1000 個方塊。</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>收集 100 顆星。</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>完成第 50 關。</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>找到一個圖畫包裡的每一幅圖。</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>不用提示、沒有錯誤，完成一個 15×15 或更大的圖。</value></data>
   <data name="dailyDone" xml:space="preserve"><value>今天就到這裡——明天見！</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>儲存空間無法使用。請再試一次。</value>

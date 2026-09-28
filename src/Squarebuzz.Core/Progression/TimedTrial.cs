@@ -26,6 +26,7 @@ public sealed record TimedTier(int Tier, int Size, TimeSpan Limit)
             Helpers = helpers,
             ForceGenerated = true,
             TimeLimit = Limit,
+            TimedTier = Tier,
         };
     }
 
@@ -37,13 +38,20 @@ public sealed record TimedTier(int Tier, int Size, TimeSpan Limit)
 }
 
 /// <summary>
-/// The three timed trials from the design: Warm-up, Steady and Lightning.
+/// The timed trials: the design's Warm-up, Steady and Lightning, and three more rungs after them.
 /// </summary>
 /// <remarks>
 /// <para>
-/// The figures are the prototype's: 5x5 in three minutes, 10x10 in five, then the same 10x10 in
-/// two. The jump that matters is the third - the same grid as the second with well under half the
-/// time, which is what makes it read as a dare rather than as more of the same.
+/// The first three figures are the prototype's: 5x5 in three minutes, 10x10 in five, then the
+/// same 10x10 in two. The jump that matters is the third - the same grid as the second with well
+/// under half the time, which is what makes it read as a dare rather than as more of the same.
+/// </para>
+/// <para>
+/// Sprint is Warm-up's 5x5 in half the time, a step before the first 10x10 race. Big Race and
+/// Marathon then move up a grid size each, with time to match - a 20x20 is a long
+/// puzzle for a child even untimed, so the Marathon is about stamina rather than speed. The tier
+/// number is an identity (strings, routes, trophies), so new rungs get new numbers and the list
+/// order alone decides where they appear.
 /// </para>
 /// <para>
 /// A trial is played under <see cref="ChallengeLevel.Sharp"/>, so mistakes are counted and there
@@ -54,11 +62,18 @@ public sealed record TimedTier(int Tier, int Size, TimeSpan Limit)
 /// </remarks>
 public static class TimedTrial
 {
+    /// <summary>The last and longest rung, which has a trophy of its own.</summary>
+    public const int MarathonTier = 6;
+
+    /// <summary>Every rung, in display order: easiest first.</summary>
     public static IReadOnlyList<TimedTier> Tiers { get; } =
     [
         new(1, GridSize.Tiny, TimeSpan.FromMinutes(3)),
+        new(4, GridSize.Tiny, TimeSpan.FromSeconds(90)),
         new(2, GridSize.Normal, TimeSpan.FromMinutes(5)),
         new(3, GridSize.Normal, TimeSpan.FromMinutes(2)),
+        new(5, GridSize.Big, TimeSpan.FromMinutes(10)),
+        new(MarathonTier, GridSize.Huge, TimeSpan.FromMinutes(20)),
     ];
 
     /// <summary>The tier with that number, or null if there is none.</summary>

@@ -68,7 +68,7 @@ public class AuthoredPuzzleSolvabilityTests
         var repository = new EmbeddedPuzzleRepository();
 
         Assert.Equal(12, repository.Packs.Count);
-        Assert.Equal(70, repository.Puzzles.Count);
+        Assert.Equal(130, repository.Puzzles.Count);
     }
 
     [Fact]

@@ -111,13 +111,11 @@ public partial class OnboardingViewModel : LocalizedViewModel
 
     private async Task FinishAsync()
     {
-        // Nobody wants card three read out over the menu they have just arrived at.
+        // Stop onboarding narration before navigating to the menu.
         _narration.StopSpeaking();
 
-        // The load and the save fail independently, so they are guarded independently. Under one
-        // try, a read that failed took the write down with it - and the flag is the whole point
-        // of this method. A player whose settings row could not be read for a moment should still
-        // not meet these cards again; defaults with the flag set are what a fresh player has anyway.
+        // Handle the settings read and completion write independently so a read failure does not
+        // prevent recording that onboarding is finished.
         GameSettings settings;
 
         try

@@ -6,7 +6,7 @@ using Xunit;
 namespace Squarebuzz.Core.Tests.Progression;
 
 /// <summary>
-/// Pins the nine trophy rules. These are product decisions rather than derived facts, so each
+/// Pins the trophy rules. These are product decisions rather than derived facts, so each
 /// test states the rule it is holding in place.
 /// </summary>
 public class TrophyEvaluatorTests
@@ -220,6 +220,23 @@ public class TrophyEvaluatorTests
 
         foreach (var trophy in TrophyEvaluator.Evaluate(Context(
             Completion(size: GridSize.Normal, stars: 3, mistakes: 0))))
+        {
+            reachable.Add(trophy);
+        }
+
+        // The long game: a won Marathon on a big grid, far into the campaign.
+        var marathon = Completion(puzzleId: null, size: GridSize.Huge, stars: 3, hints: 0, mistakes: 0)
+            with { TimedTier = TimedTrial.MarathonTier };
+
+        foreach (var trophy in TrophyEvaluator.Evaluate(Context(
+            marathon,
+            progress: PlayerProgress.Empty with
+            {
+                Streak = 30,
+                TotalBlocksFilled = 1000,
+                Stars = 100,
+                HighestLevelCompleted = 50,
+            })))
         {
             reachable.Add(trophy);
         }

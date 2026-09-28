@@ -264,19 +264,7 @@
                 <!-- Language -->
                 <Label Text="{Binding LanguageSection}" Style="{StaticResource SectionHeading}" />
                 <Border Style="{StaticResource Card}" Padding="16,12">
-                    <!--
-                      A picker rather than the wrapping chips this used to be: twenty-two of them
-                      filled a third of the screen, and the list is scanned once and then never
-                      touched again. The open list is the platform's own, so it does not carry the
-                      game's rounded look - worth it to get one row instead of six, and it brings
-                      the platform's keyboard and screen-reader handling with it.
-
-                      Title doubles as the dialog heading and reuses the section's own string, so
-                      no new key has to be added to twenty-two resx files for one line of chrome.
-
-                      Every language is written the way it writes itself, so it is recognisable
-                      whatever the app is currently showing - see AppLanguages.All.
-                    -->
+                    <!-- Use the native picker for the supported language list. -->
                     <Picker ItemsSource="{Binding Languages}"
                             ItemDisplayBinding="{Binding Endonym, x:DataType=vm:LanguageOption}"
                             SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"

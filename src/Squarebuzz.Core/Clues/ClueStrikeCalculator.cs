@@ -8,9 +8,9 @@ namespace Squarebuzz.Core.Clues;
 /// </summary>
 /// <remarks>
 /// Only runs that are pinned down are struck: those anchored to the start or end of the line
-/// by crosses or the edge. A matching run floating in the middle of an unresolved line is
-/// left alone, because it might yet turn out to belong to a different clue number - striking
-/// it would actively mislead a child.
+/// by crosses or the edge, and those anywhere else that the marks prove can only be one clue
+/// number at exactly its length. A matching run that might yet turn out to belong to a
+/// different clue number is left alone - striking it would actively mislead a child.
 /// </remarks>
 public static class ClueStrikeCalculator
 {
@@ -61,6 +61,10 @@ public static class ClueStrikeCalculator
         var claimedUpTo = StrikeFromStart(clues, line, struck);
         StrikeFromEnd(clues, line, struck, claimedUpTo);
 
+        // The end passes cannot see past the first unresolved cell, so a run in the middle of
+        // the line - the 3 of "2 3 2" - was never struck however clearly it was done.
+        StrikeProvenRuns(clues, line, struck);
+
         // Every number struck is the visual language for "this line is finished", so it must
         // never appear on a line that is not. Each individual strike above is defensible - the
         // run is anchored and the right length - but the passes stop as soon as they run out of
@@ -77,6 +81,171 @@ public static class ClueStrikeCalculator
             struck[..displayCount].Clear();
         }
     }
+
+    /// <summary>
+    /// Strikes every clue number that the marks prove is finished, wherever it sits in the line.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// A filled run is claimed by a clue number only when that is the <em>only</em> number any
+    /// arrangement consistent with the marks could place over it, and the number is exactly the
+    /// run's length - so the run can neither grow nor turn out to be a different number. That
+    /// is the same caution the end passes apply, stated as logic rather than as position: a
+    /// lone 3 against "2 3 2" can only be the 3, while a 1 floating inside "1 1" could be
+    /// either and stays unstruck.
+    /// </para>
+    /// <para>
+    /// When no arrangement fits the marks at all the player has made a mistake, and every
+    /// claim would rest on it. Nothing is added then; the end passes still report what they can.
+    /// Allocation-free for any real board: the two tables live on the stack.
+    /// </para>
+    /// </remarks>
+    private static void StrikeProvenRuns(LineClues clues, ReadOnlySpan<CellState> line, Span<bool> struck)
+    {
+        var n = line.Length;
+        var m = clues.Count;
+        var stride = n + 1;
+        var size = (m + 1) * stride;
+
+        Span<bool> prefix = size <= 1024 ? stackalloc bool[size] : new bool[size];
+        Span<bool> suffix = size <= 1024 ? stackalloc bool[size] : new bool[size];
+        prefix.Clear();
+        suffix.Clear();
+
+        // prefix[k, i]: the first k numbers fit in cells [0, i).
+        prefix[0] = true;
+        for (var i = 1; i <= n; i++)
+        {
+            for (var k = 0; k <= m; k++)
+            {
+                var fits = line[i - 1] != CellState.Filled && prefix[(k * stride) + i - 1];
+
+                if (!fits && k > 0)
+                {
+                    var start = i - clues[k - 1];
+                    fits = start >= 0
+                           && IsFreeOfCrosses(line, start, i)
+                           && (start == 0
+                               ? k == 1
+                               : line[start - 1] != CellState.Filled && prefix[((k - 1) * stride) + start - 1]);
+                }
+
+                prefix[(k * stride) + i] = fits;
+            }
+        }
+
+        // The marks contradict the clue: any claim would be built on a mistake.
+        if (!prefix[(m * stride) + n])
+        {
+            return;
+        }
+
+        // suffix[k, i]: numbers k onwards fit in cells [i, n).
+        suffix[(m * stride) + n] = true;
+        for (var i = n - 1; i >= 0; i--)
+        {
+            for (var k = m; k >= 0; k--)
+            {
+                var fits = line[i] != CellState.Filled && suffix[(k * stride) + i + 1];
+
+                if (!fits && k < m)
+                {
+                    var end = i + clues[k];
+                    fits = end <= n
+                           && IsFreeOfCrosses(line, i, end)
+                           && (end == n
+                               ? k == m - 1
+                               : line[end] != CellState.Filled && suffix[((k + 1) * stride) + end + 1]);
+                }
+
+                suffix[(k * stride) + i] = fits;
+            }
+        }
+
+        var cell = 0;
+        while (cell < n)
+        {
+            if (line[cell] != CellState.Filled)
+            {
+                cell++;
+                continue;
+            }
+
+            var runStart = cell;
+            while (cell < n && line[cell] == CellState.Filled)
+            {
+                cell++;
+            }
+
+            var runLength = cell - runStart;
+            var owner = -1;
+            var ambiguous = false;
+
+            for (var k = 0; k < m && !ambiguous; k++)
+            {
+                var length = clues[k];
+                if (length < runLength)
+                {
+                    continue;
+                }
+
+                // Every placement of number k that would cover the whole run.
+                var from = Math.Max(0, cell - length);
+                var to = Math.Min(runStart, n - length);
+
+                for (var start = from; start <= to; start++)
+                {
+                    if (CanPlace(clues, line, prefix, suffix, stride, k, start))
+                    {
+                        ambiguous = owner >= 0 && owner != k;
+                        owner = k;
+                        break;
+                    }
+                }
+            }
+
+            if (!ambiguous && owner >= 0 && clues[owner] == runLength)
+            {
+                struck[owner] = true;
+            }
+        }
+    }
+
+    /// <summary>Whether number <paramref name="k"/> can start at <paramref name="start"/> in some complete arrangement.</summary>
+    private static bool CanPlace(
+        LineClues clues,
+        ReadOnlySpan<CellState> line,
+        ReadOnlySpan<bool> prefix,
+        ReadOnlySpan<bool> suffix,
+        int stride,
+        int k,
+        int start)
+    {
+        var n = line.Length;
+        var m = clues.Count;
+        var end = start + clues[k];
+
+        if (!IsFreeOfCrosses(line, start, end))
+        {
+            return false;
+        }
+
+        var leftFits = start == 0
+            ? k == 0
+            : line[start - 1] != CellState.Filled && prefix[(k * stride) + start - 1];
+
+        if (!leftFits)
+        {
+            return false;
+        }
+
+        return end == n
+            ? k == m - 1
+            : line[end] != CellState.Filled && suffix[((k + 1) * stride) + end + 1];
+    }
+
+    private static bool IsFreeOfCrosses(ReadOnlySpan<CellState> line, int from, int to) =>
+        !line[from..to].Contains(CellState.Crossed);
 
     private static bool AllStruck(ReadOnlySpan<bool> struck, int displayCount)
     {

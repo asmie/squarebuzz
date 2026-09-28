@@ -12,15 +12,7 @@ namespace Squarebuzz.Data.Repositories;
 /// </summary>
 public sealed class SqliteSaveGameRepository : ISaveGameRepository
 {
-    /// <summary>
-    /// How many unfinished games are kept. Older ones are dropped, oldest first.
-    /// </summary>
-    /// <remarks>
-    /// Every new puzzle takes a new row, so abandoning games accumulated them without limit -
-    /// testing reached twenty-two, and Continue became a wall of five near-identical 5x5
-    /// Sailboats. This is a screen a six-year-old is meant to be able to use, and the games
-    /// worth resuming are the recent ones; a dozen is already more than anyone will scroll.
-    /// </remarks>
+    /// <summary>Maximum number of unfinished games retained, ordered by most recent save.</summary>
     public const int MaxSavedGames = 12;
 
     private readonly SquarebuzzDatabase _database;
@@ -164,6 +156,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         {
             Id = game.Id.ToString("D"),
             PuzzleId = game.PuzzleId,
+            PuzzleRevision = game.PuzzleRevision,
             Size = game.Size,
             Difficulty = game.Difficulty,
             PackId = game.PackId,
@@ -184,15 +177,9 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         };
     }
 
-    /// <summary>
-    /// The row as a <see cref="SavedGame"/>, or null when it cannot be addressed at all.
-    /// </summary>
+    /// <summary>Reads a saved row, returning null only when its ID cannot be parsed.</summary>
     /// <remarks>
-    /// The cells and the challenge were always read defensively; the id, the duration and the
-    /// timestamp went through parsers that throw, so one bad row emptied the Continue screen for
-    /// every save at once. Now only an unparseable id drops the row - Resume and Delete address a
-    /// save by that id, so there is nothing to offer without it. Everything else falls back to a
-    /// visibly wrong value and keeps the player's board. See <see cref="RowGuards"/>.
+    /// Other corrupt fields use conservative defaults so a damaged row remains visible and deletable.
     /// </remarks>
     private static SavedGame? ToModel(SavedGameEntity row)
     {
@@ -226,6 +213,7 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         {
             Id = id,
             PuzzleId = row.PuzzleId,
+            PuzzleRevision = row.PuzzleRevision,
             Size = row.Size,
             Difficulty = row.Difficulty,
             PackId = row.PackId,

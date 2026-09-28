@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · laiko daug</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · nesustok</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · nė sumirksėti</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sprintas</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Didžiosios lenktynės</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maratonas</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · greiti pirštai</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · ilgos lenktynės</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · didžiausios lenktynės</value></data>
   <data name="quickGame" xml:space="preserve"><value>Greitas žaidimas</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Pasirink dydį ir rinkinį</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Lygiai</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Naktibalda</value></data>
   <data name="tr8" xml:space="preserve"><value>Tobula dešimtis</value></data>
   <data name="tr9" xml:space="preserve"><value>Kolekcionierius</value></data>
+  <data name="tr10" xml:space="preserve"><value>Aplenk laikrodį</value></data>
+  <data name="tr11" xml:space="preserve"><value>Maratono čempionas</value></data>
+  <data name="tr12" xml:space="preserve"><value>Mėnuo iš eilės</value></data>
+  <data name="tr13" xml:space="preserve"><value>Didelis paveikslėlis</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 kubelių</value></data>
+  <data name="tr15" xml:space="preserve"><value>Žvaigždžių rinkėjas</value></data>
+  <data name="tr16" xml:space="preserve"><value>Tyrinėtojas</value></data>
+  <data name="tr17" xml:space="preserve"><value>Rinkinio meistras</value></data>
+  <data name="tr18" xml:space="preserve"><value>Be priekaištų</value></data>
   <data name="sound" xml:space="preserve"><value>Garso efektai</value></data>
   <data name="music" xml:space="preserve"><value>Muzika</value></data>
   <data name="voice" xml:space="preserve"><value>Skaitymas balsu</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Skėtis</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Snaigė</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Vaivorykštė</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Pelėda</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Lapė</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Vėžlys</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Dramblys</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pingvinas</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Žirafa</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>Tiranozauras</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktilis</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Kaulas</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontozauras</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratopsas</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronautas</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>NSO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Palydovas</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Teleskopas</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Erdvėlaivis</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Mėnulio modulis</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Vienaragis</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Stebuklingas eliksyras</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Raganos skrybėlė</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Bananas</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Morka</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Mėsainis</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Spurga</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Kriaušė</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Sūris</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Dviratis</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Traukinys</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Sraigtasparnis</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktorius</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Motoroleris</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jachta</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulpė</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Kankorėžis</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Saulėgrąža</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Bitė</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Boružė</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palmė</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Stebuklinga lempa</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Senis besmegenis</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Jūrų arkliukas</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Medūza</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Švyturys</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Ryklys</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfinas</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Banga</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Smuikas</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofonas</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Ausinės</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksofonas</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakasai</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Futbolo kamuolys</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Teniso raketė</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Riedlentė</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Šalmas</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Švilpukas</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Viesulas</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Termometras</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Vėjarodis</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Lietaus debesis</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Paslaptingas paveikslėlis</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Rodo padidintą 3×3 vaizdą, kai spalvini. Iš pradžių išjungta.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Užbaik paveikslėlį po 20 val.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Trys žvaigždutės 10×10 be nė vienos klaidos.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Surask visus galerijos paveikslėlius.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Laimėk bet kurį išbandymą su laiku.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Laimėk Maratono išbandymą.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Žaisk 30 dienų iš eilės.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Užbaik 15×15 ar didesnį paveikslėlį.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Iš viso užpildyk 1000 kubelių.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Surink 100 žvaigždučių.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Užbaik 50-ą lygį.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Surask visus vieno rinkinio paveikslėlius.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Užbaik 15×15 ar didesnį paveikslėlį be užuominų ir be klaidų.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Šiandien atlikta — iki rytojaus!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Saugykla nepasiekiama. Bandyk dar kartą.</value>

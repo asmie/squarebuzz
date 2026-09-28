@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · runsaasti aikaa</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · pidä vauhtia</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · ei aikaa räpäyttää</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Pikamatka</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Iso kisa</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maraton</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · nopeat sormet</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · pitkä kisa</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · kisojen kisa</value></data>
   <data name="quickGame" xml:space="preserve"><value>Pikapeli</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Valitse itse koko ja kuvapaketti</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Tasot</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Yökyöpeli</value></data>
   <data name="tr8" xml:space="preserve"><value>Täysi kymppi</value></data>
   <data name="tr9" xml:space="preserve"><value>Keräilijä</value></data>
+  <data name="tr10" xml:space="preserve"><value>Kelloa nopeampi</value></data>
+  <data name="tr11" xml:space="preserve"><value>Maratonmestari</value></data>
+  <data name="tr12" xml:space="preserve"><value>Kuukausi putkeen</value></data>
+  <data name="tr13" xml:space="preserve"><value>Iso kuva</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 palikkaa</value></data>
+  <data name="tr15" xml:space="preserve"><value>Tähtisilmä</value></data>
+  <data name="tr16" xml:space="preserve"><value>Tutkimusmatkailija</value></data>
+  <data name="tr17" xml:space="preserve"><value>Pakettimestari</value></data>
+  <data name="tr18" xml:space="preserve"><value>Virheetön</value></data>
   <data name="sound" xml:space="preserve"><value>Äänitehosteet</value></data>
   <data name="music" xml:space="preserve"><value>Musiikki</value></data>
   <data name="voice" xml:space="preserve"><value>Lukee ääneen</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>Omena</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>Purjevene</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>Dinosaurus</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Kissan naama</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kissa</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>Kuppikakku</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>Kilpa-auto</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Raketti</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Sateenvarjo</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Lumihiutale</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Sateenkaari</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Pöllö</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Kettu</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Kilpikonna</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Norsu</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pingviini</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Kirahvi</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktyyli</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Luu</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontosaurus</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronautti</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>Ufo</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Satelliitti</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Kaukoputki</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Avaruussukkula</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Kuumoduuli</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Yksisarvinen</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Taikajuoma</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Noidan hattu</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banaani</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Porkkana</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Hampurilainen</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donitsi</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Päärynä</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Juusto</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Pyörä</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Juna</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopteri</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktori</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Skootteri</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jahti</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulppaani</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Käpy</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Auringonkukka</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Mehiläinen</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Leppäkerttu</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palmu</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Taikalamppu</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Lumiukko</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Merihevonen</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Meduusa</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Majakka</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Hai</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfiini</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Aalto</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Viulu</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofoni</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Kuulokkeet</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksofoni</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakassit</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Jalkapallo</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Tennismaila</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Rullalauta</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Kypärä</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Pilli</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornado</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Lämpömittari</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Tuulipussi</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Sadepilvi</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Salainen kuva</value></data>
   <data name="magnifier" xml:space="preserve"><value>Suurennuslasi</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Näyttää 3×3-lähikuvan, kun maalaat. Oletuksena pois.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Tee kuva valmiiksi kello 20 jälkeen.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Kolme tähteä 10×10-pulmasta ilman virheitä.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Löydä galleriasta kaikki kuvat.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Voita mikä tahansa aikahaaste.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Voita Maraton-haaste.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Pelaa 30 päivää putkeen.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Tee valmiiksi 15×15 tai isompi.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Täytä yhteensä 1000 palikkaa.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Kerää 100 tähteä.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Läpäise taso 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Löydä kaikki kuvat yhdestä kuvapaketista.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Tee valmiiksi 15×15 tai isompi ilman vihjeitä ja virheitä.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Tämä päivä tehty — huomiseen!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Tallennustila ei ole käytettävissä. Yritä uudelleen.</value>

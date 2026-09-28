@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · času dost</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · nezastavuj</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · ani nemrkni</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sprint</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Velký závod</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maraton</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · rychlé prsty</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · dlouhý závod</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · závod všech závodů</value></data>
   <data name="quickGame" xml:space="preserve"><value>Rychlá hra</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Vyber si vlastní velikost a sadu</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Úrovně</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Noční sova</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfektní desítka</value></data>
   <data name="tr9" xml:space="preserve"><value>Sběratel</value></data>
+  <data name="tr10" xml:space="preserve"><value>Rychlejší než čas</value></data>
+  <data name="tr11" xml:space="preserve"><value>Šampion maratonu</value></data>
+  <data name="tr12" xml:space="preserve"><value>Měsíc v kuse</value></data>
+  <data name="tr13" xml:space="preserve"><value>Velký obrázek</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 kostiček</value></data>
+  <data name="tr15" xml:space="preserve"><value>Hvězdář</value></data>
+  <data name="tr16" xml:space="preserve"><value>Průzkumník</value></data>
+  <data name="tr17" xml:space="preserve"><value>Mistr sady</value></data>
+  <data name="tr18" xml:space="preserve"><value>Bez chybičky</value></data>
   <data name="sound" xml:space="preserve"><value>Zvuky</value></data>
   <data name="music" xml:space="preserve"><value>Hudba</value></data>
   <data name="voice" xml:space="preserve"><value>Čtení nahlas</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Deštník</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Sněhová vločka</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Duha</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Sova</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Liška</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Želva</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Slon</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Tučňák</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Žirafa</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktyl</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Kost</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontosaurus</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronaut</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>UFO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Družice</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Dalekohled</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Raketoplán</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Lunární modul</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Jednorožec</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Kouzelný lektvar</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Čarodějnický klobouk</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banán</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Mrkev</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Hamburger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donut</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Hruška</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Sýr</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Kolo</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Vlak</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Vrtulník</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktor</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Skútr</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jachta</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulipán</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Šiška</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Slunečnice</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Včela</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Beruška</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palma</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Kouzelná lampa</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Sněhulák</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Mořský koník</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Medúza</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Maják</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Žralok</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfín</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Vlna</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Housle</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofon</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Sluchátka</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saxofon</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Rumba koule</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Fotbalový míč</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Tenisová raketa</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Skateboard</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Helma</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Píšťalka</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornádo</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Teploměr</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Větrný rukáv</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Dešťový mrak</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Tajemný obrázek</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Při malování ukazuje zvětšený výřez 3×3. Ve výchozím stavu vypnutá.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Dokonči obrázek po osmé večer.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tři hvězdičky na 10×10 bez jediné chyby.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Najdi všechny obrázky v galerii.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Vyhraj jakoukoli výzvu na čas.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Vyhraj výzvu Maraton.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Hraj 30 dní v řadě.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Dokonči obrázek 15×15 nebo větší.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Vybarvi dohromady 1000 kostiček.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Nasbírej 100 hvězdiček.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Dokonči úroveň 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Najdi všechny obrázky v jedné sadě.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Dokonči obrázek 15×15 nebo větší bez nápovědy a bez chyby.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Dneska hotovo — zítra zas!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Úložiště není dostupné. Zkuste to znovu.</value>

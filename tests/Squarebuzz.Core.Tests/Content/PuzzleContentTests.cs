@@ -6,9 +6,7 @@ using Xunit;
 namespace Squarebuzz.Core.Tests.Content;
 
 /// <summary>
-/// Guards the authored puzzle content and the embedded-resource wiring that ships it.
-/// These assertions are about data, not behaviour, so they stay valid as the domain grows -
-/// and they fail loudly if someone hand-edits a grid into an inconsistent shape.
+/// Checks authored grid structure, revision lookup and embedded-resource wiring.
 /// </summary>
 public class PuzzleContentTests
 {
@@ -24,9 +22,7 @@ public class PuzzleContentTests
     }
 
     [Fact]
-    // The width and height fields used to be parsed and ignored - Puzzle.FromRows derives the
-    // real size from the rows - so an entry could declare 10x10 over a 5x5 grid and ship. The
-    // loader now checks the declaration against the grid it describes and names the culprit.
+    // Declared dimensions must match the rows from which Puzzle derives its actual size.
     public void APuzzleWhoseDeclaredSizeDisagreesWithItsRows_IsRejectedAtLoad()
     {
         const string lying = """
@@ -77,8 +73,7 @@ public class PuzzleContentTests
                 Assert.NotNull(row);
                 Assert.Equal(width, row.Length);
 
-                // Only '#' (filled) and '.' (empty) are legal. A stray character would
-                // otherwise be silently read as "empty" and quietly change the picture.
+                // Reject unknown characters before the loader treats them as empty cells.
                 Assert.All(row, c => Assert.True(c is '#' or '.', $"Puzzle '{id}' contains illegal grid character '{c}'."));
             }
         }
@@ -95,6 +90,25 @@ public class PuzzleContentTests
             .ToList();
 
         Assert.Equal(ids.Count, ids.Distinct().Count());
+    }
+
+    [Fact]
+    public void EveryArchivedRevision_ResolvesExactlyAndIsExcludedFromNewGames()
+    {
+        using var doc = LoadContent();
+        var repository = new Core.Content.EmbeddedPuzzleRepository();
+        foreach (var entry in doc.RootElement.GetProperty("archivedPuzzles").EnumerateArray())
+        {
+            var id = entry.GetProperty("id").GetString()!;
+            var revision = entry.GetProperty("revision").GetInt32();
+            var puzzle = repository.FindById(id, revision);
+            Assert.NotNull(puzzle);
+            var expected = string.Concat(entry.GetProperty("rows").EnumerateArray().Select(row => row.GetString()))
+                .Select(cell => cell == '#').ToArray();
+            Assert.Equal(expected, puzzle.Solution.ToArray());
+            Assert.DoesNotContain(puzzle, repository.Puzzles);
+            Assert.DoesNotContain(puzzle, repository.Find(puzzle.Pack, puzzle.Width));
+        }
     }
 
     [Fact]
@@ -115,11 +129,8 @@ public class PuzzleContentTests
     }
 
     [Fact]
-    public void EveryPuzzle_HasAtLeastOneFilledCellInEveryRowAndColumn()
+    public void EveryPuzzle_HasAtMostTwoEmptyRowsAndColumns()
     {
-        // A fully empty line is legal nonogram-wise (clue "0"), but in this game it reads as
-        // a bug in the picture, and the prototype's generator explicitly avoids it. Authored
-        // content should hold to the same bar.
         using var doc = LoadContent();
 
         foreach (var puzzle in doc.RootElement.GetProperty("puzzles").EnumerateArray())
@@ -131,8 +142,7 @@ public class PuzzleContentTests
             var emptyRows = rows.Count(r => !r.Contains('#'));
             var emptyColumns = Enumerable.Range(0, width).Count(x => rows.All(r => r[x] != '#'));
 
-            // The prototype's own art has a few deliberately blank edge rows (car, crown),
-            // so allow up to two per axis rather than demanding none.
+            // Allow limited empty space around the silhouette.
             Assert.True(emptyRows <= 2, $"Puzzle '{id}' has {emptyRows} completely empty rows.");
             Assert.True(emptyColumns <= 2, $"Puzzle '{id}' has {emptyColumns} completely empty columns.");
         }

@@ -44,11 +44,9 @@ public sealed class GameSessionFactory
         return new GameSession(puzzle, rules, options with { Seed = seed }, seed);
     }
 
-    /// <summary>Resumes a specific picture, for continuing a saved game.</summary>
+    /// <summary>Creates a session for a specific picture.</summary>
     /// <remarks>
-    /// Kept as an instance member despite touching no fields: it is the resume counterpart to
-    /// <see cref="Create"/>, and callers reach both through the injected factory. Making it
-    /// static would split session construction across two call styles for no benefit.
+    /// Kept on the factory alongside Create so callers use one session-construction API.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Performance",
@@ -61,14 +59,9 @@ public sealed class GameSessionFactory
         return new GameSession(puzzle, GameRules.Create(challenge, helpers));
     }
 
-    /// <summary>
-    /// Recovers the picture a save was playing, without building a session around it.
-    /// </summary>
+    /// <summary>Resolves the picture used by a save.</summary>
     /// <remarks>
-    /// Needed on its own by the Continue screen, which draws a thumbnail of every save but has
-    /// no reason to construct playable sessions for a list. Authored pictures are looked up by
-    /// id; generated ones are rebuilt from the stored seed, which is the whole reason generation
-    /// has to be deterministic.
+    /// Authored saves use an exact ID and revision. Generated saves use their original request and seed.
     /// </remarks>
     public Puzzle ResolvePuzzle(SavedGame save)
     {
@@ -76,20 +69,15 @@ public sealed class GameSessionFactory
 
         if (save.PuzzleId is { } id)
         {
-            return _repository.FindById(id)
+            return _repository.FindById(id, save.PuzzleRevision)
                    ?? throw new InvalidOperationException(
-                       $"Saved game references puzzle '{id}', which is no longer in the shipped content.");
+                       $"Saved game references puzzle '{id}' revision {save.PuzzleRevision}, which is no longer in the shipped content.");
         }
 
         return _generator.Generate(new PuzzleRequest(save.Size, save.Size, save.Difficulty, save.PackId, save.Seed));
     }
 
-    /// <summary>Rebuilds a playable session from a save, marks and all.</summary>
-    /// <remarks>
-    /// The result is always untimed. That is not an omission here but a property of the save
-    /// itself: <see cref="SavedGame"/> carries no time limit and <see cref="SavedGame.FromSession"/>
-    /// refuses a timed session, so there is no countdown to restore.
-    /// </remarks>
+    /// <summary>Restores an untimed session and its saved marks. Timed sessions cannot be saved.</summary>
     public GameSession Restore(SavedGame save, HelperSettings helpers)
     {
         ArgumentNullException.ThrowIfNull(save);
@@ -102,6 +90,7 @@ public sealed class GameSessionFactory
             // Restart recreates the session from this origin. Preserve the saved picture
             // selection instead of letting size and pack choose a different one.
             PuzzleId = save.PuzzleId,
+            PuzzleRevision = save.IsGenerated ? null : save.PuzzleRevision,
             ForceGenerated = save.IsGenerated,
             Level = save.Level,
             DailyDate = save.DailyDate,
@@ -118,12 +107,21 @@ public sealed class GameSessionFactory
 
     private Puzzle SelectPuzzle(NewGameOptions options, int seed, IReadOnlySet<string>? unlockedPackIds)
     {
-        // An explicit pick wins over size and pack - that is the whole point of choosing from
-        // the Gallery. A missing id falls through rather than failing, so removing content
-        // cannot strand a player on an error.
-        if (options.PuzzleId is { } requested && _repository.FindById(requested) is { } picked)
+        // An explicit gallery selection overrides size and pack. Missing gallery picks may fall
+        // back, but a restart with an explicit revision must resolve exactly.
+        if (options.PuzzleId is { } requested)
         {
-            return picked;
+            if (_repository.FindById(requested, options.PuzzleRevision) is { } picked)
+            {
+                return picked;
+            }
+
+            // A restart must never silently replace the board it is replaying.
+            if (options.PuzzleRevision is { } revision)
+            {
+                throw new InvalidOperationException(
+                    $"Puzzle '{requested}' revision {revision} is no longer in the shipped content.");
+            }
         }
 
         if (GridSize.IsAuthored(options.Size) && !options.ForceGenerated)

@@ -15,40 +15,20 @@ public sealed record TrophyContext(
     IReadOnlyList<Puzzle> AllPuzzles,
     IReadOnlySet<TrophyId> AlreadyEarned);
 
-/// <summary>
-/// Decides which trophies a completion has just earned.
-/// </summary>
-/// <remarks>
-/// <para>
-/// The prototype named nine trophies but never defined what wins them, so the thresholds below
-/// are a first proposal, gathered here deliberately so they are easy to argue with and change.
-/// Each is a named constant with the reasoning next to it.
-/// </para>
-/// <para>
-/// Pure and static: it reads a snapshot and returns what was earned, leaving awarding and
-/// persistence to the caller. Nothing here needs injecting, and the rules are cheap to test
-/// precisely because they touch no state of their own.
-/// </para>
-/// </remarks>
+/// <summary>Evaluates newly earned trophies from a completion snapshot. Persistence is handled by the caller.</summary>
 public static class TrophyEvaluator
 {
     /// <summary>A week of consecutive days. The trophy is called "Week Streak".</summary>
     public const int WeekStreakDays = 7;
 
-    /// <summary>
-    /// "Speedy" targets a 5x5. A minute is comfortable for an adult and a real push for a child,
-    /// which is roughly where a trophy should sit.
-    /// </summary>
+    /// <summary>Maximum solve duration for the Speedy 5x5 trophy.</summary>
     public const int SpeedySeconds = 60;
     public const int SpeedySize = GridSize.Tiny;
 
     /// <summary>"100 Blocks" counts filled cells across every puzzle ever finished.</summary>
     public const int HundredBlocks = 100;
 
-    /// <summary>
-    /// "Perfect Ten" reads as a perfect 10x10: three stars, and no mistakes either, so it means
-    /// a genuinely clean solve rather than one that scraped three stars.
-    /// </summary>
+    /// <summary>Perfect Ten requires a 10x10 completion with three stars and no mistakes.</summary>
     public const int PerfectTenSize = GridSize.Normal;
 
     /// <summary>Night Owl: finishing late in the evening or very early morning.</summary>
@@ -57,6 +37,26 @@ public static class TrophyEvaluator
 
     /// <summary>The pack "Dino Fan" is about.</summary>
     public const string DinoPackId = "dinos";
+
+    /// <summary>A month of consecutive days, the long sibling of "Week Streak".</summary>
+    public const int MonthStreakDays = 30;
+
+    /// <summary>
+    /// "Big Picture" and "Flawless" start at the first size with no authored pictures: a 15x15 is
+    /// where a puzzle stops being a quick one.
+    /// </summary>
+    public const int BigPictureSize = GridSize.Big;
+
+    /// <summary>"1000 Blocks", ten times "100 Blocks".</summary>
+    public const int ThousandBlocks = 1000;
+
+    /// <summary>Total stars required for Star Gazer.</summary>
+    public const int StarGazerStars = 100;
+
+    /// <summary>
+    /// "Explorer": far enough into the campaign to have left the 5x5 band (levels 1-40) behind.
+    /// </summary>
+    public const int ExplorerLevel = 50;
 
     /// <summary>
     /// Evaluates every rule and returns only newly earned trophies, so the caller can award
@@ -102,6 +102,28 @@ public static class TrophyEvaluator
 
         Award(TrophyId.Collector, HasCompletedEverything(context));
 
+        // Any rung of the ladder, won before the clock ran out - a lost trial never completes.
+        Award(TrophyId.BeatTheClock, completion.TimedTier is not null);
+
+        Award(TrophyId.MarathonChamp, completion.TimedTier == TimedTrial.MarathonTier);
+
+        Award(TrophyId.MonthStreak, context.Progress.Streak >= MonthStreakDays);
+
+        Award(TrophyId.BigPicture, completion.Size >= BigPictureSize);
+
+        Award(TrophyId.ThousandBlocks, context.Progress.TotalBlocksFilled >= ThousandBlocks);
+
+        Award(TrophyId.StarGazer, context.Progress.Stars >= StarGazerStars);
+
+        Award(TrophyId.Explorer, context.Progress.HighestLevelCompleted >= ExplorerLevel);
+
+        Award(TrophyId.PackMaster, HasCompletedAnyPack(context));
+
+        // Stricter than "Perfect Ten": no hint at all, not merely few enough to keep three stars.
+        Award(
+            TrophyId.Flawless,
+            completion.Size >= BigPictureSize && completion.HintsUsed == 0 && completion.Mistakes == 0);
+
         return earned;
     }
 
@@ -123,6 +145,13 @@ public static class TrophyEvaluator
 
         return inPack.All(solvedIds.Contains);
     }
+
+    /// <summary>Every authored picture of at least one pack finished.</summary>
+    private static bool HasCompletedAnyPack(TrophyContext context) =>
+        context.AllPuzzles
+            .Select(p => p.Pack)
+            .Distinct(StringComparer.Ordinal)
+            .Any(pack => HasCompletedPack(context, pack));
 
     /// <summary>
     /// Every shipped picture found. Locked packs are included on purpose: the collection is the

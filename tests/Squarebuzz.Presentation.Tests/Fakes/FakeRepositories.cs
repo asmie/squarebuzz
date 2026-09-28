@@ -249,8 +249,9 @@ public sealed class FakePuzzleRepository : IPuzzleRepository
             && p.Height == size
             && string.Equals(p.Pack, packId, StringComparison.Ordinal))];
 
-    public Puzzle? FindById(string puzzleId) =>
-        PuzzlesList.FirstOrDefault(p => string.Equals(p.Id, puzzleId, StringComparison.Ordinal));
+    public Puzzle? FindById(string puzzleId, int? revision = null) =>
+        PuzzlesList.FirstOrDefault(p => string.Equals(p.Id, puzzleId, StringComparison.Ordinal)
+                                       && (revision is null || revision == p.Revision));
 }
 
 /// <summary>

@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · genoeg tijd</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · blijf doorgaan</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · geen tijd om te knipperen</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sprint</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Grote race</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Marathon</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · snelle vingers</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · een lange race</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · de ultieme race</value></data>
   <data name="quickGame" xml:space="preserve"><value>Snel spelletje</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Kies zelf je formaat en pakket</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Levels</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Nachtuil</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfecte tien</value></data>
   <data name="tr9" xml:space="preserve"><value>Verzamelaar</value></data>
+  <data name="tr10" xml:space="preserve"><value>Klop de klok</value></data>
+  <data name="tr11" xml:space="preserve"><value>Marathonkampioen</value></data>
+  <data name="tr12" xml:space="preserve"><value>Maand op rij</value></data>
+  <data name="tr13" xml:space="preserve"><value>Groot plaatje</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 blokjes</value></data>
+  <data name="tr15" xml:space="preserve"><value>Sterrenkijker</value></data>
+  <data name="tr16" xml:space="preserve"><value>Ontdekker</value></data>
+  <data name="tr17" xml:space="preserve"><value>Pakketmeester</value></data>
+  <data name="tr18" xml:space="preserve"><value>Foutloos</value></data>
   <data name="sound" xml:space="preserve"><value>Geluidjes</value></data>
   <data name="music" xml:space="preserve"><value>Muziek</value></data>
   <data name="voice" xml:space="preserve"><value>Voorlezen</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Paraplu</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Sneeuwvlokje</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Regenboog</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Uil</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Vos</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Schildpad</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Olifant</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pinguïn</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Giraf</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodactylus</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Bot</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontosaurus</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronaut</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>Ufo</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Satelliet</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Telescoop</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Spaceshuttle</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Maanlander</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Eenhoorn</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Toverdrankje</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Heksenhoed</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banaan</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Wortel</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Hamburger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donut</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Peer</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Kaas</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Fiets</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Trein</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopter</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Tractor</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Scooter</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jacht</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulp</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Dennenappel</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Zonnebloem</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Bij</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Lieveheersbeestje</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palmboom</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Wonderlamp</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Sneeuwpop</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Zeepaardje</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Kwal</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Vuurtoren</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Haai</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Dolfijn</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Golf</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Viool</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Microfoon</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Koptelefoon</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saxofoon</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Sambaballen</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Voetbal</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Tennisracket</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Skateboard</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Helm</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Fluitje</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornado</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Thermometer</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Windzak</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Regenwolk</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Geheime tekening</value></data>
   <data name="magnifier" xml:space="preserve"><value>Loep</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Laat tijdens het inkleuren een uitvergroot stukje van 3×3 zien. Standaard uit.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Maak een tekening af na 20:00.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Drie sterren op een 10×10, zonder fouten.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Vind elke tekening in de galerij.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Win een tijdsuitdaging.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Win de Marathon-uitdaging.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Speel 30 dagen op rij.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Maak een 15×15 of groter af.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Vul in totaal 1000 blokjes.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Verzamel 100 sterren.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Maak level 50 af.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Vind elke tekening in één pakket.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Maak een 15×15 of groter af zonder hints en zonder fouten.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Klaar voor vandaag — tot morgen!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>De opslag is niet beschikbaar. Probeer het opnieuw.</value>

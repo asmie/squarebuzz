@@ -60,6 +60,9 @@ internal sealed class SavedGameEntity
     [Column("puzzle_id")]
     public string? PuzzleId { get; set; }
 
+    [Column("puzzle_revision")]
+    public int PuzzleRevision { get; set; } = 1;
+
     [Column("size")]
     public int Size { get; set; }
 

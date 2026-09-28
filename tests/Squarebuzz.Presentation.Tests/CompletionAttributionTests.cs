@@ -54,6 +54,20 @@ public sealed class CompletionAttributionTests : IDisposable
     }
 
     [Fact]
+    public async Task WinningATimedTrial_RecordsItsTier()
+    {
+        // The clock trophies read the tier off the completion, so it must survive the trip.
+        _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["tier"] = "4" });
+        await _h.Vm.InitialiseAsync();
+
+        _h.SolveCurrentPuzzle();
+        await GameViewModelHarness.WaitUntilAsync(() => _h.Progress.Completions.Count == 1);
+
+        var completion = Assert.Single(_h.Progress.Completions);
+        Assert.Equal(4, completion.TimedTier);
+    }
+
+    [Fact]
     public async Task CompletingLevel_RecordsStatsOfTheSolvedGame()
     {
         await StartLevelAsync(3);

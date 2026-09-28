@@ -8,7 +8,7 @@ namespace Squarebuzz.Presentation.Tests;
 
 public sealed class TrialsViewModelTests : IDisposable
 {
-    private static readonly int[] ExpectedTierNumbers = [1, 2, 3];
+    private static readonly int[] ExpectedTierNumbers = [1, 4, 2, 3, 5, 6];
 
     private readonly FakeLocalizationService _strings = new();
     private readonly FakeProgressRepository _progress = new();
@@ -50,11 +50,11 @@ public sealed class TrialsViewModelTests : IDisposable
     }
 
     [Fact]
-    public async Task Ladder_HasTheThreeTimedTiers()
+    public async Task Ladder_HasEveryTimedTier()
     {
         await _vm.OnAppearingAsync();
 
-        Assert.Equal(3, _vm.Timed.Count);
+        Assert.Equal(6, _vm.Timed.Count);
         Assert.Equal(ExpectedTierNumbers, _vm.Timed.Select(t => t.Tier.Tier));
     }
 
@@ -63,7 +63,7 @@ public sealed class TrialsViewModelTests : IDisposable
     {
         await _vm.OnAppearingAsync();
 
-        await _vm.PlayTimedCommand.ExecuteAsync(_vm.Timed[1]);
+        await _vm.PlayTimedCommand.ExecuteAsync(_vm.Timed[2]);
 
         var request = Assert.Single(_navigation.Requests);
         Assert.Equal(Routes.Game, request.Route);
@@ -103,8 +103,8 @@ public sealed class TrialsViewModelTests : IDisposable
 
         await _vm.OnAppearingAsync();
 
-        Assert.Equal(9, _vm.Trophies.Count);
+        Assert.Equal(18, _vm.Trophies.Count);
         Assert.Equal(1, _vm.Trophies.Count(t => t.IsEarned));
-        Assert.Equal("galleryFound:1,9", _vm.EarnedSummary);
+        Assert.Equal("galleryFound:1,18", _vm.EarnedSummary);
     }
 }

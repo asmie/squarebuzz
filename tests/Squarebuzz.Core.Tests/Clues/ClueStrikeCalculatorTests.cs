@@ -86,10 +86,49 @@ public class ClueStrikeCalculatorTests
     [Fact]
     public void UnterminatedRun_IsNotStruck()
     {
-        // "##..." might yet grow: without a cross after it, the 2 is not settled.
-        var struck = ClueStrikeCalculator.Compute(new LineClues(2, 1), Marks("##..."));
+        // "##..." might yet grow into the 3: without a cross after it, nothing is settled.
+        var struck = ClueStrikeCalculator.Compute(new LineClues(3, 1), Marks("##..."));
 
         Assert.Equal([false, false], struck);
+    }
+
+    [Fact]
+    public void RunThatCannotGrow_IsStruckWithoutACross()
+    {
+        // No number is longer than 2, so "##..." is already the whole of the first 2.
+        var struck = ClueStrikeCalculator.Compute(new LineClues(2, 1), Marks("##..."));
+
+        Assert.Equal([true, false], struck);
+    }
+
+    [Theory]
+    // The reported case: the 3 of "2 3 2" sits in the middle, unreachable from either end.
+    [InlineData("...###....", new[] { 2, 3, 2 }, new[] { false, true, false })]
+    [InlineData("..x###x...", new[] { 2, 3, 2 }, new[] { false, true, false })]
+    [InlineData("....###...", new[] { 2, 3, 2 }, new[] { false, true, false })]
+    // Equal numbers stay open while either could own the run...
+    [InlineData("...##.....", new[] { 2, 2 }, new[] { false, false })]
+    [InlineData(".x#x.", new[] { 1, 1 }, new[] { false, false })]
+    // ...but position alone can settle it: only the second 2 can reach this far right.
+    [InlineData(".....x##x.", new[] { 2, 2 }, new[] { false, true })]
+    // The middle number is struck alongside anchored ones.
+    [InlineData("#x.###..x#", new[] { 1, 3, 1 }, new[] { true, true, true })]
+    [InlineData("##x..###.......", new[] { 2, 3, 4 }, new[] { true, true, false })]
+    public void RunInTheMiddle_IsStruckWhenOnlyOneNumberFits(string line, int[] runs, bool[] expected)
+    {
+        var struck = ClueStrikeCalculator.Compute(new LineClues(runs), Marks(line));
+
+        Assert.Equal(expected, struck);
+    }
+
+    [Fact]
+    public void ContradictoryMarks_AddNoMiddleStrikes()
+    {
+        // The crosses leave no room for the 2s around the 3, so the marks are wrong somewhere
+        // and a claim resting on them could be wrong too.
+        var struck = ClueStrikeCalculator.Compute(new LineClues(2, 3, 2), Marks("xx.###.xxx"));
+
+        Assert.Equal([false, false, false], struck);
     }
 
     [Fact]
@@ -219,6 +258,80 @@ public class ClueStrikeCalculatorTests
                 }
             }
         }
+    }
+
+    [Fact]
+    // A struck number is a promise: on a line marked without mistakes, that number's block in
+    // the real picture is already filled in, whole, somewhere on the line.
+    public void OnACorrectlyMarkedLine_EveryStruckNumberIsReallyThere()
+    {
+        for (var length = 1; length <= 8; length++)
+        {
+            for (var picture = 0; picture < 1 << length; picture++)
+            {
+                var solution = new bool[length];
+                for (var i = 0; i < length; i++)
+                {
+                    solution[i] = (picture & (1 << i)) != 0;
+                }
+
+                var clues = ClueCalculator.FromSolution(solution);
+                if (clues.IsBlank)
+                {
+                    continue;
+                }
+
+                var blocks = Blocks(solution);
+
+                // Every correct partial marking: each cell either unmarked or marked truthfully.
+                for (var revealed = 0; revealed < 1 << length; revealed++)
+                {
+                    var line = new CellState[length];
+                    for (var i = 0; i < length; i++)
+                    {
+                        line[i] = (revealed & (1 << i)) == 0 ? CellState.Empty
+                            : solution[i] ? CellState.Filled : CellState.Crossed;
+                    }
+
+                    var struck = ClueStrikeCalculator.Compute(clues, line);
+
+                    for (var k = 0; k < clues.Count; k++)
+                    {
+                        if (!struck[k])
+                        {
+                            continue;
+                        }
+
+                        var (start, runLength) = blocks[k];
+                        var filled = line.AsSpan(start, runLength).IndexOfAnyExcept(CellState.Filled) < 0;
+
+                        Assert.True(
+                            filled,
+                            $"number {k} of [{string.Join(',', clues.DisplayRuns)}] struck on {Describe(line)} before its block was filled");
+                    }
+                }
+            }
+        }
+    }
+
+    private static List<(int Start, int Length)> Blocks(bool[] solution)
+    {
+        var blocks = new List<(int, int)>();
+        for (var i = 0; i < solution.Length; i++)
+        {
+            if (solution[i] && (i == 0 || !solution[i - 1]))
+            {
+                var end = i;
+                while (end < solution.Length && solution[end])
+                {
+                    end++;
+                }
+
+                blocks.Add((i, end - i));
+            }
+        }
+
+        return blocks;
     }
 
     [Fact]

@@ -58,6 +58,7 @@ public sealed class GameSaveService(ISaveGameRepository saves, IClock clock, IPe
             IsDaily = origin?.Mode == SessionMode.Daily,
             DailyDate = origin?.DailyDate,
             Level = origin?.Level,
+            TimedTier = origin?.TimedTier,
         };
         return (Id, completion);
     }

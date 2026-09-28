@@ -164,14 +164,21 @@ public sealed class ParentGateTests
         });
 
         var correct = CorrectAnswer();
-        string[] decorated =
+        List<string> decorated =
         [
             $"+{correct}",
             $"{correct}.0",
             $"{correct}x",
-            $"{correct[0]},{correct[1..]}",
-            $"{correct[0]} {correct[1..]}",
         ];
+
+        // A separator only decorates an answer it can split. 3 x 3 = 9 is the one single-digit
+        // answer, and "9 " is just 9 once trimmed - rightly accepted, so the test failed one run
+        // in 49.
+        if (correct.Length > 1)
+        {
+            decorated.Add($"{correct[0]},{correct[1..]}");
+            decorated.Add($"{correct[0]} {correct[1..]}");
+        }
 
         foreach (var answer in decorated)
         {

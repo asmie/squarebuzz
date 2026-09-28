@@ -15,6 +15,7 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
     internal const string ResourceName = "Squarebuzz.Core.Content.puzzles.json";
 
     private readonly Dictionary<string, Puzzle> _byId;
+    private readonly Dictionary<(string Id, int Revision), Puzzle> _byRevision;
 
     public EmbeddedPuzzleRepository()
         : this(ReadEmbeddedContent())
@@ -33,8 +34,11 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
 
         _byId = Puzzles.ToDictionary(p => p.Id, StringComparer.Ordinal);
 
+        var allRevisions = Puzzles.Concat(content.ArchivedPuzzles.Select(ToPuzzle)).ToList();
+        _byRevision = allRevisions.ToDictionary(p => (p.Id, p.Revision));
+
         var declaredPacks = Packs.Select(p => p.Id).ToHashSet(StringComparer.Ordinal);
-        var orphan = Puzzles.FirstOrDefault(p => !declaredPacks.Contains(p.Pack));
+        var orphan = allRevisions.FirstOrDefault(p => !declaredPacks.Contains(p.Pack));
 
         if (orphan is not null)
         {
@@ -53,11 +57,7 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
 
         var pack = Packs.FirstOrDefault(p => string.Equals(p.Id, packId, StringComparison.Ordinal));
 
-        // A wildcard pack draws from every pack the player can currently choose. That is not the
-        // same as "not shipped locked": a locked pack is earned by finding its pictures at their
-        // campaign levels, after which Quick game and the Gallery both offer it. Judging by the shipped
-        // flag alone left Surprise as the one place that never caught up, so a pack the player had
-        // legitimately earned could still never turn up in it.
+        // Surprise includes unlocked packs, including those earned through campaign milestones.
         if (pack?.IsWildcard == true)
         {
             var unlocked = Packs
@@ -71,28 +71,19 @@ public sealed class EmbeddedPuzzleRepository : IPuzzleRepository
         return [.. Puzzles.Where(p => p.Width == size && p.Height == size && string.Equals(p.Pack, packId, StringComparison.Ordinal))];
     }
 
-    public Puzzle? FindById(string puzzleId)
+    public Puzzle? FindById(string puzzleId, int? revision = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(puzzleId);
 
-        return _byId.GetValueOrDefault(puzzleId);
+        return revision is { } requested
+            ? _byRevision.GetValueOrDefault((puzzleId, requested))
+            : _byId.GetValueOrDefault(puzzleId);
     }
 
-    /// <summary>
-    /// Builds a puzzle from its content entry, refusing one whose declared size disagrees with its
-    /// rows.
-    /// </summary>
-    /// <remarks>
-    /// <see cref="Puzzle.FromRows"/> derives the real dimensions from the rows, so the
-    /// <c>width</c> and <c>height</c> fields were parsed and then ignored - a declaration that
-    /// looked authoritative and bound nothing. An entry could say 10x10 over a 5x5 grid and ship.
-    /// The fields stay, because they make the file readable, but they are now checked against the
-    /// grid they describe, and a mismatch fails at load with the puzzle named rather than
-    /// surviving as a quiet lie.
-    /// </remarks>
+    /// <summary>Builds a puzzle and checks that declared dimensions match its rows.</summary>
     private static Puzzle ToPuzzle(PuzzleDto dto)
     {
-        var puzzle = Puzzle.FromRows(dto.Id, dto.Pack, dto.Color, dto.Rows);
+        var puzzle = Puzzle.FromRows(dto.Id, dto.Pack, dto.Color, dto.Rows, revision: dto.Revision);
 
         if (dto.Width != puzzle.Width || dto.Height != puzzle.Height)
         {

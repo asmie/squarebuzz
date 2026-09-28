@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · bol zaman</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · durmadan devam</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · göz açıp kapayana kadar</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Sürat</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Büyük Yarış</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maraton</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · çevik parmaklar</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · uzun bir yarış</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · en büyük yarış</value></data>
   <data name="quickGame" xml:space="preserve"><value>Hızlı oyun</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Boyutu ve paketi kendin seç</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Seviyeler</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Gece Kuşu</value></data>
   <data name="tr8" xml:space="preserve"><value>Kusursuz On</value></data>
   <data name="tr9" xml:space="preserve"><value>Koleksiyoncu</value></data>
+  <data name="tr10" xml:space="preserve"><value>Zamanı Yen</value></data>
+  <data name="tr11" xml:space="preserve"><value>Maraton Şampiyonu</value></data>
+  <data name="tr12" xml:space="preserve"><value>Aylık Seri</value></data>
+  <data name="tr13" xml:space="preserve"><value>Büyük Resim</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 Blok</value></data>
+  <data name="tr15" xml:space="preserve"><value>Yıldız Avcısı</value></data>
+  <data name="tr16" xml:space="preserve"><value>Kâşif</value></data>
+  <data name="tr17" xml:space="preserve"><value>Paket Ustası</value></data>
+  <data name="tr18" xml:space="preserve"><value>Hatasız</value></data>
   <data name="sound" xml:space="preserve"><value>Ses efektleri</value></data>
   <data name="music" xml:space="preserve"><value>Müzik</value></data>
   <data name="voice" xml:space="preserve"><value>Sesli anlatım</value></data>
@@ -232,7 +247,7 @@
   <data name="Puzzle_apple" xml:space="preserve"><value>Elma</value></data>
   <data name="Puzzle_boat" xml:space="preserve"><value>Yelkenli</value></data>
   <data name="Puzzle_dino" xml:space="preserve"><value>Dinozor</value></data>
-  <data name="Puzzle_cat" xml:space="preserve"><value>Kedi Yüzü</value></data>
+  <data name="Puzzle_cat" xml:space="preserve"><value>Kedi</value></data>
   <data name="Puzzle_cupcake" xml:space="preserve"><value>Kapkek</value></data>
   <data name="Puzzle_car" xml:space="preserve"><value>Yarış Arabası</value></data>
   <data name="Puzzle_rocket" xml:space="preserve"><value>Roket</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Şemsiye</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Kar Tanesi</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Gökkuşağı</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Baykuş</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Tilki</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Kaplumbağa</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Fil</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Penguen</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Zürafa</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktil</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Kemik</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontozor</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triseratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronot</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>UFO</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Uydu</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Teleskop</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Uzay Mekiği</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Ay Aracı</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Tek Boynuzlu At</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Sihirli İksir</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Cadı Şapkası</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Muz</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Havuç</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Hamburger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Donut</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Armut</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Peynir</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Bisiklet</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Tren</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopter</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktör</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Mobilet</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Yat</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Lale</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Çam Kozalağı</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Ayçiçeği</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Arı</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Uğur Böceği</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palmiye</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Sihirli Lamba</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Kardan Adam</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Denizatı</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Denizanası</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Deniz Feneri</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Köpek Balığı</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Yunus</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Dalga</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Keman</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofon</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Kulaklık</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksafon</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakas</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Futbol Topu</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Tenis Raketi</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Kaykay</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Kask</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Düdük</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Hortum</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Termometre</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Rüzgâr Tulumu</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Yağmur Bulutu</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Gizemli Resim</value></data>
   <data name="magnifier" xml:space="preserve"><value>Büyüteç</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Boyarken 3×3 yakınlaştırılmış görünüm gösterir. Baştan kapalıdır.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Akşam 8'den sonra bir resim bitir.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>10×10'da hiç hata yapmadan üç yıldız.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Galerideki her resmi bul.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Herhangi bir süreli denemeyi kazan.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Maraton denemesini kazan.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Üst üste 30 gün oyna.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>15×15 veya daha büyük bir resim bitir.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Toplamda 1000 blok doldur.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>100 yıldız topla.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>50. seviyeyi bitir.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Bir paketteki her resmi bul.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>15×15 veya daha büyük bir resmi ipucusuz ve hatasız bitir.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Bugünlük tamam — yarın görüşürüz!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Depolama kullanılamıyor. Lütfen tekrar dene.</value>

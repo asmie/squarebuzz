@@ -30,8 +30,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         _lifecycle = lifecycle;
         BindingContext = viewModel;
 
-        // Beyond the usual leak (see PageLifecycle), disposing this ViewModel is what stops the
-        // one-second clock when the player leaves with the back gesture instead of Quit.
+        // Dispose the ViewModel when leaving the page, including navigation by the back gesture.
         this.DisposeViewModelWhenPopped();
 
         // Board rendering is imperative by nature - a canvas redraw is not a binding - so the
@@ -42,9 +41,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         _viewModel.PuzzleSolved += OnPuzzleSolved;
         _viewModel.CellFilled += (_, index) => Board.PopCell(index);
 
-        // Full Refresh, not RefreshCells: only the former re-reads the palette, which is the
-        // point - the canvas snapshots its colours and a theme swap otherwise leaves the board
-        // in the old ones.
+        // Theme changes require Refresh to reload the canvas palette.
         _viewModel.PaletteChanged += (_, _) => Board.Refresh();
 
         Board.CellPainted += OnCellPainted;
@@ -95,31 +92,14 @@ public partial class GamePage : ContentPage, IQueryAttributable
         }
     }
 
-    /// <summary>
-    /// Applies the phone or wide-landscape layout, with controls on the chosen hand's side.
-    /// </summary>
+    /// <summary>Arranges controls below the board or beside it in wide landscape.</summary>
     /// <remarks>
-    /// <para>
-    /// The design doc's scaling note is the rule: "Above 900 px in landscape the play column
-    /// becomes a row ... Cell size is computed from the free rectangle, not hard-coded." Moving
-    /// the controls beside the board rather than beneath it is what gives the board the full
-    /// height, and on a tablet in landscape that is the difference between a cramped grid and a
-    /// comfortable one.
-    /// </para>
-    /// <para>
-    /// Done in code because MAUI has no media queries, and by rearranging one visual tree rather
-    /// than toggling between two: the board is a stateful control holding the live session, so
-    /// there must only ever be one of it.
-    /// </para>
-    /// <para>
-    /// The controls sit beside the board on the side the player's hand is on. The mini-map and
-    /// magnifier remain in the board's column when those columns swap.
-    /// </para>
+    /// Rearrange one visual tree so the board retains its session and gesture state.
+    /// The control column follows handedness; minimap and magnifier remain with the board.
     /// </remarks>
     private void ApplyLayout()
     {
-        // Below this the two-column split leaves the board narrower than it is tall, which is
-        // worse than stacking. The threshold is the doc's 900, in device-independent units.
+        // Use the side layout only above 900 device-independent units.
         const double WideThreshold = 900;
         const double ControlsWidth = 320;
 
@@ -225,7 +205,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
     }
 
     private void OnCellPainted(object? sender, Controls.CellPaintedEventArgs e) =>
-        _viewModel.Paint(e.Index, e.Target);
+        _viewModel.Paint(e.Index, e.Target, e.ContinuesStroke);
 
     private void OnTouchedCellChanged(object? sender, Controls.TouchedCellEventArgs e)
     {
@@ -249,22 +229,9 @@ public partial class GamePage : ContentPage, IQueryAttributable
         Magnifier.ShowCell(e.Index);
     }
 
-    /// <summary>
-    /// Builds one focusable button per square, over the board, so a screen-reader user can reach
-    /// the puzzle at all - a canvas offers nothing to focus.
-    /// </summary>
+    /// <summary>Builds focusable cell controls when a screen reader is active.</summary>
     /// <remarks>
-    /// <para>
-    /// Only when a screen reader is actually running. A 20x20 grid is four hundred buttons, which
-    /// is worth building for the player who cannot otherwise play and pure waste for everyone else;
-    /// see <see cref="Squarebuzz.Presentation.Services.IAccessibilityState"/>.
-    /// </para>
-    /// <para>
-    /// Alignment comes from the board's own <c>BoardLayout</c> rather than from a second
-    /// calculation: the overlay is inset by the clue gutters and then given one row and column per
-    /// cell at exactly the drawn cell size. Two independent computations of the same geometry would
-    /// drift the first time either changed.
-    /// </para>
+    /// Use the board's BoardLayout for cell size and clue-gutter offsets.
     /// </remarks>
     private void BuildCellOverlay()
     {
@@ -319,10 +286,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
 
                 SemanticProperties.SetDescription(cell, _viewModel.DescribeCell(index));
 
-                // The square's description is now stale, and a screen reader reads whatever the
-                // element says at the moment it is focused. Refreshing it is OnBoardChanged's
-                // job, which TapCell reaches for every move it applies - doing it here as well
-                // just re-described four hundred buttons twice.
+                // OnBoardChanged refreshes cell descriptions after TapCell applies a move.
                 cell.Clicked += (_, _) => _viewModel.TapCell(index);
 
                 CellOverlay.Add(cell, column, row);
@@ -359,19 +323,14 @@ public partial class GamePage : ContentPage, IQueryAttributable
             MiniMap.UpdateCells(_viewModel.Session);
         }
 
-        // TouchedCellChanged fires before the move is applied, so the magnifier's first snapshot
-        // is pre-paint. Re-reading it here is what makes it show the cell as it now is rather
-        // than as it was a moment ago.
+        // Refresh magnification after painting; the earlier touch event captured the previous state.
         if (_magnifiedIndex >= 0 && MagnifierPanel.IsVisible)
         {
             Magnifier.ShowCell(_magnifiedIndex);
         }
     }
 
-    /// <summary>
-    /// Shows the overview map only when it earns its corner: a 15-and-up grid whose drawn size
-    /// exceeds the scroll window, which is exactly when the player loses sight of parts of it.
-    /// </summary>
+    /// <summary>Shows the minimap for grids of at least 15 cells that exceed the viewport.</summary>
     private void UpdateMiniMap()
     {
         var puzzle = _viewModel.Session?.Puzzle;
@@ -420,16 +379,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         Board.FlashMistake(index);
     }
 
-    /// <summary>
-    /// The "no" gesture. One at a time, and it always puts the board back where it found it.
-    /// </summary>
-    /// <remarks>
-    /// Started without being awaited, so a second mistake arriving mid-shake used to start a
-    /// second sequence against the same <c>TranslationX</c>. The two then interleaved, and
-    /// whichever finished first left its own final value behind - so a run of mistakes could
-    /// leave the board sitting seven units off-centre for the rest of the game. A drag across a
-    /// row of wrong squares produces exactly that run, several times a minute.
-    /// </remarks>
+    /// <summary>Runs one mistake-shake animation at a time and restores the board position.</summary>
     private async Task ShakeBoardAsync()
     {
         if (_isShaking)
@@ -449,8 +399,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         }
         finally
         {
-            // Belt and braces: navigating away mid-shake cancels the animation part-way, and a
-            // board left translated would still be translated when the page is next shown.
+            // Restore translation even if navigation cancels the animation.
             Board.TranslationX = 0;
             _isShaking = false;
         }
@@ -458,8 +407,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
 
     private async void OnHintGranted(object? sender, int index)
     {
-        // Bring the cell on screen first: on a scrolling board a hint could land entirely out
-        // of view, and the player paid for it. The ring only starts once the camera has arrived.
+        // Scroll the hinted cell into view before starting the highlight.
         await ScrollHintedCellIntoViewAsync(index);
         Board.ShowHint(index);
     }
@@ -554,15 +502,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
     private void OnCrossGestureRecognised(object? sender, EventArgs e) =>
         Buzz(HapticFeedbackType.Click);
 
-    /// <summary>
-    /// Buzzes, if the player asked for it.
-    /// </summary>
-    /// <remarks>
-    /// The setting check belongs here rather than at each call site: every buzz in the game goes
-    /// through this method, so there is no way to add a new one that quietly ignores the switch.
-    /// Haptics are also unsupported on desktop and some platforms, and the API throws rather than
-    /// no-opping - feedback is a nicety, so failing to buzz must never interrupt play.
-    /// </remarks>
+    /// <summary>Runs haptic feedback when enabled and supported. Feedback failure must not interrupt play.</summary>
     private void Buzz(HapticFeedbackType type)
     {
         if (!_viewModel.HapticsEnabled)

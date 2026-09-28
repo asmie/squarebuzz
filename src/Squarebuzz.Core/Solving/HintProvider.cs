@@ -2,31 +2,11 @@ using Squarebuzz.Core.Model;
 
 namespace Squarebuzz.Core.Solving;
 
-/// <summary>
-/// Chooses a hint the player could genuinely have worked out, rather than revealing a random
-/// cell from the answer as the prototype did.
-/// </summary>
+/// <summary>Chooses a deduction from the current marks, with a solution-based fallback.</summary>
 /// <remarks>
-/// <para>
-/// Preference order matters teaching-wise. An immediate deduction - one that follows from a
-/// single line, right now - shows the child the reasoning step they missed. Falling straight
-/// to the answer teaches nothing, so it is the last resort and is flagged as such.
-/// </para>
-/// <para>
-/// Every tier deduces from the board as the player has actually marked it, which is the whole
-/// point - the hint has to follow from where they are, not from a clean grid. But it means a
-/// deduction can rest on a false premise: a cell the player crossed by mistake is taken as
-/// fact, and the "forced" answer that follows can contradict the real picture. Wrong crosses
-/// are never refused (<see cref="GameSession.Paint"/> only rejects wrong fills, and only with
-/// warnings on), so this is an ordinary state to be in, not an exotic one.
-/// </para>
-/// <para>
-/// So every candidate is checked against the finished picture before it is offered. A hint
-/// that disagrees with the answer would be worse than no hint at all: it is written straight
-/// to the board, it costs one of a very small budget, and because winning requires an exact
-/// match it would lock the child out of ever finishing. On a correctly played board the check
-/// changes nothing - a true deduction always agrees with the unique solution.
-/// </para>
+/// Prefer single-line deductions. Validate candidates against the solution because incorrect
+/// player marks can create false premises. The fallback corrects a wrong mark before revealing
+/// an empty cell.
 /// </remarks>
 public static class HintProvider
 {
@@ -187,8 +167,24 @@ public static class HintProvider
         return crossedFallback;
     }
 
+    /// <remarks>
+    /// A wrong mark is corrected before anything is revealed. When the player has crossed a
+    /// square that belongs to the picture, no amount of revealing blank squares will ever let
+    /// them finish - and once the blanks ran out the hint button used to do nothing at all, with
+    /// no word as to why the picture would not complete.
+    /// </remarks>
     private static Hint? FindSolutionReveal(Puzzle puzzle, ReadOnlySpan<CellState> board)
     {
+        for (var index = 0; index < board.Length; index++)
+        {
+            var expected = puzzle.ExpectedState(index);
+
+            if (board[index] != CellState.Empty && board[index] != expected)
+            {
+                return new Hint(index, expected, index % puzzle.Width, index / puzzle.Width, HintSource.SolutionReveal);
+            }
+        }
+
         for (var index = 0; index < board.Length; index++)
         {
             var expected = puzzle.ExpectedState(index);

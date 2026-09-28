@@ -8,40 +8,31 @@
 
   <ItemGroup Label="App">
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-    <PackageVersion Include="CommunityToolkit.Maui" Version="15.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+    <PackageVersion Include="CommunityToolkit.Maui" Version="15.0.1" />
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.110" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
 
-    <!--
-      Sound effects. MAUI has no audio playback of its own - CommunityToolkit.Maui.MediaElement
-      is a view for media with transport controls, which is the wrong shape for a 90 ms blip.
-      This wraps each platform's low-latency player (SoundPool, AVAudioPlayer, MediaPlayer).
-    -->
+    <!-- Short sound effects through each platform's audio player. -->
     <PackageVersion Include="Plugin.Maui.Audio" Version="4.0.0" />
   </ItemGroup>
 
   <!--
-    sqlite-net-pcl 1.11.285 already depends on SQLitePCLRaw.core/provider 3.0.3 plus the
-    SourceGear.sqlite3 3.53.3 native package, so it needs no companion bundle.
-
-    Do NOT add SQLitePCLRaw.bundle_green here. Its newest release (2.1.11) pins the old
-    native packages at 2.1.11, and everything <= 2.1.11 is affected by CVE-2025-6965
-    (GHSA-2m69-gcr7-jv3q, high). It also ships a second copy of libe_sqlite3.so, which
-    made the Android build emit XA4301 and silently discard one of the two.
+    sqlite-net-pcl includes SQLitePCLRaw and SourceGear.sqlite3. Adding bundle_green would
+    duplicate the native Android library and reintroduce its older SQLite dependency.
   -->
   <ItemGroup Label="Data">
     <PackageVersion Include="sqlite-net-pcl" Version="1.11.285" />
   </ItemGroup>
 
   <ItemGroup Label="Tests">
-    <!-- Managed MAUI controls for the host profiling tool; keep aligned with the app workload. -->
-    <PackageVersion Include="Microsoft.Maui.Controls.Core" Version="10.0.60"
+    <!-- Keep the host profiling controls aligned with the app's Controls package. -->
+    <PackageVersion Include="Microsoft.Maui.Controls.Core" Version="10.0.110"
                     Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Profiling'" />
-    <!-- Test the Release DI runtime without pinning the app's newer Debug logging dependencies. -->
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0"
-                    Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Presentation.Tests'" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="xunit.analyzers" Version="2.1.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
   </ItemGroup>
 
 </Project>

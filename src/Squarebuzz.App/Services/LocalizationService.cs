@@ -6,21 +6,10 @@ using Squarebuzz.Presentation.Services;
 
 namespace Squarebuzz.App.Services;
 
-/// <summary>
-/// Supplies localised text and lets the language change without restarting the app.
-/// </summary>
+/// <summary>Provides localised text and change notifications for live language switching.</summary>
 /// <remarks>
-/// <para>
-/// XAML binds through the indexer - <c>{Binding [menu_newGame], Source={x:Static
-/// svc:Localization.Instance}}</c> - because a plain generated resource accessor is a static
-/// property and cannot raise change notifications. Raising <see cref="PropertyChanged"/> with
-/// an empty name on language change re-evaluates every one of those bindings at once, which is
-/// what makes the Options screen update live the way the prototype did.
-/// </para>
-/// <para>
-/// Missing keys return the key itself rather than throwing or showing blank: a forgotten
-/// translation should be obvious in the UI but must never crash a child's game.
-/// </para>
+/// An empty PropertyChanged name refreshes all indexer bindings. Missing resources return
+/// the key so lookup failures do not interrupt rendering.
 /// </remarks>
 public sealed class LocalizationService : INotifyPropertyChanged
 {
@@ -63,20 +52,15 @@ public sealed class LocalizationService : INotifyPropertyChanged
         }
         catch (MissingManifestResourceException)
         {
-            // The resource assembly is missing entirely - almost certainly a build problem.
-            // Showing keys is far better than taking the app down.
+            // Use the key when the resource assembly is missing.
             return key;
         }
     }
 
-    /// <summary>Formats a localised string, e.g. "{n} in progress".</summary>
+    /// <summary>Formats positional or single-value {n} placeholders.</summary>
     /// <remarks>
-    /// Never throws, for the same reason <see cref="GetString"/> does not: the templates are
-    /// hand-translated in thirty-nine languages, and a stray brace or a <c>{1}</c> where the code
-    /// passes one argument is a translation slip, not a reason to take the board down at render
-    /// time. The template comes back as-is, which is ugly and obvious - the right outcome for a
-    /// mistake somebody has to go and fix. <c>tools/check-strings.cs</c> catches these before
-    /// they ship; this is the net under it.
+    /// Returns the template unchanged on a format error. tools/check-strings.cs checks resource
+    /// placeholder parity before release.
     /// </remarks>
     public string Format(string key, params object[] arguments)
     {
@@ -109,11 +93,7 @@ public sealed class LocalizationService : INotifyPropertyChanged
         Language = language;
         _culture = CultureFor(language);
 
-        // Affects date and number formatting too, not just our own strings. The Default* pair
-        // matters as much as the Current* pair: Current only changes *this* thread, and the
-        // saved language is applied during startup on whichever thread the settings load
-        // happened to finish on - without the defaults, every other thread keeps formatting
-        // dates in the device language while the labels around them speak the chosen one.
+        // Update both this thread and thread defaults so dates, numbers and labels use the selected culture.
         CultureInfo.DefaultThreadCurrentCulture = _culture;
         CultureInfo.DefaultThreadCurrentUICulture = _culture;
         CultureInfo.CurrentUICulture = _culture;
@@ -124,21 +104,9 @@ public sealed class LocalizationService : INotifyPropertyChanged
         LanguageChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    /// <summary>
-    /// The culture for a shipped language, or the nearest one this device can actually supply.
-    /// </summary>
+    /// <summary>Gets the chosen culture with English, then invariant fallback.</summary>
     /// <remarks>
-    /// <para>
-    /// <see cref="CultureInfo.GetCultureInfo(string)"/> throws when the platform's ICU data does
-    /// not know the code. Directory.Build.props keeps invariant globalisation off for exactly this
-    /// reason, but a trimmed or unusual OS image can still lack a culture - and the one place that
-    /// would have surfaced it was the language picker, taking the app down on the tap.
-    /// </para>
-    /// <para>
-    /// The fallback is English, then invariant. <see cref="Language"/> still records what the
-    /// player chose: the choice is theirs and is persisted; the culture is what this device can
-    /// do with it, and a later device may do better.
-    /// </para>
+    /// The persisted language remains unchanged if the device lacks the requested culture.
     /// </remarks>
     private static CultureInfo CultureFor(AppLanguage language)
     {

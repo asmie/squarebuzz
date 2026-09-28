@@ -413,7 +413,9 @@
                                                HorizontalTextAlignment="Center" />
                                     </VerticalStackLayout>
                                 </Border>
+                                <!-- Hidden with mistake warnings off: nothing was counted. -->
                                 <Border Grid.Column="2" BackgroundColor="{DynamicResource Surface2}"
+                                        IsVisible="{Binding ShowMistakes}"
                                         StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
                                     <VerticalStackLayout Spacing="2">
                                         <Label Text="{Binding Mistakes}" FontFamily="BodyBold" FontSize="18"

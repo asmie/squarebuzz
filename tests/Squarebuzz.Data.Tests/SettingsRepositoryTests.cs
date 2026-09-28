@@ -133,7 +133,7 @@ public class SettingsRepositoryTests
         var sanitised = (GameSettings.Default with { LastDifficulty = 99, LastPackId = "  " }).Sanitised();
 
         Assert.Equal(5, sanitised.LastDifficulty);
-        Assert.Equal("animals", sanitised.LastPackId);
+        Assert.Equal(GameSettings.DefaultPackId, sanitised.LastPackId);
     }
 
     [Fact]

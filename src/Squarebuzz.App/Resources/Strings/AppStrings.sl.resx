@@ -96,6 +96,12 @@
   <data name="timedSub1" xml:space="preserve"><value>5×5 · dovolj časa</value></data>
   <data name="timedSub2" xml:space="preserve"><value>10×10 · ne ustavljaj se</value></data>
   <data name="timedSub3" xml:space="preserve"><value>10×10 · brez mežikanja</value></data>
+  <data name="timedName4" xml:space="preserve"><value>Šprint</value></data>
+  <data name="timedName5" xml:space="preserve"><value>Velika dirka</value></data>
+  <data name="timedName6" xml:space="preserve"><value>Maraton</value></data>
+  <data name="timedSub4" xml:space="preserve"><value>5×5 · hitri prsti</value></data>
+  <data name="timedSub5" xml:space="preserve"><value>15×15 · dolga dirka</value></data>
+  <data name="timedSub6" xml:space="preserve"><value>20×20 · največja dirka</value></data>
   <data name="quickGame" xml:space="preserve"><value>Hitra igra</value></data>
   <data name="quickGameSub" xml:space="preserve"><value>Izberi svojo velikost in zbirko</value></data>
   <data name="levelsTitle" xml:space="preserve"><value>Stopnje</value></data>
@@ -125,6 +131,15 @@
   <data name="tr7" xml:space="preserve"><value>Nočni čuk</value></data>
   <data name="tr8" xml:space="preserve"><value>Popolna desetka</value></data>
   <data name="tr9" xml:space="preserve"><value>Zbiratelj</value></data>
+  <data name="tr10" xml:space="preserve"><value>Hitrejši od ure</value></data>
+  <data name="tr11" xml:space="preserve"><value>Prvak maratona</value></data>
+  <data name="tr12" xml:space="preserve"><value>Mesec zapored</value></data>
+  <data name="tr13" xml:space="preserve"><value>Velika slika</value></data>
+  <data name="tr14" xml:space="preserve"><value>1000 kock</value></data>
+  <data name="tr15" xml:space="preserve"><value>Zvezdogled</value></data>
+  <data name="tr16" xml:space="preserve"><value>Raziskovalec</value></data>
+  <data name="tr17" xml:space="preserve"><value>Mojster zbirk</value></data>
+  <data name="tr18" xml:space="preserve"><value>Brezhibno</value></data>
   <data name="sound" xml:space="preserve"><value>Zvočni učinki</value></data>
   <data name="music" xml:space="preserve"><value>Glasba</value></data>
   <data name="voice" xml:space="preserve"><value>Branje na glas</value></data>
@@ -295,6 +310,66 @@
   <data name="Puzzle_umbrella" xml:space="preserve"><value>Dežnik</value></data>
   <data name="Puzzle_snowflake" xml:space="preserve"><value>Snežinka</value></data>
   <data name="Puzzle_rainbow" xml:space="preserve"><value>Mavrica</value></data>
+  <data name="Puzzle_owl" xml:space="preserve"><value>Sova</value></data>
+  <data name="Puzzle_fox" xml:space="preserve"><value>Lisica</value></data>
+  <data name="Puzzle_turtle" xml:space="preserve"><value>Želva</value></data>
+  <data name="Puzzle_elephant" xml:space="preserve"><value>Slon</value></data>
+  <data name="Puzzle_penguin" xml:space="preserve"><value>Pingvin</value></data>
+  <data name="Puzzle_giraffe" xml:space="preserve"><value>Žirafa</value></data>
+  <data name="Puzzle_trex" xml:space="preserve"><value>T-Rex</value></data>
+  <data name="Puzzle_pterodactyl" xml:space="preserve"><value>Pterodaktil</value></data>
+  <data name="Puzzle_bone" xml:space="preserve"><value>Kost</value></data>
+  <data name="Puzzle_bronto" xml:space="preserve"><value>Brontozaver</value></data>
+  <data name="Puzzle_triceratops" xml:space="preserve"><value>Triceratops</value></data>
+  <data name="Puzzle_astronaut" xml:space="preserve"><value>Astronavt</value></data>
+  <data name="Puzzle_ufo" xml:space="preserve"><value>NLP</value></data>
+  <data name="Puzzle_satellite" xml:space="preserve"><value>Satelit</value></data>
+  <data name="Puzzle_telescope" xml:space="preserve"><value>Teleskop</value></data>
+  <data name="Puzzle_shuttle" xml:space="preserve"><value>Raketoplan</value></data>
+  <data name="Puzzle_lander" xml:space="preserve"><value>Lunarni modul</value></data>
+  <data name="Puzzle_unicorn" xml:space="preserve"><value>Samorog</value></data>
+  <data name="Puzzle_potion" xml:space="preserve"><value>Čarobni napoj</value></data>
+  <data name="Puzzle_witchhat" xml:space="preserve"><value>Čarovniški klobuk</value></data>
+  <data name="Puzzle_banana" xml:space="preserve"><value>Banana</value></data>
+  <data name="Puzzle_carrot" xml:space="preserve"><value>Korenček</value></data>
+  <data name="Puzzle_burger" xml:space="preserve"><value>Burger</value></data>
+  <data name="Puzzle_donut" xml:space="preserve"><value>Krof</value></data>
+  <data name="Puzzle_pear" xml:space="preserve"><value>Hruška</value></data>
+  <data name="Puzzle_cheese" xml:space="preserve"><value>Sir</value></data>
+  <data name="Puzzle_bike" xml:space="preserve"><value>Kolo</value></data>
+  <data name="Puzzle_train" xml:space="preserve"><value>Vlak</value></data>
+  <data name="Puzzle_helicopter" xml:space="preserve"><value>Helikopter</value></data>
+  <data name="Puzzle_tractor" xml:space="preserve"><value>Traktor</value></data>
+  <data name="Puzzle_scooter" xml:space="preserve"><value>Skuter</value></data>
+  <data name="Puzzle_sailboat" xml:space="preserve"><value>Jahta</value></data>
+  <data name="Puzzle_tulip" xml:space="preserve"><value>Tulipan</value></data>
+  <data name="Puzzle_pinecone" xml:space="preserve"><value>Storž</value></data>
+  <data name="Puzzle_sunflower" xml:space="preserve"><value>Sončnica</value></data>
+  <data name="Puzzle_bee" xml:space="preserve"><value>Čebelica</value></data>
+  <data name="Puzzle_ladybug" xml:space="preserve"><value>Pikapolonica</value></data>
+  <data name="Puzzle_palm" xml:space="preserve"><value>Palma</value></data>
+  <data name="Puzzle_lamp" xml:space="preserve"><value>Čarobna svetilka</value></data>
+  <data name="Puzzle_snowman" xml:space="preserve"><value>Snežak</value></data>
+  <data name="Puzzle_seahorse" xml:space="preserve"><value>Morski konjiček</value></data>
+  <data name="Puzzle_jellyfish" xml:space="preserve"><value>Meduza</value></data>
+  <data name="Puzzle_lighthouse" xml:space="preserve"><value>Svetilnik</value></data>
+  <data name="Puzzle_shark" xml:space="preserve"><value>Morski pes</value></data>
+  <data name="Puzzle_dolphin" xml:space="preserve"><value>Delfin</value></data>
+  <data name="Puzzle_wave" xml:space="preserve"><value>Val</value></data>
+  <data name="Puzzle_violin" xml:space="preserve"><value>Violina</value></data>
+  <data name="Puzzle_microphone" xml:space="preserve"><value>Mikrofon</value></data>
+  <data name="Puzzle_headphones" xml:space="preserve"><value>Slušalke</value></data>
+  <data name="Puzzle_saxophone" xml:space="preserve"><value>Saksofon</value></data>
+  <data name="Puzzle_maracas" xml:space="preserve"><value>Marakasi</value></data>
+  <data name="Puzzle_soccer" xml:space="preserve"><value>Nogometna žoga</value></data>
+  <data name="Puzzle_racket" xml:space="preserve"><value>Teniški lopar</value></data>
+  <data name="Puzzle_skateboard" xml:space="preserve"><value>Rolka</value></data>
+  <data name="Puzzle_helmet" xml:space="preserve"><value>Čelada</value></data>
+  <data name="Puzzle_whistle" xml:space="preserve"><value>Piščalka</value></data>
+  <data name="Puzzle_tornado" xml:space="preserve"><value>Tornado</value></data>
+  <data name="Puzzle_thermometer" xml:space="preserve"><value>Toplomer</value></data>
+  <data name="Puzzle_windsock" xml:space="preserve"><value>Vetrna vreča</value></data>
+  <data name="Puzzle_raincloud" xml:space="preserve"><value>Deževni oblak</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Skrivnostna slika</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
   <data name="magnifierSub" xml:space="preserve"><value>Med barvanjem pokaže povečan pogled 3×3. Privzeto izklopljena.</value></data>
@@ -309,6 +384,15 @@
   <data name="trophyHint7" xml:space="preserve"><value>Dokončaj sliko po 20. uri.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tri zvezdice na 10×10, brez napake.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Najdi vse slike v galeriji.</value></data>
+  <data name="trophyHint10" xml:space="preserve"><value>Zmagaj v katerem koli preizkusu na čas.</value></data>
+  <data name="trophyHint11" xml:space="preserve"><value>Zmagaj v preizkusu Maraton.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Igraj 30 dni zapored.</value></data>
+  <data name="trophyHint13" xml:space="preserve"><value>Dokončaj sliko 15×15 ali večjo.</value></data>
+  <data name="trophyHint14" xml:space="preserve"><value>Pobarvaj skupaj 1000 kock.</value></data>
+  <data name="trophyHint15" xml:space="preserve"><value>Zberi 100 zvezdic.</value></data>
+  <data name="trophyHint16" xml:space="preserve"><value>Dokončaj stopnjo 50.</value></data>
+  <data name="trophyHint17" xml:space="preserve"><value>Najdi vse slike v eni zbirki.</value></data>
+  <data name="trophyHint18" xml:space="preserve"><value>Dokončaj sliko 15×15 ali večjo brez namigov in brez napak.</value></data>
   <data name="dailyDone" xml:space="preserve"><value>Za danes opravljeno — se vidiva jutri!</value></data>
   <data name="storageUnavailable" xml:space="preserve">
     <value>Shramba ni na voljo. Poskusi znova.</value>

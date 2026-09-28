@@ -4,14 +4,9 @@ using Squarebuzz.Data.Migrations;
 
 namespace Squarebuzz.Data;
 
-/// <summary>
-/// Owns the SQLite connection and brings the schema up to date on first use.
-/// </summary>
+/// <summary>Owns the shared SQLite connection and initializes its schema.</summary>
 /// <remarks>
-/// Registered as a singleton: sqlite-net's async connection is thread-safe and holds a pooled
-/// handle, so opening one per repository would waste handles and risk lock contention.
-/// Initialisation is guarded so that concurrent first calls from several repositories migrate
-/// exactly once.
+/// A semaphore serializes first use so concurrent repositories run migrations once.
 /// </remarks>
 public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
 {
@@ -27,6 +22,7 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
         new Migration0008SavedDailyDate(),
         new Migration0009SavedHintBudget(),
         new Migration0010AutomaticCrosses(),
+        new Migration0011AuthoredPuzzleRevision(),
     ];
 
     private readonly SemaphoreSlim _initialisationGate = new(1, 1);
@@ -90,33 +86,18 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
                 // repositories on one page cache; FullMutex makes the handle safe to share.
                 SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache | SQLiteOpenFlags.FullMutex);
 
-            // WAL lets a read continue while a write is in flight, which matters because the
-            // board autosaves while the UI is still reading progress.
-            //
-            // This PRAGMA reports the resulting mode as a result row, so it must be read as a
-            // scalar - running it through ExecuteAsync (ExecuteNonQuery) throws the
-            // gloriously unhelpful "SQLite Error: not an error".
+            // Enable WAL for concurrent reads and saves. journal_mode returns a row, so read it as a scalar.
             var journalMode = await connection.ExecuteScalarAsync<string>("PRAGMA journal_mode=WAL")
                 .ConfigureAwait(false);
 
             JournalMode = journalMode;
 
-            // NORMAL rather than SQLite's default FULL, which is the right pairing with WAL. FULL
-            // flushes to disk on every single commit; the board autosaves while a child is
-            // playing, so that is a device-level flush every few seconds for the sake of a game
-            // in progress. Under WAL, NORMAL still survives the app being killed - the case that
-            // actually happens, since Android stops backgrounded apps whenever it likes - and
-            // gives up only durability across an OS crash or a flat battery mid-write. The cost
-            // of that, once, is a few seconds of somebody's nonogram.
+            // NORMAL reduces fsync work under WAL. Committed data survives process termination,
+            // but recent transactions can be lost on an OS crash or power failure.
             await connection.ExecuteAsync("PRAGMA synchronous=NORMAL").ConfigureAwait(false);
 
-            // The write-ahead log is checkpointed back into the database every 256 pages instead
-            // of the default 1000. Left alone it grew to several megabytes beside a database of
-            // four kilobytes, because nothing here ever writes enough at once to trip the
-            // default. Smaller checkpoints suit a game that writes a little and often.
-            //
-            // Like journal_mode, this one answers with the value it settled on, so it has to be
-            // read as a scalar - ExecuteAsync gives the same "SQLite Error: not an error".
+            // Checkpoint every 256 pages to limit WAL growth under frequent small saves.
+            // This PRAGMA returns a result row.
             await connection.ExecuteScalarAsync<int>("PRAGMA wal_autocheckpoint=256").ConfigureAwait(false);
 
             // Returns no rows, so ExecuteAsync is correct here.
@@ -133,14 +114,10 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
         }
     }
 
-    /// <summary>Applies every migration the database has not seen yet, in order.</summary>
+    /// <summary>Applies pending migrations in version order.</summary>
     /// <remarks>
-    /// Each step runs in its own transaction together with its <c>schema_version</c> row, so the
-    /// two commit as one or not at all. That is what makes the retry-on-next-launch design
-    /// actually work: without it, a migration of several statements that failed after its first
-    /// left that statement's change behind with nothing recorded, and the retry re-ran it into
-    /// "duplicate column name" - on every launch, for ever. Migration0006 adds two columns and
-    /// was exactly that shape. SQLite's DDL is transactional, so the rollback is real.
+    /// Each migration and its schema_version entry commit in one transaction. A failed step
+    /// is rolled back and can be retried on the next initialization.
     /// </remarks>
     private async Task MigrateAsync(SQLiteAsyncConnection connection)
     {
@@ -162,9 +139,7 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
                 {
                     migration.Apply(transaction);
 
-                    // Inside the same transaction as the step itself, so the version can never be
-                    // recorded for a migration that did not fully land - nor the step land without
-                    // its version and be re-attempted over the top of itself.
+                    // Record the version in the same transaction as its schema changes.
                     transaction.Insert(new SchemaVersionEntity
                     {
                         Version = migration.Version,
@@ -174,10 +149,7 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
             }
             catch (Exception ex) when (ex is not OutOfMemoryException)
             {
-                // The raw SQLite error names a column or a table; it does not say which of the
-                // numbered steps was running, and the number alone is only meaningful with the
-                // source open. This is the one place IMigration.Name is read, and the failure that
-                // brings the database down at launch is exactly where a human-readable label pays.
+                // Include the migration number and name in initialization errors.
                 throw new InvalidOperationException(
                     $"Database migration {migration.Version} ({migration.Name}) failed and was rolled back. " +
                     "It will be retried on the next launch.",
@@ -206,18 +178,9 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
         _initialisationGate.Dispose();
     }
 
-    /// <summary>
-    /// The synchronous twin of <see cref="DisposeAsync"/>, for a container that shuts down
-    /// synchronously.
-    /// </summary>
+    /// <summary>Synchronous disposal for hosts that do not use DisposeAsync.</summary>
     /// <remarks>
-    /// This is registered as a DI singleton, and Microsoft.Extensions.DependencyInjection refuses
-    /// to dispose a singleton that implements only <see cref="IAsyncDisposable"/> from a
-    /// synchronous <c>Dispose</c>: it throws "type only implements IAsyncDisposable. Use
-    /// DisposeAsync to dispose the container." Whether the MAUI host takes the synchronous path
-    /// is the host's business; the database should not be the thing that turns shutdown into an
-    /// exception. Blocking here is safe - sqlite-net runs its async work on the thread pool, and
-    /// this only ever runs once, at exit.
+    /// sqlite-net performs async operations on the thread pool; this shutdown path waits for them.
     /// </remarks>
     public void Dispose() => DisposeAsync().AsTask().GetAwaiter().GetResult();
 }

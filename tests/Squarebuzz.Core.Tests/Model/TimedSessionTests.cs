@@ -216,23 +216,42 @@ public class TimedSessionTests
     }
 
     [Theory]
-    [InlineData(1, 5, 3, "3:00")]
-    [InlineData(2, 10, 5, "5:00")]
-    [InlineData(3, 10, 2, "2:00")]
-    public void TheLadderMatchesTheDesign(int tier, int size, int minutes, string clock)
+    [InlineData(1, 5, 180, "3:00")]
+    [InlineData(4, 5, 90, "1:30")]
+    [InlineData(2, 10, 300, "5:00")]
+    [InlineData(3, 10, 120, "2:00")]
+    [InlineData(5, 15, 600, "10:00")]
+    [InlineData(6, 20, 1200, "20:00")]
+    public void TheLadderMatchesTheDesign(int tier, int size, int seconds, string clock)
     {
         var definition = TimedTrial.Find(tier);
 
         Assert.NotNull(definition);
         Assert.Equal(size, definition.Size);
-        Assert.Equal(TimeSpan.FromMinutes(minutes), definition.Limit);
+        Assert.Equal(TimeSpan.FromSeconds(seconds), definition.Limit);
         Assert.Equal(clock, definition.ClockText);
+    }
+
+    [Fact]
+    public void TheLadderIsShownEasiestFirstAndEndsWithTheMarathon()
+    {
+        Assert.Equal([1, 4, 2, 3, 5, 6], TimedTrial.Tiers.Select(t => t.Tier));
+        Assert.Equal(TimedTrial.MarathonTier, TimedTrial.Tiers[^1].Tier);
+        Assert.Equal(TimedTrial.Tiers.Count, TimedTrial.Tiers.Select(t => t.Tier).Distinct().Count());
+    }
+
+    [Fact]
+    public void ATrialCarriesItsTierToTheCompletion()
+    {
+        var options = TimedTrial.Find(5)!.ToOptions(HelperSettings.Default);
+
+        Assert.Equal(5, options.TimedTier);
     }
 
     [Fact]
     public void ATrialIsGeneratedSharpAndTimed()
     {
-        var options = TimedTrial.Tiers[2].ToOptions(HelperSettings.Default);
+        var options = TimedTrial.Find(3)!.ToOptions(HelperSettings.Default);
 
         Assert.Equal(TimeSpan.FromMinutes(2), options.TimeLimit);
         Assert.Equal(ChallengeLevel.Sharp, options.Challenge);
@@ -247,7 +266,7 @@ public class TimedSessionTests
     public void AnUnknownTier_IsNotFound()
     {
         Assert.Null(TimedTrial.Find(0));
-        Assert.Null(TimedTrial.Find(4));
+        Assert.Null(TimedTrial.Find(7));
     }
 
     [Fact]

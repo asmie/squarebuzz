@@ -25,5 +25,9 @@ public interface IPuzzleRepository
     /// </param>
     IReadOnlyList<Puzzle> Find(string packId, int size, IReadOnlySet<string>? unlockedPackIds = null);
 
-    Puzzle? FindById(string puzzleId);
+    /// <summary>
+    /// Finds the current picture, or an exact revision for a saved game or restart.
+    /// Archived revisions are excluded from <see cref="Puzzles"/> and <see cref="Find"/>.
+    /// </summary>
+    Puzzle? FindById(string puzzleId, int? revision = null);
 }

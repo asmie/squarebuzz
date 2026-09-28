@@ -10,19 +10,10 @@ using Squarebuzz.Core.Progression;
 
 namespace Squarebuzz.Presentation.ViewModels;
 
-/// <summary>
-/// Drives the board screen: mode toggle, undo/redo, hints, the timer, pausing and completion.
-/// </summary>
+/// <summary>Coordinates the board, input, timer, pause and completion views.</summary>
 /// <remarks>
-/// Holds the <see cref="GameSession"/> but never reimplements its rules - every move goes
-/// through the session so the domain stays the single source of truth for what is legal.
-/// Pause and completion are overlays on this screen rather than separate routes, so the session
-/// never has to be serialised across a navigation just to show a summary over the board.
-/// </remarks>
-/// <remarks>
-/// Route parameters arrive through <see cref="ApplyQueryAttributes"/>. The MAUI head's
-/// <c>GamePage</c> implements Shell's <c>IQueryAttributable</c> and forwards here, so this
-/// assembly stays MAUI-free while Shell navigation keeps working.
+/// GameSession owns the rules. GamePage forwards Shell route parameters here through
+/// ApplyQueryAttributes so Presentation does not depend on MAUI.
 /// </remarks>
 public partial class GameViewModel : LocalizedViewModel
 {
@@ -137,13 +128,10 @@ public partial class GameViewModel : LocalizedViewModel
         _saves.Changed += OnPersistenceChanged;
         _completions.Changed += OnPersistenceChanged;
 
-        // The board canvas snapshots its palette when it draws, so a theme change mid-game -
-        // OS dusk flip under Auto, or Options changed from the pause overlay one day - must
-        // push a redraw. Unhooked in Dispose, which PageLifecycle guarantees is called.
+        // Redraw when the active theme changes. Dispose removes this subscription.
         _theme.Changed += OnThemeChanged;
 
-        // TalkBack switched on mid-game must grow the cell overlay right away - the player who
-        // just turned it on is exactly the one who cannot see that the board ignored them.
+        // Update the accessible cell overlay when screen-reader state changes.
         _accessibility.ScreenReaderStateChanged += OnScreenReaderStateChanged;
     }
 
@@ -187,20 +175,13 @@ public partial class GameViewModel : LocalizedViewModel
     [NotifyPropertyChangedFor(nameof(ModeButtonText))]
     public partial bool IsCrossMode { get; private set; }
 
-    /// <remarks>
-    /// Raises <see cref="SolvedTimeText"/> as well, which is what makes the win overlay's time
-    /// tile show the solve rather than the "0:00" the binding read when the page was built - see
-    /// that property.
-    /// </remarks>
+    /// <summary>Also refreshes SolvedTimeText when the win overlay opens.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SolvedTimeText))]
     [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsSolved { get; private set; }
 
-    /// <summary>
-    /// The clock beat the player. A separate flag from <see cref="IsSolved"/> because it is the
-    /// game's only loss, and the two overlays say opposite things.
-    /// </summary>
+    /// <summary>Shows the timeout overlay independently of the solved overlay.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsTimeUp { get; private set; }
@@ -209,14 +190,7 @@ public partial class GameViewModel : LocalizedViewModel
     [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
     public partial bool IsPaused { get; private set; }
 
-    /// <summary>
-    /// The break reminder, shown once when the parent-set screen-time limit is reached.
-    /// </summary>
-    /// <remarks>
-    /// Deliberately a modal overlay rather than a toast, and it stops the clock while it is up.
-    /// A message a child can play straight through is not a reminder. It is not a lockout
-    /// either - "A little longer" resumes - because the limit is guidance, not a punishment.
-    /// </remarks>
+    /// <summary>Shows the screen-time reminder and pauses play until it is dismissed.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(BreakBody))]
     [NotifyPropertyChangedFor(nameof(HasGameOverlay))]
@@ -245,11 +219,7 @@ public partial class GameViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial double Progress { get; private set; }
 
-    /// <remarks>
-    /// Both star properties, not just the visible one: the description is bound to the same label
-    /// and goes stale exactly as <see cref="SolvedTimeText"/> did, so a screen reader was told
-    /// "0 of 3 stars" over a row of three filled ones.
-    /// </remarks>
+    /// <summary>Refreshes the star display and its accessible description.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(StarsText))]
     [NotifyPropertyChangedFor(nameof(StarsDescription))]
@@ -269,11 +239,7 @@ public partial class GameViewModel : LocalizedViewModel
 
     public bool HasToast => !string.IsNullOrEmpty(Toast);
 
-    /// <summary>
-    /// The clock is a preference in an ordinary game but the whole point of a timed trial, so a
-    /// trial overrides the switch: a player who hid the timer in Options must still see the
-    /// countdown they are racing, or the first they learn of it is the "out of time" screen.
-    /// </summary>
+    /// <summary>Trials always display the countdown; ordinary games follow the timer preference.</summary>
     public bool ShowTimer => Session is { IsTimed: true } || _settings.Helpers.ShowTimer;
 
     public int ZoomPercent => _settings.CellZoomPercent;
@@ -293,26 +259,13 @@ public partial class GameViewModel : LocalizedViewModel
     /// </remarks>
     public bool NeedsCellOverlay => _accessibility.IsScreenReaderActive;
 
-    /// <summary>Read by the page before every buzz, so the Haptics switch is actually obeyed.</summary>
+    /// <summary>Current haptics preference, checked by the page before each vibration.</summary>
     public bool HapticsEnabled => _settings.Haptics;
 
-    /// <summary>
-    /// Column for each action button, so the row can be ordered for the player's hand -
-    /// "Buttons on: Left / Right".
-    /// </summary>
+    /// <summary>Places action buttons according to handedness.</summary>
     /// <remarks>
-    /// <para>
-    /// Undo is the button a child reaches for most, so it belongs under the thumb rather than
-    /// across the screen from it: right-handed puts it at the right-hand end. Reordering the row
-    /// is the whole effect - our layout is full-width, so there is no cluster to move to the
-    /// other side as the prototype's was.
-    /// </para>
-    /// <para>
-    /// Done by binding <c>Grid.Column</c> rather than by setting <c>FlowDirection</c> on the row.
-    /// FlowDirection reads better in markup and does reverse the columns, but only when it is set
-    /// before the grid lays out; changing it afterwards left the buttons where they were, so
-    /// switching hands mid-game did nothing. Only a screenshot showed that.
-    /// </para>
+    /// Bind Grid.Column explicitly: changing FlowDirection after the first layout does not
+    /// reliably reorder existing children.
     /// </remarks>
     public int UndoColumn => ColumnFor(UndoOrder);
 
@@ -330,24 +283,14 @@ public partial class GameViewModel : LocalizedViewModel
 
     public int RestartRow => RowFor(RestartOrder);
 
-    /// <summary>
-    /// True on a wide landscape screen, where the play column becomes a row.
-    /// </summary>
-    /// <remarks>
-    /// Set by the page from its own measured size, because MAUI has no media queries. The design
-    /// doc's scaling note is the source of the rule: "Above 900 px in landscape the play column
-    /// becomes a row", with cell size computed from the free rectangle rather than hard-coded.
-    /// </remarks>
+    /// <summary>Uses a side column for controls on wide landscape screens.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(
         nameof(UndoColumn), nameof(RedoColumn), nameof(HintColumn), nameof(RestartColumn),
         nameof(UndoRow), nameof(RedoRow), nameof(HintRow), nameof(RestartRow))]
     public partial bool IsWideLayout { get; set; }
 
-    /// <summary>
-    /// Which side the controls column takes in the wide layout - the hand's side, so the buttons
-    /// are under the thumb that is already holding that edge of the tablet.
-    /// </summary>
+    /// <summary>The controls column follows the selected hand in the wide layout.</summary>
     public bool IsWideControlsOnRight => IsRightHanded;
 
     // Position of each button in reading order once handedness has been applied.
@@ -367,10 +310,7 @@ public partial class GameViewModel : LocalizedViewModel
 
     private bool IsRightHanded => _settings.Handedness == Handedness.Right;
 
-    /// <summary>
-    /// Label for the mode toggle. It names the mode the button switches <em>to</em>, which is
-    /// the convention children read correctly - "Mark X" means "tapping will now mark X".
-    /// </summary>
+    /// <summary>Names the mark mode selected by the next toggle activation.</summary>
     public string ModeButtonText => IsCrossMode ? T("fill") : T("cross");
 
     /// <summary>
@@ -382,11 +322,36 @@ public partial class GameViewModel : LocalizedViewModel
     /// </remarks>
     public bool ShowModeButton => _settings.TapBehaviour == TapBehaviour.ModeButton || NeedsCellOverlay;
 
-    /// <summary>
-    /// Hints and mistakes as one line, composed here rather than assembled in XAML from several
-    /// localised spans - simpler markup, and the wording becomes testable.
-    /// </summary>
-    public string StatusText => $"{T("hints")} {(HasUnlimitedHints ? "∞" : HintsRemaining.ToString(CultureInfo.CurrentCulture))}    {T("mistakes")} {Mistakes}";
+    /// <summary>Localised helper counters. Each counter is present only while its helper is enabled.</summary>
+    public string StatusText
+    {
+        get
+        {
+            var parts = new List<string>(2);
+
+            if (ShowHints)
+            {
+                parts.Add($"{T("hints")} {(HasUnlimitedHints ? "∞" : HintsRemaining.ToString(CultureInfo.CurrentCulture))}");
+            }
+
+            if (ShowMistakes)
+            {
+                parts.Add($"{T("mistakes")} {Mistakes}");
+            }
+
+            return string.Join("    ", parts);
+        }
+    }
+
+    /// <summary>Whether mistakes are being counted and shown - the "warn on mistakes" helper.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(StatusText))]
+    public partial bool ShowMistakes { get; private set; } = true;
+
+    /// <summary>Whether hints are available at all in this game - the "allow hints" helper.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(StatusText))]
+    public partial bool ShowHints { get; private set; } = true;
 
     public string UndoText => T("undo");
 
@@ -410,10 +375,7 @@ public partial class GameViewModel : LocalizedViewModel
 
     public string BreakTitle => T("breakTitle");
 
-    /// <summary>
-    /// The reminder names the figure the parent set, so the child is told a real number rather
-    /// than "a while". Rounded up, because "0 minutes" would be nonsense at the moment it fires.
-    /// </summary>
+    /// <summary>Shows the configured break interval, rounded up to whole minutes.</summary>
     public string BreakBody => Strings.Format(
         "breakBody",
         Math.Max(1, (int)Math.Ceiling(_time.Played.TotalMinutes)));
@@ -441,17 +403,10 @@ public partial class GameViewModel : LocalizedViewModel
 
     public string MistakesLabel => T("mistakes");
 
-    /// <summary>
-    /// The solve time for the win overlay. Not <see cref="ElapsedText"/>: that shows what is
-    /// *left* during a timed trial, and a trial's win screen should still report how long the
-    /// solve took, not how much clock remained.
-    /// </summary>
+    /// <summary>Elapsed solve time for the win overlay, including timed trials.</summary>
     /// <remarks>
-    /// Computed, so it only reaches the screen when something raises it - <see cref="IsSolved"/>
-    /// does. The overlay is in the visual tree from the start, merely hidden, so its binding is
-    /// evaluated once when the page is built: before <see cref="Session"/> is loaded, which read
-    /// "0:00" and then never changed, however long the puzzle took. The same staleness would show
-    /// the *previous* puzzle's time on a second win in one sitting.
+    /// IsSolved raises this computed property when the overlay opens; ElapsedText is the
+    /// remaining countdown during a trial.
     /// </remarks>
     public string SolvedTimeText
     {
@@ -481,16 +436,9 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>Star row read as words, since "★★☆" is not something a screen reader can say.</summary>
     public string StarsDescription => Strings.Format("a11yStarRating", StarRating);
 
-    /// <summary>
-    /// What a screen reader is told about the board.
-    /// </summary>
+    /// <summary>Accessible board summary, including whether individual cells are available.</summary>
     /// <remarks>
-    /// A <c>GraphicsView</c> contributes nothing to the accessibility tree - the board is simply
-    /// absent from it - so this summary is what a screen reader has to go on for the board as a
-    /// whole. When a screen reader is running, the individual squares are reachable through the
-    /// overlay built by <c>GamePage.BuildCellOverlay</c>; when it is not, the summary says outright
-    /// that they are not, because promising a playable board and providing no way to reach a square
-    /// would be worse than admitting the limit.
+    /// The canvas has no accessible children. GamePage.BuildCellOverlay adds the per-cell controls.
     /// </remarks>
     public string BoardDescription
     {
@@ -508,23 +456,12 @@ public partial class GameViewModel : LocalizedViewModel
                 session.FilledCount,
                 session.Puzzle.PictureCellCount);
 
-            // The caveat is only true when there is no cell overlay. Leaving it in once the squares
-            // became reachable would be a description that contradicts the screen it describes.
+            // Describe unavailable cells only when the accessible overlay is absent.
             return NeedsCellOverlay ? summary : $"{summary} {T("a11yBoardNote")}";
         }
     }
 
-    /// <summary>
-    /// What a screen reader says about one square: where it is, what is in it, and the two clues
-    /// that govern it.
-    /// </summary>
-    /// <remarks>
-    /// The clues are repeated on every square, which is verbose - but a player who cannot see the
-    /// gutters has no other way to know them, and asking a child to hold twenty numbers in their
-    /// head is not an alternative. The tidier design would be separate focusable headers per row
-    /// and column, announcing clues only when the focus crosses into a new line; that needs
-    /// control over focus order, which MAUI does not offer.
-    /// </remarks>
+    /// <summary>Announces the cell position, mark, row clue and column clue.</summary>
     public string DescribeCell(int index)
     {
         if (Session is not { } session || index < 0 || index >= session.Puzzle.CellCount)
@@ -556,16 +493,7 @@ public partial class GameViewModel : LocalizedViewModel
     private string Describe(LineClues clues) =>
         clues.IsBlank ? T("a11yClueNone") : string.Join(" ", clues);
 
-    /// <summary>
-    /// The timer as a sentence; "5:26" alone is read as a pair of numbers.
-    /// </summary>
-    /// <remarks>
-    /// A trial's clock counts <em>down</em> - <see cref="UpdateElapsedText"/> shows what is left,
-    /// not what has passed - so it needs its own wording. Both cases shared "Time so far", which
-    /// told a screen-reader player the exact opposite of what the number meant, on the one screen
-    /// where the number is the whole game. Nothing visual gives that away: the sighted player sees
-    /// it counting down.
-    /// </remarks>
+    /// <summary>Announces elapsed time in ordinary games and remaining time in trials.</summary>
     public string ElapsedDescription => Strings.Format(
         Session is { IsTimed: true } ? "a11yTimeLeft" : "a11yTime",
         ElapsedText);
@@ -678,11 +606,7 @@ public partial class GameViewModel : LocalizedViewModel
         await StartAsync(options);
     }
 
-    /// <summary>
-    /// Re-reads the settings after another screen may have changed them - the pause overlay
-    /// links to Options, and the player expects a new cell size or handedness to apply the
-    /// moment they come back to the board.
-    /// </summary>
+    /// <summary>Applies settings changed while the game page was covered.</summary>
     public async Task RefreshSettingsAsync()
     {
         if (Session is not { } session)
@@ -693,9 +617,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         _settings = await LoadSettingsSafelyAsync();
 
-        // The rules too, not just the view-level preferences: a session resolves its rules at
-        // creation, so without this a helper flipped from the pause overlay's Options - the
-        // auto-cross switch, say - would quietly do nothing until the next puzzle.
+        // Apply helper changes to the active session as well as the view.
         session.ApplyHelpers(_settings.Helpers);
 
         ResetModeIfButtonHidden();
@@ -704,14 +626,7 @@ public partial class GameViewModel : LocalizedViewModel
         NotifySettingsDependentProperties();
     }
 
-    /// <summary>
-    /// The packs the player has earned, for the wildcard "surprise" pack to draw from.
-    /// </summary>
-    /// <remarks>
-    /// Only fetched when a wildcard is actually in play - every other pack names itself, and the
-    /// solved table is of no use in choosing from it. That keeps the extra read off the ordinary
-    /// start path rather than paying for it on every new game.
-    /// </remarks>
+    /// <summary>Loads earned packs only when selecting a picture from the Surprise pack.</summary>
     private async Task<IReadOnlySet<string>?> LoadUnlockedPacksAsync(NewGameOptions options)
     {
         var isWildcard = _puzzles.Packs.Any(p =>
@@ -846,10 +761,7 @@ public partial class GameViewModel : LocalizedViewModel
         }
         catch (PuzzleGenerationException)
         {
-            // The generator has already retried internally and given up, so trying again here
-            // would not help. This path should be unreachable in practice, but reaching it must
-            // not take the app down: StartAsync is called from async void page lifecycle, where
-            // an escaped exception has no handler at all. Home with an apology beats a crash.
+            // Generation failure returns to the menu. Do not let an exception escape the page lifecycle callback.
             var sorry = T("genFailed");
 
             ShowToast(sorry);
@@ -885,10 +797,7 @@ public partial class GameViewModel : LocalizedViewModel
         BoardChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    /// <summary>
-    /// What the header calls this game. A campaign level is its number; a milestone level keeps
-    /// the picture's name, because the reveal is the reward. Everything else is as before.
-    /// </summary>
+    /// <summary>Uses the campaign level number, or the picture name for an authored milestone.</summary>
     private string NameForPuzzle()
     {
         if (Session is not { } session)
@@ -904,10 +813,7 @@ public partial class GameViewModel : LocalizedViewModel
         return T($"Puzzle_{session.Puzzle.Id}");
     }
 
-    /// <summary>
-    /// The win overlay's texts change shape in level mode, and the overlay is built with the
-    /// page - so every new session must push them, exactly like the settings-dependent set.
-    /// </summary>
+    /// <summary>Refreshes completion labels when a new session changes the game mode.</summary>
     private void NotifyLevelDependentProperties()
     {
         OnPropertyChanged(nameof(SolvedTitle));
@@ -917,19 +823,14 @@ public partial class GameViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(IsCampaignComplete));
     }
 
-    /// <summary>
-    /// True while the game is suspended or a pause/break overlay is up.
-    /// </summary>
-    /// <remarks>
-    /// One definition for every route onto the board - painting, tapping, hints, undo and redo -
-    /// so they cannot disagree about what "the game is not being played right now" means. They
-    /// did: the hint and undo buttons checked only for pause, so a child could keep spending
-    /// hints behind the break reminder, which is documented as stopping play.
-    /// </remarks>
+    /// <summary>Blocks all board commands while the page is suspended or a pause/break overlay is open.</summary>
     private bool IsInputBlocked => _isClockSuspended || IsPaused || IsBreakReminderOpen;
 
     /// <summary>Applies a paint request from the board view.</summary>
-    public void Paint(int index, CellState target)
+    /// <param name="index">The square.</param>
+    /// <param name="target">What it should become.</param>
+    /// <param name="continuesStroke">True for every square of a drag after the first.</param>
+    public void Paint(int index, CellState target, bool continuesStroke = false)
     {
         AccountElapsedTime();
         if (Session is not { IsOver: false } session || IsInputBlocked)
@@ -937,17 +838,10 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        Apply(index, session.Paint(index, target), target);
+        Apply(index, session.Paint(index, target, continuesStroke), target);
     }
 
-    /// <summary>
-    /// Applies a plain tap, letting the session decide what the mark becomes from the current mode.
-    /// </summary>
-    /// <remarks>
-    /// The accessibility overlay's route in. It cannot compute a target the way the board view does,
-    /// because that is worked out from where a finger went down and which way it dragged - a
-    /// gesture a screen-reader user is not making.
-    /// </remarks>
+    /// <summary>Applies a tap using the current mark mode. Used by the accessible cell buttons.</summary>
     public void TapCell(int index)
     {
         AccountElapsedTime();
@@ -965,6 +859,8 @@ public partial class GameViewModel : LocalizedViewModel
 
     private void Apply(int index, MoveOutcome outcome, CellState target)
     {
+        var mistakesBefore = Mistakes;
+
         switch (outcome.Result)
         {
             case MoveResult.Mistake:
@@ -977,8 +873,7 @@ public partial class GameViewModel : LocalizedViewModel
             case MoveResult.Applied when outcome.CompletedALine:
                 ShowToast(T("lineDone"));
 
-                // The line sound instead of the cell sound, not as well as: the completion is
-                // the more informative of the two, and both at once is just noise.
+                // Play the line-completion sound instead of the ordinary cell sound.
                 _audio.Play(GameSound.LineComplete);
                 break;
 
@@ -997,6 +892,12 @@ public partial class GameViewModel : LocalizedViewModel
 
         SyncFromSession();
         BoardChanged?.Invoke(this, EventArgs.Empty);
+
+        // Persist a charged mistake immediately because it affects the final score.
+        if (Mistakes > mistakesBefore)
+        {
+            _ = AutosaveIfBoardChangedAsync();
+        }
 
         if (outcome.SolvedPuzzle)
         {
@@ -1076,9 +977,7 @@ public partial class GameViewModel : LocalizedViewModel
         ShowToast(T("hintUsed"));
         _audio.Play(GameSound.Hint);
 
-        // Sync before announcing the hint: the page's handler scrolls to the cell and draws the
-        // ring, and it must see the board with the hinted mark already painted - raising the
-        // event first left the handler working against a stale snapshot.
+        // Update the board snapshot before the hint event scrolls to and highlights the cell.
         SyncFromSession();
         BoardChanged?.Invoke(this, EventArgs.Empty);
         HintGranted?.Invoke(this, hint.Index);
@@ -1101,8 +1000,7 @@ public partial class GameViewModel : LocalizedViewModel
         IsPaused = true;
         StopTimer();
 
-        // Pausing is the most likely moment for the player to walk away, so write now rather
-        // than waiting for the next tick.
+        // Save on pause without waiting for the autosave interval.
         await AutosaveAsync();
     }
 
@@ -1189,11 +1087,7 @@ public partial class GameViewModel : LocalizedViewModel
             return;
         }
 
-        // Everything the completion record needs, captured before the first await. The moment
-        // control yields, a quick tap on "Next" can replace the session, regenerate the save id
-        // and leave daily mode - and this completion must be attributed to the game that was
-        // just won, not to the one that follows it. (A level recorded one-too-high would unlock
-        // a level that was never played.)
+        // Capture completion identity before awaiting: Next can replace the session, save ID and mode.
         var completion = _saves.CaptureCompletion(session);
 
         StopTimer();
@@ -1202,8 +1096,7 @@ public partial class GameViewModel : LocalizedViewModel
 
         _audio.Play(GameSound.Win);
 
-        // The picture's name is the reward, so it is said as well as the congratulation - the
-        // whole point of the puzzle was finding out what it was.
+        // Include the revealed picture name in the completion announcement.
         var solved = $"{SolvedTitle} {PuzzleName}. {StarsDescription}";
 
         _narration.Speak(solved);
@@ -1227,9 +1120,7 @@ public partial class GameViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(BoardDescription));
         OnPropertyChanged(nameof(HapticsEnabled));
 
-        // Both axes, and the side the controls sit on. Handedness moves a button's row as well
-        // as its column in the wide tablet layout, so raising only the columns left the buttons
-        // half-rearranged after a change made from the pause overlay's Options.
+        // Notify both row and column bindings when handedness or the wide layout changes.
         OnPropertyChanged(nameof(UndoColumn));
         OnPropertyChanged(nameof(RedoColumn));
         OnPropertyChanged(nameof(HintColumn));
@@ -1256,6 +1147,8 @@ public partial class GameViewModel : LocalizedViewModel
         HintsRemaining = session.HintsRemaining;
         HasUnlimitedHints = session.HasUnlimitedHints;
         HintsUsed = session.HintsUsed;
+        ShowHints = session.Rules.AllowHints;
+        ShowMistakes = session.Rules.WarnOnMistakes;
 
         var pictureSize = session.Puzzle.PictureCellCount;
         Progress = pictureSize == 0 ? 0 : (double)session.FilledCount / pictureSize;
@@ -1267,10 +1160,7 @@ public partial class GameViewModel : LocalizedViewModel
         CanUseHint = session.CanUseHint;
         IsSolved = session.IsSolved;
 
-        // The board's accessible description carries the filled count, so it goes stale on every
-        // move unless it is raised here - and "2 of 17" while the board is nearly finished is
-        // worse than no description at all. Nothing on screen shows this, so only a dump of the
-        // accessibility tree catches it.
+        // Refresh the accessible filled count after every board change.
         OnPropertyChanged(nameof(BoardDescription));
     }
 
@@ -1358,7 +1248,7 @@ public partial class GameViewModel : LocalizedViewModel
             _narration.Speak(reminder);
             Announce(reminder);
 
-            // Nothing about a break should risk the board, so this is a save point too.
+            // Save when opening the break reminder.
             if (saveOnBreak)
             {
                 _ = QueueAutosaveAsync(onlyIfChanged: false);
@@ -1380,21 +1270,13 @@ public partial class GameViewModel : LocalizedViewModel
 
     private void UpdateElapsedText()
     {
-        // A trial shows what is left rather than what has passed: the number that matters is the
-        // one running out. Same m:ss format either way, matching the prototype's fmtTime.
+        // Trials show remaining time; ordinary games show elapsed time. Both use m:ss.
         var shown = Session is { IsTimed: true } timed ? timed.Remaining : Session?.Elapsed ?? TimeSpan.Zero;
 
         ElapsedText = $"{(int)shown.TotalMinutes}:{shown.Seconds:00}";
     }
 
-    /// <summary>
-    /// Ends a trial the player did not finish in time.
-    /// </summary>
-    /// <remarks>
-    /// No progress is recorded and no save is written: a trial that ran out produced no picture, so
-    /// there is nothing to put in the Gallery and nothing to come back to. Losing is meant to cost
-    /// the attempt, not the afternoon - the overlay offers another go straight away.
-    /// </remarks>
+    /// <summary>Ends an expired trial without saving or awarding progress.</summary>
     private void HandleTimeUp()
     {
         StopTimer();
@@ -1408,13 +1290,9 @@ public partial class GameViewModel : LocalizedViewModel
         Announce(message);
     }
 
-    /// <summary>
-    /// Sends <paramref name="text"/> to the platform screen reader.
-    /// </summary>
+    /// <summary>Announces text through the active screen reader.</summary>
     /// <remarks>
-    /// A no-op when no screen reader is running, so this is safe to call unconditionally - and
-    /// unlike narration it is deliberately not tied to the Voice narration setting, because the
-    /// player's screen reader is their choice rather than ours to switch off.
+    /// This is independent of the narration preference and is a no-op without a screen reader.
     /// </remarks>
     private void Announce(string text)
     {
@@ -1428,31 +1306,21 @@ public partial class GameViewModel : LocalizedViewModel
 
     private void ShowToast(string message)
     {
-        // Already on screen means the player is repeating something - a drag over a row of wrong
-        // squares raises "Oops" once per square. Saying it ten times is not ten times as helpful;
-        // it talks over itself, and for a screen-reader user it buries everything else. The
-        // message still stays up, and its dismissal is pushed back below.
+        // Repeated toasts extend their display time without repeating speech.
         var isRepeat = Toast == message;
 
         Toast = message;
 
         if (!isRepeat)
         {
-            // Every transient message in the game goes through here, so narrating it once at the
-            // funnel covers "line done", "oops" and "hint used" without three separate calls that
-            // a fourth message could later be added alongside and forget.
+            // Narrate each new toast here.
             _narration.Speak(message);
 
-            // And the same message to whatever screen reader the player is using. A toast that
-            // appears and fades is invisible to one otherwise: nothing takes focus, so nothing is
-            // read. Announce is a no-op when no screen reader is running.
+            // Announce transient messages to the active screen reader without moving focus.
             Announce(message);
         }
 
-        // Clears itself, so no screen has to remember to tidy up after a transient message. The
-        // token means only the *latest* showing clears it: repeats each scheduled their own
-        // dismissal, and the earliest would fire first and cut a message that had just been
-        // renewed down to a fraction of its time on screen.
+        // Only the latest toast token may dismiss the message; older delayed callbacks are ignored.
         var token = ++_toastToken;
 
         _ = Task.Delay(1500).ContinueWith(
