@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Ștergem tot?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Toate jocurile, stelele și abțibildurile vor dispărea. Asta nu se mai poate reface.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Da, șterge tot</value></data>
-  <data name="version" xml:space="preserve"><value>Versiunea 1.0 · compilarea 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versiunea {0} · compilarea {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Fără reclame · fără cumpărături în aplicație</value></data>
   <data name="whatIs" xml:space="preserve"><value>Ce este o nonogramă?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>O nonogramă este o imagine ascunsă în numere. Indiciile de pe fiecare rând și fiecare coloană îți spun câte pătrățele să colorezi și în ce ordine. Rezolvă fiecare linie doar cu logica și imaginea apare — nu trebuie niciodată să ghicești.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Cunoscut și ca: Picross · Griddler · Hanjie · Pic-a-Pix · Pictează după numere · Cuvinte încrucișate japoneze</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Cum se joacă</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Autori</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politica de confidențialitate</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Trimite o părere</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Notează squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Citește indiciile</value></data>
   <data name="ht1b" xml:space="preserve"><value>Fiecare număr este un șir neîntrerupt de pătrățele colorate, scrise în ordine. Indiciul 3 1 pe un rând înseamnă trei lipite, cel puțin un spațiu liber, apoi unul singur.</value></data>

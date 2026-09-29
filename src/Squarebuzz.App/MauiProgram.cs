@@ -82,6 +82,7 @@ public static class MauiProgram
         // both are statics that a test cannot substitute.
         services.AddSingleton<INavigationService, ShellNavigationService>();
         services.AddSingleton<IDeviceScreen, DeviceScreen>();
+        services.AddSingleton<IAppVersion, AppVersion>();
 
         // The three seams that keep MAUI statics - MainThread, the dispatcher's timers and
         // SemanticScreenReader - out of the ViewModel assembly.

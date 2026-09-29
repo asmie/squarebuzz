@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Izbrisati sve?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Sve zagonetke, zvjezdice i naljepnice će nestati. To se ne može vratiti.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Da, izbriši sve</value></data>
-  <data name="version" xml:space="preserve"><value>Verzija 1.0 · izdanje 128</value></data>
+  <data name="version" xml:space="preserve"><value>Verzija {0} · izdanje {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklama · bez kupnji u aplikaciji</value></data>
   <data name="whatIs" xml:space="preserve"><value>Što je nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogram je slika skrivena u brojevima. Tragovi uz svaki red i stupac govore koliko kockica ispuniti i u kojem redoslijedu. Riješi svaku liniju čistom logikom i pojavit će se slika — nikada ne moraš pogađati.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Poznato i kao: Picross · Griddler · Hanjie · Pic-a-Pix · Slikanje po brojevima · japanska križaljka</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kako se igra</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Zahvale</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Pravila privatnosti</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Pošalji povratnu informaciju</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Ocijeni squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Čitaj tragove</value></data>
   <data name="ht1b" xml:space="preserve"><value>Svaki broj je jedan neprekinuti niz ispunjenih kockica, navedeni po redu. Trag reda 3 1 znači tri zajedno, barem jedna praznina, pa jedna sama.</value></data>

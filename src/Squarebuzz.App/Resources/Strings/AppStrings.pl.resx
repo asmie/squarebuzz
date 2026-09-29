@@ -210,15 +210,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Wymazać wszystko?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Wszystkie układanki, gwiazdki i naklejki znikną. Nie da się tego cofnąć.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Tak, wymaż wszystko</value></data>
-  <data name="version" xml:space="preserve"><value>Wersja 1.0 · kompilacja 128</value></data>
+  <data name="version" xml:space="preserve"><value>Wersja {0} · kompilacja {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklam · bez zakupów w aplikacji</value></data>
   <data name="whatIs" xml:space="preserve"><value>Czym jest nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogram to obrazek ukryty w liczbach. Wskazówki przy każdym wierszu i kolumnie mówią, ile klocków zamalować i w jakiej kolejności. Rozwiąż każdą linię czystą logiką, a obrazek się pojawi — nigdy nie musisz zgadywać.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Znany też jako: Picross · Griddler · Hanjie · Pic-a-Pix · Malowanie liczbami · Krzyżówka japońska</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Jak grać</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Autorzy</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Polityka prywatności</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Napisz do nas</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Oceń squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Czytaj wskazówki</value></data>
   <data name="ht1b" xml:space="preserve"><value>Każda liczba to jeden nieprzerwany ciąg zamalowanych klocków, w podanej kolejności. Wskazówka 3 1 znaczy: trzy razem, co najmniej jedna przerwa, potem jeden osobno.</value></data>

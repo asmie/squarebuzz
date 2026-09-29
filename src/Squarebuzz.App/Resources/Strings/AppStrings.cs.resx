@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Vymazat všechno?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Všechny hádanky, hvězdičky i samolepky zmizí. Tohle se nedá vrátit.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Ano, vymazat vše</value></data>
-  <data name="version" xml:space="preserve"><value>Verze 1.0 · sestavení 128</value></data>
+  <data name="version" xml:space="preserve"><value>Verze {0} · sestavení {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklam · bez nákupů v aplikaci</value></data>
   <data name="whatIs" xml:space="preserve"><value>Co je nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogram je obrázek schovaný v číslech. Nápovědy u každé řady a každého sloupce říkají, kolik kostiček vybarvit a v jakém pořadí. Vyřeš každou linku čistou logikou a objeví se obrázek — hádat nemusíš nikdy.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Známý také jako: Picross · Griddler · Hanjie · Pic-a-Pix · Malování podle čísel · japonská křížovka</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Jak hrát</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Autoři</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Zásady soukromí</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Napiš nám</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Ohodnoť squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Čti nápovědy</value></data>
   <data name="ht1b" xml:space="preserve"><value>Každé číslo je jeden nepřerušený úsek vybarvených kostiček a čísla jsou v pořadí. Nápověda 3 1 znamená tři vedle sebe, aspoň jednu mezeru a pak jednu samotnou.</value></data>

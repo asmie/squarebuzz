@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Cancellare tutto?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Tutte le griglie, le stelle e gli adesivi spariranno. Non si può tornare indietro.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Sì, cancella tutto</value></data>
-  <data name="version" xml:space="preserve"><value>Versione 1.0 · compilazione 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versione {0} · compilazione {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Senza pubblicità · senza acquisti in-app</value></data>
   <data name="whatIs" xml:space="preserve"><value>Che cos’è un nonogramma?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Un nonogramma è un disegno nascosto tra i numeri. Gli indizi di ogni riga e di ogni colonna dicono quante caselle riempire e in quale ordine. Risolvi ogni linea con la pura logica e il disegno appare — non devi mai indovinare.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Conosciuto anche come: Picross · Griddler · Hanjie · Pic-a-Pix · Dipingi con i numeri · Cruciverba giapponese</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Come si gioca</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Crediti</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Informativa sulla privacy</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Scrivici</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Valuta squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Leggi gli indizi</value></data>
   <data name="ht1b" xml:space="preserve"><value>Ogni numero è un gruppo di caselle piene senza interruzioni, nell’ordine indicato. L’indizio 3 1 di una riga vuol dire tre caselle attaccate, almeno uno spazio, poi una da sola.</value></data>

@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>全部清除吗？</value></data>
   <data name="resetBody" xml:space="preserve"><value>所有谜题、星星和贴纸都会消失。这无法撤销。</value></data>
   <data name="resetYes" xml:space="preserve"><value>是的，全部清除</value></data>
-  <data name="version" xml:space="preserve"><value>版本 1.0 · 构建 128</value></data>
+  <data name="version" xml:space="preserve"><value>版本 {0} · 构建 {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>没有广告 · 没有内购</value></data>
   <data name="whatIs" xml:space="preserve"><value>什么是数织？</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>数织是一幅藏在数字里的图画。每一行和每一列的提示告诉你要填几个方块、按什么顺序填。用纯粹的逻辑推出每一条线，图画就出现了——你永远不需要猜。</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>也叫：Picross · Griddler · Hanjie · Pic-a-Pix · 数字填色 · 日本谜题</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>怎么玩</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>致谢</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>隐私政策</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>发送反馈</value></data>
   <data name="aboutRate" xml:space="preserve"><value>为 squarebuzz 评分</value></data>
   <data name="ht1" xml:space="preserve"><value>读懂提示</value></data>
   <data name="ht1b" xml:space="preserve"><value>每个数字都是一段不间断的填涂方块，按顺序排列。行提示 3 1 表示三个连在一起，至少空一格，再一个单独的。</value></data>

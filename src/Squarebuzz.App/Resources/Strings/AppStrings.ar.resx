@@ -210,15 +210,13 @@
   <data name="resetTitle" xml:space="preserve"><value>محو كل شيء؟</value></data>
   <data name="resetBody" xml:space="preserve"><value>ستختفي كل الألغاز والنجوم والملصقات، ولا يمكن التراجع عن ذلك.</value></data>
   <data name="resetYes" xml:space="preserve"><value>نعم، امحُ الكل</value></data>
-  <data name="version" xml:space="preserve"><value>الإصدار 1.0 · بناء 128</value></data>
+  <data name="version" xml:space="preserve"><value>الإصدار {0} · بناء {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>بلا إعلانات · بلا مشتريات داخل التطبيق</value></data>
   <data name="whatIs" xml:space="preserve"><value>ما هو النونوغرام؟</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>النونوغرام صورة مخبّأة داخل أرقام. الأرقام عند كل صفّ وكل عمود تخبرك بعدد المربّعات التي تلوّنها وبترتيبها. حلّ كل خطّ بالمنطق وحده فتظهر الصورة — ولن تحتاج إلى التخمين أبدًا.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>يُعرف أيضًا باسم: Picross · Griddler · Hanjie · Pic-a-Pix · الرسم بالأرقام · الكلمات المتقاطعة اليابانيّة</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>كيف تلعب</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>فريق العمل</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>سياسة الخصوصيّة</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>أرسل ملاحظاتك</value></data>
   <data name="aboutRate" xml:space="preserve"><value>قيّم squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>اقرأ الأرقام</value></data>
   <data name="ht1b" xml:space="preserve"><value>كل رقم يعني مجموعة مربّعات ملوّنة متجاورة بلا انقطاع، والأرقام مكتوبة بالترتيب. الأرقام 3 1 في صفّ تعني: ثلاثة معًا، ثم فراغ واحد على الأقل، ثم مربّع واحد وحده.</value></data>

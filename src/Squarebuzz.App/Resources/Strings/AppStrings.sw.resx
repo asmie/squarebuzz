@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Futa kila kitu?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Mafumbo yote, nyota na vibandiko vitatoweka. Hii haiwezi kurudishwa.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Ndiyo, futa yote</value></data>
-  <data name="version" xml:space="preserve"><value>Toleo 1.0 · build 128</value></data>
+  <data name="version" xml:space="preserve"><value>Toleo {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Hakuna matangazo · hakuna manunuzi ndani ya programu</value></data>
   <data name="whatIs" xml:space="preserve"><value>Nonogram ni nini?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogram ni picha iliyofichwa ndani ya namba. Vidokezo kwenye kila mstari na safu vinakuambia vitalu vingapi kujaza na kwa mpangilio upi. Tatua kila mstari kwa mantiki tu na picha itajitokeza — hutahitaji kubahatisha kamwe.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Hujulikana pia kama: Picross · Griddler · Hanjie · Pic-a-Pix · Kuchora kwa namba · chemsha bongo ya Kijapani</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Jinsi ya kucheza</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Shukrani</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Sera ya faragha</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Tuma maoni</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Kadiria squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Soma vidokezo</value></data>
   <data name="ht1b" xml:space="preserve"><value>Kila namba ni mfuatano mmoja usiokatika wa vitalu vilivyojaa, kwa mpangilio. Dokezo la mstari 3 1 linamaanisha vitatu pamoja, nafasi moja angalau, kisha kimoja peke yake.</value></data>

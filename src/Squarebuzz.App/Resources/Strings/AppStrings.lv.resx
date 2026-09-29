@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Izdzēst visu?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Visas mīklas, zvaigznes un uzlīmes pazudīs. To vairs nevarēs atsaukt.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Jā, izdzēst visu</value></data>
-  <data name="version" xml:space="preserve"><value>Versija 1.0 · būvējums 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versija {0} · būvējums {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklāmām · bez pirkumiem lietotnē</value></data>
   <data name="whatIs" xml:space="preserve"><value>Kas ir nonogramma?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogramma ir bilde, kas paslēpta skaitļos. Norādes pie katras rindas un kolonnas pasaka, cik rūtiņu jāaizpilda un kādā secībā. Atmini katru līniju ar tīru loģiku, un bilde parādīsies — minēt nekad nevajag.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Pazīstama arī kā: Picross · Griddler · Hanjie · Pic-a-Pix · Krāsošana pēc skaitļiem · Japāņu krustvārdu mīkla</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kā spēlēt</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Autori</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privātuma politika</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Sūtīt atsauksmi</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Novērtē squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Lasi norādes</value></data>
   <data name="ht1b" xml:space="preserve"><value>Katrs skaitlis ir viena nepārtraukta aizpildītu rūtiņu virkne, un skaitļi ir uzskaitīti pēc kārtas. Rindas norāde 3 1 nozīmē: trīs blakus, vismaz viena tukša rūtiņa, tad viena atsevišķi.</value></data>

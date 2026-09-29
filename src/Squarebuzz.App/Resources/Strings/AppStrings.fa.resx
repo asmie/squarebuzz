@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>همه چیز پاک شود؟</value></data>
   <data name="resetBody" xml:space="preserve"><value>همهٔ پازل‌ها، ستاره‌ها و برچسب‌ها از بین می‌روند. این کار برگشت‌پذیر نیست.</value></data>
   <data name="resetYes" xml:space="preserve"><value>بله، همه را پاک کن</value></data>
-  <data name="version" xml:space="preserve"><value>نسخهٔ ۱.۰ · ساخت ۱۲۸</value></data>
+  <data name="version" xml:space="preserve"><value>نسخهٔ {0} · ساخت {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>بدون تبلیغ · بدون خرید درون‌برنامه‌ای</value></data>
   <data name="whatIs" xml:space="preserve"><value>نونوگرام چیست؟</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>نونوگرام تصویری است که در میان عددها پنهان شده. سرنخ‌های هر سطر و ستون می‌گویند چند مکعب را پر کنی و به چه ترتیب. هر خط را با منطق خالص حل کن و تصویری پیدا می‌شود — هیچ‌وقت لازم نیست حدس بزنی.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>همچنین شناخته‌شده با نام: Picross · Griddler · Hanjie · Pic-a-Pix · نقاشی با اعداد · جدول ژاپنی</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>چطور بازی کنیم</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>سپاس‌ها</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>سیاست حریم خصوصی</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>ارسال نظر</value></data>
   <data name="aboutRate" xml:space="preserve"><value>به squarebuzz امتیاز بده</value></data>
   <data name="ht1" xml:space="preserve"><value>سرنخ‌ها را بخوان</value></data>
   <data name="ht1b" xml:space="preserve"><value>هر عدد یک رشتهٔ پیوستهٔ مکعب پر است، به ترتیب. سرنخ سطر ۳ ۱ یعنی سه تا با هم، دست‌کم یک فاصله، بعد یکی تنها.</value></data>

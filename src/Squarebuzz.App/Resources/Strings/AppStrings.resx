@@ -221,15 +221,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Erase everything?</value></data>
   <data name="resetBody" xml:space="preserve"><value>All puzzles, stars and stickers will be gone. This cannot be undone.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Yes, erase it all</value></data>
-  <data name="version" xml:space="preserve"><value>Version 1.0 · build 128</value></data>
+  <data name="version" xml:space="preserve"><value>Version {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>No ads · no in-app purchases</value></data>
   <data name="whatIs" xml:space="preserve"><value>What is a nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>A nonogram is a picture hidden inside numbers. The clues on each row and column tell you how many blocks to fill and in what order. Work out every line with pure logic and a picture appears — you never have to guess.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Also known as: Picross · Griddler · Hanjie · Pic-a-Pix · Paint by Numbers · Japanese crossword</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>How to Play</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Credits</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privacy policy</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Send feedback</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Rate squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Read the clues</value></data>
   <data name="ht1b" xml:space="preserve"><value>Each number is one unbroken run of filled blocks, listed in order. Row clue 3 1 means three together, at least one gap, then one on its own.</value></data>

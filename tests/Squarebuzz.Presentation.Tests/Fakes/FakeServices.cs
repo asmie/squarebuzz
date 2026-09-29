@@ -248,6 +248,13 @@ public sealed class FakeScreenTimeMonitor : IScreenTimeMonitor
     public void Restart() => Played = TimeSpan.Zero;
 }
 
+public sealed class FakeAppVersion : IAppVersion
+{
+    public string Version => "2.3";
+
+    public string Build => "45";
+}
+
 public sealed class FakeDeviceScreen : IDeviceScreen
 {
     public bool IsLargeScreen { get; set; }

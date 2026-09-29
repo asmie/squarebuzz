@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Eyða öllu?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Allar þrautir, stjörnur og límmerki hverfa. Þetta er ekki afturkræft.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Já, eyða öllu</value></data>
-  <data name="version" xml:space="preserve"><value>Útgáfa 1.0 · smíð 128</value></data>
+  <data name="version" xml:space="preserve"><value>Útgáfa {0} · smíð {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Engar auglýsingar · engin kaup í appi</value></data>
   <data name="whatIs" xml:space="preserve"><value>Hvað er nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogram er mynd sem felur sig í tölum. Vísbendingarnar við hverja röð og súlu segja hversu marga kubba á að fylla og í hvaða röð. Leystu hverja línu með hreinni rökfræði og mynd kemur í ljós — þú þarft aldrei að giska.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Einnig þekkt sem: Picross · Griddler · Hanjie · Pic-a-Pix · Mála eftir tölum · japönsk krossgáta</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Hvernig á að spila</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Þakkir</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Gagnaverndarstefna</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Senda umsögn</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Gefa squarebuzz stjörnur</value></data>
   <data name="ht1" xml:space="preserve"><value>Lestu vísbendingarnar</value></data>
   <data name="ht1b" xml:space="preserve"><value>Hver tala er ein óbrotin röð fylltra kubba, í réttri röð. Raðvísbendingin 3 1 þýðir þrír saman, að minnsta kosti ein eyða, svo einn sér.</value></data>

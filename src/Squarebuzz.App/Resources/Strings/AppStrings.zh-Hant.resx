@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>全部清除嗎？</value></data>
   <data name="resetBody" xml:space="preserve"><value>所有謎題、星星和貼紙都會消失。這無法復原。</value></data>
   <data name="resetYes" xml:space="preserve"><value>是的，全部清除</value></data>
-  <data name="version" xml:space="preserve"><value>版本 1.0 · 建置 128</value></data>
+  <data name="version" xml:space="preserve"><value>版本 {0} · 建置 {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>沒有廣告 · 沒有內購</value></data>
   <data name="whatIs" xml:space="preserve"><value>什麼是數織？</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>數織是一幅藏在數字裡的圖畫。每一行和每一列的提示告訴你要填幾個方塊、按什麼順序填。用純粹的邏輯推出每一條線，圖畫就出現了——你永遠不需要猜。</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>也叫：Picross · Griddler · Hanjie · Pic-a-Pix · 數字填色 · 日本謎題</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>怎麼玩</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>致謝</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>隱私政策</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>傳送意見</value></data>
   <data name="aboutRate" xml:space="preserve"><value>為 squarebuzz 評分</value></data>
   <data name="ht1" xml:space="preserve"><value>讀懂提示</value></data>
   <data name="ht1b" xml:space="preserve"><value>每個數字都是一段不間斷的填塗方塊，按順序排列。行提示 3 1 表示三個連在一起，至少空一格，再一個單獨的。</value></data>

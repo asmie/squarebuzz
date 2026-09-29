@@ -78,15 +78,25 @@ public sealed partial class BoardView : GraphicsView
     }
 
     /// <summary>
-    /// Ends any gesture in flight while the native view still exists, so the scrollers it
-    /// claimed are handed back and a pending long press cannot fire into a detached view.
+    /// Forgets any gesture in flight when the view is being detached, so a pending long press
+    /// cannot fire into a view that is going away.
     /// </summary>
+    /// <remarks>
+    /// Nothing here may touch the native view: by the time this runs during page teardown it can
+    /// already be gone, and redrawing then threw "PlatformView cannot be null here" - which
+    /// crashed the app on leaving the game. Windows and Apple hand their frozen scrollers back
+    /// from the references they stored when claiming, without the native view. Android's claim
+    /// is a per-gesture flag its parent clears on the next touch, so it needs nothing.
+    /// </remarks>
     protected override void OnHandlerChanging(HandlerChangingEventArgs args)
     {
         if (args.OldHandler is not null)
         {
             CancelLongPress();
-            EndDrag();
+#if !ANDROID
+            ClaimGestureFromScrollers(false);
+#endif
+            ResetGestureState();
         }
 
         base.OnHandlerChanging(args);
@@ -515,10 +525,59 @@ public sealed partial class BoardView : GraphicsView
         CancelLongPress();
         FlushDeferredPaint();
 
+        var previous = _pressedIndex;
         _pressedIndex = cell;
 
         Highlight(cell);
-        Paint(cell);
+        PaintLine(previous, cell);
+    }
+
+    /// <summary>
+    /// Paints every square on the straight line from <paramref name="from"/> (already painted)
+    /// to <paramref name="to"/>, inclusive.
+    /// </summary>
+    /// <remarks>
+    /// Touch samples arrive once per frame, not once per square, so a quick swipe jumps several
+    /// squares between two samples. Painting only the square under each sample left gaps - a
+    /// fast swipe along a row of five filled three of them. The squares in between are walked
+    /// with Bresenham's line, in order, so the stroke still reads the way the finger moved.
+    /// </remarks>
+    private void PaintLine(int from, int to)
+    {
+        var columns = _drawable.Layout.Columns;
+
+        if (from < 0 || columns == 0)
+        {
+            Paint(to);
+            return;
+        }
+
+        var (x, y) = (from % columns, from / columns);
+        var (endX, endY) = (to % columns, to / columns);
+        var dx = Math.Abs(endX - x);
+        var dy = -Math.Abs(endY - y);
+        var stepX = x < endX ? 1 : -1;
+        var stepY = y < endY ? 1 : -1;
+        var error = dx + dy;
+
+        while (x != endX || y != endY)
+        {
+            var doubled = 2 * error;
+
+            if (doubled >= dy)
+            {
+                error += dy;
+                x += stepX;
+            }
+
+            if (doubled <= dx)
+            {
+                error += dx;
+                y += stepY;
+            }
+
+            Paint((y * columns) + x);
+        }
     }
 
     private void OnEndInteraction(object? sender, TouchEventArgs e)
@@ -552,16 +611,21 @@ public sealed partial class BoardView : GraphicsView
         // Released on every route out of a gesture, including cancellation - a host left
         // permanently unable to intercept would stop scrolling altogether.
         ClaimGestureFromScrollers(false);
+        ResetGestureState();
+        Invalidate();
 
+        TouchedCellChanged?.Invoke(this, new TouchedCellEventArgs(-1, isInLeftHalf: false));
+    }
+
+    /// <summary>Clears the gesture's own state, touching nothing native.</summary>
+    private void ResetGestureState()
+    {
         _isDragging = false;
         _paintedThisDrag.Clear();
         _deferredPaintIndex = -1;
 
         _drawable.HighlightRow = -1;
         _drawable.HighlightColumn = -1;
-        Invalidate();
-
-        TouchedCellChanged?.Invoke(this, new TouchedCellEventArgs(-1, isInLeftHalf: false));
     }
 
     private void Paint(int index)

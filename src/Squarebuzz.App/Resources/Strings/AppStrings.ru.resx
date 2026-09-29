@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Стереть всё?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Все загадки, звёзды и наклейки исчезнут. Отменить это будет нельзя.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Да, стереть всё</value></data>
-  <data name="version" xml:space="preserve"><value>Версия 1.0 · сборка 128</value></data>
+  <data name="version" xml:space="preserve"><value>Версия {0} · сборка {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Без рекламы · без покупок в приложении</value></data>
   <data name="whatIs" xml:space="preserve"><value>Что такое нонограмма?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Нонограмма — это картинка, спрятанная в числах. Подсказки у каждой строки и каждого столбца говорят, сколько блоков закрасить и в каком порядке. Разбери каждую линию чистой логикой — и картинка появится сама. Угадывать не нужно никогда.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Другие названия: Picross · Griddler · Hanjie · Pic-a-Pix · Раскраска по числам · Японский кроссворд</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Как играть</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Авторы</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Политика приватности</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Написать нам</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Оценить squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Читай подсказки</value></data>
   <data name="ht1b" xml:space="preserve"><value>Каждое число — это одна непрерывная цепочка закрашенных блоков, и цепочки идут в том же порядке. Подсказка 3 1 значит: три вместе, потом хотя бы одна пустая клетка, потом один блок отдельно.</value></data>

@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Ջնջե՞լ ամեն ինչ</value></data>
   <data name="resetBody" xml:space="preserve"><value>Բոլոր հանելուկները, աստղերն ու կպչուն պիտակները կվերանան։ Սա հետ չի բերվում։</value></data>
   <data name="resetYes" xml:space="preserve"><value>Այո, ջնջիր ամեն ինչ</value></data>
-  <data name="version" xml:space="preserve"><value>Տարբերակ 1.0 · build 128</value></data>
+  <data name="version" xml:space="preserve"><value>Տարբերակ {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Առանց գովազդի · առանց ներծրագրային գնումների</value></data>
   <data name="whatIs" xml:space="preserve"><value>Ի՞նչ է նոնոգրամը</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Նոնոգրամը թվերի մեջ թաքնված նկար է։ Ամեն տողի ու սյունակի հուշումները ասում են, թե քանի խորանարդիկ լցնես և ինչ հերթականությամբ։ Լուծիր ամեն գիծ մաքուր տրամաբանությամբ և նկարը կհայտնվի — երբեք գուշակելու կարիք չկա։</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Հայտնի է նաև որպես՝ Picross · Griddler · Hanjie · Pic-a-Pix · Նկարել թվերով · ճապոնական խաչբառ</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Շնորհակալություններ</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Գաղտնիության քաղաքականություն</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Ուղարկել կարծիք</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Գնահատել squarebuzz-ը</value></data>
   <data name="ht1" xml:space="preserve"><value>Կարդա հուշումները</value></data>
   <data name="ht1b" xml:space="preserve"><value>Ամեն թիվ լցված խորանարդիկների մեկ անընդհատ շարք է՝ հերթականությամբ։ Տողի 3 1 հուշումը նշանակում է երեքը միասին, առնվազն մեկ բացակ, ապա մեկը մենակ։</value></data>

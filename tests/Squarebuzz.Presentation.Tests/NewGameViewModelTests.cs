@@ -52,7 +52,9 @@ public class NewGameViewModelTests : IDisposable
     // ---- Memory ----
 
     [Fact]
-    public async Task Appearing_RestoresTheLastChoices()
+    // Size, difficulty and challenge are remembered; the pack is not. Every visit opens on
+    // Surprise, so older installs stop reopening on Animals, the pack that used to be the default.
+    public async Task Appearing_RestoresTheLastChoices_ButOpensOnSurprise()
     {
         _settings.Settings = GameSettings.Default with
         {
@@ -66,13 +68,13 @@ public class NewGameViewModelTests : IDisposable
 
         Assert.Equal(GridSize.Normal, _vm.SelectedSize);
         Assert.Equal(4, _vm.SelectedDifficulty);
-        Assert.Equal("animals", _vm.SelectedPackId);
+        Assert.Equal("surprise", _vm.SelectedPackId);
         Assert.True(_vm.IsSharp);
 
         // The option lists agree with the selection, one each.
         Assert.Equal([GridSize.Normal], _vm.Sizes.Where(s => s.IsSelected).Select(s => s.Size));
         Assert.Equal([4], _vm.Difficulties.Where(d => d.IsSelected).Select(d => d.Level));
-        Assert.Equal(["animals"], _vm.Packs.Where(p => p.IsSelected).Select(p => p.Id));
+        Assert.Equal(["surprise"], _vm.Packs.Where(p => p.IsSelected).Select(p => p.Id));
     }
 
     [Fact]
@@ -180,11 +182,12 @@ public class NewGameViewModelTests : IDisposable
     {
         _progress.Solved.Add(new SolvedPuzzle("crown", new DateOnly(2026, 8, 1), 3, TimeSpan.FromMinutes(1), 1));
         _progress.Solved.Add(new SolvedPuzzle("wand", new DateOnly(2026, 8, 2), 2, TimeSpan.FromMinutes(2), 1));
-        _settings.Settings = GameSettings.Default with { LastPackId = "fairy" };
-
         await _vm.OnAppearingAsync();
 
         Assert.False(Pack("fairy").IsLocked);
+
+        _vm.SelectPackCommand.Execute(Pack("fairy"));
+
         Assert.Equal("fairy", _vm.SelectedPackId);
     }
 

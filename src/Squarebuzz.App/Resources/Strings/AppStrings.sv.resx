@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Radera allt?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Alla pussel, stjärnor och klistermärken försvinner. Det går inte att ångra.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Ja, radera allt</value></data>
-  <data name="version" xml:space="preserve"><value>Version 1.0 · bygge 128</value></data>
+  <data name="version" xml:space="preserve"><value>Version {0} · bygge {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Inga annonser · inga köp i appen</value></data>
   <data name="whatIs" xml:space="preserve"><value>Vad är ett nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Ett nonogram är en bild som gömmer sig i siffror. Ledtrådarna vid varje rad och kolumn talar om hur många klossar du ska fylla och i vilken ordning. Lös varje linje med ren logik så träder en bild fram — du behöver aldrig gissa.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Kallas även: Picross · Griddler · Hanjie · Pic-a-Pix · Måla efter siffror · japanskt korsord</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Så spelar du</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Tack till</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Integritetspolicy</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Skicka synpunkter</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Betygsätt squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Läs ledtrådarna</value></data>
   <data name="ht1b" xml:space="preserve"><value>Varje siffra är en obruten rad av fyllda klossar, i ordning. Radledtråden 3 1 betyder tre tillsammans, minst ett hopp, sedan en ensam.</value></data>

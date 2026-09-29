@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Ištrinti viską?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Visi galvosūkiai, žvaigždutės ir lipdukai išnyks. To nebus galima atšaukti.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Taip, ištrinti viską</value></data>
-  <data name="version" xml:space="preserve"><value>Versija 1.0 · kompiliacija 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versija {0} · kompiliacija {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Be reklamų · be pirkimų programėlėje</value></data>
   <data name="whatIs" xml:space="preserve"><value>Kas yra nonograma?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonograma – paveikslėlis, pasislėpęs skaičiuose. Užuominos prie kiekvienos eilutės ir stulpelio pasako, kiek langelių užpildyti ir kokia tvarka. Išnarpliok kiekvieną liniją vien logika, ir paveikslėlis atsiras — spėti nereikia niekada.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Dar žinoma kaip: Picross · Griddler · Hanjie · Pic-a-Pix · Piešimas pagal skaičius · Japoniškas kryžiažodis</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kaip žaisti</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Autoriai</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privatumo politika</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Parašyk mums</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Įvertink squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Skaityk užuominas</value></data>
   <data name="ht1b" xml:space="preserve"><value>Kiekvienas skaičius – vienas nepertraukiamas užpildytų langelių ruožas; skaičiai surašyti eilės tvarka. Eilutės užuomina 3 1 reiškia: trys greta, bent vienas tuščias langelis, tada vienas atskirai.</value></data>

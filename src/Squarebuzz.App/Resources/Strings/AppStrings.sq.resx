@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Të fshihet çdo gjë?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Të gjitha enigmat, yjet dhe ngjitësat do të zhduken. Kjo nuk mund të kthehet.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Po, fshiji të gjitha</value></data>
-  <data name="version" xml:space="preserve"><value>Versioni 1.0 · ndërtimi 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versioni {0} · ndërtimi {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Pa reklama · pa blerje brenda aplikacionit</value></data>
   <data name="whatIs" xml:space="preserve"><value>Çfarë është një nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogrami është një figurë e fshehur brenda numrave. Të dhënat në çdo rresht dhe shtyllë të tregojnë sa kuba të mbushësh dhe në çfarë rendi. Zgjidh çdo vijë me logjikë të kulluar dhe shfaqet një figurë — nuk të duhet kurrë të hamendësosh.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Njihet edhe si: Picross · Griddler · Hanjie · Pic-a-Pix · Pikturë me numra · fjalëkryq japonez</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Si të lozësh</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Falënderime</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politika e privatësisë</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Dërgo mendimin tënd</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Vlerëso squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Lexo të dhënat</value></data>
   <data name="ht1b" xml:space="preserve"><value>Çdo numër është një varg i pandërprerë kubash të mbushur, të renditur me rend. Të dhëna rreshti 3 1 do të thotë tre bashkë, të paktën një hapësirë, pastaj një i vetëm.</value></data>

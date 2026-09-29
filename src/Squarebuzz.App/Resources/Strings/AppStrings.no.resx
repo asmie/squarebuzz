@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Slette alt?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Alle puslespill, stjerner og klistremerker forsvinner. Dette kan ikke angres.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Ja, slett alt</value></data>
-  <data name="version" xml:space="preserve"><value>Versjon 1.0 · bygg 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versjon {0} · bygg {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Ingen reklame · ingen kjøp i appen</value></data>
   <data name="whatIs" xml:space="preserve"><value>Hva er et nonogram?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Et nonogram er et bilde som skjuler seg i tall. Hintene ved hver rad og kolonne forteller hvor mange klosser du skal fylle, og i hvilken rekkefølge. Løs hver linje med ren logikk, og et bilde dukker opp — du trenger aldri å gjette.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Også kjent som: Picross · Griddler · Hanjie · Pic-a-Pix · Mal etter tall · japansk kryssord</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Slik spiller du</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Takk til</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Personvernerklæring</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Send tilbakemelding</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Vurder squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Les hintene</value></data>
   <data name="ht1b" xml:space="preserve"><value>Hvert tall er én ubrutt rekke av fylte klosser, listet i rekkefølge. Radhintet 3 1 betyr tre sammen, minst ett hull, så én alene.</value></data>

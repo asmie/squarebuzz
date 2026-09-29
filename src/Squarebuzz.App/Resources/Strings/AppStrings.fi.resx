@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Pyyhitäänkö kaikki?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Kaikki pulmat, tähdet ja tarrat katoavat. Tätä ei voi peruuttaa.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Kyllä, pyyhi kaikki</value></data>
-  <data name="version" xml:space="preserve"><value>Versio 1.0 · koonti 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versio {0} · koonti {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Ei mainoksia · ei sovellusostoksia</value></data>
   <data name="whatIs" xml:space="preserve"><value>Mikä on nonogrammi?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogrammi on numeroiden sisään kätketty kuva. Jokaisen rivin ja sarakkeen vihjeet kertovat, montako palikkaa täytetään ja missä järjestyksessä. Ratkaise joka linja pelkällä logiikalla, niin kuva ilmestyy — arvata ei tarvitse koskaan.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Tunnetaan myös nimillä: Picross · Griddler · Hanjie · Pic-a-Pix · Maalaa numeroilla · japanilainen ristikko</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Miten pelataan</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Tekijät</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Tietosuojakäytäntö</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Lähetä palautetta</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Arvioi squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Lue vihjeet</value></data>
   <data name="ht1b" xml:space="preserve"><value>Jokainen numero on yksi katkeamaton jono täytettyjä palikoita, luettelossa järjestyksessä. Rivin vihje 3 1 tarkoittaa kolmea peräkkäin, vähintään yhtä tyhjää väliä ja sitten yhtä yksinään.</value></data>

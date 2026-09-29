@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>ყველაფერი წაიშალოს?</value></data>
   <data name="resetBody" xml:space="preserve"><value>ყველა თავსატეხი, ვარსკვლავი და სტიკერი გაქრება. ამის დაბრუნება შეუძლებელია.</value></data>
   <data name="resetYes" xml:space="preserve"><value>დიახ, ყველაფერი წაშალე</value></data>
-  <data name="version" xml:space="preserve"><value>ვერსია 1.0 · build 128</value></data>
+  <data name="version" xml:space="preserve"><value>ვერსია {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>რეკლამის გარეშე · აპშიდა შესყიდვების გარეშე</value></data>
   <data name="whatIs" xml:space="preserve"><value>რა არის ნონოგრამა?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>ნონოგრამა არის რიცხვებში დამალული სურათი. ყოველი მწკრივისა და სვეტის მინიშნებები გეუბნება, რამდენი კუბიკი შეავსო და რა რიგით. ამოხსენი ყოველი ხაზი წმინდა ლოგიკით და სურათი გამოჩნდება — გამოცნობა არასოდეს გჭირდება.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>ასევე ცნობილია როგორც: Picross · Griddler · Hanjie · Pic-a-Pix · ხატვა ციფრებით · იაპონური კროსვორდი</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>როგორ ვითამაშოთ</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>მადლობები</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>კონფიდენციალურობის პოლიტიკა</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>გამოგზავნე შეფასება</value></data>
   <data name="aboutRate" xml:space="preserve"><value>შეაფასე squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>წაიკითხე მინიშნებები</value></data>
   <data name="ht1b" xml:space="preserve"><value>ყოველი რიცხვი შევსებული კუბიკების ერთი უწყვეტი მწკრივია, რიგის მიხედვით. მწკრივის მინიშნება 3 1 ნიშნავს სამს ერთად, სულ ცოტა ერთ ხარვეზს, შემდეგ ერთს მარტო.</value></data>

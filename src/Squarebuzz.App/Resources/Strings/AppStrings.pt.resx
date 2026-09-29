@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Apagar tudo?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Todos os puzzles, estrelas e autocolantes vão desaparecer. Isto não se pode desfazer.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Sim, apagar tudo</value></data>
-  <data name="version" xml:space="preserve"><value>Versão 1.0 · compilação 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versão {0} · compilação {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Sem anúncios · sem compras na aplicação</value></data>
   <data name="whatIs" xml:space="preserve"><value>O que é um nonograma?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Um nonograma é uma imagem escondida dentro de números. As pistas de cada linha e de cada coluna dizem-te quantos blocos pintar e em que ordem. Resolve cada linha só com lógica e a imagem aparece — nunca tens de adivinhar.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Também conhecido por: Picross · Griddler · Hanjie · Pic-a-Pix · Pintar por Números · Palavras cruzadas japonesas</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Como jogar</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Créditos</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Política de privacidade</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Enviar comentários</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Avaliar o squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Lê as pistas</value></data>
   <data name="ht1b" xml:space="preserve"><value>Cada número é um grupo seguido de blocos pintados, na ordem indicada. A pista 3 1 numa linha quer dizer três juntos, pelo menos um espaço vazio, e depois um sozinho.</value></data>

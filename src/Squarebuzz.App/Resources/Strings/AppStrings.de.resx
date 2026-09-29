@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Alles löschen?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Alle Rätsel, Sterne und Sticker sind dann weg. Das kann man nicht zurückholen.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Ja, alles löschen</value></data>
-  <data name="version" xml:space="preserve"><value>Version 1.0 · Build 128</value></data>
+  <data name="version" xml:space="preserve"><value>Version {0} · Build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Keine Werbung · keine In-App-Käufe</value></data>
   <data name="whatIs" xml:space="preserve"><value>Was ist ein Nonogramm?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Ein Nonogramm ist ein Bild, das in Zahlen versteckt ist. Die Hinweise an jeder Zeile und Spalte sagen dir, wie viele Klötzchen du malen musst und in welcher Reihenfolge. Löse jede Linie mit reiner Logik, und ein Bild erscheint — raten musst du nie.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Auch bekannt als: Picross · Griddler · Hanjie · Pic-a-Pix · Malen nach Zahlen · Japanisches Kreuzworträtsel</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>So wird gespielt</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Mitwirkende</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Datenschutz</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Feedback senden</value></data>
   <data name="aboutRate" xml:space="preserve"><value>squarebuzz bewerten</value></data>
   <data name="ht1" xml:space="preserve"><value>Hinweise lesen</value></data>
   <data name="ht1b" xml:space="preserve"><value>Jede Zahl ist eine zusammenhängende Reihe gefüllter Klötzchen, in der genannten Reihenfolge. Der Zeilenhinweis 3 1 heißt: drei zusammen, mindestens eine Lücke, dann eines allein.</value></data>

@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>ぜんぶけす？</value></data>
   <data name="resetBody" xml:space="preserve"><value>パズル・星・シールがぜんぶなくなるよ。もとにはもどせないよ。</value></data>
   <data name="resetYes" xml:space="preserve"><value>はい、ぜんぶけす</value></data>
-  <data name="version" xml:space="preserve"><value>バージョン 1.0 · ビルド 128</value></data>
+  <data name="version" xml:space="preserve"><value>バージョン {0} · ビルド {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>広告なし · アプリ内課金なし</value></data>
   <data name="whatIs" xml:space="preserve"><value>ノノグラムってなに？</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>ノノグラムは、数字の中にかくれている絵だよ。行と列のヒントが、いくつぬるか、どの順番でぬるかを教えてくれる。ぜんぶのラインを考えてとくと絵があらわれるよ。あてずっぽうはいらないんだ。</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>こんな名前でもよばれるよ: お絵かきロジック · ピクロス · グリッドラー · ハンジー · Pic-a-Pix · 数字ぬり絵</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>あそび方</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>つくった人たち</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>プライバシーポリシー</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>ごいけんを送る</value></data>
   <data name="aboutRate" xml:space="preserve"><value>squarebuzz を評価する</value></data>
   <data name="ht1" xml:space="preserve"><value>ヒントを読もう</value></data>
   <data name="ht1b" xml:space="preserve"><value>数字はひとつずつが、とぎれずにつづくぬったブロックのかたまりで、書いてある順番どおりだよ。行のヒント「3 1」は、3つならび、1マス以上のすきま、そのあと1つだけ、という意味だよ。</value></data>

@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Tout effacer ?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Toutes les grilles, les étoiles et les autocollants disparaîtront. C’est définitif.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Oui, tout effacer</value></data>
-  <data name="version" xml:space="preserve"><value>Version 1.0 · compilation 128</value></data>
+  <data name="version" xml:space="preserve"><value>Version {0} · compilation {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Sans publicité · sans achat intégré</value></data>
   <data name="whatIs" xml:space="preserve"><value>Qu’est-ce qu’un nonogramme ?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Un nonogramme est une image cachée dans des nombres. Les indices de chaque ligne et de chaque colonne disent combien de cases remplir et dans quel ordre. Résous chaque ligne avec la seule logique et l’image apparaît — tu n’as jamais besoin de deviner.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Aussi appelé : Picross · Griddler · Hanjie · Pic-a-Pix · Peinture par numéros · Mots croisés japonais</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Comment jouer</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Crédits</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politique de confidentialité</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Nous écrire</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Noter squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>Lis les indices</value></data>
   <data name="ht1b" xml:space="preserve"><value>Chaque nombre est une suite de cases remplies sans trou, dans l’ordre indiqué. L’indice 3 1 d’une ligne veut dire trois cases collées, au moins un trou, puis une case toute seule.</value></data>

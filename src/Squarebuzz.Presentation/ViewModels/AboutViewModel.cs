@@ -12,19 +12,26 @@ public partial class AboutViewModel : LocalizedViewModel
 {
     private readonly INavigationService _navigation;
     private readonly IUiThread _uiThread;
+    private readonly IAppVersion _appVersion;
 
     // Which notice is showing. Each one gets a fresh token, so the timer of an earlier notice
     // cannot clear a later one - comparing the text did, when the same link was tapped twice.
     private int _noticeToken;
 
-    public AboutViewModel(ILocalizationService strings, INavigationService navigation, IUiThread uiThread)
+    public AboutViewModel(
+        ILocalizationService strings,
+        INavigationService navigation,
+        IUiThread uiThread,
+        IAppVersion appVersion)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(navigation);
         ArgumentNullException.ThrowIfNull(uiThread);
+        ArgumentNullException.ThrowIfNull(appVersion);
 
         _navigation = navigation;
         _uiThread = uiThread;
+        _appVersion = appVersion;
         Gate = new ParentGate(strings);
     }
 
@@ -48,15 +55,14 @@ public partial class AboutViewModel : LocalizedViewModel
 
     public string HowToLabel => T("aboutHowTo");
 
-    public string ContactLabel => T("aboutContact");
 
     public string PrivacyLabel => T("aboutPrivacy");
 
     public string RateLabel => T("aboutRate");
 
-    public string CreditsLabel => T("aboutCredits");
 
-    public string VersionLabel => T("version");
+    /// <summary>The installed version and build, read from the package - see <see cref="IAppVersion"/>.</summary>
+    public string VersionLabel => Strings.Format("version", _appVersion.Version, _appVersion.Build);
 
     public string NoAdsLabel => T("noAds");
 
@@ -69,20 +75,13 @@ public partial class AboutViewModel : LocalizedViewModel
     [RelayCommand]
     private async Task HowToAsync() => await _navigation.GoToAsync(Routes.HowTo);
 
-    // Contact, privacy and rating all lead outside the app, so each sits behind the gate. A
-    // child tapping them should not reach a mail composer or a store page unaccompanied.
+    // Privacy and rating both lead outside the app, so each sits behind the gate. A child tapping
+    // them should not reach a web page or a store page unaccompanied.
     [RelayCommand]
-    private void Contact() => OpenGated(T("aboutContact"));
+    private void Privacy() => OpenGated(PrivacyLabel);
 
     [RelayCommand]
-    private void Privacy() => OpenGated(T("aboutPrivacy"));
-
-    [RelayCommand]
-    private void Rate() => OpenGated(T("aboutRate"));
-
-    /// <summary>Credits are harmless, so they are not gated.</summary>
-    [RelayCommand]
-    private void Credits() => ShowNotice("squarebuzz team");
+    private void Rate() => OpenGated(RateLabel);
 
     private void OpenGated(string label) => Gate.Open(() =>
     {

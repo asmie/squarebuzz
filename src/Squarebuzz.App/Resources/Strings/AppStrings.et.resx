@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Kas kustutame kõik?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Kõik mõistatused, tähed ja kleepsud kaovad. Seda ei saa tagasi võtta.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Jah, kustuta kõik</value></data>
-  <data name="version" xml:space="preserve"><value>Versioon 1.0 · järk 128</value></data>
+  <data name="version" xml:space="preserve"><value>Versioon {0} · järk {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Reklaamivaba · ilma ostudeta</value></data>
   <data name="whatIs" xml:space="preserve"><value>Mis on nonogramm?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogramm on numbrite sisse peidetud pilt. Iga rea ja veeru vihjed ütlevad, mitu klotsi täita ja millises järjekorras. Lahenda iga rida puhta loogikaga ja pilt tuleb välja — arvata ei pea kunagi.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Tuntud ka kui: Picross · Griddler · Hanjie · Pic-a-Pix · Värvi numbrite järgi · Jaapani ristsõna</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kuidas mängida</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Tegijad</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privaatsuspoliitika</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Saada tagasisidet</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Hinda squarebuzz'i</value></data>
   <data name="ht1" xml:space="preserve"><value>Loe vihjeid</value></data>
   <data name="ht1b" xml:space="preserve"><value>Iga number on üks katkematu jada täidetud klotse, loetletud järjekorras. Rea vihje 3 1 tähendab kolme koos, siis vähemalt üht tühja ruutu ja siis üht üksinda.</value></data>

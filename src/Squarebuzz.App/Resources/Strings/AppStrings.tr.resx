@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>Her şey silinsin mi?</value></data>
   <data name="resetBody" xml:space="preserve"><value>Bütün bulmacalar, yıldızlar ve çıkartmalar gidecek. Bu geri alınamaz.</value></data>
   <data name="resetYes" xml:space="preserve"><value>Evet, hepsini sil</value></data>
-  <data name="version" xml:space="preserve"><value>Sürüm 1.0 · yapı 128</value></data>
+  <data name="version" xml:space="preserve"><value>Sürüm {0} · yapı {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Reklam yok · uygulama içi satın alma yok</value></data>
   <data name="whatIs" xml:space="preserve"><value>Nonogram nedir?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>Nonogram, sayıların içinde saklı bir resimdir. Her satır ve sütundaki ipuçları kaç blok dolduracağını ve hangi sırayla dolduracağını söyler. Her çizgiyi saf mantıkla çöz, resim ortaya çıksın — asla tahmin etmen gerekmez.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Şu adlarla da bilinir: Picross · Griddler · Hanjie · Pic-a-Pix · Sayılarla Boyama · Japon bulmacası</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Nasıl Oynanır</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>Emeği geçenler</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Gizlilik politikası</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>Görüş gönder</value></data>
   <data name="aboutRate" xml:space="preserve"><value>squarebuzz'ı değerlendir</value></data>
   <data name="ht1" xml:space="preserve"><value>İpuçlarını oku</value></data>
   <data name="ht1b" xml:space="preserve"><value>Her sayı, sırayla yazılmış tek bir kesintisiz dolu blok dizisidir. 3 1 satır ipucu, üçü bir arada, en az bir boşluk, sonra tek başına bir tane demektir.</value></data>

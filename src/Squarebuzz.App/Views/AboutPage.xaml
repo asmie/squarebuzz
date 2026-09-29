@@ -35,13 +35,9 @@
                     <VerticalStackLayout>
                         <Button Text="{Binding HowToLabel}" Command="{Binding HowToCommand}"
                                 Style="{StaticResource GhostButton}" HeightRequest="56" />
-                        <Button Text="{Binding ContactLabel}" Command="{Binding ContactCommand}"
-                                Style="{StaticResource GhostButton}" HeightRequest="56" />
                         <Button Text="{Binding PrivacyLabel}" Command="{Binding PrivacyCommand}"
                                 Style="{StaticResource GhostButton}" HeightRequest="56" />
                         <Button Text="{Binding RateLabel}" Command="{Binding RateCommand}"
-                                Style="{StaticResource GhostButton}" HeightRequest="56" />
-                        <Button Text="{Binding CreditsLabel}" Command="{Binding CreditsCommand}"
                                 Style="{StaticResource GhostButton}" HeightRequest="56" />
                     </VerticalStackLayout>
                 </Border>

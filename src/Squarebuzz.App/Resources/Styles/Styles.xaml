@@ -258,7 +258,11 @@
     <Style TargetType="Switch">
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="OnColor" Value="{DynamicResource Accent}" />
-        <Setter Property="ThumbColor" Value="{DynamicResource Surface}" />
+        <!--
+          A fixed light knob, not the Surface colour: in the dark themes Surface is the card behind
+          the switch, and the knob vanished into it.
+        -->
+        <Setter Property="ThumbColor" Value="#FFFFFF" />
     </Style>
 
     <!-- Card surface: the prototype's surface colour with a 2px line-coloured border. -->

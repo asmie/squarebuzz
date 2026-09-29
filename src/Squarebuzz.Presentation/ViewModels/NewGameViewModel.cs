@@ -178,14 +178,17 @@ public partial class NewGameViewModel : LocalizedViewModel
 
         SelectedSize = LargestPlayableSize(_settings.LastSize);
         SelectedDifficulty = _settings.LastDifficulty;
-        SelectedPackId = OpenPackOrFallback(_settings.LastPackId);
+        // Every visit opens on Surprise, drawing from the whole collection, rather than on the pack
+        // played last time: a remembered pack kept older installs on Animals - the old default -
+        // long after the collection had outgrown it. Size, difficulty and challenge are remembered.
+        SelectedPackId = OpenPackOrFallback(GameSettings.DefaultPackId);
         SelectedChallenge = _settings.LastChallenge;
 
         BuildOptions();
     }
 
     /// <summary>
-    /// The remembered pack if it is open, otherwise the default (every open pack), otherwise the
+    /// The requested pack if it is open, otherwise the default (every open pack), otherwise the
     /// first pack that is open.
     /// </summary>
     /// <remarks>
@@ -197,11 +200,11 @@ public partial class NewGameViewModel : LocalizedViewModel
     /// played. Falling back here keeps the screen's own rule - locked packs cannot be chosen -
     /// true for the one choice the player did not make on this visit.
     /// </remarks>
-    private string OpenPackOrFallback(string remembered)
+    private string OpenPackOrFallback(string requested)
     {
-        if (_unlockedPacks.Contains(remembered))
+        if (_unlockedPacks.Contains(requested))
         {
-            return remembered;
+            return requested;
         }
 
         if (_unlockedPacks.Contains(GameSettings.DefaultPackId))
@@ -217,9 +220,9 @@ public partial class NewGameViewModel : LocalizedViewModel
             }
         }
 
-        // No open pack at all is not a state shipped content can be in; keep the memory rather
+        // No open pack at all is not a state shipped content can be in; keep the request rather
         // than invent a pack that does not exist.
-        return remembered;
+        return requested;
     }
 
     /// <summary>

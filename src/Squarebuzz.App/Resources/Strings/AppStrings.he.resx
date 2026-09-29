@@ -208,15 +208,13 @@
   <data name="resetTitle" xml:space="preserve"><value>למחוק הכול?</value></data>
   <data name="resetBody" xml:space="preserve"><value>כל החידות, הכוכבים והמדבקות ייעלמו. אין דרך לבטל את זה.</value></data>
   <data name="resetYes" xml:space="preserve"><value>כן, מחק הכול</value></data>
-  <data name="version" xml:space="preserve"><value>גרסה 1.0 · בנייה 128</value></data>
+  <data name="version" xml:space="preserve"><value>גרסה {0} · בנייה {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>בלי פרסומות · בלי רכישות בתוך האפליקציה</value></data>
   <data name="whatIs" xml:space="preserve"><value>מה זה נונוגרם?</value></data>
   <data name="whatIsBody" xml:space="preserve"><value>נונוגרם הוא תמונה שמסתתרת בתוך מספרים. הרמזים בכל שורה וטור אומרים כמה קוביות למלא ובאיזה סדר. פתור כל שורה בהיגיון טהור ותמונה תופיע — אף פעם לא צריך לנחש.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>ידוע גם בשמות: Picross · Griddler · Hanjie · Pic-a-Pix · ציור לפי מספרים · תשבץ יפני</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>איך משחקים</value></data>
-  <data name="aboutCredits" xml:space="preserve"><value>תודות</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>מדיניות פרטיות</value></data>
-  <data name="aboutContact" xml:space="preserve"><value>שלח משוב</value></data>
   <data name="aboutRate" xml:space="preserve"><value>דרג את squarebuzz</value></data>
   <data name="ht1" xml:space="preserve"><value>קרא את הרמזים</value></data>
   <data name="ht1b" xml:space="preserve"><value>כל מספר הוא רצף אחד שלם של קוביות מלאות, לפי הסדר. רמז שורה 3 1 אומר שלוש ביחד, לפחות רווח אחד, ואז אחת לבד.</value></data>

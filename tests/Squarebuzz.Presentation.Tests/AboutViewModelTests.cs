@@ -16,7 +16,7 @@ public sealed class AboutViewModelTests : IDisposable
 
     public AboutViewModelTests()
     {
-        _vm = new AboutViewModel(_strings, _navigation, _uiThread);
+        _vm = new AboutViewModel(_strings, _navigation, _uiThread, new FakeAppVersion());
     }
 
     public void Dispose() => _vm.Dispose();
@@ -36,7 +36,7 @@ public sealed class AboutViewModelTests : IDisposable
     [Fact]
     public void ExternalLinks_SitBehindTheParentGate()
     {
-        _vm.ContactCommand.Execute(null);
+        _vm.RateCommand.Execute(null);
 
         Assert.True(_vm.Gate.IsOpen);
         Assert.False(_vm.HasNotice);
@@ -45,10 +45,10 @@ public sealed class AboutViewModelTests : IDisposable
     [Fact]
     public async Task PassingTheGate_ShowsTheUnlockNotice()
     {
-        _vm.ContactCommand.Execute(null);
+        _vm.RateCommand.Execute(null);
         await PassGateAsync();
 
-        Assert.Equal("🔓 aboutContact", _vm.Notice);
+        Assert.Equal("🔓 aboutRate", _vm.Notice);
         Assert.True(_vm.HasNotice);
     }
 
@@ -65,18 +65,17 @@ public sealed class AboutViewModelTests : IDisposable
     }
 
     [Fact]
-    public void Credits_AreNotGated()
+    // The numbers come from the installed package, not from a string typed into every language.
+    public void Version_IsTheInstalledOne()
     {
-        _vm.CreditsCommand.Execute(null);
-
-        Assert.False(_vm.Gate.IsOpen);
-        Assert.Equal("squarebuzz team", _vm.Notice);
+        Assert.Equal("version:2.3,45", _vm.VersionLabel);
     }
 
     [Fact]
-    public void LanguageChange_ClearsTheNotice()
+    public async Task LanguageChange_ClearsTheNotice()
     {
-        _vm.CreditsCommand.Execute(null);
+        _vm.RateCommand.Execute(null);
+        await PassGateAsync();
         Assert.True(_vm.HasNotice);
 
         _strings.SetLanguage(AppLanguage.Polish);
@@ -87,9 +86,10 @@ public sealed class AboutViewModelTests : IDisposable
 
     [Fact]
     // The value was right but nobody was told: the binding kept showing an empty notice pill.
-    public void LanguageChange_TellsTheViewTheNoticeIsGone()
+    public async Task LanguageChange_TellsTheViewTheNoticeIsGone()
     {
-        _vm.CreditsCommand.Execute(null);
+        _vm.RateCommand.Execute(null);
+        await PassGateAsync();
         var raised = new List<string?>();
         _vm.PropertyChanged += (_, e) => raised.Add(e.PropertyName);
 
