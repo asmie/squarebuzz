@@ -39,9 +39,6 @@ public enum GameSound
 /// </remarks>
 public interface IAudioService
 {
-    /// <summary>True when the assets loaded and playback is possible.</summary>
-    bool IsAvailable { get; }
-
     /// <summary>
     /// Loads the sounds. Called once during startup so the first tap on the board is not the
     /// thing that pays for reading seven files off disk.

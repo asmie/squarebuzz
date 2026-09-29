@@ -29,9 +29,6 @@ public sealed class GalleryCard
     /// <summary>Stars earned, as filled and hollow glyphs. Empty until found.</summary>
     public required string Stars { get; init; }
 
-    /// <summary>Best time, or empty.</summary>
-    public required string BestTime { get; init; }
-
     /// <summary>Localised "Locked" caption, carried on the card so the template stays simple.</summary>
     public required string LockedLabel { get; init; }
 
@@ -149,9 +146,6 @@ public partial class GalleryViewModel : LocalizedViewModel
                 Stars = record is null
                     ? string.Empty
                     : new string('★', record.BestStars) + new string('☆', Math.Max(0, 3 - record.BestStars)),
-                BestTime = record is null
-                    ? string.Empty
-                    : $"{(int)record.BestTime.TotalMinutes}:{record.BestTime.Seconds:00}",
                 LockedLabel = T("locked"),
                 Description = DescribeCard(isFound, isLocked, puzzle, record?.BestStars ?? 0),
             });

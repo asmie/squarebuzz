@@ -91,25 +91,21 @@ public partial class TrialsViewModel : LocalizedViewModel
     };
 
     private readonly IProgressRepository _progress;
-    private readonly IPuzzleRepository _puzzles;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
 
     public TrialsViewModel(
         ILocalizationService strings,
         IProgressRepository progress,
-        IPuzzleRepository puzzles,
         INavigationService navigation,
         IClock clock)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(progress);
-        ArgumentNullException.ThrowIfNull(puzzles);
         ArgumentNullException.ThrowIfNull(navigation);
         ArgumentNullException.ThrowIfNull(clock);
 
         _progress = progress;
-        _puzzles = puzzles;
         _navigation = navigation;
         _clock = clock;
     }

@@ -8,7 +8,8 @@ public sealed class DeviceScreen : IDeviceScreen
     /// <summary>The prototype's breakpoint for unlocking the giant grid.</summary>
     private const double LargeScreenWidth = 760;
 
-    public double Width
+    /// <summary>Width in device-independent units.</summary>
+    private static double Width
     {
         get
         {

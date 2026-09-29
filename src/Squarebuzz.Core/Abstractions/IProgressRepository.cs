@@ -13,14 +13,6 @@ public interface IProgressRepository
 
     Task<IReadOnlyList<EarnedTrophy>> GetTrophiesAsync(CancellationToken cancellationToken = default);
 
-    Task AwardTrophyAsync(TrophyId trophy, DateOnly earnedOn, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Records a finished puzzle: adds its stars, updates the streak, and merges it into the
-    /// solved list keeping the best result. Returns the progress after the update.
-    /// </summary>
-    Task<PlayerProgress> RecordCompletionAsync(PuzzleCompletion completion, CancellationToken cancellationToken = default);
-
     /// <summary>Every day whose daily puzzle was finished, for the Trials calendar.</summary>
     Task<IReadOnlyList<DateOnly>> GetDailyCompletionsAsync(CancellationToken cancellationToken = default);
 

@@ -10,7 +10,7 @@
              BackgroundColor="{DynamicResource Bg}">
 
     <ContentPage.Resources>
-        <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
+        <!-- Theme colours by key: the converter looks them up on every conversion. See BoolSelectConverter. -->
         <conv:BoolSelectConverter x:Key="ChipBackground"
                                   TrueKey="Primary"
                                   FalseKey="Surface2" />
@@ -40,7 +40,7 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:SizeOption">
                                 <!-- Selection hides the outline without changing content bounds. -->
-                                <Border Stroke="{DynamicResource Line}" StrokeThickness="2" Margin="0,0,8,8"
+                                <Border Style="{StaticResource Chip}"
                                         Padding="14,10"
                                         BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
                                         Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
@@ -49,9 +49,6 @@
                                             <Setter Property="Stroke" Value="Transparent" />
                                         </DataTrigger>
                                     </Border.Triggers>
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Path=SelectSizeCommand, Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, x:DataType=vm:NewGameViewModel}"
@@ -85,7 +82,7 @@
                     <FlexLayout BindableLayout.ItemsSource="{Binding Difficulties}" Wrap="Wrap" JustifyContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:DifficultyOption">
-                                <Border Stroke="{DynamicResource Line}" StrokeThickness="2" Margin="0,0,8,8"
+                                <Border Style="{StaticResource Chip}"
                                         Padding="12,10"
                                         BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}">
                                     <Border.Triggers>
@@ -93,9 +90,6 @@
                                             <Setter Property="Stroke" Value="Transparent" />
                                         </DataTrigger>
                                     </Border.Triggers>
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Path=SelectDifficultyCommand, Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, x:DataType=vm:NewGameViewModel}"
@@ -136,18 +130,16 @@
                                 CommandParameter="relaxed"
                                 BackgroundColor="{Binding IsRelaxed, Converter={StaticResource ChipBackground}}"
                                 TextColor="{Binding IsRelaxed, Converter={StaticResource ChipTextColor}}"
-                                CornerRadius="16"
-                                HeightRequest="52"
-                                FontFamily="BodyBold" />
+                                Style="{StaticResource SegmentButton}"
+                                HeightRequest="52" />
                         <Button Grid.Column="1"
                                 Text="{Binding SharpLabel}"
                                 Command="{Binding SelectChallengeCommand}"
                                 CommandParameter="sharp"
                                 BackgroundColor="{Binding IsSharp, Converter={StaticResource ChipBackground}}"
                                 TextColor="{Binding IsSharp, Converter={StaticResource ChipTextColor}}"
-                                CornerRadius="16"
-                                HeightRequest="52"
-                                FontFamily="BodyBold" />
+                                Style="{StaticResource SegmentButton}"
+                                HeightRequest="52" />
                     </Grid>
 
                     <Label Text="{Binding ChallengeNote}" Style="{StaticResource Subtle}" FontSize="13" />
@@ -160,7 +152,7 @@
                     <FlexLayout BindableLayout.ItemsSource="{Binding Packs}" Wrap="Wrap" JustifyContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:PackOption">
-                                <Border Stroke="{DynamicResource Line}" StrokeThickness="2" Margin="0,0,8,8"
+                                <Border Style="{StaticResource Chip}"
                                         Padding="12,10"
                                         BackgroundColor="{Binding IsSelected, Converter={StaticResource ChipBackground}}"
                                         Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
@@ -169,9 +161,6 @@
                                             <Setter Property="Stroke" Value="Transparent" />
                                         </DataTrigger>
                                     </Border.Triggers>
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Path=SelectPackCommand, Source={RelativeSource AncestorType={x:Type vm:NewGameViewModel}}, x:DataType=vm:NewGameViewModel}"

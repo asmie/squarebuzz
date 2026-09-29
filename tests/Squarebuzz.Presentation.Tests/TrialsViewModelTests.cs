@@ -19,7 +19,7 @@ public sealed class TrialsViewModelTests : IDisposable
 
     public TrialsViewModelTests()
     {
-        _vm = new TrialsViewModel(_strings, _progress, _puzzles, _navigation, _clock);
+        _vm = new TrialsViewModel(_strings, _progress, _navigation, _clock);
     }
 
     public void Dispose() => _vm.Dispose();

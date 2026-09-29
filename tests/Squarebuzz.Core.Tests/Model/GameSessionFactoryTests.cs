@@ -145,19 +145,6 @@ public class GameSessionFactoryTests
         Assert.Equal(42, session.Origin?.Level);
     }
 
-    [Fact]
-    public void ResumingASpecificPicture_KeepsIt()
-    {
-        var repository = new EmbeddedPuzzleRepository();
-        var dino = repository.FindById("dino");
-        Assert.NotNull(dino);
-
-        var session = NewFactory().CreateFor(dino, ChallengeLevel.Sharp, HelperSettings.Default);
-
-        Assert.Same(dino, session.Puzzle);
-        Assert.Equal(1, session.HintsRemaining);
-    }
-
     /// <summary>
     /// Exactly one 10x10 picture, so the sole-candidate path stays testable no matter how much
     /// content the real packs grow.

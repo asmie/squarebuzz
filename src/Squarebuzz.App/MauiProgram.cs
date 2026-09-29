@@ -76,7 +76,7 @@ public static class MauiProgram
 
         // Resolves to the same object XAML reaches through x:Static, so markup and code can
         // never disagree about the current language.
-        services.AddSingleton<ILocalizationService, LocalizationServiceAdapter>();
+        services.AddSingleton<ILocalizationService>(LocalizationService.Instance);
 
         // Behind interfaces so ViewModels never touch Shell.Current or DeviceInfo directly -
         // both are statics that a test cannot substitute.

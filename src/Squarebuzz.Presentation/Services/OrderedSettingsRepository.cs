@@ -11,8 +11,7 @@ public sealed class OrderedSettingsRepository : ISettingsRepository
 {
     private readonly ISettingsRepository _inner;
     private readonly IPersistenceDiagnostics _diagnostics;
-    private readonly object _gate = new();
-    private Task _pending = Task.CompletedTask;
+    private readonly SerialQueue _queue = new(continueOnCapturedContext: false);
 
     public OrderedSettingsRepository(ISettingsRepository inner, IPersistenceDiagnostics? diagnostics = null)
     {
@@ -59,31 +58,6 @@ public sealed class OrderedSettingsRepository : ISettingsRepository
         }
     }
 
-    private Task<T> EnqueueAsync<T>(Func<Task<T>> operation, CancellationToken cancellationToken)
-    {
-        cancellationToken.ThrowIfCancellationRequested();
-        lock (_gate)
-        {
-            var next = RunAfterAsync(_pending, operation, cancellationToken);
-            _pending = next;
-            return next;
-        }
-    }
-
-    private static async Task<T> RunAfterAsync<T>(Task previous, Func<Task<T>> operation, CancellationToken cancellationToken)
-    {
-        try
-        {
-            await previous.ConfigureAwait(false);
-        }
-        catch (Exception)
-        {
-            // The original caller receives its failure. It must not poison later requests.
-        }
-
-        // Check after the preceding operation finishes: cancelling a queued request must not
-        // let the next request overtake a write that is still running.
-        cancellationToken.ThrowIfCancellationRequested();
-        return await operation().ConfigureAwait(false);
-    }
+    private Task<T> EnqueueAsync<T>(Func<Task<T>> operation, CancellationToken cancellationToken) =>
+        _queue.Enqueue(operation, cancellationToken);
 }

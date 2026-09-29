@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  Light theme. Ported 1:1 from the `:root` block of design/Squarebuzz.dc.html.
-  Keys keep the prototype's semantic names so the two can be diffed by eye.
+  Light theme. Ported from the `:root` block of design/Squarebuzz.dc.html.
+  Keys keep the prototype's semantic names so the two can be diffed by eye. Prototype tokens
+  the app never reads (the sky set, the soft accents, CellFill2, GoldDeep, Good) are left out.
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -19,7 +20,6 @@
     <Color x:Key="CellEmpty">#FFFDF7</Color>
     <Color x:Key="CellLine">#E4D8C4</Color>
     <Color x:Key="CellFill">#3B3550</Color>
-    <Color x:Key="CellFill2">#514A6B</Color>
 
     <Color x:Key="Gutter">#FBEEDA</Color>
     <Color x:Key="GutterInk">#5B5268</Color>
@@ -31,23 +31,14 @@
 
     <Color x:Key="Accent">#2FC0A4</Color>
     <Color x:Key="AccentDeep">#1E9683</Color>
-    <Color x:Key="AccentSoft">#D6F5EE</Color>
     <Color x:Key="OnAccent">#06322A</Color>
-    <Color x:Key="OnAccentSoft">#14705F</Color>
-
-    <Color x:Key="Sky">#4FA8F5</Color>
-    <Color x:Key="SkyDeep">#2F7ECB</Color>
-    <Color x:Key="OnSky">#06294A</Color>
 
     <Color x:Key="Gold">#FFC244</Color>
-    <Color x:Key="GoldDeep">#8A6000</Color>
 
     <Color x:Key="Warn">#EF6C5A</Color>
     <Color x:Key="WarnDeep">#C44B3B</Color>
     <Color x:Key="WarnSoft">#FFE2DC</Color>
     <Color x:Key="OnWarn">#3D0C04</Color>
     <Color x:Key="OnWarnSoft">#9B3527</Color>
-
-    <Color x:Key="Good">#3FBF7F</Color>
 
 </ResourceDictionary>

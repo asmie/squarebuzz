@@ -414,7 +414,7 @@ public partial class GameViewModel : LocalizedViewModel
         {
             var elapsed = Session?.Elapsed ?? TimeSpan.Zero;
 
-            return $"{(int)elapsed.TotalMinutes}:{elapsed.Seconds:00}";
+            return ClockText.Of(elapsed);
         }
     }
 
@@ -1287,7 +1287,7 @@ public partial class GameViewModel : LocalizedViewModel
         // Trials show remaining time; ordinary games show elapsed time. Both use m:ss.
         var shown = Session is { IsTimed: true } timed ? timed.Remaining : Session?.Elapsed ?? TimeSpan.Zero;
 
-        ElapsedText = $"{(int)shown.TotalMinutes}:{shown.Seconds:00}";
+        ElapsedText = ClockText.Of(shown);
     }
 
     /// <summary>Ends an expired trial without saving or awarding progress.</summary>

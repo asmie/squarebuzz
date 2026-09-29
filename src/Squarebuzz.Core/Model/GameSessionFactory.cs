@@ -44,21 +44,6 @@ public sealed class GameSessionFactory
         return new GameSession(puzzle, rules, options with { Seed = seed }, seed);
     }
 
-    /// <summary>Creates a session for a specific picture.</summary>
-    /// <remarks>
-    /// Kept on the factory alongside Create so callers use one session-construction API.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Performance",
-        "CA1822:Mark members as static",
-        Justification = "Belongs on the factory abstraction alongside Create; see remarks.")]
-    public GameSession CreateFor(Puzzle puzzle, ChallengeLevel challenge, HelperSettings helpers)
-    {
-        ArgumentNullException.ThrowIfNull(puzzle);
-
-        return new GameSession(puzzle, GameRules.Create(challenge, helpers));
-    }
-
     /// <summary>Resolves the picture used by a save.</summary>
     /// <remarks>
     /// Authored saves use an exact ID and revision. Generated saves use their original request and seed.

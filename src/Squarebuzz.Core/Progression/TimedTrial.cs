@@ -9,7 +9,7 @@ namespace Squarebuzz.Core.Progression;
 public sealed record TimedTier(int Tier, int Size, TimeSpan Limit)
 {
     /// <summary>Clock as the card shows it, e.g. "3:00".</summary>
-    public string ClockText => $"{(int)Limit.TotalMinutes}:{Limit.Seconds:00}";
+    public string ClockText => Model.ClockText.Of(Limit);
 
     /// <summary>The options that start this trial.</summary>
     /// <remarks>

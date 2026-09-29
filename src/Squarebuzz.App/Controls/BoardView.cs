@@ -48,7 +48,9 @@ public sealed partial class BoardView : GraphicsView
     private int _hintGeneration;
     private int _mistakeGeneration;
     private bool _isDragging;
-    private CancellationTokenSource? _longPressCancellation;
+
+    // Bumped to start or cancel a long press; a timer that finds it moved on does nothing.
+    private int _longPressGeneration;
     private int _pressedIndex = -1;
     private bool _wipeFrameQueued;
 
@@ -603,57 +605,37 @@ public sealed partial class BoardView : GraphicsView
         TouchedCellChanged?.Invoke(this, new TouchedCellEventArgs(index, column < layout.Columns / 2));
     }
 
+    /// <summary>Turns the press into a cross if the finger is still down, unmoved, after the delay.</summary>
+    /// <remarks>
+    /// The same dispatcher-and-generation pattern as <see cref="ShowHint"/>: the timer fires on
+    /// the UI thread, and any cancellation - a lift, a move to another cell, a new session - is
+    /// just a bump of the generation. It used to be a cancellation source, a thread-pool task and
+    /// a hop back to the main thread, with care needed never to touch the disposed source.
+    /// </remarks>
     private void StartLongPressTimer(int index)
     {
-        CancelLongPress();
+        var generation = ++_longPressGeneration;
 
-        var cancellation = new CancellationTokenSource();
-        _longPressCancellation = cancellation;
-
-        // Taken here, on the UI thread, while the source is certainly alive. The task below must
-        // only ever touch this token, never the source: a quick tap cancels *and disposes* the
-        // source from OnEndInteraction, possibly before the pool has even started the task, and
-        // a disposed source throws from its Token property. The token itself stays valid.
-        var token = cancellation.Token;
-
-        _ = Task.Run(async () =>
+        Dispatcher.DispatchDelayed(LongPressDelay, () =>
         {
-            try
-            {
-                await Task.Delay(LongPressDelay, token);
-            }
-            catch (OperationCanceledException)
+            if (generation != _longPressGeneration || Session is not { } session)
             {
                 return;
             }
 
             // The finger stayed put: convert the gesture into a cross and stop the drag so
             // the release does not also paint.
-            await MainThread.InvokeOnMainThreadAsync(() =>
-            {
-                if (token.IsCancellationRequested || Session is not { } session)
-                {
-                    return;
-                }
+            _isDragging = false;
 
-                // Stopping the drag here also stops the release from painting again.
-                _isDragging = false;
+            // The hold matured, so the fill it was holding back is abandoned rather than
+            // committed - this gesture was always going to be a cross.
+            _deferredPaintIndex = -1;
 
-                // The hold matured, so the fill it was holding back is abandoned rather than
-                // committed - this gesture was always going to be a cross.
-                _deferredPaintIndex = -1;
-
-                var target = session[index] == CellState.Crossed ? CellState.Empty : CellState.Crossed;
-                CellPainted?.Invoke(this, new CellPaintedEventArgs(index, target));
-                CrossGestureRecognised?.Invoke(this, EventArgs.Empty);
-            });
+            var target = session[index] == CellState.Crossed ? CellState.Empty : CellState.Crossed;
+            CellPainted?.Invoke(this, new CellPaintedEventArgs(index, target));
+            CrossGestureRecognised?.Invoke(this, EventArgs.Empty);
         });
     }
 
-    private void CancelLongPress()
-    {
-        _longPressCancellation?.Cancel();
-        _longPressCancellation?.Dispose();
-        _longPressCancellation = null;
-    }
+    private void CancelLongPress() => _longPressGeneration++;
 }

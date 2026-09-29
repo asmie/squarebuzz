@@ -14,7 +14,7 @@ internal sealed class HostFixture : IDisposable
     private readonly Application _app = new();
     private readonly FakeSaveGameRepository _saves = new();
     private readonly FakeClock _clock = new();
-    private readonly LocalizationServiceAdapter _strings = new();
+    private readonly LocalizationService _strings = LocalizationService.Instance;
 
     public HostFixture()
     {

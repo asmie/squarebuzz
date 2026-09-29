@@ -283,20 +283,6 @@ public class SaveGameRepositoryTests
     }
 
     [Fact]
-    public async Task DeleteAll_EmptiesTheTable()
-    {
-        await using var temp = new TemporaryDatabase();
-        var repository = new SqliteSaveGameRepository(temp.Database);
-
-        await repository.SaveAsync(SampleSave(Guid.NewGuid(), Noon));
-        await repository.SaveAsync(SampleSave(Guid.NewGuid(), Noon));
-
-        await repository.DeleteAllAsync();
-
-        Assert.Equal(0, await repository.CountAsync());
-    }
-
-    [Fact]
     public async Task SavesSurviveAppRestart()
     {
         await using var temp = new TemporaryDatabase();

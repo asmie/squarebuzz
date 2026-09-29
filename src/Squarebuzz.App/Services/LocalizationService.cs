@@ -11,7 +11,7 @@ namespace Squarebuzz.App.Services;
 /// An empty PropertyChanged name refreshes all indexer bindings. Missing resources return
 /// the key so lookup failures do not interrupt rendering.
 /// </remarks>
-public sealed class LocalizationService : INotifyPropertyChanged
+public sealed class LocalizationService : INotifyPropertyChanged, ILocalizationService
 {
     private static readonly ResourceManager Resources = new(
         "Squarebuzz.App.Resources.Strings.AppStrings",
@@ -130,23 +130,3 @@ public sealed class LocalizationService : INotifyPropertyChanged
     }
 }
 
-/// <summary>
-/// Adapts the singleton to the interface, so ViewModels take a dependency they can fake while
-/// XAML still reaches the one shared instance.
-/// </summary>
-public sealed class LocalizationServiceAdapter : ILocalizationService
-{
-    public event EventHandler? LanguageChanged
-    {
-        add => LocalizationService.Instance.LanguageChanged += value;
-        remove => LocalizationService.Instance.LanguageChanged -= value;
-    }
-
-    public AppLanguage Language => LocalizationService.Instance.Language;
-
-    public string GetString(string key) => LocalizationService.Instance.GetString(key);
-
-    public string Format(string key, params object[] arguments) => LocalizationService.Instance.Format(key, arguments);
-
-    public void SetLanguage(AppLanguage language) => LocalizationService.Instance.SetLanguage(language);
-}

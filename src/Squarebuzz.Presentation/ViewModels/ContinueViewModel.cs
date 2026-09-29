@@ -221,7 +221,7 @@ public partial class ContinueViewModel : LocalizedViewModel
         var name = save.Level is { } level && puzzle.IsGenerated
             ? Strings.Format("levelN", level)
             : puzzle.IsGenerated ? T("Puzzle_gen") : T($"Puzzle_{puzzle.Id}");
-        var elapsed = $"{(int)save.Elapsed.TotalMinutes}:{save.Elapsed.Seconds:00}";
+        var elapsed = ClockText.Of(save.Elapsed);
 
         return new SavedGameCard
         {

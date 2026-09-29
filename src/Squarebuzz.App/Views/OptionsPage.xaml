@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Squarebuzz.Presentation.ViewModels;assembly=Squarebuzz.Presentation"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
              xmlns:conv="clr-namespace:Squarebuzz.App.Converters"
              x:Class="Squarebuzz.App.Views.OptionsPage"
              x:DataType="vm:OptionsViewModel"
@@ -10,7 +11,7 @@
              BackgroundColor="{DynamicResource Bg}">
 
     <ContentPage.Resources>
-        <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
+        <!-- Theme colours by key: the converter looks them up on every conversion. See BoolSelectConverter. -->
         <conv:BoolSelectConverter x:Key="SegBackground"
                                   TrueKey="Primary"
                                   FalseKey="Surface2" />
@@ -31,11 +32,10 @@
             <Setter Property="VerticalOptions" Value="Center" />
         </Style>
 
-        <Style x:Key="SegButton" TargetType="Button">
+        <!-- Denser than the shared segment: up to four sit in a row on a phone. -->
+        <Style x:Key="SegButton" TargetType="Button" BasedOn="{StaticResource SegmentButton}">
             <Setter Property="CornerRadius" Value="14" />
-            <Setter Property="MinimumHeightRequest" Value="48" />
             <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontFamily" Value="BodyBold" />
             <Setter Property="Padding" Value="12,10" />
             <Setter Property="LineBreakMode" Value="WordWrap" />
         </Style>
@@ -66,13 +66,11 @@
                     <VerticalStackLayout>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding SoundLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding SoundEffects}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding SoundEffects}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding MusicLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding Music}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding Music}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <VerticalStackLayout VerticalOptions="Center" Spacing="2">
@@ -83,13 +81,11 @@
                                        Style="{StaticResource Subtle}"
                                        FontSize="12" />
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" IsToggled="{Binding VoiceNarration}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding VoiceNarration}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding HapticsLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding Haptics}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding Haptics}" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
@@ -125,8 +121,7 @@
                                 <Label Text="{Binding ColorBlindLabel}" Style="{StaticResource RowLabel}" />
                                 <Label Text="{Binding ColorBlindNote}" Style="{StaticResource Subtle}" FontSize="12" />
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" IsToggled="{Binding ColorBlindEnabled}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding ColorBlindEnabled}" />
                         </Grid>
 
                         <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
@@ -152,8 +147,7 @@
 
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding BigNumbersLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding BigNumbers}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding BigNumbers}" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
@@ -213,8 +207,7 @@
                                 <Label Text="{Binding MagnifierLabel}" Style="{StaticResource RowLabel}" />
                                 <Label Text="{Binding MagnifierNote}" Style="{StaticResource Subtle}" FontSize="12" />
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" IsToggled="{Binding ShowMagnifier}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding ShowMagnifier}" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
@@ -225,30 +218,25 @@
                     <VerticalStackLayout>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding AutoCrossLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding AutoCross}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding AutoCross}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding WarnLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding WarnOnMistakes}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding WarnOnMistakes}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding TimerLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding ShowTimer}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding ShowTimer}" />
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="56">
                             <Label Text="{Binding HintsLabel}" Style="{StaticResource RowLabel}" />
-                            <Switch Grid.Column="1" IsToggled="{Binding AllowHints}" VerticalOptions="Center"
-                                    OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                            <Switch Grid.Column="1" IsToggled="{Binding AllowHints}" />
                         </Grid>
                         <VerticalStackLayout IsVisible="{Binding AllowHints}" Spacing="8" Margin="0,4,0,10">
                             <Label Text="{Binding HintLimitLabel}" Style="{StaticResource RowLabel}" />
                             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" MinimumHeightRequest="56">
                                 <Label Text="{Binding UnlimitedHintsLabel}" Style="{StaticResource RowLabel}" />
-                                <Switch Grid.Column="1" IsToggled="{Binding UnlimitedHints}" VerticalOptions="Center"
-                                        OnColor="{DynamicResource Accent}" ThumbColor="{DynamicResource Surface}" />
+                                <Switch Grid.Column="1" IsToggled="{Binding UnlimitedHints}" />
                             </Grid>
                             <Entry Text="{Binding HintLimitText}" Keyboard="Numeric"
                                    IsEnabled="{Binding CanEditHintLimit}"
@@ -333,10 +321,7 @@
 
                         <Button Text="{Binding ResetLabel}"
                                 Command="{Binding OpenResetGateCommand}"
-                                BackgroundColor="{DynamicResource WarnSoft}"
-                                TextColor="{DynamicResource OnWarnSoft}"
-                                CornerRadius="16"
-                                FontFamily="BodyBold"
+                                Style="{StaticResource WarnButton}"
                                 HeightRequest="52" />
                         <Label Text="{Binding VersionLabel}" Style="{StaticResource Subtle}" FontSize="12" />
                         <Label Text="{Binding NoAdsLabel}" Style="{StaticResource Subtle}" FontSize="12" />
@@ -346,62 +331,24 @@
         </ScrollView>
 
         <!-- Parent gate: a small sum before anything destructive. -->
-        <Grid IsVisible="{Binding Gate.IsOpen}" BackgroundColor="#CC000000">
-            <ScrollView x:Name="GateIsOpenScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference GateIsOpenScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Fill"
-                            MaximumWidthRequest="300" Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
-                            <Label Grid.Row="0" Text="{Binding Gate.Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
-                            <Label Grid.Row="1" Text="{Binding Gate.Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
-
-                            <Entry Grid.Row="2" Text="{Binding Gate.Answer}"
-                                   Keyboard="Numeric"
-                                   HorizontalTextAlignment="Center"
-                                   FontSize="22"
-                                   BackgroundColor="{DynamicResource Surface2}"
-                                   TextColor="{DynamicResource Ink}" />
-
-                            <Label Grid.Row="3" Text="{Binding Gate.RetryMessage}"
-                                   IsVisible="{Binding Gate.HasFailed}"
-                                   TextColor="{DynamicResource WarnDeep}"
-                                   FontFamily="BodyBold"
-                                   HorizontalTextAlignment="Center" />
-
-                            <Button Grid.Row="4" Text="{Binding Gate.SubmitLabel}" Command="{Binding Gate.SubmitCommand}"
-                                    Style="{StaticResource PrimaryButton}" MinimumHeightRequest="52" />
-                            <Button Grid.Row="5" Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
-                                    Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
-        </Grid>
+        <controls:ParentGateOverlay BindingContext="{Binding Gate}" />
 
         <!-- Reset confirmation, once past the gate. -->
-        <Grid IsVisible="{Binding IsResetConfirmOpen}" BackgroundColor="#E6000000">
-            <ScrollView x:Name="IsResetConfirmOpenScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference IsResetConfirmOpenScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Fill"
-                            MaximumWidthRequest="310" Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="14">
-                            <Label Grid.Row="0" Text="{Binding ResetTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
-                            <Label Grid.Row="1" Text="{Binding ResetBody}" Style="{StaticResource Subtle}" HorizontalTextAlignment="Center" />
+        <controls:ModalCard IsVisible="{Binding IsResetConfirmOpen}" DimColor="#E6000000" CardMaxWidth="310">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="14">
+                <Label Grid.Row="0" Text="{Binding ResetTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+                <Label Grid.Row="1" Text="{Binding ResetBody}" Style="{StaticResource Subtle}" HorizontalTextAlignment="Center" />
 
-                            <Button Grid.Row="2" Text="{Binding ResetConfirm}"
-                                    Command="{Binding ConfirmResetCommand}"
-                                    BackgroundColor="{DynamicResource Warn}"
-                                    TextColor="{DynamicResource OnWarn}"
-                                    CornerRadius="16"
-                                    FontFamily="BodyBold"
-                                    MinimumHeightRequest="52" />
-                            <Button Grid.Row="3" Text="{Binding CancelLabel}" Command="{Binding CancelResetCommand}"
-                                    Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
-        </Grid>
+                <Button Grid.Row="2" Text="{Binding ResetConfirm}"
+                        Command="{Binding ConfirmResetCommand}"
+                        Style="{StaticResource WarnButton}"
+                        BackgroundColor="{DynamicResource Warn}"
+                        TextColor="{DynamicResource OnWarn}"
+                        MinimumHeightRequest="52" />
+                <Button Grid.Row="3" Text="{Binding CancelLabel}" Command="{Binding CancelResetCommand}"
+                        Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
+            </Grid>
+        </controls:ModalCard>
         </Grid>
     </Grid>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
   Tangerine is the default accent: it overrides nothing and lets each theme's own
-  Primary / Accent / Sky values stand. The prototype has no [data-accent="tangerine"]
+  Primary / Accent values stand. The prototype has no [data-accent="tangerine"]
   rule for the same reason. This file exists so ThemeService can merge an accent
   dictionary unconditionally instead of special-casing the default.
 -->

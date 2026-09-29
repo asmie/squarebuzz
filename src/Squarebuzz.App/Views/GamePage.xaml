@@ -7,6 +7,14 @@
              x:DataType="vm:GameViewModel"
              BackgroundColor="{DynamicResource Bg}">
 
+    <ContentPage.Resources>
+        <!-- The four-up action row: smaller type and side padding so four fit a phone. -->
+        <Style x:Key="ActionButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Padding" Value="4,0" />
+        </Style>
+    </ContentPage.Resources>
+
     <!-- Outer grid layers the pause and win overlays over the board. -->
     <Grid RowDefinitions="Auto,*" SafeAreaEdges="All">
         <Border Grid.Row="0" IsVisible="{Binding HasPersistenceFailure}"
@@ -188,36 +196,28 @@
             <Grid x:Name="ActionGrid" ColumnDefinitions="*,*,*,*" ColumnSpacing="8" RowSpacing="8">
                 <Button Grid.Column="{Binding UndoColumn}"
                         Grid.Row="{Binding UndoRow}"
-                        Style="{StaticResource SecondaryButton}"
-                        FontSize="13"
-                        Padding="4,0"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding UndoCommand}"
                         IsEnabled="{Binding CanUndo}"
                         Text="{Binding UndoText}" />
 
                 <Button Grid.Column="{Binding RedoColumn}"
                         Grid.Row="{Binding RedoRow}"
-                        Style="{StaticResource SecondaryButton}"
-                        FontSize="13"
-                        Padding="4,0"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding RedoCommand}"
                         IsEnabled="{Binding CanRedo}"
                         Text="{Binding RedoText}" />
 
                 <Button Grid.Column="{Binding HintColumn}"
                         Grid.Row="{Binding HintRow}"
-                        Style="{StaticResource SecondaryButton}"
-                        FontSize="13"
-                        Padding="4,0"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding UseHintCommand}"
                         IsEnabled="{Binding CanUseHint}"
                         Text="{Binding HintText}" />
 
                 <Button Grid.Column="{Binding RestartColumn}"
                         Grid.Row="{Binding RestartRow}"
-                        Style="{StaticResource SecondaryButton}"
-                        FontSize="13"
-                        Padding="4,0"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding RestartCommand}"
                         Text="{Binding RestartText}" />
             </Grid>
@@ -236,217 +236,178 @@
     </Grid>
 
         <!--
-          Pause is an overlay so the session stays in memory while its save completes.
-          Each modal scrolls when content exceeds the viewport. The inner grid keeps shorter
-          cards centred; minimum button heights allow system text scaling to expand them.
+          Pause is an overlay so the session stays in memory while its save completes. The
+          dimmed, scrolling, centred shell every modal here shares is ModalCard.
         -->
-        <Grid IsVisible="{Binding IsPaused}" BackgroundColor="#CC000000">
-            <ScrollView x:Name="IsPausedScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference IsPausedScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Fill"
-                            MaximumWidthRequest="300"
-                            Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="12">
-                            <controls:MascotView Grid.Row="0" Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
-                                                 AutomationProperties.ExcludedWithChildren="True" />
-                            <Label Grid.Row="1" Text="{Binding PausedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
-                                   SemanticProperties.HeadingLevel="Level1" />
+        <controls:ModalCard IsVisible="{Binding IsPaused}" CardMaxWidth="300">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="12">
+                <controls:MascotView Grid.Row="0" Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                     AutomationProperties.ExcludedWithChildren="True" />
+                <Label Grid.Row="1" Text="{Binding PausedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
+                       SemanticProperties.HeadingLevel="Level1" />
 
-                            <Button Grid.Row="2" Text="{Binding ResumeText}"
-                                    Command="{Binding ResumeCommand}"
-                                    Style="{StaticResource PrimaryButton}"
-                                    MinimumHeightRequest="54" />
-                            <Button Grid.Row="3" Text="{Binding RestartText}"
-                                    Command="{Binding RestartCommand}"
-                                    Style="{StaticResource SecondaryButton}"
-                                    MinimumHeightRequest="50" />
-                            <Button Grid.Row="4" Text="{Binding HowToText}"
-                                    Command="{Binding HowToCommand}"
-                                    Style="{StaticResource SecondaryButton}"
-                                    MinimumHeightRequest="50" />
-                            <Button Grid.Row="5" Text="{Binding OptionsText}"
-                                    Command="{Binding OptionsCommand}"
-                                    Style="{StaticResource SecondaryButton}"
-                                    MinimumHeightRequest="50" />
-                            <Button Grid.Row="6" Text="{Binding QuitText}"
-                                    Command="{Binding QuitCommand}"
-                                    BackgroundColor="{DynamicResource WarnSoft}"
-                                    TextColor="{DynamicResource OnWarnSoft}"
-                                    CornerRadius="16"
-                                    FontFamily="BodyBold"
-                                    MinimumHeightRequest="50" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
-        </Grid>
+                <Button Grid.Row="2" Text="{Binding ResumeText}"
+                        Command="{Binding ResumeCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        MinimumHeightRequest="54" />
+                <Button Grid.Row="3" Text="{Binding RestartText}"
+                        Command="{Binding RestartCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        MinimumHeightRequest="50" />
+                <Button Grid.Row="4" Text="{Binding HowToText}"
+                        Command="{Binding HowToCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        MinimumHeightRequest="50" />
+                <Button Grid.Row="5" Text="{Binding OptionsText}"
+                        Command="{Binding OptionsCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        MinimumHeightRequest="50" />
+                <Button Grid.Row="6" Text="{Binding QuitText}"
+                        Command="{Binding QuitCommand}"
+                        Style="{StaticResource WarnButton}"
+                        MinimumHeightRequest="50" />
+            </Grid>
+        </controls:ModalCard>
 
         <!--
           Break reminder. Sits above the board and below the win overlay, so finishing the
           picture on the very tick the limit is reached still shows the celebration.
         -->
-        <Grid IsVisible="{Binding IsBreakReminderOpen}" BackgroundColor="#CC000000">
-            <ScrollView x:Name="IsBreakReminderOpenScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference IsBreakReminderOpenScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Fill"
-                            MaximumWidthRequest="310"
-                            Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
-                            <controls:MascotView Grid.Row="0" Pose="Idle" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
-                                                 AutomationProperties.ExcludedWithChildren="True" />
+        <controls:ModalCard IsVisible="{Binding IsBreakReminderOpen}" CardMaxWidth="310">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+                <controls:MascotView Grid.Row="0" Pose="Idle" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                     AutomationProperties.ExcludedWithChildren="True" />
 
-                            <Label Grid.Row="1" Text="{Binding BreakTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center"
-                                   SemanticProperties.HeadingLevel="Level1" />
+                <Label Grid.Row="1" Text="{Binding BreakTitle}" Style="{StaticResource H2}" HorizontalTextAlignment="Center"
+                       SemanticProperties.HeadingLevel="Level1" />
 
-                            <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
-                            <Label Grid.Row="2" Text="{Binding BreakBody}"
-                                   Style="{StaticResource Subtle}"
-                                   FontSize="15"
-                                   HorizontalTextAlignment="Center" />
+                <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
+                <Label Grid.Row="2" Text="{Binding BreakBody}"
+                       Style="{StaticResource Subtle}"
+                       FontSize="15"
+                       HorizontalTextAlignment="Center" />
 
-                            <Button Grid.Row="3" Text="{Binding BreakKeepText}"
-                                    Command="{Binding DismissBreakReminderCommand}"
-                                    Style="{StaticResource PrimaryButton}"
-                                    MinimumHeightRequest="54" />
-                            <Button Grid.Row="4" Text="{Binding BreakStopText}"
-                                    Command="{Binding QuitCommand}"
-                                    Style="{StaticResource SecondaryButton}"
-                                    MinimumHeightRequest="50" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
-        </Grid>
+                <Button Grid.Row="3" Text="{Binding BreakKeepText}"
+                        Command="{Binding DismissBreakReminderCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        MinimumHeightRequest="54" />
+                <Button Grid.Row="4" Text="{Binding BreakStopText}"
+                        Command="{Binding QuitCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        MinimumHeightRequest="50" />
+            </Grid>
+        </controls:ModalCard>
 
         <!--
           Out of time. The game's only loss, so it is worded as a setback rather than a failure and
           leads with another go - the same shape as the win overlay, deliberately.
         -->
-        <Grid IsVisible="{Binding IsTimeUp}" BackgroundColor="#E6000000">
-            <ScrollView x:Name="IsTimeUpScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference IsTimeUpScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Fill"
-                            MaximumWidthRequest="310"
-                            Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
-                            <controls:MascotView Grid.Row="0" Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
-                                                 AutomationProperties.ExcludedWithChildren="True" />
+        <controls:ModalCard IsVisible="{Binding IsTimeUp}" DimColor="#E6000000" CardMaxWidth="310">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+                <controls:MascotView Grid.Row="0" Pose="Think" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                     AutomationProperties.ExcludedWithChildren="True" />
 
-                            <Label Grid.Row="1" Text="{Binding TimeUpTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
-                                   SemanticProperties.HeadingLevel="Level1" />
+                <Label Grid.Row="1" Text="{Binding TimeUpTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
+                       SemanticProperties.HeadingLevel="Level1" />
 
-                            <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
-                            <Label Grid.Row="2" Text="{Binding TimeUpBody}"
-                                   Style="{StaticResource Subtle}"
-                                   FontSize="15"
-                                   HorizontalTextAlignment="Center" />
+                <!-- Explicit size: see the note on HowToPage about wrapped labels in cards. -->
+                <Label Grid.Row="2" Text="{Binding TimeUpBody}"
+                       Style="{StaticResource Subtle}"
+                       FontSize="15"
+                       HorizontalTextAlignment="Center" />
 
-                            <Button Grid.Row="3" Text="{Binding TryAgainText}"
-                                    Command="{Binding RestartCommand}"
-                                    Style="{StaticResource PrimaryButton}"
-                                    MinimumHeightRequest="54" />
-                            <Button Grid.Row="4" Text="{Binding MenuText}"
-                                    Command="{Binding QuitCommand}"
-                                    Style="{StaticResource SecondaryButton}"
-                                    MinimumHeightRequest="50" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
-        </Grid>
+                <Button Grid.Row="3" Text="{Binding TryAgainText}"
+                        Command="{Binding RestartCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        MinimumHeightRequest="54" />
+                <Button Grid.Row="4" Text="{Binding MenuText}"
+                        Command="{Binding QuitCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        MinimumHeightRequest="50" />
+            </Grid>
+        </controls:ModalCard>
 
-        <!-- Win overlay: the picture revealed in its own colour, plus the result. -->
+        <!--
+          Win overlay: the picture revealed in its own colour, plus the result. The dim is on this
+          grid rather than on the card, so the confetti can fall between the two.
+        -->
         <Grid IsVisible="{Binding IsSolved}" BackgroundColor="#E6000000">
             <!-- Falls behind the card, over the dimmed board. Purely decorative. -->
             <controls:ConfettiView IsRunning="{Binding IsSolved}"
                                    AutomationProperties.ExcludedWithChildren="True" />
-            <ScrollView x:Name="IsSolvedScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference IsSolvedScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Fill"
-                            MaximumWidthRequest="320"
-                            Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
-                            <controls:MascotView Grid.Row="0" Pose="Cheer" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
-                                                 AutomationProperties.ExcludedWithChildren="True" />
+            <controls:ModalCard DimColor="Transparent" CardMaxWidth="320">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+                    <controls:MascotView Grid.Row="0" Pose="Cheer" HeightRequest="80" WidthRequest="74" HorizontalOptions="Center"
+                                         AutomationProperties.ExcludedWithChildren="True" />
 
-                            <Label Grid.Row="1" Text="{Binding SolvedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
-                                   SemanticProperties.HeadingLevel="Level1" />
+                    <Label Grid.Row="1" Text="{Binding SolvedTitle}" Style="{StaticResource H1}" HorizontalTextAlignment="Center"
+                           SemanticProperties.HeadingLevel="Level1" />
 
-                            <!-- The picture is announced by name in the win message instead. -->
-                            <controls:PuzzleArtView Grid.Row="2" x:Name="Reveal"
-                                                    AutomationProperties.ExcludedWithChildren="True"
-                                                    HeightRequest="200"
-                                                    HorizontalOptions="Center"
-                                                    WidthRequest="200" />
+                    <!-- The picture is announced by name in the win message instead. -->
+                    <controls:PuzzleArtView Grid.Row="2" x:Name="Reveal"
+                                            AutomationProperties.ExcludedWithChildren="True"
+                                            HeightRequest="200"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="200" />
 
-                            <Label Grid.Row="3" Text="{Binding StarsText}"
-                                   SemanticProperties.Description="{Binding StarsDescription}"
-                                   FontSize="30"
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{DynamicResource Gold}" />
+                    <Label Grid.Row="3" Text="{Binding StarsText}"
+                           SemanticProperties.Description="{Binding StarsDescription}"
+                           FontSize="30"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{DynamicResource Gold}" />
 
-                            <!-- The design's result tiles: how long, how much help, how many slips. -->
-                            <Grid Grid.Row="4" ColumnDefinitions="*,*,*" ColumnSpacing="8">
-                                <Border Grid.Column="0" BackgroundColor="{DynamicResource Surface2}"
-                                        StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label Text="{Binding SolvedTimeText}" FontFamily="BodyBold" FontSize="18"
-                                               TextColor="{DynamicResource Ink}" HorizontalTextAlignment="Center" />
-                                        <Label Text="{Binding TimeLabel}" Style="{StaticResource Subtle}" FontSize="13"
-                                               HorizontalTextAlignment="Center" />
-                                    </VerticalStackLayout>
-                                </Border>
-                                <Border Grid.Column="1" BackgroundColor="{DynamicResource Surface2}"
-                                        StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label Text="{Binding HintsUsed}" FontFamily="BodyBold" FontSize="18"
-                                               TextColor="{DynamicResource Ink}" HorizontalTextAlignment="Center" />
-                                        <Label Text="{Binding HintsLabel}" Style="{StaticResource Subtle}" FontSize="13"
-                                               HorizontalTextAlignment="Center" />
-                                    </VerticalStackLayout>
-                                </Border>
-                                <!-- Hidden with mistake warnings off: nothing was counted. -->
-                                <Border Grid.Column="2" BackgroundColor="{DynamicResource Surface2}"
-                                        IsVisible="{Binding ShowMistakes}"
-                                        StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label Text="{Binding Mistakes}" FontFamily="BodyBold" FontSize="18"
-                                               TextColor="{DynamicResource Ink}" HorizontalTextAlignment="Center" />
-                                        <Label Text="{Binding MistakesLabel}" Style="{StaticResource Subtle}" FontSize="13"
-                                               HorizontalTextAlignment="Center" />
-                                    </VerticalStackLayout>
-                                </Border>
-                            </Grid>
+                    <!-- The design's result tiles: how long, how much help, how many slips. -->
+                    <Grid Grid.Row="4" ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Border Grid.Column="0" BackgroundColor="{DynamicResource Surface2}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding SolvedTimeText}" FontFamily="BodyBold" FontSize="18"
+                                       TextColor="{DynamicResource Ink}" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding TimeLabel}" Style="{StaticResource Subtle}" FontSize="13"
+                                       HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" BackgroundColor="{DynamicResource Surface2}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding HintsUsed}" FontFamily="BodyBold" FontSize="18"
+                                       TextColor="{DynamicResource Ink}" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding HintsLabel}" Style="{StaticResource Subtle}" FontSize="13"
+                                       HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <!-- Hidden with mistake warnings off: nothing was counted. -->
+                        <Border Grid.Column="2" BackgroundColor="{DynamicResource Surface2}"
+                                IsVisible="{Binding ShowMistakes}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="6,10">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Mistakes}" FontFamily="BodyBold" FontSize="18"
+                                       TextColor="{DynamicResource Ink}" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding MistakesLabel}" Style="{StaticResource Subtle}" FontSize="13"
+                                       HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
 
-                            <!-- The last level has no "next": the button gives way to a farewell line. -->
-                            <Label Grid.Row="5" Text="{Binding AllLevelsDoneText}"
-                                   IsVisible="{Binding IsCampaignComplete}"
-                                   Style="{StaticResource Subtle}"
-                                   FontFamily="BodyBold"
-                                   TextColor="{DynamicResource AccentDeep}"
-                                   HorizontalTextAlignment="Center" />
+                    <!-- The last level has no "next": the button gives way to a farewell line. -->
+                    <Label Grid.Row="5" Text="{Binding AllLevelsDoneText}"
+                           IsVisible="{Binding IsCampaignComplete}"
+                           Style="{StaticResource Subtle}"
+                           FontFamily="BodyBold"
+                           TextColor="{DynamicResource AccentDeep}"
+                           HorizontalTextAlignment="Center" />
 
-                            <Button Grid.Row="6" Text="{Binding NextPuzzleText}"
-                                    Command="{Binding NextPuzzleCommand}"
-                                    IsVisible="{Binding ShowNextButton}"
-                                    Style="{StaticResource PrimaryButton}"
-                                    MinimumHeightRequest="54" />
-                            <Button Grid.Row="7" Text="{Binding MenuText}"
-                                    Command="{Binding QuitCommand}"
-                                    Style="{StaticResource SecondaryButton}"
-                                    MinimumHeightRequest="50" />
-                        </Grid>
-                    </Border>
+                    <Button Grid.Row="6" Text="{Binding NextPuzzleText}"
+                            Command="{Binding NextPuzzleCommand}"
+                            IsVisible="{Binding ShowNextButton}"
+                            Style="{StaticResource PrimaryButton}"
+                            MinimumHeightRequest="54" />
+                    <Button Grid.Row="7" Text="{Binding MenuText}"
+                            Command="{Binding QuitCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            MinimumHeightRequest="50" />
                 </Grid>
-            </ScrollView>
+            </controls:ModalCard>
         </Grid>
         </Grid>
     </Grid>

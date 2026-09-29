@@ -12,9 +12,6 @@ public abstract partial class ViewModelBase : ObservableObject
     [ObservableProperty]
     public partial bool IsBusy { get; set; }
 
-    [ObservableProperty]
-    public partial string Title { get; set; } = string.Empty;
-
     /// <summary>
     /// Called by the page's <c>OnAppearing</c>. Override for work that must happen every
     /// time a screen is shown rather than once at construction.

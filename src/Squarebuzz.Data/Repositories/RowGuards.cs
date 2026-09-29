@@ -12,9 +12,7 @@ internal static class RowGuards
     /// number small enough to be a duration.
     /// </summary>
     public static TimeSpan SecondsOrZero(double seconds) =>
-        double.IsFinite(seconds) && seconds >= 0 && seconds <= TimeSpan.MaxValue.TotalSeconds
-            ? TimeSpan.FromSeconds(seconds)
-            : TimeSpan.Zero;
+        IsUsableSeconds(seconds) ? TimeSpan.FromSeconds(seconds) : TimeSpan.Zero;
 
     /// <summary>True when a seconds column holds a usable duration - see <see cref="SecondsOrZero"/>.</summary>
     public static bool IsUsableSeconds(double seconds) =>

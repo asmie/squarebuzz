@@ -113,15 +113,6 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
         await connection.DeleteAsync<SavedGameEntity>(id.ToString("D")).ConfigureAwait(false);
     }
 
-    public async Task DeleteAllAsync(CancellationToken cancellationToken = default)
-    {
-        cancellationToken.ThrowIfCancellationRequested();
-
-        var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
-
-        await connection.DeleteAllAsync<SavedGameEntity>().ConfigureAwait(false);
-    }
-
     public async Task<int> CountAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();

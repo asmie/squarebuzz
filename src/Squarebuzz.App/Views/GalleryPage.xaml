@@ -11,7 +11,7 @@
              BackgroundColor="{DynamicResource Bg}">
 
     <ContentPage.Resources>
-        <!-- Declared per page so the theme dictionaries are already merged when they resolve. -->
+        <!-- Theme colours by key: the converter looks them up on every conversion. See BoolSelectConverter. -->
         <conv:BoolSelectConverter x:Key="CardStroke"
                                   TrueKey="Gold"
                                   FalseKey="Line" />

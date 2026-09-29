@@ -15,8 +15,6 @@ public interface ISaveGameRepository
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task DeleteAllAsync(CancellationToken cancellationToken = default);
-
     Task<int> CountAsync(CancellationToken cancellationToken = default);
 
     /// <summary>

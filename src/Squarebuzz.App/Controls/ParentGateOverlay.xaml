@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Grown-ups' check before anything destructive or outward-facing, shared by About and Options.
+  Bound to a ParentGate: the page sets BindingContext to its Gate. See ParentGate.
+-->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Squarebuzz.Presentation.ViewModels;assembly=Squarebuzz.Presentation"
+             xmlns:controls="clr-namespace:Squarebuzz.App.Controls"
+             x:Class="Squarebuzz.App.Controls.ParentGateOverlay"
+             x:DataType="vm:ParentGate"
+             IsVisible="{Binding IsOpen}">
+
+    <controls:ModalCard CardMaxWidth="300">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
+            <Label Grid.Row="0" Text="{Binding Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
+            <Label Grid.Row="1" Text="{Binding Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
+
+            <Entry Grid.Row="2" Text="{Binding Answer}"
+                   Keyboard="Numeric"
+                   HorizontalTextAlignment="Center"
+                   FontSize="22"
+                   BackgroundColor="{DynamicResource Surface2}"
+                   TextColor="{DynamicResource Ink}" />
+
+            <Label Grid.Row="3" Text="{Binding RetryMessage}"
+                   IsVisible="{Binding HasFailed}"
+                   TextColor="{DynamicResource WarnDeep}"
+                   FontFamily="BodyBold"
+                   HorizontalTextAlignment="Center" />
+
+            <Button Grid.Row="4" Text="{Binding SubmitLabel}" Command="{Binding SubmitCommand}"
+                    Style="{StaticResource PrimaryButton}" MinimumHeightRequest="52" />
+            <Button Grid.Row="5" Text="{Binding CancelLabel}" Command="{Binding CancelCommand}"
+                    Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
+        </Grid>
+    </controls:ModalCard>
+
+</ContentView>

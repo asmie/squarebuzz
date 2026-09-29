@@ -215,10 +215,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
         };
 
     private static int ReadInt(Dictionary<string, string?> values, string key, int fallback) =>
-        values.TryGetValue(key, out var raw)
-        && int.TryParse(raw, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsed)
-            ? parsed
-            : fallback;
+        ReadNullableInt(values, key) ?? fallback;
 
     private static int? ReadNullableInt(Dictionary<string, string?> values, string key) =>
         values.TryGetValue(key, out var raw)

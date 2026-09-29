@@ -16,7 +16,6 @@
     <Color x:Key="CellEmpty">#2B2540</Color>
     <Color x:Key="CellLine">#3E3660</Color>
     <Color x:Key="CellFill">#F0E4D2</Color>
-    <Color x:Key="CellFill2">#D6C8B4</Color>
 
     <Color x:Key="Gutter">#221D33</Color>
     <Color x:Key="GutterInk">#C3B9D6</Color>
@@ -28,23 +27,14 @@
 
     <Color x:Key="Accent">#3FD3B6</Color>
     <Color x:Key="AccentDeep">#22A48D</Color>
-    <Color x:Key="AccentSoft">#123A34</Color>
     <Color x:Key="OnAccent">#062F27</Color>
-    <Color x:Key="OnAccentSoft">#7FE3CE</Color>
-
-    <Color x:Key="Sky">#6FB9FF</Color>
-    <Color x:Key="SkyDeep">#3D86CC</Color>
-    <Color x:Key="OnSky">#062845</Color>
 
     <Color x:Key="Gold">#FFCE63</Color>
-    <Color x:Key="GoldDeep">#C89A2E</Color>
 
     <Color x:Key="Warn">#FF8371</Color>
     <Color x:Key="WarnDeep">#C9553F</Color>
     <Color x:Key="WarnSoft">#452019</Color>
     <Color x:Key="OnWarn">#3D0C04</Color>
     <Color x:Key="OnWarnSoft">#FFA593</Color>
-
-    <Color x:Key="Good">#4FD292</Color>
 
 </ResourceDictionary>

@@ -79,12 +79,7 @@ public sealed class FakeProgressRepository : IProgressRepository
     public Task<IReadOnlyList<EarnedTrophy>> GetTrophiesAsync(CancellationToken cancellationToken = default) =>
         Task.FromResult<IReadOnlyList<EarnedTrophy>>([.. Trophies]);
 
-    public Task AwardTrophyAsync(TrophyId trophy, DateOnly earnedOn, CancellationToken cancellationToken = default)
-    {
-        Trophies.Add(new EarnedTrophy(trophy, earnedOn));
-        return Task.CompletedTask;
-    }
-
+    /// <summary>Applies a completion, as the journal does; called by the fake completion repository.</summary>
     public async Task<PlayerProgress> RecordCompletionAsync(
         PuzzleCompletion completion,
         CancellationToken cancellationToken = default)
@@ -174,12 +169,6 @@ public sealed class FakeSaveGameRepository : ISaveGameRepository
         }
 
         Saves.Remove(id);
-    }
-
-    public Task DeleteAllAsync(CancellationToken cancellationToken = default)
-    {
-        Saves.Clear();
-        return Task.CompletedTask;
     }
 
     public Task<int> CountAsync(CancellationToken cancellationToken = default) =>

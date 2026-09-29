@@ -33,36 +33,16 @@
 
                 <Border Style="{StaticResource Card}" Padding="0">
                     <VerticalStackLayout>
-                        <Button Text="{Binding HowToLabel}"
-                                Command="{Binding HowToCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource Ink}"
-                                FontFamily="BodyBold"
-                                HeightRequest="56" />
-                        <Button Text="{Binding ContactLabel}"
-                                Command="{Binding ContactCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource Ink}"
-                                FontFamily="BodyBold"
-                                HeightRequest="56" />
-                        <Button Text="{Binding PrivacyLabel}"
-                                Command="{Binding PrivacyCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource Ink}"
-                                FontFamily="BodyBold"
-                                HeightRequest="56" />
-                        <Button Text="{Binding RateLabel}"
-                                Command="{Binding RateCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource Ink}"
-                                FontFamily="BodyBold"
-                                HeightRequest="56" />
-                        <Button Text="{Binding CreditsLabel}"
-                                Command="{Binding CreditsCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource Ink}"
-                                FontFamily="BodyBold"
-                                HeightRequest="56" />
+                        <Button Text="{Binding HowToLabel}" Command="{Binding HowToCommand}"
+                                Style="{StaticResource GhostButton}" HeightRequest="56" />
+                        <Button Text="{Binding ContactLabel}" Command="{Binding ContactCommand}"
+                                Style="{StaticResource GhostButton}" HeightRequest="56" />
+                        <Button Text="{Binding PrivacyLabel}" Command="{Binding PrivacyCommand}"
+                                Style="{StaticResource GhostButton}" HeightRequest="56" />
+                        <Button Text="{Binding RateLabel}" Command="{Binding RateCommand}"
+                                Style="{StaticResource GhostButton}" HeightRequest="56" />
+                        <Button Text="{Binding CreditsLabel}" Command="{Binding CreditsCommand}"
+                                Style="{StaticResource GhostButton}" HeightRequest="56" />
                     </VerticalStackLayout>
                 </Border>
 
@@ -83,37 +63,7 @@
         </ScrollView>
 
         <!-- Grown-ups' check, shared with Options. See ParentGate. -->
-        <Grid IsVisible="{Binding Gate.IsOpen}" BackgroundColor="#CC000000">
-            <ScrollView x:Name="GateIsOpenScroll" Margin="16">
-                <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference GateIsOpenScroll}, x:DataType=ScrollView}">
-                    <Border Style="{StaticResource Card}" VerticalOptions="Center" HorizontalOptions="Fill"
-                            MaximumWidthRequest="300" Padding="24">
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="14">
-                            <Label Grid.Row="0" Text="{Binding Gate.Title}" Style="{StaticResource H2}" HorizontalTextAlignment="Center" />
-                            <Label Grid.Row="1" Text="{Binding Gate.Question}" Style="{StaticResource H1}" HorizontalTextAlignment="Center" />
-
-                            <Entry Grid.Row="2" Text="{Binding Gate.Answer}"
-                                   Keyboard="Numeric"
-                                   HorizontalTextAlignment="Center"
-                                   FontSize="22"
-                                   BackgroundColor="{DynamicResource Surface2}"
-                                   TextColor="{DynamicResource Ink}" />
-
-                            <Label Grid.Row="3" Text="{Binding Gate.RetryMessage}"
-                                   IsVisible="{Binding Gate.HasFailed}"
-                                   TextColor="{DynamicResource WarnDeep}"
-                                   FontFamily="BodyBold"
-                                   HorizontalTextAlignment="Center" />
-
-                            <Button Grid.Row="4" Text="{Binding Gate.SubmitLabel}" Command="{Binding Gate.SubmitCommand}"
-                                    Style="{StaticResource PrimaryButton}" MinimumHeightRequest="52" />
-                            <Button Grid.Row="5" Text="{Binding Gate.CancelLabel}" Command="{Binding Gate.CancelCommand}"
-                                    Style="{StaticResource SecondaryButton}" MinimumHeightRequest="48" />
-                        </Grid>
-                    </Border>
-                </Grid>
-            </ScrollView>
-        </Grid>
+        <controls:ParentGateOverlay BindingContext="{Binding Gate}" />
     </Grid>
 
 </ContentPage>

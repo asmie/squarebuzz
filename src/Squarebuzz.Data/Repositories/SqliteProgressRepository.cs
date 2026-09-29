@@ -76,7 +76,9 @@ public sealed class SqliteProgressRepository : IProgressRepository
         ];
     }
 
-    public async Task AwardTrophyAsync(TrophyId trophy, DateOnly earnedOn, CancellationToken cancellationToken = default)
+    // Internal, for the tests: production awards trophies inside the completion journal's
+    // transaction (SqliteGameCompletionRepository), never one at a time.
+    internal async Task AwardTrophyAsync(TrophyId trophy, DateOnly earnedOn, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -91,7 +93,9 @@ public sealed class SqliteProgressRepository : IProgressRepository
         }).ConfigureAwait(false);
     }
 
-    public async Task<PlayerProgress> RecordCompletionAsync(
+    // Internal, for the tests: production records completions through the journal, which calls
+    // RecordCompletion below inside its own transaction. This wrapper exercises the same logic.
+    internal async Task<PlayerProgress> RecordCompletionAsync(
         PuzzleCompletion completion,
         CancellationToken cancellationToken = default)
     {
@@ -240,9 +244,9 @@ public sealed class SqliteProgressRepository : IProgressRepository
 
         return dayGap switch
         {
-            0 => Math.Max(1, current.Streak),
+            // The same day, or a completion dated before the last day played.
+            <= 0 => Math.Max(1, current.Streak),
             1 => current.Streak + 1,
-            < 0 => Math.Max(1, current.Streak),
             _ => 1,
         };
     }

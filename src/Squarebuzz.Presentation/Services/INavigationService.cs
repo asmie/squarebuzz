@@ -12,6 +12,4 @@ public interface INavigationService
 
     /// <summary>Replaces the whole stack, for one-way transitions like splash to menu.</summary>
     Task ResetToAsync(string route);
-
-    Task GoBackAsync();
 }

@@ -58,12 +58,6 @@ public sealed class FakeNavigationService : INavigationService
         Requests.Add(new Request(route, null, IsReset: true));
         return Task.CompletedTask;
     }
-
-    public Task GoBackAsync()
-    {
-        Requests.Add(new Request("..", null, IsReset: false));
-        return Task.CompletedTask;
-    }
 }
 
 /// <summary>A clock the test sets by hand.</summary>
@@ -135,8 +129,6 @@ public sealed class FakeScreenReader : IScreenReader
 public sealed class FakeAudioService : IAudioService
 {
     public List<GameSound> Played { get; } = [];
-
-    public bool IsAvailable => true;
 
     /// <summary>Makes <see cref="PrimeAsync"/> throw, as a missing or unplayable asset would.</summary>
     public bool PrimeFails { get; set; }
@@ -259,6 +251,4 @@ public sealed class FakeScreenTimeMonitor : IScreenTimeMonitor
 public sealed class FakeDeviceScreen : IDeviceScreen
 {
     public bool IsLargeScreen { get; set; }
-
-    public double Width { get; set; } = 400;
 }

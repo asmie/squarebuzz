@@ -63,12 +63,11 @@ public class GalleryViewModelTests : IDisposable
         Assert.Equal("???", heart.Name);
         Assert.Equal("—", heart.FoundOn);
         Assert.Equal(string.Empty, heart.Stars);
-        Assert.Equal(string.Empty, heart.BestTime);
         Assert.Equal("a11yNotFound 5×5", heart.Description);
     }
 
     [Fact]
-    public async Task AFoundPicture_ShowsItsNameStarsAndBestTime()
+    public async Task AFoundPicture_ShowsItsNameAndStars()
     {
         MarkSolved("heart", stars: 2, seconds: 65);
 
@@ -80,7 +79,6 @@ public class GalleryViewModelTests : IDisposable
         Assert.False(heart.IsMasked);
         Assert.Equal("Puzzle_heart", heart.Name);
         Assert.Equal("★★☆", heart.Stars);
-        Assert.Equal("1:05", heart.BestTime);
         Assert.Contains("2026", heart.FoundOn, StringComparison.Ordinal);
         Assert.Equal("a11yFound:Puzzle_heart,2, 5×5", heart.Description);
         Assert.Equal(1, heart.Opacity);

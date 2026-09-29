@@ -31,6 +31,11 @@
         <conv:BoolSelectConverter x:Key="DayText"
                                   TrueKey="OnPrimary"
                                   FalseKey="Ink2" />
+
+        <Style x:Key="TabButton" TargetType="Button" BasedOn="{StaticResource SegmentButton}">
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,Auto,*" Padding="{StaticResource PagePadding}" RowSpacing="12">
@@ -44,28 +49,19 @@
                     Command="{Binding ShowDailyCommand}"
                     BackgroundColor="{Binding IsDailyTab, Converter={StaticResource TabBackground}}"
                     TextColor="{Binding IsDailyTab, Converter={StaticResource TabTextColor}}"
-                    CornerRadius="16"
-                    HeightRequest="50"
-                    FontSize="12"
-                    FontFamily="BodyBold" />
+                    Style="{StaticResource TabButton}" />
             <Button Grid.Column="1"
                     Text="{Binding TimedTabLabel}"
                     Command="{Binding ShowTimedCommand}"
                     BackgroundColor="{Binding IsTimedTab, Converter={StaticResource TabBackground}}"
                     TextColor="{Binding IsTimedTab, Converter={StaticResource TabTextColor}}"
-                    CornerRadius="16"
-                    HeightRequest="50"
-                    FontSize="12"
-                    FontFamily="BodyBold" />
+                    Style="{StaticResource TabButton}" />
             <Button Grid.Column="2"
                     Text="{Binding TrophiesTabLabel}"
                     Command="{Binding ShowTrophiesCommand}"
                     BackgroundColor="{Binding IsTrophiesTab, Converter={StaticResource TabBackground}}"
                     TextColor="{Binding IsTrophiesTab, Converter={StaticResource TabTextColor}}"
-                    CornerRadius="16"
-                    HeightRequest="50"
-                    FontSize="12"
-                    FontFamily="BodyBold" />
+                    Style="{StaticResource TabButton}" />
         </Grid>
 
         <!-- Daily -->
@@ -162,7 +158,7 @@
             </Border>
         </VerticalStackLayout>
 
-        <!-- Timed Trial: three rungs, hardest last. -->
+        <!-- Timed Trial: six rungs, hardest last. -->
         <ScrollView Grid.Row="2" IsVisible="{Binding IsTimedTab}">
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Timed}" Spacing="14">
                 <BindableLayout.ItemTemplate>

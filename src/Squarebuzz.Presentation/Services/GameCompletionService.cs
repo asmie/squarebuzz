@@ -16,7 +16,9 @@ public sealed class GameCompletionService
     // dictionary reuses a removed entry's slot, so a later win could enumerate ahead of an
     // earlier one that is still failing.
     private readonly List<(Guid Id, PuzzleCompletion Completion)> _pending = [];
-    private Task _operations = Task.CompletedTask;
+
+    // On the UI thread throughout: the queued work raises Changed and touches _pending.
+    private readonly SerialQueue _operations = new(continueOnCapturedContext: true);
     private readonly IPersistenceDiagnostics _diagnostics;
     public bool HasFailure { get; private set; }
     public event EventHandler? Changed;
@@ -118,23 +120,5 @@ public sealed class GameCompletionService
         Changed?.Invoke(this, EventArgs.Empty);
     }
 
-    private Task Enqueue(Func<Task> operation)
-    {
-        _operations = RunAfterAsync(_operations, operation);
-        return _operations;
-    }
-
-    private static async Task RunAfterAsync(Task previous, Func<Task> operation)
-    {
-        try
-        {
-            await previous;
-        }
-        catch (Exception)
-        {
-            // A failed reset is reported to its caller, but must not poison later retries.
-        }
-
-        await operation();
-    }
+    private Task Enqueue(Func<Task> operation) => _operations.Enqueue(operation);
 }

@@ -9,7 +9,7 @@
              BackgroundColor="{DynamicResource Bg}">
 
     <ContentPage.Resources>
-        <!-- Declared per page so the theme dictionaries are already merged when it resolves. -->
+        <!-- Theme colours by key: the converter looks them up on every conversion. See BoolSelectConverter. -->
         <conv:BoolSelectConverter x:Key="DotFill"
                                   TrueKey="Primary"
                                   FalseKey="Line" />
@@ -21,10 +21,8 @@
                 Text="{Binding SkipLabel}"
                 Command="{Binding SkipCommand}"
                 HorizontalOptions="End"
-                BackgroundColor="Transparent"
-                TextColor="{DynamicResource Ink2}"
-                FontFamily="BodyBold"
-                MinimumHeightRequest="48" />
+                Style="{StaticResource GhostButton}"
+                TextColor="{DynamicResource Ink2}" />
 
         <!-- This wrapper exists to be measured: it fills the middle row, so its height is the row's
              height, which is what decides how big the card may be. Reading it beats adding up the

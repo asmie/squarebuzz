@@ -23,8 +23,6 @@ public sealed class ShellNavigationService : INavigationService
     /// </summary>
     public Task ResetToAsync(string route) => Navigate(shell => shell.GoToAsync($"//{route}"));
 
-    public Task GoBackAsync() => Navigate(shell => shell.GoToAsync(".."));
-
     private static Task Navigate(Func<Shell, Task> action) =>
         Shell.Current is { } shell ? action(shell) : Task.CompletedTask;
 }

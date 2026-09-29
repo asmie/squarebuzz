@@ -11,7 +11,4 @@ public interface IDeviceScreen
 {
     /// <summary>True on tablets and desktop, where the 25x25 grid becomes playable.</summary>
     bool IsLargeScreen { get; }
-
-    /// <summary>Width in device-independent units.</summary>
-    double Width { get; }
 }

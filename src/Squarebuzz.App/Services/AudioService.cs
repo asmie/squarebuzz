@@ -49,8 +49,6 @@ public sealed class AudioService : IAudioService, IDisposable
 
     public AudioService(IAudioManager manager) => _manager = manager;
 
-    public bool IsAvailable { get; private set; }
-
     public async Task PrimeAsync()
     {
         if (_isPrimed)
@@ -76,8 +74,6 @@ public sealed class AudioService : IAudioService, IDisposable
             music.Volume = MusicVolume;
             _music = music;
         }
-
-        IsAvailable = _players.Count > 0 || _music is not null;
 
         // Settings may have been applied before the assets finished loading, in which case the
         // music never got its chance to start.

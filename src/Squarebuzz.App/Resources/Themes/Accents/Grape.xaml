@@ -11,6 +11,5 @@
 
     <Color x:Key="Accent">#4FA8F5</Color>
     <Color x:Key="AccentDeep">#2F7ECB</Color>
-    <Color x:Key="AccentSoft">#DCEDFF</Color>
 
 </ResourceDictionary>
