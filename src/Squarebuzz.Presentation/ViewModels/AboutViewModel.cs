@@ -13,6 +13,7 @@ public partial class AboutViewModel : LocalizedViewModel
     private readonly INavigationService _navigation;
     private readonly IUiThread _uiThread;
     private readonly IAppVersion _appVersion;
+    private readonly ILinkOpener _links;
 
     // Which notice is showing. Each one gets a fresh token, so the timer of an earlier notice
     // cannot clear a later one - comparing the text did, when the same link was tapped twice.
@@ -22,23 +23,29 @@ public partial class AboutViewModel : LocalizedViewModel
         ILocalizationService strings,
         INavigationService navigation,
         IUiThread uiThread,
-        IAppVersion appVersion)
+        IAppVersion appVersion,
+        ILinkOpener links)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(navigation);
         ArgumentNullException.ThrowIfNull(uiThread);
         ArgumentNullException.ThrowIfNull(appVersion);
+        ArgumentNullException.ThrowIfNull(links);
 
         _navigation = navigation;
         _uiThread = uiThread;
         _appVersion = appVersion;
+        _links = links;
         Gate = new ParentGate(strings);
     }
 
     /// <summary>The shared grown-ups' check in front of the outward-facing links.</summary>
     public ParentGate Gate { get; }
 
-    /// <summary>Placeholder notice for external destinations that have not yet been configured.</summary>
+    /// <summary>
+    /// A short message under the links: the placeholder for destinations not yet wired up, or the
+    /// privacy address when no browser could open it.
+    /// </summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasNotice))]
     public partial string Notice { get; private set; } = string.Empty;
@@ -78,7 +85,14 @@ public partial class AboutViewModel : LocalizedViewModel
     // Privacy and rating both lead outside the app, so each sits behind the gate. A child tapping
     // them should not reach a web page or a store page unaccompanied.
     [RelayCommand]
-    private void Privacy() => OpenGated(PrivacyLabel);
+    private void Privacy() => Gate.Open(async () =>
+    {
+        // Shown as text when nothing can open it, so a parent can still type it in elsewhere.
+        if (!await _links.OpenAsync(ExternalLinks.PrivacyPolicy))
+        {
+            ShowNotice(ExternalLinks.PrivacyPolicy.ToString());
+        }
+    });
 
     [RelayCommand]
     private void Rate() => OpenGated(RateLabel);

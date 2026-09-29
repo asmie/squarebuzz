@@ -248,6 +248,20 @@ public sealed class FakeScreenTimeMonitor : IScreenTimeMonitor
     public void Restart() => Played = TimeSpan.Zero;
 }
 
+public sealed class FakeLinkOpener : ILinkOpener
+{
+    public List<Uri> Opened { get; } = [];
+
+    /// <summary>False acts as a device with no browser.</summary>
+    public bool Succeeds { get; set; } = true;
+
+    public Task<bool> OpenAsync(Uri address)
+    {
+        Opened.Add(address);
+        return Task.FromResult(Succeeds);
+    }
+}
+
 public sealed class FakeAppVersion : IAppVersion
 {
     public string Version => "2.3";

@@ -8,6 +8,20 @@
   -->
   <uses-permission android:name="android.permission.VIBRATE" />
 
+  <!--
+    Android 11+ hides other apps unless asked for: without this the grown-ups' privacy link
+    finds no browser to open. Opening a page in the browser needs no INTERNET permission here.
+  -->
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <data android:scheme="https" />
+    </intent>
+    <intent>
+      <action android:name="android.support.customtabs.action.CustomTabsService" />
+    </intent>
+  </queries>
+
   <!-- Phones and tablets, both orientations. -->
   <supports-screens
       android:smallScreens="true"

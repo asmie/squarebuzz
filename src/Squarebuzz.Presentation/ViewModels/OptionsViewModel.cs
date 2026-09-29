@@ -53,9 +53,16 @@ public partial class OptionsViewModel : LocalizedViewModel
         IScreenTimeMonitor screenTime,
         IAudioService audio,
         INarrationService narration,
-        IUiThread uiThread)
+        IUiThread uiThread,
+        IAppVersion appVersion,
+        ILinkOpener links)
         : base(strings)
     {
+        ArgumentNullException.ThrowIfNull(appVersion);
+        ArgumentNullException.ThrowIfNull(links);
+        _appVersion = appVersion;
+        _links = links;
+
         ArgumentNullException.ThrowIfNull(settingsRepository);
         ArgumentNullException.ThrowIfNull(completions);
         ArgumentNullException.ThrowIfNull(theme);
@@ -383,23 +390,30 @@ public partial class OptionsViewModel : LocalizedViewModel
     public string CancelLabel => T("cancel");
 
 
-    public string VersionLabel => T("version");
+    /// <summary>The installed version and build, read from the package - see <see cref="IAppVersion"/>.</summary>
+    public string VersionLabel => Strings.Format("version", _appVersion.Version, _appVersion.Build);
+
+    private readonly IAppVersion _appVersion;
+    private readonly ILinkOpener _links;
 
     public string NoAdsLabel => T("noAds");
 
-    /// <summary>Placeholder privacy message shown after the parent gate is passed.</summary>
+    /// <summary>The privacy address, shown when no browser could open it.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasNotice))]
     public partial string Notice { get; private set; } = string.Empty;
 
     public bool HasNotice => !string.IsNullOrEmpty(Notice);
 
-    /// <summary>Behind the gate: privacy is grown-up reading, and would lead outside the app.</summary>
+    /// <summary>Behind the gate: privacy is grown-up reading, and leads outside the app.</summary>
     [RelayCommand]
-    private void Privacy() => Gate.Open(() =>
+    private void Privacy() => Gate.Open(async () =>
     {
-        ShowNotice($"🔓 {T("privacy")}");
-        return Task.CompletedTask;
+        // Shown as text when nothing can open it, so a parent can still type it in elsewhere.
+        if (!await _links.OpenAsync(ExternalLinks.PrivacyPolicy))
+        {
+            ShowNotice(ExternalLinks.PrivacyPolicy.ToString());
+        }
     });
 
     private void ShowNotice(string message)

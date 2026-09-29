@@ -83,6 +83,7 @@ public static class MauiProgram
         services.AddSingleton<INavigationService, ShellNavigationService>();
         services.AddSingleton<IDeviceScreen, DeviceScreen>();
         services.AddSingleton<IAppVersion, AppVersion>();
+        services.AddSingleton<ILinkOpener, LinkOpener>();
 
         // The three seams that keep MAUI statics - MainThread, the dispatcher's timers and
         // SemanticScreenReader - out of the ViewModel assembly.

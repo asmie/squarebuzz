@@ -32,7 +32,8 @@ public sealed class OrderedSettingsRepositoryTests
         using var game = new GameViewModelHarness(settings: settings);
         await game.Vm.StartAsync();
         using var options = new OptionsViewModel(game.Strings, settings, game.CompletionService,
-            game.Theme, game.Navigation, game.ScreenTime, game.Audio, game.Narration, game.UiThread);
+            game.Theme, game.Navigation, game.ScreenTime, game.Audio, game.Narration, game.UiThread,
+            new FakeAppVersion(), new FakeLinkOpener());
         await options.OnAppearingAsync();
 
         var gate = storage.SaveGate = new(TaskCreationOptions.RunContinuationsAsynchronously);

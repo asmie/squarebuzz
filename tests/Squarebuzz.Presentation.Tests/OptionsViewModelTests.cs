@@ -36,7 +36,9 @@ public class OptionsViewModelTests : IDisposable
             _screenTime,
             _audio,
             _narration,
-            new FakeUiThread());
+            new FakeUiThread(),
+            new FakeAppVersion(),
+            new FakeLinkOpener());
     }
 
     public void Dispose()

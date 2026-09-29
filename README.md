@@ -92,7 +92,7 @@ The campaign uses 35 pictures at 5x5 and 95 at 10x10 as milestones. The order of
 `puzzles` array affects those milestones; keep it stable during artwork revisions. Larger
 generated sizes are 15x15, 20x20 and 25x25; the last requires a tablet or a sufficiently large display.
 
-The app has 39 languages and 390 resource keys per language. Structural checks do not establish
+The app has 39 languages and 388 resource keys per language. Structural checks do not establish
 translation quality; see [translation status](docs/translation-status.md).
 [Font notes](src/Squarebuzz.App/Resources/Fonts/README.md) cover script support and licences.
 
@@ -101,8 +101,14 @@ include position, state and both clues. Native review must also cover focus, ges
 motion, narration, audio and haptics; see [the acceptance cases](tests/Native/README.md).
 
 Settings apply immediately. Adding a setting requires a domain property, repository read/write
-mapping, ViewModel change hook and consumer. Confirm all four. Privacy and external-link
-placeholders still need product review before release.
+mapping, ViewModel change hook and consumer. Confirm all four.
+
+The privacy policy is [PRIVACY.md](PRIVACY.md). About and Options open it at its GitHub address
+(`ExternalLinks.PrivacyPolicy`) behind the parent gate, so the repository must be public and the
+file must stay at that path on `master`. Update the policy before shipping anything that changes
+what the app stores or sends. "Rate squarebuzz" is still a placeholder until the store IDs exist.
+The About version line is read from `ApplicationDisplayVersion` and `ApplicationVersion` in the
+app project; raise both for every store upload.
 
 ## Tools and CI
 
