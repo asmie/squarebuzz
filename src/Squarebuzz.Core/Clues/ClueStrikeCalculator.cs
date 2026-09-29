@@ -75,8 +75,9 @@ public static class ClueStrikeCalculator
         // "All struck" and "does not match" is a contradiction rather than a judgement call: if
         // every number were genuinely done the filled runs would spell out the clue, which is
         // what MatchesMarks tests and what the fast path above already returns on. So the flags
-        // are simply wrong here, and the honest answer is to strike nothing.
-        if (AllStruck(struck, displayCount) && !ClueCalculator.MatchesMarks(clues, line))
+        // are simply wrong here, and the honest answer is to strike nothing. (The line is known
+        // not to match - a matching line returned at the fast path - so it is not tested again.)
+        if (AllStruck(struck, displayCount))
         {
             struck[..displayCount].Clear();
         }

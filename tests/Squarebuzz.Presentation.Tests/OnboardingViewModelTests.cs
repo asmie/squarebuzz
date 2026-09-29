@@ -163,6 +163,10 @@ public class OnboardingViewModelTests : IDisposable
 
         Assert.True(Assert.Single(_settings.Saved).HasSeenOnboarding);
         Assert.Equal(HomeReset, _navigation.Last);
+
+        // Only the flag is written, so the defaults the failed read fell back on overwrite nothing.
+        var (baseline, updated) = Assert.Single(_settings.Changes);
+        Assert.Equal(baseline with { HasSeenOnboarding = true }, updated);
     }
 
     [Fact]

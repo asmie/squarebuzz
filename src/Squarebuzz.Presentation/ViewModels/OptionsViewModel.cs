@@ -643,25 +643,39 @@ public partial class OptionsViewModel : LocalizedViewModel
         OnPropertyChanged(nameof(HasNoVoice));
     }
 
+    /// <remarks>
+    /// Picking a brightness explicitly is also how Auto is turned off, so one tap can change two
+    /// properties. Each property's hook used to apply the theme and queue a save on its own -
+    /// two theme swaps and two writes per tap, the first of them for a combination the player
+    /// never chose. Both values are set with the hooks held off, then applied and saved once.
+    /// The property notifications still fire, which the colour converters depend on.
+    /// </remarks>
     [RelayCommand]
     private void SelectTheme(string theme)
     {
-        if (theme == "auto")
+        var follow = theme == "auto";
+        var next = follow
+            ? Theme
+            : theme switch
+            {
+                "dark" => GameTheme.Dark,
+                "cb" => GameTheme.ColorBlind,
+                _ => GameTheme.Light,
+            };
+
+        if (follow == FollowSystemTheme && next == Theme)
         {
-            FollowSystemTheme = true;
             return;
         }
 
-        // Picking a brightness explicitly is also how Auto is turned off. Order matters: clear
-        // the flag first so the Apply that OnThemeChanged fires is not still following the OS.
-        FollowSystemTheme = false;
+        _isLoading = true;
+        FollowSystemTheme = follow;
+        Theme = next;
+        ColorBlindEnabled = next == GameTheme.ColorBlind;
+        _isLoading = false;
 
-        Theme = theme switch
-        {
-            "dark" => GameTheme.Dark,
-            "cb" => GameTheme.ColorBlind,
-            _ => GameTheme.Light,
-        };
+        _theme.Apply(Theme, Accent, FollowSystemTheme);
+        Persist();
     }
 
     [RelayCommand]

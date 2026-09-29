@@ -562,9 +562,7 @@ public partial class GameViewModel : LocalizedViewModel
         if (_pendingTier is { } tier)
         {
             _pendingTier = null;
-            _settings = await LoadSettingsSafelyAsync();
-
-            await StartAsync(tier.ToOptions(_settings.Helpers));
+            await StartAsync(settings => tier.ToOptions(settings.Helpers));
             return;
         }
 
@@ -574,19 +572,17 @@ public partial class GameViewModel : LocalizedViewModel
 
             // The catalog decides everything about a level; the settings only lend the
             // player's helper preferences.
-            _settings = await LoadSettingsSafelyAsync();
-            await StartAsync(LevelCatalog.Get(level, _puzzles.Puzzles).ToOptions(_settings.Helpers));
+            await StartAsync(settings => LevelCatalog.Get(level, _puzzles.Puzzles).ToOptions(settings.Helpers));
             return;
         }
 
         if (_pendingDaily)
         {
             _pendingDaily = false;
-            _settings = await LoadSettingsSafelyAsync();
 
             // Seeded from today's date, so it is the same puzzle for everyone and survives a
             // restart. See DailyPuzzle.
-            await StartAsync(DailyPuzzle.OptionsFor(_clock.Today, _settings.Helpers));
+            await StartAsync(settings => DailyPuzzle.OptionsFor(_clock.Today, settings.Helpers));
             return;
         }
 
@@ -596,8 +592,7 @@ public partial class GameViewModel : LocalizedViewModel
 
             // The chosen picture overrides size and pack; those are still carried so the save
             // record and a later "Next" keep the player's other preferences.
-            _settings = await LoadSettingsSafelyAsync();
-            await StartAsync(_settings.ToNewGameOptions() with { PuzzleId = chosen, Seed = null });
+            await StartAsync(settings => settings.ToNewGameOptions() with { PuzzleId = chosen, Seed = null });
             return;
         }
 
@@ -708,8 +703,19 @@ public partial class GameViewModel : LocalizedViewModel
             return false;
         }
 
+        ActivateSession(Session);
+        return true;
+    }
+
+    /// <summary>
+    /// Puts a freshly created or restored session on screen: clears the previous game's overlays
+    /// and mode, pushes its state to the bindings and starts its clock.
+    /// </summary>
+    private void ActivateSession(GameSession session)
+    {
         IsCrossMode = false;
-        Session.Mode = PaintMode.Fill;
+        session.Mode = PaintMode.Fill;
+        IsTimeUp = false;
         IsPaused = false;
         IsBreakReminderOpen = false;
         Toast = string.Empty;
@@ -718,11 +724,11 @@ public partial class GameViewModel : LocalizedViewModel
         UpdateElapsedText();
         StopTimer();
         StartTimer();
+
         NotifySettingsDependentProperties();
         NotifyLevelDependentProperties();
 
         BoardChanged?.Invoke(this, EventArgs.Empty);
-        return true;
     }
 
     /// <summary>
@@ -745,7 +751,17 @@ public partial class GameViewModel : LocalizedViewModel
     private Task AutosaveIfBoardChangedAsync() => QueueAutosaveAsync(onlyIfChanged: true);
 
     /// <summary>Starts the requested puzzle, falling back to saved choices when no options are supplied.</summary>
-    public async Task StartAsync(NewGameOptions? options = null)
+    public Task StartAsync(NewGameOptions? options = null) => StartAsync(_ => options);
+
+    /// <summary>
+    /// Starts a puzzle whose options depend on the settings, reading the settings exactly once.
+    /// </summary>
+    /// <remarks>
+    /// The routes that need the player's helpers to build their options (a trial, a level, the
+    /// daily, a chosen picture) used to load the settings themselves and then have this method
+    /// load them again straight after.
+    /// </remarks>
+    private async Task StartAsync(Func<GameSettings, NewGameOptions?> chooseOptions)
     {
         // Settle the outgoing attempt before replacing it. Loading and generation are not play.
         AccountElapsedTime();
@@ -753,7 +769,7 @@ public partial class GameViewModel : LocalizedViewModel
         _settings = await LoadSettingsSafelyAsync();
 
         // New games may request a random seed; Restart supplies the current puzzle's identity.
-        var effective = (options ?? _settings.ToNewGameOptions()) with { Helpers = _settings.Helpers };
+        var effective = (chooseOptions(_settings) ?? _settings.ToNewGameOptions()) with { Helpers = _settings.Helpers };
 
         try
         {
@@ -762,11 +778,8 @@ public partial class GameViewModel : LocalizedViewModel
         catch (PuzzleGenerationException)
         {
             // Generation failure returns to the menu. Do not let an exception escape the page lifecycle callback.
-            var sorry = T("genFailed");
-
-            ShowToast(sorry);
-            _narration.Speak(sorry);
-            Announce(sorry);
+            // ShowToast already speaks and announces it.
+            ShowToast(T("genFailed"));
 
             await _navigation.ResetToAsync(Routes.Menu);
             return;
@@ -778,23 +791,7 @@ public partial class GameViewModel : LocalizedViewModel
         OnPersistenceChanged(this, EventArgs.Empty);
         _time.Saved();
 
-        IsCrossMode = false;
-        Session.Mode = PaintMode.Fill;
-        IsSolved = false;
-        IsTimeUp = false;
-        IsPaused = false;
-        IsBreakReminderOpen = false;
-        Toast = string.Empty;
-
-        SyncFromSession();
-        UpdateElapsedText();
-        StopTimer();
-        StartTimer();
-
-        NotifySettingsDependentProperties();
-        NotifyLevelDependentProperties();
-
-        BoardChanged?.Invoke(this, EventArgs.Empty);
+        ActivateSession(Session);
     }
 
     /// <summary>Uses the campaign level number, or the picture name for an authored milestone.</summary>
@@ -859,6 +856,13 @@ public partial class GameViewModel : LocalizedViewModel
 
     private void Apply(int index, MoveOutcome outcome, CellState target)
     {
+        // Nothing moved - most often a drag sliding over squares that already hold its mark.
+        // Syncing would redraw the board, minimap and accessibility overlay for no change.
+        if (outcome.Result == MoveResult.NoChange)
+        {
+            return;
+        }
+
         var mistakesBefore = Mistakes;
 
         switch (outcome.Result)
@@ -1160,9 +1164,19 @@ public partial class GameViewModel : LocalizedViewModel
         CanUseHint = session.CanUseHint;
         IsSolved = session.IsSolved;
 
-        // Refresh the accessible filled count after every board change.
-        OnPropertyChanged(nameof(BoardDescription));
+        // The accessible summary carries the filled count, so it is re-raised when that count
+        // moves - not after every move. Crossing a square changes nothing it says, and each raise
+        // formats a localised string and pushes a native accessibility update, mid-drag.
+        // A new session re-raises it through NotifySettingsDependentProperties.
+        if (session.FilledCount != _describedFilledCount)
+        {
+            _describedFilledCount = session.FilledCount;
+            OnPropertyChanged(nameof(BoardDescription));
+        }
     }
+
+    /// <summary>The filled count <see cref="BoardDescription"/> was last raised for.</summary>
+    private int _describedFilledCount = -1;
 
     /// <summary>
     /// Suspends timing while the page is covered or the window is in the background.

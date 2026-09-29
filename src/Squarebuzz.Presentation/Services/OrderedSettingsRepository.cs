@@ -35,6 +35,17 @@ public sealed class OrderedSettingsRepository : ISettingsRepository
         }), cancellationToken);
     }
 
+    public Task SaveChangesAsync(GameSettings baseline, GameSettings updated, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(baseline);
+        ArgumentNullException.ThrowIfNull(updated);
+        return EnqueueAsync(() => DiagnoseAsync(PersistenceOperation.SaveSettings, async () =>
+        {
+            await _inner.SaveChangesAsync(baseline, updated, cancellationToken).ConfigureAwait(false);
+            return true;
+        }), cancellationToken);
+    }
+
     private async Task<T> DiagnoseAsync<T>(PersistenceOperation operation, Func<Task<T>> action)
     {
         try

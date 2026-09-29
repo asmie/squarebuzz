@@ -23,6 +23,12 @@ namespace Squarebuzz.Core.Solving;
 public static class NonogramLineSolver
 {
     /// <summary>
+    /// Largest (runs + 1) x (cells + 1) table kept on the stack. A 25-cell line holds at most 13
+    /// runs, 364 states; this leaves room without letting a pathological line blow the stack.
+    /// </summary>
+    private const int MaxStackStates = 1024;
+
+    /// <summary>
     /// Applies every deduction the clue forces to <paramref name="line"/>, in place.
     /// Cells already marked by the player are left alone; only <see cref="CellState.Empty"/>
     /// cells can be filled in.
@@ -45,27 +51,33 @@ public static class NonogramLineSolver
             return LineSolveStatus.Contradiction;
         }
 
+        // Every table lives on the stack for any line the game draws (25 cells at most). This
+        // runs thousands of times per generated puzzle - once per line per solver pass per
+        // candidate - and the heap arrays, 2-D tables and Stack it used to allocate each time
+        // were most of what generation spent on garbage. Flat tables index [k, j] as
+        // k * stride + j. Very long lines, which nothing ships, fall back to the heap.
+        var stride = n + 1;
+        var states = (runCount + 1) * stride;
+        var small = states <= MaxStackStates;
+
         // crossedBefore[i] = number of Crossed cells in [0, i), so "is [a,b) free of
         // crosses" becomes a subtraction instead of a scan.
-        var crossedBefore = new int[n + 1];
+        Span<int> crossedBefore = small ? stackalloc int[stride] : new int[stride];
+        crossedBefore[0] = 0;
         for (var i = 0; i < n; i++)
         {
             crossedBefore[i + 1] = crossedBefore[i] + (line[i] == CellState.Crossed ? 1 : 0);
         }
 
-        // noFilledFrom[j] = no Filled cell anywhere in [j, n): i.e. the tail can be all blank.
-        var noFilledFrom = new bool[n + 1];
-        noFilledFrom[n] = true;
+        // feasible[k, j]: can runs k.. be laid out within cells j.. ? The last row, k == runCount,
+        // is "no Filled cell anywhere in [j, n)": the tail can be all blank.
+        Span<bool> feasible = small ? stackalloc bool[states] : new bool[states];
+        feasible.Clear();
+        var last = runCount * stride;
+        feasible[last + n] = true;
         for (var j = n - 1; j >= 0; j--)
         {
-            noFilledFrom[j] = noFilledFrom[j + 1] && line[j] != CellState.Filled;
-        }
-
-        // feasible[k, j]: can runs k.. be laid out within cells j.. ?
-        var feasible = new bool[runCount + 1, n + 1];
-        for (var j = 0; j <= n; j++)
-        {
-            feasible[runCount, j] = noFilledFrom[j];
+            feasible[last + j] = feasible[last + j + 1] && line[j] != CellState.Filled;
         }
 
         for (var k = runCount - 1; k >= 0; k--)
@@ -77,7 +89,7 @@ public static class NonogramLineSolver
                 // Option A: leave cell j blank and carry on.
                 var canSkip = j < n
                               && line[j] != CellState.Filled
-                              && feasible[k, j + 1];
+                              && feasible[(k * stride) + j + 1];
 
                 // Option B: start run k at j. It needs `length` cross-free cells, and the
                 // cell immediately after must be blank to separate it from the next run.
@@ -88,36 +100,43 @@ public static class NonogramLineSolver
                 {
                     if (end == n)
                     {
-                        canPlace = feasible[k + 1, n];
+                        canPlace = feasible[((k + 1) * stride) + n];
                     }
                     else if (line[end] != CellState.Filled)
                     {
-                        canPlace = feasible[k + 1, end + 1];
+                        canPlace = feasible[((k + 1) * stride) + end + 1];
                     }
                 }
 
-                feasible[k, j] = canSkip || canPlace;
+                feasible[(k * stride) + j] = canSkip || canPlace;
             }
         }
 
-        if (!feasible[0, 0])
+        if (!feasible[0])
         {
             return LineSolveStatus.Contradiction;
         }
 
         // Second pass: walk only the states that lie on a complete valid arrangement, and
-        // record which values each cell takes across all of them.
-        var canBeFilled = new bool[n];
-        var canBeBlank = new bool[n];
-        var visited = new bool[runCount + 1, n + 1];
-        var pending = new Stack<(int Run, int Position)>();
+        // record which values each cell takes across all of them. Each state is pushed at most
+        // once (visited guards it), so a stack as large as the state table can never overflow.
+        Span<bool> canBeFilled = small ? stackalloc bool[n] : new bool[n];
+        Span<bool> canBeBlank = small ? stackalloc bool[n] : new bool[n];
+        Span<bool> visited = small ? stackalloc bool[states] : new bool[states];
+        Span<int> pending = small ? stackalloc int[states] : new int[states];
+        canBeFilled.Clear();
+        canBeBlank.Clear();
+        visited.Clear();
 
-        pending.Push((0, 0));
-        visited[0, 0] = true;
+        var top = 0;
+        pending[top++] = 0;
+        visited[0] = true;
 
-        while (pending.Count > 0)
+        while (top > 0)
         {
-            var (k, j) = pending.Pop();
+            var state = pending[--top];
+            var k = state / stride;
+            var j = state % stride;
 
             if (k == runCount)
             {
@@ -130,14 +149,14 @@ public static class NonogramLineSolver
                 continue;
             }
 
-            if (j < n && line[j] != CellState.Filled && feasible[k, j + 1])
+            if (j < n && line[j] != CellState.Filled && feasible[state + 1])
             {
                 canBeBlank[j] = true;
 
-                if (!visited[k, j + 1])
+                if (!visited[state + 1])
                 {
-                    visited[k, j + 1] = true;
-                    pending.Push((k, j + 1));
+                    visited[state + 1] = true;
+                    pending[top++] = state + 1;
                 }
             }
 
@@ -152,7 +171,7 @@ public static class NonogramLineSolver
             int nextPosition;
             if (end == n)
             {
-                if (!feasible[k + 1, n])
+                if (!feasible[((k + 1) * stride) + n])
                 {
                     continue;
                 }
@@ -161,7 +180,7 @@ public static class NonogramLineSolver
             }
             else
             {
-                if (line[end] == CellState.Filled || !feasible[k + 1, end + 1])
+                if (line[end] == CellState.Filled || !feasible[((k + 1) * stride) + end + 1])
                 {
                     continue;
                 }
@@ -175,10 +194,12 @@ public static class NonogramLineSolver
                 canBeFilled[p] = true;
             }
 
-            if (!visited[k + 1, nextPosition])
+            var next = ((k + 1) * stride) + nextPosition;
+
+            if (!visited[next])
             {
-                visited[k + 1, nextPosition] = true;
-                pending.Push((k + 1, nextPosition));
+                visited[next] = true;
+                pending[top++] = next;
             }
         }
 
@@ -187,7 +208,7 @@ public static class NonogramLineSolver
         for (var p = 0; p < n; p++)
         {
             // A cell that can be neither filled nor blank has no consistent arrangement.
-            // feasible[0,0] rules this out, so treat it as a guard rather than an expectation.
+            // feasible[0, 0] rules this out, so treat it as a guard rather than an expectation.
             if (!canBeFilled[p] && !canBeBlank[p])
             {
                 return LineSolveStatus.Contradiction;

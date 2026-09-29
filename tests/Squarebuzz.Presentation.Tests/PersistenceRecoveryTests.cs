@@ -118,6 +118,32 @@ public sealed class PersistenceRecoveryTests
     }
 
     [Fact]
+    // Rebuilding a generated save's picture runs the generator. Deleting one card used to reload
+    // the list and regenerate every other generated save; revisiting the list did the same.
+    public async Task ContinueDelete_DoesNotRegenerateTheOtherSaves()
+    {
+        using var h = new GameViewModelHarness();
+        using var vm = new ContinueViewModel(h.Strings, h.SaveGames, h.Sessions, h.Navigation, h.Clock, h.Diagnostics);
+
+        foreach (var seed in new[] { 11, 22, 33 })
+        {
+            var session = h.Sessions.Create(NewGameOptions.Default with { Size = GridSize.Big, PackId = "surprise", Seed = seed });
+            var save = SavedGame.FromSession(session, Guid.NewGuid(), h.Clock.Now);
+            h.SaveGames.Saves[save.Id] = save;
+        }
+
+        await vm.OnAppearingAsync();
+        var generated = h.Generator.Requests.Count;
+
+        await vm.DeleteCommand.ExecuteAsync(vm.Saves[0]);
+        await vm.OnAppearingAsync();
+
+        Assert.Equal(2, vm.Saves.Count);
+        Assert.Equal(generated, h.Generator.Requests.Count);
+        Assert.False(vm.HasPersistenceFailure);
+    }
+
+    [Fact]
     public async Task ContinueReadFailure_IsNotAnEmptySaveList()
     {
         using var h = new GameViewModelHarness();

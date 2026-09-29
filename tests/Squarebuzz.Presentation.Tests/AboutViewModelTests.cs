@@ -86,6 +86,19 @@ public sealed class AboutViewModelTests : IDisposable
     }
 
     [Fact]
+    // The value was right but nobody was told: the binding kept showing an empty notice pill.
+    public void LanguageChange_TellsTheViewTheNoticeIsGone()
+    {
+        _vm.CreditsCommand.Execute(null);
+        var raised = new List<string?>();
+        _vm.PropertyChanged += (_, e) => raised.Add(e.PropertyName);
+
+        _strings.SetLanguage(AppLanguage.Polish);
+
+        Assert.Contains(nameof(_vm.HasNotice), raised);
+    }
+
+    [Fact]
     public async Task HowTo_NavigatesToTheLessons()
     {
         await _vm.HowToCommand.ExecuteAsync(null);

@@ -13,6 +13,10 @@ public partial class AboutViewModel : LocalizedViewModel
     private readonly INavigationService _navigation;
     private readonly IUiThread _uiThread;
 
+    // Which notice is showing. Each one gets a fresh token, so the timer of an earlier notice
+    // cannot clear a later one - comparing the text did, when the same link was tapped twice.
+    private int _noticeToken;
+
     public AboutViewModel(ILocalizationService strings, INavigationService navigation, IUiThread uiThread)
         : base(strings)
     {
@@ -29,6 +33,7 @@ public partial class AboutViewModel : LocalizedViewModel
 
     /// <summary>Placeholder notice for external destinations that have not yet been configured.</summary>
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasNotice))]
     public partial string Notice { get; private set; } = string.Empty;
 
     public bool HasNotice => !string.IsNullOrEmpty(Notice);
@@ -87,16 +92,15 @@ public partial class AboutViewModel : LocalizedViewModel
 
     private void ShowNotice(string message)
     {
+        var token = ++_noticeToken;
         Notice = message;
-        OnPropertyChanged(nameof(HasNotice));
 
         _ = Task.Delay(2500).ContinueWith(
             _ => _uiThread.BeginInvokeOnMainThread(() =>
             {
-                if (Notice == message)
+                if (token == _noticeToken)
                 {
                     Notice = string.Empty;
-                    OnPropertyChanged(nameof(HasNotice));
                 }
             }),
             TaskScheduler.Default);

@@ -60,6 +60,22 @@ public partial class ContinueViewModel : LocalizedViewModel
     private readonly IPersistenceDiagnostics _diagnostics;
     private SavedGameCard? _failedDelete;
 
+    // Whether the last reload had to skip a save it could not rebuild, so a later delete does
+    // not clear that warning by accident.
+    private bool _rebuildFailed;
+
+    /// <summary>
+    /// Generated pictures already rebuilt for this list, by everything that determines them.
+    /// </summary>
+    /// <remarks>
+    /// Rebuilding a generated save's picture runs the generator, which retries until it finds a
+    /// logically solvable grid. The list reloads on every visit and every language change, and
+    /// deleting one card used to reload it all - regenerating up to a dozen boards to remove one.
+    /// </remarks>
+    private readonly Dictionary<PuzzleKey, Puzzle> _generated = [];
+
+    private readonly record struct PuzzleKey(int Size, int Difficulty, string PackId, int Seed);
+
     public ContinueViewModel(
         ILocalizationService strings,
         ISaveGameRepository saveGames,
@@ -138,30 +154,63 @@ public partial class ContinueViewModel : LocalizedViewModel
         }
 
         Saves.Clear();
-        HasPersistenceFailure = _failedDelete is not null;
+        _rebuildFailed = false;
+        var stillSaved = new HashSet<PuzzleKey>();
+
         foreach (var save in saves)
         {
             // A save whose picture can no longer be produced is skipped rather than crashing the
             // list - it would only happen if authored content was removed between releases.
             try
             {
-                Saves.Add(BuildCard(save));
+                Saves.Add(BuildCard(save, stillSaved));
             }
             catch (Exception exception) when (exception is not OperationCanceledException)
             {
                 _diagnostics.Report(PersistenceOperation.RebuildGame, exception, save.Id);
-                HasPersistenceFailure = true;
-                continue;
+                _rebuildFailed = true;
             }
         }
 
+        // Drop pictures whose saves are gone, so the cache never outgrows the list.
+        foreach (var key in _generated.Keys.Where(k => !stillSaved.Contains(k)).ToList())
+        {
+            _generated.Remove(key);
+        }
+
+        UpdateListState();
+    }
+
+    private void UpdateListState()
+    {
+        HasPersistenceFailure = _failedDelete is not null || _rebuildFailed;
         IsEmpty = Saves.Count == 0 && !HasPersistenceFailure;
         OnPropertyChanged(nameof(HasSaves));
     }
 
-    private SavedGameCard BuildCard(SavedGame save)
+    private Puzzle ResolvePuzzle(SavedGame save, HashSet<PuzzleKey> stillSaved)
     {
-        var puzzle = _sessions.ResolvePuzzle(save);
+        // Authored pictures are a dictionary lookup already; only generation is worth keeping.
+        if (save.PuzzleId is not null)
+        {
+            return _sessions.ResolvePuzzle(save);
+        }
+
+        var key = new PuzzleKey(save.Size, save.Difficulty, save.PackId, save.Seed);
+        stillSaved.Add(key);
+
+        if (!_generated.TryGetValue(key, out var puzzle))
+        {
+            puzzle = _sessions.ResolvePuzzle(save);
+            _generated[key] = puzzle;
+        }
+
+        return puzzle;
+    }
+
+    private SavedGameCard BuildCard(SavedGame save, HashSet<PuzzleKey> stillSaved)
+    {
+        var puzzle = ResolvePuzzle(save, stillSaved);
 
         // The puzzle precomputes this precisely so callers do not recount an immutable value.
         var total = puzzle.PictureCellCount;
@@ -237,9 +286,11 @@ public partial class ContinueViewModel : LocalizedViewModel
             return;
         }
 
+        // Removed in place: the other cards have not changed, and reloading them regenerated
+        // every other generated save's picture.
         _failedDelete = null;
         Saves.Remove(card);
-        await ReloadAsync();
+        UpdateListState();
     }
 
     [RelayCommand]

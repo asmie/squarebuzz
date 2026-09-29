@@ -25,7 +25,45 @@ public sealed class BoardDrawable : IDrawable
     public Puzzle? Puzzle { get; set; }
 
     /// <summary>Snapshot of the player's marks. Copied, not shared, so drawing never races play.</summary>
-    public CellState[] Cells { get; set; } = [];
+    public ReadOnlySpan<CellState> Cells => _cells;
+
+    private CellState[] _cells = [];
+
+    /// <summary>
+    /// Copies the player's marks in, reusing the buffer while the board size stays the same.
+    /// </summary>
+    /// <remarks>
+    /// Called after every move, so a fresh array per call was a steady trickle of garbage during
+    /// a drag. It is also the one moment the clue strikes can change, so they are marked stale
+    /// here and recomputed on the next frame - and on no other frame. Animation frames (a hint
+    /// pulse, a pop, a wipe) used to rerun the strike logic for every line of the board.
+    /// </remarks>
+    public void SetCells(ReadOnlySpan<CellState> cells)
+    {
+        if (_cells.Length != cells.Length)
+        {
+            _cells = new CellState[cells.Length];
+        }
+
+        cells.CopyTo(_cells);
+        _strikesStale = true;
+    }
+
+    // Strike flags per clue number, cached between frames. Row y's flags start at
+    // y * _rowStride, column x's at x * _columnStride.
+    private bool[] _rowStruck = [];
+    private bool[] _columnStruck = [];
+    private int _rowStride;
+    private int _columnStride;
+    private Puzzle? _strikesPuzzle;
+    private bool _strikesStale = true;
+
+    // Read once per frame: it is a platform call, and it was being made for every struck clue.
+    private bool _reduceMotion;
+
+    /// <summary>Clue numbers as text, built once. Integers format the same in every culture.</summary>
+    private static readonly string[] Numerals =
+        [.. Enumerable.Range(0, 64).Select(n => n.ToString(System.Globalization.CultureInfo.InvariantCulture))];
 
     public BoardLayout Layout { get; set; }
 
@@ -69,6 +107,55 @@ public sealed class BoardDrawable : IDrawable
     {
         _strikeBirths.Clear();
         _seedStrikesSilently = true;
+        _strikesStale = true;
+    }
+
+    /// <summary>Recomputes the strike flags if the marks or the puzzle changed since last time.</summary>
+    private void EnsureStrikes(Puzzle puzzle)
+    {
+        if (!_strikesStale && ReferenceEquals(_strikesPuzzle, puzzle))
+        {
+            return;
+        }
+
+        _rowStride = Math.Max(1, puzzle.MaxRowClueCount);
+        _columnStride = Math.Max(1, puzzle.MaxColumnClueCount);
+
+        if (_rowStruck.Length != puzzle.Height * _rowStride)
+        {
+            _rowStruck = new bool[puzzle.Height * _rowStride];
+        }
+
+        if (_columnStruck.Length != puzzle.Width * _columnStride)
+        {
+            _columnStruck = new bool[puzzle.Width * _columnStride];
+        }
+
+        for (var y = 0; y < puzzle.Height; y++)
+        {
+            ClueStrikeCalculator.Compute(
+                puzzle.RowClues[y],
+                _cells.AsSpan(y * puzzle.Width, puzzle.Width),
+                _rowStruck.AsSpan(y * _rowStride, _rowStride));
+        }
+
+        Span<CellState> column = stackalloc CellState[puzzle.Height];
+
+        for (var x = 0; x < puzzle.Width; x++)
+        {
+            for (var y = 0; y < puzzle.Height; y++)
+            {
+                column[y] = _cells[(y * puzzle.Width) + x];
+            }
+
+            ClueStrikeCalculator.Compute(
+                puzzle.ColumnClues[x],
+                column,
+                _columnStruck.AsSpan(x * _columnStride, _columnStride));
+        }
+
+        _strikesPuzzle = puzzle;
+        _strikesStale = false;
     }
 
     private float StrikeProgress(bool isRow, int line, int run, bool isStruck)
@@ -88,7 +175,7 @@ public sealed class BoardDrawable : IDrawable
             _strikeBirths[key] = birth;
         }
 
-        if (birth == 0 || Services.MotionPreferences.ReduceMotion)
+        if (birth == 0 || _reduceMotion)
         {
             return 1f;
         }
@@ -99,6 +186,11 @@ public sealed class BoardDrawable : IDrawable
         {
             _sawUnfinishedWipe = true;
         }
+        else
+        {
+            // Finished: from now on this strike takes the settled path above.
+            _strikeBirths[key] = 0;
+        }
 
         return progress;
     }
@@ -107,7 +199,7 @@ public sealed class BoardDrawable : IDrawable
     {
         ArgumentNullException.ThrowIfNull(canvas);
 
-        if (Puzzle is not { } puzzle || Cells.Length != puzzle.CellCount)
+        if (Puzzle is not { } puzzle || _cells.Length != puzzle.CellCount)
         {
             return;
         }
@@ -121,6 +213,8 @@ public sealed class BoardDrawable : IDrawable
         }
 
         _sawUnfinishedWipe = false;
+        _reduceMotion = Services.MotionPreferences.ReduceMotion;
+        EnsureStrikes(puzzle);
 
         DrawGutterBackgrounds(canvas, layout);
 
@@ -184,7 +278,7 @@ public sealed class BoardDrawable : IDrawable
             for (var column = 0; column < layout.Columns; column++)
             {
                 var index = (row * layout.Columns) + column;
-                var state = Cells[index];
+                var state = _cells[index];
                 var (x, y) = layout.CellOrigin(column, row);
                 var left = (float)x;
                 var top = (float)y;
@@ -260,7 +354,7 @@ public sealed class BoardDrawable : IDrawable
             {
                 var index = (row * layout.Columns) + column;
 
-                if (Cells[index] != CellState.Crossed)
+                if (_cells[index] != CellState.Crossed)
                 {
                     continue;
                 }
@@ -280,7 +374,7 @@ public sealed class BoardDrawable : IDrawable
     /// </summary>
     private void DrawHintRing(ICanvas canvas, BoardLayout layout)
     {
-        if (HintIndex < 0 || HintIndex >= Cells.Length || HintRingWidth <= 0.1f)
+        if (HintIndex < 0 || HintIndex >= _cells.Length || HintRingWidth <= 0.1f)
         {
             return;
         }
@@ -356,21 +450,10 @@ public sealed class BoardDrawable : IDrawable
         var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
 
-        // Size strike buffers from the current puzzle; equal-sized boards can have different clue counts.
-        Span<bool> struck = stackalloc bool[Math.Max(4, puzzle.MaxColumnClueCount)];
-        Span<CellState> column = stackalloc CellState[puzzle.Height];
-
         for (var x = 0; x < puzzle.Width; x++)
         {
-            for (var y = 0; y < puzzle.Height; y++)
-            {
-                column[y] = Cells[(y * puzzle.Width) + x];
-            }
-
-            var clues = puzzle.ColumnClues[x];
-            ClueStrikeCalculator.Compute(clues, column, struck);
-
-            var runs = clues.DisplayRuns;
+            var struck = _columnStruck.AsSpan(x * _columnStride, _columnStride);
+            var runs = puzzle.ColumnClues[x].DisplayRuns;
             var (cellX, _) = layout.CellOrigin(x, 0);
 
             // Bottom-aligned: clues sit against the grid so the eye travels straight down
@@ -398,15 +481,10 @@ public sealed class BoardDrawable : IDrawable
         var fontSize = (float)layout.ClueFontSize();
         var slot = (float)layout.ClueSlot;
 
-        // From the puzzle for the same reason as the column pass.
-        Span<bool> struck = stackalloc bool[Math.Max(4, puzzle.MaxRowClueCount)];
-
         for (var y = 0; y < puzzle.Height; y++)
         {
-            var clues = puzzle.RowClues[y];
-            ClueStrikeCalculator.Compute(clues, Cells.AsSpan(y * puzzle.Width, puzzle.Width), struck);
-
-            var runs = clues.DisplayRuns;
+            var struck = _rowStruck.AsSpan(y * _rowStride, _rowStride);
+            var runs = puzzle.RowClues[y].DisplayRuns;
             var (_, cellY) = layout.CellOrigin(0, y);
 
             // Right-aligned against the grid, for the same reason columns are bottom-aligned.
@@ -452,7 +530,7 @@ public sealed class BoardDrawable : IDrawable
         canvas.Alpha = isStruck ? StruckClueOpacity : 1f;
 
         canvas.DrawString(
-            value.ToString(System.Globalization.CultureInfo.CurrentCulture),
+            value < Numerals.Length ? Numerals[value] : value.ToString(System.Globalization.CultureInfo.InvariantCulture),
             left,
             top,
             width,

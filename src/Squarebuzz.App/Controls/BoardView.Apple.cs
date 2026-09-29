@@ -26,6 +26,13 @@ namespace Squarebuzz.App.Controls;
 public sealed partial class BoardView
 {
     /// <summary>
+    /// The scroll views this gesture switched off, with the setting each had before, so release
+    /// restores exactly that - forcing <c>ScrollEnabled = true</c> turned scrolling on for any
+    /// ancestor that had it off on purpose.
+    /// </summary>
+    private readonly Dictionary<UIScrollView, bool> _claimedScrollers = [];
+
+    /// <summary>
     /// Claims the gesture from every scrolling ancestor, or hands it back.
     /// </summary>
     /// <remarks>
@@ -35,6 +42,17 @@ public sealed partial class BoardView
     /// </remarks>
     partial void ClaimGestureFromScrollers(bool claim)
     {
+        if (!claim)
+        {
+            foreach (var (scroller, wasEnabled) in _claimedScrollers)
+            {
+                scroller.ScrollEnabled = wasEnabled;
+            }
+
+            _claimedScrollers.Clear();
+            return;
+        }
+
         if (Handler?.PlatformView is not UIView view)
         {
             return;
@@ -42,9 +60,9 @@ public sealed partial class BoardView
 
         for (var ancestor = view.Superview; ancestor is not null; ancestor = ancestor.Superview)
         {
-            if (ancestor is UIScrollView scroller)
+            if (ancestor is UIScrollView scroller && _claimedScrollers.TryAdd(scroller, scroller.ScrollEnabled))
             {
-                scroller.ScrollEnabled = !claim;
+                scroller.ScrollEnabled = false;
             }
         }
     }

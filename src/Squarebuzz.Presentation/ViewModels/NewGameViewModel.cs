@@ -389,10 +389,12 @@ public partial class NewGameViewModel : LocalizedViewModel
         };
         var options = selectedSettings.ToNewGameOptions();
 
-        // Remember these choices for the next visit to New Game.
+        // Remember these choices for the next visit to New Game. Only the choices themselves are
+        // written: after a failed read _settings is the defaults, and saving the whole snapshot
+        // reset the language, helpers and screen-time limit along with them.
         try
         {
-            await _settingsRepository.SaveAsync(selectedSettings);
+            await _settingsRepository.SaveChangesAsync(_settings, selectedSettings);
         }
         catch (Exception)
         {

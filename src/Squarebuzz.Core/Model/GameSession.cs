@@ -329,8 +329,14 @@ public sealed class GameSession
         var wasAutoCrossed = _autoCrossed[index];
         Write(index, target);
 
-        var completedALine = (!rowWasSatisfied && IsRowSatisfied(y))
-                             || (!columnWasSatisfied && IsColumnSatisfied(x));
+        // Measured once and handed down. Satisfaction depends on filled cells only, and nothing
+        // below changes one - automatic crosses flip Empty and Crossed - so the answer holds for
+        // the rest of the move. The row and column were each being re-matched up to four times.
+        var rowSatisfied = IsRowSatisfied(y);
+        var columnSatisfied = IsColumnSatisfied(x);
+
+        var completedALine = (!rowWasSatisfied && rowSatisfied)
+                             || (!columnWasSatisfied && columnSatisfied);
 
         // Reserve for line-wide consequences only when a line completes or is broken.
         var changes = new List<CellChange>(completedALine || rowWasSatisfied || columnWasSatisfied
@@ -339,7 +345,7 @@ public sealed class GameSession
             new(index, current, target) { FromAutoCrossed = wasAutoCrossed },
         };
 
-        var autoCrossed = UpdateAutoCrossesThrough(changes, x, y);
+        var autoCrossed = UpdateAutoCrossesThrough(changes, x, y, rowSatisfied, columnSatisfied);
 
         _history.Push(new Stroke(changes) { DirectChangeCount = 1 });
 
@@ -498,7 +504,9 @@ public sealed class GameSession
 
         Write(hint.Index, hint.Value);
 
-        UpdateAutoCrossesThrough(changes, hint.Index % Puzzle.Width, hint.Index / Puzzle.Width);
+        var hintX = hint.Index % Puzzle.Width;
+        var hintY = hint.Index / Puzzle.Width;
+        UpdateAutoCrossesThrough(changes, hintX, hintY, IsRowSatisfied(hintY), IsColumnSatisfied(hintX));
 
         _history.Push(new Stroke(changes) { DirectChangeCount = 1 });
         EvaluateSolved();
@@ -514,10 +522,11 @@ public sealed class GameSession
     /// Only marks in the touched row and column can lose support. Before removing one,
     /// check its perpendicular line too. Manual and hint crosses are never removed here.
     /// Existing automatic marks still lose support when the helper is switched off.
+    /// The caller passes the touched lines' satisfaction, measured after its write.
     /// </remarks>
-    private int UpdateAutoCrossesThrough(List<CellChange> changes, int x, int y)
+    private int UpdateAutoCrossesThrough(List<CellChange> changes, int x, int y, bool rowSatisfied, bool columnSatisfied)
     {
-        if (!IsRowSatisfied(y))
+        if (!rowSatisfied)
         {
             for (var column = 0; column < Puzzle.Width; column++)
             {
@@ -529,7 +538,7 @@ public sealed class GameSession
             }
         }
 
-        if (!IsColumnSatisfied(x))
+        if (!columnSatisfied)
         {
             for (var row = 0; row < Puzzle.Height; row++)
             {
@@ -542,7 +551,7 @@ public sealed class GameSession
         }
 
         return Rules.AutoCrossCompletedLines
-            ? CrossRowIfSatisfied(changes, y) + CrossColumnIfSatisfied(changes, x)
+            ? (rowSatisfied ? CrossRow(changes, y) : 0) + (columnSatisfied ? CrossColumn(changes, x) : 0)
             : 0;
     }
 
@@ -570,13 +579,15 @@ public sealed class GameSession
         return added;
     }
 
-    private int CrossRowIfSatisfied(List<CellChange> changes, int y)
-    {
-        if (!IsRowSatisfied(y))
-        {
-            return 0;
-        }
+    private int CrossRowIfSatisfied(List<CellChange> changes, int y) =>
+        IsRowSatisfied(y) ? CrossRow(changes, y) : 0;
 
+    private int CrossColumnIfSatisfied(List<CellChange> changes, int x) =>
+        IsColumnSatisfied(x) ? CrossColumn(changes, x) : 0;
+
+    /// <summary>Crosses every blank of a row the caller already knows is satisfied.</summary>
+    private int CrossRow(List<CellChange> changes, int y)
+    {
         var width = Puzzle.Width;
         var added = 0;
 
@@ -591,13 +602,9 @@ public sealed class GameSession
         return added;
     }
 
-    private int CrossColumnIfSatisfied(List<CellChange> changes, int x)
+    /// <summary>Crosses every blank of a column the caller already knows is satisfied.</summary>
+    private int CrossColumn(List<CellChange> changes, int x)
     {
-        if (!IsColumnSatisfied(x))
-        {
-            return 0;
-        }
-
         var width = Puzzle.Width;
         var added = 0;
 
@@ -634,6 +641,13 @@ public sealed class GameSession
     /// </remarks>
     private bool EvaluateSolved()
     {
+        // The filled count is kept current on every write, and a solved board has exactly the
+        // picture's cells filled - so nearly every move is answered without scanning the board.
+        if (FilledCount != Puzzle.PictureCellCount)
+        {
+            return false;
+        }
+
         var solution = Puzzle.Solution;
 
         for (var i = 0; i < solution.Length; i++)

@@ -42,7 +42,11 @@ public partial class GamePage : ContentPage, IQueryAttributable
         _viewModel.CellFilled += (_, index) => Board.PopCell(index);
 
         // Theme changes require Refresh to reload the canvas palette.
-        _viewModel.PaletteChanged += (_, _) => Board.Refresh();
+        _viewModel.PaletteChanged += (_, _) =>
+        {
+            Board.Refresh();
+            Magnifier.RefreshPalette();
+        };
 
         Board.CellPainted += OnCellPainted;
         Board.CrossGestureRecognised += OnCrossGestureRecognised;
@@ -407,9 +411,16 @@ public partial class GamePage : ContentPage, IQueryAttributable
 
     private async void OnHintGranted(object? sender, int index)
     {
-        // Scroll the hinted cell into view before starting the highlight.
+        // Scroll the hinted cell into view before starting the highlight. The scroll animates,
+        // so by the time it finishes the player may have started another game - whose board
+        // would otherwise get a ring on the old hint's index.
+        var session = Board.Session;
         await ScrollHintedCellIntoViewAsync(index);
-        Board.ShowHint(index);
+
+        if (ReferenceEquals(Board.Session, session))
+        {
+            Board.ShowHint(index);
+        }
     }
 
     /// <summary>

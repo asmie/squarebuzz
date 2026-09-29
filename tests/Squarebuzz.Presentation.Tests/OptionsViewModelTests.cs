@@ -279,6 +279,25 @@ public class OptionsViewModelTests : IDisposable
     }
 
     [Fact]
+    // Leaving Auto for Dark changes two properties. Each hook applied and saved on its own, so
+    // one tap swapped the theme twice - once to a combination the player never chose.
+    public async Task LeavingAutoForABrightness_AppliesAndSavesOnce()
+    {
+        await _vm.OnAppearingAsync();
+        _vm.SelectThemeCommand.Execute("auto");
+        var applies = _theme.ApplyCount;
+        var saves = _settings.Saved.Count;
+
+        _vm.SelectThemeCommand.Execute("dark");
+
+        Assert.Equal(applies + 1, _theme.ApplyCount);
+        Assert.Equal(saves + 1, _settings.Saved.Count);
+        Assert.Equal(GameTheme.Dark, _theme.Theme);
+        Assert.False(_theme.FollowsSystem);
+        Assert.True(_vm.IsDarkTheme);
+    }
+
+    [Fact]
     // Auto is a third state of the same control: while it is on, Light and Dark must both read as
     // unselected or two segments look active at once. Picking a brightness is how Auto comes off.
     public async Task Auto_IsExclusiveWithLightAndDark()

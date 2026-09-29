@@ -86,24 +86,34 @@ public sealed class SquarebuzzDatabase : IAsyncDisposable, IDisposable
                 // repositories on one page cache; FullMutex makes the handle safe to share.
                 SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache | SQLiteOpenFlags.FullMutex);
 
-            // Enable WAL for concurrent reads and saves. journal_mode returns a row, so read it as a scalar.
-            var journalMode = await connection.ExecuteScalarAsync<string>("PRAGMA journal_mode=WAL")
-                .ConfigureAwait(false);
+            try
+            {
+                // Enable WAL for concurrent reads and saves. journal_mode returns a row, so read it as a scalar.
+                var journalMode = await connection.ExecuteScalarAsync<string>("PRAGMA journal_mode=WAL")
+                    .ConfigureAwait(false);
 
-            JournalMode = journalMode;
+                JournalMode = journalMode;
 
-            // NORMAL reduces fsync work under WAL. Committed data survives process termination,
-            // but recent transactions can be lost on an OS crash or power failure.
-            await connection.ExecuteAsync("PRAGMA synchronous=NORMAL").ConfigureAwait(false);
+                // NORMAL reduces fsync work under WAL. Committed data survives process termination,
+                // but recent transactions can be lost on an OS crash or power failure.
+                await connection.ExecuteAsync("PRAGMA synchronous=NORMAL").ConfigureAwait(false);
 
-            // Checkpoint every 256 pages to limit WAL growth under frequent small saves.
-            // This PRAGMA returns a result row.
-            await connection.ExecuteScalarAsync<int>("PRAGMA wal_autocheckpoint=256").ConfigureAwait(false);
+                // Checkpoint every 256 pages to limit WAL growth under frequent small saves.
+                // This PRAGMA returns a result row.
+                await connection.ExecuteScalarAsync<int>("PRAGMA wal_autocheckpoint=256").ConfigureAwait(false);
 
-            // Returns no rows, so ExecuteAsync is correct here.
-            await connection.ExecuteAsync("PRAGMA foreign_keys=ON").ConfigureAwait(false);
+                // Returns no rows, so ExecuteAsync is correct here.
+                await connection.ExecuteAsync("PRAGMA foreign_keys=ON").ConfigureAwait(false);
 
-            await MigrateAsync(connection).ConfigureAwait(false);
+                await MigrateAsync(connection).ConfigureAwait(false);
+            }
+            catch
+            {
+                // Never published, so nothing else will ever close it. Each retry would otherwise
+                // leak another open handle on the database file.
+                await connection.CloseAsync().ConfigureAwait(false);
+                throw;
+            }
 
             _connection = connection;
             return connection;

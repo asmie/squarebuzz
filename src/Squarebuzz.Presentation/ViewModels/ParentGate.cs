@@ -1,4 +1,3 @@
-using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Squarebuzz.Presentation.Services;
@@ -117,20 +116,27 @@ public sealed partial class ParentGate : ObservableObject
     /// digits by default, and a parent typing the right answer in their own numerals should not be
     /// told to ask a grown-up.
     /// </para>
+    /// <para>
+    /// The value is accumulated digit by digit rather than copied into a buffer and parsed. The
+    /// buffer used to be a <c>stackalloc</c> sized by whatever was typed, and neither gate entry
+    /// limits its length - so pasting a long enough string overflowed the stack, a crash no
+    /// handler can catch.
+    /// </para>
     /// </remarks>
     private static bool TryReadAnswer(string? text, out int answer)
     {
         answer = 0;
 
-        if (string.IsNullOrWhiteSpace(text))
+        var digits = text.AsSpan().Trim();
+
+        if (digits.IsEmpty)
         {
             return false;
         }
 
-        Span<char> digits = stackalloc char[text.Length];
-        var length = 0;
+        var total = 0;
 
-        foreach (var c in text.Trim())
+        foreach (var c in digits)
         {
             // GetNumericValue maps every Unicode decimal digit - ٤, ۴, ৪, ４ - to its value.
             var value = char.GetNumericValue(c);
@@ -140,11 +146,17 @@ public sealed partial class ParentGate : ObservableObject
                 return false;
             }
 
-            digits[length++] = (char)('0' + (int)value);
+            // Anything past int range is certainly not the answer to a times-table question.
+            if (total > (int.MaxValue - (int)value) / 10)
+            {
+                return false;
+            }
+
+            total = (total * 10) + (int)value;
         }
 
-        return length > 0
-               && int.TryParse(digits[..length], NumberStyles.None, CultureInfo.InvariantCulture, out answer);
+        answer = total;
+        return true;
     }
 
     /// <summary>Re-reads the localised labels after a language change.</summary>

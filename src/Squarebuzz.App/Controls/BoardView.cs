@@ -60,6 +60,9 @@ public sealed partial class BoardView : GraphicsView
     /// </remarks>
     private int _deferredPaintIndex = -1;
 
+    /// <summary>The session <see cref="LayoutChanged"/> was last raised for.</summary>
+    private GameSession? _layoutSession;
+
     public BoardView()
     {
         Drawable = _drawable;
@@ -70,6 +73,21 @@ public sealed partial class BoardView : GraphicsView
         DragInteraction += OnDragInteraction;
         EndInteraction += OnEndInteraction;
         CancelInteraction += OnCancelInteraction;
+    }
+
+    /// <summary>
+    /// Ends any gesture in flight while the native view still exists, so the scrollers it
+    /// claimed are handed back and a pending long press cannot fire into a detached view.
+    /// </summary>
+    protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+    {
+        if (args.OldHandler is not null)
+        {
+            CancelLongPress();
+            EndDrag();
+        }
+
+        base.OnHandlerChanging(args);
     }
 
     protected override void OnHandlerChanged()
@@ -127,8 +145,11 @@ public sealed partial class BoardView : GraphicsView
             view._mistakeGeneration++;
             view._drawable.MistakeIndex = -1;
 
-            // Nor a mark still pending from a gesture on the board that has just gone away.
-            view._deferredPaintIndex = -1;
+            // Nor any part of a gesture on the board that has just gone away: a pending long
+            // press would otherwise mature and cross a cell of the new game, and the scrollers
+            // it claimed would stay frozen.
+            view.CancelLongPress();
+            view.EndDrag();
 
             view.Refresh();
         });
@@ -310,7 +331,14 @@ public sealed partial class BoardView : GraphicsView
     /// </summary>
     public BoardLayout CurrentLayout => _drawable.Layout;
 
-    /// <summary>Raised after <see cref="Refresh"/> recomputes the geometry.</summary>
+    /// <summary>
+    /// Raised after <see cref="Refresh"/> when the geometry or the puzzle actually changed.
+    /// </summary>
+    /// <remarks>
+    /// Not on every refresh: a theme or palette change refreshes too, and the game page answers
+    /// this event by rebuilding up to 625 screen-reader cells - which also threw away the
+    /// screen reader's place on the board, for a change that moved nothing.
+    /// </remarks>
     public event EventHandler? LayoutChanged;
 
     /// <summary>Recomputes layout for the available space and redraws.</summary>
@@ -326,9 +354,13 @@ public sealed partial class BoardView : GraphicsView
         var height = AvailableSize.Height > 0 ? AvailableSize.Height : Height;
 
         var layout = BoardLayout.Calculate(session.Puzzle, width, height, ZoomPercent, BigNumbers);
+        // A new session counts even on an identical board: restarting a picture reuses its
+        // Puzzle, and the overlay has to be rebuilt for the game now being played.
+        var geometryChanged = layout != _drawable.Layout || !ReferenceEquals(session, _layoutSession);
+        _layoutSession = session;
 
         _drawable.Puzzle = session.Puzzle;
-        _drawable.Cells = session.Cells.ToArray();
+        _drawable.SetCells(session.Cells);
         _drawable.Layout = layout;
         _drawable.Palette = BoardPalette.FromResources();
 
@@ -339,7 +371,10 @@ public sealed partial class BoardView : GraphicsView
 
         Invalidate();
 
-        LayoutChanged?.Invoke(this, EventArgs.Empty);
+        if (geometryChanged)
+        {
+            LayoutChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     /// <summary>Redraws from the session without recomputing layout - the common case after a move.</summary>
@@ -350,7 +385,7 @@ public sealed partial class BoardView : GraphicsView
             return;
         }
 
-        _drawable.Cells = session.Cells.ToArray();
+        _drawable.SetCells(session.Cells);
 
         // Invalidate once. An active clue-strike animation requests additional frames as needed.
         Invalidate();

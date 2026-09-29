@@ -86,6 +86,27 @@ public class NewGameViewModelTests : IDisposable
     }
 
     [Fact]
+    // After a failed read the screen holds the defaults. Starting a game must record the four
+    // choices it owns, not write the defaults over the player's language and helpers.
+    public async Task AFailedSettingsLoad_ThenStart_WritesOnlyTheGameChoices()
+    {
+        _settings.LoadFails = true;
+        await _vm.OnAppearingAsync();
+
+        await _vm.StartCommand.ExecuteAsync(null);
+
+        var (baseline, updated) = Assert.Single(_settings.Changes);
+        Assert.Equal(GameSettings.Default, baseline);
+        Assert.Equal(baseline with
+        {
+            LastSize = updated.LastSize,
+            LastDifficulty = updated.LastDifficulty,
+            LastPackId = updated.LastPackId,
+            LastChallenge = updated.LastChallenge,
+        }, updated);
+    }
+
+    [Fact]
     public async Task AFailedSettingsLoad_StartsFromTheDefaults()
     {
         _settings.LoadFails = true;

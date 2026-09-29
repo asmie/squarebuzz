@@ -72,15 +72,17 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
 
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
 
+        // The guarded write and the trim commit together, so a failure between them can neither
+        // leave one save over the limit nor drop an old save for a new one that never landed.
         await connection.RunInTransactionAsync(transaction =>
         {
             // A delayed save from another page must not resurrect a journaled/completed game.
             if (transaction.Find<GameCompletionEntity>(game.Id.ToString("D")) is null)
             {
                 transaction.InsertOrReplace(ToEntity(game));
+                TrimToMostRecent(transaction);
             }
         }).ConfigureAwait(false);
-        await TrimToMostRecentAsync(connection).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -92,8 +94,8 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
     /// is never.
     /// </remarks>
     /// <returns>How many games were dropped, which is almost always none.</returns>
-    private static Task<int> TrimToMostRecentAsync(SQLiteAsyncConnection connection) =>
-        connection.ExecuteAsync(
+    private static int TrimToMostRecent(SQLiteConnection transaction) =>
+        transaction.Execute(
             """
             DELETE FROM saved_game
             WHERE id NOT IN (

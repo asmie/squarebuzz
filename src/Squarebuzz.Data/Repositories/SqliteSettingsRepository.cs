@@ -114,15 +114,48 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
         return seeded;
     }
 
-    public async Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
+    public Task SaveAsync(GameSettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(settings);
+
+        return WriteAsync(RowsFor(settings), cancellationToken);
+    }
+
+    public Task SaveChangesAsync(GameSettings baseline, GameSettings updated, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(baseline);
+        ArgumentNullException.ThrowIfNull(updated);
+
+        // Compared as stored text, so "changed" means exactly "would write a different row".
+        var before = RowsFor(baseline).ToDictionary(r => r.Key, r => r.Value, StringComparer.Ordinal);
+
+        return WriteAsync([.. RowsFor(updated).Where(r => before[r.Key] != r.Value)], cancellationToken);
+    }
+
+    private async Task WriteAsync(List<SettingEntity> rows, CancellationToken cancellationToken)
+    {
         cancellationToken.ThrowIfCancellationRequested();
+
+        if (rows.Count == 0)
+        {
+            return;
+        }
 
         var connection = await _database.GetConnectionAsync().ConfigureAwait(false);
 
-        var rows = new List<SettingEntity>
+        // One transaction: a half-written settings table would leave the UI in a state the
+        // player never chose.
+        await connection.RunInTransactionAsync(transaction =>
         {
+            foreach (var row in rows)
+            {
+                transaction.InsertOrReplace(row);
+            }
+        }).ConfigureAwait(false);
+    }
+
+    private static List<SettingEntity> RowsFor(GameSettings settings) =>
+        [
             Row(Keys.SoundEffects, settings.SoundEffects),
             Row(Keys.Music, settings.Music),
             Row(Keys.VoiceNarration, settings.VoiceNarration),
@@ -158,18 +191,7 @@ public sealed class SqliteSettingsRepository : ISettingsRepository
             },
 
             Row(Keys.HasSeenOnboarding, settings.HasSeenOnboarding),
-        };
-
-        // One transaction: a half-written settings table would leave the UI in a state the
-        // player never chose.
-        await connection.RunInTransactionAsync(transaction =>
-        {
-            foreach (var row in rows)
-            {
-                transaction.InsertOrReplace(row);
-            }
-        }).ConfigureAwait(false);
-    }
+        ];
 
     private static SettingEntity Row(string key, bool value) =>
         new() { Key = key, Value = value ? "1" : "0" };

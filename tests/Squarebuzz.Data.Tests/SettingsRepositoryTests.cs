@@ -128,6 +128,43 @@ public class SettingsRepositoryTests
     }
 
     [Fact]
+    // A screen whose read failed holds the defaults. Writing its one change must not write the
+    // defaults for everything else over what the player actually chose.
+    public async Task SaveChanges_WritesOnlyWhatDiffers()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSettingsRepository(temp.Database);
+        var chosen = GameSettings.Default with
+        {
+            Language = AppLanguage.Polish,
+            ScreenTimeLimitMinutes = 30,
+            Helpers = HelperSettings.Default with { WarnOnMistakes = false },
+        };
+        await repository.SaveAsync(chosen);
+
+        var baseline = GameSettings.Default;
+        await repository.SaveChangesAsync(baseline, baseline with { LastSize = GridSize.Normal });
+
+        var loaded = await repository.LoadAsync();
+        Assert.Equal(GridSize.Normal, loaded.LastSize);
+        Assert.Equal(AppLanguage.Polish, loaded.Language);
+        Assert.Equal(30, loaded.ScreenTimeLimitMinutes);
+        Assert.False(loaded.Helpers.WarnOnMistakes);
+    }
+
+    [Fact]
+    public async Task SaveChanges_WithNothingChanged_WritesNothing()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSettingsRepository(temp.Database);
+        await repository.SaveAsync(GameSettings.Default with { Music = false });
+
+        await repository.SaveChangesAsync(GameSettings.Default, GameSettings.Default);
+
+        Assert.False((await repository.LoadAsync()).Music);
+    }
+
+    [Fact]
     public void Sanitise_ClampsDifficultyAndPack()
     {
         var sanitised = (GameSettings.Default with { LastDifficulty = 99, LastPackId = "  " }).Sanitised();

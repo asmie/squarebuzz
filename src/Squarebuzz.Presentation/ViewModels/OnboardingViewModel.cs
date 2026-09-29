@@ -72,12 +72,18 @@ public partial class OnboardingViewModel : LocalizedViewModel
     /// A tiny picture illustrating each card. The last card shows a complete heart, because
     /// that card's promise is "finish every line and a picture appears".
     /// </summary>
-    public Puzzle DemoPuzzle => Step switch
-    {
-        0 => Puzzle.FromRows("demo1", "demo", "#FF8A3D", ["##.#.", ".....", ".....", ".....", "....."]),
-        1 => Puzzle.FromRows("demo2", "demo", "#4FA8F5", ["##.#.", "..###", "#..#.", ".....", "....."]),
-        _ => Puzzle.FromRows("demo3", "demo", "#FF6B8A", [".#.#.", "#####", "#####", ".###.", "..#.."]),
-    };
+    /// <remarks>
+    /// Built once: a puzzle is immutable, and rebuilding one on every read re-derived all of its
+    /// clues each time a binding asked.
+    /// </remarks>
+    public Puzzle DemoPuzzle => DemoPuzzles[Math.Clamp(Step, 0, DemoPuzzles.Length - 1)];
+
+    private static readonly Puzzle[] DemoPuzzles =
+    [
+        Puzzle.FromRows("demo1", "demo", "#FF8A3D", ["##.#.", ".....", ".....", ".....", "....."]),
+        Puzzle.FromRows("demo2", "demo", "#4FA8F5", ["##.#.", "..###", "#..#.", ".....", "....."]),
+        Puzzle.FromRows("demo3", "demo", "#FF6B8A", [".#.#.", "#####", "#####", ".###.", "..#.."]),
+    ];
 
     /// <summary>
     /// Reads the card aloud. These three cards explain the entire game in prose, to a player who
@@ -129,7 +135,9 @@ public partial class OnboardingViewModel : LocalizedViewModel
 
         try
         {
-            await _settingsRepository.SaveAsync(settings with { HasSeenOnboarding = true });
+            // Only the flag: after a failed read the snapshot is the defaults, and writing it all
+            // back would reset a language the player had already picked.
+            await _settingsRepository.SaveChangesAsync(settings, settings with { HasSeenOnboarding = true });
         }
         catch (Exception)
         {

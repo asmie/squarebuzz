@@ -71,6 +71,17 @@ public static class PuzzleSolver
         // Rows sit contiguously in the board, so they are solved in place. Columns are
         // strided, so they are gathered into this scratch buffer and scattered back.
         Span<CellState> column = height <= 64 ? stackalloc CellState[height] : new CellState[height];
+        Span<CellState> rowBefore = width <= 64 ? stackalloc CellState[width] : new CellState[width];
+
+        // Only lines that something has touched since they were last solved are solved again.
+        // A row can only change through a column and a column only through a row, and re-solving
+        // an untouched line always comes back Unchanged - the solver already applied everything
+        // it forces. Skipping them is therefore exact: the same board, outcome and pass count
+        // (which the content tooling reports as difficulty), for a fraction of the line solves.
+        Span<bool> rowDirty = height <= 64 ? stackalloc bool[height] : new bool[height];
+        Span<bool> columnDirty = width <= 64 ? stackalloc bool[width] : new bool[width];
+        rowDirty.Fill(true);
+        columnDirty.Fill(true);
 
         var passes = 0;
 
@@ -81,7 +92,14 @@ public static class PuzzleSolver
 
             for (var y = 0; y < height; y++)
             {
+                if (!rowDirty[y])
+                {
+                    continue;
+                }
+
+                rowDirty[y] = false;
                 var row = board.Slice(y * width, width);
+                row.CopyTo(rowBefore);
 
                 switch (NonogramLineSolver.Solve(rowClues[y], row))
                 {
@@ -89,6 +107,15 @@ public static class PuzzleSolver
                         return new PuzzleSolveResult(PuzzleSolveOutcome.Contradiction, passes, CountUndetermined(board));
                     case LineSolveStatus.Progressed:
                         changed = true;
+
+                        for (var x = 0; x < width; x++)
+                        {
+                            if (row[x] != rowBefore[x])
+                            {
+                                columnDirty[x] = true;
+                            }
+                        }
+
                         break;
                     default:
                         break;
@@ -97,6 +124,13 @@ public static class PuzzleSolver
 
             for (var x = 0; x < width; x++)
             {
+                if (!columnDirty[x])
+                {
+                    continue;
+                }
+
+                columnDirty[x] = false;
+
                 for (var y = 0; y < height; y++)
                 {
                     column[y] = board[(y * width) + x];
@@ -113,7 +147,13 @@ public static class PuzzleSolver
                 {
                     for (var y = 0; y < height; y++)
                     {
-                        board[(y * width) + x] = column[y];
+                        var index = (y * width) + x;
+
+                        if (board[index] != column[y])
+                        {
+                            board[index] = column[y];
+                            rowDirty[y] = true;
+                        }
                     }
 
                     changed = true;

@@ -191,6 +191,25 @@ public sealed class ParentGateTests
     }
 
     [Fact]
+    // The answer used to be copied into a stack buffer as long as the input. A pasted wall of
+    // digits overflowed the stack and took the whole app down.
+    public async Task AnEnormousPaste_IsRejectedWithoutCrashing()
+    {
+        var passed = false;
+        _gate.Open(() =>
+        {
+            passed = true;
+            return Task.CompletedTask;
+        });
+
+        _gate.Answer = new string('9', 4_000_000);
+        await _gate.SubmitCommand.ExecuteAsync(null);
+
+        Assert.False(passed);
+        Assert.True(_gate.HasFailed);
+    }
+
+    [Fact]
     public void EachOpening_PosesAFreshState()
     {
         _gate.Open(() => Task.CompletedTask);

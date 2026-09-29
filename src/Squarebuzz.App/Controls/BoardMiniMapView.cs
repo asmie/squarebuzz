@@ -28,7 +28,14 @@ public sealed class BoardMiniMapView : GraphicsView
     {
         _drawable.Columns = session?.Puzzle.Width ?? 0;
         _drawable.Rows = session?.Puzzle.Height ?? 0;
-        _drawable.Cells = session?.Cells.ToArray() ?? [];
+        // Copied into a reused buffer: this runs after every move.
+        ReadOnlySpan<CellState> cells = session is null ? [] : session.Cells;
+        if (_drawable.Cells.Length != cells.Length)
+        {
+            _drawable.Cells = new CellState[cells.Length];
+        }
+
+        cells.CopyTo(_drawable.Cells);
         Invalidate();
     }
 

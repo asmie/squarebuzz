@@ -317,8 +317,12 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 
         for (var distance = 1; distance < height; distance++)
         {
-            foreach (var y in new[] { emptyY - distance, emptyY + distance })
+            // Above first, then below - the order the candidates have always been tried in, which
+            // decides the picture. A loop rather than a two-element array per step.
+            for (var side = -1; side <= 1; side += 2)
             {
+                var y = emptyY + (side * distance);
+
                 if (y < 0 || y >= height || !RowHasFilledCell(cells, width, y))
                 {
                     continue;
@@ -354,8 +358,11 @@ public sealed class BlobPuzzleGenerator : IPuzzleGenerator
 
         for (var distance = 1; distance < width; distance++)
         {
-            foreach (var x in new[] { emptyX - distance, emptyX + distance })
+            // Left first, then right, as in ColumnToContinue.
+            for (var side = -1; side <= 1; side += 2)
             {
+                var x = emptyX + (side * distance);
+
                 if (x < 0 || x >= width || !ColumnHasFilledCell(cells, width, height, x))
                 {
                     continue;

@@ -38,6 +38,15 @@ public sealed class FakeSettingsRepository : ISettingsRepository
         Settings = settings;
         Saved.Add(settings);
     }
+
+    /// <summary>Every targeted write, as the (baseline, updated) pair it was given.</summary>
+    public List<(GameSettings Baseline, GameSettings Updated)> Changes { get; } = [];
+
+    public async Task SaveChangesAsync(GameSettings baseline, GameSettings updated, CancellationToken cancellationToken = default)
+    {
+        Changes.Add((baseline, updated));
+        await SaveAsync(updated, cancellationToken);
+    }
 }
 
 public sealed class FakeProgressRepository : IProgressRepository
