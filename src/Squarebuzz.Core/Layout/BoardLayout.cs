@@ -22,8 +22,18 @@ public readonly record struct BoardLayout
     /// </summary>
     public const double BigClueSlotRatio = 0.82;
 
-    /// <summary>Below this a cell is too small to hit reliably with a child's finger.</summary>
-    public const double MinCellSize = 17;
+    /// <summary>
+    /// The cell size a child's finger hits comfortably. A board that fits the screen at this
+    /// size never shrinks below it, and zooming in never goes below it either.
+    /// </summary>
+    public const double ComfortableCellSize = 17;
+
+    /// <summary>
+    /// The smallest cell a board shrinks to so that it fits the screen. Seeing the whole board
+    /// matters more than comfort: a scrolled board hides its clues. A 20x20 campaign board with
+    /// seven-number clues fits a 360-unit phone at about 12. Below this the board scrolls.
+    /// </summary>
+    public const double MinCellSize = 11;
 
     /// <summary>Above this the board stops looking like a grid and starts looking like blocks.</summary>
     public const double MaxCellSize = 64;
@@ -32,6 +42,12 @@ public readonly record struct BoardLayout
     public const int GroupSize = 5;
 
     private const double MinClueFontSize = 9;
+
+    /// <summary>
+    /// A clue slot never shrinks below this, so a two-digit clue at the minimum font still fits:
+    /// "10" at 9 units is about 10.8 wide.
+    /// </summary>
+    private const double MinClueSlot = 11;
     private const double MaxClueFontSize = 22;
     private const double ClueFontRatio = 0.52;
     private const double BigNumbersMultiplier = 1.3;
@@ -101,17 +117,20 @@ public readonly record struct BoardLayout
         var usableWidth = Math.Max(1, availableWidth);
         var usableHeight = Math.Max(1, availableHeight);
 
-        // Solve for the cell size that makes cells plus gutter exactly fill each axis, then
-        // take whichever axis is tighter.
+        // The largest cell at which cells plus gutter fill each axis; the tighter axis wins.
         var slotRatio = bigNumbers ? BigClueSlotRatio : ClueSlotRatio;
-        var cellFromWidth = usableWidth / (puzzle.Width + (maxRowClues * slotRatio));
-        var cellFromHeight = usableHeight / (puzzle.Height + (maxColumnClues * slotRatio));
+        var fit = Math.Min(
+            CellToFill(usableWidth, puzzle.Width, maxRowClues, slotRatio),
+            CellToFill(usableHeight, puzzle.Height, maxColumnClues, slotRatio));
 
+        // A board that fits only below the comfortable size takes the fitted size as its floor,
+        // so by default the whole board is on screen. Zooming out cannot shrink it further;
+        // zooming in enlarges it and the host scrolls.
+        var floor = Math.Clamp(fit, MinCellSize, ComfortableCellSize);
         var zoom = Math.Clamp(zoomPercent, GameSettings.MinCellZoomPercent, GameSettings.MaxCellZoomPercent) / 100.0;
-        var fitted = Math.Floor(Math.Min(cellFromWidth, cellFromHeight) * zoom);
-        var cellSize = Math.Clamp(fitted, MinCellSize, MaxCellSize);
+        var cellSize = Math.Clamp(Math.Floor(fit * zoom), floor, MaxCellSize);
 
-        var clueSlot = Math.Round(cellSize * slotRatio);
+        var clueSlot = SlotFor(cellSize, slotRatio);
 
         var layout = new BoardLayout
         {
@@ -130,6 +149,23 @@ public readonly record struct BoardLayout
             RequiresScrolling = layout.TotalWidth > usableWidth || layout.TotalHeight > usableHeight,
         };
     }
+
+    /// <summary>
+    /// Whole-unit cell size at which <paramref name="cells"/> cells plus a gutter of
+    /// <paramref name="clues"/> slots fit in <paramref name="available"/>.
+    /// </summary>
+    private static double CellToFill(double available, int cells, int clues, double slotRatio)
+    {
+        var cell = Math.Floor(available / (cells + (clues * slotRatio)));
+
+        // Small cells hit the slot minimum, which makes the gutter wider than the ratio assumes.
+        return SlotFor(cell, slotRatio) > Math.Round(cell * slotRatio)
+            ? Math.Floor((available - (clues * MinClueSlot)) / cells)
+            : cell;
+    }
+
+    private static double SlotFor(double cellSize, double slotRatio) =>
+        Math.Max(Math.Round(cellSize * slotRatio), MinClueSlot);
 
     /// <summary>
     /// Font size for clue numerals at this cell size, capped so a two-digit clue always fits

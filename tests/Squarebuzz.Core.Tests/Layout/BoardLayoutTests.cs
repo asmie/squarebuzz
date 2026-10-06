@@ -16,6 +16,14 @@ public class BoardLayoutTests
         return Puzzle.FromRows($"square{size}", "test", "#FF8A3D", rows);
     }
 
+    private static Puzzle Striped(int size, int rowClues)
+    {
+        // Every row reads "1 1 1 ..." with rowClues numbers, so the row gutter is as wide as a
+        // busy real board's. 20x20 campaign levels top out at seven numbers per line.
+        var row = string.Concat(Enumerable.Repeat("#.", rowClues)).PadRight(size, '.');
+        return Puzzle.FromRows($"striped{size}x{rowClues}", "test", "#FF8A3D", Enumerable.Repeat(row, size).ToList());
+    }
+
     [Fact]
     public void GuttersAreSizedForTheLongestClue()
     {
@@ -70,17 +78,46 @@ public class BoardLayoutTests
         Assert.False(layout.RequiresScrolling);
     }
 
-    [Fact]
-    public void TheGiantGridDoesNotFitAPhone_WhichIsWhyItIsTabletOnly()
+    [Theory]
+    [InlineData(324)] // A 360-unit phone less the page padding.
+    [InlineData(354)] // A 390-unit phone less the page padding.
+    public void TheBusiestCampaignBoardFitsAPhone_BelowTheComfortableSize(int width)
     {
-        // 25 cells at the 17-unit minimum touch target is already 425 units, before the clue
-        // gutter. It cannot fit a 390-unit phone at a hittable size, which is exactly the
-        // reason GridSize gates it to large screens. Pinned here so the two rules cannot
-        // drift apart: if this ever fits, the gate is obsolete.
+        // Levels 401-600 are 20x20. At the comfortable size they overflowed a phone and hid
+        // their clues off screen; they now shrink to fit instead.
+        var layout = BoardLayout.Calculate(Striped(GridSize.Huge, 7), width, 480);
+
+        Assert.False(layout.RequiresScrolling, $"Needs {layout.TotalWidth} of {width}.");
+        Assert.InRange(layout.CellSize, BoardLayout.MinCellSize, BoardLayout.ComfortableCellSize - 1);
+    }
+
+    [Fact]
+    public void ZoomingOutCannotShrinkAFittedBoardFurther()
+    {
+        var fitted = BoardLayout.Calculate(Striped(GridSize.Huge, 7), 324, 480);
+        var zoomedOut = BoardLayout.Calculate(Striped(GridSize.Huge, 7), 324, 480, GameSettings.MinCellZoomPercent);
+
+        Assert.Equal(fitted.CellSize, zoomedOut.CellSize);
+    }
+
+    [Fact]
+    public void ZoomingIntoAFittedBoardReachesTheComfortableSizeAndScrolls()
+    {
+        var layout = BoardLayout.Calculate(Striped(GridSize.Huge, 7), 324, 480, GameSettings.MaxCellZoomPercent);
+
+        Assert.True(layout.CellSize >= BoardLayout.ComfortableCellSize);
+        Assert.True(layout.RequiresScrolling);
+    }
+
+    [Fact]
+    public void TheGiantGridIsBelowTheComfortableSizeOnAPhone_WhichIsWhyItIsTabletOnly()
+    {
+        // Even a one-clue 25x25 board needs cells under the comfortable size on a phone, which
+        // is why GridSize gates it to large screens. Pinned here so the two rules cannot drift
+        // apart: if this ever passes the comfortable size, the gate is obsolete.
         var layout = BoardLayout.Calculate(Square(GridSize.Giant), 390, 700);
 
-        Assert.True(layout.RequiresScrolling);
-        Assert.Equal(BoardLayout.MinCellSize, layout.CellSize);
+        Assert.True(layout.CellSize < BoardLayout.ComfortableCellSize);
         Assert.True(GridSize.RequiresLargeScreen(GridSize.Giant));
     }
 
@@ -91,7 +128,7 @@ public class BoardLayoutTests
         var layout = BoardLayout.Calculate(Square(GridSize.Giant), 760, 1000);
 
         Assert.False(layout.RequiresScrolling);
-        Assert.True(layout.CellSize > BoardLayout.MinCellSize);
+        Assert.True(layout.CellSize >= BoardLayout.ComfortableCellSize);
     }
 
     [Fact]
