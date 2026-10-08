@@ -213,7 +213,9 @@
   <data name="version" xml:space="preserve"><value>الإصدار {0} · بناء {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>بلا إعلانات · بلا مشتريات داخل التطبيق</value></data>
   <data name="whatIs" xml:space="preserve"><value>ما هو النونوغرام؟</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>النونوغرام صورة مخبّأة داخل أرقام. الأرقام عند كل صفّ وكل عمود تخبرك بعدد المربّعات التي تلوّنها وبترتيبها. حلّ كل خطّ بالمنطق وحده فتظهر الصورة — ولن تحتاج إلى التخمين أبدًا.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>النونوغرام صورة مخبّأة داخل أرقام. الأرقام عند كل صفّ وكل عمود تخبرك بعدد المربّعات التي تلوّنها وبترتيبها. حلّ كل خطّ بالمنطق وحده فتظهر الصورة — ولن تحتاج إلى التخمين أبدًا.
+
+squarebuzz لعبة ألغاز نونوغرام للأطفال من عمر 6 سنوات، دون حد أقصى للعمر. يمكن للكبار الاستمتاع بها بالقدر نفسه.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>يُعرف أيضًا باسم: Picross · Griddler · Hanjie · Pic-a-Pix · الرسم بالأرقام · الكلمات المتقاطعة اليابانيّة</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>كيف تلعب</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>سياسة الخصوصيّة</value></data>

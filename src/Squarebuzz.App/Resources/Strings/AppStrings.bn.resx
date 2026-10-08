@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>সংস্করণ {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>কোনো বিজ্ঞাপন নেই · অ্যাপে কোনো কেনাকাটা নেই</value></data>
   <data name="whatIs" xml:space="preserve"><value>নোনোগ্রাম কী?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>নোনোগ্রাম হলো সংখ্যার ভেতরে লুকিয়ে থাকা একটা ছবি। প্রতিটি সারি আর কলামের সংকেত বলে দেয় কতগুলো ব্লক ভরতে হবে আর কোন ক্রমে। শুধু যুক্তি দিয়ে প্রতিটি লাইন মেলাও, ছবি ফুটে উঠবে — আন্দাজ করার দরকারই পড়ে না।</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>নোনোগ্রাম হলো সংখ্যার ভেতরে লুকিয়ে থাকা একটা ছবি। প্রতিটি সারি আর কলামের সংকেত বলে দেয় কতগুলো ব্লক ভরতে হবে আর কোন ক্রমে। শুধু যুক্তি দিয়ে প্রতিটি লাইন মেলাও, ছবি ফুটে উঠবে — আন্দাজ করার দরকারই পড়ে না।
+
+squarebuzz হলো 6 বছর ও তার বেশি বয়সী শিশুদের জন্য ননোগ্রাম ধাঁধার খেলা। বয়সের কোনো ঊর্ধ্বসীমা নেই। বড়রাও একই রকম আনন্দ পেতে পারেন।</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>আরও যে নামে পরিচিত: Picross · Griddler · Hanjie · Pic-a-Pix · সংখ্যা দিয়ে আঁকা · জাপানি শব্দছক</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>কীভাবে খেলবে</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>গোপনীয়তার নীতি</value></data>

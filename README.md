@@ -1,6 +1,7 @@
 # squarebuzz
 
-A nonogram game for ages 6 to 12, built with .NET MAUI for Android, iOS, Mac Catalyst and Windows.
+A nonogram game for children aged 6 and up, with no upper age limit. Adults can enjoy it just as much.
+Built with .NET MAUI for Android, iOS, Mac Catalyst and Windows.
 Players fill a grid using row and column clues to reveal a picture.
 
 The game has a 600-level campaign, Quick Game, daily puzzles and six timed trials. It includes

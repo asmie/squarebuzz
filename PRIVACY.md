@@ -1,8 +1,9 @@
 # squarebuzz privacy policy
 
-**Effective date:** 29 September 2026
+**Effective date:** 8 October 2026
 
-squarebuzz is a picture-logic puzzle game (nonograms) for children aged 6 to 12. It runs on
+squarebuzz is a picture-logic puzzle game (nonograms) for children aged 6 and up, with no upper
+age limit. Adults can enjoy it just as much. It runs on
 Android, iPhone and iPad, and Windows. This policy explains what the app does with information.
 In short: **squarebuzz does not collect, send or share any personal information.**
 
@@ -52,7 +53,8 @@ stored by the operating system provider under their own privacy policies, not by
 
 ## Children's privacy
 
-squarebuzz is designed for children. Because it collects no personal information from anyone,
+squarebuzz is designed with children aged 6 and up in mind and welcomes adult players too.
+Because it collects no personal information from anyone,
 there is nothing to collect from a child, and nothing for a parent to request, review or delete
 beyond what is stored on the device.
 

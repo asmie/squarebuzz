@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Inguqulo {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Azikho izikhangiso · akukho okuthengwa ngaphakathi</value></data>
   <data name="whatIs" xml:space="preserve"><value>Yini i-nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>I-nonogram yisithombe esifihlwe phakathi kwezinombolo. Izinkomba emgqeni nasekholomu ngayinye zikutshela ukuthi mangaki izigaxa okumele uzigcwalise nangaluphi uhlelo. Xazulula umugqa ngamunye ngengqondo kuphela bese isithombe siyavela — awudingi ukuqagela nanini.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>I-nonogram yisithombe esifihlwe phakathi kwezinombolo. Izinkomba emgqeni nasekholomu ngayinye zikutshela ukuthi mangaki izigaxa okumele uzigcwalise nangaluphi uhlelo. Xazulula umugqa ngamunye ngengqondo kuphela bese isithombe siyavela — awudingi ukuqagela nanini.
+
+I-squarebuzz ngumdlalo wamaphazili e-nonogram wezingane ezineminyaka engu-6 nangaphezulu, ngaphandle komkhawulo weminyaka ephezulu. Nabantu abadala bangawujabulela ngendlela efanayo.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Kwaziwa nangokuthi: Picross · Griddler · Hanjie · Pic-a-Pix · Ukupenda ngezinombolo · iphazili lamagama lesiJapane</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Indlela yokudlala</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Inqubomgomo yobumfihlo</value></data>

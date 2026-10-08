@@ -224,7 +224,9 @@
   <data name="version" xml:space="preserve"><value>Version {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>No ads · no in-app purchases</value></data>
   <data name="whatIs" xml:space="preserve"><value>What is a nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>A nonogram is a picture hidden inside numbers. The clues on each row and column tell you how many blocks to fill and in what order. Work out every line with pure logic and a picture appears — you never have to guess.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>A nonogram is a picture hidden inside numbers. The clues on each row and column tell you how many blocks to fill and in what order. Work out every line with pure logic and a picture appears — you never have to guess.
+
+squarebuzz is a nonogram puzzle game for children aged 6 and up, with no upper age limit. Adults can enjoy it just as much.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Also known as: Picross · Griddler · Hanjie · Pic-a-Pix · Paint by Numbers · Japanese crossword</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>How to Play</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privacy policy</value></data>

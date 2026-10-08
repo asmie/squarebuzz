@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Versioni {0} · ndërtimi {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Pa reklama · pa blerje brenda aplikacionit</value></data>
   <data name="whatIs" xml:space="preserve"><value>Çfarë është një nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogrami është një figurë e fshehur brenda numrave. Të dhënat në çdo rresht dhe shtyllë të tregojnë sa kuba të mbushësh dhe në çfarë rendi. Zgjidh çdo vijë me logjikë të kulluar dhe shfaqet një figurë — nuk të duhet kurrë të hamendësosh.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogrami është një figurë e fshehur brenda numrave. Të dhënat në çdo rresht dhe shtyllë të tregojnë sa kuba të mbushësh dhe në çfarë rendi. Zgjidh çdo vijë me logjikë të kulluar dhe shfaqet një figurë — nuk të duhet kurrë të hamendësosh.
+
+squarebuzz është një lojë me enigma nonogram për fëmijë nga mosha 6 vjeç, pa kufi të sipërm moshe. Të rriturit mund të argëtohen po aq.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Njihet edhe si: Picross · Griddler · Hanjie · Pic-a-Pix · Pikturë me numra · fjalëkryq japonez</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Si të lozësh</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politika e privatësisë</value></data>

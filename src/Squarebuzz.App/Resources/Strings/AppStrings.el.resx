@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Έκδοση {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Χωρίς διαφημίσεις · χωρίς αγορές μέσα στην εφαρμογή</value></data>
   <data name="whatIs" xml:space="preserve"><value>Τι είναι το νονόγκραμ;</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Το νονόγκραμ είναι μια εικόνα κρυμμένη μέσα σε αριθμούς. Τα στοιχεία σε κάθε γραμμή και στήλη σου λένε πόσα τουβλάκια να γεμίσεις και με ποια σειρά. Λύσε κάθε γραμμή με καθαρή λογική και εμφανίζεται μια εικόνα — δεν χρειάζεται ποτέ να μαντέψεις.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Το νονόγκραμ είναι μια εικόνα κρυμμένη μέσα σε αριθμούς. Τα στοιχεία σε κάθε γραμμή και στήλη σου λένε πόσα τουβλάκια να γεμίσεις και με ποια σειρά. Λύσε κάθε γραμμή με καθαρή λογική και εμφανίζεται μια εικόνα — δεν χρειάζεται ποτέ να μαντέψεις.
+
+Το squarebuzz είναι ένα παιχνίδι nonogram για παιδιά από 6 ετών, χωρίς ανώτατο όριο ηλικίας. Οι ενήλικες μπορούν να διασκεδάσουν εξίσου.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Γνωστό και ως: Picross · Griddler · Hanjie · Pic-a-Pix · Ζωγραφική με αριθμούς · ιαπωνικό σταυρόλεξο</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Πώς παίζεται</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Πολιτική απορρήτου</value></data>

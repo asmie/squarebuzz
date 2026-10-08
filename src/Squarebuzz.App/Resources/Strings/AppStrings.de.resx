@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Version {0} · Build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Keine Werbung · keine In-App-Käufe</value></data>
   <data name="whatIs" xml:space="preserve"><value>Was ist ein Nonogramm?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Ein Nonogramm ist ein Bild, das in Zahlen versteckt ist. Die Hinweise an jeder Zeile und Spalte sagen dir, wie viele Klötzchen du malen musst und in welcher Reihenfolge. Löse jede Linie mit reiner Logik, und ein Bild erscheint — raten musst du nie.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Ein Nonogramm ist ein Bild, das in Zahlen versteckt ist. Die Hinweise an jeder Zeile und Spalte sagen dir, wie viele Klötzchen du malen musst und in welcher Reihenfolge. Löse jede Linie mit reiner Logik, und ein Bild erscheint — raten musst du nie.
+
+squarebuzz ist ein Nonogrammspiel für Kinder ab 6 Jahren, ohne Altersgrenze nach oben. Erwachsene können genauso viel Spaß daran haben.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Auch bekannt als: Picross · Griddler · Hanjie · Pic-a-Pix · Malen nach Zahlen · Japanisches Kreuzworträtsel</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>So wird gespielt</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Datenschutz</value></data>

@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Sürüm {0} · yapı {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Reklam yok · uygulama içi satın alma yok</value></data>
   <data name="whatIs" xml:space="preserve"><value>Nonogram nedir?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram, sayıların içinde saklı bir resimdir. Her satır ve sütundaki ipuçları kaç blok dolduracağını ve hangi sırayla dolduracağını söyler. Her çizgiyi saf mantıkla çöz, resim ortaya çıksın — asla tahmin etmen gerekmez.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram, sayıların içinde saklı bir resimdir. Her satır ve sütundaki ipuçları kaç blok dolduracağını ve hangi sırayla dolduracağını söyler. Her çizgiyi saf mantıkla çöz, resim ortaya çıksın — asla tahmin etmen gerekmez.
+
+squarebuzz, 6 yaş ve üzerindeki çocuklar için bir nonogram bulmaca oyunudur ve üst yaş sınırı yoktur. Yetişkinler de aynı derecede eğlenebilir.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Şu adlarla da bilinir: Picross · Griddler · Hanjie · Pic-a-Pix · Sayılarla Boyama · Japon bulmacası</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Nasıl Oynanır</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Gizlilik politikası</value></data>

@@ -213,7 +213,9 @@
   <data name="version" xml:space="preserve"><value>Versión {0} · compilación {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Sin anuncios · sin compras en la app</value></data>
   <data name="whatIs" xml:space="preserve"><value>¿Qué es un nonograma?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Un nonograma es una imagen escondida entre números. Las pistas de cada fila y columna te dicen cuántos bloques rellenar y en qué orden. Resuelve cada línea con pura lógica y aparecerá una imagen: nunca hace falta adivinar.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Un nonograma es una imagen escondida entre números. Las pistas de cada fila y columna te dicen cuántos bloques rellenar y en qué orden. Resuelve cada línea con pura lógica y aparecerá una imagen: nunca hace falta adivinar.
+
+squarebuzz es un juego de nonogramas para niños a partir de 6 años, sin límite máximo de edad. Los adultos pueden disfrutarlo tanto como los niños.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>También conocido como: Picross · Griddler · Hanjie · Pic-a-Pix · Pintar por números · Crucigrama japonés</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Cómo jugar</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Política de privacidad</value></data>

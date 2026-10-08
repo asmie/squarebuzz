@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Verzia {0} · zostava {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklám · bez nákupov v aplikácii</value></data>
   <data name="whatIs" xml:space="preserve"><value>Čo je nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je obrázok skrytý v číslach. Nápovedy pri každom riadku a stĺpci hovoria, koľko kociek vyfarbiť a v akom poradí. Vyrieš každú líniu čistou logikou a objaví sa obrázok — hádať nemusíš nikdy.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je obrázok skrytý v číslach. Nápovedy pri každom riadku a stĺpci hovoria, koľko kociek vyfarbiť a v akom poradí. Vyrieš každú líniu čistou logikou a objaví sa obrázok — hádať nemusíš nikdy.
+
+squarebuzz je hra s nonogramami pre deti od 6 rokov, bez hornej vekovej hranice. Dospelí si ju môžu užiť rovnako ako deti.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Známy aj ako: Picross · Griddler · Hanjie · Pic-a-Pix · Maľovanie podľa čísel · japonská krížovka</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Ako hrať</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Ochrana súkromia</value></data>

@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Versioon {0} · järk {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Reklaamivaba · ilma ostudeta</value></data>
   <data name="whatIs" xml:space="preserve"><value>Mis on nonogramm?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogramm on numbrite sisse peidetud pilt. Iga rea ja veeru vihjed ütlevad, mitu klotsi täita ja millises järjekorras. Lahenda iga rida puhta loogikaga ja pilt tuleb välja — arvata ei pea kunagi.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogramm on numbrite sisse peidetud pilt. Iga rea ja veeru vihjed ütlevad, mitu klotsi täita ja millises järjekorras. Lahenda iga rida puhta loogikaga ja pilt tuleb välja — arvata ei pea kunagi.
+
+squarebuzz on nonogrammide mäng lastele alates 6. eluaastast, ilma ülemise vanusepiirita. Täiskasvanud saavad sellest sama palju rõõmu tunda.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Tuntud ka kui: Picross · Griddler · Hanjie · Pic-a-Pix · Värvi numbrite järgi · Jaapani ristsõna</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kuidas mängida</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privaatsuspoliitika</value></data>

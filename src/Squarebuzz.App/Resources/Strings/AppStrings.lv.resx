@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Versija {0} · būvējums {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklāmām · bez pirkumiem lietotnē</value></data>
   <data name="whatIs" xml:space="preserve"><value>Kas ir nonogramma?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogramma ir bilde, kas paslēpta skaitļos. Norādes pie katras rindas un kolonnas pasaka, cik rūtiņu jāaizpilda un kādā secībā. Atmini katru līniju ar tīru loģiku, un bilde parādīsies — minēt nekad nevajag.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogramma ir bilde, kas paslēpta skaitļos. Norādes pie katras rindas un kolonnas pasaka, cik rūtiņu jāaizpilda un kādā secībā. Atmini katru līniju ar tīru loģiku, un bilde parādīsies — minēt nekad nevajag.
+
+squarebuzz ir nonogrammu spēle bērniem no 6 gadu vecuma, bez augšējās vecuma robežas. Arī pieaugušie var to izbaudīt tikpat daudz.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Pazīstama arī kā: Picross · Griddler · Hanjie · Pic-a-Pix · Krāsošana pēc skaitļiem · Japāņu krustvārdu mīkla</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kā spēlēt</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privātuma politika</value></data>

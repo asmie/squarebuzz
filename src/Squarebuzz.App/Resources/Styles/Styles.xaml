@@ -18,7 +18,7 @@
     <OnIdiom x:Key="PagePadding" x:TypeArguments="Thickness" Phone="18" Tablet="26" Desktop="34" Default="18" />
     <OnIdiom x:Key="FrameMaxWidth" x:TypeArguments="x:Double" Phone="430" Tablet="720" Desktop="980" Default="430" />
 
-    <!-- Minimum 48px touch targets throughout: this is a game for 6-12 year olds. -->
+    <!-- Minimum 48px touch targets throughout: accessible to children aged 6 and up and adults alike. -->
     <x:Double x:Key="TouchTargetMin">48</x:Double>
 
     <!--

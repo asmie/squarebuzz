@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
   <!--
-    No INTERNET permission on purpose. squarebuzz is a fully offline game for 6-12 year
-    olds with no ads, analytics or purchases, and the absence of the permission is the
-    strongest guarantee of that. Add it only if a real online feature ever ships.
+    No INTERNET permission on purpose. squarebuzz is a fully offline game for children aged
+    6 and up and adults, with no upper age limit. It has no ads, analytics or purchases.
+    The absence of this permission is the strongest guarantee of that.
+    Add it only if a real online feature ever ships.
   -->
   <uses-permission android:name="android.permission.VIBRATE" />
 

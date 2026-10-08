@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>版本 {0} · 构建 {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>没有广告 · 没有内购</value></data>
   <data name="whatIs" xml:space="preserve"><value>什么是数织？</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>数织是一幅藏在数字里的图画。每一行和每一列的提示告诉你要填几个方块、按什么顺序填。用纯粹的逻辑推出每一条线，图画就出现了——你永远不需要猜。</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>数织是一幅藏在数字里的图画。每一行和每一列的提示告诉你要填几个方块、按什么顺序填。用纯粹的逻辑推出每一条线，图画就出现了——你永远不需要猜。
+
+squarebuzz 是适合 6 岁及以上儿童的数织益智游戏，没有年龄上限。大人也能同样享受游戏的乐趣。</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>也叫：Picross · Griddler · Hanjie · Pic-a-Pix · 数字填色 · 日本谜题</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>怎么玩</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>隐私政策</value></data>

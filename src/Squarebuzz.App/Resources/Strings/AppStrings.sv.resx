@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Version {0} · bygge {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Inga annonser · inga köp i appen</value></data>
   <data name="whatIs" xml:space="preserve"><value>Vad är ett nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Ett nonogram är en bild som gömmer sig i siffror. Ledtrådarna vid varje rad och kolumn talar om hur många klossar du ska fylla och i vilken ordning. Lös varje linje med ren logik så träder en bild fram — du behöver aldrig gissa.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Ett nonogram är en bild som gömmer sig i siffror. Ledtrådarna vid varje rad och kolumn talar om hur många klossar du ska fylla och i vilken ordning. Lös varje linje med ren logik så träder en bild fram — du behöver aldrig gissa.
+
+squarebuzz är ett nonogramspel för barn från 6 år, utan någon övre åldersgräns. Vuxna kan ha lika roligt.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Kallas även: Picross · Griddler · Hanjie · Pic-a-Pix · Måla efter siffror · japanskt korsord</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Så spelar du</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Integritetspolicy</value></data>

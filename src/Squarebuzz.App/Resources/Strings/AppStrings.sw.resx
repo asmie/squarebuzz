@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Toleo {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Hakuna matangazo · hakuna manunuzi ndani ya programu</value></data>
   <data name="whatIs" xml:space="preserve"><value>Nonogram ni nini?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram ni picha iliyofichwa ndani ya namba. Vidokezo kwenye kila mstari na safu vinakuambia vitalu vingapi kujaza na kwa mpangilio upi. Tatua kila mstari kwa mantiki tu na picha itajitokeza — hutahitaji kubahatisha kamwe.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram ni picha iliyofichwa ndani ya namba. Vidokezo kwenye kila mstari na safu vinakuambia vitalu vingapi kujaza na kwa mpangilio upi. Tatua kila mstari kwa mantiki tu na picha itajitokeza — hutahitaji kubahatisha kamwe.
+
+squarebuzz ni mchezo wa mafumbo ya nonogram kwa watoto wenye umri wa miaka 6 na zaidi, bila kikomo cha juu cha umri. Watu wazima pia wanaweza kuufurahia kwa kiwango sawa.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Hujulikana pia kama: Picross · Griddler · Hanjie · Pic-a-Pix · Kuchora kwa namba · chemsha bongo ya Kijapani</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Jinsi ya kucheza</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Sera ya faragha</value></data>

@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Версия {0} · сборка {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Без рекламы · без покупок в приложении</value></data>
   <data name="whatIs" xml:space="preserve"><value>Что такое нонограмма?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Нонограмма — это картинка, спрятанная в числах. Подсказки у каждой строки и каждого столбца говорят, сколько блоков закрасить и в каком порядке. Разбери каждую линию чистой логикой — и картинка появится сама. Угадывать не нужно никогда.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Нонограмма — это картинка, спрятанная в числах. Подсказки у каждой строки и каждого столбца говорят, сколько блоков закрасить и в каком порядке. Разбери каждую линию чистой логикой — и картинка появится сама. Угадывать не нужно никогда.
+
+squarebuzz — игра с нонограммами для детей от 6 лет, без верхнего возрастного ограничения. Взрослые могут получать от неё столько же удовольствия.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Другие названия: Picross · Griddler · Hanjie · Pic-a-Pix · Раскраска по числам · Японский кроссворд</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Как играть</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Политика приватности</value></data>

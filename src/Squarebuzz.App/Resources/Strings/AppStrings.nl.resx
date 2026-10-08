@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Versie {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Geen advertenties · geen aankopen in de app</value></data>
   <data name="whatIs" xml:space="preserve"><value>Wat is een nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Een nonogram is een tekening die in getallen verstopt zit. De aanwijzingen bij elke rij en kolom vertellen je hoeveel blokjes je moet vullen en in welke volgorde. Los elke lijn op met pure logica en er komt een tekening — gokken hoeft nooit.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Een nonogram is een tekening die in getallen verstopt zit. De aanwijzingen bij elke rij en kolom vertellen je hoeveel blokjes je moet vullen en in welke volgorde. Los elke lijn op met pure logica en er komt een tekening — gokken hoeft nooit.
+
+squarebuzz is een nonogramspel voor kinderen vanaf 6 jaar, zonder bovengrens aan de leeftijd. Volwassenen kunnen er net zo veel plezier aan beleven.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Ook bekend als: Picross · Griddler · Hanjie · Pic-a-Pix · Schilderen op nummers · Japanse kruiswoordpuzzel</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Zo werkt het</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privacybeleid</value></data>

@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>संस्करण {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>कोई विज्ञापन नहीं · ऐप में कोई ख़रीद नहीं</value></data>
   <data name="whatIs" xml:space="preserve"><value>नोनोग्राम क्या है?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>नोनोग्राम संख्याओं में छिपी एक तस्वीर है। हर पंक्ति और स्तंभ के संकेत बताते हैं कि कितने गुटके भरने हैं और किस क्रम में। हर पंक्ति को सिर्फ़ तर्क से हल करो और तस्वीर उभर आती है — अंदाज़ा लगाने की ज़रूरत कभी नहीं पड़ती।</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>नोनोग्राम संख्याओं में छिपी एक तस्वीर है। हर पंक्ति और स्तंभ के संकेत बताते हैं कि कितने गुटके भरने हैं और किस क्रम में। हर पंक्ति को सिर्फ़ तर्क से हल करो और तस्वीर उभर आती है — अंदाज़ा लगाने की ज़रूरत कभी नहीं पड़ती।
+
+squarebuzz, 6 साल और उससे अधिक उम्र के बच्चों के लिए नोनोग्राम पहेली खेल है। उम्र की कोई ऊपरी सीमा नहीं है। बड़े भी इसका उतना ही आनंद ले सकते हैं।</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>इन नामों से भी जाना जाता है: Picross · Griddler · Hanjie · Pic-a-Pix · संख्याओं से चित्रकारी · जापानी वर्ग पहेली</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>कैसे खेलें</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>निजता नीति</value></data>

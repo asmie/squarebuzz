@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>גרסה {0} · בנייה {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>בלי פרסומות · בלי רכישות בתוך האפליקציה</value></data>
   <data name="whatIs" xml:space="preserve"><value>מה זה נונוגרם?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>נונוגרם הוא תמונה שמסתתרת בתוך מספרים. הרמזים בכל שורה וטור אומרים כמה קוביות למלא ובאיזה סדר. פתור כל שורה בהיגיון טהור ותמונה תופיע — אף פעם לא צריך לנחש.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>נונוגרם הוא תמונה שמסתתרת בתוך מספרים. הרמזים בכל שורה וטור אומרים כמה קוביות למלא ובאיזה סדר. פתור כל שורה בהיגיון טהור ותמונה תופיע — אף פעם לא צריך לנחש.
+
+squarebuzz הוא משחק נונוגרם לילדים מגיל 6, ללא הגבלת גיל מרבית. גם מבוגרים יכולים ליהנות ממנו באותה מידה.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>ידוע גם בשמות: Picross · Griddler · Hanjie · Pic-a-Pix · ציור לפי מספרים · תשבץ יפני</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>איך משחקים</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>מדיניות פרטיות</value></data>

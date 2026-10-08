@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Verżjoni {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bla reklami · bla xiri fl-app</value></data>
   <data name="whatIs" xml:space="preserve"><value>X'inhu nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram hu stampa moħbija fin-numri. Il-ħjiel ħdejn kull ringiela u kolonna jgħidulek kemm blokki timla u f'liema ordni. Solvi kull linja bil-loġika biss u tfeġġ stampa — qatt ma jkollok bżonn taqta' fil-lajma.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram hu stampa moħbija fin-numri. Il-ħjiel ħdejn kull ringiela u kolonna jgħidulek kemm blokki timla u f'liema ordni. Solvi kull linja bil-loġika biss u tfeġġ stampa — qatt ma jkollok bżonn taqta' fil-lajma.
+
+squarebuzz hija logħba ta' nonogrammi għat-tfal minn 6 snin 'il fuq, mingħajr limitu massimu tal-età. L-adulti jistgħu jieħdu gost biha daqstant ieħor.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Magħruf ukoll bħala: Picross · Griddler · Hanjie · Pic-a-Pix · Pittura bin-numri · tisliba Ġappuniża</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kif tilgħab</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politika tal-privatezza</value></data>

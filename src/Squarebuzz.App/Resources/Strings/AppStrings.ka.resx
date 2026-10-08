@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>ვერსია {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>რეკლამის გარეშე · აპშიდა შესყიდვების გარეშე</value></data>
   <data name="whatIs" xml:space="preserve"><value>რა არის ნონოგრამა?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>ნონოგრამა არის რიცხვებში დამალული სურათი. ყოველი მწკრივისა და სვეტის მინიშნებები გეუბნება, რამდენი კუბიკი შეავსო და რა რიგით. ამოხსენი ყოველი ხაზი წმინდა ლოგიკით და სურათი გამოჩნდება — გამოცნობა არასოდეს გჭირდება.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>ნონოგრამა არის რიცხვებში დამალული სურათი. ყოველი მწკრივისა და სვეტის მინიშნებები გეუბნება, რამდენი კუბიკი შეავსო და რა რიგით. ამოხსენი ყოველი ხაზი წმინდა ლოგიკით და სურათი გამოჩნდება — გამოცნობა არასოდეს გჭირდება.
+
+squarebuzz არის ნონოგრამების თამაში ბავშვებისთვის 6 წლიდან, ასაკის ზედა ზღვრის გარეშე. უფროსებსაც შეუძლიათ თამაშით ისეთივე სიამოვნება მიიღონ.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>ასევე ცნობილია როგორც: Picross · Griddler · Hanjie · Pic-a-Pix · ხატვა ციფრებით · იაპონური კროსვორდი</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>როგორ ვითამაშოთ</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>კონფიდენციალურობის პოლიტიკა</value></data>

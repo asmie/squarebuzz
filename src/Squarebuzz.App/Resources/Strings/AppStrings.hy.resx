@@ -211,7 +211,9 @@
   <data name="version" xml:space="preserve"><value>Տարբերակ {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Առանց գովազդի · առանց ներծրագրային գնումների</value></data>
   <data name="whatIs" xml:space="preserve"><value>Ի՞նչ է նոնոգրամը</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Նոնոգրամը թվերի մեջ թաքնված նկար է։ Ամեն տողի ու սյունակի հուշումները ասում են, թե քանի խորանարդիկ լցնես և ինչ հերթականությամբ։ Լուծիր ամեն գիծ մաքուր տրամաբանությամբ և նկարը կհայտնվի — երբեք գուշակելու կարիք չկա։</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Նոնոգրամը թվերի մեջ թաքնված նկար է։ Ամեն տողի ու սյունակի հուշումները ասում են, թե քանի խորանարդիկ լցնես և ինչ հերթականությամբ։ Լուծիր ամեն գիծ մաքուր տրամաբանությամբ և նկարը կհայտնվի — երբեք գուշակելու կարիք չկա։
+
+squarebuzz-ը նոնոգրամներով խաղ է՝ 6 տարեկանից երեխաների համար, առանց տարիքային վերին սահմանի։ Մեծահասակները կարող են նույնքան հաճույք ստանալ խաղից։</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Հայտնի է նաև որպես՝ Picross · Griddler · Hanjie · Pic-a-Pix · Նկարել թվերով · ճապոնական խաչբառ</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Գաղտնիության քաղաքականություն</value></data>
