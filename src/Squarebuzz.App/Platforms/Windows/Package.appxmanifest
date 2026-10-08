@@ -7,11 +7,11 @@
 
   <!-- The $placeholder$ tokens are substituted at build time from the .csproj
        ApplicationTitle / ApplicationId / ApplicationVersion properties. -->
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=squarebuzz" Version="0.0.0.0" />
+  <Identity Name="asmie.squarebuzz" Publisher="CN=98E7CD08-07AD-41BF-8337-6C4FB38FF65B" Version="0.0.0.0" />
 
   <Properties>
     <DisplayName>$placeholder$</DisplayName>
-    <PublisherDisplayName>squarebuzz</PublisherDisplayName>
+    <PublisherDisplayName>asmie</PublisherDisplayName>
     <Logo>$placeholder$.png</Logo>
   </Properties>
 
