@@ -21,7 +21,7 @@
     <ApplicationTitle>squarebuzz</ApplicationTitle>
     <ApplicationId>fun.asmie.squarebuzz</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationVersion>6</ApplicationVersion>
 
     <!--
       MAUI's own generated partial classes trip a few analyser rules, so the solution-wide
@@ -31,10 +31,33 @@
 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release' AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <AndroidLinkTool>r8</AndroidLinkTool>
+    <AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <!-- Keep AOT symbols in intermediate files; strip the copies packaged for users. -->
+    <_AndroidAotStripLibraries>false</_AndroidAotStripLibraries>
+    <AndroidStripNativeLibraries>true</AndroidStripNativeLibraries>
+    <AndroidIncludeDebugSymbols>false</AndroidIncludeDebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <!-- Store reserves the fourth component; use the app build in the third component. -->
+    <SquarebuzzWindowsDisplayVersion Condition="'$(SquarebuzzWindowsDisplayVersion)' == ''">$([System.Version]::Parse('$(ApplicationDisplayVersion)').Major).$([System.Version]::Parse('$(ApplicationDisplayVersion)').Minor).$(ApplicationVersion)</SquarebuzzWindowsDisplayVersion>
+    <ApplicationDisplayVersion>$(SquarebuzzWindowsDisplayVersion)</ApplicationDisplayVersion>
+    <ApplicationVersion>0</ApplicationVersion>
+    <!-- Keep the RID override local to the app, as recommended by the MAUI publishing guide. -->
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifierOverride)' != ''">$(RuntimeIdentifierOverride)</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <Import Project="Platforms\Android\ReleaseDiagnostics.targets" />
 
   <ItemGroup>
     <!-- App icon and splash are generated from these vectors for every platform. -->

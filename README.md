@@ -50,6 +50,13 @@ Apple builds require a Mac and the Xcode version selected in [CI](.github/workfl
 For Android Debug deployment, add `-t:Run` with an emulator or device connected; this also
 deploys the assemblies required by Fast Deployment.
 
+Android Release builds use R8 with code optimization and private-member obfuscation.
+They retain AOT symbols in `obj` while packaging stripped copies. The project-local workaround in
+`Platforms/Android/ReleaseDiagnostics.targets` preserves the pinned SDK's JNI keep rules;
+review it when updating the Android workload. It affects Java names, not managed C# names.
+See [the Google Play release instructions](store/google-play/RELEASE-1.0-build-6.pl.txt)
+for signing, exporting matching native symbols, and uploading the release artifacts.
+
 ## Code map
 
 | Directory | Responsibility |
@@ -107,9 +114,31 @@ mapping, ViewModel change hook and consumer. Confirm all four.
 The privacy policy is [PRIVACY.md](PRIVACY.md). About and Options open it at its GitHub address
 (`ExternalLinks.PrivacyPolicy`) behind the parent gate, so the repository must be public and the
 file must stay at that path on `master`. Update the policy before shipping anything that changes
-what the app stores or sends. "Rate squarebuzz" is still a placeholder until the store IDs exist.
+what the app stores or sends. "Rate squarebuzz" opens Google Play on Android and the Microsoft
+Store review dialog for `9P308NW6NSXM` on Windows, behind the same parent gate. A missing
+store falls back to the web listing. The button is hidden on platforms without a configured store.
 The About version line is read from `ApplicationDisplayVersion` and `ApplicationVersion` in the
-app project; raise both for every store upload.
+app project. Increase `ApplicationVersion` for each newly uploaded build; change
+`ApplicationDisplayVersion` when the user-facing release version changes.
+
+## Microsoft Store packages
+
+Run `./tools/build-microsoft-store.ps1` on Windows to build self-contained Release packages
+for x64, x86 and ARM64, then combine them with matching symbols into an MSIXUpload file.
+The script requires PowerShell 7, the pinned .NET SDK/workload, a Windows SDK and Visual Studio C++ Build Tools.
+Artifacts are written to `artifacts/microsoft-store/<version>/final/`.
+
+Windows packages use the registered identity `asmie.squarebuzz` and Store ID `9P308NW6NSXM`.
+The shared display version's major/minor and build number become `major.minor.build.0`
+(for example, Android `1.0 (6)` becomes Windows `1.0.6.0`). The fourth component stays zero
+for Store submission. Use `-Version 1.0.7.0` to choose an independent Windows package version.
+Android versioning and signing are unchanged.
+
+Upload the `.msixupload` file in the existing product's Partner Center Packages section.
+Microsoft Store signs the package during publication; these unsigned artifacts are intended
+for Store submission. The script checks identities, all translations, native architectures
+and matching PDB identifiers. Installation tests and Windows App Certification Kit are
+separate pre-release checks. See [the upload instructions](store/microsoft-store/INSTRUCTIONS.pl.txt).
 
 ## Tools and CI
 

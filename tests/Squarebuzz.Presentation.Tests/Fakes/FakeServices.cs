@@ -252,6 +252,16 @@ public sealed class FakeLinkOpener : ILinkOpener
 {
     public List<Uri> Opened { get; } = [];
 
+    public Uri? StorePage { get; set; } = new("https://play.google.com/store/apps/details?id=fun.asmie.squarebuzz");
+
+    public int StoreOpenCount { get; private set; }
+
+    public Task<bool> OpenStoreAsync()
+    {
+        StoreOpenCount++;
+        return Task.FromResult(Succeeds);
+    }
+
     /// <summary>False acts as a device with no browser.</summary>
     public bool Succeeds { get; set; } = true;
 

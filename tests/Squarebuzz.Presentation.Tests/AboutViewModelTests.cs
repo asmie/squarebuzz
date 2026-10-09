@@ -42,16 +42,60 @@ public sealed class AboutViewModelTests : IDisposable
 
         Assert.True(_vm.Gate.IsOpen);
         Assert.False(_vm.HasNotice);
+        Assert.Equal(0, _links.StoreOpenCount);
     }
 
     [Fact]
-    public async Task PassingTheGate_ShowsTheUnlockNotice()
+    public async Task PassingTheGate_OpensTheStoreOnce()
     {
         _vm.RateCommand.Execute(null);
         await PassGateAsync();
 
-        Assert.Equal("🔓 aboutRate", _vm.Notice);
-        Assert.True(_vm.HasNotice);
+        Assert.Equal(1, _links.StoreOpenCount);
+        Assert.False(_vm.Gate.IsOpen);
+        Assert.False(_vm.HasNotice);
+        Assert.Empty(_links.Opened);
+    }
+
+    [Fact]
+    public async Task Rating_WithNothingToOpenIt_ShowsTheStoreAddress()
+    {
+        _links.StorePage = ExternalLinks.MicrosoftStoreListing;
+        _links.Succeeds = false;
+        _vm.RateCommand.Execute(null);
+
+        await PassGateAsync();
+
+        Assert.Equal(ExternalLinks.MicrosoftStoreListing.ToString(), _vm.Notice);
+        Assert.Equal(1, _links.StoreOpenCount);
+    }
+
+    [Fact]
+    public async Task Rating_WrongAnswerOrCancellation_DoesNotOpenTheStore()
+    {
+        _vm.RateCommand.Execute(null);
+        _vm.Gate.Answer = "0";
+        await _vm.Gate.SubmitCommand.ExecuteAsync(null);
+
+        Assert.True(_vm.Gate.IsOpen);
+        Assert.Equal(0, _links.StoreOpenCount);
+
+        _vm.Gate.CancelCommand.Execute(null);
+        await PassGateAsync();
+
+        Assert.Equal(0, _links.StoreOpenCount);
+    }
+
+    [Fact]
+    public void Rating_WithoutConfiguredStore_IsHiddenAndDoesNothing()
+    {
+        _links.StorePage = null;
+
+        Assert.False(_vm.CanRate);
+        _vm.RateCommand.Execute(null);
+
+        Assert.False(_vm.Gate.IsOpen);
+        Assert.Equal(0, _links.StoreOpenCount);
     }
 
     [Fact]
@@ -88,6 +132,7 @@ public sealed class AboutViewModelTests : IDisposable
     [Fact]
     public async Task LanguageChange_ClearsTheNotice()
     {
+        _links.Succeeds = false;
         _vm.RateCommand.Execute(null);
         await PassGateAsync();
         Assert.True(_vm.HasNotice);
@@ -102,6 +147,7 @@ public sealed class AboutViewModelTests : IDisposable
     // The value was right but nobody was told: the binding kept showing an empty notice pill.
     public async Task LanguageChange_TellsTheViewTheNoticeIsGone()
     {
+        _links.Succeeds = false;
         _vm.RateCommand.Execute(null);
         await PassGateAsync();
         var raised = new List<string?>();

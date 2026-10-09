@@ -43,8 +43,7 @@ public partial class AboutViewModel : LocalizedViewModel
     public ParentGate Gate { get; }
 
     /// <summary>
-    /// A short message under the links: the placeholder for destinations not yet wired up, or the
-    /// privacy address when no browser could open it.
+    /// The destination address when the device cannot open a store or browser.
     /// </summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasNotice))]
@@ -66,6 +65,8 @@ public partial class AboutViewModel : LocalizedViewModel
     public string PrivacyLabel => T("aboutPrivacy");
 
     public string RateLabel => T("aboutRate");
+
+    public bool CanRate => _links.StorePage is not null;
 
 
     /// <summary>The installed version and build, read from the package - see <see cref="IAppVersion"/>.</summary>
@@ -95,13 +96,21 @@ public partial class AboutViewModel : LocalizedViewModel
     });
 
     [RelayCommand]
-    private void Rate() => OpenGated(RateLabel);
-
-    private void OpenGated(string label) => Gate.Open(() =>
+    private void Rate()
     {
-        ShowNotice($"🔓 {label}");
-        return Task.CompletedTask;
-    });
+        if (_links.StorePage is not { } page)
+        {
+            return;
+        }
+
+        Gate.Open(async () =>
+        {
+            if (!await _links.OpenStoreAsync())
+            {
+                ShowNotice(page.ToString());
+            }
+        });
+    }
 
     private void ShowNotice(string message)
     {

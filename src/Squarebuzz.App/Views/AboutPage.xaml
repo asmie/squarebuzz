@@ -38,6 +38,7 @@
                         <Button Text="{Binding PrivacyLabel}" Command="{Binding PrivacyCommand}"
                                 Style="{StaticResource GhostButton}" HeightRequest="56" />
                         <Button Text="{Binding RateLabel}" Command="{Binding RateCommand}"
+                                IsVisible="{Binding CanRate}"
                                 Style="{StaticResource GhostButton}" HeightRequest="56" />
                     </VerticalStackLayout>
                 </Border>
