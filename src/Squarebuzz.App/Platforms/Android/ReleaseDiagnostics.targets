@@ -1,0 +1,126 @@
+<Project>
+  <!--
+    SDK 36.1.69 disables optimization and obfuscation in its R8 defaults. Retain the SDK's
+    runtime keep rules, but use the private-member policy proposed by dotnet/android:
+    https://github.com/dotnet/android/issues/12535
+    Class/interface and public/protected names remain stable for managed JNI bindings.
+    This is a project-local workaround; it never changes the installed SDK.
+  -->
+  <UsingTask TaskName="SquarebuzzPrepareR8Configuration"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Destination ParameterType="System.String" Required="true" />
+      <MappingFile ParameterType="System.String" Required="true" />
+      <PlatformConfiguration ParameterType="System.String" Required="true" />
+      <EffectiveConfiguration ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Reflection" />
+      <Using Namespace="System.Text" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        Assembly assembly = null;
+        foreach (var loaded in AppDomain.CurrentDomain.GetAssemblies())
+            if (loaded.GetName().Name == "Xamarin.Android.Build.Tasks")
+                assembly = loaded;
+        if (assembly == null)
+            throw new InvalidOperationException("The Android SDK build tasks have not been loaded.");
+        using (var stream = assembly.GetManifestResourceStream("proguard_xamarin.cfg"))
+        {
+            if (stream == null)
+                throw new InvalidOperationException("The Android SDK's runtime keep rules are missing.");
+            string defaults;
+            using (var reader = new StreamReader(stream))
+                defaults = reader.ReadToEnd();
+            defaults = Regex.Replace(defaults, @"(?m)^\s*-(dontobfuscate|dontoptimize)\s*$", "");
+            // Keep Android's reflection/native entry-point rules, enabling R8 optimization.
+            var platformDefaults = File.ReadAllText(PlatformConfiguration);
+            platformDefaults = Regex.Replace(platformDefaults, @"(?m)^\s*-dontoptimize\s*$", "");
+            var policy = @"# Preserve managed JNI names; obfuscate private/package-private members.
+-keep,allowshrinking,allowoptimization class **
+-keepclassmembers,allowshrinking,allowoptimization class ** {
+    public protected *;
+}
+-keep,allowoptimization interface ** {
+    public protected *;
+}
+-keep,allowshrinking class * implements **
+-keepattributes SourceFile,LineNumberTable
+# Loaded by name from managed JNI initialization; its Java body can be empty.
+-keep class net.dot.android.ApplicationRegistration { *; }
+# Error Prone references this compile-time JDK enum; it is not an Android runtime class.
+-dontwarn javax.lang.model.element.Modifier
+";
+            var mappingPath = Path.GetFullPath(MappingFile).Replace('\\', '/');
+            var effectivePath = Path.GetFullPath(EffectiveConfiguration).Replace('\\', '/');
+            var contents = policy + defaults + "\n" + platformDefaults
+                + "\n-printmapping \"" + mappingPath + "\"\n"
+                + "-printconfiguration \"" + effectivePath + "\"\n";
+            Directory.CreateDirectory(Path.GetDirectoryName(Destination));
+            if (!File.Exists(Destination) || File.ReadAllText(Destination) != contents)
+                File.WriteAllText(Destination, contents, new UTF8Encoding(false));
+        }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="SquarebuzzConfigureReleaseR8"
+          AfterTargets="_CalculateProguardConfigurationFiles"
+          Condition="'$(Configuration)' == 'Release' AND '$(AndroidLinkTool)' == 'r8'">
+    <PropertyGroup>
+      <_SquarebuzzR8Configuration>$(IntermediateOutputPath)proguard\squarebuzz-runtime.cfg</_SquarebuzzR8Configuration>
+      <_SquarebuzzR8EffectiveConfiguration>$(IntermediateOutputPath)proguard\squarebuzz-effective.cfg</_SquarebuzzR8EffectiveConfiguration>
+    </PropertyGroup>
+    <ItemGroup>
+      <_SquarebuzzR8PlatformDefaults Include="@(_ProguardConfiguration)"
+          Condition="'%(Filename)%(Extension)' == 'proguard-android.txt'" />
+    </ItemGroup>
+    <SquarebuzzPrepareR8Configuration
+        Destination="$(_SquarebuzzR8Configuration)"
+        MappingFile="$(AndroidProguardMappingFile)"
+        PlatformConfiguration="@(_SquarebuzzR8PlatformDefaults)"
+        EffectiveConfiguration="$(_SquarebuzzR8EffectiveConfiguration)" />
+    <ItemGroup>
+      <_ProguardConfiguration Remove="@(_SquarebuzzR8PlatformDefaults)" />
+      <_ProguardConfiguration Remove="$(IntermediateOutputPath)proguard\proguard_xamarin.cfg" />
+      <_ProguardConfiguration Include="$(_SquarebuzzR8Configuration)" />
+      <FileWrites Include="$(_SquarebuzzR8Configuration)" />
+      <FileWrites Include="$(_SquarebuzzR8EffectiveConfiguration)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- The pinned SDK does not strip AOT copies at archive creation. Keep the
+       original ELF files for Play symbols and package separate stripped copies. -->
+  <Target Name="SquarebuzzStripReleaseAotCopies"
+          AfterTargets="_AndroidAot"
+          Condition="'$(Configuration)' == 'Release' AND '$(RuntimeIdentifier)' != '' AND '$(AotAssemblies)' == 'true'">
+    <PropertyGroup>
+      <_SquarebuzzNdkHost Condition="$([MSBuild]::IsOSPlatform('Windows'))">windows-x86_64</_SquarebuzzNdkHost>
+      <_SquarebuzzNdkHost Condition="$([MSBuild]::IsOSPlatform('Linux'))">linux-x86_64</_SquarebuzzNdkHost>
+      <_SquarebuzzNdkHost Condition="$([MSBuild]::IsOSPlatform('OSX'))">darwin-x86_64</_SquarebuzzNdkHost>
+      <_SquarebuzzStripExtension Condition="$([MSBuild]::IsOSPlatform('Windows'))">.exe</_SquarebuzzStripExtension>
+      <_SquarebuzzStripTool>$(_AndroidNdkDirectory)toolchains/llvm/prebuilt/$(_SquarebuzzNdkHost)/bin/llvm-strip$(_SquarebuzzStripExtension)</_SquarebuzzStripTool>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(_SquarebuzzStripTool)')" Text="Android NDK llvm-strip is required to preserve release symbols separately: $(_SquarebuzzStripTool)" />
+    <ItemGroup>
+      <_SquarebuzzAotToPackage Include="@(_AotCompiledAssemblies)">
+        <StrippedPath>$(IntermediateOutputPath)aot-packaged/%(Filename)%(Extension)</StrippedPath>
+      </_SquarebuzzAotToPackage>
+    </ItemGroup>
+    <MakeDir Directories="$(IntermediateOutputPath)aot-packaged" />
+    <Exec Command="&quot;$(_SquarebuzzStripTool)&quot; --strip-unneeded &quot;%(_SquarebuzzAotToPackage.Identity)&quot; -o &quot;%(_SquarebuzzAotToPackage.StrippedPath)&quot;" />
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(_AotCompiledAssemblies)" />
+      <_AotResolvedFileToPublish Remove="@(_AotCompiledAssemblies)" />
+      <ResolvedFileToPublish Include="@(_SquarebuzzAotToPackage->'%(StrippedPath)')"
+          Condition="'$(_AndroidUseMarshalMethods)' != 'True'"
+          ArchiveFileName="libaot-%(Filename)%(Extension)" />
+      <_AotResolvedFileToPublish Include="@(_SquarebuzzAotToPackage->'%(StrippedPath)')"
+          Condition="'$(_AndroidUseMarshalMethods)' == 'True'"
+          ArchiveFileName="libaot-%(Filename)%(Extension)" />
+      <FileWrites Include="@(_SquarebuzzAotToPackage->'%(StrippedPath)')" />
+    </ItemGroup>
+  </Target>
+</Project>
