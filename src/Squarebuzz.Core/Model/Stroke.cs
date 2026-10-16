@@ -14,12 +14,12 @@ public readonly record struct CellChange(int Index, CellState From, CellState To
 
 /// <summary>
 /// An immutable snapshot of a single undoable action. A cell edit and any cells auto-crossed
-/// as a consequence belong to one stroke, so undo reverses the whole effect. A drag that
-/// applies several cell edits can produce several strokes.
+/// as a consequence belong to one stroke. History groups the edits of a drag into one action.
 /// </summary>
 public sealed class Stroke
 {
     private readonly ReadOnlyCollection<CellChange> _changes;
+    private readonly int? _combinedAutoCrossedCount;
 
     public Stroke(IEnumerable<CellChange> changes)
     {
@@ -35,10 +35,32 @@ public sealed class Stroke
 
     public IReadOnlyList<CellChange> Changes => _changes;
 
+    private Stroke(IEnumerable<CellChange> changes, int directChangeCount, int autoCrossedCount)
+        : this(changes)
+    {
+        DirectChangeCount = directChangeCount;
+        _combinedAutoCrossedCount = autoCrossedCount;
+    }
+
+    internal static Stroke Combine(IEnumerable<Stroke> strokes)
+    {
+        var changes = new List<CellChange>();
+        var direct = 0;
+        var automatic = 0;
+        foreach (var stroke in strokes)
+        {
+            // Keep chronological order: an automatic cross may be removed by a later edit.
+            changes.AddRange(stroke.Changes);
+            direct += stroke.DirectChangeCount;
+            automatic += stroke.AutoCrossedCount;
+        }
+        return new Stroke(changes, direct, automatic);
+    }
+
     /// <summary>Cells the player touched directly, as opposed to consequences like auto-crossing.</summary>
     public int DirectChangeCount { get; init; } = 1;
 
     /// <summary>Cells crossed automatically because a line became complete.</summary>
-    public int AutoCrossedCount => _changes.Skip(DirectChangeCount)
+    public int AutoCrossedCount => _combinedAutoCrossedCount ?? _changes.Skip(DirectChangeCount)
         .Count(change => change.From != CellState.Crossed && change.To == CellState.Crossed);
 }

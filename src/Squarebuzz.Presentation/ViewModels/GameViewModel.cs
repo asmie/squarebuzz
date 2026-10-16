@@ -619,15 +619,18 @@ public partial class GameViewModel : LocalizedViewModel
 
         SyncFromSession();
         NotifySettingsDependentProperties();
+        BoardChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    /// <summary>Loads earned packs only when selecting a picture from the Surprise pack.</summary>
+    /// <summary>Loads earned packs only for an authored Surprise selection.</summary>
     private async Task<IReadOnlySet<string>?> LoadUnlockedPacksAsync(NewGameOptions options)
     {
         var isWildcard = _puzzles.Packs.Any(p =>
             p.IsWildcard && string.Equals(p.Id, options.PackId, StringComparison.Ordinal));
+        var hasExplicitPicture = options.PuzzleId is { } id
+            && _puzzles.FindById(id, options.PuzzleRevision) is not null;
 
-        if (!isWildcard)
+        if (!isWildcard || !GridSize.IsAuthored(options.Size) || options.ForceGenerated || hasExplicitPicture)
         {
             _progressLoadFailed = false;
             OnPersistenceChanged(this, EventArgs.Empty);

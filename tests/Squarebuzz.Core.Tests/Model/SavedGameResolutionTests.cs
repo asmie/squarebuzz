@@ -30,6 +30,7 @@ public class SavedGameResolutionTests
         HintsRemaining = 3,
         Mistakes = 0,
         SavedAt = SavedAt,
+        GeneratorVersion = puzzleId is null ? GeneratorVersion.Current : GeneratorVersion.Unknown,
     };
 
     [Fact]
@@ -55,6 +56,19 @@ public class SavedGameResolutionTests
         var save = Save(puzzleId: null, 10, seed: 7) with { GeneratorVersion = version };
 
         Assert.Equal(expected, save.CanBeRebuilt);
+    }
+
+    [Theory]
+    [InlineData(GeneratorVersion.Unknown)]
+    [InlineData(GeneratorVersion.Current - 1)]
+    [InlineData(GeneratorVersion.Current + 1)]
+    public void IncompatibleGeneratedSave_IsRejectedByBothResolutionAndRestore(int version)
+    {
+        var factory = NewFactory();
+        var save = Save(puzzleId: null, GridSize.Big, seed: 4242) with { GeneratorVersion = version };
+
+        Assert.Throws<InvalidOperationException>(() => factory.ResolvePuzzle(save));
+        Assert.Throws<InvalidOperationException>(() => factory.Restore(save, HelperSettings.Default));
     }
 
     [Fact]

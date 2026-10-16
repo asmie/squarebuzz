@@ -85,7 +85,7 @@ public sealed class MenuViewModelTests : IDisposable
     [Fact]
     public async Task LiveStreak_MakesTheMascotCheer()
     {
-        _progress.Progress = PlayerProgress.Empty with { Streak = 3 };
+        _progress.Progress = PlayerProgress.Empty with { Streak = 3, LastPlayedOn = _clock.Today };
 
         await _vm.OnAppearingAsync();
 

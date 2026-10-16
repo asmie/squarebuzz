@@ -59,6 +59,12 @@ public sealed class GameSessionFactory
                        $"Saved game references puzzle '{id}' revision {save.PuzzleRevision}, which is no longer in the shipped content.");
         }
 
+        if (!save.CanBeRebuilt)
+        {
+            throw new InvalidOperationException(
+                $"Saved game uses generator version {save.GeneratorVersion}, but this build uses {Generation.GeneratorVersion.Current}.");
+        }
+
         return _generator.Generate(new PuzzleRequest(save.Size, save.Size, save.Difficulty, save.PackId, save.Seed));
     }
 

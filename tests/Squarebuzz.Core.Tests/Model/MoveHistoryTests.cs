@@ -5,6 +5,32 @@ namespace Squarebuzz.Core.Tests.Model;
 
 public class MoveHistoryTests
 {
+    [Fact]
+    public void GroupedEdits_PreserveChronologyAndSeparateAutomaticCountsFromDirectCrosses()
+    {
+        var first = new Stroke(
+        [
+            new CellChange(0, CellState.Empty, CellState.Filled),
+            new CellChange(1, CellState.Empty, CellState.Crossed) { ToAutoCrossed = true },
+        ]);
+        var second = new Stroke(
+        [
+            new CellChange(2, CellState.Empty, CellState.Crossed),
+            new CellChange(3, CellState.Empty, CellState.Crossed) { ToAutoCrossed = true },
+        ]);
+        var history = new MoveHistory();
+        history.Push(first);
+        history.Push(second, continuesStroke: true);
+
+        Assert.Equal(1, history.AppliedCount);
+        var combined = Assert.IsType<Stroke>(history.Undo());
+        Assert.Equal(first.Changes.Concat(second.Changes), combined.Changes);
+        Assert.Equal(2, combined.DirectChangeCount);
+        Assert.Equal(2, combined.AutoCrossedCount);
+        Assert.False(history.CanUndo);
+        Assert.Equal(combined.Changes, Assert.IsType<Stroke>(history.Redo()).Changes);
+    }
+
     private static Stroke StrokeAt(int index) =>
         new([new CellChange(index, CellState.Empty, CellState.Filled)]);
 

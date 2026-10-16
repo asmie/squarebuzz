@@ -30,13 +30,13 @@ public sealed class GameSaveService(ISaveGameRepository saves, IClock clock, IPe
     {
         if (_session is not { IsOver: false, IsTimed: false } session)
         {
-            return Task.CompletedTask;
+            return Pending;
         }
 
         if (!_hasSave && session.Mistakes == 0 && session.HintsUsed == 0
             && !session.Cells.ContainsAnyExcept(CellState.Empty))
         {
-            return Task.CompletedTask;
+            return Pending;
         }
 
         var snapshot = SavedGame.FromSession(session, Id, clock.Now);

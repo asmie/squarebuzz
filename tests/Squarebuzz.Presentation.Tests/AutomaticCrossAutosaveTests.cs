@@ -6,6 +6,28 @@ namespace Squarebuzz.Presentation.Tests;
 public sealed class AutomaticCrossAutosaveTests
 {
     [Fact]
+    public async Task EnablingAutomaticCrosses_RefreshesTheBoardWithTheNewMarks()
+    {
+        using var harness = new GameViewModelHarness();
+        harness.Settings.Settings = GameSettings.Default with
+        {
+            Helpers = HelperSettings.Default with { AutoCross = false },
+        };
+        await harness.Vm.StartAsync();
+        harness.Vm.Paint(0, CellState.Filled);
+        CellState[]? refreshed = null;
+        harness.Vm.BoardChanged += (_, _) => refreshed = harness.Vm.Session!.Cells.ToArray();
+        harness.Settings.Settings = harness.Settings.Settings with { Helpers = HelperSettings.Default };
+
+        await harness.Vm.RefreshSettingsAsync();
+
+        Assert.NotNull(refreshed);
+        Assert.Equal(CellState.Crossed, refreshed[1]);
+        Assert.Equal(CellState.Crossed, refreshed[2]);
+        Assert.Equal(harness.Vm.Session!.Cells.ToArray(), refreshed);
+    }
+
+    [Fact]
     public async Task ClaimingAnAutomaticCross_IsSavedEvenWhenVisibleCellsAreUnchanged()
     {
         using var harness = new GameViewModelHarness();

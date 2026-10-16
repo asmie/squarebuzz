@@ -17,13 +17,15 @@ public partial class MenuViewModel : LocalizedViewModel
     private readonly ISaveGameRepository _saveGames;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
+    private readonly GameCompletionService? _completions;
 
     public MenuViewModel(
         ILocalizationService strings,
         IProgressRepository progress,
         ISaveGameRepository saveGames,
         INavigationService navigation,
-        IClock clock)
+        IClock clock,
+        GameCompletionService? completions = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(progress);
@@ -35,6 +37,7 @@ public partial class MenuViewModel : LocalizedViewModel
         _saveGames = saveGames;
         _navigation = navigation;
         _clock = clock;
+        _completions = completions;
     }
 
     [ObservableProperty]
@@ -95,6 +98,8 @@ public partial class MenuViewModel : LocalizedViewModel
 
     public override async Task OnAppearingAsync()
     {
+        // Also covers the system Back gesture, which cannot await the game page's save.
+        await (_completions?.RetryAsync() ?? Task.CompletedTask);
         // Refreshed on every appearance, not just construction: the player returns here after
         // finishing a puzzle and the star count must already reflect it.
         try
@@ -102,7 +107,7 @@ public partial class MenuViewModel : LocalizedViewModel
             var progress = await _progress.GetProgressAsync();
 
             Stars = progress.Stars;
-            Streak = progress.Streak;
+            Streak = progress.ActiveStreak(_clock.Today);
             HighestLevel = progress.HighestLevelCompleted;
             SaveCount = await _saveGames.CountAsync();
         }

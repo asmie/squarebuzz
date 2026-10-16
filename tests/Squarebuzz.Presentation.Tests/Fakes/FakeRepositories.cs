@@ -73,8 +73,13 @@ public sealed class FakeProgressRepository : IProgressRepository
         return Task.CompletedTask;
     }
 
-    public Task<IReadOnlyList<SolvedPuzzle>> GetSolvedPuzzlesAsync(CancellationToken cancellationToken = default) =>
-        Task.FromResult<IReadOnlyList<SolvedPuzzle>>([.. Solved]);
+    public int SolvedLoadCalls { get; private set; }
+
+    public Task<IReadOnlyList<SolvedPuzzle>> GetSolvedPuzzlesAsync(CancellationToken cancellationToken = default)
+    {
+        SolvedLoadCalls++;
+        return Task.FromResult<IReadOnlyList<SolvedPuzzle>>([.. Solved]);
+    }
 
     public Task<IReadOnlyList<EarnedTrophy>> GetTrophiesAsync(CancellationToken cancellationToken = default) =>
         Task.FromResult<IReadOnlyList<EarnedTrophy>>([.. Trophies]);

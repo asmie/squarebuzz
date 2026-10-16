@@ -85,11 +85,7 @@ public sealed class LocalizationService : INotifyPropertyChanged, ILocalizationS
 
     public void SetLanguage(AppLanguage language)
     {
-        if (language == Language)
-        {
-            return;
-        }
-
+        var changed = language != Language;
         Language = language;
         _culture = CultureFor(language);
 
@@ -98,6 +94,11 @@ public sealed class LocalizationService : INotifyPropertyChanged, ILocalizationS
         CultureInfo.DefaultThreadCurrentUICulture = _culture;
         CultureInfo.CurrentUICulture = _culture;
         CultureInfo.CurrentCulture = _culture;
+
+        if (!changed)
+        {
+            return;
+        }
 
         // An empty property name means "everything changed" - every indexer binding re-reads.
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));

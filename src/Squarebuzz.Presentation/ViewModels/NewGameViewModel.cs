@@ -65,6 +65,7 @@ public partial class NewGameViewModel : LocalizedViewModel
     private readonly IProgressRepository _progress;
     private readonly INavigationService _navigation;
     private readonly IDeviceScreen _screen;
+    private readonly GameCompletionService? _completions;
 
     private GameSettings _settings = GameSettings.Default;
 
@@ -77,7 +78,8 @@ public partial class NewGameViewModel : LocalizedViewModel
         ISettingsRepository settingsRepository,
         IProgressRepository progress,
         INavigationService navigation,
-        IDeviceScreen screen)
+        IDeviceScreen screen,
+        GameCompletionService? completions = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(puzzles);
@@ -91,6 +93,7 @@ public partial class NewGameViewModel : LocalizedViewModel
         _progress = progress;
         _navigation = navigation;
         _screen = screen;
+        _completions = completions;
     }
 
     public ObservableCollection<SizeOption> Sizes { get; } = [];
@@ -152,6 +155,7 @@ public partial class NewGameViewModel : LocalizedViewModel
 
     public override async Task OnAppearingAsync()
     {
+        await (_completions?.RetryAsync() ?? Task.CompletedTask);
         try
         {
             _settings = await _settingsRepository.LoadAsync();

@@ -63,12 +63,14 @@ public partial class LevelsViewModel : LocalizedViewModel
     private readonly IProgressRepository _progress;
     private readonly IPuzzleRepository _puzzles;
     private readonly INavigationService _navigation;
+    private readonly GameCompletionService? _completions;
 
     public LevelsViewModel(
         ILocalizationService strings,
         IProgressRepository progress,
         IPuzzleRepository puzzles,
-        INavigationService navigation)
+        INavigationService navigation,
+        GameCompletionService? completions = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(progress);
@@ -78,6 +80,7 @@ public partial class LevelsViewModel : LocalizedViewModel
         _progress = progress;
         _puzzles = puzzles;
         _navigation = navigation;
+        _completions = completions;
     }
 
     /// <summary>The whole campaign. A CollectionView virtualizes this; nothing else could show 600 nodes.</summary>
@@ -112,6 +115,7 @@ public partial class LevelsViewModel : LocalizedViewModel
 
     private async Task ReloadAsync()
     {
+        await (_completions?.RetryAsync() ?? Task.CompletedTask);
         int highest;
 
         try

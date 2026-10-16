@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Squarebuzz.Core.Progression;
 
 /// <summary>One cell of the daily calendar: a day of the month, or a leading blank.</summary>
@@ -29,23 +31,18 @@ public static class DailyCalendar
     public static IReadOnlyList<CalendarDay> Build(
         DateOnly today,
         IReadOnlyCollection<DateOnly> completions,
-        DayOfWeek firstDayOfWeek)
+        DayOfWeek firstDayOfWeek,
+        Calendar? calendar = null)
     {
         ArgumentNullException.ThrowIfNull(completions);
 
-        var done = new HashSet<int>();
-
-        foreach (var date in completions)
-        {
-            if (date.Year == today.Year && date.Month == today.Month)
-            {
-                done.Add(date.Day);
-            }
-        }
-
-        var first = new DateOnly(today.Year, today.Month, 1);
+        calendar ??= new GregorianCalendar();
+        var instant = today.ToDateTime(TimeOnly.MinValue);
+        var dayOfMonth = calendar.GetDayOfMonth(instant);
+        var first = today.AddDays(1 - dayOfMonth);
+        var done = completions.ToHashSet();
         var leadingBlanks = ((int)first.DayOfWeek - (int)firstDayOfWeek + 7) % 7;
-        var daysInMonth = DateTime.DaysInMonth(today.Year, today.Month);
+        var daysInMonth = calendar.GetDaysInMonth(calendar.GetYear(instant), calendar.GetMonth(instant), calendar.GetEra(instant));
 
         var cells = new List<CalendarDay>(leadingBlanks + daysInMonth);
 
@@ -56,7 +53,7 @@ public static class DailyCalendar
 
         for (var day = 1; day <= daysInMonth; day++)
         {
-            cells.Add(new CalendarDay(day, done.Contains(day), day == today.Day));
+            cells.Add(new CalendarDay(day, done.Contains(first.AddDays(day - 1)), day == dayOfMonth));
         }
 
         return cells;

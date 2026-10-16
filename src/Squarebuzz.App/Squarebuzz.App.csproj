@@ -20,8 +20,8 @@
 
     <ApplicationTitle>squarebuzz</ApplicationTitle>
     <ApplicationId>fun.asmie.squarebuzz</ApplicationId>
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <ApplicationVersion>6</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+    <ApplicationVersion>7</ApplicationVersion>
 
     <!--
       MAUI's own generated partial classes trip a few analyser rules, so the solution-wide

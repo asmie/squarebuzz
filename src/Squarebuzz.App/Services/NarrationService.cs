@@ -31,21 +31,16 @@ public sealed class NarrationService : INarrationService, IDisposable
         // install the previous language's voice.
         var generation = Interlocked.Increment(ref _prepareGeneration);
 
-        var wanted = language.ToCultureCode();
         Locale? found;
 
         try
         {
             var locales = await TextToSpeech.Default.GetLocalesAsync().ConfigureAwait(false);
 
-            // Match on the language part only. Devices report "en-GB", "en-US", "en_US" and
-            // occasionally just "en", and any English voice can read English text.
-            //
-            // Deliberately not falling back to some other language's voice. An English engine
-            // reading Polish is not a degraded version of narration, it is noise - and a child
-            // who cannot read the words cannot work out that the voice is wrong either.
+            // Android separates language and country (zh / TW), while Apple and Windows
+            // report BCP-47 tags. Match both forms without selecting another language's voice.
             found = locales.FirstOrDefault(l =>
-                l.Language.StartsWith(wanted, StringComparison.OrdinalIgnoreCase));
+                SpeechLocaleMatcher.Matches(language, l.Language, l.Country));
         }
         catch (Exception)
         {

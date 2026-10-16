@@ -41,7 +41,7 @@ public sealed class SqliteGameCompletionRepository : IGameCompletionRepository
         {
             // Apply in journal order, including older failed results before a newer win.
             var pending = transaction.Query<GameCompletionEntity>(
-                "SELECT id, payload FROM game_completion WHERE payload IS NOT NULL ORDER BY rowid");
+                "SELECT id, payload FROM game_completion INDEXED BY pending_game_completion WHERE payload IS NOT NULL ORDER BY rowid");
 
             foreach (var entry in pending)
             {

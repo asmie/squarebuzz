@@ -15,7 +15,9 @@ public sealed class SavedGameCard
     public required Guid Id { get; init; }
 
     /// <summary>The picture, for the thumbnail. Resolved from the save's id or seed.</summary>
-    public required Puzzle Puzzle { get; init; }
+    public required Puzzle? Puzzle { get; init; }
+
+    public bool CanResume => Puzzle is not null;
 
     /// <summary>
     /// The player's marks. Drawn instead of the solution so the thumbnail shows how far they got
@@ -58,11 +60,8 @@ public partial class ContinueViewModel : LocalizedViewModel
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
     private readonly IPersistenceDiagnostics _diagnostics;
+    private readonly GameCompletionService? _completions;
     private SavedGameCard? _failedDelete;
-
-    // Whether the last reload had to skip a save it could not rebuild, so a later delete does
-    // not clear that warning by accident.
-    private bool _rebuildFailed;
 
     /// <summary>
     /// Generated pictures already rebuilt for this list, by everything that determines them.
@@ -74,7 +73,7 @@ public partial class ContinueViewModel : LocalizedViewModel
     /// </remarks>
     private readonly Dictionary<PuzzleKey, Puzzle> _generated = [];
 
-    private readonly record struct PuzzleKey(int Size, int Difficulty, string PackId, int Seed);
+    private readonly record struct PuzzleKey(int Size, int Difficulty, string PackId, int Seed, int GeneratorVersion);
 
     public ContinueViewModel(
         ILocalizationService strings,
@@ -82,7 +81,8 @@ public partial class ContinueViewModel : LocalizedViewModel
         GameSessionFactory sessions,
         INavigationService navigation,
         IClock clock,
-        IPersistenceDiagnostics? diagnostics = null)
+        IPersistenceDiagnostics? diagnostics = null,
+        GameCompletionService? completions = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(saveGames);
@@ -95,6 +95,7 @@ public partial class ContinueViewModel : LocalizedViewModel
         _navigation = navigation;
         _clock = clock;
         _diagnostics = diagnostics ?? NullPersistenceDiagnostics.Instance;
+        _completions = completions;
     }
 
     public ObservableCollection<SavedGameCard> Saves { get; } = [];
@@ -135,6 +136,7 @@ public partial class ContinueViewModel : LocalizedViewModel
 
     private async Task ReloadAsync()
     {
+        await (_completions?.RetryAsync() ?? Task.CompletedTask);
         IReadOnlyList<SavedGame> saves;
 
         try
@@ -154,13 +156,11 @@ public partial class ContinueViewModel : LocalizedViewModel
         }
 
         Saves.Clear();
-        _rebuildFailed = false;
         var stillSaved = new HashSet<PuzzleKey>();
 
         foreach (var save in saves)
         {
-            // A save whose picture can no longer be produced is skipped rather than crashing the
-            // list - it would only happen if authored content was removed between releases.
+            // Keep unavailable saves visible so the player can delete them or retry later.
             try
             {
                 Saves.Add(BuildCard(save, stillSaved));
@@ -168,7 +168,19 @@ public partial class ContinueViewModel : LocalizedViewModel
             catch (Exception exception) when (exception is not OperationCanceledException)
             {
                 _diagnostics.Report(PersistenceOperation.RebuildGame, exception, save.Id);
-                _rebuildFailed = true;
+                Saves.Add(new SavedGameCard
+                {
+                    Id = save.Id,
+                    Puzzle = null,
+                    Marks = [],
+                    Name = T("continueGame"),
+                    Details = T("storageUnavailable"),
+                    ProgressText = string.Empty,
+                    Progress = 0,
+                    SavedWhen = DescribeWhen(save.SavedAt),
+                    ResumeDescription = string.Empty,
+                    DeleteDescription = Strings.Format("a11yDeleteGame", T("continueGame")),
+                });
             }
         }
 
@@ -183,7 +195,7 @@ public partial class ContinueViewModel : LocalizedViewModel
 
     private void UpdateListState()
     {
-        HasPersistenceFailure = _failedDelete is not null || _rebuildFailed;
+        HasPersistenceFailure = _failedDelete is not null || Saves.Any(card => !card.CanResume);
         IsEmpty = Saves.Count == 0 && !HasPersistenceFailure;
         OnPropertyChanged(nameof(HasSaves));
     }
@@ -196,7 +208,7 @@ public partial class ContinueViewModel : LocalizedViewModel
             return _sessions.ResolvePuzzle(save);
         }
 
-        var key = new PuzzleKey(save.Size, save.Difficulty, save.PackId, save.Seed);
+        var key = new PuzzleKey(save.Size, save.Difficulty, save.PackId, save.Seed, save.GeneratorVersion);
         stillSaved.Add(key);
 
         if (!_generated.TryGetValue(key, out var puzzle))
@@ -259,6 +271,10 @@ public partial class ContinueViewModel : LocalizedViewModel
     private async Task ResumeAsync(SavedGameCard card)
     {
         ArgumentNullException.ThrowIfNull(card);
+        if (!card.CanResume)
+        {
+            return;
+        }
 
         await _navigation.GoToAsync(
             Routes.Game,
@@ -289,7 +305,11 @@ public partial class ContinueViewModel : LocalizedViewModel
         // Removed in place: the other cards have not changed, and reloading them regenerated
         // every other generated save's picture.
         _failedDelete = null;
-        Saves.Remove(card);
+        // A reload during the write can replace the card object, but its identity is stable.
+        if (Saves.FirstOrDefault(current => current.Id == card.Id) is { } current)
+        {
+            Saves.Remove(current);
+        }
         UpdateListState();
     }
 

@@ -93,12 +93,15 @@ public partial class TrialsViewModel : LocalizedViewModel
     private readonly IProgressRepository _progress;
     private readonly INavigationService _navigation;
     private readonly IClock _clock;
+    private readonly GameCompletionService? _completions;
+    private AppLanguage? _ladderLanguage;
 
     public TrialsViewModel(
         ILocalizationService strings,
         IProgressRepository progress,
         INavigationService navigation,
-        IClock clock)
+        IClock clock,
+        GameCompletionService? completions = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(progress);
@@ -108,6 +111,7 @@ public partial class TrialsViewModel : LocalizedViewModel
         _progress = progress;
         _navigation = navigation;
         _clock = clock;
+        _completions = completions;
     }
 
     public ObservableCollection<TrophyCard> Trophies { get; } = [];
@@ -190,6 +194,7 @@ public partial class TrialsViewModel : LocalizedViewModel
 
     private async Task ReloadAsync()
     {
+        await (_completions?.RetryAsync() ?? Task.CompletedTask);
         var today = _clock.Today;
         TodayLabel = today.ToString("dddd, d MMMM", CultureInfo.CurrentCulture);
 
@@ -210,7 +215,7 @@ public partial class TrialsViewModel : LocalizedViewModel
         BuildTimedLadder();
 
         IsDailyAvailable = DailyPuzzle.IsAvailable(progress, today);
-        Streak = progress.Streak;
+        Streak = progress.ActiveStreak(today);
 
         await BuildCalendarAsync(today);
 
@@ -253,6 +258,11 @@ public partial class TrialsViewModel : LocalizedViewModel
     /// </summary>
     private void BuildTimedLadder()
     {
+        if (_ladderLanguage == Strings.Language)
+        {
+            return;
+        }
+        _ladderLanguage = Strings.Language;
         Timed.Clear();
 
         foreach (var tier in TimedTrial.Tiers)
@@ -292,7 +302,8 @@ public partial class TrialsViewModel : LocalizedViewModel
         var cells = DailyCalendar.Build(
             today,
             completions,
-            CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek);
+            CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek,
+            CultureInfo.CurrentCulture.DateTimeFormat.Calendar);
 
         CalendarDays.Clear();
 

@@ -3,7 +3,8 @@
 Run these cases on installed Release builds after the unit tests. A successful build, a UI
 hierarchy dump, or an emulator screenshot does not establish audio or screen-reader usability.
 Record each case as **passed**, **failed**, or **not run**, with the build and device used.
-The latest execution record is [RESULTS.md](RESULTS.md).
+The latest execution record is [release-1.0.1.md](release-1.0.1.md).
+Earlier platform evidence remains in [RESULTS.md](RESULTS.md).
 
 ## Build and evidence
 
@@ -96,6 +97,8 @@ gh run view RUN_ID --repo asmie/squarebuzz --json headSha,jobs,url
 On a known solution, test tap fill, drag across adjacent cells, reverse direction, lift outside
 the board, cancel a gesture, and multi-touch interruption. Inspect every affected cell. Test both
 mode-button crosses and hold-to-cross, then clear, undo, redo, and a new stroke after undo.
+One Undo must reverse the entire drag, including its automatic crosses; one Redo restores it.
+Repeat with an erase drag and a drag that starts on an incorrect fill. Undo keeps charged mistakes.
 With a zoomed board inside its scrolling host, distinguish a scroll from a paint gesture: a
 cancelled scroll must not leave unintended marks, stuck magnification, or stale drag ownership.
 Repeat on tablet, left-handed layout and native touch hardware.
@@ -134,7 +137,10 @@ Phones intentionally remain portrait; rotating a phone is not a tablet-layout te
 
 During play open Options, change light/dark/auto and accent, handedness, big numbers, zoom,
 magnifier, helpers and tap mode. Check immediate selection styling and the returning board,
-including clue/cell descriptions. In Auto, change OS light/dark while foreground and background;
+including clue/cell descriptions. With automatic crosses off, finish a line, then enable the helper
+in Options. On return, its crosses must appear immediately on the board and minimap and be announced
+in the cell descriptions.
+In Auto, change OS light/dark while foreground and background;
 explicit themes and colour-blind mode retain their intended policy. Check system-bar icon contrast.
 Enable/disable OS reduced motion during play and in the background: mascot/confetti/cell/shake
 animations follow the preference after returning, without changing game state. Verify persisted

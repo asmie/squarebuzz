@@ -54,6 +54,11 @@ public sealed record PlayerProgress
 
     public DateOnly? LastPlayedOn { get; init; }
 
+    /// <summary>The live streak, retaining yesterday's run until today's opportunity has passed.</summary>
+    public int ActiveStreak(DateOnly today) => LastPlayedOn is { } last && today.DayNumber - last.DayNumber <= 1
+        ? Math.Max(0, Streak)
+        : 0;
+
     /// <summary>Total filled cells ever, which the "100 blocks" trophy counts.</summary>
     public int TotalBlocksFilled { get; init; }
 

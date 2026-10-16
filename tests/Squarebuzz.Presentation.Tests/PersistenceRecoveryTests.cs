@@ -1,4 +1,5 @@
 using Squarebuzz.Core.Model;
+using Squarebuzz.Core.Generation;
 using Squarebuzz.Presentation.Services;
 using Squarebuzz.Presentation.ViewModels;
 using Xunit;
@@ -7,6 +8,31 @@ namespace Squarebuzz.Presentation.Tests;
 
 public sealed class PersistenceRecoveryTests
 {
+    [Fact]
+    public async Task IncompatibleSave_IsRejectedEvenAfterContinueCachedTheSameSeed()
+    {
+        using var h = new GameViewModelHarness();
+        var session = h.Sessions.Create(NewGameOptions.Default with { Size = GridSize.Big, Seed = 42 });
+        var save = SavedGame.FromSession(session, Guid.NewGuid(), h.Clock.Now);
+        h.SaveGames.Saves[save.Id] = save;
+        using var vm = new ContinueViewModel(h.Strings, h.SaveGames, h.Sessions, h.Navigation, h.Clock, h.Diagnostics);
+        await vm.OnAppearingAsync();
+        Assert.Single(vm.Saves);
+        var generated = h.Generator.Requests.Count;
+
+        h.SaveGames.Saves[save.Id] = save with { GeneratorVersion = GeneratorVersion.Current - 1 };
+        await vm.OnAppearingAsync();
+        Assert.False(Assert.Single(vm.Saves).CanResume);
+        Assert.True(vm.HasPersistenceFailure);
+        Assert.Equal(generated, h.Generator.Requests.Count);
+
+        h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { [GameViewModel.SaveIdParameter] = save.Id });
+        await h.Vm.InitialiseAsync();
+        Assert.Null(h.Vm.Session);
+        Assert.True(h.Vm.HasPersistenceFailure);
+        Assert.Equal(generated, h.Generator.Requests.Count);
+    }
+
     [Fact]
     public async Task InFlightSaveFailsAfterWin_CompletionOwnsRecoveryState()
     {

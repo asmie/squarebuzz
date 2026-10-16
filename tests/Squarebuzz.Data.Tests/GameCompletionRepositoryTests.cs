@@ -8,6 +8,33 @@ namespace Squarebuzz.Data.Tests;
 
 public sealed class GameCompletionRepositoryTests
 {
+    [Fact]
+    public async Task VersionElevenUpgradeIndexesPendingWinsAndKeepsReceipts()
+    {
+        await using var temp = new TemporaryDatabase();
+        var repository = Repository(temp);
+        var completedId = Guid.NewGuid();
+        await repository.JournalAsync(completedId, Completion);
+        await repository.RetryPendingAsync();
+        var pendingId = Guid.NewGuid();
+        await repository.JournalAsync(pendingId, Completion with { CompletedAt = CompletedAt.AddDays(1) });
+        var connection = await temp.Database.GetConnectionAsync();
+        await connection.ExecuteAsync("DROP INDEX pending_game_completion");
+        await connection.ExecuteAsync("DELETE FROM schema_version WHERE version = 12");
+        await temp.ReopenAsync();
+        connection = await temp.Database.GetConnectionAsync();
+        var indexedPending = await connection.QueryScalarsAsync<string>(
+            "SELECT id FROM game_completion INDEXED BY pending_game_completion WHERE payload IS NOT NULL ORDER BY rowid");
+        Assert.Equal([pendingId.ToString("D")], indexedPending);
+        Assert.Equal(2, await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM game_completion"));
+        await Repository(temp).RetryPendingAsync();
+        await Repository(temp).JournalAsync(completedId, Completion);
+        await Repository(temp).RetryPendingAsync();
+        Assert.Equal(6, (await new SqliteProgressRepository(temp.Database).GetProgressAsync()).Stars);
+        Assert.Equal(0, await connection.ExecuteScalarAsync<int>(
+            "SELECT COUNT(*) FROM game_completion INDEXED BY pending_game_completion WHERE payload IS NOT NULL"));
+    }
+
     private static readonly DateTimeOffset CompletedAt = new(2026, 8, 5, 23, 30, 0, TimeSpan.FromHours(2));
 
     private static PuzzleCompletion Completion => new("heart", 3, TimeSpan.FromSeconds(30), 12, 0, CompletedAt)
@@ -179,7 +206,7 @@ public sealed class GameCompletionRepositoryTests
         await new SqliteProgressRepository(temp.Database).SaveProgressAsync(PlayerProgress.Empty with { Stars = 10 });
         var connection = await temp.Database.GetConnectionAsync();
         await connection.ExecuteAsync("DROP TABLE game_completion");
-        await connection.ExecuteAsync("DELETE FROM schema_version WHERE version = 7");
+        await connection.ExecuteAsync("DELETE FROM schema_version WHERE version IN (7, 12)");
         await temp.ReopenAsync();
         await CompleteAsync(temp, Guid.NewGuid(), Completion);
 

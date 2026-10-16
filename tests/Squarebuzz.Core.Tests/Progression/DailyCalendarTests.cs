@@ -5,6 +5,22 @@ namespace Squarebuzz.Core.Tests.Progression;
 
 public class DailyCalendarTests
 {
+    [Theory]
+    [InlineData(1403, 12, 30)]
+    [InlineData(1404, 12, 29)]
+    [InlineData(1405, 1, 31)]
+    public void PersianMonthsUseTheirOwnLengthAndWeekAlignment(int year, int month, int days)
+    {
+        var calendar = new System.Globalization.PersianCalendar();
+        var first = DateOnly.FromDateTime(calendar.ToDateTime(year, month, 1, 0, 0, 0, 0));
+        var today = first.AddDays(9);
+        var cells = DailyCalendar.Build(today, [first.AddDays(-1), first, first.AddDays(days)], DayOfWeek.Saturday, calendar);
+        Assert.Equal(days, cells.Count(cell => !cell.IsBlank));
+        Assert.Equal(10, Assert.Single(cells, cell => cell.IsToday).Day);
+        Assert.Equal(1, Assert.Single(cells, cell => cell.IsDone).Day);
+        Assert.Equal(((int)first.DayOfWeek - (int)DayOfWeek.Saturday + 7) % 7, cells.TakeWhile(cell => cell.IsBlank).Count());
+    }
+
     // July 2026: the 1st is a Wednesday, 31 days.
     private static readonly DateOnly MidJuly = new(2026, 7, 15);
 

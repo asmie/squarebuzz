@@ -59,12 +59,14 @@ public partial class GalleryViewModel : LocalizedViewModel
     private readonly IPuzzleRepository _puzzles;
     private readonly IProgressRepository _progress;
     private readonly INavigationService _navigation;
+    private readonly GameCompletionService? _completions;
 
     public GalleryViewModel(
         ILocalizationService strings,
         IPuzzleRepository puzzles,
         IProgressRepository progress,
-        INavigationService navigation)
+        INavigationService navigation,
+        GameCompletionService? completions = null)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(puzzles);
@@ -74,6 +76,7 @@ public partial class GalleryViewModel : LocalizedViewModel
         _puzzles = puzzles;
         _progress = progress;
         _navigation = navigation;
+        _completions = completions;
     }
 
     public ObservableCollection<GalleryCard> Cards { get; } = [];
@@ -101,6 +104,7 @@ public partial class GalleryViewModel : LocalizedViewModel
 
     private async Task ReloadAsync()
     {
+        await (_completions?.RetryAsync() ?? Task.CompletedTask);
         IReadOnlyList<SolvedPuzzle> solved;
 
         try

@@ -18,6 +18,7 @@ public sealed class GameSession
     // charged a mistake. See Paint.
     private CellState _strokeSource;
     private bool _strokeChargedAMistake;
+    private bool _strokeHasChanges;
 
     public GameSession(Puzzle puzzle, GameRules rules, NewGameOptions? origin = null, int seed = 0)
     {
@@ -227,6 +228,7 @@ public sealed class GameSession
 
         Mistakes = mistakes;
         _history.Clear();
+        _strokeHasChanges = false;
 
         EvaluateSolved();
     }
@@ -239,6 +241,7 @@ public sealed class GameSession
     public void ApplyHelpers(HelperSettings helpers)
     {
         ArgumentNullException.ThrowIfNull(helpers);
+        _strokeHasChanges = false;
 
         var wasAutoCrossing = Rules.AutoCrossCompletedLines;
 
@@ -281,7 +284,7 @@ public sealed class GameSession
     /// <param name="target">Requested mark.</param>
     /// <param name="continuesStroke">
     /// True after the first cell of a drag. Only cells matching the first cell's original state
-    /// are painted, and the entire drag can charge at most one mistake.
+    /// are painted. The whole drag is one undoable action and charges at most one mistake.
     /// </param>
     public MoveOutcome Paint(int index, CellState target, bool continuesStroke = false)
     {
@@ -297,6 +300,7 @@ public sealed class GameSession
         {
             _strokeSource = current;
             _strokeChargedAMistake = false;
+            _strokeHasChanges = false;
         }
         else if (current != _strokeSource)
         {
@@ -347,7 +351,8 @@ public sealed class GameSession
 
         var autoCrossed = UpdateAutoCrossesThrough(changes, x, y, rowSatisfied, columnSatisfied);
 
-        _history.Push(new Stroke(changes) { DirectChangeCount = 1 });
+        _history.Push(new Stroke(changes) { DirectChangeCount = 1 }, continuesStroke && _strokeHasChanges);
+        _strokeHasChanges = true;
 
         var solved = EvaluateSolved();
 
@@ -423,6 +428,7 @@ public sealed class GameSession
     /// </summary>
     public bool Undo()
     {
+        _strokeHasChanges = false;
         if (IsOver)
         {
             return false;
@@ -448,6 +454,7 @@ public sealed class GameSession
 
     public bool Redo()
     {
+        _strokeHasChanges = false;
         if (IsOver)
         {
             return false;
@@ -475,6 +482,7 @@ public sealed class GameSession
     /// </summary>
     public Hint? UseHint()
     {
+        _strokeHasChanges = false;
         if (!CanUseHint)
         {
             return null;

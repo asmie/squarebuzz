@@ -71,7 +71,7 @@
                                 <Label Text="{Binding Name}" FontFamily="BodyBold" />
                                 <Label Text="{Binding Details}" Style="{StaticResource Subtle}" FontSize="12" />
 
-                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" IsVisible="{Binding CanResume}">
                                     <ProgressBar Grid.Column="0"
                                                  Progress="{Binding Progress}"
                                                  ProgressColor="{DynamicResource Primary}"
@@ -91,6 +91,7 @@
 
                                 <Button Text="▶"
                                         SemanticProperties.Description="{Binding ResumeDescription}"
+                                        IsEnabled="{Binding CanResume}"
                                         Command="{Binding Path=ResumeCommand, Source={RelativeSource AncestorType={x:Type vm:ContinueViewModel}}, x:DataType=vm:ContinueViewModel}"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="{DynamicResource Primary}"
