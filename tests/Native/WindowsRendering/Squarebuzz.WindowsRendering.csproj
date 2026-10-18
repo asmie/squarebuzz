@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <SelfContained>true</SelfContained>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls.Core" />
+    <ProjectReference Include="../../../src/Squarebuzz.Core/Squarebuzz.Core.csproj" />
+    <Compile Include="../../../src/Squarebuzz.App/Drawing/BoardDrawable.cs" Link="App/BoardDrawable.cs" />
+    <Compile Include="../../../src/Squarebuzz.App/Drawing/BoardPalette.cs" Link="App/BoardPalette.cs" />
+    <Compile Include="../../../src/Squarebuzz.App/Services/MotionPreferences.cs" Link="App/MotionPreferences.cs" />
+    <Compile Include="../../../src/Squarebuzz.App/Platforms/Windows/MotionPreferences.Windows.cs" Link="App/MotionPreferences.Windows.cs" />
+    <Compile Include="../../../src/Squarebuzz.App/Platforms/Windows/WindowsCanvasFont.cs" Link="App/WindowsCanvasFont.cs" />
+    <Content Include="../../../src/Squarebuzz.App/Resources/Fonts/Quicksand-Bold.ttf" Link="Quicksand-Bold.ttf" CopyToOutputDirectory="PreserveNewest" />
+    <Using Include="Microsoft.Maui" />
+    <Using Include="Microsoft.Maui.Controls" />
+    <Using Include="Microsoft.Maui.Graphics" />
+    <Using Include="Microsoft.Maui.ApplicationModel" />
+  </ItemGroup>
+</Project>

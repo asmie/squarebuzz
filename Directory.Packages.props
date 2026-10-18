@@ -28,7 +28,7 @@
   <ItemGroup Label="Tests">
     <!-- Keep the host profiling controls aligned with the app's Controls package. -->
     <PackageVersion Include="Microsoft.Maui.Controls.Core" Version="10.0.110"
-                    Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Profiling'" />
+                    Condition="'$(MSBuildProjectName)' == 'Squarebuzz.Profiling' OR '$(MSBuildProjectName)' == 'Squarebuzz.WindowsRendering'" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.analyzers" Version="2.1.0" />

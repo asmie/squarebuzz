@@ -55,6 +55,24 @@ device, display size/density, font scale, theme, language, reader version, input
 steps. Keep recordings/logs with the test run; do not add private device data to the repository.
 Restore any OS settings changed for a case to their recorded original values afterward.
 
+## Windows board rendering regression
+
+On Windows, run the unpackaged Win2D regression before testing Quick Game in the app:
+
+```powershell
+dotnet publish tests/Native/WindowsRendering -c Release -o artifacts/windows-rendering
+& ./artifacts/windows-rendering/Squarebuzz.WindowsRendering.exe
+```
+
+The runner uses the production font resolver and board renderer with native Win2D, checks that
+the bundled Quicksand face loads, and draws 40 combinations of board size, available width,
+clue size and marks. It exits nonzero on failure. Run the executable from a different working
+directory to check that font lookup follows the executable's location.
+
+This covers the unpackaged `ms-appx` font crash when the first board is drawn. It does not
+exercise Shell navigation, input, audio, saves or an installed MSIX package; those still need
+the interactive cases below.
+
 ## Required platform coverage
 
 | Platform | Required environments |

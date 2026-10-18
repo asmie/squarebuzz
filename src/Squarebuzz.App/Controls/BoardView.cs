@@ -114,8 +114,7 @@ public sealed partial class BoardView : GraphicsView
         // Resolve once per handler, not on every draw. Android needs the actual asset name;
         // Apple needs the registered native face, and Windows also needs the family fragment.
 #if WINDOWS
-        var name = services.GetRequiredService<IFontManager>()
-            .GetFontFamily(Microsoft.Maui.Font.OfSize("BodyBold", 12)).Source;
+        var name = WindowsCanvasFont.Resolve(services.GetRequiredService<IFontManager>());
 #else
         var name = services.GetRequiredService<IFontRegistrar>().GetFont("BodyBold");
 #endif
