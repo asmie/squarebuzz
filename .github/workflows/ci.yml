@@ -120,7 +120,8 @@ jobs:
 
   apple:
     name: ${{ matrix.name }}
-    runs-on: macos-26
+    # Xcode 27 is available on this preview runner image; macos-26 only provides Xcode 26.
+    runs-on: xcode-27
     strategy:
       fail-fast: false
       matrix:
@@ -136,7 +137,7 @@ jobs:
             runtime: maccatalyst-arm64
             code-signing: 'false'
     env:
-      XCODE_VERSION: '26.6'
+      XCODE_VERSION: '27.0'
 
     steps:
       - uses: actions/checkout@v7.0.1
@@ -146,7 +147,7 @@ jobs:
         with:
           global-json-file: global.json
 
-      # Workload set 10.0.401 uses Apple SDK 26.5.10318. Keep Xcode aligned with its requirements.
+      # Workload set 10.0.402 uses Apple SDK 27.0.10722, which requires Xcode 27.0.
       - name: Select pinned Xcode
         shell: bash
         run: |
