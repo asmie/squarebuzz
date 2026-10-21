@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>困难</value></data>
   <data name="expert" xml:space="preserve"><value>专家</value></data>
   <data name="challenge" xml:space="preserve"><value>挑战级别</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>第二个档位，和尺寸、提示难度无关。</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>轻松模式使用你的提示设置。挑战模式最多可用一次提示。</value></data>
   <data name="relaxed" xml:space="preserve"><value>轻松</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>辅助开启，没有限制</value></data>
-  <data name="sharp" xml:space="preserve"><value>严格</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>统计错误，一次提示</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>使用你的辅助设置</value></data>
+  <data name="sharp" xml:space="preserve"><value>挑战</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>最多一次提示</value></data>
   <data name="pack" xml:space="preserve"><value>图画包</value></data>
   <data name="helpers" xml:space="preserve"><value>辅助</value></data>
   <data name="autoCross" xml:space="preserve"><value>自动为完成的行打叉</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>哎呀</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>下一个</value></data>
   <data name="menu" xml:space="preserve"><value>菜单</value></data>
-  <data name="onb1t" xml:space="preserve"><value>数字是一连串方块</value></data>
-  <data name="onb1b" xml:space="preserve"><value>提示 3 1 表示三个方块连在一起，空一格，再一个方块。顺序一样，从左到右。</value></data>
-  <data name="onb2t" xml:space="preserve"><value>把空格标出来</value></data>
-  <data name="onb2b" xml:space="preserve"><value>点一下就填涂。切到叉号模式，把你确定会留空的格子标起来——这样脑子里清清楚楚。</value></data>
+  <data name="onb1t" xml:space="preserve"><value>数字表示一组方格</value></data>
+  <data name="onb1b" xml:space="preserve"><value>一行旁的数字2 1表示：涂满两格，至少空一格，再涂满一格。</value></data>
+  <data name="onb2t" xml:space="preserve"><value>涂色或标记X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>涂满组成图案的方格。在确定要留空的方格里标记X。</value></data>
   <data name="onb3t" xml:space="preserve"><value>一幅图画出现了</value></data>
-  <data name="onb3b" xml:space="preserve"><value>把每一行每一列都做完，方块就变成图画。每道谜题只有一个答案——永远不用猜。</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>这一个免费送你！</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>不是那个——再试试</value></data>
-  <data name="genFailed" xml:space="preserve"><value>这次没能生成谜题。请再试一次！</value></data>
+  <data name="onb3b" xml:space="preserve"><value>完成每一行和每一列，就能发现隐藏的图案。</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>给你一个提示。</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>试试别的方格。</value></data>
+  <data name="genFailed" xml:space="preserve"><value>无法创建谜题。请重试。</value></data>
   <data name="ok" xml:space="preserve"><value>好</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>适用于游戏自己生成的较大盘面——15×15 及以上。小图是手绘的。</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>难度设置会改变15×15及更大的谜题。较小的图案不变。</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>本月完成的每日谜题：{0}</value></data>
   <data name="noHints" xml:space="preserve"><value>没有提示了</value></data>
   <data name="lineDone" xml:space="preserve"><value>这一行完成了！</value></data>
   <data name="m_menu1" xml:space="preserve"><value>你准备好我就好。挑一个谜题吧！</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>你势头正好。再来一个？</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>我今天找到了一些新图画。</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>欢迎回来！</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>这次会发现什么图案呢？</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>开始你的第一个谜题</value></data>
   <data name="howToTitle" xml:space="preserve"><value>怎么玩</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>每日谜题</value></data>
-  <data name="dailySub" xml:space="preserve"><value>每天早上一幅新图</value></data>
+  <data name="dailySub" xml:space="preserve"><value>每天一道新谜题</value></data>
   <data name="play" xml:space="preserve"><value>玩</value></data>
   <data name="timedName1" xml:space="preserve"><value>热身</value></data>
   <data name="timedName2" xml:space="preserve"><value>稳住</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>这一关藏着一幅图画。</value></data>
   <data name="trophies" xml:space="preserve"><value>奖杯</value></data>
   <data name="timeUp" xml:space="preserve"><value>时间到！</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>这次时钟赢了。要再来一次吗？</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>时间到了。想再试时，随时可以开始。</value></data>
   <data name="tryAgain" xml:space="preserve"><value>再试一次</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}。{1}。时钟上还有 {2}。</value></data>
   <data name="tabDaily" xml:space="preserve"><value>每日</value></data>
   <data name="tabTimed" xml:space="preserve"><value>计时</value></data>
   <data name="tr1" xml:space="preserve"><value>第一幅图</value></data>
-  <data name="tr2" xml:space="preserve"><value>连续一周</value></data>
+  <data name="tr2" xml:space="preserve"><value>7幅图案</value></data>
   <data name="tr3" xml:space="preserve"><value>不用提示</value></data>
   <data name="tr4" xml:space="preserve"><value>神速</value></data>
   <data name="tr5" xml:space="preserve"><value>100 个方块</value></data>
   <data name="tr6" xml:space="preserve"><value>恐龙迷</value></data>
-  <data name="tr7" xml:space="preserve"><value>夜猫子</value></data>
+  <data name="tr7" xml:space="preserve"><value>各种图案</value></data>
   <data name="tr8" xml:space="preserve"><value>完美十格</value></data>
   <data name="tr9" xml:space="preserve"><value>收藏家</value></data>
   <data name="tr10" xml:space="preserve"><value>战胜时钟</value></data>
   <data name="tr11" xml:space="preserve"><value>马拉松冠军</value></data>
-  <data name="tr12" xml:space="preserve"><value>连续一个月</value></data>
+  <data name="tr12" xml:space="preserve"><value>30幅图案</value></data>
   <data name="tr13" xml:space="preserve"><value>大幅图</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 个方块</value></data>
   <data name="tr15" xml:space="preserve"><value>摘星人</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>现在我可以读给你听了。</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>这台设备上没有这种语言的语音</value></data>
   <data name="a11yCell" xml:space="preserve"><value>第 {0} 行，第 {1} 列，{2}。行提示 {3}。列提示 {4}。</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>空的</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>未标记</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>填涂了</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>打了叉</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>已标记为空白</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>没有</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>谜题盘面，{0} 乘 {1}。已填 {3} 格中的 {2} 格。</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>目前还无法用触摸浏览摸到这些格子。</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>屏幕阅读器无法在此视图中逐格选择方格。</value></data>
   <data name="a11yTime" xml:space="preserve"><value>已用时间：{0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>剩余时间：{0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>连续 {0} 天</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>深色</value></data>
   <data name="auto" xml:space="preserve"><value>自动</value></data>
   <data name="cbPalette" xml:space="preserve"><value>色盲友好</value></data>
-  <data name="cbSub" xml:space="preserve"><value>蓝／橙配色，保留图案</value></data>
+  <data name="cbSub" xml:space="preserve"><value>蓝色和橙色搭配纹理</value></data>
   <data name="accentTheme" xml:space="preserve"><value>主色</value></data>
   <data name="accTangerine" xml:space="preserve"><value>橘子</value></data>
   <data name="accGrape" xml:space="preserve"><value>葡萄</value></data>
   <data name="accTrio" xml:space="preserve"><value>三色</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>点击时</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>点击填涂，长按 = 叉</value></data>
-  <data name="tapMode" xml:space="preserve"><value>模式按钮</value></data>
-  <data name="handed" xml:space="preserve"><value>按钮放在</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>点按操作</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>点按涂色，长按标记X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>选择涂色或X</value></data>
+  <data name="handed" xml:space="preserve"><value>按钮位置</value></data>
   <data name="leftH" xml:space="preserve"><value>左边</value></data>
   <data name="rightH" xml:space="preserve"><value>右边</value></data>
-  <data name="cellSize" xml:space="preserve"><value>格子大小</value></data>
+  <data name="cellSize" xml:space="preserve"><value>方格大小</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>大号数字</value></data>
   <data name="language" xml:space="preserve"><value>语言</value></data>
   <data name="screenTime" xml:space="preserve"><value>用眼时间提醒</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 小时</value></data>
   <data name="breakTitle" xml:space="preserve"><value>该歇一歇了吗？</value></data>
   <data name="breakBody" xml:space="preserve"><value>你已经玩了 {0} 分钟。谜题会等着你的。</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>再玩一会儿</value></data>
-  <data name="breakStop" xml:space="preserve"><value>我就玩到这里</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>继续玩</value></data>
+  <data name="breakStop" xml:space="preserve"><value>休息一下</value></data>
   <data name="resetProgress" xml:space="preserve"><value>重置进度</value></data>
   <data name="privacy" xml:space="preserve"><value>数据 &amp; 隐私</value></data>
   <data name="open" xml:space="preserve"><value>打开</value></data>
   <data name="reset" xml:space="preserve"><value>重置</value></data>
   <data name="grownUps" xml:space="preserve"><value>仅限大人</value></data>
   <data name="cancel" xml:space="preserve"><value>取消</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>全部清除吗？</value></data>
-  <data name="resetBody" xml:space="preserve"><value>所有谜题、星星和贴纸都会消失。这无法撤销。</value></data>
-  <data name="resetYes" xml:space="preserve"><value>是的，全部清除</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>清除游戏进度？</value></data>
+  <data name="resetBody" xml:space="preserve"><value>这会清除所有进度，包括已保存的游戏、星星和奖杯。设置保持不变。此操作无法撤销。</value></data>
+  <data name="resetYes" xml:space="preserve"><value>重置进度</value></data>
   <data name="version" xml:space="preserve"><value>版本 {0} · 构建 {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>没有广告 · 没有内购</value></data>
   <data name="whatIs" xml:space="preserve"><value>什么是数织？</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>数织是一幅藏在数字里的图画。每一行和每一列的提示告诉你要填几个方块、按什么顺序填。用纯粹的逻辑推出每一条线，图画就出现了——你永远不需要猜。
-
-squarebuzz 是适合 6 岁及以上儿童的数织益智游戏，没有年龄上限。大人也能同样享受游戏的乐趣。</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>数织是一种藏着图案的谜题。根据每行每列旁的数字，找出应该涂满的方格。</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>也叫：Picross · Griddler · Hanjie · Pic-a-Pix · 数字填色 · 日本谜题</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>怎么玩</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>隐私政策</value></data>
   <data name="aboutRate" xml:space="preserve"><value>为 squarebuzz 评分</value></data>
-  <data name="ht1" xml:space="preserve"><value>读懂提示</value></data>
-  <data name="ht1b" xml:space="preserve"><value>每个数字都是一段不间断的填涂方块，按顺序排列。行提示 3 1 表示三个连在一起，至少空一格，再一个单独的。</value></data>
-  <data name="ht2" xml:space="preserve"><value>填涂和打叉</value></data>
-  <data name="ht2b" xml:space="preserve"><value>点一个格子就填涂它。对于你已经确定会留空的格子，切到叉号模式。叉号不是装饰——你就是靠它记住推理的。</value></data>
-  <data name="ht3" xml:space="preserve"><value>长提示的重叠部分</value></data>
-  <data name="ht3b" xml:space="preserve"><value>在宽 10 的一行里，提示 8 不管从哪里开始，都一定会覆盖中间的 6 格。把这段往左推，再往右推，重叠的部分就填上。</value></data>
-  <data name="ht4" xml:space="preserve"><value>行列对照</value></data>
-  <data name="ht4b" xml:space="preserve"><value>当一行给你一个确定的方块时，顺着那一列往下看。新方块常常正好做完一个列提示，于是又多了叉号，又多了方块。</value></data>
+  <data name="ht1" xml:space="preserve"><value>读懂数字</value></data>
+  <data name="ht1b" xml:space="preserve"><value>每个数字表示一组要涂满的格数。组与组之间至少留一格空白。横行从左往右读，竖列从上往下读。</value></data>
+  <data name="ht2" xml:space="preserve"><value>涂色或标记X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>涂满组成图案的方格。在确定要留空的方格里标记X。</value></data>
+  <data name="ht3" xml:space="preserve"><value>找出确定的方格</value></data>
+  <data name="ht3b" xml:space="preserve"><value>一行有10格时，连续8格无论放在哪里，都会盖住中间6格。你可以涂满这6格。</value></data>
+  <data name="ht4" xml:space="preserve"><value>查看行和列</value></data>
+  <data name="ht4b" xml:space="preserve"><value>涂完一格后，看看它所在的列。每个新标记都可能帮你找到下一格。</value></data>
   <data name="ht5" xml:space="preserve"><value>给做完的线打叉</value></data>
   <data name="ht5b" xml:space="preserve"><value>当一条线和它的提示完全对上时，把剩下的每一格都打上叉。提示数字会变淡，你就知道这条线做完了。</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>动物</value></data>
@@ -372,21 +370,21 @@ squarebuzz 是适合 6 岁及以上儿童的数织益智游戏，没有年龄上
   <data name="Puzzle_raincloud" xml:space="preserve"><value>雨云</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>神秘图画</value></data>
   <data name="magnifier" xml:space="preserve"><value>放大镜</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>填涂时显示放大的 3×3 视图。默认关闭。</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>涂色时放大查看方格。</value></data>
   <data name="gateRetry" xml:space="preserve"><value>问一个大人</value></data>
   <data name="galleryFound" xml:space="preserve"><value>已找到 {1} 幅中的 {0} 幅</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>完成你的第一幅图。</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>连续玩七天。</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>按自己的节奏，发现7幅不同图案。</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>一个提示都不用，完成一幅图。</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>一分钟内完成一个 5×5。</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>在一分钟内完成一道5×5谜题。</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>累计填涂 100 个方块。</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>找到每一只恐龙。</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>晚上八点以后完成一幅图。</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>在3个不同主题包中各完成一幅图案。</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>在 10×10 上拿到三颗星，且没有错误。</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>找到图库里的每一幅图。</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>赢得任意一场计时挑战。</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>赢得马拉松挑战。</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>连续玩 30 天。</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>按自己的节奏，发现30幅不同图案。</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>完成一个 15×15 或更大的图。</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>累计填涂 1000 个方块。</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>收集 100 颗星。</value></data>
@@ -400,4 +398,13 @@ squarebuzz 是适合 6 岁及以上儿童的数织益智游戏，没有年龄上
   <data name="hintLimit" xml:space="preserve"><value>新游戏的提示次数</value></data>
   <data name="unlimited" xml:space="preserve"><value>无限制</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>请输入不小于 1 的整数。</value></data>
+  <data name="shareApp" xml:space="preserve"><value>分享 squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>无法分享应用。链接：{0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>无法读取已保存的游戏。请重试。</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>无法保存进度。请重试。</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>无法读取进度。请重试。</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>无法读取设置。请重试。</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>无法保存设置。请重试。</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>无法删除已保存的游戏。请重试。</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>无法清除进度。请重试。</value></data>
 </root>

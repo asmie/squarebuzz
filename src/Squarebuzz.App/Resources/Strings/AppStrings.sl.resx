@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Težko</value></data>
   <data name="expert" xml:space="preserve"><value>Mojster</value></data>
   <data name="challenge" xml:space="preserve"><value>Stopnja izziva</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Druga nastavitev, ločena od velikosti in težavnosti namigov.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Sproščeno uporablja tvoje nastavitve namigov. Izziv omogoča največ en namig.</value></data>
   <data name="relaxed" xml:space="preserve"><value>Sproščeno</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Pomoč vklopljena, brez omejitev</value></data>
-  <data name="sharp" xml:space="preserve"><value>Ostro</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Napake se štejejo, en namig</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Uporablja tvoje nastavitve pomoči</value></data>
+  <data name="sharp" xml:space="preserve"><value>Izziv</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Največ en namig</value></data>
   <data name="pack" xml:space="preserve"><value>Zbirka slik</value></data>
   <data name="helpers" xml:space="preserve"><value>Pomoč</value></data>
   <data name="autoCross" xml:space="preserve"><value>Samodejni X ob končani vrsti</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Ojoj</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Naprej</value></data>
   <data name="menu" xml:space="preserve"><value>Meni</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Številke so nizi kock</value></data>
-  <data name="onb1b" xml:space="preserve"><value>Namig 3 1 pomeni tri kocke skupaj, presledek, nato eno samo. V istem vrstnem redu, od leve na desno.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Označi prazna polja</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Tapni, da pobarvaš. Preklopi na način X in označi polja, ki zagotovo ostanejo prazna — tako imaš red v glavi.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Številke kažejo skupine</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Številki 2 1 ob vrstici pomenita dve pobarvani polji, vsaj eno prazno in nato eno pobarvano.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Pobarvaj ali označi X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Pobarvaj polja, ki sestavljajo sliko. Polja, ki morajo ostati prazna, označi z X.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Pokaže se slika</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Reši vse vrstice in stolpce in kocke se spremenijo v sliko. Vsaka uganka ima natanko eno rešitev — nikoli ne ugibaj.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Tega imaš zastonj!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>To polje ne — poskusi še enkrat</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Tokrat uganke ni bilo mogoče sestaviti. Poskusi znova!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Dokončaj vsako vrstico in stolpec, da odkriješ sliko.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Tukaj je namig.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Poskusi drugo polje.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Uganke ni bilo mogoče ustvariti. Poskusi znova.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Velja za večje mreže, ki jih igra sestavi sama — 15×15 in več. Male slike so narisane na roko.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Težavnost spreminja uganke velikosti 15×15 in več. Manjše slike ostanejo enake.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Dnevne uganke, rešene ta mesec: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Ni več namigov</value></data>
   <data name="lineDone" xml:space="preserve"><value>Vrsta je rešena!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Pripravljen sem. Izberi uganko!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Gre ti odlično. Še ena?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Danes sem našel nekaj novih slik.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Lepo te je spet videti!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Katero sliko boš odkril zdaj?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Začni svojo prvo uganko</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Kako igrati</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Uganka dneva</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Vsako jutro nova slika</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Nova uganka vsak dan</value></data>
   <data name="play" xml:space="preserve"><value>Igraj</value></data>
   <data name="timedName1" xml:space="preserve"><value>Ogrevanje</value></data>
   <data name="timedName2" xml:space="preserve"><value>Umirjeno</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Na tej stopnji se skriva slika.</value></data>
   <data name="trophies" xml:space="preserve"><value>Pokali</value></data>
   <data name="timeUp" xml:space="preserve"><value>Čas je potekel!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Tokrat je bila ura hitrejša. Poskusiš še enkrat?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Čas je potekel. Lahko poskusiš znova, ko želiš.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Poskusi znova</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na uri.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Danes</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na čas</value></data>
   <data name="tr1" xml:space="preserve"><value>Prva slika</value></data>
-  <data name="tr2" xml:space="preserve"><value>Teden zapored</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 slik</value></data>
   <data name="tr3" xml:space="preserve"><value>Brez namigov</value></data>
   <data name="tr4" xml:space="preserve"><value>Hitre roke</value></data>
   <data name="tr5" xml:space="preserve"><value>100 kock</value></data>
   <data name="tr6" xml:space="preserve"><value>Dino navdušenec</value></data>
-  <data name="tr7" xml:space="preserve"><value>Nočni čuk</value></data>
+  <data name="tr7" xml:space="preserve"><value>Malo vsega</value></data>
   <data name="tr8" xml:space="preserve"><value>Popolna desetka</value></data>
   <data name="tr9" xml:space="preserve"><value>Zbiratelj</value></data>
   <data name="tr10" xml:space="preserve"><value>Hitrejši od ure</value></data>
   <data name="tr11" xml:space="preserve"><value>Prvak maratona</value></data>
-  <data name="tr12" xml:space="preserve"><value>Mesec zapored</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 slik</value></data>
   <data name="tr13" xml:space="preserve"><value>Velika slika</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 kock</value></data>
   <data name="tr15" xml:space="preserve"><value>Zvezdogled</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Zdaj ti lahko berem.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Za ta jezik na tej napravi ni glasu</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Vrstica {0}, stolpec {1}, {2}. Namig vrstice: {3}. Namig stolpca: {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>prazno</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>neoznačeno</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>pobarvano</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>prečrtano</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>označeno kot prazno</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>brez</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Igralna mreža, {0} krat {1}. Pobarvanih polj: {2} od {3}.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Polj še ni mogoče doseči z raziskovanjem na dotik.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Bralnik zaslona v tem pogledu ne more izbirati posameznih polj.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Čas doslej: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Preostali čas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dni zapored: {0}</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>Temna</value></data>
   <data name="auto" xml:space="preserve"><value>Samodejno</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Prijazno barvno slepim</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Modro-oranžna paleta, vzorci ostanejo</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Modra in oranžna barva z vzorci</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Glavna barva</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarina</value></data>
   <data name="accGrape" xml:space="preserve"><value>Grozdje</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Dotik naredi</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Dotik barva, držanje = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Gumb načina</value></data>
-  <data name="handed" xml:space="preserve"><value>Gumbi na</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Dejanje ob dotiku</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Dotik pobarva, pridržanje označi X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Izberi barvanje ali X</value></data>
+  <data name="handed" xml:space="preserve"><value>Položaj gumbov</value></data>
   <data name="leftH" xml:space="preserve"><value>Levi</value></data>
   <data name="rightH" xml:space="preserve"><value>Desni</value></data>
-  <data name="cellSize" xml:space="preserve"><value>Velikost polj</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Velikost polja</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Velike številke</value></data>
   <data name="language" xml:space="preserve"><value>Jezik</value></data>
   <data name="screenTime" xml:space="preserve"><value>Opomnik za odmor</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 ura</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Čas za odmor?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Igraš že {0} min. Uganka te bo počakala.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Še malo</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Dovolj za danes</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Igraj naprej</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Vzemi odmor</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Ponastavi napredek</value></data>
   <data name="privacy" xml:space="preserve"><value>Podatki in zasebnost</value></data>
   <data name="open" xml:space="preserve"><value>Odpri</value></data>
   <data name="reset" xml:space="preserve"><value>Ponastavi</value></data>
   <data name="grownUps" xml:space="preserve"><value>Samo za odrasle</value></data>
   <data name="cancel" xml:space="preserve"><value>Prekliči</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Izbrišem vse?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Vse uganke, zvezdice in nalepke bodo izbrisane. Tega ni mogoče razveljaviti.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Da, izbriši vse</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Izbrišem napredek v igri?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Izbrisan bo ves napredek, vključno s shranjenimi igrami, zvezdicami in pokali. Nastavitve ostanejo enake. Tega ni mogoče razveljaviti.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Ponastavi napredek</value></data>
   <data name="version" xml:space="preserve"><value>Različica {0} · gradnja {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Brez reklam · brez nakupov v aplikaciji</value></data>
   <data name="whatIs" xml:space="preserve"><value>Kaj je nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je slika, skrita v številkah. Namigi ob vsaki vrstici in vsakem stolpcu ti povedo, koliko kock pobarvati in v kakšnem vrstnem redu. Vsako vrsto reši s čisto logiko in slika se prikaže — nikoli ni treba ugibati.
-
-squarebuzz je igra z nonogrami za otroke od 6. leta dalje, brez zgornje starostne meje. Odrasli se lahko ob njej zabavajo prav tako.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je uganka s skrito sliko. Številke ob vrsticah in stolpcih ti pomagajo ugotoviti, katera polja pobarvati.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Znan tudi kot: Picross · Griddler · Hanjie · Pic-a-Pix · Barvanje po številkah · Japonska križanka</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kako igrati</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politika zasebnosti</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Oceni squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Beri namige</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Vsaka številka je en neprekinjen niz pobarvanih kock, našteti po vrsti. Namig vrstice 3 1 pomeni tri skupaj, vsaj eno prazno polje, nato eno samo.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Barvaj in prečrtaj</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Tapni polje, da ga pobarvaš. Preklopi na način X za polja, ki zagotovo ostanejo prazna. Znaki X niso okras — z njimi ohranjaš pregled.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Prekrivanje pri dolgih namigih</value></data>
-  <data name="ht3b" xml:space="preserve"><value>V vrstici, široki 10 polj, namig 8 vedno pokrije srednjih 6 polj, kjer koli se začne. Potisni niz čim bolj v levo, potem čim bolj v desno in pobarvaj tisto, kar se prekriva.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Poveži vrstice in stolpce</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Ko ti vrstica da eno zanesljivo kocko, poglej po njenem stolpcu. Nova kocka pogosto dopolni namig stolpca, to ti da nove X-e, ti pa nove kocke.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Beri številke</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Vsaka številka pove, koliko polj ima skupina. Med skupinami pusti vsaj eno prazno polje. Vrstice beri od leve proti desni, stolpce pa od zgoraj navzdol.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Pobarvaj ali označi X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Pobarvaj polja, ki sestavljajo sliko. Polja, ki morajo ostati prazna, označi z X.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Poišči zanesljiva polja</value></data>
+  <data name="ht3b" xml:space="preserve"><value>V vrstici z 10 polji skupina 8 vedno pokrije srednjih 6. Teh 6 polj lahko pobarvaš.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Preveri vrstice in stolpce</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Ko pobarvaš polje, poglej njegov stolpec. Vsaka nova oznaka ti lahko pomaga najti naslednje polje.</value></data>
   <data name="ht5" xml:space="preserve"><value>Prečrtaj končane vrste</value></data>
   <data name="ht5b" xml:space="preserve"><value>Ko se vrsta popolnoma ujema s svojimi namigi, prečrtaj vsa preostala polja v njej. Številke namigov zbledijo, da veš, da je ta vrsta končana.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Živali</value></data>
@@ -372,21 +370,21 @@ squarebuzz je igra z nonogrami za otroke od 6. leta dalje, brez zgornje starostn
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Deževni oblak</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Skrivnostna slika</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Med barvanjem pokaže povečan pogled 3×3. Privzeto izklopljena.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Med barvanjem vidiš povečana polja.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Vprašaj odraslega</value></data>
   <data name="galleryFound" xml:space="preserve"><value>Najdenih: {0} od {1}</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Dokončaj svojo prvo sliko.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Igraj sedem dni zapored.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Odkrij 7 različnih slik v svojem tempu.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Dokončaj sliko brez enega samega namiga.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Dokončaj 5×5 v manj kot minuti.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Reši uganko 5×5 v minuti ali manj.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Pobarvaj skupaj 100 kock.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Najdi vse dinozavre.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Dokončaj sliko po 20. uri.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Dokončaj po eno sliko iz 3 različnih paketov.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tri zvezdice na 10×10, brez napake.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Najdi vse slike v galeriji.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Zmagaj v katerem koli preizkusu na čas.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Zmagaj v preizkusu Maraton.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Igraj 30 dni zapored.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Odkrij 30 različnih slik v svojem tempu.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Dokončaj sliko 15×15 ali večjo.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Pobarvaj skupaj 1000 kock.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Zberi 100 zvezdic.</value></data>
@@ -400,4 +398,13 @@ squarebuzz je igra z nonogrami za otroke od 6. leta dalje, brez zgornje starostn
   <data name="hintLimit" xml:space="preserve"><value>Namigi v novih igrah</value></data>
   <data name="unlimited" xml:space="preserve"><value>Neomejeno</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Vnesite celo število, ki je vsaj 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Deli squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Aplikacije ni bilo mogoče deliti. Povezava: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Shranjenih iger ni bilo mogoče naložiti. Poskusi znova.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Napredka ni bilo mogoče shraniti. Poskusi znova.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Napredka ni bilo mogoče naložiti. Poskusi znova.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Nastavitev ni bilo mogoče naložiti. Poskusi znova.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Nastavitev ni bilo mogoče shraniti. Poskusi znova.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Shranjene igre ni bilo mogoče izbrisati. Poskusi znova.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Napredka ni bilo mogoče izbrisati. Poskusi znova.</value></data>
 </root>

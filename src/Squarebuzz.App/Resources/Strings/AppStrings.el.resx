@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Δύσκολο</value></data>
   <data name="expert" xml:space="preserve"><value>Ειδικός</value></data>
   <data name="challenge" xml:space="preserve"><value>Επίπεδο πρόκλησης</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Δεύτερη κλίμακα, ξεχωριστή από το μέγεθος και τη δυσκολία των στοιχείων.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Το Χαλαρό χρησιμοποιεί τις ρυθμίσεις βοήθειάς σου. Η Πρόκληση επιτρέπει το πολύ μία βοήθεια.</value></data>
   <data name="relaxed" xml:space="preserve"><value>Χαλαρό</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Βοηθήματα ανοιχτά, χωρίς όρια</value></data>
-  <data name="sharp" xml:space="preserve"><value>Απαιτητικό</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Τα λάθη μετριούνται, μία βοήθεια</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Χρησιμοποιεί τις ρυθμίσεις βοήθειάς σου</value></data>
+  <data name="sharp" xml:space="preserve"><value>Πρόκληση</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Το πολύ μία βοήθεια</value></data>
   <data name="pack" xml:space="preserve"><value>Πακέτο εικόνων</value></data>
   <data name="helpers" xml:space="preserve"><value>Βοηθήματα</value></data>
   <data name="autoCross" xml:space="preserve"><value>Αυτόματο Χ στις έτοιμες γραμμές</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Ουπς</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Επόμενο</value></data>
   <data name="menu" xml:space="preserve"><value>Μενού</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Οι αριθμοί είναι σειρές από τουβλάκια</value></data>
-  <data name="onb1b" xml:space="preserve"><value>Το στοιχείο 3 1 σημαίνει τρία τουβλάκια στη σειρά, ένα κενό, μετά ένα τουβλάκι. Με την ίδια σειρά, από αριστερά προς δεξιά.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Σημείωσε τα άδεια</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Πάτα μία φορά για να γεμίσεις. Άλλαξε σε λειτουργία Χ για να σημειώσεις τετράγωνα που ξέρεις πως μένουν άδεια — έτσι καθαρίζει το μυαλό σου.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Οι αριθμοί δείχνουν ομάδες</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Το 2 1 δίπλα σε μια σειρά σημαίνει δύο γεμάτα τετράγωνα, τουλάχιστον ένα κενό και μετά ένα γεμάτο.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Γέμισε ή βάλε X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Γέμισε τα τετράγωνα της εικόνας. Βάλε X σε όσα ξέρεις ότι πρέπει να μείνουν κενά.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Εμφανίζεται μια εικόνα</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Τελείωσε κάθε γραμμή και στήλη και τα τουβλάκια γίνονται εικόνα. Κάθε παζλ έχει ακριβώς μία απάντηση — μην μαντεύεις ποτέ.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Πάρε μία δωρεάν!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Όχι αυτό — δοκίμασε ξανά</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Δεν μπόρεσα να φτιάξω παζλ αυτή τη φορά. Δοκίμασε ξανά!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Ολοκλήρωσε κάθε σειρά και στήλη για να ανακαλύψεις την εικόνα.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Ορίστε μια βοήθεια.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Δοκίμασε άλλο τετράγωνο.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Δεν δημιουργήθηκε το παζλ. Δοκίμασε ξανά.</value></data>
   <data name="ok" xml:space="preserve"><value>ΟΚ</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Μετράει για τα μεγαλύτερα ταμπλό που φτιάχνει μόνο του το παιχνίδι — 15×15 και πάνω. Οι μικρές εικόνες είναι σχεδιασμένες στο χέρι.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Η δυσκολία αλλάζει τα παζλ από 15×15 και πάνω. Οι μικρότερες εικόνες μένουν ίδιες.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Ημερήσια παζλ που τελείωσαν αυτόν τον μήνα: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Δεν έμειναν βοήθειες</value></data>
   <data name="lineDone" xml:space="preserve"><value>Η γραμμή τελείωσε!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Έτοιμος όποτε θέλεις. Διάλεξε παζλ!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Πάει καλά! Άλλο ένα;</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Βρήκα καινούριες εικόνες σήμερα.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Χαιρόμαστε που σε βλέπουμε!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Ποια εικόνα θα ανακαλύψεις τώρα;</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Ξεκίνα το πρώτο σου παζλ</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Πώς παίζεται</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Παζλ της ημέρας</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Μια νέα εικόνα κάθε πρωί</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Ένα νέο παζλ κάθε μέρα</value></data>
   <data name="play" xml:space="preserve"><value>Παίξε</value></data>
   <data name="timedName1" xml:space="preserve"><value>Ζέσταμα</value></data>
   <data name="timedName2" xml:space="preserve"><value>Σταθερά</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Σε αυτό το επίπεδο κρύβεται μια εικόνα.</value></data>
   <data name="trophies" xml:space="preserve"><value>Τρόπαια</value></data>
   <data name="timeUp" xml:space="preserve"><value>Τέλος χρόνου!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Το ρολόι σε νίκησε αυτή τη φορά. Θέλεις άλλη προσπάθεια;</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Ο χρόνος τελείωσε. Μπορείς να δοκιμάσεις ξανά όποτε θέλεις.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Δοκίμασε ξανά</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} στο ρολόι.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Ημερήσιο</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Με χρόνο</value></data>
   <data name="tr1" xml:space="preserve"><value>Πρώτη εικόνα</value></data>
-  <data name="tr2" xml:space="preserve"><value>Εβδομάδα σερί</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 εικόνες</value></data>
   <data name="tr3" xml:space="preserve"><value>Χωρίς βοήθειες</value></data>
   <data name="tr4" xml:space="preserve"><value>Γρήγορος</value></data>
   <data name="tr5" xml:space="preserve"><value>100 τουβλάκια</value></data>
   <data name="tr6" xml:space="preserve"><value>Φίλος των δεινοσαύρων</value></data>
-  <data name="tr7" xml:space="preserve"><value>Κουκουβάγια</value></data>
+  <data name="tr7" xml:space="preserve"><value>Λίγο απ’ όλα</value></data>
   <data name="tr8" xml:space="preserve"><value>Άριστο δεκάρι</value></data>
   <data name="tr9" xml:space="preserve"><value>Συλλέκτης</value></data>
   <data name="tr10" xml:space="preserve"><value>Νίκησε το ρολόι</value></data>
   <data name="tr11" xml:space="preserve"><value>Πρωταθλητής μαραθωνίου</value></data>
-  <data name="tr12" xml:space="preserve"><value>Μήνας σερί</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 εικόνες</value></data>
   <data name="tr13" xml:space="preserve"><value>Μεγάλη εικόνα</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 τουβλάκια</value></data>
   <data name="tr15" xml:space="preserve"><value>Αστεροσκόπος</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Τώρα μπορώ να σου διαβάζω.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Δεν υπάρχει φωνή για αυτή τη γλώσσα σε αυτή τη συσκευή</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Γραμμή {0}, στήλη {1}, {2}. Στοιχείο γραμμής {3}. Στοιχείο στήλης {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>άδειο</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>χωρίς σημάδι</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>γεμάτο</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>με Χ</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>σημειωμένο ως κενό</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>κανένα</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Ταμπλό παζλ, {0} επί {1}. {2} από {3} τετράγωνα γεμάτα.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Τα τετράγωνα δεν είναι ακόμη προσβάσιμα με εξερεύνηση αφής.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Το πρόγραμμα ανάγνωσης οθόνης δεν μπορεί να επιλέξει μεμονωμένα τετράγωνα σε αυτή την προβολή.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Χρόνος μέχρι τώρα: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Χρόνος που απομένει: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} μέρες σερί</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>Σκούρο</value></data>
   <data name="auto" xml:space="preserve"><value>Αυτόματο</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Φιλικό στην αχρωματοψία</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Μπλε/πορτοκαλί παλέτα, τα μοτίβα μένουν</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Μπλε και πορτοκαλί χρώματα με μοτίβα</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Κύριο χρώμα</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Μανταρίνι</value></data>
   <data name="accGrape" xml:space="preserve"><value>Σταφύλι</value></data>
   <data name="accTrio" xml:space="preserve"><value>Τρίο</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Το άγγιγμα κάνει</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Άγγιγμα γεμίζει, κράτημα = Χ</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Κουμπί λειτουργίας</value></data>
-  <data name="handed" xml:space="preserve"><value>Κουμπιά στα</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Ενέργεια αγγίγματος</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Άγγιξε για γέμισμα, κράτησε για X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Επίλεξε γέμισμα ή X</value></data>
+  <data name="handed" xml:space="preserve"><value>Θέση κουμπιών</value></data>
   <data name="leftH" xml:space="preserve"><value>Αριστερά</value></data>
   <data name="rightH" xml:space="preserve"><value>Δεξιά</value></data>
-  <data name="cellSize" xml:space="preserve"><value>Μέγεθος τετραγώνου</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Μέγεθος τετραγώνων</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Μεγάλοι αριθμοί</value></data>
   <data name="language" xml:space="preserve"><value>Γλώσσα</value></data>
   <data name="screenTime" xml:space="preserve"><value>Υπενθύμιση χρόνου στην οθόνη</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 ώρα</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Ώρα για διάλειμμα;</value></data>
   <data name="breakBody" xml:space="preserve"><value>Παίζεις {0} λεπτά. Το παζλ σου θα σε περιμένει.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Λίγο ακόμη</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Θα σταματήσω εδώ</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Συνέχισε το παιχνίδι</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Κάνε διάλειμμα</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Μηδενισμός προόδου</value></data>
   <data name="privacy" xml:space="preserve"><value>Δεδομένα &amp; απόρρητο</value></data>
   <data name="open" xml:space="preserve"><value>Άνοιγμα</value></data>
   <data name="reset" xml:space="preserve"><value>Μηδενισμός</value></data>
   <data name="grownUps" xml:space="preserve"><value>Μόνο για μεγάλους</value></data>
   <data name="cancel" xml:space="preserve"><value>Άκυρο</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Να σβηστούν όλα;</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Όλα τα παζλ, τα αστέρια και τα αυτοκόλλητα θα χαθούν. Αυτό δεν αναιρείται.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Ναι, σβήσε τα όλα</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Να διαγραφεί η πρόοδος;</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Θα διαγραφεί όλη η πρόοδος, μαζί με αποθηκευμένα παιχνίδια, αστέρια και τρόπαια. Οι ρυθμίσεις σου μένουν ίδιες. Αυτό δεν αναιρείται.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Μηδενισμός προόδου</value></data>
   <data name="version" xml:space="preserve"><value>Έκδοση {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Χωρίς διαφημίσεις · χωρίς αγορές μέσα στην εφαρμογή</value></data>
   <data name="whatIs" xml:space="preserve"><value>Τι είναι το νονόγκραμ;</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Το νονόγκραμ είναι μια εικόνα κρυμμένη μέσα σε αριθμούς. Τα στοιχεία σε κάθε γραμμή και στήλη σου λένε πόσα τουβλάκια να γεμίσεις και με ποια σειρά. Λύσε κάθε γραμμή με καθαρή λογική και εμφανίζεται μια εικόνα — δεν χρειάζεται ποτέ να μαντέψεις.
-
-Το squarebuzz είναι ένα παιχνίδι nonogram για παιδιά από 6 ετών, χωρίς ανώτατο όριο ηλικίας. Οι ενήλικες μπορούν να διασκεδάσουν εξίσου.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Το νονόγραμμα είναι ένα παζλ με κρυμμένη εικόνα. Οι αριθμοί στις σειρές και τις στήλες σε βοηθούν να βρεις ποια τετράγωνα να γεμίσεις.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Γνωστό και ως: Picross · Griddler · Hanjie · Pic-a-Pix · Ζωγραφική με αριθμούς · ιαπωνικό σταυρόλεξο</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Πώς παίζεται</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Πολιτική απορρήτου</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Βαθμολόγησε το squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Διάβασε τα στοιχεία</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Κάθε αριθμός είναι μία αδιάσπαστη σειρά γεμάτων τουβλάκιων, με τη σειρά. Στοιχείο γραμμής 3 1 σημαίνει τρία μαζί, τουλάχιστον ένα κενό, μετά ένα μόνο.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Γέμισε και βάλε Χ</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Πάτα ένα τετράγωνο για να το γεμίσεις. Άλλαξε σε λειτουργία Χ για τετράγωνα που απέδειξες ότι μένουν άδεια. Τα Χ δεν είναι διακόσμηση — έτσι κρατάς λογαριασμό.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Επικάλυψη στα μεγάλα στοιχεία</value></data>
-  <data name="ht3b" xml:space="preserve"><value>Σε γραμμή πλάτους 10 ένα στοιχείο 8 πρέπει να καλύψει τα 6 μεσαία τετράγωνα όπου κι αν αρχίζει. Σπρώξε τη σειρά αριστερά, σπρώξ' την δεξιά, και γέμισε ό,τι επικαλύπτεται.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Διασταύρωσε γραμμή και στήλη</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Όταν μια γραμμή σου δώσει ένα σίγουρο τουβλάκι, κοίτα κάτω σε αυτή τη στήλη. Το νέο τουβλάκι συχνά τελειώνει ένα στοιχείο στήλης, που δίνει πιο πολλά Χ, που δίνουν πιο πολλά τουβλάκια.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Διάβασε τους αριθμούς</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Κάθε αριθμός δείχνει πόσα τετράγωνα έχει μια ομάδα. Άφηνε τουλάχιστον ένα κενό ανάμεσα στις ομάδες. Διάβαζε τις σειρές από αριστερά προς τα δεξιά και τις στήλες από πάνω προς τα κάτω.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Γέμισε ή βάλε X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Γέμισε τα τετράγωνα της εικόνας. Βάλε X σε όσα ξέρεις ότι πρέπει να μείνουν κενά.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Βρες τα σίγουρα τετράγωνα</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Σε σειρά με 10 τετράγωνα, μια ομάδα των 8 καλύπτει πάντα τα 6 μεσαία. Μπορείς να τα γεμίσεις.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Έλεγξε σειρές και στήλες</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Αφού γεμίσεις ένα τετράγωνο, κοίτα τη στήλη του. Κάθε νέο σημάδι μπορεί να σε βοηθήσει να βρεις το επόμενο.</value></data>
   <data name="ht5" xml:space="preserve"><value>Βάλε Χ στις έτοιμες γραμμές</value></data>
   <data name="ht5b" xml:space="preserve"><value>Όταν μια γραμμή ταιριάζει απόλυτα με τα στοιχεία της, βάλε Χ σε κάθε τετράγωνο που μένει. Οι αριθμοί ξεθωριάζουν για να ξέρεις ότι τελείωσε.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Ζώα</value></data>
@@ -372,21 +370,21 @@
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Σύννεφο βροχής</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Μυστήρια εικόνα</value></data>
   <data name="magnifier" xml:space="preserve"><value>Μεγεθυντικός φακός</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Δείχνει μεγεθυμένη όψη 3×3 όσο ζωγραφίζεις. Κλειστό από προεπιλογή.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Δες τα τετράγωνα μεγεθυμένα όσο τα γεμίζεις.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Ρώτα έναν μεγάλο</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} από {1} βρέθηκαν</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Τελείωσε την πρώτη σου εικόνα.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Παίξε εφτά μέρες σερί.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Ανακάλυψε 7 διαφορετικές εικόνες με τον ρυθμό σου.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Τελείωσε μια εικόνα χωρίς ούτε μία βοήθεια.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Τελείωσε ένα 5×5 σε λιγότερο από ένα λεπτό.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Λύσε ένα παζλ 5×5 σε ένα λεπτό ή λιγότερο.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Γέμισε 100 τουβλάκια συνολικά.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Βρες κάθε δεινόσαυρο.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Τελείωσε μια εικόνα μετά τις 8 το βράδυ.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Ολοκλήρωσε από μία εικόνα από 3 διαφορετικά πακέτα.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Τρία αστέρια σε ένα 10×10, χωρίς λάθη.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Βρες κάθε εικόνα στη συλλογή.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Κέρδισε οποιαδήποτε πρόκληση με χρόνο.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Κέρδισε την πρόκληση Μαραθώνιος.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Παίξε 30 μέρες σερί.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Ανακάλυψε 30 διαφορετικές εικόνες με τον ρυθμό σου.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Τελείωσε ένα 15×15 ή μεγαλύτερο.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Γέμισε 1000 τουβλάκια συνολικά.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Μάζεψε 100 αστέρια.</value></data>
@@ -400,4 +398,13 @@
   <data name="hintLimit" xml:space="preserve"><value>Υποδείξεις σε νέα παιχνίδια</value></data>
   <data name="unlimited" xml:space="preserve"><value>Απεριόριστες</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Εισάγετε έναν ακέραιο αριθμό τουλάχιστον 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Κοινοποίηση του squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Δεν έγινε κοινή χρήση της εφαρμογής. Σύνδεσμος: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Δεν φορτώθηκαν τα αποθηκευμένα παιχνίδια. Δοκίμασε ξανά.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Δεν αποθηκεύτηκε η πρόοδός σου. Δοκίμασε ξανά.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Δεν φορτώθηκε η πρόοδός σου. Δοκίμασε ξανά.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Δεν φορτώθηκαν οι ρυθμίσεις σου. Δοκίμασε ξανά.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Δεν αποθηκεύτηκαν οι ρυθμίσεις σου. Δοκίμασε ξανά.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Δεν διαγράφηκε το αποθηκευμένο παιχνίδι. Δοκίμασε ξανά.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Δεν διαγράφηκε η πρόοδός σου. Δοκίμασε ξανά.</value></data>
 </root>

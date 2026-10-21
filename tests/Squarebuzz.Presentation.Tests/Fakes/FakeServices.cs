@@ -272,6 +272,19 @@ public sealed class FakeLinkOpener : ILinkOpener
     }
 }
 
+public sealed class FakeAppShare : IAppShare
+{
+    public List<(Uri Address, string Title)> Requests { get; } = [];
+    public bool Succeeds { get; set; } = true;
+    public TaskCompletionSource<bool>? PendingRequest { get; set; }
+
+    public Task<bool> RequestAsync(Uri address, string title)
+    {
+        Requests.Add((address, title));
+        return PendingRequest?.Task ?? Task.FromResult(Succeeds);
+    }
+}
+
 public sealed class FakeAppVersion : IAppVersion
 {
     public string Version => "2.3";

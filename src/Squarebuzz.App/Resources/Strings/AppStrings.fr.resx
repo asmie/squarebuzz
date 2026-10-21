@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Difficile</value></data>
   <data name="expert" xml:space="preserve"><value>Expert</value></data>
   <data name="challenge" xml:space="preserve"><value>Niveau de défi</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Un second réglage, distinct de la taille et de la difficulté des indices.</value></data>
-  <data name="relaxed" xml:space="preserve"><value>Tranquille</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Aides activées, sans limite</value></data>
-  <data name="sharp" xml:space="preserve"><value>Sérieux</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Erreurs comptées, un indice</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Détente utilise tes réglages d’indices. Défi permet au maximum un indice.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Détente</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Utilise tes réglages d’aide</value></data>
+  <data name="sharp" xml:space="preserve"><value>Défi</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Un indice au maximum</value></data>
   <data name="pack" xml:space="preserve"><value>Pack d’images</value></data>
   <data name="helpers" xml:space="preserve"><value>Aides</value></data>
   <data name="autoCross" xml:space="preserve"><value>Croix auto sur les lignes finies</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Oups</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Suivant</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Les nombres sont des suites de cases</value></data>
-  <data name="onb1b" xml:space="preserve"><value>L’indice 3 1 veut dire trois cases à la suite, un trou, puis une case. Dans cet ordre, de gauche à droite.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Marque les cases vides</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Touche une fois pour remplir. Passe en mode X pour marquer les cases qui restent vides à coup sûr — ça t’évite de t’emmêler.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Les nombres indiquent des groupes</value></data>
+  <data name="onb1b" xml:space="preserve"><value>L’indice 2 1 d’une ligne signifie : deux cases remplies, au moins une case vide, puis une case remplie.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Remplis ou marque X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Remplis les cases de l’image. Marque d’un X les cases qui doivent rester vides.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Une image apparaît</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Finis chaque ligne et chaque colonne, et les cases forment une image. Chaque grille a une seule solution — pas besoin de deviner.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Tiens, celle-là est offerte !</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Pas celle-là — réessaie</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Je n’ai pas réussi à créer une grille cette fois. Réessaie !</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Termine chaque ligne et chaque colonne pour découvrir l’image.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Voici un indice.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Essaie une autre case.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Impossible de créer une grille. Réessaie.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Vaut pour les grandes grilles inventées par le jeu — 15×15 et plus. Les petites images sont dessinées à la main.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>La difficulté change les grilles de 15×15 et plus. Les petites images restent les mêmes.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Grilles du jour terminées ce mois-ci : {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Plus d’indices</value></data>
   <data name="lineDone" xml:space="preserve"><value>Ligne finie !</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Quand tu veux. Choisis une grille !</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Tu es bien lancé. Encore une ?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>J’ai trouvé de nouvelles images aujourd’hui.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Bon retour !</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Quelle image vas-tu découvrir ?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Commence ta première grille</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Comment jouer</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Grille du jour</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Une nouvelle image chaque matin</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Une nouvelle grille chaque jour</value></data>
   <data name="play" xml:space="preserve"><value>Jouer</value></data>
   <data name="timedName1" xml:space="preserve"><value>Échauffement</value></data>
   <data name="timedName2" xml:space="preserve"><value>Régulier</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Une image se cache à ce niveau.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trophées</value></data>
   <data name="timeUp" xml:space="preserve"><value>Temps écoulé !</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Le chrono a gagné cette fois. Tu réessaies ?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Le temps est écoulé. Tu peux réessayer quand tu veux.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Réessayer</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} au chrono.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Du jour</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Chrono</value></data>
   <data name="tr1" xml:space="preserve"><value>Première image</value></data>
-  <data name="tr2" xml:space="preserve"><value>Une semaine</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 images</value></data>
   <data name="tr3" xml:space="preserve"><value>Sans indice</value></data>
   <data name="tr4" xml:space="preserve"><value>Rapide</value></data>
   <data name="tr5" xml:space="preserve"><value>100 cases</value></data>
   <data name="tr6" xml:space="preserve"><value>Fan de dinos</value></data>
-  <data name="tr7" xml:space="preserve"><value>Couche-tard</value></data>
+  <data name="tr7" xml:space="preserve"><value>Un peu de tout</value></data>
   <data name="tr8" xml:space="preserve"><value>Dix sur dix</value></data>
   <data name="tr9" xml:space="preserve"><value>Collectionneur</value></data>
   <data name="tr10" xml:space="preserve"><value>Plus vite que l’horloge</value></data>
   <data name="tr11" xml:space="preserve"><value>Champion du marathon</value></data>
-  <data name="tr12" xml:space="preserve"><value>Un mois entier</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 images</value></data>
   <data name="tr13" xml:space="preserve"><value>Grande image</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 cases</value></data>
   <data name="tr15" xml:space="preserve"><value>Tête dans les étoiles</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Je peux te lire les textes, maintenant.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Aucune voix pour cette langue sur cet appareil</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Ligne {0}, colonne {1}, {2}. Indice de la ligne : {3}. Indice de la colonne : {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>vide</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>sans marque</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>remplie</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>barrée</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>marquée vide</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>aucun</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Grille de {0} sur {1}. {2} cases remplies sur {3}.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Les cases ne sont pas encore accessibles à l’exploration tactile.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Le lecteur d’écran ne peut pas sélectionner les cases une par une dans cette vue.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Temps écoulé : {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Temps restant : {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} jours de suite</value></data>
@@ -176,15 +176,15 @@
   <data name="dark" xml:space="preserve"><value>Sombre</value></data>
   <data name="auto" xml:space="preserve"><value>Auto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Adapté aux daltoniens</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Palette bleu / orange, motifs gardés</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Couleurs bleue et orange avec des motifs</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Couleur principale</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarine</value></data>
   <data name="accGrape" xml:space="preserve"><value>Raisin</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Le toucher</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Toucher remplit, appui long = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Bouton mode</value></data>
-  <data name="handed" xml:space="preserve"><value>Boutons à</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Action au toucher</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Touche pour remplir, maintiens pour X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Choisir Remplir ou X</value></data>
+  <data name="handed" xml:space="preserve"><value>Position des boutons</value></data>
   <data name="leftH" xml:space="preserve"><value>Gauche</value></data>
   <data name="rightH" xml:space="preserve"><value>Droite</value></data>
   <data name="cellSize" xml:space="preserve"><value>Taille des cases</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 heure</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Une petite pause ?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Tu joues depuis {0} minutes. Ta grille t’attendra.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Encore un peu</value></data>
-  <data name="breakStop" xml:space="preserve"><value>J’arrête là</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Continuer à jouer</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Faire une pause</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Effacer les progrès</value></data>
   <data name="privacy" xml:space="preserve"><value>Données et confidentialité</value></data>
   <data name="open" xml:space="preserve"><value>Ouvrir</value></data>
   <data name="reset" xml:space="preserve"><value>Effacer</value></data>
   <data name="grownUps" xml:space="preserve"><value>Adultes seulement</value></data>
   <data name="cancel" xml:space="preserve"><value>Annuler</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Tout effacer ?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Toutes les grilles, les étoiles et les autocollants disparaîtront. C’est définitif.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Oui, tout effacer</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Effacer ta progression ?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Toute ta progression sera effacée, y compris les parties sauvegardées, les étoiles et les trophées. Tes réglages seront conservés. Tu ne pourras pas annuler.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Effacer les progrès</value></data>
   <data name="version" xml:space="preserve"><value>Version {0} · compilation {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Sans publicité · sans achat intégré</value></data>
   <data name="whatIs" xml:space="preserve"><value>Qu’est-ce qu’un nonogramme ?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Un nonogramme est une image cachée dans des nombres. Les indices de chaque ligne et de chaque colonne disent combien de cases remplir et dans quel ordre. Résous chaque ligne avec la seule logique et l’image apparaît — tu n’as jamais besoin de deviner.
-
-squarebuzz est un jeu de nonogrammes pour les enfants dès 6 ans, sans limite d'âge supérieure. Les adultes peuvent s'amuser tout autant.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Un nonogramme est une image à découvrir. Les nombres des lignes et des colonnes t’aident à trouver les cases à remplir.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Aussi appelé : Picross · Griddler · Hanjie · Pic-a-Pix · Peinture par numéros · Mots croisés japonais</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Comment jouer</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politique de confidentialité</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Noter squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Lis les indices</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Chaque nombre est une suite de cases remplies sans trou, dans l’ordre indiqué. L’indice 3 1 d’une ligne veut dire trois cases collées, au moins un trou, puis une case toute seule.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Remplis et barre</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Touche une case pour la remplir. Passe en mode X pour les cases dont tu as la preuve qu’elles restent vides. Les X ne sont pas une décoration : c’est comme ça que tu t’y retrouves.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Le chevauchement des grands indices</value></data>
-  <data name="ht3b" xml:space="preserve"><value>Dans une ligne de 10 cases, un indice de 8 couvre forcément les 6 cases du milieu, où qu’il commence. Pousse la suite à gauche, pousse-la à droite, et remplis la partie commune.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Croise les indices</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Quand une ligne te donne une case sûre, regarde sa colonne. Cette nouvelle case complète souvent un indice de colonne, ce qui donne d’autres X, qui donnent d’autres cases.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lis les nombres</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Chaque nombre indique combien de cases remplir dans un groupe. Laisse au moins une case vide entre les groupes. Lis les lignes de gauche à droite et les colonnes de haut en bas.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Remplis ou marque X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Remplis les cases de l’image. Marque d’un X les cases qui doivent rester vides.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Trouve les cases certaines</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Dans une ligne de 10 cases, un groupe de 8 couvre toujours les 6 cases du milieu. Tu peux les remplir.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Vérifie lignes et colonnes</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Après avoir rempli une case, regarde sa colonne. Chaque nouvelle marque peut t’aider à trouver la suivante.</value></data>
   <data name="ht5" xml:space="preserve"><value>Barre les lignes finies</value></data>
   <data name="ht5b" xml:space="preserve"><value>Quand une ligne correspond entièrement à ses indices, mets un X sur toutes les cases qui restent. Les nombres pâlissent : tu sais que cette ligne est terminée.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Animaux</value></data>
@@ -372,21 +370,21 @@ squarebuzz est un jeu de nonogrammes pour les enfants dès 6 ans, sans limite d'
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Nuage de pluie</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Image mystère</value></data>
   <data name="magnifier" xml:space="preserve"><value>Loupe</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Montre une vue agrandie 3×3 pendant que tu remplis. Désactivée par défaut.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Vois les cases en plus grand pendant que tu les remplis.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Demande à un adulte</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} trouvées sur {1}</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Termine ta première image.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Joue sept jours de suite.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Découvre 7 images différentes, à ton rythme.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Termine une image sans aucun indice.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Termine une grille 5×5 en moins d’une minute.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Termine une grille 5×5 en une minute ou moins.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Remplis 100 cases en tout.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Trouve tous les dinosaures.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Termine une image après 20 h.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Termine une image dans chacun de 3 packs différents.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Trois étoiles sur une 10×10, sans une seule erreur.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Trouve toutes les images de la galerie.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Gagne n’importe quel défi chrono.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Gagne le défi Marathon.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Joue 30 jours de suite.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Découvre 30 images différentes, à ton rythme.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Termine une grille 15×15 ou plus grande.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Remplis 1000 cases en tout.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Récolte 100 étoiles.</value></data>
@@ -400,4 +398,13 @@ squarebuzz est un jeu de nonogrammes pour les enfants dès 6 ans, sans limite d'
   <data name="hintLimit" xml:space="preserve"><value>Indices dans les nouvelles parties</value></data>
   <data name="unlimited" xml:space="preserve"><value>Illimités</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Saisissez un nombre entier supérieur ou égal à 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Partager squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Impossible de partager l’application. Lien : {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Impossible de charger tes parties sauvegardées. Réessaie.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Impossible d’enregistrer ta progression. Réessaie.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Impossible de charger ta progression. Réessaie.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Impossible de charger tes réglages. Réessaie.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Impossible d’enregistrer tes réglages. Réessaie.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Impossible d’effacer la partie sauvegardée. Réessaie.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Impossible d’effacer ta progression. Réessaie.</value></data>
 </root>

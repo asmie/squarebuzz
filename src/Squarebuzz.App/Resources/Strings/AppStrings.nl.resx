@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Moeilijk</value></data>
   <data name="expert" xml:space="preserve"><value>Expert</value></data>
   <data name="challenge" xml:space="preserve"><value>Speelstijl</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Een tweede knop, los van grootte en moeilijkheid.</value></data>
-  <data name="relaxed" xml:space="preserve"><value>Rustig</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Hulp aan, geen grenzen</value></data>
-  <data name="sharp" xml:space="preserve"><value>Scherp</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Fouten geteld, één hint</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Ontspannen gebruikt je hintinstellingen. Uitdaging geeft hoogstens één hint.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Ontspannen</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Gebruikt je hulpinstellingen</value></data>
+  <data name="sharp" xml:space="preserve"><value>Uitdaging</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Hoogstens één hint</value></data>
   <data name="pack" xml:space="preserve"><value>Plaatjespakket</value></data>
   <data name="helpers" xml:space="preserve"><value>Hulpjes</value></data>
   <data name="autoCross" xml:space="preserve"><value>Auto-X bij volle lijnen</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Oeps</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Verder</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Getallen zijn rijen blokjes</value></data>
-  <data name="onb1b" xml:space="preserve"><value>De aanwijzing 3 1 betekent: drie blokjes naast elkaar, een gaatje, dan één blokje. In die volgorde, van links naar rechts.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Markeer de lege vakjes</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Tik één keer om te vullen. Zet de X-stand aan om vakjes te markeren die zeker leeg blijven — zo houd je het overzicht.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Getallen geven groepen aan</value></data>
+  <data name="onb1b" xml:space="preserve"><value>2 1 bij een rij betekent twee gevulde vakjes, minstens één leeg vakje en dan één gevuld vakje.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Vul vakjes of zet X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Vul de vakjes die bij het plaatje horen. Zet X in vakjes die leeg moeten blijven.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Er komt een tekening</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Los elke rij en elke kolom op en de blokjes worden een tekening. Elke puzzel heeft precies één oplossing — je hoeft nooit te gokken.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Deze krijg je van mij!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Die niet — probeer nog eens</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Deze keer lukte het niet om een puzzel te maken. Probeer het nog eens!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Maak elke rij en kolom af om het plaatje te ontdekken.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Hier is een hint.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Probeer een ander vakje.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>De puzzel kon niet worden gemaakt. Probeer het opnieuw.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Geldt voor de grotere borden die het spel zelf verzint — 15×15 en groter. De kleine tekeningen zijn met de hand gemaakt.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>De moeilijkheid verandert puzzels van 15×15 en groter. Kleinere plaatjes blijven hetzelfde.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Dagpuzzels die je deze maand hebt afgemaakt: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Geen hints meer</value></data>
   <data name="lineDone" xml:space="preserve"><value>Lijn klaar!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Ik ben er klaar voor. Kies een puzzel!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Je bent goed op weg. Nog één?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Ik heb vandaag nieuwe tekeningen gevonden.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Welkom terug!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Welk plaatje ontdek je hierna?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Begin je eerste puzzel</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Zo werkt het</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Dagpuzzel</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Elke ochtend een nieuwe tekening</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Elke dag een nieuwe puzzel</value></data>
   <data name="play" xml:space="preserve"><value>Spelen</value></data>
   <data name="timedName1" xml:space="preserve"><value>Opwarmen</value></data>
   <data name="timedName2" xml:space="preserve"><value>Tempo</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Bij dit level zit een tekening verstopt.</value></data>
   <data name="trophies" xml:space="preserve"><value>Bekers</value></data>
   <data name="timeUp" xml:space="preserve"><value>Tijd is om!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>De klok was deze keer sneller. Nog een keer proberen?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>De tijd is om. Je kunt het opnieuw proberen wanneer je wilt.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Nog eens</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} op de klok.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Vandaag</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Tijd</value></data>
   <data name="tr1" xml:space="preserve"><value>Eerste tekening</value></data>
-  <data name="tr2" xml:space="preserve"><value>Week op rij</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 plaatjes</value></data>
   <data name="tr3" xml:space="preserve"><value>Zonder hints</value></data>
   <data name="tr4" xml:space="preserve"><value>Bliksemsnel</value></data>
   <data name="tr5" xml:space="preserve"><value>100 blokjes</value></data>
   <data name="tr6" xml:space="preserve"><value>Dinofan</value></data>
-  <data name="tr7" xml:space="preserve"><value>Nachtuil</value></data>
+  <data name="tr7" xml:space="preserve"><value>Van alles wat</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfecte tien</value></data>
   <data name="tr9" xml:space="preserve"><value>Verzamelaar</value></data>
   <data name="tr10" xml:space="preserve"><value>Klop de klok</value></data>
   <data name="tr11" xml:space="preserve"><value>Marathonkampioen</value></data>
-  <data name="tr12" xml:space="preserve"><value>Maand op rij</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 plaatjes</value></data>
   <data name="tr13" xml:space="preserve"><value>Groot plaatje</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 blokjes</value></data>
   <data name="tr15" xml:space="preserve"><value>Sterrenkijker</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Ik kan je nu voorlezen.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Geen stem voor deze taal op dit apparaat</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Rij {0}, kolom {1}, {2}. Aanwijzing van de rij: {3}. Aanwijzing van de kolom: {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>leeg</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>ongemarkeerd</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>gevuld</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>doorgestreept</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>als leeg gemarkeerd</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>geen</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Puzzelbord, {0} bij {1}. {2} van {3} vakjes gevuld.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>De vakjes zijn nog niet te bereiken door met je vinger te verkennen.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>De schermlezer kan in deze weergave geen losse vakjes selecteren.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tijd tot nu toe: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Resterende tijd: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dagen op rij</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>Donker</value></data>
   <data name="auto" xml:space="preserve"><value>Auto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Voor kleurenblinden</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Blauw/oranje, patronen blijven</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Blauwe en oranje kleuren met patronen</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Hoofdkleur</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarijn</value></data>
   <data name="accGrape" xml:space="preserve"><value>Druif</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Tikken doet</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Tik vult, vasthouden = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Modusknop</value></data>
-  <data name="handed" xml:space="preserve"><value>Knoppen</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Actie bij tikken</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Tik om te vullen, houd vast voor X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Vullen of X kiezen</value></data>
+  <data name="handed" xml:space="preserve"><value>Plaats van knoppen</value></data>
   <data name="leftH" xml:space="preserve"><value>Links</value></data>
   <data name="rightH" xml:space="preserve"><value>Rechts</value></data>
-  <data name="cellSize" xml:space="preserve"><value>Vakgrootte</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Grootte van vakjes</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Grote cijfers</value></data>
   <data name="language" xml:space="preserve"><value>Taal</value></data>
   <data name="screenTime" xml:space="preserve"><value>Pauzeherinnering</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 uur</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Tijd voor een pauze?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Je speelt al {0} minuten. Je puzzel wacht op je.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Nog even</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Ik stop hier</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Verder spelen</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Pauze nemen</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Voortgang wissen</value></data>
   <data name="privacy" xml:space="preserve"><value>Gegevens &amp; privacy</value></data>
   <data name="open" xml:space="preserve"><value>Open</value></data>
   <data name="reset" xml:space="preserve"><value>Wissen</value></data>
   <data name="grownUps" xml:space="preserve"><value>Alleen voor volwassenen</value></data>
   <data name="cancel" xml:space="preserve"><value>Annuleren</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Alles wissen?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Alle puzzels, sterren en stickers zijn dan weg. Dit kun je niet terugdraaien.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Ja, wis alles</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Voortgang wissen?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Alle voortgang wordt gewist, ook opgeslagen spellen, sterren en trofeeën. Je instellingen blijven hetzelfde. Je kunt dit niet ongedaan maken.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Voortgang wissen</value></data>
   <data name="version" xml:space="preserve"><value>Versie {0} · build {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Geen advertenties · geen aankopen in de app</value></data>
   <data name="whatIs" xml:space="preserve"><value>Wat is een nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Een nonogram is een tekening die in getallen verstopt zit. De aanwijzingen bij elke rij en kolom vertellen je hoeveel blokjes je moet vullen en in welke volgorde. Los elke lijn op met pure logica en er komt een tekening — gokken hoeft nooit.
-
-squarebuzz is een nonogramspel voor kinderen vanaf 6 jaar, zonder bovengrens aan de leeftijd. Volwassenen kunnen er net zo veel plezier aan beleven.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Een nonogram is een puzzel met een verborgen plaatje. De getallen bij elke rij en kolom helpen je bepalen welke vakjes je vult.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Ook bekend als: Picross · Griddler · Hanjie · Pic-a-Pix · Schilderen op nummers · Japanse kruiswoordpuzzel</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Zo werkt het</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privacybeleid</value></data>
   <data name="aboutRate" xml:space="preserve"><value>squarebuzz beoordelen</value></data>
-  <data name="ht1" xml:space="preserve"><value>Lees de aanwijzingen</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Elk getal is één ononderbroken rij gevulde blokjes, in de volgorde die er staat. De aanwijzing 3 1 bij een rij betekent: drie naast elkaar, minstens één leeg vakje, dan één alleen.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Vullen en kruisen</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Tik op een vakje om het te vullen. Zet de X-stand aan voor vakjes waarvan je zeker weet dat ze leeg blijven. Kruisjes zijn geen versiering — zo houd je bij wat je al weet.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Overlap bij lange aanwijzingen</value></data>
-  <data name="ht3b" xml:space="preserve"><value>In een rij van 10 breed bedekt een aanwijzing van 8 altijd de middelste 6 vakjes, waar hij ook begint. Schuif de rij blokjes naar links, schuif hem naar rechts en vul alles wat overlapt.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Rijen en kolommen combineren</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Als een rij je één zeker blokje geeft, kijk dan omlaag in die kolom. Dat nieuwe blokje maakt vaak een kolomaanwijzing af, en dat geeft je meer kruisjes, en die geven je meer blokjes.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lees de getallen</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Elk getal zegt hoeveel vakjes een groep heeft. Laat minstens één vakje tussen groepen leeg. Lees rijen van links naar rechts en kolommen van boven naar beneden.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Vul vakjes of zet X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Vul de vakjes die bij het plaatje horen. Zet X in vakjes die leeg moeten blijven.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Vind de zekere vakjes</value></data>
+  <data name="ht3b" xml:space="preserve"><value>In een rij van 10 vakjes bedekt een groep van 8 altijd de middelste 6. Die 6 kun je vullen.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Bekijk rijen en kolommen</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Bekijk na het vullen van een vakje ook de kolom. Elk nieuw teken kan je helpen het volgende vakje te vinden.</value></data>
   <data name="ht5" xml:space="preserve"><value>Kruis volle lijnen door</value></data>
   <data name="ht5b" xml:space="preserve"><value>Als een lijn helemaal bij zijn aanwijzingen past, zet dan een kruisje in alle vakjes die over zijn. De getallen worden lichter, zo zie je dat die lijn klaar is.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Dieren</value></data>
@@ -372,21 +370,21 @@ squarebuzz is een nonogramspel voor kinderen vanaf 6 jaar, zonder bovengrens aan
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Regenwolk</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Geheime tekening</value></data>
   <data name="magnifier" xml:space="preserve"><value>Loep</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Laat tijdens het inkleuren een uitvergroot stukje van 3×3 zien. Standaard uit.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Bekijk de vakjes vergroot terwijl je ze vult.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Vraag een volwassene</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} van {1} gevonden</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Maak je eerste tekening af.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Speel zeven dagen op rij.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Ontdek 7 verschillende plaatjes, op je eigen tempo.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Maak een tekening af zonder één hint.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Maak een 5×5 af binnen een minuut.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Maak een puzzel van 5×5 af in één minuut of minder.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Vul in totaal 100 blokjes.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Vind alle dinosaurussen.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Maak een tekening af na 20:00.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Maak een plaatje af uit elk van 3 verschillende pakketten.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Drie sterren op een 10×10, zonder fouten.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Vind elke tekening in de galerij.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Win een tijdsuitdaging.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Win de Marathon-uitdaging.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Speel 30 dagen op rij.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Ontdek 30 verschillende plaatjes, op je eigen tempo.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Maak een 15×15 of groter af.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Vul in totaal 1000 blokjes.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Verzamel 100 sterren.</value></data>
@@ -400,4 +398,13 @@ squarebuzz is een nonogramspel voor kinderen vanaf 6 jaar, zonder bovengrens aan
   <data name="hintLimit" xml:space="preserve"><value>Hints in nieuwe spellen</value></data>
   <data name="unlimited" xml:space="preserve"><value>Onbeperkt</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Voer een geheel getal van minimaal 1 in.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>squarebuzz delen</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>De app kon niet worden gedeeld. Link: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Opgeslagen spellen konden niet worden geladen. Probeer het opnieuw.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Je voortgang kon niet worden opgeslagen. Probeer het opnieuw.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Je voortgang kon niet worden geladen. Probeer het opnieuw.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Je instellingen konden niet worden geladen. Probeer het opnieuw.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Je instellingen konden niet worden opgeslagen. Probeer het opnieuw.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Het opgeslagen spel kon niet worden gewist. Probeer het opnieuw.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Je voortgang kon niet worden gewist. Probeer het opnieuw.</value></data>
 </root>

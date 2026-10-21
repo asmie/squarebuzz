@@ -6,6 +6,43 @@ Record each case as **passed**, **failed**, or **not run**, with the build and d
 The latest execution record is [release-1.0.1.md](release-1.0.1.md).
 Earlier platform evidence remains in [RESULTS.md](RESULTS.md).
 
+## Sharing the app
+
+Run on both Android and a packaged Windows build. These checks require a person to choose a
+share target; a successful compile does not confirm delivery to another app.
+
+1. Open Settings and select **Share squarebuzz** in the grown-ups section. Cancel the parent
+   gate or enter a wrong answer: no share sheet should open.
+2. Pass the gate. Confirm that the native Android Sharesheet or Windows share window opens.
+3. Choose a disposable draft or copy-link target and inspect the payload without sending it:
+   Android must share `https://play.google.com/store/apps/details?id=fun.asmie.squarebuzz`;
+   Windows must share `https://apps.microsoft.com/detail/9P308NW6NSXM`. Neither payload should
+   contain a review URI, private game data, or a local file path.
+4. Open that link in a browser and confirm the intended public store listing is available.
+5. Dismiss the share sheet, return to Settings, and share again. Cancellation must not show an
+   error or a claim that the link was sent. Check that gameplay and settings remain intact.
+6. Check a long-label language and an RTL language; the button and parent gate remain usable.
+   If the system cannot open sharing, the app should show a localized notice with the link.
+
+## Text and collection goals
+
+Use the current language's labels when following these cases. Check English, Polish, an RTL
+language and a language with long labels, then record remaining locales for native review.
+
+1. Onboarding's first example says `2 1` and shows two filled squares, a gap and one filled
+   square. The next card explains filling and X without requiring a particular input mode.
+2. How to Play shows both placements of the eight-square group and the six shared squares.
+   At large text sizes, scroll through all five lessons and confirm no sentence is clipped.
+3. Change the hint allowance in Options, return to Quick game and verify the displayed number.
+   Repeat with hints disabled, unlimited hints and Sharp. The description must follow the
+   actual rules even when the selected mode did not change.
+4. Inspect reset behind the parent gate without confirming it. It must explain that progress,
+   saves, stars and trophies are removed, and settings remain. Cancel returns safely.
+5. Inspect the three replacement trophy goals: 7 different pictures, 3 different packs and
+   30 different pictures. Previously earned IDs 2, 7 and 12 remain earned after an update.
+6. With a screen reader, distinguish an unmarked square from a square marked empty. Check
+   complete coordinates and clues, as well as pronunciation of the revised tutorial.
+
 ## Build and evidence
 
 Use the SDK/workload versions pinned in `global.json` and the platform prerequisites in the

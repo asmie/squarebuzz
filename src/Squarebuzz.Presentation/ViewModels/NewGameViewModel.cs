@@ -151,7 +151,17 @@ public partial class NewGameViewModel : LocalizedViewModel
 
     public string GalleryLabel => T("gallery");
 
-    public string ChallengeNote => IsSharp ? T("sharpSub") : T("relaxedSub");
+    public string ChallengeNote
+    {
+        get
+        {
+            var rules = GameRules.Create(SelectedChallenge, _settings.Helpers);
+            var allowance = !rules.AllowHints ? T("stOff")
+                : rules.HasUnlimitedHints ? T("unlimited")
+                : rules.HintAllowance.ToString(System.Globalization.CultureInfo.CurrentCulture);
+            return $"{T("hints")}: {allowance}";
+        }
+    }
 
     public override async Task OnAppearingAsync()
     {
@@ -187,6 +197,7 @@ public partial class NewGameViewModel : LocalizedViewModel
         // long after the collection had outgrown it. Size, difficulty and challenge are remembered.
         SelectedPackId = OpenPackOrFallback(GameSettings.DefaultPackId);
         SelectedChallenge = _settings.LastChallenge;
+        OnPropertyChanged(nameof(ChallengeNote));
 
         BuildOptions();
     }

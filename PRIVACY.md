@@ -1,15 +1,15 @@
 # squarebuzz privacy policy
 
-**Effective date:** 8 October 2026
+**Effective date:** 21 October 2026
 
-squarebuzz is a picture-logic puzzle game (nonograms) for children aged 6 and up, with no upper
-age limit. Adults can enjoy it just as much. It runs on
+squarebuzz is a nonogram puzzle game for children aged 6 and up and adults. It runs on
 Android, iPhone and iPad, and Windows. This policy explains what the app does with information.
-In short: **squarebuzz does not collect, send or share any personal information.**
+**squarebuzz does not collect, send or share personal information.**
 
 ## What the app keeps, and where
 
-Everything squarebuzz remembers stays **on your device**, inside the app's own storage:
+squarebuzz saves the following information **on your device**, inside the app's own storage.
+Your operating system may include it in device backups, as explained below.
 
 - **Game progress**: campaign levels finished, stars, the daily-play streak, which pictures have
   been found, trophies, and the dates these happened.
@@ -31,7 +31,7 @@ accounts and no sign-in.
 - It includes no analytics, tracking or crash-reporting services, and no third-party SDKs that
   collect data.
 - It does not use the camera, microphone, location, contacts or photos.
-- It does not share information with anyone, because it has nothing to share.
+- It does not upload your game progress or settings.
 
 ## Voice narration
 
@@ -41,9 +41,13 @@ squarebuzz does not send it anywhere.
 
 ## Links out of the app
 
-The only links that leave the app, such as this privacy policy, sit behind a grown-ups' check
-(a multiplication question) so that a child cannot follow them alone. Once you leave the app,
-the website or store you open has its own privacy policy.
+External links, such as this privacy policy, sit behind a grown-ups' check: a multiplication
+question. The check helps prevent accidental access; it does not verify a person's age.
+Once you leave the app, the website or store you open has its own privacy policy.
+
+If you choose **Share squarebuzz**, the app passes its public store link to your device's
+sharing feature. It does not include your game progress or settings. The app you choose
+to share the link has its own privacy policy.
 
 ## Device backups
 
@@ -61,7 +65,8 @@ beyond what is stored on the device.
 ## Removing the data
 
 - **Reset progress** in *Options → Parent zone* erases game progress on the device.
-- **Uninstalling the app** removes everything it stored.
+- **Uninstalling the app** removes its local data. Device backups are managed separately by
+  your operating system provider.
 
 ## Changes to this policy
 

@@ -1371,11 +1371,17 @@ public partial class GameViewModel : LocalizedViewModel
     public bool HasPersistenceFailure => _saves.HasFailure || _completions.HasFailure
         || _settingsLoadFailed || _progressLoadFailed || _failedResumeId is not null;
 
-    public string PersistenceFailureText => T("storageUnavailable");
+    public string PersistenceFailureText => T(_failedResumeId is not null ? "loadGamesFailed"
+        : _settingsLoadFailed ? "loadSettingsFailed"
+        : _progressLoadFailed ? "loadProgressFailed" : "saveProgressFailed");
     public string RetryPersistenceText => T("tryAgain");
 
     private void OnPersistenceChanged(object? sender, EventArgs e) =>
-        _uiThread.BeginInvokeOnMainThread(() => OnPropertyChanged(nameof(HasPersistenceFailure)));
+        _uiThread.BeginInvokeOnMainThread(() =>
+        {
+            OnPropertyChanged(nameof(HasPersistenceFailure));
+            OnPropertyChanged(nameof(PersistenceFailureText));
+        });
 
     private void ReportReadFailure(PersistenceOperation operation, Exception error, Guid? id = null)
     {

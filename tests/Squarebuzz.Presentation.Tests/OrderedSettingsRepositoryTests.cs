@@ -33,7 +33,7 @@ public sealed class OrderedSettingsRepositoryTests
         await game.Vm.StartAsync();
         using var options = new OptionsViewModel(game.Strings, settings, game.CompletionService,
             game.Theme, game.Navigation, game.ScreenTime, game.Audio, game.Narration, game.UiThread,
-            new FakeAppVersion(), new FakeLinkOpener());
+            new FakeAppVersion(), new FakeLinkOpener(), new FakeAppShare());
         await options.OnAppearingAsync();
 
         var gate = storage.SaveGate = new(TaskCreationOptions.RunContinuationsAsynchronously);

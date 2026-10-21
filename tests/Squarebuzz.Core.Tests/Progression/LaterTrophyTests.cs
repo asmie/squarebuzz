@@ -67,11 +67,11 @@ public class LaterTrophyTests
     [Theory]
     [InlineData(29, false)]
     [InlineData(30, true)]
-    public void MonthStreak_NeedsThirtyDays(int streak, bool expected)
+    public void ThirtyPictures_NeedsThirtyDifferentPictures(int count, bool expected)
     {
-        var earned = Evaluate(Completion(), PlayerProgress.Empty with { Streak = streak });
+        var earned = Evaluate(Completion(), PlayerProgress.Empty with { Streak = 0 }, AllPuzzles.Take(count).Select(p => p.Id));
 
-        Assert.Equal(expected, earned.Contains(TrophyId.MonthStreak));
+        Assert.Equal(expected, earned.Contains(TrophyId.ThirtyPictures));
     }
 
     [Theory]

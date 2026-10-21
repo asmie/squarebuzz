@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>سخت</value></data>
   <data name="expert" xml:space="preserve"><value>استاد</value></data>
   <data name="challenge" xml:space="preserve"><value>سطح چالش</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>یک درجه‌بندی دوم، جدا از اندازه و سختی سرنخ‌ها.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>آرام از تنظیمات راهنمای تو استفاده می‌کند. چالش حداکثر یک راهنما می‌دهد.</value></data>
   <data name="relaxed" xml:space="preserve"><value>آرام</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>کمک‌ها روشن، بدون محدودیت</value></data>
-  <data name="sharp" xml:space="preserve"><value>تیز</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>اشتباه‌ها شمرده می‌شوند، یک راهنما</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>از تنظیمات کمک تو استفاده می‌کند</value></data>
+  <data name="sharp" xml:space="preserve"><value>چالش</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>حداکثر یک راهنما</value></data>
   <data name="pack" xml:space="preserve"><value>بستهٔ تصاویر</value></data>
   <data name="helpers" xml:space="preserve"><value>کمک‌ها</value></data>
   <data name="autoCross" xml:space="preserve"><value>ضربدر خودکار روی خطوط کامل</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>اوپس</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>بعدی</value></data>
   <data name="menu" xml:space="preserve"><value>منو</value></data>
-  <data name="onb1t" xml:space="preserve"><value>عددها رشته‌های مکعب هستند</value></data>
-  <data name="onb1b" xml:space="preserve"><value>سرنخ ۳ ۱ یعنی سه مکعب پشت هم، یک فاصله، بعد یک مکعب. همین ترتیب، از چپ به راست.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>خانه‌های خالی را علامت بزن</value></data>
-  <data name="onb2b" xml:space="preserve"><value>یک بار بزن تا پر شود. به حالت ضربدر برو تا خانه‌هایی را که می‌دانی خالی می‌مانند علامت بزنی — ذهنت را مرتب نگه می‌دارد.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>عددها گروه‌ها را نشان می‌دهند</value></data>
+  <data name="onb1b" xml:space="preserve"><value>عددهای ⁦2 1⁩ کنار یک ردیف یعنی دو خانهٔ پر، دست‌کم یک خانهٔ خالی و سپس یک خانهٔ پر.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>پر کن یا X بگذار</value></data>
+  <data name="onb2b" xml:space="preserve"><value>خانه‌هایی را که بخشی از تصویرند پر کن. خانه‌هایی را که باید خالی بمانند با X علامت بزن.</value></data>
   <data name="onb3t" xml:space="preserve"><value>یک تصویر پیدا می‌شود</value></data>
-  <data name="onb3b" xml:space="preserve"><value>هر سطر و ستون را کامل کن و مکعب‌ها تصویر می‌شوند. هر پازل دقیقاً یک جواب دارد — هیچ‌وقت حدس نزن.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>این یکی مهمان من!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>آن نه — دوباره امتحان کن</value></data>
-  <data name="genFailed" xml:space="preserve"><value>این بار نتوانستم پازلی بسازم. دوباره امتحان کن!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>هر ردیف و ستون را کامل کن تا تصویر پیدا شود.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>این هم یک راهنما.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>یک خانهٔ دیگر را امتحان کن.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>معما ساخته نشد. دوباره امتحان کن.</value></data>
   <data name="ok" xml:space="preserve"><value>باشه</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>برای تخته‌های بزرگ‌تری که بازی خودش می‌سازد — ۱۵×۱۵ و بالاتر. تصویرهای کوچک با دست کشیده شده‌اند.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>درجهٔ سختی، معماهای 15×15 و بزرگ‌تر را تغییر می‌دهد. تصویرهای کوچک‌تر همان می‌مانند.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>پازل‌های روزانهٔ کامل‌شده در این ماه: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>راهنمایی نمانده</value></data>
   <data name="lineDone" xml:space="preserve"><value>خط کامل شد!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>هر وقت آماده بودی. یک پازل انتخاب کن!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>داری خوب پیش می‌روی. یکی دیگر؟</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>امروز چند تصویر تازه پیدا کردم.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>خوش برگشتی!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>حالا کدام تصویر را پیدا می‌کنی؟</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>اولین پازلت را شروع کن</value></data>
   <data name="howToTitle" xml:space="preserve"><value>چطور بازی کنیم</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>پازل روزانه</value></data>
-  <data name="dailySub" xml:space="preserve"><value>هر صبح یک تصویر تازه</value></data>
+  <data name="dailySub" xml:space="preserve"><value>هر روز یک معمای تازه</value></data>
   <data name="play" xml:space="preserve"><value>بازی</value></data>
   <data name="timedName1" xml:space="preserve"><value>گرم کردن</value></data>
   <data name="timedName2" xml:space="preserve"><value>یکنواخت</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>در این مرحله یک تصویر پنهان شده است.</value></data>
   <data name="trophies" xml:space="preserve"><value>جام‌ها</value></data>
   <data name="timeUp" xml:space="preserve"><value>وقت تمام شد!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>این بار ساعت برد. یک بار دیگر امتحان می‌کنی؟</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>وقت تمام شد. هر وقت خواستی می‌توانی دوباره امتحان کنی.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>دوباره امتحان کن</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} روی ساعت.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>روزانه</value></data>
   <data name="tabTimed" xml:space="preserve"><value>زمان‌دار</value></data>
   <data name="tr1" xml:space="preserve"><value>اولین تصویر</value></data>
-  <data name="tr2" xml:space="preserve"><value>یک هفته پشت هم</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 تصویر</value></data>
   <data name="tr3" xml:space="preserve"><value>بدون راهنما</value></data>
   <data name="tr4" xml:space="preserve"><value>چابک</value></data>
   <data name="tr5" xml:space="preserve"><value>۱۰۰ مکعب</value></data>
   <data name="tr6" xml:space="preserve"><value>دوستدار دایناسور</value></data>
-  <data name="tr7" xml:space="preserve"><value>شب‌بیدار</value></data>
+  <data name="tr7" xml:space="preserve"><value>کمی از هر چیز</value></data>
   <data name="tr8" xml:space="preserve"><value>دهِ بی‌نقص</value></data>
   <data name="tr9" xml:space="preserve"><value>جمع‌کننده</value></data>
   <data name="tr10" xml:space="preserve"><value>جلوتر از ساعت</value></data>
   <data name="tr11" xml:space="preserve"><value>قهرمان ماراتن</value></data>
-  <data name="tr12" xml:space="preserve"><value>یک ماه پشت هم</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 تصویر</value></data>
   <data name="tr13" xml:space="preserve"><value>تصویر بزرگ</value></data>
   <data name="tr14" xml:space="preserve"><value>۱۰۰۰ مکعب</value></data>
   <data name="tr15" xml:space="preserve"><value>ستاره‌نگر</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>حالا می‌توانم برایت بخوانم.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>برای این زبان روی این دستگاه صدایی نیست</value></data>
   <data name="a11yCell" xml:space="preserve"><value>سطر {0}، ستون {1}، {2}. سرنخ سطر {3}. سرنخ ستون {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>خالی</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>بدون علامت</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>پر</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>ضربدر خورده</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>علامت‌خورده به‌عنوان خالی</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>هیچ</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>تختهٔ پازل، {0} در {1}. {2} از {3} خانه پر شده.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>خانه‌ها هنوز با کاوش لمسی در دسترس نیستند.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>صفحه‌خوان نمی‌تواند خانه‌ها را در این نما جداگانه انتخاب کند.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>زمان تا اینجا: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>زمان باقی‌مانده: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} روز پشت هم</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>تیره</value></data>
   <data name="auto" xml:space="preserve"><value>خودکار</value></data>
   <data name="cbPalette" xml:space="preserve"><value>مناسب کوررنگی</value></data>
-  <data name="cbSub" xml:space="preserve"><value>پالت آبی/نارنجی، الگوها می‌مانند</value></data>
+  <data name="cbSub" xml:space="preserve"><value>رنگ‌های آبی و نارنجی همراه با نقش</value></data>
   <data name="accentTheme" xml:space="preserve"><value>رنگ اصلی</value></data>
   <data name="accTangerine" xml:space="preserve"><value>نارنگی</value></data>
   <data name="accGrape" xml:space="preserve"><value>انگور</value></data>
   <data name="accTrio" xml:space="preserve"><value>سه‌گانه</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>ضربه چه می‌کند</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>ضربه پر می‌کند، نگه‌داشتن = ضربدر</value></data>
-  <data name="tapMode" xml:space="preserve"><value>دکمهٔ حالت</value></data>
-  <data name="handed" xml:space="preserve"><value>دکمه‌ها در</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>کار لمس</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>برای پر کردن بزن، برای X نگه دار</value></data>
+  <data name="tapMode" xml:space="preserve"><value>پر کردن یا X را انتخاب کن</value></data>
+  <data name="handed" xml:space="preserve"><value>جای دکمه‌ها</value></data>
   <data name="leftH" xml:space="preserve"><value>چپ</value></data>
   <data name="rightH" xml:space="preserve"><value>راست</value></data>
-  <data name="cellSize" xml:space="preserve"><value>اندازهٔ خانه</value></data>
+  <data name="cellSize" xml:space="preserve"><value>اندازهٔ خانه‌ها</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>عددهای بزرگ</value></data>
   <data name="language" xml:space="preserve"><value>زبان</value></data>
   <data name="screenTime" xml:space="preserve"><value>یادآور زمان نمایشگر</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>۱ ساعت</value></data>
   <data name="breakTitle" xml:space="preserve"><value>وقت استراحت است؟</value></data>
   <data name="breakBody" xml:space="preserve"><value>{0} دقیقه بازی کرده‌ای. پازلت منتظرت می‌ماند.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>کمی بیشتر</value></data>
-  <data name="breakStop" xml:space="preserve"><value>همین‌جا بس می‌کنم</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>ادامهٔ بازی</value></data>
+  <data name="breakStop" xml:space="preserve"><value>استراحت کن</value></data>
   <data name="resetProgress" xml:space="preserve"><value>بازنشانی پیشرفت</value></data>
   <data name="privacy" xml:space="preserve"><value>داده‌ها &amp; حریم خصوصی</value></data>
   <data name="open" xml:space="preserve"><value>باز کن</value></data>
   <data name="reset" xml:space="preserve"><value>بازنشانی</value></data>
   <data name="grownUps" xml:space="preserve"><value>فقط بزرگ‌ترها</value></data>
   <data name="cancel" xml:space="preserve"><value>لغو</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>همه چیز پاک شود؟</value></data>
-  <data name="resetBody" xml:space="preserve"><value>همهٔ پازل‌ها، ستاره‌ها و برچسب‌ها از بین می‌روند. این کار برگشت‌پذیر نیست.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>بله، همه را پاک کن</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>پیشرفت بازی پاک شود؟</value></data>
+  <data name="resetBody" xml:space="preserve"><value>همهٔ پیشرفت، از جمله بازی‌های ذخیره‌شده، ستاره‌ها و جایزه‌ها پاک می‌شود. تنظیمات تو باقی می‌ماند. این کار برگشت‌پذیر نیست.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>بازنشانی پیشرفت</value></data>
   <data name="version" xml:space="preserve"><value>نسخهٔ {0} · ساخت {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>بدون تبلیغ · بدون خرید درون‌برنامه‌ای</value></data>
   <data name="whatIs" xml:space="preserve"><value>نونوگرام چیست؟</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>نونوگرام تصویری است که در میان عددها پنهان شده. سرنخ‌های هر سطر و ستون می‌گویند چند مکعب را پر کنی و به چه ترتیب. هر خط را با منطق خالص حل کن و تصویری پیدا می‌شود — هیچ‌وقت لازم نیست حدس بزنی.
-
-squarebuzz یک بازی نونوگرام برای کودکان از 6 سال به بالا است و محدودیت سنی بالایی ندارد. بزرگسالان هم می‌توانند به همان اندازه از آن لذت ببرند.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>نونوگرام معمایی با یک تصویر پنهان است. عددهای کنار ردیف‌ها و ستون‌ها کمک می‌کنند بفهمی کدام خانه‌ها را پر کنی.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>همچنین شناخته‌شده با نام: Picross · Griddler · Hanjie · Pic-a-Pix · نقاشی با اعداد · جدول ژاپنی</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>چطور بازی کنیم</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>سیاست حریم خصوصی</value></data>
   <data name="aboutRate" xml:space="preserve"><value>به squarebuzz امتیاز بده</value></data>
-  <data name="ht1" xml:space="preserve"><value>سرنخ‌ها را بخوان</value></data>
-  <data name="ht1b" xml:space="preserve"><value>هر عدد یک رشتهٔ پیوستهٔ مکعب پر است، به ترتیب. سرنخ سطر ۳ ۱ یعنی سه تا با هم، دست‌کم یک فاصله، بعد یکی تنها.</value></data>
-  <data name="ht2" xml:space="preserve"><value>پر کن و ضربدر بزن</value></data>
-  <data name="ht2b" xml:space="preserve"><value>روی خانه بزن تا پر شود. برای خانه‌هایی که ثابت کرده‌ای خالی می‌مانند به حالت ضربدر برو. ضربدرها تزئین نیستند — با آن‌ها حساب کار را نگه می‌داری.</value></data>
-  <data name="ht3" xml:space="preserve"><value>هم‌پوشانی در سرنخ‌های بلند</value></data>
-  <data name="ht3b" xml:space="preserve"><value>در سطری به پهنای ۱۰، سرنخ ۸ هر جا شروع شود باید ۶ خانهٔ میانی را بپوشاند. رشته را به چپ بران، به راست بران، و آنچه هم‌پوشانی دارد پر کن.</value></data>
-  <data name="ht4" xml:space="preserve"><value>سطر و ستون را با هم ببین</value></data>
-  <data name="ht4b" xml:space="preserve"><value>وقتی سطری یک مکعب قطعی به تو داد، آن ستون را پایین نگاه کن. مکعب تازه بیشتر وقت‌ها سرنخ ستون را کامل می‌کند، که ضربدر بیشتری می‌دهد، که مکعب بیشتری می‌دهد.</value></data>
+  <data name="ht1" xml:space="preserve"><value>عددها را بخوان</value></data>
+  <data name="ht1b" xml:space="preserve"><value>هر عدد می‌گوید چند خانه در یک گروه پر می‌شوند. بین گروه‌ها دست‌کم یک خانه را خالی بگذار. ردیف‌های جدول را از چپ به راست و ستون‌ها را از بالا به پایین بخوان.</value></data>
+  <data name="ht2" xml:space="preserve"><value>پر کن یا X بگذار</value></data>
+  <data name="ht2b" xml:space="preserve"><value>خانه‌هایی را که بخشی از تصویرند پر کن. خانه‌هایی را که باید خالی بمانند با X علامت بزن.</value></data>
+  <data name="ht3" xml:space="preserve"><value>خانه‌های قطعی را پیدا کن</value></data>
+  <data name="ht3b" xml:space="preserve"><value>در ردیفی با 10 خانه، گروهی 8تایی همیشه 6 خانهٔ وسط را می‌پوشاند. می‌توانی آن‌ها را پر کنی.</value></data>
+  <data name="ht4" xml:space="preserve"><value>ردیف‌ها و ستون‌ها را بررسی کن</value></data>
+  <data name="ht4b" xml:space="preserve"><value>پس از پر کردن یک خانه، به ستونش نگاه کن. هر علامت تازه می‌تواند به پیدا کردن خانهٔ بعدی کمک کند.</value></data>
   <data name="ht5" xml:space="preserve"><value>خطوط کامل را ضربدر بزن</value></data>
   <data name="ht5b" xml:space="preserve"><value>وقتی خطی کاملاً با سرنخ‌هایش جور شد، در هر خانهٔ باقی‌مانده ضربدر بگذار. عددها کم‌رنگ می‌شوند تا بدانی آن خط تمام شده.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>حیوانات</value></data>
@@ -372,21 +370,21 @@ squarebuzz یک بازی نونوگرام برای کودکان از 6 سال ب
   <data name="Puzzle_raincloud" xml:space="preserve"><value>ابر بارانی</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>تصویر مرموز</value></data>
   <data name="magnifier" xml:space="preserve"><value>ذره‌بین</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>هنگام رنگ‌کردن نمای بزرگ‌شدهٔ ۳×۳ نشان می‌دهد. به‌طور پیش‌فرض خاموش.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>هنگام پر کردن، خانه‌ها را بزرگ‌تر ببین.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>از یک بزرگ‌تر بپرس</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} از {1} پیدا شد</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>اولین تصویرت را کامل کن.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>هفت روز پشت هم بازی کن.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>7 تصویر متفاوت را با سرعت دلخواهت پیدا کن.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>تصویری را بدون حتی یک راهنما کامل کن.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>یک ۵×۵ را در کمتر از یک دقیقه کامل کن.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>یک معمای 5×5 را در یک دقیقه یا کمتر تمام کن.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>در کل ۱۰۰ مکعب پر کن.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>همهٔ دایناسورها را پیدا کن.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>تصویری را بعد از ساعت ۸ شب کامل کن.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>از هرکدام از 3 بستهٔ متفاوت یک تصویر را کامل کن.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>سه ستاره روی یک ۱۰×۱۰، بدون اشتباه.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>همهٔ تصویرهای گالری را پیدا کن.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>در هر چالش زمان‌دار برنده شو.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>در چالش ماراتن برنده شو.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>۳۰ روز پشت هم بازی کن.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>30 تصویر متفاوت را با سرعت دلخواهت پیدا کن.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>یک ۱۵×۱۵ یا بزرگ‌تر را کامل کن.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>در کل ۱۰۰۰ مکعب پر کن.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>۱۰۰ ستاره جمع کن.</value></data>
@@ -400,4 +398,13 @@ squarebuzz یک بازی نونوگرام برای کودکان از 6 سال ب
   <data name="hintLimit" xml:space="preserve"><value>راهنمایی‌ها در بازی‌های جدید</value></data>
   <data name="unlimited" xml:space="preserve"><value>نامحدود</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>یک عدد صحیح حداقل ۱ وارد کنید.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>اشتراک‌گذاری squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>برنامه به اشتراک گذاشته نشد. پیوند: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>بازی‌های ذخیره‌شده بارگیری نشدند. دوباره امتحان کن.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>پیشرفتت ذخیره نشد. دوباره امتحان کن.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>پیشرفتت بارگیری نشد. دوباره امتحان کن.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>تنظیماتت بارگیری نشد. دوباره امتحان کن.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>تنظیماتت ذخیره نشد. دوباره امتحان کن.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>بازی ذخیره‌شده پاک نشد. دوباره امتحان کن.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>پیشرفتت پاک نشد. دوباره امتحان کن.</value></data>
 </root>

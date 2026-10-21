@@ -37,17 +37,17 @@
   <data name="hard" xml:space="preserve"><value>Grūta</value></data>
   <data name="expert" xml:space="preserve"><value>Eksperts</value></data>
   <data name="challenge" xml:space="preserve"><value>Izaicinājuma līmenis</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Otra skala, atsevišķa no izmēra un norāžu grūtības.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Mierīgi izmanto tavus padomu iestatījumus. Izaicinājums ļauj izmantot ne vairāk kā vienu padomu.</value></data>
   <data name="relaxed" xml:space="preserve"><value>Mierīgi</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Palīgi ieslēgti, bez ierobežojumiem</value></data>
-  <data name="sharp" xml:space="preserve"><value>Asi</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Kļūdas tiek skaitītas, viena norāde</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Izmanto tavus palīdzības iestatījumus</value></data>
+  <data name="sharp" xml:space="preserve"><value>Izaicinājums</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Ne vairāk kā viens padoms</value></data>
   <data name="pack" xml:space="preserve"><value>Bilžu komplekts</value></data>
   <data name="helpers" xml:space="preserve"><value>Palīgi</value></data>
   <data name="autoCross" xml:space="preserve"><value>Auto-X pabeigtās līnijās</value></data>
   <data name="warnMistakes" xml:space="preserve"><value>Brīdināt par kļūdām</value></data>
   <data name="showTimer" xml:space="preserve"><value>Rādīt laiku</value></data>
-  <data name="allowHints" xml:space="preserve"><value>Atļaut norādes</value></data>
+  <data name="allowHints" xml:space="preserve"><value>Atļaut padomus</value></data>
   <data name="gallery" xml:space="preserve"><value>Galerija</value></data>
   <data name="locked" xml:space="preserve"><value>Aizslēgta</value></data>
   <data name="start" xml:space="preserve"><value>Sākt</value></data>
@@ -55,7 +55,7 @@
   <data name="cross" xml:space="preserve"><value>Atzīmēt X</value></data>
   <data name="undo" xml:space="preserve"><value>Atsaukt</value></data>
   <data name="redo" xml:space="preserve"><value>Atjaunot</value></data>
-  <data name="hint" xml:space="preserve"><value>Norāde</value></data>
+  <data name="hint" xml:space="preserve"><value>Padoms</value></data>
   <data name="pause" xml:space="preserve"><value>Pauze</value></data>
   <data name="paused" xml:space="preserve"><value>Pauze</value></data>
   <data name="resume" xml:space="preserve"><value>Turpināt</value></data>
@@ -64,31 +64,31 @@
   <data name="quit" xml:space="preserve"><value>Uz izvēlni</value></data>
   <data name="solved" xml:space="preserve"><value>Tev izdevās!</value></data>
   <data name="time" xml:space="preserve"><value>Laiks</value></data>
-  <data name="hints" xml:space="preserve"><value>Norādes</value></data>
+  <data name="hints" xml:space="preserve"><value>Padomi</value></data>
   <data name="mistakes" xml:space="preserve"><value>Ups</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Tālāk</value></data>
   <data name="menu" xml:space="preserve"><value>Izvēlne</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Skaitļi ir klucīšu virknes</value></data>
-  <data name="onb1b" xml:space="preserve"><value>Norāde 3 1 nozīmē: trīs klucīši pēc kārtas, atstarpe, tad vēl viens. Tādā pašā secībā, no kreisās uz labo.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Atzīmē tukšās</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Pieskaries, lai aizpildītu. Pārslēdzies uz X režīmu un atzīmē rūtiņas, kas noteikti paliks tukšas — tā ir vieglāk nesajukt.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Skaitļi rāda grupas</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Skaitļi 2 1 pie rindas nozīmē divas aizkrāsotas rūtiņas, vismaz vienu tukšu un tad vienu aizkrāsotu.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Aizkrāso vai atzīmē X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Aizkrāso rūtiņas, kas veido attēlu. Tukšās rūtiņas atzīmē ar X.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Parādās bilde</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Pabeidz visas rindas un kolonnas, un klucīši pārtaps bildē. Katrai mīklai ir tikai viena atbilde — minēt nevajag.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Lūk, viena par velti!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Ne tā rūtiņa — pamēģini vēlreiz</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Šoreiz neizdevās izveidot mīklu. Pamēģini vēlreiz!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Pabeidz katru rindu un kolonnu, lai atklātu attēlu.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Lūk, padoms.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Izmēģini citu rūtiņu.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Neizdevās izveidot mīklu. Mēģini vēlreiz.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Attiecas uz lielākiem laukumiem, ko izdomā pati spēle — no 15×15. Mazās bildes ir zīmētas ar roku.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Grūtība maina mīklas no 15×15 un lielākas. Mazākie attēli paliek tādi paši.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Šomēnes pabeigto dienas mīklu skaits: {0}</value></data>
-  <data name="noHints" xml:space="preserve"><value>Norāžu vairs nav</value></data>
+  <data name="noHints" xml:space="preserve"><value>Padomu vairs nav</value></data>
   <data name="lineDone" xml:space="preserve"><value>Līnija pabeigta!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Es esmu gatavs. Izvēlies mīklu!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Tev lieliski sokas. Vēl vienu?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Šodien atradu jaunas bildes.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Prieks tevi atkal redzēt!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Kuru attēlu atklāsi tagad?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Sāc savu pirmo mīklu</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Kā spēlēt</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Dienas mīkla</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Jauna bilde katru rītu</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Jauna mīkla katru dienu</value></data>
   <data name="play" xml:space="preserve"><value>Spēlēt</value></data>
   <data name="timedName1" xml:space="preserve"><value>Iesildīšanās</value></data>
   <data name="timedName2" xml:space="preserve"><value>Vienmērīgi</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Šajā līmenī slēpjas bilde.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofejas</value></data>
   <data name="timeUp" xml:space="preserve"><value>Laiks beidzies!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Šoreiz pulkstenis bija ātrāks. Pamēģini vēl?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Laiks beidzies. Vari mēģināt vēlreiz, kad vēlies.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Mēģini vēlreiz</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Pulkstenī {2}.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Šodien</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Pret laiku</value></data>
   <data name="tr1" xml:space="preserve"><value>Pirmā bilde</value></data>
-  <data name="tr2" xml:space="preserve"><value>Nedēļa pēc kārtas</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 attēli</value></data>
   <data name="tr3" xml:space="preserve"><value>Bez norādēm</value></data>
   <data name="tr4" xml:space="preserve"><value>Ātrais</value></data>
   <data name="tr5" xml:space="preserve"><value>100 klucīšu</value></data>
   <data name="tr6" xml:space="preserve"><value>Dinozauru fans</value></data>
-  <data name="tr7" xml:space="preserve"><value>Nakts pūce</value></data>
+  <data name="tr7" xml:space="preserve"><value>No visa pa druskai</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfekts desmitnieks</value></data>
   <data name="tr9" xml:space="preserve"><value>Kolekcionārs</value></data>
   <data name="tr10" xml:space="preserve"><value>Apsteidz pulksteni</value></data>
   <data name="tr11" xml:space="preserve"><value>Maratona čempions</value></data>
-  <data name="tr12" xml:space="preserve"><value>Mēnesis pēc kārtas</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 attēli</value></data>
   <data name="tr13" xml:space="preserve"><value>Liela bilde</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 klucīšu</value></data>
   <data name="tr15" xml:space="preserve"><value>Zvaigžņu vācējs</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Tagad varu tev lasīt.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Šai valodai šajā ierīcē nav balss</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Rinda {0}, kolonna {1}, {2}. Rindas norāde: {3}. Kolonnas norāde: {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>tukša</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>neatzīmēta</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>aizpildīta</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>pārsvītrota</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>atzīmēta kā tukša</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>nav</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Spēles laukums, {0} reiz {1}. Aizpildītās rūtiņas: {2} no {3}.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Rūtiņas vēl nevar izpētīt ar pieskārienu.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Ekrāna lasītājs šajā skatā nevar izvēlēties atsevišķas rūtiņas.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Līdz šim pagājis laiks: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Atlikušais laiks: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dienu skaits pēc kārtas: {0}</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>Tumša</value></data>
   <data name="auto" xml:space="preserve"><value>Auto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Piemērota daltoniķiem</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Zila un oranža palete, raksti paliek</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Zila un oranža krāsa ar rakstiem</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Galvenā krāsa</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarīns</value></data>
   <data name="accGrape" xml:space="preserve"><value>Vīnoga</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Pieskāriens</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Pieskaries – aizpilda, turi – X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Režīms</value></data>
-  <data name="handed" xml:space="preserve"><value>Pogas</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Pieskāriena darbība</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Pieskaries, lai aizkrāsotu; turi, lai atzīmētu X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Izvēlies krāsošanu vai X</value></data>
+  <data name="handed" xml:space="preserve"><value>Pogu novietojums</value></data>
   <data name="leftH" xml:space="preserve"><value>Pa kreisi</value></data>
   <data name="rightH" xml:space="preserve"><value>Pa labi</value></data>
-  <data name="cellSize" xml:space="preserve"><value>Rūtiņu izmērs</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Rūtiņas izmērs</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Lieli skaitļi</value></data>
   <data name="language" xml:space="preserve"><value>Valoda</value></data>
   <data name="screenTime" xml:space="preserve"><value>Atgādinājums par pārtraukumu</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 stunda</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Varbūt laiks pārtraukumam?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Tu spēlē jau {0} min. Tava mīkla tevi pagaidīs.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Vēl mazliet</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Beigšu šeit</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Turpini spēlēt</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Paņem pauzi</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Atiestatīt progresu</value></data>
   <data name="privacy" xml:space="preserve"><value>Dati un privātums</value></data>
   <data name="open" xml:space="preserve"><value>Atvērt</value></data>
   <data name="reset" xml:space="preserve"><value>Atiestatīt</value></data>
   <data name="grownUps" xml:space="preserve"><value>Tikai pieaugušajiem</value></data>
   <data name="cancel" xml:space="preserve"><value>Atcelt</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Izdzēst visu?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Visas mīklas, zvaigznes un uzlīmes pazudīs. To vairs nevarēs atsaukt.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Jā, izdzēst visu</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Dzēst spēles progresu?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Tiks dzēsts viss progress, arī saglabātās spēles, zvaigznes un trofejas. Iestatījumi paliks. Šo darbību nevar atsaukt.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Atiestatīt progresu</value></data>
   <data name="version" xml:space="preserve"><value>Versija {0} · būvējums {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklāmām · bez pirkumiem lietotnē</value></data>
   <data name="whatIs" xml:space="preserve"><value>Kas ir nonogramma?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogramma ir bilde, kas paslēpta skaitļos. Norādes pie katras rindas un kolonnas pasaka, cik rūtiņu jāaizpilda un kādā secībā. Atmini katru līniju ar tīru loģiku, un bilde parādīsies — minēt nekad nevajag.
-
-squarebuzz ir nonogrammu spēle bērniem no 6 gadu vecuma, bez augšējās vecuma robežas. Arī pieaugušie var to izbaudīt tikpat daudz.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogramma ir mīkla ar paslēptu attēlu. Skaitļi pie rindām un kolonnām palīdz saprast, kuras rūtiņas aizkrāsot.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Pazīstama arī kā: Picross · Griddler · Hanjie · Pic-a-Pix · Krāsošana pēc skaitļiem · Japāņu krustvārdu mīkla</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Kā spēlēt</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Privātuma politika</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Novērtē squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Lasi norādes</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Katrs skaitlis ir viena nepārtraukta aizpildītu rūtiņu virkne, un skaitļi ir uzskaitīti pēc kārtas. Rindas norāde 3 1 nozīmē: trīs blakus, vismaz viena tukša rūtiņa, tad viena atsevišķi.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Aizpildi un pārsvītro</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Pieskaries rūtiņai, lai to aizpildītu. Pārslēdzies uz X režīmu tām rūtiņām, par kurām esi pārliecinājies, ka tās paliks tukšas. X zīmes nav rotājums — tās palīdz nesajukt.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Pārklāšanās garās norādēs</value></data>
-  <data name="ht3b" xml:space="preserve"><value>Rindā, kas ir 10 rūtiņas plata, norāde 8 vienmēr aizņem vidējās 6 rūtiņas — lai kur tā sāktos. Pabīdi virkni pa kreisi, pabīdi pa labi un aizpildi to, kas pārklājas.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Sasaisti rindas un kolonnas</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Kad rinda tev dod vienu drošu rūtiņu, paskaties pa tās kolonnu. Jaunā rūtiņa bieži pabeidz kolonnas norādi, tas dod vairāk X zīmju, un tās dod vēl vairāk aizpildītu rūtiņu.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Lasi skaitļus</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Katrs skaitlis norāda rūtiņu skaitu grupā. Starp grupām atstāj vismaz vienu tukšu rūtiņu. Rindas lasi no kreisās uz labo, bet kolonnas no augšas uz leju.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Aizkrāso vai atzīmē X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Aizkrāso rūtiņas, kas veido attēlu. Tukšās rūtiņas atzīmē ar X.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Atrodi drošās rūtiņas</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Rindā ar 10 rūtiņām 8 rūtiņu grupa vienmēr aizņem vidējās 6. Tās vari aizkrāsot.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Pārbaudi rindas un kolonnas</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Pēc rūtiņas aizkrāsošanas apskati tās kolonnu. Katra jauna atzīme var palīdzēt atrast nākamo rūtiņu.</value></data>
   <data name="ht5" xml:space="preserve"><value>Pārsvītro pabeigtās līnijas</value></data>
   <data name="ht5b" xml:space="preserve"><value>Kad līnija pilnībā atbilst savām norādēm, atzīmē ar X visas pārējās tās rūtiņas. Norāžu skaitļi izgaist, un tu zini, ka līnija ir pabeigta.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Dzīvnieki</value></data>
@@ -372,21 +370,21 @@ squarebuzz ir nonogrammu spēle bērniem no 6 gadu vecuma, bez augšējās vecum
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Lietus mākonis</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Noslēpumainā bilde</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Rāda palielinātu 3×3 skatu, kamēr zīmē. Sākotnēji izslēgta.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Aizkrāsošanas laikā skaties uz palielinātām rūtiņām.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Palūdz pieaugušajam</value></data>
   <data name="galleryFound" xml:space="preserve"><value>Atrastas: {0} no {1}</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Pabeidz savu pirmo bildi.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Spēlē septiņas dienas pēc kārtas.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Atklāj 7 dažādus attēlus savā tempā.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Pabeidz bildi bez nevienas norādes.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Pabeidz 5×5 ātrāk par minūti.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Atrisini 5×5 mīklu minūtē vai ātrāk.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Kopā aizpildi 100 klucīšu.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Atrodi visus dinozaurus.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Pabeidz bildi pēc pulksten 20.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Pabeidz pa vienam attēlam no 3 dažādiem komplektiem.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Trīs zvaigznes 10×10 bez nevienas kļūdas.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Atrodi visas bildes galerijā.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Uzvari jebkurā izaicinājumā pret laiku.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Uzvari Maratona izaicinājumā.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Spēlē 30 dienas pēc kārtas.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Atklāj 30 dažādus attēlus savā tempā.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Pabeidz 15×15 vai lielāku bildi.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Kopā aizpildi 1000 klucīšu.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Savāc 100 zvaigznes.</value></data>
@@ -397,7 +395,16 @@ squarebuzz ir nonogrammu spēle bērniem no 6 gadu vecuma, bez augšējās vecum
   <data name="storageUnavailable" xml:space="preserve">
     <value>Krātuve nav pieejama. Mēģini vēlreiz.</value>
   </data>
-  <data name="hintLimit" xml:space="preserve"><value>Norādes jaunās spēlēs</value></data>
+  <data name="hintLimit" xml:space="preserve"><value>Padomi jaunās spēlēs</value></data>
   <data name="unlimited" xml:space="preserve"><value>Neierobežoti</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Ievadiet veselu skaitli, kas nav mazāks par 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Kopīgot squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Neizdevās kopīgot lietotni. Saite: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Neizdevās ielādēt saglabātās spēles. Mēģini vēlreiz.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Neizdevās saglabāt progresu. Mēģini vēlreiz.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Neizdevās ielādēt progresu. Mēģini vēlreiz.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Neizdevās ielādēt iestatījumus. Mēģini vēlreiz.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Neizdevās saglabāt iestatījumus. Mēģini vēlreiz.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Neizdevās dzēst saglabāto spēli. Mēģini vēlreiz.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Neizdevās dzēst progresu. Mēģini vēlreiz.</value></data>
 </root>

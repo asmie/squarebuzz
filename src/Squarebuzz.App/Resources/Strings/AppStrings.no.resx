@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Vanskelig</value></data>
   <data name="expert" xml:space="preserve"><value>Ekspert</value></data>
   <data name="challenge" xml:space="preserve"><value>Utfordringsnivå</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>En ekstra skala, uavhengig av størrelse og hvor vanskelige hintene er.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Rolig bruker hintinnstillingene dine. Utfordring tillater høyst ett hint.</value></data>
   <data name="relaxed" xml:space="preserve"><value>Rolig</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Hjelpemidler på, ingen grenser</value></data>
-  <data name="sharp" xml:space="preserve"><value>Skarpt</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Feil telles, ett hint</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Bruker hjelpeinnstillingene dine</value></data>
+  <data name="sharp" xml:space="preserve"><value>Utfordring</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Høyst ett hint</value></data>
   <data name="pack" xml:space="preserve"><value>Bildepakke</value></data>
   <data name="helpers" xml:space="preserve"><value>Hjelpemidler</value></data>
   <data name="autoCross" xml:space="preserve"><value>Kryss av ferdige linjer automatisk</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Oi</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Neste</value></data>
   <data name="menu" xml:space="preserve"><value>Meny</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Tallene er rekker av klosser</value></data>
-  <data name="onb1b" xml:space="preserve"><value>Hintet 3 1 betyr tre klosser på rad, et hull, så én kloss. Samme rekkefølge, fra venstre mot høyre.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Merk de tomme</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Trykk én gang for å fylle. Bytt til X-modus for å merke ruter du vet er tomme — det holder hodet klart.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Tall viser grupper</value></data>
+  <data name="onb1b" xml:space="preserve"><value>2 1 ved en rad betyr to fylte ruter, minst én tom rute og så én fylt rute.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Fyll ruter og sett X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Fyll rutene som hører til bildet. Sett X i ruter som skal være tomme.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Et bilde dukker opp</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Gjør ferdig hver rad og kolonne, og klossene blir et bilde. Hvert puslespill har nøyaktig ett svar — du skal aldri gjette.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Her får du ett gratis!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Ikke den — prøv igjen</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Klarte ikke å lage et puslespill denne gangen. Prøv igjen!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Gjør ferdig hver rad og kolonne for å finne bildet.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Her er et hint.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Prøv en annen rute.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Kunne ikke lage oppgaven. Prøv igjen.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Gjelder de større brettene spillet lager selv — 15×15 og oppover. De små bildene er tegnet for hånd.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Vanskelighetsgraden endrer oppgaver fra 15×15 og oppover. Mindre bilder forblir like.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Daglige puslespill fullført denne måneden: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Ingen hint igjen</value></data>
   <data name="lineDone" xml:space="preserve"><value>Linjen er ferdig!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Klar når du er. Velg et puslespill!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Dette går bra. Én til?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Jeg fant noen nye bilder i dag.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Velkommen tilbake!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Hvilket bilde finner du nå?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Start ditt første puslespill</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Slik spiller du</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Dagens puslespill</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Et nytt bilde hver morgen</value></data>
+  <data name="dailySub" xml:space="preserve"><value>En ny oppgave hver dag</value></data>
   <data name="play" xml:space="preserve"><value>Spill</value></data>
   <data name="timedName1" xml:space="preserve"><value>Oppvarming</value></data>
   <data name="timedName2" xml:space="preserve"><value>Jevnt</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Et bilde gjemmer seg på dette nivået.</value></data>
   <data name="trophies" xml:space="preserve"><value>Troféer</value></data>
   <data name="timeUp" xml:space="preserve"><value>Tiden er ute!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Klokka vant denne gangen. Vil du prøve igjen?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Tiden er ute. Du kan prøve igjen når du vil.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Prøv igjen</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} på klokka.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Daglig</value></data>
   <data name="tabTimed" xml:space="preserve"><value>På tid</value></data>
   <data name="tr1" xml:space="preserve"><value>Første bilde</value></data>
-  <data name="tr2" xml:space="preserve"><value>Uke på rad</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 bilder</value></data>
   <data name="tr3" xml:space="preserve"><value>Ingen hint</value></data>
   <data name="tr4" xml:space="preserve"><value>Kjapp</value></data>
   <data name="tr5" xml:space="preserve"><value>100 klosser</value></data>
   <data name="tr6" xml:space="preserve"><value>Dinofan</value></data>
-  <data name="tr7" xml:space="preserve"><value>Nattugle</value></data>
+  <data name="tr7" xml:space="preserve"><value>Litt av hvert</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfekt tier</value></data>
   <data name="tr9" xml:space="preserve"><value>Samler</value></data>
   <data name="tr10" xml:space="preserve"><value>Slå klokka</value></data>
   <data name="tr11" xml:space="preserve"><value>Maratonmester</value></data>
-  <data name="tr12" xml:space="preserve"><value>Måned på rad</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 bilder</value></data>
   <data name="tr13" xml:space="preserve"><value>Stort bilde</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 klosser</value></data>
   <data name="tr15" xml:space="preserve"><value>Stjernesamler</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Nå kan jeg lese for deg.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Ingen stemme for dette språket på denne enheten</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Rad {0}, kolonne {1}, {2}. Radhint {3}. Kolonnehint {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>tom</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>umerket</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>fylt</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>krysset ut</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>merket som tom</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>ingen</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Puslebrett, {0} ganger {1}. {2} av {3} ruter fylt.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Rutene kan ennå ikke nås med utforsking ved berøring.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Skjermleseren kan ikke velge enkeltruter i denne visningen.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Tid så langt: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Tid igjen: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} dager på rad</value></data>
@@ -176,15 +176,15 @@
   <data name="dark" xml:space="preserve"><value>Mørkt</value></data>
   <data name="auto" xml:space="preserve"><value>Auto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Fargeblindvennlig</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Blå/oransje palett, mønstre beholdt</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Blå og oransje farger med mønstre</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Hovedfarge</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarin</value></data>
   <data name="accGrape" xml:space="preserve"><value>Drue</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Trykk gjør</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Trykk fyller, hold = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Modusknapp</value></data>
-  <data name="handed" xml:space="preserve"><value>Knapper på</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Trykkfunksjon</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Trykk for å fylle, hold for X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Velg Fyll eller X</value></data>
+  <data name="handed" xml:space="preserve"><value>Plassering av knapper</value></data>
   <data name="leftH" xml:space="preserve"><value>Venstre</value></data>
   <data name="rightH" xml:space="preserve"><value>Høyre</value></data>
   <data name="cellSize" xml:space="preserve"><value>Rutestørrelse</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 time</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Tid for en pause?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Du har spilt i {0} minutter. Puslespillet ditt venter på deg.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Litt lenger</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Jeg stopper her</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Fortsett å spille</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Ta en pause</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Nullstill framgang</value></data>
   <data name="privacy" xml:space="preserve"><value>Data &amp; personvern</value></data>
   <data name="open" xml:space="preserve"><value>Åpne</value></data>
   <data name="reset" xml:space="preserve"><value>Nullstill</value></data>
   <data name="grownUps" xml:space="preserve"><value>Bare for voksne</value></data>
   <data name="cancel" xml:space="preserve"><value>Avbryt</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Slette alt?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Alle puslespill, stjerner og klistremerker forsvinner. Dette kan ikke angres.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Ja, slett alt</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Slette fremgangen?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>All fremgang slettes, også lagrede spill, stjerner og trofeer. Innstillingene dine beholdes. Dette kan ikke angres.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Nullstill framgang</value></data>
   <data name="version" xml:space="preserve"><value>Versjon {0} · bygg {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Ingen reklame · ingen kjøp i appen</value></data>
   <data name="whatIs" xml:space="preserve"><value>Hva er et nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Et nonogram er et bilde som skjuler seg i tall. Hintene ved hver rad og kolonne forteller hvor mange klosser du skal fylle, og i hvilken rekkefølge. Løs hver linje med ren logikk, og et bilde dukker opp — du trenger aldri å gjette.
-
-squarebuzz er et nonogramspill for barn fra 6 år, uten noen øvre aldersgrense. Voksne kan ha det like morsomt.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Et nonogram er en oppgave med et skjult bilde. Tallene ved radene og kolonnene hjelper deg å finne rutene du skal fylle.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Også kjent som: Picross · Griddler · Hanjie · Pic-a-Pix · Mal etter tall · japansk kryssord</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Slik spiller du</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Personvernerklæring</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Vurder squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Les hintene</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Hvert tall er én ubrutt rekke av fylte klosser, listet i rekkefølge. Radhintet 3 1 betyr tre sammen, minst ett hull, så én alene.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Fyll og kryss</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Trykk på en rute for å fylle den. Bytt til X-modus for ruter du har bevist er tomme. X er ikke pynt — det er slik du holder oversikten.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Overlapp på lange hint</value></data>
-  <data name="ht3b" xml:space="preserve"><value>I en rad som er 10 bred må hintet 8 dekke de 6 midterste rutene uansett hvor det starter. Skyv rekken mot venstre, skyv den mot høyre, og fyll det som overlapper.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Se rad og kolonne sammen</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Når en rad gir deg én sikker kloss, se nedover den kolonnen. Den nye klossen fullfører ofte et kolonnehint, som gir flere X-er, som gir flere klosser.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Les tallene</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Hvert tall viser hvor mange ruter en gruppe har. La minst én rute være tom mellom gruppene. Les rader fra venstre mot høyre og kolonner ovenfra og ned.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Fyll ruter og sett X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Fyll rutene som hører til bildet. Sett X i ruter som skal være tomme.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Finn de sikre rutene</value></data>
+  <data name="ht3b" xml:space="preserve"><value>I en rad med 10 ruter dekker en gruppe på 8 alltid de 6 i midten. Du kan fylle dem.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Sjekk rader og kolonner</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Når du har fylt en rute, sjekk kolonnen dens. Hvert nytt merke kan hjelpe deg med neste rute.</value></data>
   <data name="ht5" xml:space="preserve"><value>Kryss ut ferdige linjer</value></data>
   <data name="ht5b" xml:space="preserve"><value>Når en linje stemmer helt med hintene sine, sett X i alle rutene som er igjen. Tallene blekner slik at du ser at linjen er ferdig.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Dyr</value></data>
@@ -372,21 +370,21 @@ squarebuzz er et nonogramspill for barn fra 6 år, uten noen øvre aldersgrense.
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Regnsky</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Hemmelig bilde</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupe</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Viser en forstørret 3×3-visning mens du maler. Av som standard.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Se rutene forstørret mens du fyller dem.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Spør en voksen</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} av {1} funnet</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Gjør ferdig ditt første bilde.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Spill sju dager på rad.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Finn 7 forskjellige bilder i ditt eget tempo.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Gjør ferdig et bilde uten et enkelt hint.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Klar en 5×5 på under ett minutt.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Løs en 5×5-oppgave på ett minutt eller mindre.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Fyll 100 klosser til sammen.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Finn alle dinosaurene.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Gjør ferdig et bilde etter klokka 20.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Fullfør ett bilde fra hver av 3 forskjellige pakker.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tre stjerner på en 10×10, uten feil.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Finn alle bildene i galleriet.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Vinn en hvilken som helst utfordring på tid.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Vinn Maraton-utfordringen.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Spill 30 dager på rad.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Finn 30 forskjellige bilder i ditt eget tempo.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Gjør ferdig en 15×15 eller større.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Fyll 1000 klosser til sammen.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Samle 100 stjerner.</value></data>
@@ -400,4 +398,13 @@ squarebuzz er et nonogramspill for barn fra 6 år, uten noen øvre aldersgrense.
   <data name="hintLimit" xml:space="preserve"><value>Hint i nye spill</value></data>
   <data name="unlimited" xml:space="preserve"><value>Ubegrenset</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Skriv inn et heltall på minst 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Del squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Kunne ikke dele appen. Lenke: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Kunne ikke laste inn lagrede spill. Prøv igjen.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Kunne ikke lagre fremgangen din. Prøv igjen.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Kunne ikke laste inn fremgangen din. Prøv igjen.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Kunne ikke laste inn innstillingene dine. Prøv igjen.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Kunne ikke lagre innstillingene dine. Prøv igjen.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Kunne ikke slette det lagrede spillet. Prøv igjen.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Kunne ikke slette fremgangen din. Prøv igjen.</value></data>
 </root>

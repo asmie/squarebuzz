@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Zor</value></data>
   <data name="expert" xml:space="preserve"><value>Uzman</value></data>
   <data name="challenge" xml:space="preserve"><value>Meydan okuma</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Boyuttan ve ipucu zorluğundan ayrı, ikinci bir ayar.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Rahat, ipucu ayarlarını kullanır. Zorlu, en fazla bir ipucuna izin verir.</value></data>
   <data name="relaxed" xml:space="preserve"><value>Rahat</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Yardımlar açık, sınır yok</value></data>
-  <data name="sharp" xml:space="preserve"><value>Sıkı</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Hatalar sayılır, tek ipucu</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Yardım ayarlarını kullanır</value></data>
+  <data name="sharp" xml:space="preserve"><value>Zorlu</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>En fazla bir ipucu</value></data>
   <data name="pack" xml:space="preserve"><value>Resim paketi</value></data>
   <data name="helpers" xml:space="preserve"><value>Yardımlar</value></data>
   <data name="autoCross" xml:space="preserve"><value>Bitmiş çizgilere otomatik X</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Hoppa</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>İleri</value></data>
   <data name="menu" xml:space="preserve"><value>Menü</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Sayılar blok dizileridir</value></data>
-  <data name="onb1b" xml:space="preserve"><value>3 1 ipucu, üç blok yan yana, bir boşluk, sonra tek blok demek. Aynı sırayla, soldan sağa.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Boş kalanları işaretle</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Doldurmak için bir kez dokun. Boş kalacağını bildiğin kareler için X moduna geç — kafan karışmaz.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Sayılar grupları gösterir</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Bir satırdaki 2 1, iki dolu kare, en az bir boş kare ve ardından bir dolu kare demektir.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Doldur veya X koy</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Resme ait kareleri doldur. Boş kalacağını bildiğin karelere X koy.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Bir resim çıkıyor</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Her satırı ve her sütunu bitir, bloklar bir resme dönüşsün. Her bulmacanın tek bir çözümü var — asla tahmin etme.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Al bir tane bedava!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>O değil — bir daha dene</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Bu sefer bulmaca kuramadım. Lütfen tekrar dene!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Resmi ortaya çıkarmak için her satırı ve sütunu tamamla.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>İşte bir ipucu.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Başka bir kare dene.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Bulmaca oluşturulamadı. Tekrar dene.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Oyunun kendi kurduğu büyük tahtalar için geçerli — 15×15 ve üstü. Küçük resimler elle çizildi.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Zorluk, 15×15 ve daha büyük bulmacaları değiştirir. Küçük resimler aynı kalır.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Bu ay bitirilen günlük bulmacalar: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>İpucu kalmadı</value></data>
   <data name="lineDone" xml:space="preserve"><value>Çizgi tamam!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Sen hazır olunca başlarız. Bir bulmaca seç!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Çok iyi gidiyorsun. Bir tane daha?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Bugün yeni resimler buldum.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Tekrar hoş geldin!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Şimdi hangi resmi keşfedeceksin?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>İlk bulmacana başla</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Nasıl Oynanır</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Günlük Bulmaca</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Her sabah yeni bir resim</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Her gün yeni bir bulmaca</value></data>
   <data name="play" xml:space="preserve"><value>Oyna</value></data>
   <data name="timedName1" xml:space="preserve"><value>Isınma</value></data>
   <data name="timedName2" xml:space="preserve"><value>Dengeli</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Bu seviyede bir resim saklı.</value></data>
   <data name="trophies" xml:space="preserve"><value>Kupalar</value></data>
   <data name="timeUp" xml:space="preserve"><value>Süre bitti!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Bu sefer saat seni geçti. Bir daha denemek ister misin?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Süre doldu. İstediğin zaman tekrar deneyebilirsin.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Tekrar dene</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. Saatte {2} var.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Günlük</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Süreli</value></data>
   <data name="tr1" xml:space="preserve"><value>İlk Resim</value></data>
-  <data name="tr2" xml:space="preserve"><value>Haftalık Seri</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 resim</value></data>
   <data name="tr3" xml:space="preserve"><value>İpucusuz</value></data>
   <data name="tr4" xml:space="preserve"><value>Hızlı</value></data>
   <data name="tr5" xml:space="preserve"><value>100 Blok</value></data>
   <data name="tr6" xml:space="preserve"><value>Dino Hayranı</value></data>
-  <data name="tr7" xml:space="preserve"><value>Gece Kuşu</value></data>
+  <data name="tr7" xml:space="preserve"><value>Her şeyden biraz</value></data>
   <data name="tr8" xml:space="preserve"><value>Kusursuz On</value></data>
   <data name="tr9" xml:space="preserve"><value>Koleksiyoncu</value></data>
   <data name="tr10" xml:space="preserve"><value>Zamanı Yen</value></data>
   <data name="tr11" xml:space="preserve"><value>Maraton Şampiyonu</value></data>
-  <data name="tr12" xml:space="preserve"><value>Aylık Seri</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 resim</value></data>
   <data name="tr13" xml:space="preserve"><value>Büyük Resim</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 Blok</value></data>
   <data name="tr15" xml:space="preserve"><value>Yıldız Avcısı</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Artık sana okuyabilirim.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Bu cihazda bu dil için ses yok</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Satır {0}, sütun {1}, {2}. Satır ipucu {3}. Sütun ipucu {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>boş</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>işaretlenmemiş</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>dolu</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>çarpı işaretli</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>boş olarak işaretlenmiş</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>yok</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Bulmaca tahtası, {0} çarpı {1}. {3} karenin {2} tanesi dolu.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Karelere henüz dokunarak keşifle ulaşılamıyor.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Ekran okuyucu bu görünümde kareleri tek tek seçemez.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Şu ana kadarki süre: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Kalan süre: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Üst üste {0} gün</value></data>
@@ -176,15 +176,15 @@
   <data name="dark" xml:space="preserve"><value>Koyu</value></data>
   <data name="auto" xml:space="preserve"><value>Oto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Renk körlüğüne uygun</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Mavi / turuncu palet, desenler kalır</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Desenli mavi ve turuncu renkler</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Ana renk</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandalina</value></data>
   <data name="accGrape" xml:space="preserve"><value>Üzüm</value></data>
   <data name="accTrio" xml:space="preserve"><value>Üçlü</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Dokunma</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Dokun doldurur, basılı tut = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Mod düğmesi</value></data>
-  <data name="handed" xml:space="preserve"><value>Düğmeler</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Dokunma işlevi</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Doldurmak için dokun, X için basılı tut</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Doldurma veya X seç</value></data>
+  <data name="handed" xml:space="preserve"><value>Düğmelerin yeri</value></data>
   <data name="leftH" xml:space="preserve"><value>Solda</value></data>
   <data name="rightH" xml:space="preserve"><value>Sağda</value></data>
   <data name="cellSize" xml:space="preserve"><value>Kare boyutu</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 saat</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Mola vakti mi?</value></data>
   <data name="breakBody" xml:space="preserve"><value>{0} dakikadır oynuyorsun. Bulmacan seni bekler.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Biraz daha</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Burada bırakıyorum</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Oynamaya devam et</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Mola ver</value></data>
   <data name="resetProgress" xml:space="preserve"><value>İlerlemeyi sıfırla</value></data>
   <data name="privacy" xml:space="preserve"><value>Veriler ve gizlilik</value></data>
   <data name="open" xml:space="preserve"><value>Aç</value></data>
   <data name="reset" xml:space="preserve"><value>Sıfırla</value></data>
   <data name="grownUps" xml:space="preserve"><value>Sadece yetişkinler</value></data>
   <data name="cancel" xml:space="preserve"><value>İptal</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Her şey silinsin mi?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Bütün bulmacalar, yıldızlar ve çıkartmalar gidecek. Bu geri alınamaz.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Evet, hepsini sil</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Oyun ilerlemesi silinsin mi?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Kayıtlı oyunlar, yıldızlar ve kupalar dahil tüm ilerleme silinir. Ayarların aynı kalır. Bu işlem geri alınamaz.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>İlerlemeyi sıfırla</value></data>
   <data name="version" xml:space="preserve"><value>Sürüm {0} · yapı {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Reklam yok · uygulama içi satın alma yok</value></data>
   <data name="whatIs" xml:space="preserve"><value>Nonogram nedir?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram, sayıların içinde saklı bir resimdir. Her satır ve sütundaki ipuçları kaç blok dolduracağını ve hangi sırayla dolduracağını söyler. Her çizgiyi saf mantıkla çöz, resim ortaya çıksın — asla tahmin etmen gerekmez.
-
-squarebuzz, 6 yaş ve üzerindeki çocuklar için bir nonogram bulmaca oyunudur ve üst yaş sınırı yoktur. Yetişkinler de aynı derecede eğlenebilir.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram, gizli bir resim bulmacasıdır. Satır ve sütunların yanındaki sayılar, hangi kareleri dolduracağını bulmana yardım eder.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Şu adlarla da bilinir: Picross · Griddler · Hanjie · Pic-a-Pix · Sayılarla Boyama · Japon bulmacası</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Nasıl Oynanır</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Gizlilik politikası</value></data>
   <data name="aboutRate" xml:space="preserve"><value>squarebuzz'ı değerlendir</value></data>
-  <data name="ht1" xml:space="preserve"><value>İpuçlarını oku</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Her sayı, sırayla yazılmış tek bir kesintisiz dolu blok dizisidir. 3 1 satır ipucu, üçü bir arada, en az bir boşluk, sonra tek başına bir tane demektir.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Doldur ve çarpı koy</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Bir kareyi doldurmak için dokun. Boş kaldığını kanıtladığın kareler için X moduna geç. X işaretleri süs değildir — takip etmenin yolu onlardır.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Uzun ipuçlarında örtüşme</value></data>
-  <data name="ht3b" xml:space="preserve"><value>10 kare genişliğindeki bir satırda 8 ipucu, nereden başlarsa başlasın ortadaki 6 kareyi kaplamak zorundadır. Diziyi sola daya, sonra sağa daya ve örtüşen yerleri doldur.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Satırla sütunu karşılaştır</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Bir satır sana kesin bir blok verdiğinde o sütuna bak. Yeni blok çoğu zaman bir sütun ipucunu tamamlar, bu sana yeni X'ler verir, X'ler de yeni bloklar.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Sayıları oku</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Her sayı bir grupta kaç kare dolduracağını söyler. Grupların arasında en az bir boş kare bırak. Satırları soldan sağa, sütunları yukarıdan aşağıya oku.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Doldur veya X koy</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Resme ait kareleri doldur. Boş kalacağını bildiğin karelere X koy.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Kesin kareleri bul</value></data>
+  <data name="ht3b" xml:space="preserve"><value>10 karelik bir satırda 8 karelik grup, ortadaki 6 kareyi her zaman kaplar. Bu 6 kareyi doldurabilirsin.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Satır ve sütunları kontrol et</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Bir kareyi doldurunca sütununa bak. Her yeni işaret, sonraki kareyi bulmana yardımcı olabilir.</value></data>
   <data name="ht5" xml:space="preserve"><value>Biten çizgileri çarpıyla kapat</value></data>
   <data name="ht5b" xml:space="preserve"><value>Bir çizgi ipuçlarıyla tam olarak uyuştuğunda, içinde kalan her kareye X koy. İpucu sayıları soluklaşır, böylece o çizginin bittiğini bilirsin.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Hayvanlar</value></data>
@@ -372,21 +370,21 @@ squarebuzz, 6 yaş ve üzerindeki çocuklar için bir nonogram bulmaca oyunudur 
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Yağmur Bulutu</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Gizemli Resim</value></data>
   <data name="magnifier" xml:space="preserve"><value>Büyüteç</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Boyarken 3×3 yakınlaştırılmış görünüm gösterir. Baştan kapalıdır.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Kareleri doldururken büyütülmüş olarak gör.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Bir büyüğüne sor</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{1} resimden {0} tanesi bulundu</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>İlk resmini bitir.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Üst üste yedi gün oyna.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Kendi hızında 7 farklı resim bul.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Bir resmi tek ipucu bile almadan bitir.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Bir 5×5'i bir dakikanın altında bitir.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Bir 5×5 bulmacayı en fazla bir dakikada bitir.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Toplamda 100 blok doldur.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Bütün dinozorları bul.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Akşam 8'den sonra bir resim bitir.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>3 farklı paketin her birinden bir resim bitir.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>10×10'da hiç hata yapmadan üç yıldız.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Galerideki her resmi bul.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Herhangi bir süreli denemeyi kazan.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Maraton denemesini kazan.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Üst üste 30 gün oyna.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Kendi hızında 30 farklı resim bul.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>15×15 veya daha büyük bir resim bitir.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Toplamda 1000 blok doldur.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>100 yıldız topla.</value></data>
@@ -400,4 +398,13 @@ squarebuzz, 6 yaş ve üzerindeki çocuklar için bir nonogram bulmaca oyunudur 
   <data name="hintLimit" xml:space="preserve"><value>Yeni oyunlarda ipuçları</value></data>
   <data name="unlimited" xml:space="preserve"><value>Sınırsız</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>En az 1 olan bir tam sayı girin.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>squarebuzz’ı paylaş</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Uygulama paylaşılamadı. Bağlantı: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Kayıtlı oyunların yüklenemedi. Tekrar dene.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>İlerlemen kaydedilemedi. Tekrar dene.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>İlerlemen yüklenemedi. Tekrar dene.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Ayarların yüklenemedi. Tekrar dene.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Ayarların kaydedilemedi. Tekrar dene.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Kayıtlı oyun silinemedi. Tekrar dene.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>İlerlemen silinemedi. Tekrar dene.</value></data>
 </root>

@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Greu</value></data>
   <data name="expert" xml:space="preserve"><value>Expert</value></data>
   <data name="challenge" xml:space="preserve"><value>Nivel de provocare</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Un al doilea reglaj, separat de mărime și de dificultatea indiciilor.</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Relaxat folosește setările tale de ajutor. Provocare permite cel mult un indiciu.</value></data>
   <data name="relaxed" xml:space="preserve"><value>Relaxat</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Ajutoare active, fără limite</value></data>
-  <data name="sharp" xml:space="preserve"><value>Serios</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Greșelile contează, un indiciu</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Folosește setările tale de ajutor</value></data>
+  <data name="sharp" xml:space="preserve"><value>Provocare</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Cel mult un indiciu</value></data>
   <data name="pack" xml:space="preserve"><value>Set de imagini</value></data>
   <data name="helpers" xml:space="preserve"><value>Ajutoare</value></data>
   <data name="autoCross" xml:space="preserve"><value>X automat pe liniile gata</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Hopa</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Înainte</value></data>
   <data name="menu" xml:space="preserve"><value>Meniu</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Numerele sunt șiruri de pătrățele</value></data>
-  <data name="onb1b" xml:space="preserve"><value>Indiciul 3 1 înseamnă trei pătrățele lipite, un spațiu liber, apoi unul singur. În aceeași ordine, de la stânga la dreapta.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Marchează-le pe cele goale</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Atinge o dată ca să colorezi. Trece pe modul X ca să marchezi pătrățelele despre care știi că rămân goale — așa nu te încurci.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Numerele arată grupuri</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Indiciul 2 1 al unui rând înseamnă două pătrate umplute, cel puțin unul gol, apoi unul umplut.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Umple sau marchează X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Umple pătratele din imagine. Marchează cu X pătratele care trebuie să rămână goale.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Apare o imagine</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Termină fiecare rând și fiecare coloană, iar pătrățelele se transformă într-o imagine. Fiecare joc are un singur răspuns — nu trebuie să ghicești niciodată.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Îți dau unul gratis!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Nu acela — mai încearcă</value></data>
-  <data name="genFailed" xml:space="preserve"><value>N-am reușit să fac un joc de data asta. Mai încearcă, te rog!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Completează fiecare rând și coloană pentru a descoperi imaginea.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Iată un indiciu.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Încearcă alt pătrat.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Puzzle-ul nu a putut fi creat. Încearcă din nou.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Se aplică la tablele mai mari pe care le inventează jocul — de la 15×15 în sus. Imaginile mici sunt desenate de mână.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Dificultatea schimbă puzzle-urile de 15×15 și mai mari. Imaginile mici rămân la fel.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Jocuri zilnice terminate luna asta: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Nu mai ai indicii</value></data>
   <data name="lineDone" xml:space="preserve"><value>Linie gata!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Sunt gata când vrei tu. Alege un joc!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Îți merge grozav. Încă unul?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Am găsit niște imagini noi azi.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Bine ai revenit!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Ce imagine vei descoperi acum?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Începe primul tău joc</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Cum se joacă</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Jocul zilei</value></data>
-  <data name="dailySub" xml:space="preserve"><value>O imagine nouă în fiecare dimineață</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Un puzzle nou în fiecare zi</value></data>
   <data name="play" xml:space="preserve"><value>Joacă</value></data>
   <data name="timedName1" xml:space="preserve"><value>Încălzire</value></data>
   <data name="timedName2" xml:space="preserve"><value>În ritm</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>La acest nivel se ascunde o imagine.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofee</value></data>
   <data name="timeUp" xml:space="preserve"><value>S-a terminat timpul!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>De data asta ceasul a fost mai rapid. Mai încerci o dată?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Timpul a expirat. Poți încerca din nou când dorești.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Mai încearcă</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} pe ceas.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Azi</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Pe timp</value></data>
   <data name="tr1" xml:space="preserve"><value>Prima imagine</value></data>
-  <data name="tr2" xml:space="preserve"><value>O săptămână</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 imagini</value></data>
   <data name="tr3" xml:space="preserve"><value>Fără indicii</value></data>
   <data name="tr4" xml:space="preserve"><value>Rapid</value></data>
   <data name="tr5" xml:space="preserve"><value>100 pătrățele</value></data>
   <data name="tr6" xml:space="preserve"><value>Fan dinozauri</value></data>
-  <data name="tr7" xml:space="preserve"><value>Bufniță</value></data>
+  <data name="tr7" xml:space="preserve"><value>Câte puțin din toate</value></data>
   <data name="tr8" xml:space="preserve"><value>Zece perfect</value></data>
   <data name="tr9" xml:space="preserve"><value>Colecționar</value></data>
   <data name="tr10" xml:space="preserve"><value>Contra cronometru</value></data>
   <data name="tr11" xml:space="preserve"><value>Campion la maraton</value></data>
-  <data name="tr12" xml:space="preserve"><value>O lună întreagă</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 de imagini</value></data>
   <data name="tr13" xml:space="preserve"><value>Imagine mare</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 pătrățele</value></data>
   <data name="tr15" xml:space="preserve"><value>Vânător de stele</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Acum pot să-ți citesc.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Nu există voce pentru limba asta pe acest aparat</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Rândul {0}, coloana {1}, {2}. Indiciul rândului {3}. Indiciul coloanei {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>gol</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>nemarcat</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>colorat</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>tăiat cu X</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>marcat ca gol</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>niciunul</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Tabla jocului, {0} pe {1}. {2} din {3} pătrățele colorate.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Pătrățelele nu pot fi atinse încă prin explorare cu degetul.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Cititorul de ecran nu poate selecta pătrate individuale în această vizualizare.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Timp până acum: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Timp rămas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0} zile la rând</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>Închisă</value></data>
   <data name="auto" xml:space="preserve"><value>Auto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Pentru daltoniști</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Paletă albastru / portocaliu, cu modele</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Culori albastru și portocaliu cu modele</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Culoarea principală</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarină</value></data>
   <data name="accGrape" xml:space="preserve"><value>Strugure</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Atingerea</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Atingi = colorezi, ții apăsat = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Buton mod</value></data>
-  <data name="handed" xml:space="preserve"><value>Butoane la</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Acțiune la atingere</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Atinge pentru umplere, ține apăsat pentru X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Alege umplere sau X</value></data>
+  <data name="handed" xml:space="preserve"><value>Poziția butoanelor</value></data>
   <data name="leftH" xml:space="preserve"><value>Stânga</value></data>
   <data name="rightH" xml:space="preserve"><value>Dreapta</value></data>
-  <data name="cellSize" xml:space="preserve"><value>Mărime pătrățele</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Mărimea pătratelor</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Cifre mari</value></data>
   <data name="language" xml:space="preserve"><value>Limbă</value></data>
   <data name="screenTime" xml:space="preserve"><value>Amintește-mi de pauză</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 oră</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Facem o pauză?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Te joci deja de {0} minute. Jocul tău te așteaptă.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Încă puțin</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Mă opresc aici</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Continuă jocul</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Ia o pauză</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Șterge progresul</value></data>
   <data name="privacy" xml:space="preserve"><value>Date și confidențialitate</value></data>
   <data name="open" xml:space="preserve"><value>Deschide</value></data>
   <data name="reset" xml:space="preserve"><value>Șterge</value></data>
   <data name="grownUps" xml:space="preserve"><value>Numai pentru adulți</value></data>
   <data name="cancel" xml:space="preserve"><value>Anulează</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Ștergem tot?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Toate jocurile, stelele și abțibildurile vor dispărea. Asta nu se mai poate reface.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Da, șterge tot</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Ștergi progresul din joc?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Se șterge tot progresul, inclusiv jocurile salvate, stelele și trofeele. Setările rămân la fel. Nu poți anula această acțiune.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Șterge progresul</value></data>
   <data name="version" xml:space="preserve"><value>Versiunea {0} · compilarea {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Fără reclame · fără cumpărături în aplicație</value></data>
   <data name="whatIs" xml:space="preserve"><value>Ce este o nonogramă?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>O nonogramă este o imagine ascunsă în numere. Indiciile de pe fiecare rând și fiecare coloană îți spun câte pătrățele să colorezi și în ce ordine. Rezolvă fiecare linie doar cu logica și imaginea apare — nu trebuie niciodată să ghicești.
-
-squarebuzz este un joc cu nonograme pentru copii de la 6 ani, fără limită superioară de vârstă. Adulții se pot distra la fel de mult.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>O nonogramă este un puzzle cu o imagine ascunsă. Numerele de lângă rânduri și coloane te ajută să afli ce pătrate să umpli.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Cunoscut și ca: Picross · Griddler · Hanjie · Pic-a-Pix · Pictează după numere · Cuvinte încrucișate japoneze</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Cum se joacă</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Politica de confidențialitate</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Notează squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Citește indiciile</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Fiecare număr este un șir neîntrerupt de pătrățele colorate, scrise în ordine. Indiciul 3 1 pe un rând înseamnă trei lipite, cel puțin un spațiu liber, apoi unul singur.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Colorează și taie</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Atinge un pătrățel ca să îl colorezi. Trece pe modul X pentru pătrățelele despre care ai dovedit că rămân goale. Semnele X nu sunt podoabă — cu ele ții socoteala.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Suprapunerea la indicii mari</value></data>
-  <data name="ht3b" xml:space="preserve"><value>Pe un rând de 10, un indiciu de 8 acoperă sigur cele 6 pătrățele din mijloc, oriunde ar începe. Împinge șirul la stânga, împinge-l la dreapta și colorează partea care se suprapune.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Compară rânduri și coloane</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Când un rând îți dă un pătrățel sigur, uită-te în jos, pe coloana lui. Pătrățelul nou termină deseori indiciul coloanei, asta îți dă mai multe X-uri, iar X-urile îți dau mai multe pătrățele.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Citește numerele</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Fiecare număr arată câte pătrate are un grup. Lasă cel puțin un pătrat gol între grupuri. Citește rândurile de la stânga la dreapta și coloanele de sus în jos.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Umple sau marchează X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Umple pătratele din imagine. Marchează cu X pătratele care trebuie să rămână goale.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Găsește pătratele sigure</value></data>
+  <data name="ht3b" xml:space="preserve"><value>Într-un rând de 10 pătrate, un grup de 8 acoperă mereu cele 6 din mijloc. Le poți umple.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Verifică rânduri și coloane</value></data>
+  <data name="ht4b" xml:space="preserve"><value>După ce umpli un pătrat, privește coloana lui. Fiecare semn nou te poate ajuta să găsești următorul pătrat.</value></data>
   <data name="ht5" xml:space="preserve"><value>Taie liniile terminate</value></data>
   <data name="ht5b" xml:space="preserve"><value>Când o linie se potrivește complet cu indiciile ei, pune X pe toate pătrățelele rămase. Numerele indiciului pălesc, ca să știi că linia aceea e gata.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Animale</value></data>
@@ -372,21 +370,21 @@ squarebuzz este un joc cu nonograme pentru copii de la 6 ani, fără limită sup
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Nor de ploaie</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Imagine misterioasă</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupă</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Arată o vedere mărită 3×3 în timp ce colorezi. Implicit este oprită.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Vezi pătratele mărite în timp ce le umpli.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Întreabă un adult</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{0} din {1} găsite</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Termină prima ta imagine.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Joacă șapte zile la rând.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Descoperă 7 imagini diferite, în ritmul tău.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Termină o imagine fără niciun indiciu.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Termină un 5×5 în mai puțin de un minut.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Rezolvă un puzzle 5×5 într-un minut sau mai puțin.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Colorează 100 de pătrățele în total.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Găsește toți dinozaurii.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Termină o imagine după ora 20.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Termină câte o imagine din 3 pachete diferite.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Trei stele la un 10×10, fără greșeli.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Găsește toate imaginile din galerie.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Câștigă orice provocare pe timp.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Câștigă provocarea Maraton.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Joacă 30 de zile la rând.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Descoperă 30 de imagini diferite, în ritmul tău.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Termină un 15×15 sau mai mare.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Colorează 1000 de pătrățele în total.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Adună 100 de stele.</value></data>
@@ -400,4 +398,13 @@ squarebuzz este un joc cu nonograme pentru copii de la 6 ani, fără limită sup
   <data name="hintLimit" xml:space="preserve"><value>Indicii în jocurile noi</value></data>
   <data name="unlimited" xml:space="preserve"><value>Nelimitat</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Introdu un număr întreg de cel puțin 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Distribuie squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Aplicația nu a putut fi distribuită. Link: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Jocurile salvate nu au putut fi încărcate. Încearcă din nou.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Progresul nu a putut fi salvat. Încearcă din nou.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Progresul nu a putut fi încărcat. Încearcă din nou.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Setările nu au putut fi încărcate. Încearcă din nou.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Setările nu au putut fi salvate. Încearcă din nou.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Jocul salvat nu a putut fi șters. Încearcă din nou.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Progresul nu a putut fi șters. Încearcă din nou.</value></data>
 </root>

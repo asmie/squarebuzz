@@ -17,17 +17,18 @@ public sealed record SolvedPuzzle(
 public enum TrophyId
 {
     FirstPicture = 1,
-    WeekStreak = 2,
+    // IDs 2, 7 and 12 replace time-based goals. Previously earned trophies remain earned.
+    SevenPictures = 2,
     NoHints = 3,
     Speedy = 4,
     HundredBlocks = 5,
     DinoFan = 6,
-    NightOwl = 7,
+    PackSampler = 7,
     PerfectTen = 8,
     Collector = 9,
     BeatTheClock = 10,
     MarathonChamp = 11,
-    MonthStreak = 12,
+    ThirtyPictures = 12,
     BigPicture = 13,
     ThousandBlocks = 14,
     StarGazer = 15,
@@ -84,7 +85,7 @@ public sealed record PlayerProgress
 /// <param name="Elapsed">How long it took.</param>
 /// <param name="BlocksFilled">Cells filled in the finished picture.</param>
 /// <param name="HintsUsed">Hints spent.</param>
-/// <param name="CompletedAt">When it was finished, for streaks and the night-owl trophy.</param>
+/// <param name="CompletedAt">When it was finished, for progress history and streaks.</param>
 public sealed record PuzzleCompletion(
     string? PuzzleId,
     int Stars,

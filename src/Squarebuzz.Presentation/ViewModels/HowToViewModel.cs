@@ -70,8 +70,8 @@ public partial class HowToViewModel : LocalizedViewModel
             Number = "3",
             Title = T("ht3"),
             Body = T("ht3b"),
-            Rows = ["##oooooo##", "..oooooo.."],
-            RowClues = ["8", "8"],
+            Rows = ["##oooooo..", "..oooooo##", "..oooooo.."],
+            RowClues = ["8", "8", "8"],
         });
 
         // Cross-reference

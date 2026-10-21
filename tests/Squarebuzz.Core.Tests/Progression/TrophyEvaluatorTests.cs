@@ -13,7 +13,7 @@ public class TrophyEvaluatorTests
 {
     private static readonly IReadOnlyList<Puzzle> AllPuzzles = new EmbeddedPuzzleRepository().Puzzles;
 
-    /// <summary>Mid-afternoon, so Night Owl does not fire unless a test asks for it.</summary>
+    /// <summary>A fixed completion time for repeatable fixtures.</summary>
     private static readonly DateTimeOffset Afternoon = new(2026, 7, 30, 15, 0, 0, TimeSpan.Zero);
 
     private static PuzzleCompletion Completion(
@@ -67,13 +67,14 @@ public class TrophyEvaluatorTests
     [InlineData(6, false)]
     [InlineData(7, true)]
     [InlineData(30, true)]
-    public void WeekStreakNeedsSevenConsecutiveDays(int streak, bool expected)
+    public void SevenPicturesNeedsDifferentPictures(int count, bool expected)
     {
         var earned = TrophyEvaluator.Evaluate(Context(
             Completion(),
-            progress: PlayerProgress.Empty with { Streak = streak }));
+            progress: PlayerProgress.Empty with { Streak = 0 },
+            solvedIds: AllPuzzles.Take(count).Select(p => p.Id)));
 
-        Assert.Equal(expected, earned.Contains(TrophyId.WeekStreak));
+        Assert.Equal(expected, earned.Contains(TrophyId.SevenPictures));
     }
 
     [Theory]
@@ -124,20 +125,44 @@ public class TrophyEvaluatorTests
     }
 
     [Theory]
-    [InlineData(19, false)]
-    [InlineData(20, true)]
-    [InlineData(23, true)]
-    [InlineData(5, true)]
-    [InlineData(6, false)]
-    [InlineData(12, false)]
-    public void NightOwlSpansTheEveningIntoTheEarlyMorning(int hour, bool expected)
+    [InlineData(0)]
+    [InlineData(5)]
+    [InlineData(12)]
+    [InlineData(20)]
+    public void PackSamplerDependsOnPacksRatherThanTimeOfDay(int hour)
     {
-        // Constructed as local time, because the rule is about the player's own clock.
         var at = new DateTimeOffset(new DateTime(2026, 7, 30, hour, 0, 0, DateTimeKind.Local));
+        var ids = AllPuzzles.GroupBy(p => p.Pack).Take(3).Select(g => g.First().Id).ToArray();
+        var without = TrophyEvaluator.Evaluate(Context(Completion(at: at), solvedIds: ids.Take(2)));
+        var with = TrophyEvaluator.Evaluate(Context(Completion(at: at), solvedIds: ids));
 
-        var earned = TrophyEvaluator.Evaluate(Context(Completion(at: at)));
+        Assert.DoesNotContain(TrophyId.PackSampler, without);
+        Assert.Contains(TrophyId.PackSampler, with);
+    }
 
-        Assert.Equal(expected, earned.Contains(TrophyId.NightOwl));
+    [Fact]
+    public void RepeatedOrUnknownPicturesDoNotAdvanceCollectionGoals()
+    {
+        var ids = Enumerable.Repeat(AllPuzzles[0].Id, 30).Concat(Enumerable.Range(0, 30).Select(i => $"unknown-{i}"));
+        var earned = TrophyEvaluator.Evaluate(Context(Completion(), solvedIds: ids));
+
+        Assert.DoesNotContain(TrophyId.SevenPictures, earned);
+        Assert.DoesNotContain(TrophyId.ThirtyPictures, earned);
+        Assert.DoesNotContain(TrophyId.PackSampler, earned);
+    }
+
+    [Fact]
+    public void PreviouslyEarnedTimeBasedTrophiesKeepTheirIdsAndAreNotAwardedAgain()
+    {
+        Assert.Equal(2, (int)TrophyId.SevenPictures);
+        Assert.Equal(7, (int)TrophyId.PackSampler);
+        Assert.Equal(12, (int)TrophyId.ThirtyPictures);
+        TrophyId[] saved = [(TrophyId)2, (TrophyId)7, (TrophyId)12];
+        var earned = TrophyEvaluator.Evaluate(Context(Completion(), solvedIds: AllPuzzles.Select(p => p.Id), alreadyEarned: saved));
+
+        Assert.DoesNotContain(TrophyId.SevenPictures, earned);
+        Assert.DoesNotContain(TrophyId.PackSampler, earned);
+        Assert.DoesNotContain(TrophyId.ThirtyPictures, earned);
     }
 
     [Theory]
@@ -191,11 +216,11 @@ public class TrophyEvaluatorTests
             solvedIds: AllPuzzles.Select(p => p.Id)));
 
         Assert.Contains(TrophyId.FirstPicture, earned);
-        Assert.Contains(TrophyId.WeekStreak, earned);
+        Assert.Contains(TrophyId.SevenPictures, earned);
         Assert.Contains(TrophyId.NoHints, earned);
         Assert.Contains(TrophyId.Speedy, earned);
         Assert.Contains(TrophyId.HundredBlocks, earned);
-        Assert.Contains(TrophyId.NightOwl, earned);
+        Assert.Contains(TrophyId.PackSampler, earned);
         Assert.Contains(TrophyId.Collector, earned);
         Assert.Contains(TrophyId.DinoFan, earned);
 

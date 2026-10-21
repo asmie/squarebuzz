@@ -257,11 +257,46 @@ public class NewGameViewModelTests : IDisposable
 
         _vm.SelectChallengeCommand.Execute("sharp");
         Assert.True(_vm.IsSharp);
-        Assert.Equal("sharpSub", _vm.ChallengeNote);
+        Assert.Equal("hints: 1", _vm.ChallengeNote);
 
         _vm.SelectChallengeCommand.Execute("relaxed");
         Assert.True(_vm.IsRelaxed);
-        Assert.Equal("relaxedSub", _vm.ChallengeNote);
+        Assert.Equal("hints: 3", _vm.ChallengeNote);
+    }
+
+    [Theory]
+    [InlineData(true, 8, "relaxed", "8")]
+    [InlineData(true, null, "relaxed", "unlimited")]
+    [InlineData(true, null, "sharp", "1")]
+    [InlineData(false, 8, "relaxed", "stOff")]
+    [InlineData(false, null, "sharp", "stOff")]
+    public async Task ChallengeNote_DescribesTheResolvedHintAllowance(bool enabled, int? limit, string challenge, string expected)
+    {
+        _settings.Settings = GameSettings.Default with
+        {
+            Helpers = new HelperSettings { AllowHints = enabled, HintBudget = new HintBudget(limit) },
+        };
+        await _vm.OnAppearingAsync();
+        _vm.SelectChallengeCommand.Execute(challenge);
+
+        Assert.Equal($"hints: {expected}", _vm.ChallengeNote);
+    }
+
+    [Fact]
+    public async Task ReturningFromOptions_RefreshesAllowanceWithoutChangingTheMode()
+    {
+        await _vm.OnAppearingAsync();
+        var notified = false;
+        _vm.PropertyChanged += (_, e) => notified |= e.PropertyName == nameof(_vm.ChallengeNote);
+        _settings.Settings = _settings.Settings with
+        {
+            Helpers = new HelperSettings { HintBudget = HintBudget.Unlimited },
+        };
+
+        await _vm.OnAppearingAsync();
+
+        Assert.True(notified);
+        Assert.Equal("hints: unlimited", _vm.ChallengeNote);
     }
 
     // ---- Starting ----

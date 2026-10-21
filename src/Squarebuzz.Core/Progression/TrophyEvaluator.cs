@@ -18,8 +18,8 @@ public sealed record TrophyContext(
 /// <summary>Evaluates newly earned trophies from a completion snapshot. Persistence is handled by the caller.</summary>
 public static class TrophyEvaluator
 {
-    /// <summary>A week of consecutive days. The trophy is called "Week Streak".</summary>
-    public const int WeekStreakDays = 7;
+    /// <summary>Different authored pictures completed, with no time limit.</summary>
+    public const int SevenPicturesCount = 7;
 
     /// <summary>Maximum solve duration for the Speedy 5x5 trophy.</summary>
     public const int SpeedySeconds = 60;
@@ -31,15 +31,14 @@ public static class TrophyEvaluator
     /// <summary>Perfect Ten requires a 10x10 completion with three stars and no mistakes.</summary>
     public const int PerfectTenSize = GridSize.Normal;
 
-    /// <summary>Night Owl: finishing late in the evening or very early morning.</summary>
-    public const int NightOwlFromHour = 20;
-    public const int NightOwlUntilHour = 6;
+    /// <summary>Different packs with at least one completed picture.</summary>
+    public const int SampledPackCount = 3;
 
     /// <summary>The pack "Dino Fan" is about.</summary>
     public const string DinoPackId = "dinos";
 
-    /// <summary>A month of consecutive days, the long sibling of "Week Streak".</summary>
-    public const int MonthStreakDays = 30;
+    /// <summary>A larger picture collection, with no daily attendance requirement.</summary>
+    public const int ThirtyPicturesCount = 30;
 
     /// <summary>
     /// "Big Picture" and "Flawless" start at the first size with no authored pictures: a 15x15 is
@@ -77,11 +76,13 @@ public static class TrophyEvaluator
         }
 
         var completion = context.Completion;
+        var solvedIds = context.Solved.Select(s => s.PuzzleId).ToHashSet(StringComparer.Ordinal);
+        var pictures = context.AllPuzzles.Where(p => solvedIds.Contains(p.Id)).DistinctBy(p => p.Id).ToList();
 
         // Any finished puzzle at all - the first thing a new player should be given.
         Award(TrophyId.FirstPicture, true);
 
-        Award(TrophyId.WeekStreak, context.Progress.Streak >= WeekStreakDays);
+        Award(TrophyId.SevenPictures, pictures.Count >= SevenPicturesCount);
 
         // Unaided, not merely hint-light.
         Award(TrophyId.NoHints, completion.HintsUsed == 0);
@@ -94,7 +95,7 @@ public static class TrophyEvaluator
 
         Award(TrophyId.DinoFan, HasCompletedPack(context, DinoPackId));
 
-        Award(TrophyId.NightOwl, IsLateNight(completion.CompletedAt));
+        Award(TrophyId.PackSampler, pictures.Select(p => p.Pack).Distinct(StringComparer.Ordinal).Count() >= SampledPackCount);
 
         Award(
             TrophyId.PerfectTen,
@@ -107,7 +108,7 @@ public static class TrophyEvaluator
 
         Award(TrophyId.MarathonChamp, completion.TimedTier == TimedTrial.MarathonTier);
 
-        Award(TrophyId.MonthStreak, context.Progress.Streak >= MonthStreakDays);
+        Award(TrophyId.ThirtyPictures, pictures.Count >= ThirtyPicturesCount);
 
         Award(TrophyId.BigPicture, completion.Size >= BigPictureSize);
 
@@ -169,14 +170,4 @@ public static class TrophyEvaluator
         return context.AllPuzzles.All(p => solvedIds.Contains(p.Id));
     }
 
-    /// <summary>
-    /// Late evening through to early morning, using the player's local time - a trophy about
-    /// bedtime has to mean their bedtime, not UTC.
-    /// </summary>
-    private static bool IsLateNight(DateTimeOffset completedAt)
-    {
-        var hour = completedAt.LocalDateTime.Hour;
-
-        return hour >= NightOwlFromHour || hour < NightOwlUntilHour;
-    }
 }

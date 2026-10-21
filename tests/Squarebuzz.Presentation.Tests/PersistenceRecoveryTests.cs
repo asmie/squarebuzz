@@ -59,6 +59,7 @@ public sealed class PersistenceRecoveryTests
         h.SaveGames.SaveError = new IOException("disk full");
         await h.Vm.AutosaveAsync();
         Assert.True(h.Vm.HasPersistenceFailure);
+        Assert.Equal("saveProgressFailed", h.Vm.PersistenceFailureText);
         var report = Assert.Single(h.Diagnostics.Reports);
         Assert.Equal(PersistenceOperation.SaveGame, report.Operation);
         Assert.Equal(h.Saves.Id, report.SessionId);
@@ -120,6 +121,7 @@ public sealed class PersistenceRecoveryTests
         await h.Vm.InitialiseAsync();
         Assert.Null(h.Vm.Session);
         Assert.True(h.Vm.HasPersistenceFailure);
+        Assert.Equal("loadGamesFailed", h.Vm.PersistenceFailureText);
 
         h.SaveGames.LoadError = null;
         await h.Vm.RetryPersistenceCommand.ExecuteAsync(null);
@@ -138,6 +140,7 @@ public sealed class PersistenceRecoveryTests
         await h.Vm.RefreshSettingsAsync();
         Assert.False(h.Vm.ShowTimer);
         Assert.True(h.Vm.HasPersistenceFailure);
+        Assert.Equal("loadSettingsFailed", h.Vm.PersistenceFailureText);
         h.Settings.LoadFails = false;
         await h.Vm.RetryPersistenceCommand.ExecuteAsync(null);
         Assert.False(h.Vm.HasPersistenceFailure);
@@ -179,6 +182,7 @@ public sealed class PersistenceRecoveryTests
         Assert.False(vm.IsEmpty);
         Assert.False(vm.HasSaves);
         Assert.True(vm.HasPersistenceFailure);
+        Assert.Equal("loadGamesFailed", vm.PersistenceFailureText);
         Assert.Equal(PersistenceOperation.LoadGames, Assert.Single(h.Diagnostics.Reports).Operation);
         h.SaveGames.LoadError = null;
         await vm.RetryPersistenceCommand.ExecuteAsync(null);

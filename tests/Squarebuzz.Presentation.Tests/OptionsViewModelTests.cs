@@ -24,6 +24,8 @@ public class OptionsViewModelTests : IDisposable
     private readonly FakeAudioService _audio = new();
     private readonly FakeNarrationService _narration = new();
     private readonly OptionsViewModel _vm;
+    private readonly FakeLinkOpener _links = new();
+    private readonly FakeAppShare _appShare = new();
 
     public OptionsViewModelTests()
     {
@@ -38,7 +40,92 @@ public class OptionsViewModelTests : IDisposable
             _narration,
             new FakeUiThread(),
             new FakeAppVersion(),
-            new FakeLinkOpener());
+            _links,
+            _appShare);
+    }
+
+    [Theory]
+    [InlineData("https://play.google.com/store/apps/details?id=fun.asmie.squarebuzz")]
+    [InlineData("https://apps.microsoft.com/detail/9P308NW6NSXM")]
+    public async Task Share_RequiresParentGate_AndUsesPublicListing(string listing)
+    {
+        _links.StorePage = new Uri(listing);
+        Assert.True(_vm.CanShare);
+        _vm.ShareAppCommand.Execute(null);
+        Assert.True(_vm.Gate.IsOpen);
+        Assert.Empty(_appShare.Requests);
+
+        _vm.Gate.Answer = CorrectAnswer(_vm.Gate);
+        await _vm.Gate.SubmitCommand.ExecuteAsync(null);
+
+        var request = Assert.Single(_appShare.Requests);
+        Assert.Equal(listing, request.Address.AbsoluteUri);
+        Assert.Equal(_vm.ShareLabel, request.Title);
+        Assert.False(_vm.Gate.IsOpen);
+        Assert.False(_vm.HasNotice);
+        Assert.False(_vm.IsSharing);
+        Assert.Empty(_links.Opened);
+        Assert.Equal(0, _links.StoreOpenCount);
+    }
+
+    [Fact]
+    public async Task Share_WrongAnswerAndCancellation_DoNotShare()
+    {
+        _vm.ShareAppCommand.Execute(null);
+        _vm.Gate.Answer = "0";
+        await _vm.Gate.SubmitCommand.ExecuteAsync(null);
+        Assert.True(_vm.Gate.IsOpen);
+        Assert.Empty(_appShare.Requests);
+
+        var answer = CorrectAnswer(_vm.Gate);
+        _vm.Gate.CancelCommand.Execute(null);
+        _vm.Gate.Answer = answer;
+        await _vm.Gate.SubmitCommand.ExecuteAsync(null);
+        Assert.Empty(_appShare.Requests);
+    }
+
+    [Fact]
+    public void Share_WithoutStore_IsHiddenAndDoesNothing()
+    {
+        _links.StorePage = null;
+        Assert.False(_vm.CanShare);
+        _vm.ShareAppCommand.Execute(null);
+        Assert.False(_vm.Gate.IsOpen);
+        Assert.Empty(_appShare.Requests);
+    }
+
+    [Fact]
+    public async Task Share_Unavailable_ShowsListingAndCanRetry()
+    {
+        _appShare.Succeeds = false;
+        _vm.ShareAppCommand.Execute(null);
+        _vm.Gate.Answer = CorrectAnswer(_vm.Gate);
+        await _vm.Gate.SubmitCommand.ExecuteAsync(null);
+        Assert.Equal(_strings.Format("shareUnavailable", _links.StorePage!.AbsoluteUri), _vm.Notice);
+        Assert.False(_vm.IsSharing);
+
+        _appShare.Succeeds = true;
+        _vm.ShareAppCommand.Execute(null);
+        _vm.Gate.Answer = CorrectAnswer(_vm.Gate);
+        await _vm.Gate.SubmitCommand.ExecuteAsync(null);
+        Assert.False(_vm.HasNotice);
+        Assert.Equal(2, _appShare.Requests.Count);
+    }
+
+    [Fact]
+    public async Task Share_WhilePending_DoesNotOpenAnotherGate()
+    {
+        var pending = _appShare.PendingRequest = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        _vm.ShareAppCommand.Execute(null);
+        _vm.Gate.Answer = CorrectAnswer(_vm.Gate);
+        var sharing = _vm.Gate.SubmitCommand.ExecuteAsync(null);
+        Assert.True(_vm.IsSharing);
+        _vm.ShareAppCommand.Execute(null);
+        Assert.False(_vm.Gate.IsOpen);
+        Assert.Single(_appShare.Requests);
+        pending.SetResult(true);
+        await sharing;
+        Assert.False(_vm.IsSharing);
     }
 
     public void Dispose()
@@ -105,6 +192,7 @@ public class OptionsViewModelTests : IDisposable
         _progress.ResetError = new IOException("busy");
         await _vm.ConfirmResetCommand.ExecuteAsync(null);
         Assert.True(_vm.HasPersistenceFailure);
+        Assert.Equal("resetProgressFailed", _vm.PersistenceFailureText);
         Assert.Null(_navigation.Last);
         await _vm.RetryPersistenceCommand.ExecuteAsync(null);
         Assert.True(_vm.IsResetConfirmOpen);
@@ -122,6 +210,7 @@ public class OptionsViewModelTests : IDisposable
         _settings.LoadFails = true;
         await _vm.OnAppearingAsync();
         Assert.True(_vm.HasPersistenceFailure);
+        Assert.Equal("loadSettingsFailed", _vm.PersistenceFailureText);
         Assert.False(_vm.CanEditSettings);
         Assert.Empty(_settings.Saved);
         _settings.LoadFails = false;
@@ -140,6 +229,7 @@ public class OptionsViewModelTests : IDisposable
         _vm.BigNumbers = true;
         _vm.CellZoomPercent = 130;
         Assert.True(_vm.HasPersistenceFailure);
+        Assert.Equal("saveSettingsFailed", _vm.PersistenceFailureText);
         _settings.SaveFails = false;
         await _vm.RetryPersistenceCommand.ExecuteAsync(null);
         Assert.False(_vm.HasPersistenceFailure);

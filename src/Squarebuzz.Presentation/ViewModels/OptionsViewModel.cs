@@ -55,13 +55,16 @@ public partial class OptionsViewModel : LocalizedViewModel
         INarrationService narration,
         IUiThread uiThread,
         IAppVersion appVersion,
-        ILinkOpener links)
+        ILinkOpener links,
+        IAppShare appShare)
         : base(strings)
     {
         ArgumentNullException.ThrowIfNull(appVersion);
         ArgumentNullException.ThrowIfNull(links);
+        ArgumentNullException.ThrowIfNull(appShare);
         _appVersion = appVersion;
         _links = links;
+        _appShare = appShare;
 
         ArgumentNullException.ThrowIfNull(settingsRepository);
         ArgumentNullException.ThrowIfNull(completions);
@@ -395,10 +398,19 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     private readonly IAppVersion _appVersion;
     private readonly ILinkOpener _links;
+    private readonly IAppShare _appShare;
+    private int _noticeToken;
+
+    public string ShareLabel => T("shareApp");
+
+    public bool CanShare => _links.StorePage is not null;
+
+    [ObservableProperty]
+    public partial bool IsSharing { get; private set; }
 
     public string NoAdsLabel => T("noAds");
 
-    /// <summary>The privacy address, shown when no browser could open it.</summary>
+    /// <summary>The external address or an explanation when an external action fails.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasNotice))]
     public partial string Notice { get; private set; } = string.Empty;
@@ -416,14 +428,40 @@ public partial class OptionsViewModel : LocalizedViewModel
         }
     });
 
+    [RelayCommand]
+    private void ShareApp()
+    {
+        if (IsSharing || _links.StorePage is not { } page) return;
+
+        Gate.Open(async () =>
+        {
+            IsSharing = true;
+            ++_noticeToken;
+            Notice = string.Empty;
+            try
+            {
+                if (!await _appShare.RequestAsync(page, ShareLabel))
+                {
+                    // Keep the address visible so it can be read when no share UI is available.
+                    Notice = Strings.Format("shareUnavailable", page.AbsoluteUri);
+                }
+            }
+            finally
+            {
+                IsSharing = false;
+            }
+        });
+    }
+
     private void ShowNotice(string message)
     {
+        var token = ++_noticeToken;
         Notice = message;
 
         _ = Task.Delay(2500).ContinueWith(
             _ => _uiThread.BeginInvokeOnMainThread(() =>
             {
-                if (Notice == message)
+                if (token == _noticeToken)
                 {
                     Notice = string.Empty;
                 }
@@ -431,7 +469,12 @@ public partial class OptionsViewModel : LocalizedViewModel
             TaskScheduler.Default);
     }
 
-    protected override void OnLanguageChangedCore() => Gate.RefreshLabels();
+    protected override void OnLanguageChangedCore()
+    {
+        Gate.RefreshLabels();
+        ++_noticeToken;
+        Notice = string.Empty;
+    }
 
     public override async Task OnAppearingAsync()
     {
@@ -782,13 +825,15 @@ public partial class OptionsViewModel : LocalizedViewModel
 
     public bool HasPersistenceFailure => _loadFailed || _saveFailed || _resetFailed;
     public bool CanEditSettings => !_loadFailed;
-    public string PersistenceFailureText => T("storageUnavailable");
+    public string PersistenceFailureText => T(_loadFailed ? "loadSettingsFailed"
+        : _resetFailed ? "resetProgressFailed" : "saveSettingsFailed");
     public string RetryPersistenceText => T("tryAgain");
 
     private void NotifyPersistenceState() => _uiThread.BeginInvokeOnMainThread(() =>
     {
         OnPropertyChanged(nameof(HasPersistenceFailure));
         OnPropertyChanged(nameof(CanEditSettings));
+        OnPropertyChanged(nameof(PersistenceFailureText));
     });
 
     [RelayCommand]

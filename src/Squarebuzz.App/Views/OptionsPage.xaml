@@ -32,7 +32,7 @@
             <Setter Property="VerticalOptions" Value="Center" />
         </Style>
 
-        <!-- Denser than the shared segment: up to four sit in a row on a phone. -->
+        <!-- Compact segments with wrapping for translated labels. -->
         <Style x:Key="SegButton" TargetType="Button" BasedOn="{StaticResource SegmentButton}">
             <Setter Property="CornerRadius" Value="14" />
             <Setter Property="FontSize" Value="13" />
@@ -275,23 +275,23 @@
                         -->
                         <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
                             <Label Grid.Row="0" Text="{Binding ScreenTimeLabel}" Style="{StaticResource RowLabel}" />
-                            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
-                                <Button Grid.Column="0" Style="{StaticResource SegButton}"
+                            <Grid Grid.Row="1" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="8" ColumnSpacing="8">
+                                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding ScreenTimeOffLabel}"
                                         Command="{Binding SelectScreenTimeCommand}" CommandParameter="off"
                                         BackgroundColor="{Binding IsScreenTimeOff, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsScreenTimeOff, Converter={StaticResource SegTextColor}}" />
-                                <Button Grid.Column="1" Style="{StaticResource SegButton}"
+                                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource SegButton}"
                                         Text="{Binding ScreenTime15Label}"
                                         Command="{Binding SelectScreenTimeCommand}" CommandParameter="15"
                                         BackgroundColor="{Binding IsScreenTime15, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsScreenTime15, Converter={StaticResource SegTextColor}}" />
-                                <Button Grid.Column="2" Style="{StaticResource SegButton}"
+                                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource SegButton}"
                                         Text="{Binding ScreenTime30Label}"
                                         Command="{Binding SelectScreenTimeCommand}" CommandParameter="30"
                                         BackgroundColor="{Binding IsScreenTime30, Converter={StaticResource SegBackground}}"
                                         TextColor="{Binding IsScreenTime30, Converter={StaticResource SegTextColor}}" />
-                                <Button Grid.Column="3" Style="{StaticResource SegButton}"
+                                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource SegButton}"
                                         Text="{Binding ScreenTime60Label}"
                                         Command="{Binding SelectScreenTimeCommand}" CommandParameter="60"
                                         BackgroundColor="{Binding IsScreenTime60, Converter={StaticResource SegBackground}}"
@@ -313,6 +313,12 @@
                                     MinimumWidthRequest="96" />
                         </Grid>
 
+                        <Button Text="{Binding ShareLabel}"
+                                Command="{Binding ShareAppCommand}"
+                                IsVisible="{Binding CanShare}"
+                                Style="{StaticResource SecondaryButton}"
+                                MinimumHeightRequest="48" />
+
                         <Label Text="{Binding Notice}"
                                IsVisible="{Binding HasNotice}"
                                Style="{StaticResource Subtle}"
@@ -330,7 +336,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Parent gate: a small sum before anything destructive. -->
+        <!-- Parent gate before destructive or outward-facing actions. -->
         <controls:ParentGateOverlay BindingContext="{Binding Gate}" />
 
         <!-- Reset confirmation, once past the gate. -->

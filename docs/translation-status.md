@@ -1,7 +1,12 @@
 # Translation review
 
-As of 2026-09-28, the app lists 39 languages: neutral English and 38 resource files. Each has
-390 keys. Chinese has separate Simplified (`zh-Hans`) and Traditional (`zh-Hant`) entries.
+As of 2026-10-21, the app lists 39 languages: neutral English and 38 resource files. Each has
+397 keys. Chinese has separate Simplified (`zh-Hans`) and Traditional (`zh-Hant`) entries.
+
+The October text update revises tutorials, hint rules, reset, feedback, accessibility states,
+controls, trophies and store descriptions in every language. Seven operation-specific storage
+messages replace the shared generic error at its call sites. See
+[text update](text-update-2026-10-21.md) for implementation and validation details.
 
 No complete native-speaker sign-off is recorded. Treat translated text as awaiting review,
 including the latest trial, trophy and picture names. Earlier draft confidence ratings have

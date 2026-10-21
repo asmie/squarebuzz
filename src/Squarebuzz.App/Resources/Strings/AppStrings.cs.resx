@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>Těžké</value></data>
   <data name="expert" xml:space="preserve"><value>Expert</value></data>
   <data name="challenge" xml:space="preserve"><value>Úroveň výzvy</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>Druhá stupnice, nezávislá na velikosti a obtížnosti nápověd.</value></data>
-  <data name="relaxed" xml:space="preserve"><value>V klidu</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>Pomůcky zapnuté, bez limitu</value></data>
-  <data name="sharp" xml:space="preserve"><value>Naostro</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>Chyby se počítají, jedna nápověda</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>Pohoda používá tvoje nastavení nápověd. Výzva dovolí nejvýše jednu nápovědu.</value></data>
+  <data name="relaxed" xml:space="preserve"><value>Pohoda</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>Používá tvoje nastavení pomoci</value></data>
+  <data name="sharp" xml:space="preserve"><value>Výzva</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>Nejvýše jedna nápověda</value></data>
   <data name="pack" xml:space="preserve"><value>Sada obrázků</value></data>
   <data name="helpers" xml:space="preserve"><value>Pomůcky</value></data>
   <data name="autoCross" xml:space="preserve"><value>Auto-X u hotových řad</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>Chybky</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>Další</value></data>
   <data name="menu" xml:space="preserve"><value>Menu</value></data>
-  <data name="onb1t" xml:space="preserve"><value>Čísla jsou řady kostiček</value></data>
-  <data name="onb1b" xml:space="preserve"><value>Nápověda 3 1 znamená tři kostičky za sebou, mezeru a pak jednu. Ve stejném pořadí, zleva doprava.</value></data>
-  <data name="onb2t" xml:space="preserve"><value>Označ prázdná políčka</value></data>
-  <data name="onb2b" xml:space="preserve"><value>Klepnutím políčko vyplníš. Přepni na režim X a označ ta, o kterých víš, že zůstanou prázdná — budeš mít v hlavě jasno.</value></data>
+  <data name="onb1t" xml:space="preserve"><value>Čísla ukazují skupiny</value></data>
+  <data name="onb1b" xml:space="preserve"><value>Čísla 2 1 u řádku znamenají dvě vyplněná políčka, nejméně jedno prázdné a pak jedno vyplněné.</value></data>
+  <data name="onb2t" xml:space="preserve"><value>Vyplň nebo označ X</value></data>
+  <data name="onb2b" xml:space="preserve"><value>Vyplň políčka, která patří do obrázku. Políčka, která mají zůstat prázdná, označ X.</value></data>
   <data name="onb3t" xml:space="preserve"><value>Objeví se obrázek</value></data>
-  <data name="onb3b" xml:space="preserve"><value>Dokonči každou řadu a každý sloupec a z kostiček se stane obrázek. Každá hádanka má jediné řešení — hádat nemusíš nikdy.</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>Tuhle máš zdarma!</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>Tohle ne — zkus to jinak</value></data>
-  <data name="genFailed" xml:space="preserve"><value>Tentokrát se hádanku nepodařilo vytvořit. Zkus to prosím znovu!</value></data>
+  <data name="onb3b" xml:space="preserve"><value>Dokonči každý řádek a sloupec a objevíš obrázek.</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>Tady je nápověda.</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>Zkus jiné políčko.</value></data>
+  <data name="genFailed" xml:space="preserve"><value>Hlavolam se nepodařilo vytvořit. Zkus to znovu.</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>Platí pro větší plochy, které si hra vymyslí — od 15×15 výš. Malé obrázky jsou kreslené ručně.</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>Obtížnost mění hlavolamy od 15×15. Menší obrázky zůstávají stejné.</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>Denní hádanky dokončené tento měsíc: {0}</value></data>
   <data name="noHints" xml:space="preserve"><value>Už nemáš nápovědy</value></data>
   <data name="lineDone" xml:space="preserve"><value>Řada hotová!</value></data>
   <data name="m_menu1" xml:space="preserve"><value>Jsem připraven. Vyber si hádanku!</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>Jde ti to. Ještě jednu?</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>Dneska jsem našel nové obrázky.</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>Vítej zpátky!</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>Jaký obrázek objevíš teď?</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>Začni svou první hádanku</value></data>
   <data name="howToTitle" xml:space="preserve"><value>Jak hrát</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>Denní hádanka</value></data>
-  <data name="dailySub" xml:space="preserve"><value>Každé ráno nový obrázek</value></data>
+  <data name="dailySub" xml:space="preserve"><value>Nový hlavolam každý den</value></data>
   <data name="play" xml:space="preserve"><value>Hrát</value></data>
   <data name="timedName1" xml:space="preserve"><value>Rozehřátí</value></data>
   <data name="timedName2" xml:space="preserve"><value>Tempo</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>Na této úrovni se skrývá obrázek.</value></data>
   <data name="trophies" xml:space="preserve"><value>Trofeje</value></data>
   <data name="timeUp" xml:space="preserve"><value>Čas vypršel!</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>Tentokrát byly hodiny rychlejší. Zkusíš to znovu?</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>Čas vypršel. Můžeš to zkusit znovu, až budeš chtít.</value></data>
   <data name="tryAgain" xml:space="preserve"><value>Zkusit znovu</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}. {1}. {2} na hodinách.</value></data>
   <data name="tabDaily" xml:space="preserve"><value>Dnes</value></data>
   <data name="tabTimed" xml:space="preserve"><value>Na čas</value></data>
   <data name="tr1" xml:space="preserve"><value>První obrázek</value></data>
-  <data name="tr2" xml:space="preserve"><value>Týden v kuse</value></data>
+  <data name="tr2" xml:space="preserve"><value>7 obrázků</value></data>
   <data name="tr3" xml:space="preserve"><value>Bez nápovědy</value></data>
   <data name="tr4" xml:space="preserve"><value>Rychlík</value></data>
   <data name="tr5" xml:space="preserve"><value>100 kostiček</value></data>
   <data name="tr6" xml:space="preserve"><value>Dino fanda</value></data>
-  <data name="tr7" xml:space="preserve"><value>Noční sova</value></data>
+  <data name="tr7" xml:space="preserve"><value>Od každého trochu</value></data>
   <data name="tr8" xml:space="preserve"><value>Perfektní desítka</value></data>
   <data name="tr9" xml:space="preserve"><value>Sběratel</value></data>
   <data name="tr10" xml:space="preserve"><value>Rychlejší než čas</value></data>
   <data name="tr11" xml:space="preserve"><value>Šampion maratonu</value></data>
-  <data name="tr12" xml:space="preserve"><value>Měsíc v kuse</value></data>
+  <data name="tr12" xml:space="preserve"><value>30 obrázků</value></data>
   <data name="tr13" xml:space="preserve"><value>Velký obrázek</value></data>
   <data name="tr14" xml:space="preserve"><value>1000 kostiček</value></data>
   <data name="tr15" xml:space="preserve"><value>Hvězdář</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>Teď ti můžu číst.</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>Pro tento jazyk tu není hlas</value></data>
   <data name="a11yCell" xml:space="preserve"><value>Řádek {0}, sloupec {1}, {2}. Nápověda řádku: {3}. Nápověda sloupce: {4}.</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>prázdné</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>neoznačené</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>vyplněné</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>přeškrtnuté</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>označené jako prázdné</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>žádná</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>Hrací plocha, {0} na {1}. Vyplněno {2} z {3} políček.</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>Políčka se zatím nedají prozkoumávat dotykem.</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>Čtečka obrazovky v tomto zobrazení nemůže vybírat jednotlivá políčka.</value></data>
   <data name="a11yTime" xml:space="preserve"><value>Dosavadní čas: {0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>Zbývající čas: {0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>Dnů v řadě: {0}</value></data>
@@ -176,18 +176,18 @@
   <data name="dark" xml:space="preserve"><value>Tmavý</value></data>
   <data name="auto" xml:space="preserve"><value>Auto</value></data>
   <data name="cbPalette" xml:space="preserve"><value>Pro barvoslepé</value></data>
-  <data name="cbSub" xml:space="preserve"><value>Modrá a oranžová, vzory zůstávají</value></data>
+  <data name="cbSub" xml:space="preserve"><value>Modrá a oranžová barva se vzory</value></data>
   <data name="accentTheme" xml:space="preserve"><value>Hlavní barva</value></data>
   <data name="accTangerine" xml:space="preserve"><value>Mandarinka</value></data>
   <data name="accGrape" xml:space="preserve"><value>Hrozny</value></data>
   <data name="accTrio" xml:space="preserve"><value>Trio</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>Klepnutí</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>Klepnutí vyplní, držení = X</value></data>
-  <data name="tapMode" xml:space="preserve"><value>Přepínač</value></data>
-  <data name="handed" xml:space="preserve"><value>Tlačítka</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>Akce při klepnutí</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>Klepni pro vyplnění, podrž pro X</value></data>
+  <data name="tapMode" xml:space="preserve"><value>Vybrat vyplnění nebo X</value></data>
+  <data name="handed" xml:space="preserve"><value>Poloha tlačítek</value></data>
   <data name="leftH" xml:space="preserve"><value>Vlevo</value></data>
   <data name="rightH" xml:space="preserve"><value>Vpravo</value></data>
-  <data name="cellSize" xml:space="preserve"><value>Velikost políček</value></data>
+  <data name="cellSize" xml:space="preserve"><value>Velikost políčka</value></data>
   <data name="bigNumbers" xml:space="preserve"><value>Velká čísla</value></data>
   <data name="language" xml:space="preserve"><value>Jazyk</value></data>
   <data name="screenTime" xml:space="preserve"><value>Připomínka pauzy</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1 hod.</value></data>
   <data name="breakTitle" xml:space="preserve"><value>Čas na pauzu?</value></data>
   <data name="breakBody" xml:space="preserve"><value>Hraješ už {0} min. Tvoje hádanka na tebe počká.</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>Ještě chvilku</value></data>
-  <data name="breakStop" xml:space="preserve"><value>Už toho nechám</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>Hrát dál</value></data>
+  <data name="breakStop" xml:space="preserve"><value>Dát si přestávku</value></data>
   <data name="resetProgress" xml:space="preserve"><value>Vynulovat postup</value></data>
   <data name="privacy" xml:space="preserve"><value>Data a soukromí</value></data>
   <data name="open" xml:space="preserve"><value>Otevřít</value></data>
   <data name="reset" xml:space="preserve"><value>Vynulovat</value></data>
   <data name="grownUps" xml:space="preserve"><value>Jen pro dospělé</value></data>
   <data name="cancel" xml:space="preserve"><value>Zrušit</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>Vymazat všechno?</value></data>
-  <data name="resetBody" xml:space="preserve"><value>Všechny hádanky, hvězdičky i samolepky zmizí. Tohle se nedá vrátit.</value></data>
-  <data name="resetYes" xml:space="preserve"><value>Ano, vymazat vše</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>Smazat postup ve hře?</value></data>
+  <data name="resetBody" xml:space="preserve"><value>Smaže se všechen postup, včetně uložených her, hvězd a trofejí. Nastavení zůstane stejné. Tuto akci nelze vrátit.</value></data>
+  <data name="resetYes" xml:space="preserve"><value>Vynulovat postup</value></data>
   <data name="version" xml:space="preserve"><value>Verze {0} · sestavení {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>Bez reklam · bez nákupů v aplikaci</value></data>
   <data name="whatIs" xml:space="preserve"><value>Co je nonogram?</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je obrázek schovaný v číslech. Nápovědy u každé řady a každého sloupce říkají, kolik kostiček vybarvit a v jakém pořadí. Vyřeš každou linku čistou logikou a objeví se obrázek — hádat nemusíš nikdy.
-
-squarebuzz je hra s nonogramy pro děti od 6 let, bez horní věkové hranice. Dospělí si ji mohou užít stejně jako děti.</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>Nonogram je hlavolam se skrytým obrázkem. Čísla u řádků a sloupců ti pomohou poznat, která políčka vyplnit.</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>Známý také jako: Picross · Griddler · Hanjie · Pic-a-Pix · Malování podle čísel · japonská křížovka</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>Jak hrát</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>Zásady soukromí</value></data>
   <data name="aboutRate" xml:space="preserve"><value>Ohodnoť squarebuzz</value></data>
-  <data name="ht1" xml:space="preserve"><value>Čti nápovědy</value></data>
-  <data name="ht1b" xml:space="preserve"><value>Každé číslo je jeden nepřerušený úsek vybarvených kostiček a čísla jsou v pořadí. Nápověda 3 1 znamená tři vedle sebe, aspoň jednu mezeru a pak jednu samotnou.</value></data>
-  <data name="ht2" xml:space="preserve"><value>Vybarvuj a škrtej</value></data>
-  <data name="ht2b" xml:space="preserve"><value>Klepnutím políčko vybarvíš. U políček, o kterých už víš, že zůstanou prázdná, přepni na režim X. Křížky nejsou ozdoba — díky nim se neztratíš.</value></data>
-  <data name="ht3" xml:space="preserve"><value>Překryv u dlouhých nápověd</value></data>
-  <data name="ht3b" xml:space="preserve"><value>V řadě široké 10 políček musí nápověda 8 vždycky zakrýt prostředních 6 políček, ať začíná kdekoli. Posuň úsek úplně vlevo, pak úplně vpravo a vybarvi to, co se překrývá.</value></data>
-  <data name="ht4" xml:space="preserve"><value>Porovnávej řady a sloupce</value></data>
-  <data name="ht4b" xml:space="preserve"><value>Když ti řada odhalí jedno jisté políčko, podívej se po jeho sloupci. Nová kostička často dokončí nápovědu sloupce, z toho vzniknou další křížky a z nich další kostičky.</value></data>
+  <data name="ht1" xml:space="preserve"><value>Čti čísla</value></data>
+  <data name="ht1b" xml:space="preserve"><value>Každé číslo říká, kolik políček má skupina. Mezi skupinami nech nejméně jedno prázdné políčko. Řádky čti zleva doprava a sloupce shora dolů.</value></data>
+  <data name="ht2" xml:space="preserve"><value>Vyplň nebo označ X</value></data>
+  <data name="ht2b" xml:space="preserve"><value>Vyplň políčka, která patří do obrázku. Políčka, která mají zůstat prázdná, označ X.</value></data>
+  <data name="ht3" xml:space="preserve"><value>Najdi jistá políčka</value></data>
+  <data name="ht3b" xml:space="preserve"><value>V řádku s 10 políčky zabere skupina 8 vždy prostředních 6. Těchto 6 políček můžeš vyplnit.</value></data>
+  <data name="ht4" xml:space="preserve"><value>Kontroluj řádky a sloupce</value></data>
+  <data name="ht4b" xml:space="preserve"><value>Po vyplnění políčka se podívej na jeho sloupec. Každá nová značka ti může pomoci najít další políčko.</value></data>
   <data name="ht5" xml:space="preserve"><value>Škrtej hotové linky</value></data>
   <data name="ht5b" xml:space="preserve"><value>Když linka přesně odpovídá svým nápovědám, dej křížek do všech zbylých políček. Čísla nápovědy zesvětlí, takže poznáš, že je linka hotová.</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>Zvířata</value></data>
@@ -372,21 +370,21 @@ squarebuzz je hra s nonogramy pro děti od 6 let, bez horní věkové hranice. D
   <data name="Puzzle_raincloud" xml:space="preserve"><value>Dešťový mrak</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>Tajemný obrázek</value></data>
   <data name="magnifier" xml:space="preserve"><value>Lupa</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>Při malování ukazuje zvětšený výřez 3×3. Ve výchozím stavu vypnutá.</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>Při vyplňování uvidíš políčka zvětšená.</value></data>
   <data name="gateRetry" xml:space="preserve"><value>Zeptej se dospělého</value></data>
   <data name="galleryFound" xml:space="preserve"><value>Nalezeno {0} z {1}</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>Dokonči svůj první obrázek.</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>Hraj sedm dní v řadě.</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>Objev 7 různých obrázků vlastním tempem.</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>Dokonči obrázek bez jediné nápovědy.</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>Dokonči 5×5 pod jednu minutu.</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>Vyřeš hlavolam 5×5 za minutu nebo rychleji.</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>Vybarvi dohromady 100 kostiček.</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>Najdi všechny dinosaury.</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>Dokonči obrázek po osmé večer.</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>Dokonči po jednom obrázku ze 3 různých sad.</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>Tři hvězdičky na 10×10 bez jediné chyby.</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>Najdi všechny obrázky v galerii.</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>Vyhraj jakoukoli výzvu na čas.</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>Vyhraj výzvu Maraton.</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>Hraj 30 dní v řadě.</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>Objev 30 různých obrázků vlastním tempem.</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>Dokonči obrázek 15×15 nebo větší.</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>Vybarvi dohromady 1000 kostiček.</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>Nasbírej 100 hvězdiček.</value></data>
@@ -400,4 +398,13 @@ squarebuzz je hra s nonogramy pro děti od 6 let, bez horní věkové hranice. D
   <data name="hintLimit" xml:space="preserve"><value>Nápovědy v nových hrách</value></data>
   <data name="unlimited" xml:space="preserve"><value>Bez omezení</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>Zadejte celé číslo alespoň 1.</value></data>
+  <data name="shareApp" xml:space="preserve"><value>Sdílet squarebuzz</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>Aplikaci se nepodařilo sdílet. Odkaz: {0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>Uložené hry se nepodařilo načíst. Zkus to znovu.</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>Postup se nepodařilo uložit. Zkus to znovu.</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>Postup se nepodařilo načíst. Zkus to znovu.</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>Nastavení se nepodařilo načíst. Zkus to znovu.</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>Nastavení se nepodařilo uložit. Zkus to znovu.</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>Uloženou hru se nepodařilo smazat. Zkus to znovu.</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>Postup se nepodařilo smazat. Zkus to znovu.</value></data>
 </root>

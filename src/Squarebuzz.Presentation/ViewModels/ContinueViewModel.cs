@@ -109,7 +109,7 @@ public partial class ContinueViewModel : LocalizedViewModel
     [ObservableProperty]
     public partial bool HasPersistenceFailure { get; private set; }
 
-    public string PersistenceFailureText => T("storageUnavailable");
+    public string PersistenceFailureText => T(_failedDelete is not null ? "deleteGameFailed" : "loadGamesFailed");
     public string RetryPersistenceText => T("tryAgain");
 
     public string Heading => T("continueGame");
@@ -151,6 +151,7 @@ public partial class ContinueViewModel : LocalizedViewModel
         {
             _diagnostics.Report(PersistenceOperation.LoadGames, exception);
             HasPersistenceFailure = true;
+            OnPropertyChanged(nameof(PersistenceFailureText));
             IsEmpty = false;
             return;
         }
@@ -174,7 +175,7 @@ public partial class ContinueViewModel : LocalizedViewModel
                     Puzzle = null,
                     Marks = [],
                     Name = T("continueGame"),
-                    Details = T("storageUnavailable"),
+                    Details = T("loadGamesFailed"),
                     ProgressText = string.Empty,
                     Progress = 0,
                     SavedWhen = DescribeWhen(save.SavedAt),
@@ -198,6 +199,7 @@ public partial class ContinueViewModel : LocalizedViewModel
         HasPersistenceFailure = _failedDelete is not null || Saves.Any(card => !card.CanResume);
         IsEmpty = Saves.Count == 0 && !HasPersistenceFailure;
         OnPropertyChanged(nameof(HasSaves));
+        OnPropertyChanged(nameof(PersistenceFailureText));
     }
 
     private Puzzle ResolvePuzzle(SavedGame save, HashSet<PuzzleKey> stillSaved)
@@ -299,6 +301,7 @@ public partial class ContinueViewModel : LocalizedViewModel
             _diagnostics.Report(PersistenceOperation.DeleteGame, exception, card.Id);
             _failedDelete = card;
             HasPersistenceFailure = true;
+            OnPropertyChanged(nameof(PersistenceFailureText));
             return;
         }
 

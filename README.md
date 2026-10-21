@@ -16,7 +16,7 @@ the picture review and how to generate a visual catalogue.
 
 Install the SDK pinned in [global.json](global.json). Package versions are in
 [Directory.Packages.props](Directory.Packages.props). The SDK and workload set are pinned
-separately; both currently use `10.0.401`.
+separately: SDK `10.0.402` and workload set `10.0.401`.
 
 Core, Data and Presentation target plain `net10.0` and can be tested without MAUI workloads:
 

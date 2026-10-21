@@ -37,11 +37,11 @@
   <data name="hard" xml:space="preserve"><value>むずかしい</value></data>
   <data name="expert" xml:space="preserve"><value>たつじん</value></data>
   <data name="challenge" xml:space="preserve"><value>きびしさ</value></data>
-  <data name="challengeHelp" xml:space="preserve"><value>大きさやヒントのむずかしさとは別の、もう一つのつまみだよ。</value></data>
-  <data name="relaxed" xml:space="preserve"><value>のんびり</value></data>
-  <data name="relaxedSub" xml:space="preserve"><value>おたすけあり、せいげんなし</value></data>
-  <data name="sharp" xml:space="preserve"><value>しんけん</value></data>
-  <data name="sharpSub" xml:space="preserve"><value>まちがいをかぞえる・ヒント1つ</value></data>
+  <data name="challengeHelp" xml:space="preserve"><value>ゆったりはヒントの設定を使うよ。チャレンジで使えるヒントは最大1回だよ。</value></data>
+  <data name="relaxed" xml:space="preserve"><value>ゆったり</value></data>
+  <data name="relaxedSub" xml:space="preserve"><value>お手伝いの設定を使う</value></data>
+  <data name="sharp" xml:space="preserve"><value>チャレンジ</value></data>
+  <data name="sharpSub" xml:space="preserve"><value>ヒントは最大1回</value></data>
   <data name="pack" xml:space="preserve"><value>絵のパック</value></data>
   <data name="helpers" xml:space="preserve"><value>おたすけ</value></data>
   <data name="autoCross" xml:space="preserve"><value>できたラインに自動でバツ</value></data>
@@ -68,27 +68,27 @@
   <data name="mistakes" xml:space="preserve"><value>おっと</value></data>
   <data name="nextPuzzle" xml:space="preserve"><value>つぎへ</value></data>
   <data name="menu" xml:space="preserve"><value>メニュー</value></data>
-  <data name="onb1t" xml:space="preserve"><value>数字はブロックのならび</value></data>
-  <data name="onb1b" xml:space="preserve"><value>ヒントの「3 1」は、3つならんで、すきま、そのあと1つという意味だよ。左から右へ、この順番だよ。</value></data>
-  <data name="onb2t" xml:space="preserve"><value>空くマスに印をつけよう</value></data>
-  <data name="onb2b" xml:space="preserve"><value>1回タップするとぬれるよ。空くとわかったマスは、バツモードで印をつけよう。頭がすっきりするよ。</value></data>
+  <data name="onb1t" xml:space="preserve"><value>数字はマスのまとまり</value></data>
+  <data name="onb1b" xml:space="preserve"><value>横の列にある「2 1」は、2マスぬって、1マス以上あけてから、1マスぬるという意味だよ。</value></data>
+  <data name="onb2t" xml:space="preserve"><value>ぬる・Xをつける</value></data>
+  <data name="onb2b" xml:space="preserve"><value>絵になるマスをぬろう。空けておくとわかったマスにはXをつけよう。</value></data>
   <data name="onb3t" xml:space="preserve"><value>絵があらわれる</value></data>
-  <data name="onb3b" xml:space="preserve"><value>ぜんぶの行と列をうめると、ブロックが絵になるよ。答えはいつも1つだけ。あてずっぽうはいらないよ。</value></data>
-  <data name="hintUsed" xml:space="preserve"><value>1つおしえちゃう！</value></data>
-  <data name="mistakeMsg" xml:space="preserve"><value>そこじゃないよ、もう一回！</value></data>
-  <data name="genFailed" xml:space="preserve"><value>今回はパズルが作れなかったよ。もう一度ためしてね！</value></data>
+  <data name="onb3b" xml:space="preserve"><value>横と縦の列が全部そろうと、絵が見えるよ。</value></data>
+  <data name="hintUsed" xml:space="preserve"><value>ヒントだよ。</value></data>
+  <data name="mistakeMsg" xml:space="preserve"><value>ほかのマスを試してみよう。</value></data>
+  <data name="genFailed" xml:space="preserve"><value>パズルを作れなかったよ。もう一度試してね。</value></data>
   <data name="ok" xml:space="preserve"><value>OK</value></data>
-  <data name="difficultyNote" xml:space="preserve"><value>ゲームが自分で作る大きなばん（15×15以上）にきくよ。小さい絵は手がきだよ。</value></data>
+  <data name="difficultyNote" xml:space="preserve"><value>難しさが変わるのは15×15以上のパズルだよ。小さい絵のパズルは変わらないよ。</value></data>
   <data name="a11yDailyCalendar" xml:space="preserve"><value>今月クリアした毎日パズルは{0}こだよ</value></data>
   <data name="noHints" xml:space="preserve"><value>ヒントがもうないよ</value></data>
   <data name="lineDone" xml:space="preserve"><value>ラインができた！</value></data>
   <data name="m_menu1" xml:space="preserve"><value>いつでもいいよ。パズルをえらんで！</value></data>
-  <data name="m_menu2" xml:space="preserve"><value>いいちょうしだね。もう1つやる？</value></data>
-  <data name="m_menu3" xml:space="preserve"><value>今日は新しい絵を見つけたよ。</value></data>
+  <data name="m_menu2" xml:space="preserve"><value>また会えたね！</value></data>
+  <data name="m_menu3" xml:space="preserve"><value>今度はどんな絵が見つかるかな？</value></data>
   <data name="firstPuzzle" xml:space="preserve"><value>はじめてのパズルをやってみよう</value></data>
   <data name="howToTitle" xml:space="preserve"><value>あそび方</value></data>
   <data name="dailyTitle" xml:space="preserve"><value>毎日パズル</value></data>
-  <data name="dailySub" xml:space="preserve"><value>毎朝あたらしい絵が出るよ</value></data>
+  <data name="dailySub" xml:space="preserve"><value>毎日新しいパズル</value></data>
   <data name="play" xml:space="preserve"><value>あそぶ</value></data>
   <data name="timedName1" xml:space="preserve"><value>ウォームアップ</value></data>
   <data name="timedName2" xml:space="preserve"><value>てきぱき</value></data>
@@ -117,23 +117,23 @@
   <data name="a11yMilestone" xml:space="preserve"><value>このレベルには絵がかくれているよ。</value></data>
   <data name="trophies" xml:space="preserve"><value>トロフィー</value></data>
   <data name="timeUp" xml:space="preserve"><value>時間切れ！</value></data>
-  <data name="timeUpBody" xml:space="preserve"><value>今回は時計のほうが早かったね。もう一回やってみる？</value></data>
+  <data name="timeUpBody" xml:space="preserve"><value>時間になったよ。またやりたくなったら試してね。</value></data>
   <data name="tryAgain" xml:space="preserve"><value>もう一回</value></data>
   <data name="a11yTimedTier" xml:space="preserve"><value>{0}。{1}。もち時間は{2}。</value></data>
   <data name="tabDaily" xml:space="preserve"><value>毎日</value></data>
   <data name="tabTimed" xml:space="preserve"><value>タイム</value></data>
   <data name="tr1" xml:space="preserve"><value>はじめの絵</value></data>
-  <data name="tr2" xml:space="preserve"><value>1週間れんぞく</value></data>
+  <data name="tr2" xml:space="preserve"><value>7つの絵</value></data>
   <data name="tr3" xml:space="preserve"><value>ヒントなし</value></data>
   <data name="tr4" xml:space="preserve"><value>すばやい</value></data>
   <data name="tr5" xml:space="preserve"><value>100ブロック</value></data>
   <data name="tr6" xml:space="preserve"><value>きょうりゅう好き</value></data>
-  <data name="tr7" xml:space="preserve"><value>よふかしフクロウ</value></data>
+  <data name="tr7" xml:space="preserve"><value>いろいろな絵</value></data>
   <data name="tr8" xml:space="preserve"><value>パーフェクト10</value></data>
   <data name="tr9" xml:space="preserve"><value>コレクター</value></data>
   <data name="tr10" xml:space="preserve"><value>とけいに勝つ</value></data>
   <data name="tr11" xml:space="preserve"><value>マラソンチャンピオン</value></data>
-  <data name="tr12" xml:space="preserve"><value>1か月れんぞく</value></data>
+  <data name="tr12" xml:space="preserve"><value>30の絵</value></data>
   <data name="tr13" xml:space="preserve"><value>大きな絵</value></data>
   <data name="tr14" xml:space="preserve"><value>1000ブロック</value></data>
   <data name="tr15" xml:space="preserve"><value>星あつめ</value></data>
@@ -146,12 +146,12 @@
   <data name="voiceReady" xml:space="preserve"><value>これから読んであげるね。</value></data>
   <data name="voiceMissing" xml:space="preserve"><value>この機器には、この言語の声がないよ</value></data>
   <data name="a11yCell" xml:space="preserve"><value>{0}行{1}列、{2}。行のヒントは{3}。列のヒントは{4}。</value></data>
-  <data name="a11yCellEmpty" xml:space="preserve"><value>からっぽ</value></data>
+  <data name="a11yCellEmpty" xml:space="preserve"><value>しるしなし</value></data>
   <data name="a11yCellFilled" xml:space="preserve"><value>ぬってある</value></data>
-  <data name="a11yCellCrossed" xml:space="preserve"><value>バツがついている</value></data>
+  <data name="a11yCellCrossed" xml:space="preserve"><value>空けるマス</value></data>
   <data name="a11yClueNone" xml:space="preserve"><value>なし</value></data>
   <data name="a11yBoard" xml:space="preserve"><value>パズルのばん、{0}かける{1}。{3}マスのうち{2}マスがぬってあるよ。</value></data>
-  <data name="a11yBoardNote" xml:space="preserve"><value>マスはまだ、なぞって見つけることができないよ。</value></data>
+  <data name="a11yBoardNote" xml:space="preserve"><value>この画面では、スクリーンリーダーでマスを一つずつ選べません。</value></data>
   <data name="a11yTime" xml:space="preserve"><value>ここまでの時間は{0}</value></data>
   <data name="a11yTimeLeft" xml:space="preserve"><value>残り時間は{0}</value></data>
   <data name="a11yStreak" xml:space="preserve"><value>{0}日れんぞく</value></data>
@@ -176,14 +176,14 @@
   <data name="dark" xml:space="preserve"><value>暗い</value></data>
   <data name="auto" xml:space="preserve"><value>自動</value></data>
   <data name="cbPalette" xml:space="preserve"><value>色が見分けやすいモード</value></data>
-  <data name="cbSub" xml:space="preserve"><value>青とオレンジの色、もようはそのまま</value></data>
+  <data name="cbSub" xml:space="preserve"><value>青とオレンジの色と模様</value></data>
   <data name="accentTheme" xml:space="preserve"><value>メインの色</value></data>
   <data name="accTangerine" xml:space="preserve"><value>みかん</value></data>
   <data name="accGrape" xml:space="preserve"><value>ぶどう</value></data>
   <data name="accTrio" xml:space="preserve"><value>トリオ</value></data>
-  <data name="tapBehaviour" xml:space="preserve"><value>タップすると</value></data>
-  <data name="tapFillLong" xml:space="preserve"><value>タップでぬる、長おしでバツ</value></data>
-  <data name="tapMode" xml:space="preserve"><value>モードボタン</value></data>
+  <data name="tapBehaviour" xml:space="preserve"><value>タップの動き</value></data>
+  <data name="tapFillLong" xml:space="preserve"><value>タップでぬる・長押しでX</value></data>
+  <data name="tapMode" xml:space="preserve"><value>ぬる・Xを選ぶ</value></data>
   <data name="handed" xml:space="preserve"><value>ボタンの位置</value></data>
   <data name="leftH" xml:space="preserve"><value>左</value></data>
   <data name="rightH" xml:space="preserve"><value>右</value></data>
@@ -197,35 +197,33 @@
   <data name="st60" xml:space="preserve"><value>1時間</value></data>
   <data name="breakTitle" xml:space="preserve"><value>ひとやすみする？</value></data>
   <data name="breakBody" xml:space="preserve"><value>{0}分あそんだよ。パズルはまってくれるから、だいじょうぶ。</value></data>
-  <data name="breakKeep" xml:space="preserve"><value>もう少しあそぶ</value></data>
-  <data name="breakStop" xml:space="preserve"><value>ここでやめる</value></data>
+  <data name="breakKeep" xml:space="preserve"><value>遊びつづける</value></data>
+  <data name="breakStop" xml:space="preserve"><value>休けいする</value></data>
   <data name="resetProgress" xml:space="preserve"><value>きろくをリセット</value></data>
   <data name="privacy" xml:space="preserve"><value>データとプライバシー</value></data>
   <data name="open" xml:space="preserve"><value>ひらく</value></data>
   <data name="reset" xml:space="preserve"><value>リセット</value></data>
   <data name="grownUps" xml:space="preserve"><value>おとなの人だけ</value></data>
   <data name="cancel" xml:space="preserve"><value>やめる</value></data>
-  <data name="resetTitle" xml:space="preserve"><value>ぜんぶけす？</value></data>
-  <data name="resetBody" xml:space="preserve"><value>パズル・星・シールがぜんぶなくなるよ。もとにはもどせないよ。</value></data>
-  <data name="resetYes" xml:space="preserve"><value>はい、ぜんぶけす</value></data>
+  <data name="resetTitle" xml:space="preserve"><value>ゲームの記録を消しますか？</value></data>
+  <data name="resetBody" xml:space="preserve"><value>保存したゲーム、星、トロフィーなど、すべての進み具合を消します。設定は変わりません。元には戻せません。</value></data>
+  <data name="resetYes" xml:space="preserve"><value>きろくをリセット</value></data>
   <data name="version" xml:space="preserve"><value>バージョン {0} · ビルド {1}</value></data>
   <data name="noAds" xml:space="preserve"><value>広告なし · アプリ内課金なし</value></data>
   <data name="whatIs" xml:space="preserve"><value>ノノグラムってなに？</value></data>
-  <data name="whatIsBody" xml:space="preserve"><value>ノノグラムは、数字の中にかくれている絵だよ。行と列のヒントが、いくつぬるか、どの順番でぬるかを教えてくれる。ぜんぶのラインを考えてとくと絵があらわれるよ。あてずっぽうはいらないんだ。
-
-squarebuzz は、6歳以上の子ども向けのノノグラムパズルゲームで、年齢の上限はありません。大人も同じように楽しめます。</value></data>
+  <data name="whatIsBody" xml:space="preserve"><value>ノノグラムは、かくれた絵を見つけるパズルだよ。横と縦の列にある数字を使って、ぬるマスを考えよう。</value></data>
   <data name="alsoCalled" xml:space="preserve"><value>こんな名前でもよばれるよ: お絵かきロジック · ピクロス · グリッドラー · ハンジー · Pic-a-Pix · 数字ぬり絵</value></data>
   <data name="aboutHowTo" xml:space="preserve"><value>あそび方</value></data>
   <data name="aboutPrivacy" xml:space="preserve"><value>プライバシーポリシー</value></data>
   <data name="aboutRate" xml:space="preserve"><value>squarebuzz を評価する</value></data>
-  <data name="ht1" xml:space="preserve"><value>ヒントを読もう</value></data>
-  <data name="ht1b" xml:space="preserve"><value>数字はひとつずつが、とぎれずにつづくぬったブロックのかたまりで、書いてある順番どおりだよ。行のヒント「3 1」は、3つならび、1マス以上のすきま、そのあと1つだけ、という意味だよ。</value></data>
-  <data name="ht2" xml:space="preserve"><value>ぬってバツをつけよう</value></data>
-  <data name="ht2b" xml:space="preserve"><value>マスをタップするとぬれるよ。空くとたしかめられたマスには、バツモードで印をつけよう。バツはかざりじゃなくて、わからなくならないための目じるしだよ。</value></data>
-  <data name="ht3" xml:space="preserve"><value>長いヒントはかさなる</value></data>
-  <data name="ht3b" xml:space="preserve"><value>よこ10マスの行でヒントが8なら、どこから始まっても真ん中の6マスはかならずぬれるよ。ブロックを左にぴったりよせて、右にもよせて、かさなったところをぬろう。</value></data>
-  <data name="ht4" xml:space="preserve"><value>行と列を見くらべよう</value></data>
-  <data name="ht4b" xml:space="preserve"><value>行でひとつ、たしかなブロックが決まったら、その列を見てみよう。新しいブロックで列のヒントが完成することが多くて、そうするとバツがふえて、バツがふえるとまたブロックが決まるよ。</value></data>
+  <data name="ht1" xml:space="preserve"><value>数字を読もう</value></data>
+  <data name="ht1b" xml:space="preserve"><value>数字は、続けてぬるマスの数だよ。まとまりの間は1マス以上あけよう。横の列は左から右へ、縦の列は上から下へ読むよ。</value></data>
+  <data name="ht2" xml:space="preserve"><value>ぬる・Xをつける</value></data>
+  <data name="ht2b" xml:space="preserve"><value>絵になるマスをぬろう。空けておくとわかったマスにはXをつけよう。</value></data>
+  <data name="ht3" xml:space="preserve"><value>ぬれるマスを見つけよう</value></data>
+  <data name="ht3b" xml:space="preserve"><value>10マスの列に8マスのまとまりを置くと、真ん中の6マスは必ず入るよ。その6マスをぬろう。</value></data>
+  <data name="ht4" xml:space="preserve"><value>横と縦を見よう</value></data>
+  <data name="ht4b" xml:space="preserve"><value>マスをぬったら、その縦の列も見てみよう。新しいしるしが、次のマスを見つける手がかりになるよ。</value></data>
   <data name="ht5" xml:space="preserve"><value>できたラインはバツでうめる</value></data>
   <data name="ht5b" xml:space="preserve"><value>あるラインがヒントとぴったり合ったら、のこりのマスぜんぶにバツをつけよう。ヒントの数字がうすくなって、そのラインが終わったとわかるよ。</value></data>
   <data name="Pack_animals" xml:space="preserve"><value>どうぶつ</value></data>
@@ -372,21 +370,21 @@ squarebuzz は、6歳以上の子ども向けのノノグラムパズルゲー�
   <data name="Puzzle_raincloud" xml:space="preserve"><value>あまぐも</value></data>
   <data name="Puzzle_gen" xml:space="preserve"><value>ひみつの絵</value></data>
   <data name="magnifier" xml:space="preserve"><value>むしめがね</value></data>
-  <data name="magnifierSub" xml:space="preserve"><value>ぬっている間、3×3を大きくして見せるよ。さいしょはオフだよ。</value></data>
+  <data name="magnifierSub" xml:space="preserve"><value>ぬっているマスを大きく見られるよ。</value></data>
   <data name="gateRetry" xml:space="preserve"><value>おとなの人にきいてね</value></data>
   <data name="galleryFound" xml:space="preserve"><value>{1}このうち{0}こ見つけた</value></data>
   <data name="trophyHint1" xml:space="preserve"><value>はじめての絵をかんせいさせよう。</value></data>
-  <data name="trophyHint2" xml:space="preserve"><value>7日れんぞくであそぼう。</value></data>
+  <data name="trophyHint2" xml:space="preserve"><value>自分のペースで、ちがう絵を7つ見つけよう。</value></data>
   <data name="trophyHint3" xml:space="preserve"><value>ヒントを1つも使わずに絵をかんせいさせよう。</value></data>
-  <data name="trophyHint4" xml:space="preserve"><value>5×5を1分いないでかんせいさせよう。</value></data>
+  <data name="trophyHint4" xml:space="preserve"><value>5×5のパズルを1分以内に完成させよう。</value></data>
   <data name="trophyHint5" xml:space="preserve"><value>ぜんぶで100ブロックぬろう。</value></data>
   <data name="trophyHint6" xml:space="preserve"><value>きょうりゅうをぜんぶ見つけよう。</value></data>
-  <data name="trophyHint7" xml:space="preserve"><value>夜8時よりあとに絵をかんせいさせよう。</value></data>
+  <data name="trophyHint7" xml:space="preserve"><value>3つのちがうパックから、絵を1つずつ完成させよう。</value></data>
   <data name="trophyHint8" xml:space="preserve"><value>10×10でまちがいなし、星3つをとろう。</value></data>
   <data name="trophyHint9" xml:space="preserve"><value>ギャラリーの絵をぜんぶ見つけよう。</value></data>
   <data name="trophyHint10" xml:space="preserve"><value>どれかのタイムチャレンジで勝とう。</value></data>
   <data name="trophyHint11" xml:space="preserve"><value>マラソンのチャレンジで勝とう。</value></data>
-  <data name="trophyHint12" xml:space="preserve"><value>30日れんぞくであそぼう。</value></data>
+  <data name="trophyHint12" xml:space="preserve"><value>自分のペースで、ちがう絵を30枚見つけよう。</value></data>
   <data name="trophyHint13" xml:space="preserve"><value>15×15いじょうの絵をかんせいさせよう。</value></data>
   <data name="trophyHint14" xml:space="preserve"><value>ぜんぶで1000ブロックぬろう。</value></data>
   <data name="trophyHint15" xml:space="preserve"><value>星を100こあつめよう。</value></data>
@@ -400,4 +398,13 @@ squarebuzz は、6歳以上の子ども向けのノノグラムパズルゲー�
   <data name="hintLimit" xml:space="preserve"><value>新しいゲームのヒント数</value></data>
   <data name="unlimited" xml:space="preserve"><value>無制限</value></data>
   <data name="hintLimitInvalid" xml:space="preserve"><value>1以上の整数を入力してください。</value></data>
+  <data name="shareApp" xml:space="preserve"><value>squarebuzzを共有</value></data>
+  <data name="shareUnavailable" xml:space="preserve"><value>アプリを共有できませんでした。リンク：{0}</value></data>
+  <data name="loadGamesFailed" xml:space="preserve"><value>保存したゲームを読み込めませんでした。もう一度試してください。</value></data>
+  <data name="saveProgressFailed" xml:space="preserve"><value>ゲームの記録を保存できませんでした。もう一度試してください。</value></data>
+  <data name="loadProgressFailed" xml:space="preserve"><value>ゲームの記録を読み込めませんでした。もう一度試してください。</value></data>
+  <data name="loadSettingsFailed" xml:space="preserve"><value>設定を読み込めませんでした。もう一度試してください。</value></data>
+  <data name="saveSettingsFailed" xml:space="preserve"><value>設定を保存できませんでした。もう一度試してください。</value></data>
+  <data name="deleteGameFailed" xml:space="preserve"><value>保存したゲームを消せませんでした。もう一度試してください。</value></data>
+  <data name="resetProgressFailed" xml:space="preserve"><value>ゲームの記録を消せませんでした。もう一度試してください。</value></data>
 </root>
