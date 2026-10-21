@@ -13,9 +13,22 @@ public sealed class FakeSettingsRepository : ISettingsRepository
     /// <summary>Makes <see cref="LoadAsync"/> throw, as a locked or corrupt database would.</summary>
     public bool LoadFails { get; set; }
 
-    public Task<GameSettings> LoadAsync(CancellationToken cancellationToken = default) => LoadFails
-        ? Task.FromException<GameSettings>(new InvalidOperationException("database is locked"))
-        : Task.FromResult(Settings);
+    /// <summary>When set, holds every settings read until the test releases it.</summary>
+    public TaskCompletionSource? LoadGate { get; set; }
+
+    public int LoadCalls { get; private set; }
+
+    public async Task<GameSettings> LoadAsync(CancellationToken cancellationToken = default)
+    {
+        LoadCalls++;
+
+        if (LoadGate is { } gate)
+        {
+            await gate.Task;
+        }
+
+        return LoadFails ? throw new InvalidOperationException("database is locked") : Settings;
+    }
 
     /// <summary>Makes <see cref="SaveAsync"/> throw, as a full disk or a locked database would.</summary>
     public bool SaveFails { get; set; }

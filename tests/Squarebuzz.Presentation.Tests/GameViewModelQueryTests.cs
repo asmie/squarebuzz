@@ -34,6 +34,39 @@ public sealed class GameViewModelQueryTests : IDisposable
         Assert.Equal("levelN:5", _h.Vm.PuzzleName);
     }
 
+    [Fact]
+    public async Task AppearingAgainWhileTheLevelStarts_JoinsIt_InsteadOfStartingAQuickGame()
+    {
+        // MAUI can raise Appearing twice before the first start has read the settings.
+        _h.Settings.LoadGate = new TaskCompletionSource();
+        _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["level"] = "5" });
+
+        var first = _h.Vm.InitialiseAsync();
+        var second = _h.Vm.InitialiseAsync();
+        _h.Settings.LoadGate.SetResult();
+        await Task.WhenAll(first, second);
+
+        Assert.Same(first, second);
+        Assert.Equal(1, _h.Settings.LoadCalls);
+        Assert.Equal(5, _h.Vm.Session!.Origin!.Level);
+    }
+
+    [Fact]
+    public async Task AppearingAgainAfterAFailedResume_KeepsTheRetryInsteadOfStartingAQuickGame()
+    {
+        var id = Guid.NewGuid();
+        _h.SaveGames.LoadError = new IOException("busy");
+        _h.Vm.ApplyQueryAttributes(new Dictionary<string, object> { ["saveId"] = id.ToString() });
+        await _h.Vm.InitialiseAsync();
+        Assert.Null(_h.Vm.Session);
+
+        await _h.Vm.InitialiseAsync();
+
+        Assert.Null(_h.Vm.Session);
+        Assert.True(_h.Vm.HasPersistenceFailure);
+        Assert.Equal("loadGamesFailed", _h.Vm.PersistenceFailureText);
+    }
+
     [Theory]
     [InlineData("0")]
     [InlineData("601")]

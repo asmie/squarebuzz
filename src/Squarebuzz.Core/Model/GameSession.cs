@@ -351,6 +351,15 @@ public sealed class GameSession
 
         var autoCrossed = UpdateAutoCrossesThrough(changes, x, y, rowSatisfied, columnSatisfied);
 
+        // Erasing an automatic cross from a line that is still complete puts the same automatic
+        // cross straight back. The board is unchanged, so record nothing: a pushed stroke would
+        // count a move and discard the redo branch.
+        if (changes.Count == 2 && wasAutoCrossed && changes[1].Index == index
+            && _cells[index] == current && _autoCrossed[index])
+        {
+            return MoveOutcome.NoChange;
+        }
+
         _history.Push(new Stroke(changes) { DirectChangeCount = 1 }, continuesStroke && _strokeHasChanges);
         _strokeHasChanges = true;
 

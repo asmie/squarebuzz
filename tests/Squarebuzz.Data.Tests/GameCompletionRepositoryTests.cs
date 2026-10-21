@@ -60,6 +60,34 @@ public sealed class GameCompletionRepositoryTests
     }
 
     [Theory]
+    [InlineData("{ not json")]
+    [InlineData("null")]
+    [InlineData("{\"CompletedAt\":\"yesterday\"}")]
+    public async Task ADamagedPendingResult_IsDropped_AndDoesNotBlockTheResultsBehindIt(string payload)
+    {
+        await using var temp = new TemporaryDatabase();
+        var connection = await temp.Database.GetConnectionAsync();
+        var damagedId = Guid.NewGuid();
+        var saves = new SqliteSaveGameRepository(temp.Database);
+        await saves.SaveAsync(Save(damagedId));
+        await connection.ExecuteAsync(
+            "INSERT INTO game_completion (id, payload) VALUES (?, ?)", damagedId.ToString("D"), payload);
+        var healthyId = Guid.NewGuid();
+
+        await CompleteAsync(temp, healthyId, Completion);
+
+        Assert.Equal(3, (await new SqliteProgressRepository(temp.Database).GetProgressAsync()).Stars);
+        Assert.Equal(0, await connection.ExecuteScalarAsync<int>(
+            "SELECT COUNT(*) FROM game_completion WHERE id = ?", damagedId.ToString("D")));
+
+        // The damaged win was never credited, so its game stays playable and can still be won.
+        Assert.NotNull(await saves.GetAsync(damagedId));
+        await CompleteAsync(temp, damagedId, Completion with { CompletedAt = CompletedAt.AddMinutes(5) });
+        Assert.Equal(6, (await new SqliteProgressRepository(temp.Database).GetProgressAsync()).Stars);
+        Assert.Null(await saves.GetAsync(damagedId));
+    }
+
+    [Theory]
     [InlineData("BEFORE INSERT ON progress")]
     [InlineData("BEFORE INSERT ON daily_completion")]
     [InlineData("BEFORE INSERT ON solved_puzzle")]

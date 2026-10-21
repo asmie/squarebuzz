@@ -38,6 +38,8 @@
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release' AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
     <AndroidLinkTool>r8</AndroidLinkTool>
+    <!-- Obfuscate private Java members; class, interface and public/protected names stay stable for JNI. -->
+    <AndroidR8ObfuscationMode>private-members</AndroidR8ObfuscationMode>
     <AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <DebugSymbols>true</DebugSymbols>
@@ -58,6 +60,10 @@
   </PropertyGroup>
 
   <Import Project="Platforms\Android\ReleaseDiagnostics.targets" />
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <ProguardConfiguration Include="Platforms\Android\proguard.cfg" />
+  </ItemGroup>
 
   <ItemGroup>
     <!-- App icon and splash are generated from these vectors for every platform. -->

@@ -30,6 +30,35 @@ public class SaveGameRepositoryTests
     };
 
     [Fact]
+    public async Task SavingAtTheLimitWithTheClockSetBack_KeepsTheGameJustSaved()
+    {
+        // A device whose clock went backwards stamps the new game older than every other save.
+        // Ranking it with the rest deleted it in the same transaction that wrote it.
+        await using var temp = new TemporaryDatabase();
+        var repository = new SqliteSaveGameRepository(temp.Database);
+        var ids = new Guid[SqliteSaveGameRepository.MaxSavedGames];
+
+        for (var i = 0; i < ids.Length; i++)
+        {
+            ids[i] = Guid.NewGuid();
+            await repository.SaveAsync(SampleSave(ids[i], Noon.AddMinutes(i)));
+        }
+
+        var current = Guid.NewGuid();
+        await repository.SaveAsync(SampleSave(current, Noon.AddDays(-1)));
+        await repository.SaveAsync(SampleSave(current, Noon.AddDays(-1).AddSeconds(15)));
+
+        Assert.NotNull(await repository.GetAsync(current));
+        Assert.Equal(SqliteSaveGameRepository.MaxSavedGames, await repository.CountAsync());
+        Assert.Null(await repository.GetAsync(ids[0]));
+
+        foreach (var id in ids[1..])
+        {
+            Assert.NotNull(await repository.GetAsync(id));
+        }
+    }
+
+    [Fact]
     public async Task SavingBeyondTheLimit_DropsTheOldestAndKeepsTheRest()
     {
         // The cap deletes somebody's unfinished game, so it has to delete the right ones. Saves

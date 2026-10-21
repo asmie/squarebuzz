@@ -1,93 +1,25 @@
 <Project>
   <!--
-    SDK 36.1.69 disables optimization and obfuscation in its R8 defaults. Retain the SDK's
-    runtime keep rules, but use the private-member policy proposed by dotnet/android:
-    https://github.com/dotnet/android/issues/12535
-    Class/interface and public/protected names remain stable for managed JNI bindings.
-    This is a project-local workaround; it never changes the installed SDK.
+    Release R8 settings beyond the SDK's AndroidR8ObfuscationMode=private-members (set in the
+    project file). The SDK applies the keep policy, removes -dontoptimize, writes the mapping
+    into the bundle and embeds r8.json so Google Play can report the optimization percentages.
+    This target only records the effective R8 configuration for the release archive.
   -->
-  <UsingTask TaskName="SquarebuzzPrepareR8Configuration"
-             TaskFactory="RoslynCodeTaskFactory"
-             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
-    <ParameterGroup>
-      <Destination ParameterType="System.String" Required="true" />
-      <MappingFile ParameterType="System.String" Required="true" />
-      <PlatformConfiguration ParameterType="System.String" Required="true" />
-      <EffectiveConfiguration ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Reflection" />
-      <Using Namespace="System.Text" />
-      <Using Namespace="System.Text.RegularExpressions" />
-      <Code Type="Fragment" Language="cs"><![CDATA[
-        Assembly assembly = null;
-        foreach (var loaded in AppDomain.CurrentDomain.GetAssemblies())
-            if (loaded.GetName().Name == "Xamarin.Android.Build.Tasks")
-                assembly = loaded;
-        if (assembly == null)
-            throw new InvalidOperationException("The Android SDK build tasks have not been loaded.");
-        using (var stream = assembly.GetManifestResourceStream("proguard_xamarin.cfg"))
-        {
-            if (stream == null)
-                throw new InvalidOperationException("The Android SDK's runtime keep rules are missing.");
-            string defaults;
-            using (var reader = new StreamReader(stream))
-                defaults = reader.ReadToEnd();
-            defaults = Regex.Replace(defaults, @"(?m)^\s*-(dontobfuscate|dontoptimize)\s*$", "");
-            // Keep Android's reflection/native entry-point rules, enabling R8 optimization.
-            var platformDefaults = File.ReadAllText(PlatformConfiguration);
-            platformDefaults = Regex.Replace(platformDefaults, @"(?m)^\s*-dontoptimize\s*$", "");
-            var policy = @"# Preserve managed JNI names; obfuscate private/package-private members.
--keep,allowshrinking,allowoptimization class **
--keepclassmembers,allowshrinking,allowoptimization class ** {
-    public protected *;
-}
--keep,allowoptimization interface ** {
-    public protected *;
-}
--keep,allowshrinking class * implements **
--keepattributes SourceFile,LineNumberTable
-# Loaded by name from managed JNI initialization; its Java body can be empty.
--keep class net.dot.android.ApplicationRegistration { *; }
-# Error Prone references this compile-time JDK enum; it is not an Android runtime class.
--dontwarn javax.lang.model.element.Modifier
-";
-            var mappingPath = Path.GetFullPath(MappingFile).Replace('\\', '/');
-            var effectivePath = Path.GetFullPath(EffectiveConfiguration).Replace('\\', '/');
-            var contents = policy + defaults + "\n" + platformDefaults
-                + "\n-printmapping \"" + mappingPath + "\"\n"
-                + "-printconfiguration \"" + effectivePath + "\"\n";
-            Directory.CreateDirectory(Path.GetDirectoryName(Destination));
-            if (!File.Exists(Destination) || File.ReadAllText(Destination) != contents)
-                File.WriteAllText(Destination, contents, new UTF8Encoding(false));
-        }
-      ]]></Code>
-    </Task>
-  </UsingTask>
-
   <Target Name="SquarebuzzConfigureReleaseR8"
           AfterTargets="_CalculateProguardConfigurationFiles"
           Condition="'$(Configuration)' == 'Release' AND '$(AndroidLinkTool)' == 'r8'">
     <PropertyGroup>
-      <_SquarebuzzR8Configuration>$(IntermediateOutputPath)proguard\squarebuzz-runtime.cfg</_SquarebuzzR8Configuration>
+      <_SquarebuzzR8Configuration>$(IntermediateOutputPath)proguard\squarebuzz-diagnostics.cfg</_SquarebuzzR8Configuration>
       <_SquarebuzzR8EffectiveConfiguration>$(IntermediateOutputPath)proguard\squarebuzz-effective.cfg</_SquarebuzzR8EffectiveConfiguration>
+      <_SquarebuzzR8EffectivePath>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\$(_SquarebuzzR8EffectiveConfiguration)').Replace('\', '/'))</_SquarebuzzR8EffectivePath>
     </PropertyGroup>
+    <WriteLinesToFile File="$(_SquarebuzzR8Configuration)"
+                      Lines="-printconfiguration &quot;$(_SquarebuzzR8EffectivePath)&quot;"
+                      Overwrite="true"
+                      WriteOnlyWhenDifferent="true" />
     <ItemGroup>
-      <_SquarebuzzR8PlatformDefaults Include="@(_ProguardConfiguration)"
-          Condition="'%(Filename)%(Extension)' == 'proguard-android.txt'" />
-    </ItemGroup>
-    <SquarebuzzPrepareR8Configuration
-        Destination="$(_SquarebuzzR8Configuration)"
-        MappingFile="$(AndroidProguardMappingFile)"
-        PlatformConfiguration="@(_SquarebuzzR8PlatformDefaults)"
-        EffectiveConfiguration="$(_SquarebuzzR8EffectiveConfiguration)" />
-    <ItemGroup>
-      <_ProguardConfiguration Remove="@(_SquarebuzzR8PlatformDefaults)" />
-      <_ProguardConfiguration Remove="$(IntermediateOutputPath)proguard\proguard_xamarin.cfg" />
       <_ProguardConfiguration Include="$(_SquarebuzzR8Configuration)" />
-      <FileWrites Include="$(_SquarebuzzR8Configuration)" />
-      <FileWrites Include="$(_SquarebuzzR8EffectiveConfiguration)" />
+      <FileWrites Include="$(_SquarebuzzR8Configuration);$(_SquarebuzzR8EffectiveConfiguration)" />
     </ItemGroup>
   </Target>
 

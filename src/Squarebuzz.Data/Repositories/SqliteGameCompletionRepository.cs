@@ -45,8 +45,15 @@ public sealed class SqliteGameCompletionRepository : IGameCompletionRepository
 
             foreach (var entry in pending)
             {
-                var completion = JsonSerializer.Deserialize(entry.Payload!, CompletionJsonContext.Default.PuzzleCompletion)
-                    ?? throw new InvalidOperationException("A pending completion has no result.");
+                if (ReadPayload(entry) is not { } completion)
+                {
+                    // An unreadable result cannot be credited, and keeping it would stop every
+                    // result behind it from ever applying. It was never applied, so dropping it
+                    // cannot credit anything twice, and the game's last save stays playable.
+                    transaction.Delete<GameCompletionEntity>(entry.Id);
+                    continue;
+                }
+
                 var progress = SqliteProgressRepository.RecordCompletion(transaction, completion);
                 var solved = transaction.Table<SolvedPuzzleEntity>().ToList()
                     .Select(SqliteProgressRepository.ToModel).ToArray();
@@ -69,6 +76,19 @@ public sealed class SqliteGameCompletionRepository : IGameCompletionRepository
                 transaction.Update(entry);
             }
         }).ConfigureAwait(false);
+    }
+
+    /// <summary>Reads a journaled result, or null when its payload is damaged.</summary>
+    private static PuzzleCompletion? ReadPayload(GameCompletionEntity entry)
+    {
+        try
+        {
+            return JsonSerializer.Deserialize(entry.Payload!, CompletionJsonContext.Default.PuzzleCompletion);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
     }
 }
 

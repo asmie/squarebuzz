@@ -66,6 +66,7 @@ public partial class GameViewModel : LocalizedViewModel
     private TimedTier? _pendingTier;
     private int? _pendingLevel;
     private NewGameOptions? _pendingOptions;
+    private Task? _initialisation;
 
     /// <summary>Identifies the most recent toast, so only its own dismissal takes effect.</summary>
     private int _toastToken;
@@ -545,7 +546,29 @@ public partial class GameViewModel : LocalizedViewModel
     /// <summary>
     /// Entry point for the page: resumes the save the route named, or starts a fresh puzzle.
     /// </summary>
-    public async Task InitialiseAsync()
+    /// <remarks>
+    /// The page calls this whenever it appears without a session, and Appearing can fire again
+    /// before the first start finishes. The route's request is consumed by the first call, so a
+    /// later one must not fall through to a quick game: it joins a start still in progress, and
+    /// leaves a failed resume to the retry banner.
+    /// </remarks>
+    public Task InitialiseAsync()
+    {
+        if (_initialisation is { IsCompleted: false } running)
+        {
+            return running;
+        }
+
+        if (_failedResumeId is not null)
+        {
+            return Task.CompletedTask;
+        }
+
+        _initialisation = InitialiseFromRouteAsync();
+        return _initialisation;
+    }
+
+    private async Task InitialiseFromRouteAsync()
     {
         if (_pendingResumeId is { } id)
         {
@@ -1029,6 +1052,9 @@ public partial class GameViewModel : LocalizedViewModel
 
         // A reminder can be dismissed between ticks, or after no ticks at all.
         _time.Rebase();
+
+        // Keep playing means "remind me again later", not "never again this run".
+        _time.SnoozeBreakReminder();
         IsBreakReminderOpen = false;
     }
 

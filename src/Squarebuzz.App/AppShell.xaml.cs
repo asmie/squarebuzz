@@ -12,9 +12,10 @@ public partial class AppShell : Shell
         InitializeComponent();
         RegisterRoutes();
 
-        // Arabic reads right to left, so the whole shell mirrors: rows of chips, the board's
-        // clue gutters, the back gesture. Set on the Shell rather than per page, because
-        // FlowDirection inherits and every screen lives inside this one.
+        // Arabic reads right to left, so the whole shell mirrors: rows of chips, the game's
+        // controls, the back gesture. Set on the Shell rather than per page, because
+        // FlowDirection inherits and every screen lives inside this one. The game board area
+        // opts back out: its canvas, clue gutters and cell overlay stay left to right.
         //
         // Hooked to the language service, which is the single funnel every language change goes
         // through - Options taps and the saved language the splash applies both arrive here.

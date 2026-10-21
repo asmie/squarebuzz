@@ -132,9 +132,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
             ];
 
             Place(StatusBar, row: 0, column: 0, columnSpan: 1);
-            Place(BoardHost, row: 1, column: 0, columnSpan: 1);
-            Place(MagnifierPanel, row: 1, column: 0, columnSpan: 1);
-            Place(MiniMap, row: 1, column: 0, columnSpan: 1);
+            Place(BoardArea, row: 1, column: 0, columnSpan: 1);
             Place(ControlsPanel, row: 2, column: 0, columnSpan: 1);
 
             ControlsPanel.WidthRequest = -1;
@@ -162,9 +160,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         var boardColumn = controlsFirst ? 1 : 0;
 
         Place(StatusBar, row: 0, column: 0, columnSpan: 2);
-        Place(BoardHost, row: 1, column: boardColumn, columnSpan: 1);
-        Place(MagnifierPanel, row: 1, column: boardColumn, columnSpan: 1);
-        Place(MiniMap, row: 1, column: boardColumn, columnSpan: 1);
+        Place(BoardArea, row: 1, column: boardColumn, columnSpan: 1);
         Place(ControlsPanel, row: 1, column: controlsColumn, columnSpan: 1);
 
         ControlsPanel.WidthRequest = ControlsWidth;
@@ -347,11 +343,15 @@ public partial class GamePage : ContentPage, IQueryAttributable
     }
 
     /// <summary>Shows the minimap for grids of at least 15 cells that exceed the viewport.</summary>
+    /// <remarks>
+    /// Decided from the board's new layout, not its arranged size: LayoutChanged is raised as
+    /// soon as the size request changes, before the next layout pass, so Width and Height still
+    /// describe the previous zoom or orientation.
+    /// </remarks>
     private void UpdateMiniMap()
     {
         var puzzle = _viewModel.Session?.Puzzle;
-        var scrollable = Board.Width > BoardHost.Width + 1 || Board.Height > BoardHost.Height + 1;
-        var wanted = puzzle is { Width: >= 15 } && scrollable;
+        var wanted = puzzle is { Width: >= 15 } && Board.CurrentLayout.RequiresScrolling;
 
         if (MiniMap.IsVisible != wanted)
         {
@@ -369,16 +369,19 @@ public partial class GamePage : ContentPage, IQueryAttributable
 
     private void UpdateMiniMapViewport()
     {
-        if (!MiniMap.IsVisible || Board.Width <= 0 || Board.Height <= 0)
+        // The layout's size, for the same reason as UpdateMiniMap.
+        var layout = Board.CurrentLayout;
+
+        if (!MiniMap.IsVisible || layout.TotalWidth <= 0 || layout.TotalHeight <= 0)
         {
             return;
         }
 
         MiniMap.UpdateViewport(
-            BoardHost.ScrollX / Board.Width,
-            BoardHost.ScrollY / Board.Height,
-            Math.Min(1, BoardHost.Width / Board.Width),
-            Math.Min(1, BoardHost.Height / Board.Height));
+            BoardHost.ScrollX / layout.TotalWidth,
+            BoardHost.ScrollY / layout.TotalHeight,
+            Math.Min(1, BoardHost.Width / layout.TotalWidth),
+            Math.Min(1, BoardHost.Height / layout.TotalHeight));
     }
 
     private void OnMistakeMade(object? sender, int index)
@@ -449,7 +452,7 @@ public partial class GamePage : ContentPage, IQueryAttributable
         }
 
         // Same test UpdateMiniMap uses: a board that fits its window has nothing to scroll.
-        var scrollable = Board.Width > BoardHost.Width + 1 || Board.Height > BoardHost.Height + 1;
+        var scrollable = layout.RequiresScrolling;
 
         var column = index % layout.Columns;
         var row = index / layout.Columns;
@@ -463,11 +466,11 @@ public partial class GamePage : ContentPage, IQueryAttributable
             targetX = Math.Clamp(
                 cellX + (layout.CellSize / 2) - (BoardHost.Width / 2),
                 0,
-                Math.Max(0, Board.Width - BoardHost.Width));
+                Math.Max(0, layout.TotalWidth - BoardHost.Width));
             targetY = Math.Clamp(
                 cellY + (layout.CellSize / 2) - (BoardHost.Height / 2),
                 0,
-                Math.Max(0, Board.Height - BoardHost.Height));
+                Math.Max(0, layout.TotalHeight - BoardHost.Height));
 
             await BoardHost.ScrollToAsync(targetX, targetY, animated: !Services.MotionPreferences.ReduceMotion);
         }

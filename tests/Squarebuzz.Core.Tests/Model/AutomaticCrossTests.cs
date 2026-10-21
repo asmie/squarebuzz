@@ -93,6 +93,30 @@ public sealed class AutomaticCrossTests
         Assert.True(session.AutoCrossedCells[0]);
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void ErasingAnAutomaticCrossInACompleteLine_ChangesNothing_AndKeepsRedo(bool byTap)
+    {
+        var session = NewSession();
+        session.Paint(2, CellState.Filled);
+        session.Paint(10, CellState.Filled);
+        Assert.True(session.Undo());
+        Assert.True(session.AutoCrossedCells[1]);
+        var cells = session.Cells.ToArray();
+        var flags = session.AutoCrossedCells.ToArray();
+        var moves = session.MoveCount;
+
+        session.Mode = PaintMode.Cross;
+        var outcome = byTap ? session.Tap(1) : session.Paint(1, CellState.Empty);
+
+        Assert.Equal(MoveResult.NoChange, outcome.Result);
+        Assert.Equal(cells, session.Cells.ToArray());
+        Assert.Equal(flags, session.AutoCrossedCells.ToArray());
+        Assert.Equal(moves, session.MoveCount);
+        Assert.True(session.CanRedo);
+    }
+
     [Fact]
     public void AddingAnExtraFill_ClearsAutomaticMarks_AndUndoRestoresThem()
     {

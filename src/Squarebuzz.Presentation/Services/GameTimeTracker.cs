@@ -15,6 +15,9 @@ public sealed class GameTimeTracker(IClock clock, IScreenTimeMonitor screenTime)
     public void Rebase() => _lastAccountedAt = clock.Monotonic;
     public void Saved() => _sinceSave = TimeSpan.Zero;
 
+    /// <summary>Re-arms the break reminder for another full limit of play.</summary>
+    public void SnoozeBreakReminder() => screenTime.Snooze();
+
     public bool Account(GameSession session)
     {
         ArgumentNullException.ThrowIfNull(session);

@@ -79,30 +79,37 @@ public sealed class SqliteSaveGameRepository : ISaveGameRepository
             // A delayed save from another page must not resurrect a journaled/completed game.
             if (transaction.Find<GameCompletionEntity>(game.Id.ToString("D")) is null)
             {
-                transaction.InsertOrReplace(ToEntity(game));
-                TrimToMostRecent(transaction);
+                var entity = ToEntity(game);
+                transaction.InsertOrReplace(entity);
+                TrimToMostRecent(transaction, entity.Id);
             }
         }).ConfigureAwait(false);
     }
 
     /// <summary>
-    /// Drops everything past the <see cref="MaxSavedGames"/> most recently saved games.
+    /// Keeps the game just written plus the most recently saved others, up to
+    /// <see cref="MaxSavedGames"/> in all.
     /// </summary>
     /// <remarks>
     /// Done here rather than by a caller, so no future save path can forget it. A single
     /// statement, and it does nothing at all until the limit is passed, which for most players
-    /// is never.
+    /// is never. The game being saved is never a candidate: after the device clock has been set
+    /// back its timestamp can be the oldest, and ranking it with the rest would delete every
+    /// autosave in the same transaction that wrote it.
     /// </remarks>
     /// <returns>How many games were dropped, which is almost always none.</returns>
-    private static int TrimToMostRecent(SQLiteConnection transaction) =>
+    private static int TrimToMostRecent(SQLiteConnection transaction, string keptId) =>
         transaction.Execute(
             """
             DELETE FROM saved_game
-            WHERE id NOT IN (
-                SELECT id FROM saved_game ORDER BY saved_at_ticks DESC LIMIT ?
+            WHERE id <> ?
+              AND id NOT IN (
+                SELECT id FROM saved_game WHERE id <> ? ORDER BY saved_at_ticks DESC LIMIT ?
             )
             """,
-            MaxSavedGames);
+            keptId,
+            keptId,
+            MaxSavedGames - 1);
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {

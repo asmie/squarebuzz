@@ -170,6 +170,38 @@ public class ScreenTimeMonitorTests
     }
 
     [Fact]
+    public void Snooze_RemindsAgainAfterAnotherFullLimit_AndKeepsTheTotal()
+    {
+        // "Keep playing" must not silence the reminder for the rest of the app run.
+        var monitor = new ScreenTimeMonitor();
+        monitor.Configure(15);
+        Assert.True(monitor.Add(TimeSpan.FromMinutes(15)));
+
+        monitor.Snooze();
+
+        Assert.Equal(TimeSpan.FromMinutes(15), monitor.Played);
+        Assert.False(monitor.Add(TimeSpan.FromMinutes(14)));
+        Assert.True(monitor.Add(TimeSpan.FromMinutes(1)));
+        Assert.Equal(TimeSpan.FromMinutes(30), monitor.Played);
+        Assert.False(monitor.Add(TimeSpan.FromMinutes(1)));
+    }
+
+    [Fact]
+    public void RaisingTheLimitAfterASnooze_CountsFromTheSnooze()
+    {
+        var monitor = new ScreenTimeMonitor();
+        monitor.Configure(15);
+        Assert.True(monitor.Add(TimeSpan.FromMinutes(15)));
+        monitor.Snooze();
+        Assert.True(monitor.Add(TimeSpan.FromMinutes(15)));
+
+        monitor.Configure(30);
+
+        Assert.False(monitor.Add(TimeSpan.FromMinutes(14)));
+        Assert.True(monitor.Add(TimeSpan.FromMinutes(1)));
+    }
+
+    [Fact]
     public void ZeroOrNegativeElapsed_IsIgnored()
     {
         var monitor = new ScreenTimeMonitor();

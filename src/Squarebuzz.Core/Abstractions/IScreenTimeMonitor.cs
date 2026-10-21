@@ -34,10 +34,17 @@ public interface IScreenTimeMonitor
     /// </summary>
     /// <returns>
     /// True on the single call that carries the count past the limit, and never again until
-    /// <see cref="Restart"/>. Returning it exactly once is what stops the reminder reappearing
-    /// every second.
+    /// <see cref="Snooze"/> or <see cref="Restart"/>. Returning it exactly once is what stops the
+    /// reminder reappearing every second.
     /// </returns>
     bool Add(TimeSpan elapsed);
+
+    /// <summary>
+    /// Re-arms the reminder one full limit after the time played so far, keeping the total.
+    /// Called when the player chooses to keep playing, so the next reminder reports the
+    /// whole session rather than the minutes since the last one.
+    /// </summary>
+    void Snooze();
 
     /// <summary>Clears the count and re-arms the reminder.</summary>
     void Restart();

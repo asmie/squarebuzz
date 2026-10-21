@@ -245,6 +245,10 @@ public sealed class FakeScreenTimeMonitor : IScreenTimeMonitor
         return true;
     }
 
+    public int SnoozeCalls { get; private set; }
+
+    public void Snooze() => SnoozeCalls++;
+
     public void Restart() => Played = TimeSpan.Zero;
 }
 

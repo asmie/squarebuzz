@@ -84,78 +84,85 @@
             </Border>
         </Grid>
 
-        <!-- The board. Scrollable on both axes so a 25x25 grid stays reachable on a phone. -->
         <!--
-          The host fills the row, so its measured size IS the space available to the board.
-          The board then centres itself inside it, and the host scrolls only when the board
-          is genuinely larger.
+          The board area: the board, its minimap and its magnifier. Always left to right, even
+          when the app runs right to left. The canvas draws column 1 on the left whatever the
+          language, so the screen-reader cell overlay, the scroll origin and the corner panels
+          have to share that orientation or they point at the mirrored cell and the wrong corner.
+          Placed as one unit by GamePage.ApplyLayout.
         -->
-        <ScrollView Grid.Row="1"
-                    x:Name="BoardHost"
-                    Orientation="Both"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Fill">
+        <Grid x:Name="BoardArea" Grid.Row="1" FlowDirection="LeftToRight">
+
+            <!-- The board. Scrollable on both axes so a 25x25 grid stays reachable on a phone. -->
             <!--
-              A GraphicsView adds nothing to the accessibility tree, so without this the board is
-              simply not there for a screen reader. See GameViewModel.BoardDescription.
+              The host fills the row, so its measured size IS the space available to the board.
+              The board then centres itself inside it, and the host scrolls only when the board
+              is genuinely larger.
+            -->
+            <ScrollView x:Name="BoardHost"
+                        Orientation="Both"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill">
+                <!--
+                  A GraphicsView adds nothing to the accessibility tree, so without this the board is
+                  simply not there for a screen reader. See GameViewModel.BoardDescription.
+                -->
+                <!--
+                  The board and, over it, the per-cell accessibility overlay. One container so the two
+                  share an origin: the overlay is inset by the clue gutters and then lays out a cell-sized
+                  grid, which is the only way it can line up with squares drawn on a canvas.
+                -->
+                <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                    <controls:BoardView x:Name="Board"
+                                        SemanticProperties.Description="{Binding BoardDescription}"
+                                        Session="{Binding Session}"
+                                        ZoomPercent="{Binding ZoomPercent}"
+                                        BigNumbers="{Binding BigNumbers}"
+                                        TapBehaviour="{Binding TapBehaviour}" />
+
+                    <!-- Built in code, and only when a screen reader is running. See GamePage.BuildCellOverlay. -->
+                    <Grid x:Name="CellOverlay" IsVisible="False" />
+                </Grid>
+            </ScrollView>
+
+            <!--
+              Magnifier, opt-in via Options. Parked in a corner of the board area rather than
+              following the finger: a panel under the palm would defeat the point, and pinning it
+              avoids translating touch coordinates up through the ScrollView. The corner flips to
+              whichever side the hand is not on.
             -->
             <!--
-              The board and, over it, the per-cell accessibility overlay. One container so the two
-              share an origin: the overlay is inset by the clue gutters and then lays out a cell-sized
-              grid, which is the only way it can line up with squares drawn on a canvas.
+              Overview map for boards bigger than their viewport - 15x15 and up on a phone. Bottom
+              corner, opposite nothing in particular: the magnifier owns the top and the two must
+              not fight over it. Shown from code when the board actually scrolls.
             -->
-            <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                <controls:BoardView x:Name="Board"
-                                    SemanticProperties.Description="{Binding BoardDescription}"
-                                    Session="{Binding Session}"
-                                    ZoomPercent="{Binding ZoomPercent}"
-                                    BigNumbers="{Binding BigNumbers}"
-                                    TapBehaviour="{Binding TapBehaviour}" />
+            <controls:BoardMiniMapView x:Name="MiniMap"
+                                       IsVisible="False"
+                                       AutomationProperties.ExcludedWithChildren="True"
+                                       WidthRequest="104"
+                                       HeightRequest="104"
+                                       Margin="4"
+                                       VerticalOptions="End"
+                                       HorizontalOptions="End" />
 
-                <!-- Built in code, and only when a screen reader is running. See GamePage.BuildCellOverlay. -->
-                <Grid x:Name="CellOverlay" IsVisible="False" />
-            </Grid>
-        </ScrollView>
-
-        <!--
-          Magnifier, opt-in via Options. Parked in a corner of the board area rather than
-          following the finger: a panel under the palm would defeat the point, and pinning it
-          avoids translating touch coordinates up through the ScrollView. The corner flips to
-          whichever side the hand is not on.
-        -->
-        <!--
-          Overview map for boards bigger than their viewport - 15x15 and up on a phone. Bottom
-          corner, opposite nothing in particular: the magnifier owns the top and the two must
-          not fight over it. Shown from code when the board actually scrolls.
-        -->
-        <controls:BoardMiniMapView Grid.Row="1"
-                                   x:Name="MiniMap"
-                                   IsVisible="False"
-                                   AutomationProperties.ExcludedWithChildren="True"
-                                   WidthRequest="104"
-                                   HeightRequest="104"
-                                   Margin="4"
-                                   VerticalOptions="End"
-                                   HorizontalOptions="End" />
-
-        <Border Grid.Row="1"
-                x:Name="MagnifierPanel"
-                IsVisible="False"
-                WidthRequest="116"
-                HeightRequest="116"
-                Padding="6"
-                Margin="4"
-                VerticalOptions="Start"
-                HorizontalOptions="End"
-                BackgroundColor="{DynamicResource Surface}"
-                Stroke="{DynamicResource Line}"
-                StrokeThickness="2">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="16" />
-            </Border.StrokeShape>
-            <controls:MagnifierView x:Name="Magnifier" Session="{Binding Session}"
-                                    AutomationProperties.ExcludedWithChildren="True" />
-        </Border>
+            <Border x:Name="MagnifierPanel"
+                    IsVisible="False"
+                    WidthRequest="116"
+                    HeightRequest="116"
+                    Padding="6"
+                    Margin="4"
+                    VerticalOptions="Start"
+                    HorizontalOptions="End"
+                    BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Line}"
+                    StrokeThickness="2">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <controls:MagnifierView x:Name="Magnifier" Session="{Binding Session}"
+                                        AutomationProperties.ExcludedWithChildren="True" />
+            </Border>
+        </Grid>
 
         <!--
           "Line done!" / "Oops". An overlay pinned to the bottom of the board area, not a row in

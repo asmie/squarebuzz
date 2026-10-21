@@ -50,10 +50,12 @@ Apple builds require a Mac and the Xcode version selected in [CI](.github/workfl
 For Android Debug deployment, add `-t:Run` with an emulator or device connected; this also
 deploys the assemblies required by Fast Deployment.
 
-Android Release builds use R8 with code optimization and private-member obfuscation.
-They retain AOT symbols in `obj` while packaging stripped copies. The project-local workaround in
-`Platforms/Android/ReleaseDiagnostics.targets` preserves the pinned SDK's JNI keep rules;
-review it when updating the Android workload. It affects Java names, not managed C# names.
+Android Release builds use R8 with code optimization and the SDK's `private-members`
+obfuscation mode, which keeps class, interface and public/protected names stable for JNI and
+embeds `r8.json` so Google Play can report optimization percentages. They retain AOT symbols in
+`obj` while packaging stripped copies. `Platforms/Android/ReleaseDiagnostics.targets` records the
+effective R8 configuration and `Platforms/Android/proguard.cfg` holds project rules. Neither
+affects managed C# names.
 
 ## Code map
 

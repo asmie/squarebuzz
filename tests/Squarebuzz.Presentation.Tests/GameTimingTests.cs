@@ -178,6 +178,25 @@ public sealed class GameTimingTests : IDisposable
     }
 
     [Fact]
+    public async Task KeepPlaying_RearmsTheBreakReminder()
+    {
+        await StartAsync();
+        _h.ScreenTime.RemindOnNextAdd = true;
+        _h.Clock.Advance(TimeSpan.FromSeconds(1));
+        _h.Timers.Latest!.RaiseTick();
+        Assert.True(_h.Vm.IsBreakReminderOpen);
+
+        _h.Vm.DismissBreakReminderCommand.Execute(null);
+
+        Assert.False(_h.Vm.IsBreakReminderOpen);
+        Assert.Equal(1, _h.ScreenTime.SnoozeCalls);
+
+        // Closing a reminder that is not open must not push the next one further away.
+        _h.Vm.DismissBreakReminderCommand.Execute(null);
+        Assert.Equal(1, _h.ScreenTime.SnoozeCalls);
+    }
+
+    [Fact]
     public async Task Restart_AccountsForTheOutgoingAttempt_AndStartsAFreshClock()
     {
         await StartAsync();

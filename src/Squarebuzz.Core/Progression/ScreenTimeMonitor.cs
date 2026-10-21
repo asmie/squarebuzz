@@ -8,6 +8,9 @@ public sealed class ScreenTimeMonitor : IScreenTimeMonitor
     private readonly object _gate = new();
 
     private TimeSpan _played;
+
+    // Play time the current limit is counted from: zero until the player snoozes a reminder.
+    private TimeSpan _armedAt;
     private int? _limitMinutes;
     private bool _hasFired;
 
@@ -48,7 +51,7 @@ public sealed class ScreenTimeMonitor : IScreenTimeMonitor
 
             // Raising the limit past the time already played has to re-arm the reminder,
             // otherwise a parent who extends it gets no further warning at the new figure.
-            if (_limitMinutes is { } minutes && _played < TimeSpan.FromMinutes(minutes))
+            if (_limitMinutes is { } minutes && _played - _armedAt < TimeSpan.FromMinutes(minutes))
             {
                 _hasFired = false;
             }
@@ -72,7 +75,7 @@ public sealed class ScreenTimeMonitor : IScreenTimeMonitor
                 return false;
             }
 
-            if (_played < TimeSpan.FromMinutes(minutes))
+            if (_played - _armedAt < TimeSpan.FromMinutes(minutes))
             {
                 return false;
             }
@@ -82,11 +85,21 @@ public sealed class ScreenTimeMonitor : IScreenTimeMonitor
         }
     }
 
+    public void Snooze()
+    {
+        lock (_gate)
+        {
+            _armedAt = _played;
+            _hasFired = false;
+        }
+    }
+
     public void Restart()
     {
         lock (_gate)
         {
             _played = TimeSpan.Zero;
+            _armedAt = TimeSpan.Zero;
             _hasFired = false;
         }
     }
